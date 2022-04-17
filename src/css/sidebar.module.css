@@ -1,0 +1,141 @@
+.container {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-right: 2px solid #504651;
+    height: 100%;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    width: 300px;
+}
+
+.container>ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.container>ul>li {
+    border-bottom: 1px solid #504651;
+}
+
+.container>ul>li>a,
+.container>ul>li>div,
+.container>ul>li>p {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: 24px;
+    padding: 20px 24px;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+}
+
+.container>ul>li>a>*,
+.container>ul>li>div>*,
+.container>ul>li>p>* {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.container>ul>li>a:hover,
+.container>ul>li>div:hover,
+.container>ul>li>p:hover {
+    background-color: #0000001d;
+}
+
+.container>ul>li>a.active,
+.container>ul>li>div.active,
+.container>ul>li>p.active {
+    background-color: #00000033;
+}
+
+.container>ul>li>a.active>*,
+.container>ul>li>div.active>*,
+.container>ul>li>p.active>* {
+    font-weight: bold;
+}
+
+.container>ul>li>a>.toggle,
+.container>ul>li>div>.toggle,
+.container>ul>li>p>.toggle {
+    font-size: 24px;
+    position: absolute;
+    right: 12px;
+    transform: rotate(0deg);
+    transition: 0.4s ease-in-out;
+}
+
+.container>ul>li.active>a>.toggle,
+.container>ul>li.active>div>.toggle,
+.container>ul>li.active>p>.toggle {
+    transform: rotate(180deg);
+}
+
+ul>li.dropdown>ul.dropdown_menu {
+    height: 0px;
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    transition: 0.4s ease-in-out;
+}
+
+ul>li.dropdown>ul.dropdown_menu>li {
+    border-bottom: 1px solid #504651;
+}
+
+ul>li.dropdown>ul.dropdown_menu>li>a,
+ul>li.dropdown>ul.dropdown_menu>li>div,
+ul>li.dropdown>ul.dropdown_menu>li>p {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: 24px;
+    padding: 16px 24px 16px 84px;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+}
+
+ul>li.dropdown>ul.dropdown_menu>li>a>*,
+ul>li.dropdown>ul.dropdown_menu>li>div>*,
+ul>li.dropdown>ul.dropdown_menu>li>p>* {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+ul>li.dropdown>ul.dropdown_menu>li>a:hover,
+ul>li.dropdown>ul.dropdown_menu>li>div:hover,
+ul>li.dropdown>ul.dropdown_menu>li>p:hover {
+    background-color: #0000001d;
+}
+
+ul>li.dropdown>ul.dropdown_menu>li>a.active,
+ul>li.dropdown>ul.dropdown_menu>li>div.active,
+ul>li.dropdown>ul.dropdown_menu>li>p.active {
+    background-color: #00000033;
+}
+
+ul>li.dropdown>ul.dropdown_menu>li>a.active>*,
+ul>li.dropdown>ul.dropdown_menu>li>div.active>*,
+ul>li.dropdown>ul.dropdown_menu>li>p.active>* {
+    font-weight: bold;
+}
+
+ul>li.dropdown>ul.dropdown_menu>li>a>.toggle,
+ul>li.dropdown>ul.dropdown_menu>li>div>.toggle,
+ul>li.dropdown>ul.dropdown_menu>li>p>.toggle {
+    font-size: 24px;
+    position: absolute;
+    right: 12px;
+    transform: rotate(0deg);
+    transition: 0.4s ease-in-out;
+}
+
+ul>li.dropdown>ul.dropdown_menu>li.active>a>.toggle,
+ul>li.dropdown>ul.dropdown_menu>li.active>div>.toggle,
+ul>li.dropdown>ul.dropdown_menu>li.active>p>.toggle {
+    transform: rotate(180deg);
+}

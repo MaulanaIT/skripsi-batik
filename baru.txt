@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-This is a bad day
-=======
-This is a amazing day
->>>>>>> e6124e3dca7493510549c83c7819b54d62064674
