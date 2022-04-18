@@ -6,6 +6,7 @@
 }
 
 .container_content {
+    display: flex;
     flex: 1;
     overflow: hidden;
     margin-top: 64px;
@@ -18,4 +19,5 @@
     overflow-x: hidden;
     overflow-y: auto;
     padding: 12px;
+    width: 100%;
 }

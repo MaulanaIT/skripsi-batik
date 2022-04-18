@@ -6,7 +6,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
-    width: 300px;
+    width: 230px;
 }
 
 .container>ul {
@@ -25,8 +25,8 @@
     align-items: center;
     cursor: pointer;
     display: flex;
-    gap: 24px;
-    padding: 20px 24px;
+    gap: 12px;
+    padding: 12px;
     position: relative;
     text-decoration: none;
     width: 100%;
@@ -35,7 +35,7 @@
 .container>ul>li>a>*,
 .container>ul>li>div>*,
 .container>ul>li>p>* {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: normal;
 }
 
@@ -54,13 +54,13 @@
 .container>ul>li>a.active>*,
 .container>ul>li>div.active>*,
 .container>ul>li>p.active>* {
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .container>ul>li>a>.toggle,
 .container>ul>li>div>.toggle,
 .container>ul>li>p>.toggle {
-    font-size: 24px;
+    font-size: 16px;
     position: absolute;
     right: 12px;
     transform: rotate(0deg);
@@ -73,13 +73,24 @@
     transform: rotate(180deg);
 }
 
+.container>ul>li.dropdown>ul.dropdown_menu>li>a,
+.container>ul>li.dropdown>ul.dropdown_menu>li>div,
+.container>ul>li.dropdown>ul.dropdown_menu>li>p {
+    padding: 12px 12px 12px 48px;
+}
+
+.container>ul>li.dropdown>ul.dropdown_menu>li.dropdown>ul.dropdown_menu>li>a,
+.container>ul>li.dropdown>ul.dropdown_menu>li.dropdown>ul.dropdown_menu>li>div,
+.container>ul>li.dropdown>ul.dropdown_menu>li.dropdown>ul.dropdown_menu>li>p {
+    padding: 12px 12px 12px 60px;
+}
+
 ul>li.dropdown>ul.dropdown_menu {
-    height: 0px;
+    display: none;
     list-style: none;
     margin: 0;
     overflow: hidden;
     padding: 0;
-    transition: 0.4s ease-in-out;
 }
 
 ul>li.dropdown>ul.dropdown_menu>li {
@@ -93,7 +104,6 @@ ul>li.dropdown>ul.dropdown_menu>li>p {
     cursor: pointer;
     display: flex;
     gap: 24px;
-    padding: 16px 24px 16px 84px;
     position: relative;
     text-decoration: none;
     width: 100%;
@@ -121,13 +131,13 @@ ul>li.dropdown>ul.dropdown_menu>li>p.active {
 ul>li.dropdown>ul.dropdown_menu>li>a.active>*,
 ul>li.dropdown>ul.dropdown_menu>li>div.active>*,
 ul>li.dropdown>ul.dropdown_menu>li>p.active>* {
-    font-weight: bold;
+    font-weight: 500;
 }
 
 ul>li.dropdown>ul.dropdown_menu>li>a>.toggle,
 ul>li.dropdown>ul.dropdown_menu>li>div>.toggle,
 ul>li.dropdown>ul.dropdown_menu>li>p>.toggle {
-    font-size: 24px;
+    font-size: 16px;
     position: absolute;
     right: 12px;
     transform: rotate(0deg);
