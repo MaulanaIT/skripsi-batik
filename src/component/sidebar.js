@@ -7,25 +7,13 @@ import { MdDashboard, MdExpandMore, MdLibraryBooks, MdStackedBarChart, MdStickyN
 // Import CSS
 import style from '../css/sidebar.module.css';
 
+// Import Javascript
+import $ from 'jquery';
+
 export class sidebar extends Component {
 
     componentDidMount() {
         this.ToggleMenu();
-    }
-
-    ToggleDropdown = (ele) => {
-        let ElementChild = ele.querySelector('ul');
-
-        if (ElementChild.style.height == '' || parseInt(ElementChild.style.height) === 0) {
-            ElementChild.style.height = `${ElementChild.children.length * ElementChild.children[0].offsetHeight}px`;
-
-            if (ele.parentNode.classList.contains(style.dropdown_menu)) ele.parentNode.style.height = `${parseInt(ele.parentNode.style.height) + parseInt(ElementChild.style.height)}px`;
-        } else {
-            if (ele.parentNode.classList.contains(style.dropdown_menu)) ele.parentNode.style.height = `${parseInt(ele.parentNode.style.height) - parseInt(ElementChild.style.height)}px`;
-
-            ele.classList.remove(style.active);
-            ElementChild.style.height = '0px';
-        }
     }
 
     ToggleMenu = () => {
@@ -36,8 +24,8 @@ export class sidebar extends Component {
         ElementDropdownToggle.forEach(element => {
             element.addEventListener('click', function () {
                 this.parentNode.classList.toggle(style.active);
-
-                Element.ToggleDropdown(this.parentNode);
+                
+                $(this).next('ul').slideToggle(500);
             });
         });
 
@@ -54,7 +42,7 @@ export class sidebar extends Component {
                 });
 
                 ElementDropdown.forEach(item => {
-                    let Check = item.querySelector(`a.${style.active}`);
+                    let Check = (item.querySelector(`ul`)).querySelector(`a.${style.active}`);
 
                     if (Check) {
                         item.firstElementChild.classList.add(style.active);
@@ -73,82 +61,82 @@ export class sidebar extends Component {
                     <li>
                         <Link to={'/dashboard'} className={style.active}>
                             <MdDashboard />
-                            <span>DASHBOARD</span>
+                            <span>Dashboard</span>
                         </Link>
                     </li>
                     <li className={style.dropdown}>
                         <a>
                             <MdLibraryBooks />
-                            <span>MASTER</span>
+                            <span>Master</span>
                             <MdExpandMore className={style.toggle} />
                         </a>
                         <ul className={style.dropdown_menu}>
-                            <li><Link to={'/master/user'}><span>USER</span></Link></li>
-                            <li><Link to={'/master/akun'}><span>AKUN</span></Link></li>
-                            <li><Link to={'/master/supplier'}><span>SUPPLIER</span></Link></li>
-                            <li><Link to={'/master/customer'}><span>CUSTOMER</span></Link></li>
-                            <li><Link to={'/master/consignee'}><span>CONSIGNEE</span></Link></li>
+                            <li><Link to={'/master/user'}><span>User</span></Link></li>
+                            <li><Link to={'/master/akun'}><span>Akun</span></Link></li>
+                            <li><Link to={'/master/supplier'}><span>Supplier</span></Link></li>
+                            <li><Link to={'/master/customer'}><span>Customer</span></Link></li>
+                            <li><Link to={'/master/consignee'}><span>Consignee</span></Link></li>
                             <li className={style.dropdown}>
                                 <div>
-                                    <span>INVENTORY</span>
+                                    <span>Inventory</span>
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/master/inventory/bahan-baku'}><span>BAHAN BAKU</span></Link></li>
-                                    <li><Link to={'/master/inventory/bahan-penolong'}><span>BAHAN PENOLONG</span></Link></li>
-                                    <li><Link to={'/master/inventory/bahan-alat'}><span>BAHAN ALAT</span></Link></li>
+                                    <li><Link to={'/master/inventory/bahan-baku'}><span>Bahan Baku</span></Link></li>
+                                    <li><Link to={'/master/inventory/bahan-penolong'}><span>Bahan Penolong</span></Link></li>
+                                    <li><Link to={'/master/inventory/bahan-alat'}><span>Bahan Alat</span></Link></li>
                                 </ul>
                             </li>
-                            <li><Link to={'/master/tenaga-kerja'}><span>TENAGA KERJA</span></Link></li>
+                            <li><Link to={'/master/tenaga-kerja'}><span>Tenaga Kerja</span></Link></li>
                         </ul>
                     </li>
                     <li className={style.dropdown}>
                         <a>
                             <MdStackedBarChart />
-                            <span>TRANSAKSI</span>
+                            <span>Transaksi</span>
                             <MdExpandMore className={style.toggle} />
                         </a>
                         <ul className={style.dropdown_menu}>
                             <li className={style.dropdown}>
                                 <div>
-                                    <span>PENJUALAN</span>
+                                    <span>Penjualan</span>
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/transaksi/penjualan/transaksi-penjualan'}><span>TRANSAKSI PENJUALAN</span></Link></li>
-                                    <li><Link to={'/transaksi/penjualan/perhitungan-harga'}><span>PERHITUNGAN HARGA</span></Link></li>
+                                    <li><Link to={'/transaksi/penjualan/transaksi-penjualan'}><span>Transaksi Penjualan</span></Link></li>
+                                    <li><Link to={'/transaksi/penjualan/perhitungan-harga'}><span>Perhitungan Harga</span></Link></li>
                                 </ul>
                             </li>
                             <li className={style.dropdown}>
                                 <div>
-                                    <span>PEMBELIAN</span>
+                                    <span>Pembelian</span>
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/transaksi/pembelian/order-pembelian'}><span>ORDER PEMBELIAN</span></Link></li>
-                                    <li><Link to={'/transaksi/pembelian/pengeluaran-kas'}><span>PENGELUARAN KAS</span></Link></li>
-                                    <li><Link to={'/transaksi/pembelian/penerimaan-barang'}><span>PENERIMAAN BARANG</span></Link></li>
-                                    <li><Link to={'/transaksi/pembelian/retur-pembelian'}><span>RETUR PEMBELIAN</span></Link></li>
+                                    <li><Link to={'/transaksi/pembelian/order-pembelian'}><span>Order Pembelian</span></Link></li>
+                                    <li><Link to={'/transaksi/pembelian/pengeluaran-kas'}><span>Pengeluaran Kas</span></Link></li>
+                                    <li><Link to={'/transaksi/pembelian/penerimaan-barang'}><span>Penerimaan Barang</span></Link></li>
+                                    <li><Link to={'/transaksi/pembelian/retur-pembelian'}><span>Retur Pembelian</span></Link></li>
                                 </ul>
                             </li>
                             <li className={style.dropdown}>
                                 <div>
-                                    <span>PENERIMAAN KAS</span>
+                                    <span>Penerimaan Kas</span>
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/transaksi/penerimaan-kas/pengembalian-dana'}><span>PENGEMBALIAN DANA</span></Link></li>
-                                    <li><Link to={'/transaksi/penerimaan-kas/uang-muka-pesanan'}><span>UANG MUKA PESANAN</span></Link></li>
-                                    <li><Link to={'/transaksi/penerimaan-kas/konsinyasi'}><span>KONSINYASI</span></Link></li>
+                                    <li><Link to={'/transaksi/penerimaan-kas/pengembalian-dana'}><span>Pengembalian Dana</span></Link></li>
+                                    <li><Link to={'/transaksi/penerimaan-kas/uang-muka-pesanan'}><span>Uang Muka Pesanan</span></Link></li>
+                                    <li><Link to={'/transaksi/penerimaan-kas/konsinyasi'}><span>Konsinyasi</span></Link></li>
                                 </ul>
                             </li>
                             <li className={style.dropdown}>
                                 <div>
-                                    <span>PRODUKSI</span>
+                                    <span>Produksi</span>
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/transaksi/produksi/produksi'}><span>PRODUKSI</span></Link></li>
+                                    <li><Link to={'/transaksi/produksi/produksi'}><span>Produksi</span></Link></li>
                                 </ul>
                             </li>
                         </ul>
@@ -156,51 +144,51 @@ export class sidebar extends Component {
                     <li className={style.dropdown}>
                         <a>
                             <MdStickyNote2 />
-                            <span>LAPORAN</span>
+                            <span>Laporan</span>
                             <MdExpandMore className={style.toggle} />
                         </a>
                         <ul className={style.dropdown_menu}>
                             <li className={style.dropdown}>
                                 <div>
-                                    <span>LAPORAN PEMBELIAN</span>
+                                    <span>Laporan Pembelian</span>
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/laporan/pembelian/transaksi-pembelian'}><span>TRANSAKSI PEMBELIAN</span></Link></li>
-                                    <li><Link to={'/laporan/pembelian/retur-pembelian'}><span>RETUR PEMBELIAN</span></Link></li>
+                                    <li><Link to={'/laporan/pembelian/transaksi-pembelian'}><span>Transaksi Pembelian</span></Link></li>
+                                    <li><Link to={'/laporan/pembelian/retur-pembelian'}><span>Retur Pembelian</span></Link></li>
                                 </ul>
                             </li>
                             <li className={style.dropdown}>
                                 <div>
-                                    <span>LAPORAN PENJUALAN</span>
+                                    <span>Laporan Penjualan</span>
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/laporan/penjualan/transaksi-penjualan'}><span>TRANSAKSI PENJUALAN</span></Link></li>
-                                    <li><Link to={'/laporan/penjualan/piutang-pesanan'}><span>PIUTANG PESANAN</span></Link></li>
-                                    <li><Link to={'/laporan/penjualan/piutang-konsinyasi'}><span>PIUTANG KONSINYASI</span></Link></li>
+                                    <li><Link to={'/laporan/penjualan/transaksi-penjualan'}><span>Transaksi Penjualan</span></Link></li>
+                                    <li><Link to={'/laporan/penjualan/piutang-pesanan'}><span>Piutang Pesanan</span></Link></li>
+                                    <li><Link to={'/laporan/penjualan/piutang-konsinyasi'}><span>Piutang Konsinyasi</span></Link></li>
                                 </ul>
                             </li>
                             <li className={style.dropdown}>
                                 <div>
-                                    <span>LAPORAN KAS</span>
+                                    <span>Laporan Kas</span>
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/laporan/kas/penerimaan-kas'}><span>PENERIMAAN KAS</span></Link></li>
-                                    <li><Link to={'/laporan/kas/pengeluaran-kas'}><span>PENGELUARAN KAS</span></Link></li>
+                                    <li><Link to={'/laporan/kas/penerimaan-kas'}><span>Penerimaan Kas</span></Link></li>
+                                    <li><Link to={'/laporan/kas/pengeluaran-kas'}><span>Pengeluaran Kas</span></Link></li>
                                 </ul>
                             </li>
                             <li className={style.dropdown}>
                                 <div>
-                                    <span>LAPORAN PRODUKSI</span>
+                                    <span>Laporan Produksi</span>
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/laporan/produksi/produksi'}><span>PRODUKSI</span></Link></li>
+                                    <li><Link to={'/laporan/produksi/produksi'}><span>Produksi</span></Link></li>
                                 </ul>
                             </li>
-                            <li><Link to={'/laporan/profitabilitas'}><span>LAPORAN PROFITABILITAS</span></Link></li>
+                            <li><Link to={'/laporan/profitabilitas'}><span>Laporan Profitabilitas</span></Link></li>
                         </ul>
                     </li>
                 </ul>
