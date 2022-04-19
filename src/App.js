@@ -10,7 +10,7 @@ import Sidebar from './component/sidebar';
 
 // Import Page - Format: MenuSubmenu
 import TransaksiPenjualanTransaksiPenjualan from './pages/transaksi/penjualan/transaksi_penjualan';
-import MasterAkun from './pages/Master/Akun';
+import MasterAkun from './pages/master/akun';
 
 // Import CSS
 import style from './App.module.css';
