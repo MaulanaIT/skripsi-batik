@@ -39,7 +39,7 @@ export class App extends Component {
                             <Route patg={'/'} element={<Navigate to={'/dashboard'} />} />
                             <Route path={'/dashboard'} element={<Dashboard />} />
                             <Route path={'/master/user'} element={<Dashboard />} />
-                            <Route path={'/master/akun'} element={<MasterAkun />} />
+                            <Route path={'/master/akun'} element={<Akun />} />
                             <Route path={'/master/supplier'} element={<Dashboard />} />
                             <Route path={'/master/customer'} element={<Dashboard />} />
                             <Route path={'/master/consignee'} element={<Dashboard />} />
