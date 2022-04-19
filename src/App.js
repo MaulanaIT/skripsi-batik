@@ -10,6 +10,7 @@ import Sidebar from './component/sidebar';
 
 // Import Page - Format: MenuSubmenu
 import TransaksiPenjualanTransaksiPenjualan from './pages/transaksi/penjualan/transaksi_penjualan';
+import MasterAkun from './pages/Master/Akun';
 
 // Import CSS
 import style from './App.module.css';
@@ -39,7 +40,7 @@ export class App extends Component {
                             <Route patg={'/'} element={<Navigate to={'/dashboard'} />} />
                             <Route path={'/dashboard'} element={<Dashboard />} />
                             <Route path={'/master/user'} element={<Dashboard />} />
-                            <Route path={'/master/akun'} element={<Dashboard />} />
+                            <Route path={'/master/akun'} element={<MasterAkun />} />
                             <Route path={'/master/supplier'} element={<Dashboard />} />
                             <Route path={'/master/customer'} element={<Dashboard />} />
                             <Route path={'/master/consignee'} element={<Dashboard />} />
