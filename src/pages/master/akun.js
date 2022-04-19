@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 // Import Library
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md'
-import Select from 'react-select';
 
 // Import CSS
+import bootstrap from '../../css/bootstrap.module.css';
+import global from '../../css/global.module.css';
 import style from '../../css/master/akun.module.css';
-
 
 export class akun extends Component {
     render() {
@@ -16,6 +16,24 @@ export class akun extends Component {
                 <div className={style.header}>
                     <p className={style.title}>Akun</p>
                     <p className={style.pathname}>Master / Akun </p>
+                </div>
+                <div className={style.content}>
+                    <div className={global.card}>
+                    <p className={global.title}>Tambah Akun</p>
+                        <div className={`${global.input_group} ${bootstrap['col-4']} ${bootstrap['pe-2']}`}>
+                            <p className={global.title}>Kode Akun</p>
+                            <input type="text" id='input-kode-akun' name='input-kode-akun' />
+                        </div>
+                        <div className={`${global.input_group}`}>
+                            <p className={global.title}>Nama Akun</p>
+                            <input type="text" id='input-nama-akun' name='input-nama-akun' />
+                        </div>
+                            <div className={`${global.input_group} ${bootstrap['col-7']} ${bootstrap['pe-2']}`}>
+                                <p className={global.title}>Saldo</p>
+                                <input type="text" id='input-saldo' name='input-saldo' />
+                        </div>
+                        <button type='button' className={global.button}><MdAdd /> Tambah</button>
+                    </div>
                 </div>
             </>
         )
