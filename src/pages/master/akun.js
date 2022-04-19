@@ -8,7 +8,7 @@ import Select from 'react-select';
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
-import style from '../css/master/akun.module.css';
+import style from '../../../css/master/akun.module.css';
 
 
 export class akun extends Component {
