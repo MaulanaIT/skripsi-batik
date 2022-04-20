@@ -11,6 +11,7 @@ import Sidebar from './component/sidebar';
 // Import Page - Format: MenuSubmenu
 import TransaksiPenjualanTransaksiPenjualan from './pages/transaksi/penjualan/transaksi_penjualan';
 import MasterAkun from './pages/master/akun';
+import MasterSupplier from './pages/master/supplier';
 import TransaksiPembelianOrderPembelian from './pages/transaksi/pembelian/order_pembelian';
 
 // Import CSS
@@ -42,7 +43,7 @@ export class App extends Component {
                             <Route path={'/dashboard'} element={<Dashboard />} />
                             <Route path={'/master/user'} element={<Dashboard />} />
                             <Route path={'/master/akun'} element={<MasterAkun />} />
-                            <Route path={'/master/supplier'} element={<Dashboard />} />
+                            <Route path={'/master/supplier'} element={<MasterSupplier />} />
                             <Route path={'/master/customer'} element={<Dashboard />} />
                             <Route path={'/master/consignee'} element={<Dashboard />} />
                             <Route path={'/master/inventory/bahan-baku'} element={<Dashboard />} />

@@ -6,8 +6,8 @@ import { MdAdd } from 'react-icons/md'
 
 // Import CSS
 import bootstrap from '../../css/bootstrap.module.css';
-import global from '../../css/global.module.css';
-import style from '../../css/master/akun.module.css';
+import global from '../../css/master.module.css';
+import style from '../../css/master.module.css';
 
 export class akun extends Component {
     render() {
@@ -20,7 +20,7 @@ export class akun extends Component {
                 <div className={style.content}>
                     <div className={global.card}>
                     <p className={global.title}>Tambah Akun</p>
-                        <div className={`${global.input_group} ${bootstrap['col-4']} ${bootstrap['pe-2']}`}>
+                        <div className={`${global.input_group}`}>
                             <p className={global.title}>Kode Akun</p>
                             <input type="text" id='input-kode-akun' name='input-kode-akun' />
                         </div>
@@ -28,11 +28,11 @@ export class akun extends Component {
                             <p className={global.title}>Nama Akun</p>
                             <input type="text" id='input-nama-akun' name='input-nama-akun' />
                         </div>
-                            <div className={`${global.input_group} ${bootstrap['col-7']} ${bootstrap['pe-2']}`}>
+                            <div className={`${global.input_group}`}>
                                 <p className={global.title}>Saldo</p>
                                 <input type="text" id='input-saldo' name='input-saldo' />
                         </div>
-                        <button type='button' className={global.button}><MdAdd /> Tambah</button>
+                        <button type='button' className={global.button}><MdAdd /> Simpan</button>
                     </div>
                 </div>
             </>
