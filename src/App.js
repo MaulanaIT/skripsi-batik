@@ -12,6 +12,11 @@ import Sidebar from './component/sidebar';
 import TransaksiPenjualanTransaksiPenjualan from './pages/transaksi/penjualan/transaksi_penjualan';
 import MasterAkun from './pages/master/akun';
 import MasterSupplier from './pages/master/supplier';
+import MasterCustomer from './pages/master/customer';
+import MasterConsignee from './pages/master/consignee';
+import MasterBahanBaku from './pages/master/inventory/bahan_baku';
+import MasterBahanPenolong from './pages/master/inventory/bahan_penolong';
+import MasterAlat from './pages/master/inventory/alat';
 import TransaksiPembelianOrderPembelian from './pages/transaksi/pembelian/order_pembelian';
 
 // Import CSS
@@ -44,11 +49,11 @@ export class App extends Component {
                             <Route path={'/master/user'} element={<Dashboard />} />
                             <Route path={'/master/akun'} element={<MasterAkun />} />
                             <Route path={'/master/supplier'} element={<MasterSupplier />} />
-                            <Route path={'/master/customer'} element={<Dashboard />} />
-                            <Route path={'/master/consignee'} element={<Dashboard />} />
-                            <Route path={'/master/inventory/bahan-baku'} element={<Dashboard />} />
-                            <Route path={'/master/inventory/bahan-penolong'} element={<Dashboard />} />
-                            <Route path={'/master/inventory/bahan-alat'} element={<Dashboard />} />
+                            <Route path={'/master/customer'} element={<MasterCustomer />} />
+                            <Route path={'/master/consignee'} element={<MasterConsignee />} />
+                            <Route path={'/master/inventory/bahan-baku'} element={<MasterBahanBaku />} />
+                            <Route path={'/master/inventory/bahan-penolong'} element={<MasterBahanPenolong />} />
+                            <Route path={'/master/inventory/alat'} element={<MasterAlat />} />
                             <Route path={'/master/tenaga-kerja'} element={<Dashboard />} />
                             <Route path={'/transaksi/penjualan/transaksi-penjualan'} element={<TransaksiPenjualanTransaksiPenjualan />} />
                             <Route path={'/transaksi/penjualan/perhitungan-harga'} element={<Dashboard />} />

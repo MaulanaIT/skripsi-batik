@@ -87,11 +87,33 @@
     margin: 0;
 }
 
-input {
+.input_group>.title2>.nama {
+    max-width: 80%;
+}
+
+.input1 {
   background-color: rgba(0, 0, 0, 0.2);
   border: none;
   border-radius: 2px;
   font-size: 12px;
   outline: none;
-  padding: 10px 12px;
+  padding: 10px 0px;
 }
+
+.input2 {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 2px;
+    font-size: 12px;
+    outline: none;
+    padding: 10px 120px;
+  }
+
+  .input3 {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 2px;
+    font-size: 12px;
+    outline: none;
+    padding: 10px 30px;
+  }
