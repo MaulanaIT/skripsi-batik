@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 // Import Library
+import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md'
 
@@ -9,6 +10,10 @@ import global from '../../css/master.module.css';
 import style from '../../css/master.module.css';
 
 export class akun extends Component {
+    componentDidMount() {
+        $('#table-data').DataTable();
+    }
+
     render() {
         return (
             <>
@@ -34,17 +39,19 @@ export class akun extends Component {
                         <button type='button' className={global.button}><MdAdd /> Simpan</button>
                     </div>
                     <div className={global.card}>
-                        <table className={`${global.title}`} id="table-data">
-                            <thead className="align-middle text-center text-nowrap">
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Kode Akun</th>
-                                    <th>Nama Akun</th>
-                                    <th>Saldo</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div className={`table-responsive`}>
+                            <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                <thead className="align-middle text-center text-nowrap">
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Kode Akun</th>
+                                        <th>Nama Akun</th>
+                                        <th>Saldo</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </>
