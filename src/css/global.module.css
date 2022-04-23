@@ -1,6 +1,11 @@
+:root {
+    --button-first-color: #532f00;
+    --button-second-color: #9e5e31;
+}
+
 .button {
     align-items: center;
-    background-image: linear-gradient(-40deg, #532f00 0%, #9e5e31 100%);
+    background-image: linear-gradient(-40deg, var(--button-first-color) 0%, var(--button-second-color) 100%);
     border: none;
     display: flex;
     filter: brightness(100%);
@@ -10,6 +15,7 @@
     padding: 8px 12px;
     position: relative;
     transition: 0.2s ease-in-out;
+    width: 100%;
 }
 
 .button:before {
@@ -55,7 +61,13 @@
     gap: 6px;
 }
 
-.input_group>.title {
+.input_group_row {
+    display: flex;
+    flex-direction: row;
+}
+
+.input_group_row *,
+.input_group * {
     font-size: 12px;
     font-weight: normal;
     margin: 0;
@@ -67,5 +79,5 @@ input {
   border-radius: 2px;
   font-size: 12px;
   outline: none;
-  padding: 10px 12px;
+  padding: 6px 12px;
 }

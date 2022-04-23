@@ -7,6 +7,7 @@ import { MdAdd } from 'react-icons/md';
 import Select from 'react-select';
 
 // Import CSS
+import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
 import style from '../../../css/transaksi/penjualan/transaksi_penjualan.module.css';
 
@@ -59,83 +60,134 @@ export class transaksi_penjualan extends Component {
                     <p className={style.pathname}>Transaksi / Penjualan / Transaksi Penjualan</p>
                 </div>
                 <div className={style.content}>
-                    <div className={global.card}>
-                        <p className={global.title}>Input Penjualan</p>
-                        <div className={global.input_group}>
-                            <p className={global.title}>Jenis Transaksi</p>
-                            <Select isClearable={true} isSearchable={true} options={[
-                                { value: 'Tunai', label: 'Tunai' },
-                                { value: 'Konsinyasi', label: 'Konsinyasi' }
-                            ]} placeholder={'Select Transaksi...'} styles={CustomSelect} />
+                    <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
+                        <div className={`${global.card}`}>
+                            <p className={global.title}>Input Penjualan</p>
+                            <div className={global.input_group}>
+                                <p className={global.title}>Jenis Transaksi</p>
+                                <Select isClearable={true} isSearchable={true} options={[
+                                    { value: 'Tunai', label: 'Tunai' },
+                                    { value: 'Konsinyasi', label: 'Konsinyasi' }
+                                ]} placeholder={'Select Transaksi...'} styles={CustomSelect} />
+                            </div>
+                            <div className={`${bootstrap['d-flex']}`}>
+                                <div className={`${global.input_group} col-6 pe-2`}>
+                                    <p className={global.title}>Kode Jual</p>
+                                    <input type="text" id='input-kode-jual' name='input-kode-jual' readOnly />
+                                </div>
+                                <div className={`${global.input_group} col-6 ps-2`}>
+                                    <p className={global.title}>Tanggal</p>
+                                    <input type="date" id='input-tanggal-jual' name='input-tanggal-jual' />
+                                </div>
+                            </div>
+                            <div className={`${bootstrap['d-flex']}`}>
+                                <div className={`${global.input_group} col-5 pe-2`}>
+                                    <p className={global.title}>Kode Consignee</p>
+                                    <Select id='select-kode-consignee' name='select-kode-consignee' isClearable={true} isSearchable={true} options={[
+                                        { value: 'CN0001', label: 'CN0001' },
+                                        { value: 'CN0002', label: 'CN0002' }
+                                    ]} placeholder={'Select Kode...'} styles={CustomSelect} />
+                                </div>
+                                <div className={`${global.input_group} col-7 pe-2`}>
+                                    <p className={global.title}>Nama Consignee</p>
+                                    <input type="text" id='input-nama-consignee' name='input-nama-consignee' placeholder='Nama Consignee...' />
+                                </div>
+                            </div>
+                            <div className={`${bootstrap['d-flex']}`}>
+                                <div className={`${global.input_group} col-5 pe-2`}>
+                                    <p className={global.title}>Kode Produk</p>
+                                    <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={[
+                                        { value: 'PROD0001', label: 'PROD0001' },
+                                        { value: 'PROD0002', label: 'PROD0002' }
+                                    ]} placeholder={'Select Kode...'} styles={CustomSelect} />
+                                </div>
+                                <div className={`${global.input_group} col-7 pe-2`}>
+                                    <p className={global.title}>Nama Produk</p>
+                                    <input type="text" id='input-nama-produk' name='input-nama-produk' placeholder='Nama Produk...' />
+                                </div>
+                            </div>
+                            <div className={`${bootstrap['d-flex']}`}>
+                                <div className={`${global.input_group} col-4 pe-2`}>
+                                    <p className={global.title}>Jumlah</p>
+                                    <input type="text" id='input-jumlah-jual' name='input-jumlah-jual' readOnly />
+                                </div>
+                                <div className={`${global.input_group} col-4 px-2`}>
+                                    <p className={global.title}>Harga</p>
+                                    <input type="text" id='input-harga-jual' name='input-harga-jual' />
+                                </div>
+                                <div className={`${global.input_group} col-4 ps-2`}>
+                                    <p className={global.title}>Total Harga</p>
+                                    <input type="text" id='input-total-harga-jual' name='input-total-harga-jual' />
+                                </div>
+                            </div>
+                            <button type='button' className={global.button}><MdAdd /> Tambah</button>
                         </div>
-                        <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-6 pe-2`}>
-                                <p className={global.title}>Kode Jual</p>
-                                <input type="text" id='input-kode-jual' name='input-kode-jual' readOnly />
-                            </div>
-                            <div className={`${global.input_group} col-6 ps-2`}>
-                                <p className={global.title}>Tanggal</p>
-                                <input type="date" id='input-tanggal-jual' name='input-tanggal-jual' />
-                            </div>
-                        </div>
-                        <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-5 pe-2`}>
-                                <p className={global.title}>Kode Consignee</p>
-                                <Select id='select-kode-consignee' name='select-kode-consignee' isClearable={true} isSearchable={true} options={[
-                                    { value: 'CN0001', label: 'CN0001' },
-                                    { value: 'CN0002', label: 'CN0002' }
-                                ]} placeholder={'Select Kode...'} styles={CustomSelect} />
-                            </div>
-                            <div className={`${global.input_group} col-7 pe-2`}>
-                                <p className={global.title}>Nama Consignee</p>
-                                <input type="text" id='input-nama-consignee' name='input-nama-consignee' placeholder='Nama Consignee...' />
-                            </div>
-                        </div>
-                        <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-5 pe-2`}>
-                                <p className={global.title}>Kode Produk</p>
-                                <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={[
-                                    { value: 'PROD0001', label: 'PROD0001' },
-                                    { value: 'PROD0002', label: 'PROD0002' }
-                                ]} placeholder={'Select Kode...'} styles={CustomSelect} />
-                            </div>
-                            <div className={`${global.input_group} col-7 pe-2`}>
-                                <p className={global.title}>Nama Produk</p>
-                                <input type="text" id='input-nama-produk' name='input-nama-produk' placeholder='Nama Produk...' />
-                            </div>
-                        </div>
-                        <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-4 pe-2`}>
-                                <p className={global.title}>Jumlah</p>
-                                <input type="text" id='input-jumlah-jual' name='input-jumlah-jual' readOnly />
-                            </div>
-                            <div className={`${global.input_group} col-4 px-2`}>
-                                <p className={global.title}>Harga</p>
-                                <input type="text" id='input-harga-jual' name='input-harga-jual' />
-                            </div>
-                            <div className={`${global.input_group} col-4 ps-2`}>
-                                <p className={global.title}>Total Harga</p>
-                                <input type="text" id='input-total-harga-jual' name='input-total-harga-jual' />
-                            </div>
-                        </div>
-                        <button type='button' className={global.button}><MdAdd /> Tambah</button>
                     </div>
-                    <div className={global.card}>
-                        <div className={`table-responsive`}>
-                            <table id='table-data' className={`table table-striped table-hover w-100`}>
-                                <thead>
-                                    <tr>
-                                        <td>No.</td>
-                                        <td>Kode Produk</td>
-                                        <td>Nama Produk</td>
-                                        <td>Jumlah Jual</td>
-                                        <td>Harga Jual</td>
-                                        <td>Total Harga</td>
-                                        <td>Aksi</td>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+                    <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                        <div className={`${global.card}`}>
+                            <p className={global.title}>Daftar Penjualan</p>
+                            <div className={`table-responsive`}>
+                                <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                    <thead>
+                                        <tr>
+                                            <td>No.</td>
+                                            <td>Kode Produk</td>
+                                            <td>Nama Produk</td>
+                                            <td>Jumlah Jual</td>
+                                            <td>Harga Jual</td>
+                                            <td>Total Harga</td>
+                                            <td>Aksi</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div className={`d-flex flex-column gap-2 pb-2`}>
+                                <div className={`align-items-center ${global.input_group_row}`}>
+                                    <p className={`${global.title} col-3`}>Total Jual</p>
+                                    <input type="text" id='input-detail-total-jual' name='input-detail-total-jual' className={`col-6`} />
+                                </div>
+                                <div className={`align-items-center ${global.input_group_row}`}>
+                                    <p className={`${global.title} col-3`}>Diskon</p>
+                                    <input type="text" id='input-detail-diskon' name='input-detail-diskon' className={`col-6`} />
+                                </div>
+                                <div className={`align-items-center ${global.input_group_row}`}>
+                                    <p className={`${global.title} col-3`}>Ongkos Kirim</p>
+                                    <input type="text" id='input-detail-ongkos-kirim' name='input-detail-ongkos-kirim' className={`col-6`} />
+                                </div>
+                                <div className={`align-items-center ${global.input_group_row}`}>
+                                    <p className={`${global.title} col-3`}>Total Harga</p>
+                                    <input type="text" id='input-detail-total-harga' name='input-detail-total-harga' className={`col-6`} />
+                                    <div className='col-3 ps-2'>
+                                        <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={[
+                                            { value: '1', label: 'Akun 1' },
+                                            { value: '2', label: 'Akun 2' }
+                                        ]} placeholder={'Select Akun...'} styles={CustomSelect} />
+                                    </div>
+                                </div>
+                                <div className={`align-items-center ${global.input_group_row}`}>
+                                    <p className={`${global.title} col-3`}>Bayar</p>
+                                    <input type="text" id='input-detail-bayar' name='input-detail-bayar' className={`col-6`} />
+                                </div>
+                                <div className={`align-items-center ${global.input_group_row}`}>
+                                    <p className={`${global.title} col-3`}>Kembalian</p>
+                                    <input type="text" id='input-detail-kembalian' name='input-detail-kembalian' className={`col-6`} />
+                                </div>
+                            </div>
+                            <div className='d-flex flex-column gap-2 pt-2'>
+                                <div className='align-items-center d-flex justify-content-between'>
+                                    <p>Upload File Transfer</p>
+                                    <input type="file" accept='.pdf' id='input-detail-file' name='input-detail-file' />
+                                </div>
+                                <div className='d-flex'>
+                                    <div className='col-6 pe-2'>
+                                        <button type='button' className={`${global.button}`}>Simpan</button>
+                                    </div>
+                                    <div className='col-6 ps-2'>
+                                        <button type='button' className={`${global.button}`} style={{"--button-first-color": '#8e0000', "--button-second-color": '#a06565'}}>Batal</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

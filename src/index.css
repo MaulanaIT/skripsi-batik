@@ -65,6 +65,10 @@ Not supports in Firefox and IE */
   filter: invert(1);
 }
 
+p {
+  margin-bottom: 0px !important;
+}
+
 .table-responsive *,
 tr>td {
   font-size: 12px;
