@@ -9,6 +9,8 @@ import Header from './component/header';
 import Sidebar from './component/sidebar';
 
 // Import Page - Format: MenuSubmenu
+import TransaksiPenjualanKalkulatorEstimasi from './pages/transaksi/penjualan/kalkulator_estimasi';
+import TransaksiPenjualanPerhitunganHarga from './pages/transaksi/penjualan/perhitungan_harga';
 import TransaksiPenjualanTransaksiPenjualan from './pages/transaksi/penjualan/transaksi_penjualan';
 import MasterAkun from './pages/master/akun';
 import MasterSupplier from './pages/master/supplier';
@@ -59,7 +61,8 @@ export class App extends Component {
                             <Route path={'/master/inventory/alat'} element={<MasterAlat />} />
                             <Route path={'/master/tenaga-kerja'} element={<Dashboard />} />
                             <Route path={'/transaksi/penjualan/transaksi-penjualan'} element={<TransaksiPenjualanTransaksiPenjualan />} />
-                            <Route path={'/transaksi/penjualan/perhitungan-harga'} element={<Dashboard />} />
+                            <Route path={'/transaksi/penjualan/perhitungan-harga'} element={<TransaksiPenjualanPerhitunganHarga />} />
+                            <Route path={'/transaksi/penjualan/perhitungan-harga/kalkulator-estimasi'} element={<TransaksiPenjualanKalkulatorEstimasi />} />
                             <Route path={'/transaksi/pembelian/order-pembelian'} element={<TransaksiPembelianOrderPembelian />} />
                             <Route path={'/transaksi/pembelian/pengeluaran-kas'} element={<Dashboard />} />
                             <Route path={'/transaksi/pembelian/penerimaan-barang'} element={<Dashboard />} />

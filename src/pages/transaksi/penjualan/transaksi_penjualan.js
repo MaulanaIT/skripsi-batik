@@ -37,6 +37,7 @@ const CustomSelect = {
     }),
     placeholder: (provided, state) => ({
         ...provided,
+        color: 'rgba(255, 255, 255, 0.6)',
         whiteSpace: 'nowrap'
     }),
     singleValue: (provided, state) => ({
@@ -70,11 +71,12 @@ export class transaksi_penjualan extends Component {
                 <div className={style.content}>
                     <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
                         <div className={`${global.card}`}>
-                            <p className={global.title}>Input Penjualan</p>
+                            <div className={`${global.header}`}>
+                                <p className={global.title}>Input Penjualan</p>
+                            </div>
                             <div className={global.input_group}>
                                 <p className={global.title}>Jenis Transaksi</p>
                                 <Select isClearable={true} isSearchable={true} options={[
-                                    { value: '', label: 'Pilih Jenis Transaksi' },
                                     { value: 'Tunai', label: 'Tunai' },
                                     { value: 'Konsinyasi', label: 'Konsinyasi' }
                                 ]} placeholder={'Select Transaksi...'} styles={CustomSelect} onChange={(value) => this.SelectTransaksi(value)} />
@@ -101,7 +103,10 @@ export class transaksi_penjualan extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-7 pe-2`}>
                                             <p className={global.title}>Nama Consignee</p>
-                                            <input type="text" id='input-nama-consignee' name='input-nama-consignee' placeholder='Nama Consignee...' />
+                                            <Select id='select-nama-consignee' name='select-nama-consignee' isClearable={true} isSearchable={true} options={[
+                                                { value: 'Consignee 1', label: 'Consignee 1' },
+                                                { value: 'Consignee 2', label: 'Consignee 2' }
+                                            ]} placeholder={'Select Nama Consignee...'} styles={CustomSelect} />
                                         </div>
                                     </div>
                                     <div className={`${bootstrap['d-flex']}`}>
@@ -139,7 +144,9 @@ export class transaksi_penjualan extends Component {
                     {this.state.jenisTransaksi !== '' ?
                         <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
                             <div className={`${global.card}`}>
-                                <p className={global.title}>Daftar Penjualan</p>
+                                <div className={`${global.header}`}>
+                                    <p className={global.title}>Daftar Penjualan</p>
+                                </div>
                                 <div className={`table-responsive`}>
                                     <table id='table-data' className={`table table-striped table-hover w-100`}>
                                         <thead>
@@ -206,10 +213,10 @@ export class transaksi_penjualan extends Component {
                                     </div>
                                     <div className='d-flex'>
                                         <div className='col-6 pe-2'>
-                                            <button type='button' className={`${global.button}`}>Simpan</button>
+                                            <button type='button' className={`${global.button} w-100`}>Simpan</button>
                                         </div>
                                         <div className='col-6 ps-2'>
-                                            <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>
+                                            <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>
                                         </div>
                                     </div>
                                 </div>
