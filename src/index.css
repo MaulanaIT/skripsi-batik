@@ -65,6 +65,10 @@ Not supports in Firefox and IE */
   filter: invert(1);
 }
 
+input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
 p {
   margin-bottom: 0px !important;
 }

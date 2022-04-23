@@ -12,10 +12,9 @@
     font-size: 12px;
     justify-content: center;
     outline: none;
-    padding: 8px 12px;
+    padding: 8px 16px;
     position: relative;
     transition: 0.2s ease-in-out;
-    width: 100%;
 }
 
 .button:before {
@@ -31,11 +30,15 @@
     width: 100%;
 }
 
-.button>* {
-    font-size: 16px;
+.button,
+.button * {
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
 }
 
 .button:hover {
+    color: white;
     filter: brightness(120%);
 }
 
@@ -48,7 +51,12 @@
     padding: 12px;
 }
 
-.card>.title {
+.card>.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card>.header>.title {
     font-size: 16px;
     font-weight: 500;
     margin: 0;
@@ -58,6 +66,7 @@
 .input_group {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     gap: 6px;
 }
 
@@ -73,11 +82,39 @@
     margin: 0;
 }
 
-input {
-  background-color: rgba(0, 0, 0, 0.2);
-  border: none;
-  border-radius: 2px;
-  font-size: 12px;
-  outline: none;
-  padding: 6px 12px;
+input,
+textarea {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 2px;
+    font-size: 12px !important;
+    outline: none;
+    padding: 10px 12px;
+}
+
+.tab_card {
+    align-items: center;
+    display: flex;
+}
+
+.tab_card>.item {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+}
+
+.tab_card>.item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.tab_card>.item.active {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.tab_card>.item>.name {
+    font-size: 12px;
 }
