@@ -17,19 +17,36 @@ export class sidebar extends Component {
     }
 
     ToggleMenu = () => {
-        let Element = this;
         let ElementDropdown = document.querySelectorAll(`li.${style.dropdown}`);
         let ElementDropdownToggle = document.querySelectorAll(`li.${style.dropdown}>a, li.${style.dropdown}>div, li.${style.dropdown}>p`);
 
         ElementDropdownToggle.forEach(element => {
             element.addEventListener('click', function () {
                 this.parentNode.classList.toggle(style.active);
-                
+
                 $(this).next('ul').slideToggle(500);
             });
         });
 
         let ElementMenu = document.querySelectorAll('ul>li>a[href]');
+
+        for (let i = 0; i < ElementMenu.length; i++) {
+            if (window.location.pathname.includes(ElementMenu[i].getAttribute('href'))) {
+                ElementMenu[i].classList.add(style.active);
+
+                for (let j = 0; j < ElementDropdown.length; j++) {
+                    let Check = (ElementDropdown[j].querySelector(`ul`)).querySelector(`a.${style.active}`);
+
+                    if (Check) {
+                        ElementDropdown[j].firstElementChild.classList.add(style.active);
+
+                        break;
+                    }
+                }
+
+                break;
+            }
+        }
 
         ElementMenu.forEach(element => {
             element.addEventListener('click', function () {
@@ -59,7 +76,7 @@ export class sidebar extends Component {
             <div className={style.container}>
                 <ul>
                     <li>
-                        <Link to={'/dashboard'} className={style.active}>
+                        <Link to={'/dashboard'}>
                             <MdDashboard />
                             <span>Dashboard</span>
                         </Link>
