@@ -91,19 +91,39 @@ export class transaksi_penjualan extends Component {
                                             <input type="date" id='input-tanggal-jual' name='input-tanggal-jual' />
                                         </div>
                                     </div>
-                                    <div className={`${bootstrap['d-flex']}`}>
-                                        <div className={`${global.input_group} col-5 pe-2`}>
-                                            <p className={global.title}>Kode Consignee</p>
-                                            <Select id='select-kode-consignee' name='select-kode-consignee' isClearable={true} isSearchable={true} options={[
-                                                { value: 'CN0001', label: 'CN0001' },
-                                                { value: 'CN0002', label: 'CN0002' }
-                                            ]} placeholder={'Select Kode...'} styles={CustomSelect} />
-                                        </div>
-                                        <div className={`${global.input_group} col-7 pe-2`}>
-                                            <p className={global.title}>Nama Consignee</p>
-                                            <input type="text" id='input-nama-consignee' name='input-nama-consignee' placeholder='Nama Consignee...' />
-                                        </div>
-                                    </div>
+                                    {this.state.jenisTransaksi === 'Tunai' ?
+                                        <>
+                                                    <div className={`${bootstrap['d-flex']}`}>
+                                                <div className={`${global.input_group} col-5 pe-2`}>
+                                                    <p className={global.title}>Kode Customer</p>
+                                                    <Select id='select-kode-customer' name='select-kode-customer' isClearable={true} isSearchable={true} options={[
+                                                        { value: 'CS0001', label: 'CS0001' },
+                                                        { value: 'CS0002', label: 'CS0002' }
+                                                    ]} placeholder={'Select Kode...'} styles={CustomSelect} />
+                                                </div>
+                                                <div className={`${global.input_group} col-7 pe-2`}>
+                                                    <p className={global.title}>Nama Customer</p>
+                                                    <input type="text" id='input-nama-customer' name='input-nama-customer' placeholder='Nama Consignee...' />
+                                                </div>
+                                            </div>
+                                        </>
+                                        :
+                                        <>
+                                            <div className={`${bootstrap['d-flex']}`}>
+                                                <div className={`${global.input_group} col-5 pe-2`}>
+                                                    <p className={global.title}>Kode Consignee</p>
+                                                    <Select id='select-kode-consignee' name='select-kode-consignee' isClearable={true} isSearchable={true} options={[
+                                                        { value: 'CN0001', label: 'CN0001' },
+                                                        { value: 'CN0002', label: 'CN0002' }
+                                                    ]} placeholder={'Select Kode...'} styles={CustomSelect} />
+                                                </div>
+                                                <div className={`${global.input_group} col-7 pe-2`}>
+                                                    <p className={global.title}>Nama Consignee</p>
+                                                    <input type="text" id='input-nama-consignee' name='input-nama-consignee' placeholder='Nama Consignee...' />
+                                                </div>
+                                            </div>
+                                        </>
+                                    }
                                     <div className={`${bootstrap['d-flex']}`}>
                                         <div className={`${global.input_group} col-5 pe-2`}>
                                             <p className={global.title}>Kode Produk</p>
