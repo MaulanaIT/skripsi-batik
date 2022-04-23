@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md'
 
 // Import CSS
-import bootstrap from '../../css/bootstrap.module.css';
 import global from '../../css/master.module.css';
 import style from '../../css/master.module.css';
 
@@ -21,23 +20,23 @@ export class supplier extends Component {
                     <div className={global.card}>
                     <p className={global.title}>Tambah Supplier</p>
                         <div className={`${global.input_group}`}>
-                            <p className={`${global.title} ${bootstrap['col-3']}`}>Kode Supplier</p>
+                            <p className={`${global.title} col-3`}>Kode Supplier</p>
                             <input type="text" className={global.input1} id='input-kode-supplier' name='input-kode-supplier' readOnly />
                         </div>
                         <div className={`${global.input_group}`}>
-                            <p className={`${global.title} ${bootstrap['col-3']}`}>Nama Supplier</p>
+                            <p className={`${global.title} col-3`}>Nama Supplier</p>
                             <input type="text" className={global.input2} id='input-nama-supplier' name='input-nama-supplier' />
                         </div>
                         <div className={`${global.input_group}`}>
-                            <p className={`${global.title} ${bootstrap['col-3']}`}>Alamat</p>
+                            <p className={`${global.title} col-3`}>Alamat</p>
                             <input type="text" className={global.input2} id='input-alamat' name='input-alamat' />
                         </div>
                         <div className={`${global.input_group}`}>
-                            <p className={`${global.title} ${bootstrap['col-3']}`}>No. Telp</p>
+                            <p className={`${global.title} col-3`}>No. Telp</p>
                             <input type="text" className={global.input3} id='input-telp' name='input-telp' />
                         </div>
                         <div className={`${global.input_group}`}>
-                            <p className={`${global.title} ${bootstrap['col-3']}`}>No. Rek. Bank</p>
+                            <p className={`${global.title} col-3`}>No. Rek. Bank</p>
                             <input type="text" className={global.input3} id='input-rek-bank' name='input-rek-bank' />
                         </div>
                         <button type='button' className={global.button}><MdAdd /> Simpan</button>

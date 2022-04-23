@@ -29,6 +29,7 @@
 .container>.logo>.title {
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 0;
 }
 
 .container>.menu>.account {

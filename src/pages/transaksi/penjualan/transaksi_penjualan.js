@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
 // Import Library
+import $ from 'jquery';
 import { Link } from 'react-router-dom';
-import { MdAdd } from 'react-icons/md'
+import { MdAdd } from 'react-icons/md';
 import Select from 'react-select';
 
 // Import CSS
-import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
 import style from '../../../css/transaksi/penjualan/transaksi_penjualan.module.css';
 
@@ -46,6 +46,11 @@ const CustomSelect = {
 }
 
 export class transaksi_penjualan extends Component {
+
+    componentDidMount() {
+        $('#table-data').DataTable();
+    }
+
     render() {
         return (
             <>
@@ -63,59 +68,76 @@ export class transaksi_penjualan extends Component {
                                 { value: 'Konsinyasi', label: 'Konsinyasi' }
                             ]} placeholder={'Select Transaksi...'} styles={CustomSelect} />
                         </div>
-                        <div className={`${bootstrap['d-flex']}`}>
-                            <div className={`${global.input_group} ${bootstrap['col-6']} ${bootstrap['pe-2']}`}>
+                        <div className={`d-flex`}>
+                            <div className={`${global.input_group} col-6 pe-2`}>
                                 <p className={global.title}>Kode Jual</p>
                                 <input type="text" id='input-kode-jual' name='input-kode-jual' readOnly />
                             </div>
-                            <div className={`${global.input_group} ${bootstrap['col-6']} ${bootstrap['ps-2']}`}>
+                            <div className={`${global.input_group} col-6 ps-2`}>
                                 <p className={global.title}>Tanggal</p>
                                 <input type="date" id='input-tanggal-jual' name='input-tanggal-jual' />
                             </div>
                         </div>
-                        <div className={`${bootstrap['d-flex']}`}>
-                            <div className={`${global.input_group} ${bootstrap['col-5']} ${bootstrap['pe-2']}`}>
+                        <div className={`d-flex`}>
+                            <div className={`${global.input_group} col-5 pe-2`}>
                                 <p className={global.title}>Kode Consignee</p>
                                 <Select id='select-kode-consignee' name='select-kode-consignee' isClearable={true} isSearchable={true} options={[
                                     { value: 'CN0001', label: 'CN0001' },
                                     { value: 'CN0002', label: 'CN0002' }
                                 ]} placeholder={'Select Kode...'} styles={CustomSelect} />
                             </div>
-                            <div className={`${global.input_group} ${bootstrap['col-7']} ${bootstrap['pe-2']}`}>
+                            <div className={`${global.input_group} col-7 pe-2`}>
                                 <p className={global.title}>Nama Consignee</p>
                                 <input type="text" id='input-nama-consignee' name='input-nama-consignee' placeholder='Nama Consignee...' />
                             </div>
                         </div>
-                        <div className={`${bootstrap['d-flex']}`}>
-                            <div className={`${global.input_group} ${bootstrap['col-5']} ${bootstrap['pe-2']}`}>
+                        <div className={`d-flex`}>
+                            <div className={`${global.input_group} col-5 pe-2`}>
                                 <p className={global.title}>Kode Produk</p>
                                 <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={[
                                     { value: 'PROD0001', label: 'PROD0001' },
                                     { value: 'PROD0002', label: 'PROD0002' }
                                 ]} placeholder={'Select Kode...'} styles={CustomSelect} />
                             </div>
-                            <div className={`${global.input_group} ${bootstrap['col-7']} ${bootstrap['pe-2']}`}>
+                            <div className={`${global.input_group} col-7 pe-2`}>
                                 <p className={global.title}>Nama Produk</p>
                                 <input type="text" id='input-nama-produk' name='input-nama-produk' placeholder='Nama Produk...' />
                             </div>
                         </div>
-                        <div className={`${bootstrap['d-flex']}`}>
-                            <div className={`${global.input_group} ${bootstrap['col-4']} ${bootstrap['pe-2']}`}>
+                        <div className={`d-flex`}>
+                            <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Jumlah</p>
                                 <input type="text" id='input-jumlah-jual' name='input-jumlah-jual' readOnly />
                             </div>
-                            <div className={`${global.input_group} ${bootstrap['col-4']} ${bootstrap['px-2']}`}>
+                            <div className={`${global.input_group} col-4 px-2`}>
                                 <p className={global.title}>Harga</p>
                                 <input type="text" id='input-harga-jual' name='input-harga-jual' />
                             </div>
-                            <div className={`${global.input_group} ${bootstrap['col-4']} ${bootstrap['ps-2']}`}>
+                            <div className={`${global.input_group} col-4 ps-2`}>
                                 <p className={global.title}>Total Harga</p>
                                 <input type="text" id='input-total-harga-jual' name='input-total-harga-jual' />
                             </div>
                         </div>
                         <button type='button' className={global.button}><MdAdd /> Tambah</button>
                     </div>
-                    <div className={global.card}></div>
+                    <div className={global.card}>
+                        <div className={`table-responsive`}>
+                            <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                <thead>
+                                    <tr>
+                                        <td>No.</td>
+                                        <td>Kode Produk</td>
+                                        <td>Nama Produk</td>
+                                        <td>Jumlah Jual</td>
+                                        <td>Harga Jual</td>
+                                        <td>Total Harga</td>
+                                        <td>Aksi</td>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </>
         )

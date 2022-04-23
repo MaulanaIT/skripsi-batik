@@ -6,7 +6,6 @@ import { MdAdd } from 'react-icons/md'
 import Select from 'react-select';
 
 // Import CSS
-import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
 import style from '../../../css/transaksi/pembelian/order_pembelian.module.css';
 
@@ -56,35 +55,35 @@ export class order_pembelian extends Component {
                 <div className={style.content}>
                     <div className={global.card}>
                         <p className={global.title}>Input Order Pembelian</p>
-                        <div className={`${bootstrap['d-flex']}`}>
-                            <div className={`${global.input_group} ${bootstrap['col-6']} ${bootstrap['pe-2']}`}>
+                        <div className={`d-flex`}>
+                            <div className={`${global.input_group} col-6 pe-2`}>
                                 <p className={global.title}>Kode Order</p>
                                 <input type="text" id='input-kode-order' name='input-kode-order' readOnly />
                             </div>
-                            <div className={`${global.input_group} ${bootstrap['col-6']} ${bootstrap['ps-2']}`}>
+                            <div className={`${global.input_group} col-6 ps-2`}>
                                 <p className={global.title}>Tanggal</p>
                                 <input type="date" id='input-tanggal-order' name='input-tanggal-order' />
                             </div>
                         </div>
-                        <div className={`${bootstrap['d-flex']}`}>
-                            <div className={`${global.input_group} ${bootstrap['col-4']} ${bootstrap['pe-2']}`}>
+                        <div className={`d-flex`}>
+                            <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Jenis Pembelian</p>
                                 <Select isClearable={true} isSearchable={true} options={[
                                     { value: 'Bahan', label: 'Bahan' },
                                     { value: 'Alat', label: 'Alat' }
                                 ]} placeholder={'Select Pembelian...'} styles={CustomSelect} />
                             </div>
-                            <div className={`${global.input_group} ${bootstrap['col-3']} ${bootstrap['px-2']}`}>
+                            <div className={`${global.input_group} col-3 px-2`}>
                                 <p className={global.title}>Kode Supplier</p>
                                 <input type="text" id='input-kode-supplier' name='input-kode-supplier' />
                             </div>
-                            <div className={`${global.input_group} ${bootstrap['col-5']} ${bootstrap['ps-2']}`}>
+                            <div className={`${global.input_group} col-5 ps-2`}>
                                 <p className={global.title}>Nama Supplier</p>
                                 <input type="text" id='input-nama-supplier' name='input-nama-supplier' />
                             </div>
                         </div>
-                        <div className={`${bootstrap['d-flex']}`}>
-                            <div className={`${global.input_group} ${bootstrap['col-5']} ${bootstrap['pe-2']}`}>
+                        <div className={`d-flex`}>
+                            <div className={`${global.input_group} col-5 pe-2`}>
                                 <p className={global.title}>Kode Barang</p>
                                 <Select id='select-kode-barang' name='select-kode-barang' isClearable={true} isSearchable={true} options={[
                                     { value: 'BB0001', label: 'BB0001' },
@@ -92,21 +91,21 @@ export class order_pembelian extends Component {
                                     { value: 'ALAT0001', label: 'ALAT0001' }
                                 ]} placeholder={'Select Kode...'} styles={CustomSelect} />
                             </div>
-                            <div className={`${global.input_group} ${bootstrap['col-7']} ${bootstrap['pe-2']}`}>
+                            <div className={`${global.input_group} col-7 pe-2`}>
                                 <p className={global.title}>Nama Barang</p>
                                 <input type="text" id='input-nama-barang' name='input-nama-barang' placeholder='Nama Barang...' />
                             </div>
                         </div>
-                        <div className={`${bootstrap['d-flex']}`}>
-                            <div className={`${global.input_group} ${bootstrap['col-4']} ${bootstrap['pe-2']}`}>
+                        <div className={`d-flex`}>
+                            <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Jumlah</p>
                                 <input type="text" id='input-jumlah-beli' name='input-jumlah-beli' readOnly />
                             </div>
-                            <div className={`${global.input_group} ${bootstrap['col-4']} ${bootstrap['px-2']}`}>
+                            <div className={`${global.input_group} col-4 px-2`}>
                                 <p className={global.title}>Harga</p>
                                 <input type="text" id='input-harga-beli' name='input-harga-beli' />
                             </div>
-                            <div className={`${global.input_group} ${bootstrap['col-4']} ${bootstrap['ps-2']}`}>
+                            <div className={`${global.input_group} col-4 ps-2`}>
                                 <p className={global.title}>Total Harga</p>
                                 <input type="text" id='input-total-harga-beli' name='input-total-harga-beli' />
                             </div>

@@ -20,9 +20,12 @@ import MasterAlat from './pages/master/inventory/alat';
 import TransaksiPembelianOrderPembelian from './pages/transaksi/pembelian/order_pembelian';
 
 // Import CSS
+import 'bootstrap/dist/css/bootstrap.css'
+import 'datatables.net-bs5/css/dataTables.bootstrap5.css';
 import style from './App.module.css';
 
 // Import Javascript
+import 'datatables.net-bs5/js/dataTables.bootstrap5';
 import WOW from 'wowjs';
 
 export class App extends Component {

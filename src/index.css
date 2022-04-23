@@ -34,6 +34,7 @@ Not supports in Firefox and IE */
 /* total width */
 ::-webkit-scrollbar {
   background-color: transparent;
+  height: 6px;
   width: 8px;
 }
 
@@ -62,4 +63,9 @@ Not supports in Firefox and IE */
   cursor: pointer;
   font-size: 14px;
   filter: invert(1);
+}
+
+.table-responsive *,
+tr>td {
+  font-size: 12px;
 }
