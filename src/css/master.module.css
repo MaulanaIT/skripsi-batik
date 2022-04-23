@@ -1,8 +1,9 @@
 .content {
     display: grid;
     gap: 12px;
-    grid-template-rows: repeat(2, 50%);
+    grid-template-columns: repeat(2, 50%);
     margin-top: 24px;
+    
 }
 
 .header {
