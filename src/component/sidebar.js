@@ -72,7 +72,7 @@ export class sidebar extends Component {
                         </a>
                         <ul className={style.dropdown_menu}>
                             <li><Link to={'/master/user'}><span>User</span></Link></li>
-                            <li><Link to={'/master/akun'}><span>Akun</span></Link></li>
+                            <li><Link to={'/master/daftar_akun'}><span>Akun</span></Link></li>
                             <li><Link to={'/master/supplier'}><span>Supplier</span></Link></li>
                             <li><Link to={'/master/customer'}><span>Customer</span></Link></li>
                             <li><Link to={'/master/consignee'}><span>Consignee</span></Link></li>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 // Import Library
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md'
 
 // Import CSS
@@ -36,22 +35,7 @@ export class akun extends Component {
                             <p className={`${global.title} col-3`}>Saldo</p>
                             <input type="text" className={global.input3} id='input-saldo' name='input-saldo' />
                         </div>
-                        <button type='button' className={global.button}><MdAdd /> Simpan</button>
-                    </div>
-                    <div className={global.card}>
-                        <div className={`table-responsive`}>
-                            <table id='table-data' className={`table table-striped table-hover w-100`}>
-                                <thead className="align-middle text-center text-nowrap">
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Kode Akun</th>
-                                        <th>Nama Akun</th>
-                                        <th>Saldo</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                        <button type='button' className={global.button}>Simpan</button>
                     </div>
                 </div>
             </>

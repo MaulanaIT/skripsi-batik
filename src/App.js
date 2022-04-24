@@ -13,6 +13,7 @@ import TransaksiPenjualanKalkulatorEstimasi from './pages/transaksi/penjualan/ka
 import TransaksiPenjualanPerhitunganHarga from './pages/transaksi/penjualan/perhitungan_harga';
 import TransaksiPenjualanTransaksiPenjualan from './pages/transaksi/penjualan/transaksi_penjualan';
 import MasterAkun from './pages/master/akun';
+import MasterDaftarAkun from './pages/master/daftar_akun';
 import MasterSupplier from './pages/master/supplier';
 import MasterCustomer from './pages/master/customer';
 import MasterConsignee from './pages/master/consignee';
@@ -53,6 +54,7 @@ export class App extends Component {
                             <Route path={'/dashboard'} element={<Dashboard />} />
                             <Route path={'/master/user'} element={<Dashboard />} />
                             <Route path={'/master/akun'} element={<MasterAkun />} />
+                            <Route path={'/master/daftar_akun'} element={<MasterDaftarAkun />} />
                             <Route path={'/master/supplier'} element={<MasterSupplier />} />
                             <Route path={'/master/customer'} element={<MasterCustomer />} />
                             <Route path={'/master/consignee'} element={<MasterConsignee />} />

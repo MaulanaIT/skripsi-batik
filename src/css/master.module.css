@@ -1,9 +1,9 @@
 .content {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(2, 50%);
+    display: flex;
+    flex-wrap: wrap;
     margin-top: 24px;
-    
+    flex-direction: column;
+    gap: 20px;
 }
 
 .header {
