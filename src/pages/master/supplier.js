@@ -25,24 +25,24 @@ export class supplier extends Component {
                     <div className={global.card}>
                     <p className={global.title}>Tambah Supplier</p>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Supplier</p>
-                            <input type="text" id='input-kode-supplier' name='input-kode-supplier' maxLength={100} readOnly />
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>Kode Supplier</p>
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-supplier' name='input-kode-supplier' readOnly />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Supplier</p>
-                            <input type="text" id='input-nama-supplier' name='input-nama-supplier' />
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>Nama Supplier</p>
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-supplier' name='input-nama-supplier' />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Alamat</p>
-                            <input type="text" id='input-alamat' name='input-alamat' />
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>Alamat</p>
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-alamat' name='input-alamat' />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>No. Telp</p>
-                            <input type="text" id='input-telp' name='input-telp' />
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>No. Telp</p>
+                            <input type="text" className="col col-lg-3 col-md-6" id='input-telp' name='input-telp' />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>No. Rek. Bank</p>
-                            <input type="text" id='input-rek-bank' name='input-rek-bank' />
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>No. Rek. Bank</p>
+                            <input type="text" className="col col-lg-3 col-md-6" id='input-rek-bank' name='input-rek-bank' />
                         </div>
                         <button type='button' className={global.button}><MdAdd /> Simpan</button>
                     </div>
