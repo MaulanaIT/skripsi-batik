@@ -102,6 +102,7 @@ export class sidebar extends Component {
                                     <li><Link to={'/master/inventory/bahan-baku'}><span>Bahan Baku</span></Link></li>
                                     <li><Link to={'/master/inventory/bahan-penolong'}><span>Bahan Penolong</span></Link></li>
                                     <li><Link to={'/master/inventory/alat'}><span>Alat</span></Link></li>
+                                    <li><Link to={'/master/inventory/produk'}><span>Produk</span></Link></li>
                                 </ul>
                             </li>
                             <li><Link to={'/master/tenaga-kerja'}><span>Tenaga Kerja</span></Link></li>
@@ -153,7 +154,7 @@ export class sidebar extends Component {
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/transaksi/produksi/produksi'}><span>Produksi</span></Link></li>
+                                    <li><Link to={'/transaksi/produksi/permintaanprod'}><span>Permintaan Produksi</span></Link></li>
                                 </ul>
                             </li>
                         </ul>

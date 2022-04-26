@@ -3,10 +3,47 @@ import React, { Component } from 'react';
 // Import Library
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md'
+import Select from 'react-select';
 
 // Import CSS
 import global from '../../css/master.module.css';
 import style from '../../css/master.module.css';
+
+const CustomSelect = {
+    control: (provided, state) => ({
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        color: 'white',
+        cursor: 'pointer',
+        display: 'flex',
+        fontSize: 12
+    }),
+    input: (provided, state) => ({
+        ...provided,
+        color: 'white'
+    }),
+    menu: (provided, state) => ({
+        backgroundColor: 'rgba(0, 0, 0, 1)',
+        fontSize: 12,
+        position: 'absolute',
+        width: '100%',
+        zIndex: 1
+    }),
+    option: (provided, state) => ({
+        ...provided,
+        backgroundColor: state.isFocused ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.2)',
+        fontSize: 12
+    }),
+    placeholder: (provided, state) => ({
+        ...provided,
+        color: 'rgba(255, 255, 255, 0.6)',
+        whiteSpace: 'nowrap'
+    }),
+    singleValue: (provided, state) => ({
+        ...provided,
+        color: 'white',
+        fontSize: 12
+    })
+}
 
 export class tenaga_kerja extends Component {
     render() {
@@ -28,8 +65,14 @@ export class tenaga_kerja extends Component {
                             <input type="text" className={global.input2} id='input-nama-tenaga-kerja' name='input-nama-tenaga-kerja' />
                         </div>
                         <div className={`${global.input_group}`}>
-                            <p className={`${global.title} col-3`}>Departemen</p>
-                            <input type="text" className={global.input2} id='input-departemen' name='input-departemen' />
+                                            <p className={`${global.title} col-3`}>Departemen</p>
+                                            <Select id='select-departemen' name='select-departemen' isClearable={true} isSearchable={true} options={[
+                                                { value: 'Desain', label: 'Desain' },
+                                                { value: 'Canting', label: 'Canting' },
+                                                { value: 'Cap', label: 'Cap' },
+                                                { value: 'Pewarnaan', label: 'Pewarnaan' },
+                                                { value: 'Packing', label: 'Packing' }
+                                            ]} placeholder={'Pilih Departemen...'} styles={CustomSelect} />
                         </div>
                         <div className={`${global.input_group}`}>
                             <p className={`${global.title} col-3`}>No. Telp</p>

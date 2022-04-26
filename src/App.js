@@ -22,6 +22,7 @@ import MasterBahanPenolong from './pages/master/inventory/bahan_penolong';
 import MasterAlat from './pages/master/inventory/alat';
 import MasterProduk from './pages/master/inventory/produk';
 import TransaksiPembelianOrderPembelian from './pages/transaksi/pembelian/order_pembelian';
+import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
 
 
 // Import CSS
@@ -74,7 +75,7 @@ export class App extends Component {
                             <Route path={'/transaksi/penerimaan-kas/pengembalian-dana'} element={<Dashboard />} />
                             <Route path={'/transaksi/penerimaan-kas/uang-muka-pesanan'} element={<Dashboard />} />
                             <Route path={'/transaksi/penerimaan-kas/konsinyasi'} element={<Dashboard />} />
-                            <Route path={'/transaksi/produksi/produksi'} element={<Dashboard />} />
+                            <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
                             <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<Dashboard />} />
                             <Route path={'/laporan/pembelian/retur-pembelian'} element={<Dashboard />} />
                             <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<Dashboard />} />
