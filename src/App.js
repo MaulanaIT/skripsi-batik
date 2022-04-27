@@ -26,6 +26,7 @@ import MasterAlat from './pages/master/inventory/alat';
 import MasterDaftarAlat from './pages/master/inventory/daftar_alat';
 import MasterProduk from './pages/master/inventory/produk';
 import TransaksiPembelianOrderPembelian from './pages/transaksi/pembelian/order_pembelian';
+import TransaksiPembelianDaftarOrder from './pages/transaksi/pembelian/daftar_order';
 import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
 import DaftarProduksi from './pages/transaksi/produksi/daftar_produksi';
 
@@ -69,6 +70,7 @@ export class App extends Component {
                             <Route path={'/transaksi/penjualan/perhitungan-harga'} element={<TransaksiPenjualanPerhitunganHarga />} />
                             <Route path={'/transaksi/penjualan/perhitungan-harga/kalkulator-estimasi'} element={<TransaksiPenjualanKalkulatorEstimasi />} />
                             <Route path={'/transaksi/pembelian/order-pembelian'} element={<TransaksiPembelianOrderPembelian />} />
+                            <Route path={'/transaksi/pembelian/daftar-order'} element={<TransaksiPembelianDaftarOrder />} />
                             <Route path={'/transaksi/pembelian/pengeluaran-kas'} element={<Dashboard />} />
                             <Route path={'/transaksi/pembelian/penerimaan-barang'} element={<Dashboard />} />
                             <Route path={'/transaksi/pembelian/retur-pembelian'} element={<Dashboard />} />
