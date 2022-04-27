@@ -26,19 +26,19 @@ export class customer extends Component {
                         <p className={global.title}>Tambah Customer</p>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Customer</p>
-                            <input type="text" id='input-kode-customer' name='input-kode-customer' readOnly />
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-customer' name='input-kode-customer' readOnly />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Customer</p>
-                            <input type="text" id='input-nama-customer' name='input-nama-customer' />
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-customer' name='input-nama-customer' />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Alamat</p>
-                            <input type="text" id='input-alamat' name='input-alamat' />
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-alamat' name='input-alamat' />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>No. Telp</p>
-                            <input type="text" id='input-telp' name='input-telp' />
+                            <input type="text" className="col col-lg-3 col-md-6" id='input-telp' name='input-telp' />
                         </div>
                         <button type='button' className={global.button}><MdAdd /> Simpan</button>
                     </div>

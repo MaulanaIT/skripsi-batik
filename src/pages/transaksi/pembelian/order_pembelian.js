@@ -112,7 +112,46 @@ export class order_pembelian extends Component {
                         </div>
                         <button type='button' className={global.button}><MdAdd /> Tambah</button>
                     </div>
-                    <div className={global.card}></div>
+                    <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                        <div className={global.card}>
+                            <div className={`${global.header}`}>
+                                <p className={global.title}>Daftar Pembelian</p>
+                            </div>
+                            <div className={`table-responsive`}>
+                                <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                    <thead>
+                                        <tr>
+                                            <td>No.</td>
+                                            <td>Kode </td>
+                                            <td>Nama </td>
+                                            <td>Satuan</td>
+                                            <td>Jumlah Beli</td>
+                                            <td>Harga</td>
+                                            <td>Total Harga</td>
+                                            <td>Aksi</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div className={`d-flex flex-column gap-2 pb-2`}>
+                                <div className={`align-items-center ${global.input_group_row}`}>
+                                    <p className={`${global.title} col-3`}>Total Harga</p>
+                                    <input type="text" id='input-detail-total-jual' name='input-detail-total-jual' />
+                                </div>
+                            </div>
+                            <div className='d-flex flex-column gap-2 pt-2'>
+                                <div className='d-flex'>
+                                    <div className='col-6 pe-2'>
+                                        <button type='button' className={`${global.button} w-100`}>Simpan</button>
+                                    </div>
+                                    <div className='col-6 ps-2'>
+                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
                 </div>
             </>
         )

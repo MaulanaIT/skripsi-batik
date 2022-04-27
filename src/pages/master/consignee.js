@@ -26,19 +26,19 @@ export class consignee extends Component {
                     <p className={global.title}>Tambah Consignee</p>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Consignee</p>
-                            <input type="text" id='input-kode-consignee' name='input-kode-consignee' readOnly />
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-consignee' name='input-kode-consignee' readOnly />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Consignee</p>
-                            <input type="text" id='input-nama-consignee' name='input-nama-consignee' />
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-consignee' name='input-nama-consignee' />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Alamat</p>
-                            <input type="text" id='input-alamat' name='input-alamat' />
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-alamat' name='input-alamat' />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>No. Telp</p>
-                            <input type="text" id='input-telp' name='input-telp' />
+                            <input type="text" className="col col-lg-3 col-md-6" id='input-telp' name='input-telp' />
                         </div>
                         <button type='button' className={global.button}><MdAdd /> Simpan</button>
                     </div>

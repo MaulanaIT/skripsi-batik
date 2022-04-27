@@ -19,8 +19,11 @@ import MasterCustomer from './pages/master/customer';
 import MasterConsignee from './pages/master/consignee';
 import MasterTenagaKerja from './pages/master/tenaga_kerja';
 import MasterBahanBaku from './pages/master/inventory/bahan_baku';
+import MasterDaftarBB from './pages/master/inventory/daftar_bb';
 import MasterBahanPenolong from './pages/master/inventory/bahan_penolong';
+import MasterDaftarBP from './pages/master/inventory/daftar_bp';
 import MasterAlat from './pages/master/inventory/alat';
+import MasterDaftarAlat from './pages/master/inventory/daftar_alat';
 import MasterProduk from './pages/master/inventory/produk';
 import TransaksiPembelianOrderPembelian from './pages/transaksi/pembelian/order_pembelian';
 import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
@@ -59,13 +62,16 @@ export class App extends Component {
                             <Route path={'/dashboard'} element={<Dashboard />} />
                             <Route path={'/master/user'} element={<Dashboard />} />
                             <Route path={'/master/akun'} element={<MasterAkun />} />
-                            <Route path={'/master/daftar_akun'} element={<MasterDaftarAkun />} />
+                            <Route path={'/master/daftar-akun'} element={<MasterDaftarAkun />} />
                             <Route path={'/master/supplier'} element={<MasterSupplier />} />
                             <Route path={'/master/customer'} element={<MasterCustomer />} />
                             <Route path={'/master/consignee'} element={<MasterConsignee />} />
                             <Route path={'/master/inventory/bahan-baku'} element={<MasterBahanBaku />} />
+                            <Route path={'/master/inventory/daftar-bb'} element={<MasterDaftarBB />} />
                             <Route path={'/master/inventory/bahan-penolong'} element={<MasterBahanPenolong />} />
+                            <Route path={'/master/inventory/daftar-bp'} element={<MasterDaftarBP />} />
                             <Route path={'/master/inventory/alat'} element={<MasterAlat />} />
+                            <Route path={'/master/inventory/daftar-alat'} element={<MasterDaftarAlat />} />
                             <Route path={'/master/inventory/produk'} element={<MasterProduk />} />
                             <Route path={'/master/tenaga-kerja'} element={<MasterTenagaKerja />} />
                             <Route path={'/transaksi/penjualan/transaksi-penjualan'} element={<TransaksiPenjualanTransaksiPenjualan />} />
