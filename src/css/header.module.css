@@ -1,0 +1,113 @@
+.container {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid #504651;
+    display: flex;
+    height: 64px;
+    justify-content: space-between;
+    left: 0;
+    padding: 12px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.container>.logo {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+}
+
+.container>.logo>img {
+    border-radius: 50%;
+    height: 36px;
+    object-fit: cover;
+    width: 36px;
+}
+
+.container>.logo>.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.container>.menu>.account {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: 8px;
+    position: relative;
+}
+
+.container>.menu>.account>ul.dropdown_menu {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid #504651;
+    border-radius: 8px;
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 64px;
+    width: 130px;
+}
+
+.container>.menu>.account>ul.dropdown_menu.active {
+    display: block;
+}
+
+.container>.menu>.account>ul.dropdown_menu>li {
+    position: relative;
+}
+
+.container>.menu>.account>ul.dropdown_menu>li:not(:last-child) {
+    border-bottom: 1px solid #504651;
+}
+
+.container>.menu>.account>ul.dropdown_menu>li>a,
+.container>.menu>.account>ul.dropdown_menu>li>div {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 12px;
+    position: relative;
+    text-decoration: none;
+}
+
+.container>.menu>.account>ul.dropdown_menu>li>a:hover,
+.container>.menu>.account>ul.dropdown_menu>li>div:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.container>.menu>.account:hover>.icon>*,
+.container>.menu>.account:hover>.title {
+    color: #f7e3c1;
+}
+
+.container>.menu>.account>.icon {
+    font-size: 36px;
+}
+
+.container>.menu>.account>.icon>* {
+    transition: 0.4s ease-in-out;
+}
+
+.container>.menu>.account>.title {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0;
+    margin: 0;
+    transition: 0.4s ease-in-out;
+}
+
+@media screen and (max-width: 495px) {
+    .container {
+        justify-content: flex-end;
+    }
+
+    .container>.logo {
+        display: none;
+    }
+}
