@@ -17,10 +17,15 @@ import MasterDaftarAkun from './pages/master/daftar_akun';
 import MasterSupplier from './pages/master/supplier';
 import MasterCustomer from './pages/master/customer';
 import MasterConsignee from './pages/master/consignee';
+import MasterTenagaKerja from './pages/master/tenaga_kerja';
 import MasterBahanBaku from './pages/master/inventory/bahan_baku';
 import MasterBahanPenolong from './pages/master/inventory/bahan_penolong';
 import MasterAlat from './pages/master/inventory/alat';
+import MasterProduk from './pages/master/inventory/produk';
 import TransaksiPembelianOrderPembelian from './pages/transaksi/pembelian/order_pembelian';
+import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
+import DaftarProduksi from './pages/transaksi/produksi/daftar_produksi';
+
 
 // Import CSS
 import 'bootstrap/dist/css/bootstrap.css'
@@ -61,7 +66,8 @@ export class App extends Component {
                             <Route path={'/master/inventory/bahan-baku'} element={<MasterBahanBaku />} />
                             <Route path={'/master/inventory/bahan-penolong'} element={<MasterBahanPenolong />} />
                             <Route path={'/master/inventory/alat'} element={<MasterAlat />} />
-                            <Route path={'/master/tenaga-kerja'} element={<Dashboard />} />
+                            <Route path={'/master/inventory/produk'} element={<MasterProduk />} />
+                            <Route path={'/master/tenaga-kerja'} element={<MasterTenagaKerja />} />
                             <Route path={'/transaksi/penjualan/transaksi-penjualan'} element={<TransaksiPenjualanTransaksiPenjualan />} />
                             <Route path={'/transaksi/penjualan/perhitungan-harga'} element={<TransaksiPenjualanPerhitunganHarga />} />
                             <Route path={'/transaksi/penjualan/perhitungan-harga/kalkulator-estimasi'} element={<TransaksiPenjualanKalkulatorEstimasi />} />
@@ -72,7 +78,8 @@ export class App extends Component {
                             <Route path={'/transaksi/penerimaan-kas/pengembalian-dana'} element={<Dashboard />} />
                             <Route path={'/transaksi/penerimaan-kas/uang-muka-pesanan'} element={<Dashboard />} />
                             <Route path={'/transaksi/penerimaan-kas/konsinyasi'} element={<Dashboard />} />
-                            <Route path={'/transaksi/produksi/produksi'} element={<Dashboard />} />
+                            <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
+                            <Route path={'/transaksi/produksi/daftar_produksi'} element={<DaftarProduksi />} />
                             <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<Dashboard />} />
                             <Route path={'/laporan/pembelian/retur-pembelian'} element={<Dashboard />} />
                             <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<Dashboard />} />

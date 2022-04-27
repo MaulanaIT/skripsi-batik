@@ -17,19 +17,36 @@ export class sidebar extends Component {
     }
 
     ToggleMenu = () => {
-        let Element = this;
         let ElementDropdown = document.querySelectorAll(`li.${style.dropdown}`);
         let ElementDropdownToggle = document.querySelectorAll(`li.${style.dropdown}>a, li.${style.dropdown}>div, li.${style.dropdown}>p`);
 
         ElementDropdownToggle.forEach(element => {
             element.addEventListener('click', function () {
                 this.parentNode.classList.toggle(style.active);
-                
+
                 $(this).next('ul').slideToggle(500);
             });
         });
 
         let ElementMenu = document.querySelectorAll('ul>li>a[href]');
+
+        for (let i = 0; i < ElementMenu.length; i++) {
+            if (window.location.pathname.includes(ElementMenu[i].getAttribute('href'))) {
+                ElementMenu[i].classList.add(style.active);
+
+                for (let j = 0; j < ElementDropdown.length; j++) {
+                    let Check = (ElementDropdown[j].querySelector(`ul`)).querySelector(`a.${style.active}`);
+
+                    if (Check) {
+                        ElementDropdown[j].firstElementChild.classList.add(style.active);
+
+                        break;
+                    }
+                }
+
+                break;
+            }
+        }
 
         ElementMenu.forEach(element => {
             element.addEventListener('click', function () {
@@ -59,7 +76,7 @@ export class sidebar extends Component {
             <div className={style.container}>
                 <ul>
                     <li>
-                        <Link to={'/dashboard'} className={style.active}>
+                        <Link to={'/dashboard'}>
                             <MdDashboard />
                             <span>Dashboard</span>
                         </Link>
@@ -85,6 +102,7 @@ export class sidebar extends Component {
                                     <li><Link to={'/master/inventory/bahan-baku'}><span>Bahan Baku</span></Link></li>
                                     <li><Link to={'/master/inventory/bahan-penolong'}><span>Bahan Penolong</span></Link></li>
                                     <li><Link to={'/master/inventory/alat'}><span>Alat</span></Link></li>
+                                    <li><Link to={'/master/inventory/produk'}><span>Produk</span></Link></li>
                                 </ul>
                             </li>
                             <li><Link to={'/master/tenaga-kerja'}><span>Tenaga Kerja</span></Link></li>
@@ -136,7 +154,8 @@ export class sidebar extends Component {
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/transaksi/produksi/produksi'}><span>Produksi</span></Link></li>
+                                    <li><Link to={'/transaksi/produksi/permintaanprod'}><span>Permintaan Produksi</span></Link></li>
+                                    <li><Link to={'/transaksi/produksi/daftar_produksi'}><span>Daftar Produksi</span></Link></li>
                                 </ul>
                             </li>
                         </ul>
