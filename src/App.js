@@ -37,17 +37,8 @@ import style from './App.module.css';
 
 // Import Javascript
 import 'datatables.net-bs5/js/dataTables.bootstrap5';
-import WOW from 'wowjs';
 
 export class App extends Component {
-
-    componentDidMount() {
-        const wow = new WOW.WOW({
-            live: false
-        });
-
-        wow.init();
-    }
 
     render() {
         return (
