@@ -78,7 +78,8 @@ export class transaksi_penjualan extends Component {
                                 <p className={global.title}>Jenis Transaksi</p>
                                 <Select isClearable={true} isSearchable={true} options={[
                                     { value: 'Tunai', label: 'Tunai' },
-                                    { value: 'Konsinyasi', label: 'Konsinyasi' }
+                                    { value: 'Konsinyasi', label: 'Konsinyasi' },
+                                    { value: 'Pesanan', label: 'Pesanan' }
                                 ]} placeholder={'Select Transaksi...'} styles={CustomSelect} onChange={(value) => this.SelectTransaksi(value)} />
                             </div>
                             {this.state.jenisTransaksi !== '' ?

@@ -7,9 +7,9 @@ import { MdAdd } from 'react-icons/md';
 
 // Import CSS
 import global from '../../../css/global.module.css';
-import style from '../../../css/transaksi/pembelian/order_pembelian.module.css';
+import style from '../../../css/transaksi/pembelian/penerimaan_barang.module.css';
 
-export class daftar_order extends Component {
+export class daftar_terimabarang extends Component {
 
     componentDidMount() {
         $('#table-data').DataTable();
@@ -19,26 +19,26 @@ export class daftar_order extends Component {
         return (
             <>
                 <div className={style.header}>
-                    <p className={style.title}>Order Pembelian</p>
-                    <p className={style.pathname}>Transaksi / Pembelian / Order Pembelian</p>
+                    <p className={style.title}>Penerimaan Barang</p>
+                    <p className={style.pathname}>Transaksi / Pembelian / Penerimaan Barang</p>
                 </div>
                 <div className={`${style.content}`}>
                     <div className={`${global.card} col-12`}>
                         <div className={`${global.header}`}>
-                            <p className={global.title}>Daftar Order Pembelian</p>
-                            <Link to={'/transaksi/pembelian/order-pembelian'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
+                            <p className={global.title}>Daftar Penerimaan Barang</p>
+                            <Link to={'/transaksi/pembelian/penerimaan-barang'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
                         </div>
                         <div className={`table-responsive`}>
                             <table id='table-data' className={`table table-striped table-hover w-100`}>
                                 <thead className='text-nowrap'>
                                     <tr>
                                         <td>No.</td>
+                                        <td>Kode Penerimaan</td>
+                                        <td>Tanggal Terima</td>
                                         <td>Kode Order</td>
-                                        <td>Tanggal</td>
                                         <td>Kode Supplier</td>
                                         <td>Nama Supplier</td>
-                                        <td>Total Harga</td>
-                                        <td>Status</td>
+                                        <td>Total Barang</td>
                                         <td>Aksi</td>
                                     </tr>
                                 </thead>
@@ -52,4 +52,4 @@ export class daftar_order extends Component {
     }
 }
 
-export default daftar_order
+export default daftar_terimabarang
