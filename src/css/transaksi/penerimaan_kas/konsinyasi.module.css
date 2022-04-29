@@ -1,0 +1,24 @@
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+.header {
+    align-items: baseline;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.header>.pathname {
+    font-size: 12px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.header>.title {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+}

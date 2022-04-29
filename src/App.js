@@ -33,6 +33,9 @@ import TransaksiPembelianDaftarTerimaBarang from './pages/transaksi/pembelian/da
 import TransaksiPembelianReturPembelian from './pages/transaksi/pembelian/retur_pembelian';
 import TransaksiPembelianDaftarRetur from './pages/transaksi/pembelian/daftar_retur';
 import TransaksiPenerimaanKasPengembalianDana from './pages/transaksi/penerimaan_kas/pengembalian_dana';
+import TransaksiPenerimaanKasUangMukaPesanan from './pages/transaksi/penerimaan_kas/uang_muka_pesanan';
+import TransaksiPenerimaanKasDaftarUangMuka from './pages/transaksi/penerimaan_kas/daftar_uangmuka';
+import TransaksiPenerimaanKasKonsinyasi from './pages/transaksi/penerimaan_kas/konsinyasi';
 import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
 import DaftarProduksi from './pages/transaksi/produksi/daftar_produksi';
 
@@ -83,8 +86,9 @@ export class App extends Component {
                             <Route path={'/transaksi/pembelian/retur-pembelian'} element={<TransaksiPembelianReturPembelian />} />
                             <Route path={'/transaksi/pembelian/daftar-retur'} element={<TransaksiPembelianDaftarRetur />} />
                             <Route path={'/transaksi/penerimaan-kas/pengembalian-dana'} element={<TransaksiPenerimaanKasPengembalianDana />} />
-                            <Route path={'/transaksi/penerimaan-kas/uang-muka-pesanan'} element={<Dashboard />} />
-                            <Route path={'/transaksi/penerimaan-kas/konsinyasi'} element={<Dashboard />} />
+                            <Route path={'/transaksi/penerimaan-kas/uang-muka-pesanan'} element={<TransaksiPenerimaanKasUangMukaPesanan />} />
+                            <Route path={'/transaksi/penerimaan-kas/daftar-uangmuka'} element={<TransaksiPenerimaanKasDaftarUangMuka />} />
+                            <Route path={'/transaksi/penerimaan-kas/konsinyasi'} element={<TransaksiPenerimaanKasKonsinyasi />} />
                             <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
                             <Route path={'/transaksi/produksi/daftar_produksi'} element={<DaftarProduksi />} />
                             <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<Dashboard />} />

@@ -144,7 +144,7 @@ export class sidebar extends Component {
                                 </div>
                                 <ul className={style.dropdown_menu}>
                                     <li><Link to={'/transaksi/penerimaan-kas/pengembalian-dana'}><span>Pengembalian Dana</span></Link></li>
-                                    <li><Link to={'/transaksi/penerimaan-kas/uang-muka-pesanan'}><span>Uang Muka Pesanan</span></Link></li>
+                                    <li><Link to={'/transaksi/penerimaan-kas/daftar-uangmuka'}><span>Uang Muka Pesanan</span></Link></li>
                                     <li><Link to={'/transaksi/penerimaan-kas/konsinyasi'}><span>Konsinyasi</span></Link></li>
                                 </ul>
                             </li>
