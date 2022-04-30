@@ -1,0 +1,120 @@
+:root {
+    --button-first-color: #532f00;
+    --button-second-color: #9e5e31;
+}
+
+.button {
+    align-items: center;
+    background-image: linear-gradient(-40deg, var(--button-first-color) 0%, var(--button-second-color) 100%);
+    border: none;
+    display: flex;
+    filter: brightness(100%);
+    font-size: 12px;
+    justify-content: center;
+    outline: none;
+    padding: 8px 16px;
+    position: relative;
+    transition: 0.2s ease-in-out;
+}
+
+.button:before {
+    background: url(../assets/images/batik-button-background.png) no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    content: '';
+    height: 100%;
+    left: 0;
+    opacity: 0.1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.button,
+.button * {
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.button:hover {
+    color: white;
+    filter: brightness(120%);
+}
+
+.card {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+}
+
+.card>.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card>.header>.title {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    margin-bottom: 6px;
+}
+
+.input_group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.input_group_row {
+    display: flex;
+    flex-direction: row;
+}
+
+.input_group_row *,
+.input_group * {
+    font-size: 12px;
+    font-weight: normal;
+    margin: 0;
+}
+
+input,
+textarea {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 2px;
+    font-size: 12px !important;
+    outline: none;
+    padding: 10px 12px;
+}
+
+.tab_card {
+    align-items: center;
+    display: flex;
+}
+
+.tab_card>.item {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+}
+
+.tab_card>.item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.tab_card>.item.active {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.tab_card>.item>.name {
+    font-size: 12px;
+}
