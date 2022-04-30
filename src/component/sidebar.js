@@ -89,7 +89,7 @@ export class sidebar extends Component {
                         </a>
                         <ul className={style.dropdown_menu}>
                             <li><Link to={'/master/user'}><span>User</span></Link></li>
-                            <li><Link to={'/master/akun'}><span>Akun</span></Link></li>
+                            <li><Link to={'/master/daftar-akun'}><span>Akun</span></Link></li>
                             <li><Link to={'/master/supplier'}><span>Supplier</span></Link></li>
                             <li><Link to={'/master/customer'}><span>Customer</span></Link></li>
                             <li><Link to={'/master/consignee'}><span>Consignee</span></Link></li>
@@ -99,9 +99,9 @@ export class sidebar extends Component {
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/master/inventory/bahan-baku'}><span>Bahan Baku</span></Link></li>
-                                    <li><Link to={'/master/inventory/bahan-penolong'}><span>Bahan Penolong</span></Link></li>
-                                    <li><Link to={'/master/inventory/alat'}><span>Alat</span></Link></li>
+                                    <li><Link to={'/master/inventory/daftar-bb'}><span>Bahan Baku</span></Link></li>
+                                    <li><Link to={'/master/inventory/daftar-bp'}><span>Bahan Penolong</span></Link></li>
+                                    <li><Link to={'/master/inventory/daftar-alat'}><span>Alat</span></Link></li>
                                     <li><Link to={'/master/inventory/produk'}><span>Produk</span></Link></li>
                                 </ul>
                             </li>
@@ -131,10 +131,10 @@ export class sidebar extends Component {
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/transaksi/pembelian/order-pembelian'}><span>Order Pembelian</span></Link></li>
+                                    <li><Link to={'/transaksi/pembelian/daftar-order'}><span>Order Pembelian</span></Link></li>
                                     <li><Link to={'/transaksi/pembelian/pengeluaran-kas'}><span>Pengeluaran Kas</span></Link></li>
-                                    <li><Link to={'/transaksi/pembelian/penerimaan-barang'}><span>Penerimaan Barang</span></Link></li>
-                                    <li><Link to={'/transaksi/pembelian/retur-pembelian'}><span>Retur Pembelian</span></Link></li>
+                                    <li><Link to={'/transaksi/pembelian/daftar-terimabarang'}><span>Penerimaan Barang</span></Link></li>
+                                    <li><Link to={'/transaksi/pembelian/daftar-retur'}><span>Retur Pembelian</span></Link></li>
                                 </ul>
                             </li>
                             <li className={style.dropdown}>
@@ -144,7 +144,7 @@ export class sidebar extends Component {
                                 </div>
                                 <ul className={style.dropdown_menu}>
                                     <li><Link to={'/transaksi/penerimaan-kas/pengembalian-dana'}><span>Pengembalian Dana</span></Link></li>
-                                    <li><Link to={'/transaksi/penerimaan-kas/uang-muka-pesanan'}><span>Uang Muka Pesanan</span></Link></li>
+                                    <li><Link to={'/transaksi/penerimaan-kas/daftar-uangmuka'}><span>Uang Muka Pesanan</span></Link></li>
                                     <li><Link to={'/transaksi/penerimaan-kas/konsinyasi'}><span>Konsinyasi</span></Link></li>
                                 </ul>
                             </li>

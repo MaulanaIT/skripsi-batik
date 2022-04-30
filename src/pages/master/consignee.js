@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 
 // Import Library
+import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md'
 
 // Import CSS
-import global from '../../css/master.module.css';
+import global from '../../css/global.module.css';
 import style from '../../css/master.module.css';
 
 export class consignee extends Component {
+    componentDidMount() {
+        $('#table-data').DataTable();
+    }
+
     render() {
         return (
             <>
@@ -19,23 +24,44 @@ export class consignee extends Component {
                 <div className={style.content}>
                     <div className={global.card}>
                     <p className={global.title}>Tambah Consignee</p>
-                        <div className={`${global.input_group}`}>
-                            <p className={`${global.title} col-3`}>Kode Consignee</p>
-                            <input type="text" className={global.input1} id='input-kode-consignee' name='input-kode-consignee' readOnly />
+                        <div className={`${global.input_group_row}`}>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Consignee</p>
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-consignee' name='input-kode-consignee' readOnly />
                         </div>
-                        <div className={`${global.input_group}`}>
-                            <p className={`${global.title} col-3`}>Nama Consignee</p>
-                            <input type="text" className={global.input2} id='input-nama-consignee' name='input-nama-consignee' />
+                        <div className={`${global.input_group_row}`}>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Consignee</p>
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-consignee' name='input-nama-consignee' />
                         </div>
-                        <div className={`${global.input_group}`}>
-                            <p className={`${global.title} col-3`}>Alamat</p>
-                            <input type="text" className={global.input2} id='input-alamat' name='input-alamat' />
+                        <div className={`${global.input_group_row}`}>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Alamat</p>
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-alamat' name='input-alamat' />
                         </div>
-                        <div className={`${global.input_group}`}>
-                            <p className={`${global.title} col-3`}>No. Telp</p>
-                            <input type="text" className={global.input3} id='input-telp' name='input-telp' />
+                        <div className={`${global.input_group_row}`}>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>No. Telp</p>
+                            <input type="text" className="col col-lg-3 col-md-6" id='input-telp' name='input-telp' />
                         </div>
                         <button type='button' className={global.button}><MdAdd /> Simpan</button>
+                    </div>
+                    <div className={`${global.card} col-12`}>
+                        <div className={`${global.header}`}>
+                            <p className={global.title}>Daftar Consignee</p>
+                        </div>
+                        <div className={global.card}>
+                            <div className={`table-responsive`}>
+                                <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                    <thead className="align-middle text-center text-nowrap">
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Kode Consignee</th>
+                                            <th>Nama Consignee</th>
+                                            <th>Alamat</th>
+                                            <th>No. Telp</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </>

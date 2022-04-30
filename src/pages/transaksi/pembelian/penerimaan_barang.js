@@ -8,7 +8,7 @@ import Select from 'react-select';
 
 // Import CSS
 import global from '../../../css/global.module.css';
-import style from '../../../css/transaksi/pembelian/order_pembelian.module.css';
+import style from '../../../css/transaksi/pembelian/penerimaan_barang.module.css';
 
 const CustomSelect = {
     control: (provided, state) => ({
@@ -45,7 +45,7 @@ const CustomSelect = {
     })
 }
 
-export class order_pembelian extends Component {
+export class penerimaan_barang extends Component {
 
     state = {
         jenisPembelian: '',
@@ -63,13 +63,13 @@ export class order_pembelian extends Component {
         return (
             <>
                 <div className={style.header}>
-                    <p className={style.title}>Order Pembelian</p>
-                    <p className={style.pathname}>Transaksi / Pembelian / Order Pembelian</p>
+                    <p className={style.title}>Penerimaan Barang</p>
+                    <p className={style.pathname}>Transaksi / Pembelian / Penerimaan Barang</p>
                 </div>
                 <div className={style.content}>
                     <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
                         <div className={`${global.card}`}>
-                            <p className={global.title}>Input Order Pembelian</p>
+                            <p className={global.title}>Input Penerimaan Barang</p>
                             <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Jenis Pembelian</p>
                                 <Select isClearable={true} isSearchable={true} options={[
@@ -77,77 +77,36 @@ export class order_pembelian extends Component {
                                     { value: 'Alat', label: 'Alat' }
                                 ]} placeholder={'Select Pembelian...'} styles={CustomSelect} onChange={(value) => this.SelectPembelian(value)} />
                             </div>
-                            {this.state.jenisPembelian !== '' ?
-                                <>
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-6 pe-2`}>
-                                        <p className={global.title}>Kode Order</p>
-                                        <input type="text" id='input-kode-order' name='input-kode-order' readOnly />
+                                        <p className={global.title}>Kode Penerimaan</p>
+                                        <input type="text" id='input-kode-penerimaan' name='input-kode-penerimaan' readOnly />
                                     </div>
                                     <div className={`${global.input_group} col-6 ps-2`}>
-                                        <p className={global.title}>Tanggal</p>
-                                        <input type="date" id='input-tanggal-order' name='input-tanggal-order' />
+                                        <p className={global.title}>Tanggal Terima</p>
+                                        <input type="date" id='input-tanggal-terima' name='input-tanggal-terima' />
+                                    </div>
+                                </div>
+                                <div className={`d-flex`}>
+                                    <div className={`${global.input_group} col-3 px-2`}>
+                                        <p className={global.title}>Kode Order</p>
+                                        <input type="text" id='input-kode-order' name='input-kode-order' />
+                                    </div>
+                                    <div className={`${global.input_group} col-5 ps-2`}>
+                                        <p className={global.title}>Tanggal Order</p>
+                                        <input type="text" id='input-tanggal-order' name='input-tanggal-order' readOnly/>
                                     </div>
                                 </div>
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-3 px-2`}>
                                         <p className={global.title}>Kode Supplier</p>
-                                        <input type="text" id='input-kode-supplier' name='input-kode-supplier' />
+                                        <input type="text" id='input-kode-supplier' name='input-kode-supplier' readOnly/>
                                     </div>
                                     <div className={`${global.input_group} col-5 ps-2`}>
                                         <p className={global.title}>Nama Supplier</p>
-                                        <input type="text" id='input-nama-supplier' name='input-nama-supplier' />
+                                        <input type="text" id='input-nama-supplier' name='input-nama-supplier' readOnly/>
                                     </div>
-                                </div>
-                                {this.state.jenisPembelian === 'Bahan' ?
-                                    <>
-                                        <div className={`d-flex`}>
-                                            <div className={`${global.input_group} col-5 pe-2`}>
-                                                <p className={global.title}>Kode Bahan</p>
-                                                <Select id='select-kode-bahan' name='select-kode-bahan' isClearable={true} isSearchable={true} options={[
-                                                    { value: 'BB0001', label: 'BB0001' },
-                                                    { value: 'BP0001', label: 'BP0001' },
-                                                ]} placeholder={'Select Kode...'} styles={CustomSelect} />
-                                            </div>
-                                            <div className={`${global.input_group} col-7 pe-2`}>
-                                                <p className={global.title}>Nama Bahan</p>
-                                                <input type="text" id='input-nama-bahan' name='input-nama-bahan' placeholder='Nama Bahan...' />
-                                            </div>
-                                        </div>
-                                    </>
-                                    :
-                                    <>
-                                        <div className={`d-flex`}>
-                                            <div className={`${global.input_group} col-5 pe-2`}>
-                                                <p className={global.title}>Kode Alat</p>
-                                                <Select id='select-kode-alat' name='select-kode-alat' isClearable={true} isSearchable={true} options={[
-                                                    { value: 'ALAT0001', label: 'ALAT0001' }
-                                                ]} placeholder={'Select Kode...'} styles={CustomSelect} />
-                                            </div>
-                                            <div className={`${global.input_group} col-7 pe-2`}>
-                                                <p className={global.title}>Nama Alat</p>
-                                                <input type="text" id='input-nama-alat' name='input-nama-alat' placeholder='Nama Alat...' />
-                                            </div>
-                                        </div>
-                                    </>
-                                }
-                                <div className={`d-flex`}>
-                                    <div className={`${global.input_group} col-4 pe-2`}>
-                                        <p className={global.title}>Jumlah</p>
-                                        <input type="text" id='input-jumlah-beli' name='input-jumlah-beli' readOnly />
-                                    </div>
-                                    <div className={`${global.input_group} col-4 px-2`}>
-                                        <p className={global.title}>Harga</p>
-                                        <input type="text" id='input-harga-beli' name='input-harga-beli' />
-                                    </div>
-                                    <div className={`${global.input_group} col-4 ps-2`}>
-                                        <p className={global.title}>Total Harga</p>
-                                        <input type="text" id='input-total-harga-beli' name='input-total-harga-beli' />
-                                    </div>
-                                </div>
-                                    <button type='button' className={global.button}><MdAdd /> Tambah</button>
-                                </>
-                                :null}    
+                                </div> 
                             </div>
                         </div>
                     {this.state.jenisPembelian !== '' ?   
@@ -166,10 +125,9 @@ export class order_pembelian extends Component {
                                                     <td>Kode Bahan</td>
                                                     <td>Nama Bahan</td>
                                                     <td>Satuan</td>
-                                                    <td>Jumlah Beli</td>
+                                                    <td>Jumlah</td>
                                                     <td>Harga</td>
                                                     <td>Total Harga</td>
-                                                    <td>Aksi</td>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -186,10 +144,9 @@ export class order_pembelian extends Component {
                                                     <td>Kode Alat</td>
                                                     <td>Nama Alat</td>
                                                     <td>Satuan</td>
-                                                    <td>Jumlah Beli</td>
+                                                    <td>Jumlah</td>
                                                     <td>Harga</td>
                                                     <td>Total Harga</td>
-                                                    <td>Aksi</td>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -199,8 +156,8 @@ export class order_pembelian extends Component {
                                 }
                             <div className={`d-flex flex-column gap-2 pb-2`}>
                                 <div className={`align-items-center ${global.input_group_row}`}>
-                                    <p className={`${global.title} col-3`}>Total Harga</p>
-                                    <input type="text" id='input-detail-total-jual' name='input-detail-total-jual' />
+                                    <p className={`${global.title} col-3`}>Total Barang</p>
+                                    <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-3`} />
                                 </div>
                             </div>
                             <div className='d-flex flex-column gap-2 pt-2'>
@@ -221,4 +178,4 @@ export class order_pembelian extends Component {
         )
     }
 }
-export default order_pembelian
+export default penerimaan_barang

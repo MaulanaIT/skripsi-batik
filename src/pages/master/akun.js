@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 
 // Import Library
-import { Link } from 'react-router-dom';
+import $ from 'jquery';
 import { MdAdd } from 'react-icons/md'
 
 // Import CSS
-import global from '../../css/master.module.css';
+import global from '../../css/global.module.css';
 import style from '../../css/master.module.css';
 
 export class akun extends Component {
+    componentDidMount() {
+        $('#table-data').DataTable();
+    }
+
     render() {
         return (
             <>
@@ -19,32 +23,19 @@ export class akun extends Component {
                 <div className={style.content}>
                     <div className={global.card}>
                     <p className={global.title}>Tambah Akun</p>
-                        <div className={`${global.input_group}`}>
-                            <p className={`${global.title} col-3`}>Kode Akun</p>
-                            <input type="text" className={global.input1} id='input-kode-akun' name='input-kode-akun' />
+                        <div className={`${global.input_group_row}`}>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Akun</p>
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-akun' name='input-kode-akun' />
                         </div>
-                        <div className={`${global.input_group}`}>
-                            <p className={`${global.title} col-3`}>Nama Akun</p>
-                            <input type="text" className={global.input2} id='input-nama-akun' name='input-nama-akun' />
+                        <div className={`${global.input_group_row}`}>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Akun</p>
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-akun' name='input-nama-akun' />
                         </div>
-                        <div className={`${global.input_group}`}>
-                            <p className={`${global.title} col-3`}>Saldo</p>
-                            <input type="text" className={global.input3} id='input-saldo' name='input-saldo' />
+                        <div className={`${global.input_group_row}`}>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Saldo</p>
+                            <input type="text" className="col col-lg-3 col-md-6" id='input-saldo' name='input-saldo' />
                         </div>
-                        <button type='button' className={global.button}><MdAdd /> Simpan</button>
-                    </div>
-                    <div className={global.card}>
-                        <table className={`${global.title}`} id="table-data">
-                            <thead className="align-middle text-center text-nowrap">
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Kode Akun</th>
-                                    <th>Nama Akun</th>
-                                    <th>Saldo</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <button type='button' className={global.button}>Simpan</button>
                     </div>
                 </div>
             </>
