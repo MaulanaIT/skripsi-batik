@@ -38,6 +38,14 @@ import TransaksiPenerimaanKasDaftarUangMuka from './pages/transaksi/penerimaan_k
 import TransaksiPenerimaanKasKonsinyasi from './pages/transaksi/penerimaan_kas/konsinyasi';
 import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
 import DaftarProduksi from './pages/transaksi/produksi/daftar_produksi';
+import LaporanPembelianTransaksiPembelian from './pages/laporan/pembelian/transaksi_pembelian';
+import LaporanPembelianReturPembelian from './pages/laporan/pembelian/retur_pembelian';
+import LaporanPenjualanTransaksiPenjualan from './pages/laporan/penjualan/transaksi_penjualan';
+import LaporanPenjualanPiutangPesanan from './pages/laporan/penjualan/piutang_pesanan';
+import LaporanPenjualanPiutangKonsinyasi from './pages/laporan/penjualan/piutang_konsinyasi';
+import LaporanKasPenerimaanKas from './pages/laporan/kas/penerimaan_kas';
+import LaporanKasPengeluaranKas from './pages/laporan/kas/pengeluaran_kas';
+import LaporanProfitabilitas from './pages/laporan/profitabilitas';
 
 
 // Import CSS
@@ -91,15 +99,15 @@ export class App extends Component {
                             <Route path={'/transaksi/penerimaan-kas/konsinyasi'} element={<TransaksiPenerimaanKasKonsinyasi />} />
                             <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
                             <Route path={'/transaksi/produksi/daftar_produksi'} element={<DaftarProduksi />} />
-                            <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<Dashboard />} />
-                            <Route path={'/laporan/pembelian/retur-pembelian'} element={<Dashboard />} />
-                            <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<Dashboard />} />
-                            <Route path={'/laporan/penjualan/piutang-pesanan'} element={<Dashboard />} />
-                            <Route path={'/laporan/penjualan/piutang-konsinyasi'} element={<Dashboard />} />
-                            <Route path={'/laporan/kas/penerimaan-kas'} element={<Dashboard />} />
-                            <Route path={'/laporan/kas/pengeluaran-kas'} element={<Dashboard />} />
+                            <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<LaporanPembelianTransaksiPembelian />} />
+                            <Route path={'/laporan/pembelian/retur-pembelian'} element={<LaporanPembelianReturPembelian />} />
+                            <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<LaporanPenjualanTransaksiPenjualan />} />
+                            <Route path={'/laporan/penjualan/piutang-pesanan'} element={<LaporanPenjualanPiutangPesanan />} />
+                            <Route path={'/laporan/penjualan/piutang-konsinyasi'} element={<LaporanPenjualanPiutangKonsinyasi />} />
+                            <Route path={'/laporan/kas/penerimaan-kas'} element={<LaporanKasPenerimaanKas />} />
+                            <Route path={'/laporan/kas/pengeluaran-kas'} element={<LaporanKasPengeluaranKas />} />
                             <Route path={'/laporan/produksi/produksi'} element={<Dashboard />} />
-                            <Route path={'/laporan/profitabilitas'} element={<Dashboard />} />
+                            <Route path={'/laporan/profitabilitas'} element={<LaporanProfitabilitas />} />
                         </Routes>
                     </div>
                 </div>
