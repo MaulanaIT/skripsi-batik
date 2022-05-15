@@ -7,6 +7,8 @@ import { MdAdd } from 'react-icons/md'
 // Import CSS
 import global from '../../css/global.module.css';
 import style from '../../css/master.module.css';
+import axios from 'axios';
+import { ConfigAPI } from '../../component/helper';
 
 export class akun extends Component {
     componentDidMount() {

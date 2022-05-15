@@ -22,13 +22,34 @@ if ($result) {
 
 $token = json_encode($token);
 
-if ($_GET) {
-    if (isset($_GET['token']) && $_GET['token'] === json_decode($token)->data->token) {
-        print $response;
+$headers = getAuthorizationHeader();
+
+if (!empty($headers)) {
+    if ($headers === json_decode($token)->data->token) {
+        $token = true;
     } else {
-        print 'Token is not match.';
+        $token = false;
+        return print 'Token is not match.';
     }
 } else {
-    print 'Token required.';
+    $token = false;
+    return print 'Token required.';
+}
+
+function getAuthorizationHeader(){
+    $headers = null;
+    if (isset($_SERVER['Authorization'])) {
+        $headers = trim($_SERVER["Authorization"]);
+    }
+    else if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        $headers = trim($_SERVER["HTTP_AUTHORIZATION"]);
+    } elseif (function_exists('apache_request_headers')) {
+        $requestHeaders = apache_request_headers();
+        $requestHeaders = array_combine(array_map('ucwords', array_keys($requestHeaders)), array_values($requestHeaders));
+        if (isset($requestHeaders['Authorization'])) {
+            $headers = trim($requestHeaders['Authorization']);
+        }
+    }
+    return $headers;
 }
 ?>

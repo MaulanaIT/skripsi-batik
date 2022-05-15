@@ -24,7 +24,7 @@ if ($result) {
 
 $response = json_encode($response);
 
-require_once '../config/token.php';
+if ($token) print $response;
 
 $conn->close();
 ?>
