@@ -1,6 +1,6 @@
 <?php
 
-require_once '../connection.php';
+require_once '../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];

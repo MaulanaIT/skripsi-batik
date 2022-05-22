@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 
 // Import Library
 import $ from 'jquery';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
+import { baseURL, config } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -12,8 +14,41 @@ import style from '../../../css/master.module.css';
 
 export class daftar_bp extends Component {
 
+    state = {
+        htmlTableDaftarBahanBaku: []
+    }
+
     componentDidMount() {
-        $('#table-data').DataTable();
+        axios.get(`${baseURL}/api/master-inventory-bahan-baku/select.php`, config).then(response => {
+            let dataBahanBaku = response.data.data;
+
+            let htmlTableDaftarBahanBaku = [];
+
+            if (dataBahanBaku.length > 0) {
+                dataBahanBaku.map((item, index) => {
+                    htmlTableDaftarBahanBaku.push(
+                        <tr className={`align-middle`}>
+                            <td className={`text-center`}>{index + 1}.</td>
+                            <td>{item.kode}</td>
+                            <td>{item.nama}</td>
+                            <td>{item.satuan}</td>
+                            <td>{item.jumlah}</td>
+                            <td>{item.stok_minimal}</td>
+                            <td>{item.harga}</td>
+                            <td></td>
+                        </tr>
+                    );
+                });
+            }
+
+            $('#table-data').DataTable().destroy();
+
+            this.setState({ htmlTableDaftarBahanBaku: htmlTableDaftarBahanBaku }, () => {
+                $('#table-data').DataTable();
+            });
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     render() {
@@ -31,7 +66,7 @@ export class daftar_bp extends Component {
                         </div>
                         <div className={global.card}>
                             <div className={`table-responsive`}>
-                                <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                <table id='table-data' className={`table w-100`}>
                                     <thead className="align-middle text-center text-nowrap">
                                         <tr>
                                             <th>No.</th>
@@ -44,6 +79,9 @@ export class daftar_bp extends Component {
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        {this.state.htmlTableDaftarBahanBaku}
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

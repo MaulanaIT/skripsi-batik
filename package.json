@@ -1,6 +1,7 @@
 {
   "name": "skripsi-batik",
   "version": "0.1.0",
+  "homepage": "/skripsi-batik/build/",
   "private": true,
   "dependencies": {
     "@babel/register": "^7.17.7",

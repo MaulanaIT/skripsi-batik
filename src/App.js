@@ -67,7 +67,7 @@ export class App extends Component {
 
                     <div className={style.content}>
                         <Routes>
-                            <Route patg={'/'} element={<Navigate to={'/dashboard'} />} />
+                            <Route path={'/'} element={<Navigate to={'/dashboard'} />} />
                             <Route path={'/dashboard'} element={<Dashboard />} />
                             <Route path={'/master/user'} element={<Dashboard />} />
                             <Route path={'/master/akun'} element={<MasterAkun />} />

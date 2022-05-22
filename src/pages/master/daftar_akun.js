@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 
 // Import Library
 import $ from 'jquery';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
+import { baseURL, config } from '../../component/helper';
 
 // Import CSS
 import global from '../../css/global.module.css';
@@ -12,8 +14,38 @@ import style from '../../css/master.module.css';
 
 export class daftar_akun extends Component {
 
+    state = {
+        htmlTableDaftarAkun: []
+    }
+
     componentDidMount() {
-        $('#table-data').DataTable();
+        axios.get(`${baseURL}/api/master-akun/select.php`, config).then(response => {
+            let dataAkun = response.data.data;
+
+            let htmlTableDaftarAkun = [];
+
+            if (dataAkun.length > 0) {
+                dataAkun.map((item, index) => {
+                    htmlTableDaftarAkun.push(
+                        <tr className={`align-middle`}>
+                            <td className={`text-center`}>{index + 1}.</td>
+                            <td>{item.kode}</td>
+                            <td>{item.nama}</td>
+                            <td className={`text-end`}>{item.saldo}</td>
+                            <td></td>
+                        </tr>
+                    );
+                });
+            }
+
+            $('#table-data').DataTable().destroy();
+
+            this.setState({ htmlTableDaftarAkun: htmlTableDaftarAkun }, () => {
+                $('#table-data').DataTable();
+            });
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     render() {
@@ -31,7 +63,7 @@ export class daftar_akun extends Component {
                         </div>
                         <div className={global.card}>
                             <div className={`table-responsive`}>
-                                <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                <table id='table-data' className={`table w-100`}>
                                     <thead className="align-middle text-center text-nowrap">
                                         <tr>
                                             <th>No.</th>
@@ -41,6 +73,9 @@ export class daftar_akun extends Component {
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        {this.state.htmlTableDaftarAkun}
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

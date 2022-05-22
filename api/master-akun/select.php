@@ -13,7 +13,7 @@ if ($result) {
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            $response['data'] = $row;
+            $response['data'][] = $row;
         }
     } else {
         $response['data'] = [];

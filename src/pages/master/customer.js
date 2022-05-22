@@ -2,16 +2,68 @@ import React, { Component } from 'react';
 
 // Import Library
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { MdAdd } from 'react-icons/md'
+import { baseURL, config, generateCode, getInputValue } from '../../component/helper';
 
 // Import CSS
 import global from '../../css/global.module.css';
 import style from '../../css/master.module.css';
 
 export class customer extends Component {
-    componentDidMount() {
-        $('#table-data').DataTable();
+
+    state = {
+        dataCustomer: [],
+
+        htmlTableDaftarCustomer: []
+    }
+
+    async componentDidMount() {
+        axios.get(`${baseURL}/api/master-customer/select.php`, config).then(response => {
+            let dataCustomer = response.data.data;
+
+            let htmlTableDaftarCustomer = [];
+
+            if (dataCustomer.length > 0) {
+                dataCustomer.map((item, index) => {
+                    htmlTableDaftarCustomer.push(
+                        <tr className={`align-middle`}>
+                            <td className={`text-center`}>{index + 1}.</td>
+                            <td>{item.kode}</td>
+                            <td>{item.nama}</td>
+                            <td>{item.alamat}</td>
+                            <td>{item.telepon}</td>
+                            <td></td>
+                        </tr>
+                    );
+                });
+            }
+
+            $('#table-data').DataTable().destroy();
+
+            this.setState({ dataCustomer: dataCustomer, htmlTableDaftarCustomer: htmlTableDaftarCustomer }, () => {
+                $('#table-data').DataTable();
+            });
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    InsertCustomer = () => {
+        const formData = new FormData();
+
+        formData.append('kode', getInputValue('input-kode-customer'));
+        formData.append('nama', getInputValue('input-nama-customer'));
+        formData.append('alamat', getInputValue('input-alamat-customer'));
+        formData.append('telepon', getInputValue('input-telepon-customer'));
+
+        axios.post(`${baseURL}/api/master-customer/insert.php`, formData, config).then(response => {
+            let dataCustomer = response.data;
+
+            console.log(dataCustomer);
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     render() {
@@ -26,7 +78,7 @@ export class customer extends Component {
                         <p className={global.title}>Tambah Customer</p>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Customer</p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-customer' name='input-kode-customer' readOnly />
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-customer' name='input-kode-customer' value={generateCode('CUS', this.state.dataCustomer.length + 1)} readOnly={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Customer</p>
@@ -40,7 +92,7 @@ export class customer extends Component {
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>No. Telp</p>
                             <input type="text" className="col col-lg-3 col-md-6" id='input-telp' name='input-telp' />
                         </div>
-                        <button type='button' className={global.button}><MdAdd /> Simpan</button>
+                        <button type='button' className={global.button} onClick={this.InsertCustomer}><MdAdd /> Simpan</button>
                     </div>
                     <div className={`${global.card} col-12`}>
                         <div className={`${global.header}`}>
@@ -59,6 +111,9 @@ export class customer extends Component {
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        {this.state.htmlTableDaftarCustomer}
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

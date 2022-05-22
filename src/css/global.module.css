@@ -71,6 +71,7 @@
 }
 
 .input_group_row {
+    align-items: center;
     display: flex;
     flex-direction: row;
 }
