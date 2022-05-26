@@ -36,7 +36,7 @@ export class akun extends Component {
         axios.post(`${baseURL}/api/master-akun/insert.php`, formData, config).then(response => {
             // let dataAkun = response.data;
 
-            HideLoading();
+            // HideLoading();
 
             window.location.href = '/master/daftar-akun';
         }).catch(error => {
