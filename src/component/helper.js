@@ -7,12 +7,24 @@ const config = {
     }
 };
 
-const generateCode = (Initial, Nomor) => {
+const GenerateCode = (Initial, Nomor) => {
     return `${Initial}${Nomor.toString().padStart(4, '0')}`;
 }
 
-const getInputValue = (id) => {
+const GetInputValue = (id) => {
     return document.getElementById(id).value;
 }
 
-export { baseURL, config, generateCode, getInputValue };
+const HideLoading = () => {
+    document.getElementById('loading').classList.add('d-none');
+}
+
+const InputFormatNumber = (event) => {
+    event.target.value = event.target.value.replace(/[^.0-9]/g, '').replace(/(\..*?)\..*/g, '0.');
+}
+
+const ShowLoading = () => {
+    document.getElementById('loading').classList.remove('d-none');
+}
+
+export { baseURL, config, GenerateCode, GetInputValue, HideLoading, InputFormatNumber, ShowLoading };

@@ -187,7 +187,7 @@ export class kalkulator_estimasi extends Component {
                                 </div>
                             </div>
                             <div className={`table-responsive`}>
-                                <table id='table-data-bahan-baku' className={`table table-striped table-hover w-100`}>
+                                <table id='table-data-bahan-baku' className={`table w-100`}>
                                     <thead className='text-nowrap'>
                                         <tr>
                                             <td>No.</td>
@@ -235,7 +235,7 @@ export class kalkulator_estimasi extends Component {
                                 </div>
                             </div>
                             <div className={`table-responsive`}>
-                                <table id='table-data-bop-penolong' className={`table table-striped table-hover w-100`}>
+                                <table id='table-data-bop-penolong' className={`table w-100`}>
                                     <thead className='text-nowrap'>
                                         <tr>
                                             <td>No.</td>
@@ -283,7 +283,7 @@ export class kalkulator_estimasi extends Component {
                                 </div>
                             </div>
                             <div className={`table-responsive`}>
-                                <table id='table-data-bop-alat' className={`table table-striped table-hover w-100`}>
+                                <table id='table-data-bop-alat' className={`table w-100`}>
                                     <thead className='text-nowrap'>
                                         <tr>
                                             <td>No.</td>
@@ -331,7 +331,7 @@ export class kalkulator_estimasi extends Component {
                                 </div>
                             </div>
                             <div className={`table-responsive`}>
-                                <table id='table-data-btkl' className={`table table-striped table-hover w-100`}>
+                                <table id='table-data-btkl' className={`table w-100`}>
                                     <thead className='text-nowrap'>
                                         <tr>
                                             <td>No.</td>

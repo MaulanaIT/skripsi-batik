@@ -29,7 +29,7 @@ export class perhitungan_harga extends Component {
                             <Link to={'/transaksi/penjualan/perhitungan-harga/kalkulator-estimasi'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
                         </div>
                         <div className={`table-responsive`}>
-                            <table id='table-data' className={`table table-striped table-hover w-100`}>
+                            <table id='table-data' className={`table w-100`}>
                                 <thead className='text-nowrap'>
                                     <tr>
                                         <td>No.</td>

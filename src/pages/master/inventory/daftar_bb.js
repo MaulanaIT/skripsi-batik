@@ -26,9 +26,9 @@ export class daftar_bb extends Component {
             let htmlTableDaftarBahanBaku = [];
 
             if (dataBahanBaku.length > 0) {
-                dataBahanBaku.map((item, index) => {
+                dataBahanBaku.forEach((item, index) => {
                     htmlTableDaftarBahanBaku.push(
-                        <tr className={`align-middle`}>
+                        <tr key={index} className={`align-middle`}>
                             <td className={`text-center`}>{index + 1}.</td>
                             <td>{item.kode}</td>
                             <td>{item.nama}</td>

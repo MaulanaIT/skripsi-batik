@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 
 // Import Library
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md'
 import Select from 'react-select';
 
 // Import CSS
 import global from '../../../css/global.module.css';
 import style from '../../../css/transaksi/pembelian/order_pembelian.module.css';
+import { InputFormatNumber } from '../../../component/helper';
 
 const CustomSelect = {
     control: (provided, state) => ({
@@ -82,7 +82,7 @@ export class order_pembelian extends Component {
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-6 pe-2`}>
                                         <p className={global.title}>Kode Order</p>
-                                        <input type="text" id='input-kode-order' name='input-kode-order' readOnly />
+                                        <input type="text" id='input-kode-order' name='input-kode-order' maxLength={10} readOnly />
                                     </div>
                                     <div className={`${global.input_group} col-6 ps-2`}>
                                         <p className={global.title}>Tanggal</p>
@@ -92,11 +92,11 @@ export class order_pembelian extends Component {
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-3 px-2`}>
                                         <p className={global.title}>Kode Supplier</p>
-                                        <input type="text" id='input-kode-supplier' name='input-kode-supplier' />
+                                        <input type="text" id='input-kode-supplier' name='input-kode-supplier' maxLength={10} />
                                     </div>
                                     <div className={`${global.input_group} col-5 ps-2`}>
                                         <p className={global.title}>Nama Supplier</p>
-                                        <input type="text" id='input-nama-supplier' name='input-nama-supplier' />
+                                        <input type="text" id='input-nama-supplier' name='input-nama-supplier' maxLength={50} />
                                     </div>
                                 </div>
                                 {this.state.jenisPembelian === 'Bahan' ?
@@ -111,7 +111,7 @@ export class order_pembelian extends Component {
                                             </div>
                                             <div className={`${global.input_group} col-7 pe-2`}>
                                                 <p className={global.title}>Nama Bahan</p>
-                                                <input type="text" id='input-nama-bahan' name='input-nama-bahan' placeholder='Nama Bahan...' />
+                                                <input type="text" id='input-nama-bahan' name='input-nama-bahan' maxLength={50} placeholder='Nama Bahan...' />
                                             </div>
                                         </div>
                                     </>
@@ -126,7 +126,7 @@ export class order_pembelian extends Component {
                                             </div>
                                             <div className={`${global.input_group} col-7 pe-2`}>
                                                 <p className={global.title}>Nama Alat</p>
-                                                <input type="text" id='input-nama-alat' name='input-nama-alat' placeholder='Nama Alat...' />
+                                                <input type="text" id='input-nama-alat' name='input-nama-alat' maxLength={50} placeholder='Nama Alat...' />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
@@ -140,15 +140,15 @@ export class order_pembelian extends Component {
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-4 pe-2`}>
                                         <p className={global.title}>Jumlah</p>
-                                        <input type="text" id='input-jumlah-beli' name='input-jumlah-beli' readOnly />
+                                        <input type="text" id='input-jumlah-beli' name='input-jumlah-beli' onInput={InputFormatNumber} readOnly />
                                     </div>
                                     <div className={`${global.input_group} col-4 px-2`}>
                                         <p className={global.title}>Harga</p>
-                                        <input type="text" id='input-harga-beli' name='input-harga-beli' />
+                                        <input type="text" id='input-harga-beli' name='input-harga-beli' onInput={InputFormatNumber} />
                                     </div>
                                     <div className={`${global.input_group} col-4 ps-2`}>
                                         <p className={global.title}>Total Harga</p>
-                                        <input type="text" id='input-total-harga-beli' name='input-total-harga-beli' />
+                                        <input type="text" id='input-total-harga-beli' name='input-total-harga-beli' onInput={InputFormatNumber} />
                                     </div>
                                 </div>
                                     <button type='button' className={global.button}><MdAdd /> Tambah</button>
@@ -165,7 +165,7 @@ export class order_pembelian extends Component {
                                 {this.state.jenisPembelian === 'Bahan' ?
                                 <>
                                     <div className={`table-responsive`}>
-                                        <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                        <table id='table-data' className={`table w-100`}>
                                             <thead>
                                                 <tr>
                                                     <td>No.</td>
@@ -185,7 +185,7 @@ export class order_pembelian extends Component {
                                 :
                                 <>
                                     <div className={`table-responsive`}>
-                                        <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                        <table id='table-data' className={`table w-100`}>
                                             <thead>
                                                 <tr>
                                                     <td>No.</td>
@@ -206,7 +206,7 @@ export class order_pembelian extends Component {
                             <div className={`d-flex flex-column gap-2 pb-2`}>
                                 <div className={`align-items-center ${global.input_group_row}`}>
                                     <p className={`${global.title} col-3`}>Total Harga</p>
-                                    <input type="text" id='input-detail-total-jual' name='input-detail-total-jual' />
+                                    <input type="text" id='input-detail-total-jual' name='input-detail-total-jual' onInput={InputFormatNumber} />
                                 </div>
                             </div>
                             <div className='d-flex flex-column gap-2 pt-2'>

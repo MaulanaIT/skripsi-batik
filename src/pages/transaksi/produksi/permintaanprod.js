@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 // Import Library
-import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 
 // Import CSS

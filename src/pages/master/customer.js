@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import axios from 'axios';
 import { MdAdd } from 'react-icons/md'
-import { baseURL, config, generateCode, getInputValue } from '../../component/helper';
+import { baseURL, config, GenerateCode, GetInputValue, HideLoading, InputFormatNumber, ShowLoading } from '../../component/helper';
 
 // Import CSS
 import global from '../../css/global.module.css';
@@ -25,9 +25,9 @@ export class customer extends Component {
             let htmlTableDaftarCustomer = [];
 
             if (dataCustomer.length > 0) {
-                dataCustomer.map((item, index) => {
+                dataCustomer.forEach((item, index) => {
                     htmlTableDaftarCustomer.push(
-                        <tr className={`align-middle`}>
+                        <tr key={index} className={`align-middle`}>
                             <td className={`text-center`}>{index + 1}.</td>
                             <td>{item.kode}</td>
                             <td>{item.nama}</td>
@@ -50,19 +50,23 @@ export class customer extends Component {
     }
 
     InsertCustomer = () => {
+        ShowLoading();
+
         const formData = new FormData();
 
-        formData.append('kode', getInputValue('input-kode-customer'));
-        formData.append('nama', getInputValue('input-nama-customer'));
-        formData.append('alamat', getInputValue('input-alamat-customer'));
-        formData.append('telepon', getInputValue('input-telepon-customer'));
+        formData.append('kode', GetInputValue('input-kode-customer'));
+        formData.append('nama', GetInputValue('input-nama-customer'));
+        formData.append('alamat', GetInputValue('input-alamat-customer'));
+        formData.append('telepon', GetInputValue('input-telepon-customer'));
 
         axios.post(`${baseURL}/api/master-customer/insert.php`, formData, config).then(response => {
-            let dataCustomer = response.data;
+            HideLoading();
 
-            console.log(dataCustomer);
+            window.location.reload();
         }).catch(error => {
             console.log(error);
+
+            HideLoading();
         });
     }
 
@@ -78,19 +82,19 @@ export class customer extends Component {
                         <p className={global.title}>Tambah Customer</p>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Customer</p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-customer' name='input-kode-customer' value={generateCode('CUS', this.state.dataCustomer.length + 1)} readOnly={true} />
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-customer' name='input-kode-customer' value={GenerateCode('CUS', this.state.dataCustomer.length + 1)} maxLength={10} readOnly={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Customer</p>
-                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-customer' name='input-nama-customer' />
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-customer' name='input-nama-customer' maxLength={50} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Alamat</p>
-                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-alamat' name='input-alamat' />
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-alamat-customer' name='input-alamat-customer' maxLength={100} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>No. Telp</p>
-                            <input type="text" className="col col-lg-3 col-md-6" id='input-telp' name='input-telp' />
+                            <input type="text" className="col col-lg-3 col-md-6" id='input-telepon-customer' name='input-telepon-customer' maxLength={13} onInput={InputFormatNumber} />
                         </div>
                         <button type='button' className={global.button} onClick={this.InsertCustomer}><MdAdd /> Simpan</button>
                     </div>
@@ -100,7 +104,7 @@ export class customer extends Component {
                         </div>
                         <div className={global.card}>
                             <div className={`table-responsive`}>
-                                <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                <table id='table-data' className={`table w-100`}>
                                     <thead className="align-middle text-center text-nowrap">
                                         <tr>
                                             <th>No.</th>

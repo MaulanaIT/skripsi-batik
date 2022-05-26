@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 // Import Library
 import axios from 'axios';
-import { baseURL, config, generateCode, getInputValue } from '../../component/helper';
+import { baseURL, config, GenerateCode, GetInputValue, HideLoading, InputFormatNumber, ShowLoading } from '../../component/helper';
 
 // Import CSS
 import global from '../../css/global.module.css';
@@ -25,18 +25,24 @@ export class akun extends Component {
     }
 
     InsertAkun = () => {
+        ShowLoading();
+
         const formData = new FormData();
 
-        formData.append('kode', getInputValue('input-kode-akun'));
-        formData.append('nama', getInputValue('input-nama-akun'));
-        formData.append('saldo', getInputValue('input-saldo-akun'));
+        formData.append('kode', GetInputValue('input-kode-akun'));
+        formData.append('nama', GetInputValue('input-nama-akun'));
+        formData.append('saldo', GetInputValue('input-saldo-akun'));
 
         axios.post(`${baseURL}/api/master-akun/insert.php`, formData, config).then(response => {
-            let dataAkun = response.data;
+            // let dataAkun = response.data;
 
-            console.log(dataAkun);
+            HideLoading();
+
+            window.location.href = '/master/daftar-akun';
         }).catch(error => {
             console.log(error);
+
+            HideLoading();
         });
     }
 
@@ -52,15 +58,15 @@ export class akun extends Component {
                         <p className={global.title}>Tambah Akun</p>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Akun</p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-akun' name='input-kode-akun' value={generateCode('A', this.state.dataAkun.length + 1)} readOnly={true} />
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-akun' name='input-kode-akun' maxLength={10} value={GenerateCode('A', this.state.dataAkun.length + 1)} readOnly={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Akun</p>
-                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-akun' name='input-nama-akun' />
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-akun' name='input-nama-akun' maxLength={50} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Saldo</p>
-                            <input type="text" className="col col-lg-3 col-md-6" id='input-saldo-akun' name='input-saldo-akun' />
+                            <input type="text" className="col col-lg-3 col-md-6" id='input-saldo-akun' name='input-saldo-akun' onInput={InputFormatNumber} defaultValue={0} />
                         </div>
                         <button type='button' className={global.button} onClick={this.InsertAkun}>Simpan</button>
                     </div>

@@ -5,6 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
+import { FaPen, FaTrash } from 'react-icons/fa';
 import { baseURL, config } from '../../component/helper';
 
 // Import CSS
@@ -25,14 +26,17 @@ export class daftar_akun extends Component {
             let htmlTableDaftarAkun = [];
 
             if (dataAkun.length > 0) {
-                dataAkun.map((item, index) => {
+                dataAkun.forEach((item, index) => {
                     htmlTableDaftarAkun.push(
-                        <tr className={`align-middle`}>
+                        <tr key={index} className={`align-middle`}>
                             <td className={`text-center`}>{index + 1}.</td>
                             <td>{item.kode}</td>
                             <td>{item.nama}</td>
                             <td className={`text-end`}>{item.saldo}</td>
-                            <td></td>
+                            <td className={global.table_action}>
+                                <button type='button' className={global.edit} onClick={this.EditAkun}><FaPen /> Edit</button>
+                                <button type='button' className={global.delete} onClick={() => this.DeleteAkun(item.id)}><FaTrash />Delete</button>
+                            </td>
                         </tr>
                     );
                 });
@@ -46,6 +50,24 @@ export class daftar_akun extends Component {
         }).catch(error => {
             console.log(error);
         });
+    }
+
+    DeleteAkun = (id) => {
+        const formData = new FormData();
+
+        formData.append('id', id);
+
+        axios.post(`${baseURL}/api/master-akun/delete.php`, formData, config).then(response => {
+            let dataAkun = response.data;
+
+            console.log(dataAkun);
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    EditAkun = () => {
+        return;
     }
 
     render() {

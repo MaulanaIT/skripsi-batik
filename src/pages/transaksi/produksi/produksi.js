@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 // Import Library
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import Select from 'react-select';
 

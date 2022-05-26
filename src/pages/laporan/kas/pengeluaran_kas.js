@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 // Import Library
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
-import { MdAdd } from 'react-icons/md'
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -94,7 +92,7 @@ export class penerimaan_kas extends Component {
                         </div>
                         <div className={global.card}>
                             <div className={`table-responsive`}>
-                                <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                <table id='table-data' className={`table w-100`}>
                                     <thead className="align-middle text-center text-nowrap">
                                         <tr>
                                             <th>No.</th>

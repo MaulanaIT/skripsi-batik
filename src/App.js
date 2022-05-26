@@ -6,6 +6,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 // Import Component
 import Dashboard from './pages/dashboard';
 import Header from './component/header';
+import Loading from './component/loading';
 import Sidebar from './component/sidebar';
 
 // Import Page - Format: MenuSubmenu
@@ -47,7 +48,6 @@ import LaporanKasPenerimaanKas from './pages/laporan/kas/penerimaan_kas';
 import LaporanKasPengeluaranKas from './pages/laporan/kas/pengeluaran_kas';
 import LaporanProfitabilitas from './pages/laporan/profitabilitas';
 
-
 // Import CSS
 import 'bootstrap/dist/css/bootstrap.css'
 import 'datatables.net-bs5/css/dataTables.bootstrap5.css';
@@ -60,58 +60,61 @@ export class App extends Component {
 
     render() {
         return (
-            <div className={style.container}>
-                <Header />
-                <div className={style.container_content}>
-                    <Sidebar />
+            <React.Fragment>
+                <Loading />
+                <div className={style.container}>
+                    <Header />
+                    <div className={style.container_content}>
+                        <Sidebar />
 
-                    <div className={style.content}>
-                        <Routes>
-                            <Route path={'/'} element={<Navigate to={'/dashboard'} />} />
-                            <Route path={'/dashboard'} element={<Dashboard />} />
-                            <Route path={'/master/user'} element={<Dashboard />} />
-                            <Route path={'/master/akun'} element={<MasterAkun />} />
-                            <Route path={'/master/daftar-akun'} element={<MasterDaftarAkun />} />
-                            <Route path={'/master/supplier'} element={<MasterSupplier />} />
-                            <Route path={'/master/customer'} element={<MasterCustomer />} />
-                            <Route path={'/master/consignee'} element={<MasterConsignee />} />
-                            <Route path={'/master/inventory/bahan-baku'} element={<MasterBahanBaku />} />
-                            <Route path={'/master/inventory/daftar-bb'} element={<MasterDaftarBB />} />
-                            <Route path={'/master/inventory/bahan-penolong'} element={<MasterBahanPenolong />} />
-                            <Route path={'/master/inventory/daftar-bp'} element={<MasterDaftarBP />} />
-                            <Route path={'/master/inventory/alat'} element={<MasterAlat />} />
-                            <Route path={'/master/inventory/daftar-alat'} element={<MasterDaftarAlat />} />
-                            <Route path={'/master/inventory/produk'} element={<MasterProduk />} />
-                            <Route path={'/master/tenaga-kerja'} element={<MasterTenagaKerja />} />
-                            <Route path={'/transaksi/penjualan/transaksi-penjualan'} element={<TransaksiPenjualanTransaksiPenjualan />} />
-                            <Route path={'/transaksi/penjualan/perhitungan-harga'} element={<TransaksiPenjualanPerhitunganHarga />} />
-                            <Route path={'/transaksi/penjualan/perhitungan-harga/kalkulator-estimasi'} element={<TransaksiPenjualanKalkulatorEstimasi />} />
-                            <Route path={'/transaksi/pembelian/order-pembelian'} element={<TransaksiPembelianOrderPembelian />} />
-                            <Route path={'/transaksi/pembelian/daftar-order'} element={<TransaksiPembelianDaftarOrder />} />
-                            <Route path={'/transaksi/pembelian/pengeluaran-kas'} element={<TransaksiPembelianPengeluaranKas />} />
-                            <Route path={'/transaksi/pembelian/penerimaan-barang'} element={<TransaksiPembelianPenerimaanBarang />} />
-                            <Route path={'/transaksi/pembelian/daftar-terimabarang'} element={<TransaksiPembelianDaftarTerimaBarang />} />
-                            <Route path={'/transaksi/pembelian/retur-pembelian'} element={<TransaksiPembelianReturPembelian />} />
-                            <Route path={'/transaksi/pembelian/daftar-retur'} element={<TransaksiPembelianDaftarRetur />} />
-                            <Route path={'/transaksi/penerimaan-kas/pengembalian-dana'} element={<TransaksiPenerimaanKasPengembalianDana />} />
-                            <Route path={'/transaksi/penerimaan-kas/uang-muka-pesanan'} element={<TransaksiPenerimaanKasUangMukaPesanan />} />
-                            <Route path={'/transaksi/penerimaan-kas/daftar-uangmuka'} element={<TransaksiPenerimaanKasDaftarUangMuka />} />
-                            <Route path={'/transaksi/penerimaan-kas/konsinyasi'} element={<TransaksiPenerimaanKasKonsinyasi />} />
-                            <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
-                            <Route path={'/transaksi/produksi/daftar_produksi'} element={<DaftarProduksi />} />
-                            <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<LaporanPembelianTransaksiPembelian />} />
-                            <Route path={'/laporan/pembelian/retur-pembelian'} element={<LaporanPembelianReturPembelian />} />
-                            <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<LaporanPenjualanTransaksiPenjualan />} />
-                            <Route path={'/laporan/penjualan/piutang-pesanan'} element={<LaporanPenjualanPiutangPesanan />} />
-                            <Route path={'/laporan/penjualan/piutang-konsinyasi'} element={<LaporanPenjualanPiutangKonsinyasi />} />
-                            <Route path={'/laporan/kas/penerimaan-kas'} element={<LaporanKasPenerimaanKas />} />
-                            <Route path={'/laporan/kas/pengeluaran-kas'} element={<LaporanKasPengeluaranKas />} />
-                            <Route path={'/laporan/produksi/produksi'} element={<Dashboard />} />
-                            <Route path={'/laporan/profitabilitas'} element={<LaporanProfitabilitas />} />
-                        </Routes>
+                        <div className={style.content}>
+                            <Routes>
+                                <Route path={'/'} element={<Navigate to={'/dashboard'} />} />
+                                <Route path={'/dashboard'} element={<Dashboard />} />
+                                <Route path={'/master/user'} element={<Dashboard />} />
+                                <Route path={'/master/akun'} element={<MasterAkun />} />
+                                <Route path={'/master/daftar-akun'} element={<MasterDaftarAkun />} />
+                                <Route path={'/master/supplier'} element={<MasterSupplier />} />
+                                <Route path={'/master/customer'} element={<MasterCustomer />} />
+                                <Route path={'/master/consignee'} element={<MasterConsignee />} />
+                                <Route path={'/master/inventory/bahan-baku'} element={<MasterBahanBaku />} />
+                                <Route path={'/master/inventory/daftar-bb'} element={<MasterDaftarBB />} />
+                                <Route path={'/master/inventory/bahan-penolong'} element={<MasterBahanPenolong />} />
+                                <Route path={'/master/inventory/daftar-bp'} element={<MasterDaftarBP />} />
+                                <Route path={'/master/inventory/alat'} element={<MasterAlat />} />
+                                <Route path={'/master/inventory/daftar-alat'} element={<MasterDaftarAlat />} />
+                                <Route path={'/master/inventory/produk'} element={<MasterProduk />} />
+                                <Route path={'/master/tenaga-kerja'} element={<MasterTenagaKerja />} />
+                                <Route path={'/transaksi/penjualan/transaksi-penjualan'} element={<TransaksiPenjualanTransaksiPenjualan />} />
+                                <Route path={'/transaksi/penjualan/perhitungan-harga'} element={<TransaksiPenjualanPerhitunganHarga />} />
+                                <Route path={'/transaksi/penjualan/perhitungan-harga/kalkulator-estimasi'} element={<TransaksiPenjualanKalkulatorEstimasi />} />
+                                <Route path={'/transaksi/pembelian/order-pembelian'} element={<TransaksiPembelianOrderPembelian />} />
+                                <Route path={'/transaksi/pembelian/daftar-order'} element={<TransaksiPembelianDaftarOrder />} />
+                                <Route path={'/transaksi/pembelian/pengeluaran-kas'} element={<TransaksiPembelianPengeluaranKas />} />
+                                <Route path={'/transaksi/pembelian/penerimaan-barang'} element={<TransaksiPembelianPenerimaanBarang />} />
+                                <Route path={'/transaksi/pembelian/daftar-terimabarang'} element={<TransaksiPembelianDaftarTerimaBarang />} />
+                                <Route path={'/transaksi/pembelian/retur-pembelian'} element={<TransaksiPembelianReturPembelian />} />
+                                <Route path={'/transaksi/pembelian/daftar-retur'} element={<TransaksiPembelianDaftarRetur />} />
+                                <Route path={'/transaksi/penerimaan-kas/pengembalian-dana'} element={<TransaksiPenerimaanKasPengembalianDana />} />
+                                <Route path={'/transaksi/penerimaan-kas/uang-muka-pesanan'} element={<TransaksiPenerimaanKasUangMukaPesanan />} />
+                                <Route path={'/transaksi/penerimaan-kas/daftar-uangmuka'} element={<TransaksiPenerimaanKasDaftarUangMuka />} />
+                                <Route path={'/transaksi/penerimaan-kas/konsinyasi'} element={<TransaksiPenerimaanKasKonsinyasi />} />
+                                <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
+                                <Route path={'/transaksi/produksi/daftar_produksi'} element={<DaftarProduksi />} />
+                                <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<LaporanPembelianTransaksiPembelian />} />
+                                <Route path={'/laporan/pembelian/retur-pembelian'} element={<LaporanPembelianReturPembelian />} />
+                                <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<LaporanPenjualanTransaksiPenjualan />} />
+                                <Route path={'/laporan/penjualan/piutang-pesanan'} element={<LaporanPenjualanPiutangPesanan />} />
+                                <Route path={'/laporan/penjualan/piutang-konsinyasi'} element={<LaporanPenjualanPiutangKonsinyasi />} />
+                                <Route path={'/laporan/kas/penerimaan-kas'} element={<LaporanKasPenerimaanKas />} />
+                                <Route path={'/laporan/kas/pengeluaran-kas'} element={<LaporanKasPengeluaranKas />} />
+                                <Route path={'/laporan/produksi/produksi'} element={<Dashboard />} />
+                                <Route path={'/laporan/profitabilitas'} element={<LaporanProfitabilitas />} />
+                            </Routes>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         )
     }
 }

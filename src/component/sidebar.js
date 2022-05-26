@@ -51,7 +51,7 @@ export class sidebar extends Component {
         ElementMenu.forEach(element => {
             element.addEventListener('click', function () {
                 ElementMenu.forEach(item => {
-                    if (item != element) {
+                    if (item !== element) {
                         item.classList.remove(style.active);
                     } else {
                         item.classList.add(style.active);
@@ -82,11 +82,11 @@ export class sidebar extends Component {
                         </Link>
                     </li>
                     <li className={style.dropdown}>
-                        <a>
+                        <div>
                             <MdLibraryBooks />
                             <span>Master</span>
                             <MdExpandMore className={style.toggle} />
-                        </a>
+                        </div>
                         <ul className={style.dropdown_menu}>
                             <li><Link to={'/master/user'}><span>User</span></Link></li>
                             <li><Link to={'/master/daftar-akun'}><span>Akun</span></Link></li>
@@ -109,11 +109,11 @@ export class sidebar extends Component {
                         </ul>
                     </li>
                     <li className={style.dropdown}>
-                        <a>
+                        <div>
                             <MdStackedBarChart />
                             <span>Transaksi</span>
                             <MdExpandMore className={style.toggle} />
-                        </a>
+                        </div>
                         <ul className={style.dropdown_menu}>
                             <li className={style.dropdown}>
                                 <div>
@@ -161,11 +161,11 @@ export class sidebar extends Component {
                         </ul>
                     </li>
                     <li className={style.dropdown}>
-                        <a>
+                        <div>
                             <MdStickyNote2 />
                             <span>Laporan</span>
                             <MdExpandMore className={style.toggle} />
-                        </a>
+                        </div>
                         <ul className={style.dropdown_menu}>
                             <li className={style.dropdown}>
                                 <div>

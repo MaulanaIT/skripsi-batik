@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 
 // Import Library
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
-import { MdAdd } from 'react-icons/md'
 import Select from 'react-select';
 
 // Import CSS
 import global from '../../../css/global.module.css';
 import style from '../../../css/transaksi/pembelian/penerimaan_barang.module.css';
+import { InputFormatNumber } from '../../../component/helper';
 
 const CustomSelect = {
     control: (provided, state) => ({
@@ -80,7 +79,7 @@ export class penerimaan_barang extends Component {
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-6 pe-2`}>
                                         <p className={global.title}>Kode Penerimaan</p>
-                                        <input type="text" id='input-kode-penerimaan' name='input-kode-penerimaan' readOnly />
+                                        <input type="text" id='input-kode-penerimaan' name='input-kode-penerimaan' maxLength={10} readOnly />
                                     </div>
                                     <div className={`${global.input_group} col-6 ps-2`}>
                                         <p className={global.title}>Tanggal Terima</p>
@@ -90,7 +89,7 @@ export class penerimaan_barang extends Component {
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-3 px-2`}>
                                         <p className={global.title}>Kode Order</p>
-                                        <input type="text" id='input-kode-order' name='input-kode-order' />
+                                        <input type="text" id='input-kode-order' name='input-kode-order' maxLength={10} />
                                     </div>
                                     <div className={`${global.input_group} col-5 ps-2`}>
                                         <p className={global.title}>Tanggal Order</p>
@@ -104,7 +103,7 @@ export class penerimaan_barang extends Component {
                                     </div>
                                     <div className={`${global.input_group} col-5 ps-2`}>
                                         <p className={global.title}>Nama Supplier</p>
-                                        <input type="text" id='input-nama-supplier' name='input-nama-supplier' readOnly/>
+                                        <input type="text" id='input-nama-supplier' name='input-nama-supplier' maxLength={10} readOnly/>
                                     </div>
                                 </div> 
                             </div>
@@ -118,7 +117,7 @@ export class penerimaan_barang extends Component {
                                 {this.state.jenisPembelian === 'Bahan' ?
                                 <>
                                     <div className={`table-responsive`}>
-                                        <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                        <table id='table-data' className={`table w-100`}>
                                             <thead>
                                                 <tr>
                                                     <td>No.</td>
@@ -137,7 +136,7 @@ export class penerimaan_barang extends Component {
                                 :
                                 <>
                                     <div className={`table-responsive`}>
-                                        <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                        <table id='table-data' className={`table w-100`}>
                                             <thead>
                                                 <tr>
                                                     <td>No.</td>
@@ -157,7 +156,7 @@ export class penerimaan_barang extends Component {
                             <div className={`d-flex flex-column gap-2 pb-2`}>
                                 <div className={`align-items-center ${global.input_group_row}`}>
                                     <p className={`${global.title} col-3`}>Total Barang</p>
-                                    <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-3`} />
+                                    <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-3`} onInput={InputFormatNumber} />
                                 </div>
                             </div>
                             <div className='d-flex flex-column gap-2 pt-2'>

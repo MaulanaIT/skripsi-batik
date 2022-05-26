@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 // Import Library
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { baseURL, config, GetInputValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 import { MdAdd } from 'react-icons/md';
 import Select from 'react-select';
 
@@ -46,6 +47,46 @@ const CustomSelect = {
 }
 
 export class produk extends Component {
+
+    state = {
+        dataProduk: 0
+    }
+
+    componentDidMount() {
+        axios.get(`${baseURL}/api/master-inventory-produk/select.php`, config).then(response => {
+            let dataProduk = response.data.data;
+
+            this.setState({ dataProduk: dataProduk });
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    InsertProduk = () => {
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('kode', GetInputValue('input-kode-produk'));
+        formData.append('nama', GetInputValue('input-nama-produk'));
+        formData.append('jenis', GetInputValue('input-jenis-produk'));
+        formData.append('warna', GetInputValue('input-warna-produk'));
+        formData.append('jumlah', GetInputValue('input-jumlah-produk'));
+        formData.append('stok_minimal', GetInputValue('input-stok-minimal-produk'));
+        formData.append('hpp', GetInputValue('input-hpp-produk'));
+        formData.append('harga_jual', GetInputValue('input-harga-jual-produk'));
+
+        axios.post(`${baseURL}/api/master-inventory-produk/insert.php`, formData, config).then(response => {
+            HideLoading();
+
+            window.location.reload();
+        }).catch(error => {
+            console.log(error);
+
+            HideLoading();
+        });
+    }
+
     render() {
         return (
             <>
@@ -58,11 +99,11 @@ export class produk extends Component {
                     <p className={global.title}>Tambah Produk</p>
                         <div className={`${global.input_group}`}>
                             <p className={`${global.title} col-3`}>Kode Produk</p>
-                            <input type="text" className={global.input1} id='input-kode-produk' name='input-kode-produk' readOnly />
+                            <input type="text" className={global.input1} id='input-kode-produk' name='input-kode-produk' maxLength={10} readOnly={true} />
                         </div>
                         <div className={`${global.input_group}`}>
                             <p className={`${global.title} col-3`}>Nama Produk</p>
-                            <input type="text" className={global.input2} id='input-nama-produk' name='input-nama-produk' />
+                            <input type="text" className={global.input2} id='input-nama-produk' name='input-nama-produk' maxLength={50} />
                         </div>
                         <div className={`${global.input_group}`}>
                                             <p className={`${global.title} col-3`}>Jenis Produk</p>
@@ -74,28 +115,28 @@ export class produk extends Component {
                         </div>
                         <div className={`${global.input_group}`}>
                                             <p className={`${global.title} col-3`}>Jenis Warna</p>
-                                            <Select id='select-jenis-warna' name='select-jenis-warna' isClearable={true} isSearchable={true} options={[
+                                            <Select id='select-warna-produk' name='select-warna-produk' isClearable={true} isSearchable={true} options={[
                                                 { value: 'Alami', label: 'Alami' },
                                                 { value: 'Sintetis', label: 'Sintetis' }
                                             ]} placeholder={'Pilih Jenis Warna...'} styles={CustomSelect} />
                         </div>
                         <div className={`${global.input_group}`}>
                             <p className={`${global.title} col-3`}>Jumlah</p>
-                            <input type="text" className={global.input3} id='input-jumlah' name='input-jumlah' />
+                            <input type="text" className={global.input3} id='input-jumlah-produk' name='input-jumlah-produk' onInput={InputFormatNumber} />
                         </div>
                         <div className={`${global.input_group}`}>
                             <p className={`${global.title} col-3`}>Stok Minimal</p>
-                            <input type="text" className={global.input3} id='input-stok-minimal' name='input-stok-minimal' />
+                            <input type="text" className={global.input3} id='input-stok-minimal-produk' name='input-stok-minimal-produk' onInput={InputFormatNumber} />
                         </div>
                         <div className={`${global.input_group}`}>
                             <p className={`${global.title} col-3`}>HPP</p>
-                            <input type="text" className={global.input3} id='input-hpp' name='input-hpp' />
+                            <input type="text" className={global.input3} id='input-hpp-produk' name='input-hpp-produk' onInput={InputFormatNumber} />
                         </div>
                         <div className={`${global.input_group}`}>
                             <p className={`${global.title} col-3`}>Harga Jual</p>
-                            <input type="text" className={global.input3} id='input-harga-jual' name='input-harga-jual' />
+                            <input type="text" className={global.input3} id='input-harga-jual-produk' name='input-harga-jual-produk' onInput={InputFormatNumber} />
                         </div>
-                        <button type='button' className={global.button}><MdAdd /> Simpan</button>
+                        <button type='button' className={global.button} onClick={this.InsertProduk}><MdAdd /> Simpan</button>
                     </div>
                 </div>
             </>

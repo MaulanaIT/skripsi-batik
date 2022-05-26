@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 // Import Library
 import $ from 'jquery';
-import { MdAdd } from 'react-icons/md';
 import Select from 'react-select';
 
 // Import CSS
@@ -146,7 +145,7 @@ export class konsinyasi extends Component {
                         </div>
                         <div className={`${global.card} ${this.state.tabSelected === 0 ? '' : 'd-none'}`}>
                             <div className={`table-responsive`}>
-                                <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                <table id='table-data' className={`table w-100`}>
                                     <thead className='text-nowrap'>
                                         <tr>
                                             <td>No.</td>
@@ -166,7 +165,7 @@ export class konsinyasi extends Component {
                         </div>
                         <div className={`${global.card} ${this.state.tabSelected === 1 ? '' : 'd-none'}`}>
                             <div className={`table-responsive`}>
-                                    <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                    <table id='table-data' className={`table w-100`}>
                                         <thead className='text-nowrap'>
                                             <tr>
                                                 <td>No.</td>

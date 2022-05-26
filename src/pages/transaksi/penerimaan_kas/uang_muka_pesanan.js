@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 // Import Library
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md'
 import Select from 'react-select';
 
@@ -126,7 +125,7 @@ export class uang_muka_pesanan extends Component {
                                     <p className={global.title}>Daftar Pesanan</p>
                                 </div>                          
                                     <div className={`table-responsive`}>
-                                        <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                        <table id='table-data' className={`table w-100`}>
                                             <thead>
                                                 <tr>
                                                     <td>No.</td>

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 // Import Library
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md'
 import Select from 'react-select';
 
@@ -82,7 +81,7 @@ export class retur_pembelian extends Component {
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-6 pe-2`}>
                                         <p className={global.title}>Kode Retur</p>
-                                        <input type="text" id='input-kode-retur' name='input-kode-retur' readOnly />
+                                        <input type="text" id='input-kode-retur' name='input-kode-retur' maxLength={10} readOnly />
                                     </div>
                                     <div className={`${global.input_group} col-6 ps-2`}>
                                         <p className={global.title}>Tanggal</p>
@@ -96,17 +95,17 @@ export class retur_pembelian extends Component {
                                     </div>
                                     <div className={`${global.input_group} col-6 ps-2`}>
                                         <p className={global.title}>Kode Penerimaan</p>
-                                        <input type="date" id='input-kode-penerimaan' name='input-kode-penerimaan' />
+                                        <input type="date" id='input-kode-penerimaan' name='input-kode-penerimaan' maxLength={10} />
                                     </div>
                                 </div>
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-3 px-2`}>
                                         <p className={global.title}>Kode Supplier</p>
-                                        <input type="text" id='input-kode-supplier' name='input-kode-supplier' />
+                                        <input type="text" id='input-kode-supplier' name='input-kode-supplier' maxLength={10} />
                                     </div>
                                     <div className={`${global.input_group} col-5 ps-2`}>
                                         <p className={global.title}>Nama Supplier</p>
-                                        <input type="text" id='input-nama-supplier' name='input-nama-supplier' />
+                                        <input type="text" id='input-nama-supplier' name='input-nama-supplier' maxLength={50} />
                                     </div>
                                 </div>
                                 {this.state.jenisRetur === 'Bahan' ?
@@ -169,7 +168,7 @@ export class retur_pembelian extends Component {
                                 {this.state.jenisRetur === 'Bahan' ?
                                 <>
                                     <div className={`table-responsive`}>
-                                        <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                        <table id='table-data' className={`table w-100`}>
                                             <thead>
                                                 <tr>
                                                     <td>No.</td>
@@ -189,7 +188,7 @@ export class retur_pembelian extends Component {
                                 :
                                 <>
                                     <div className={`table-responsive`}>
-                                        <table id='table-data' className={`table table-striped table-hover w-100`}>
+                                        <table id='table-data' className={`table w-100`}>
                                             <thead>
                                                 <tr>
                                                     <td>No.</td>

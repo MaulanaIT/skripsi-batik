@@ -25,9 +25,9 @@ export class daftar_bp extends Component {
             let htmlTableDaftarAlat = [];
 
             if (dataAlat.length > 0) {
-                dataAlat.map((item, index) => {
+                dataAlat.forEach((item, index) => {
                     htmlTableDaftarAlat.push(
-                        <tr className={`align-middle`}>
+                        <tr key={index} className={`align-middle`}>
                             <td className={`text-center`}>{index + 1}.</td>
                             <td>{item.kode}</td>
                             <td>{item.nama}</td>
