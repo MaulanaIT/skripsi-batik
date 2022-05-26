@@ -4,6 +4,9 @@ import React, { Component } from 'react'
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
+import { HideLoading, ShowLoading } from '../../../component/helper';
+
+import DetailOrder from './detail_order_admkeu';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -15,9 +18,14 @@ export class daftar_order extends Component {
         $('#table-data').DataTable();
     }
 
+    SelectDetail = () => {
+    document.getElementById('detail_order_admkeu').classList.remove('d-none');
+    }
+
     render() {
         return (
             <>
+                <DetailOrder />
                 <div className={style.header}>
                     <p className={style.title}>Order Pembelian</p>
                     <p className={style.pathname}>Transaksi / Pembelian / Order Pembelian</p>
@@ -40,9 +48,13 @@ export class daftar_order extends Component {
                                         <td>Total Harga</td>
                                         <td>Status</td>
                                         <td>Aksi</td>
+                                        <td>
+                                            <button type='button' className={global.button} onClick={this.SelectDetail}>Detail</button>
+                                        </td>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                </tbody>
                             </table>
                         </div>
                     </div>
