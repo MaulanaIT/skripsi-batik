@@ -156,6 +156,7 @@ export class sidebar extends Component {
                                 <ul className={style.dropdown_menu}>
                                     <li><Link to={'/transaksi/produksi/permintaanprod'}><span>Permintaan Produksi</span></Link></li>
                                     <li><Link to={'/transaksi/produksi/daftar_produksi'}><span>Daftar Produksi</span></Link></li>
+                                    <li><Link to={'/transaksi/produksi/daftar_hpp'}><span>Daftar Harga Pokok Produksi</span></Link></li>
                                 </ul>
                             </li>
                         </ul>
@@ -204,7 +205,12 @@ export class sidebar extends Component {
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/laporan/produksi/produksi'}><span>Produksi</span></Link></li>
+                                    <li><Link to={'/laporan/produksi/lap_produksi'}><span>Laporan Produksi</span></Link></li>
+                                    <li><Link to={'/laporan/produksi/lap_hpp'}><span>Laporan Harga Pokok Produksi</span></Link></li>
+                                    <li><Link to={'/laporan/produksi/lap_tenaga_kerja'}><span>Laporan Tenaga Kerja</span></Link></li>
+                                    <li><Link to={'/laporan/produksi/kartu_alat'}><span>Kartu Alat</span></Link></li>
+                                    <li><Link to={'/laporan/produksi/kartu_persediaan_bb'}><span>Kartu Persediaan Bahan Baku</span></Link></li>
+                                    <li><Link to={'/laporan/produksi/kartu_persediaan_bp'}><span>Kartu Persediaan Bahan Penolong</span></Link></li>
                                 </ul>
                             </li>
                             <li><Link to={'/laporan/profitabilitas'}><span>Laporan Profitabilitas</span></Link></li>
