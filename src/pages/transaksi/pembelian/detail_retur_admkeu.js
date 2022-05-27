@@ -5,15 +5,15 @@ import { FiXCircle } from 'react-icons/fi';
 // Import CSS
 import global from '../../../css/global.module.css';
 
-export class detail_order_admkeu extends Component {
+export class detail_retur_admkeu extends Component {
 
     CloseDetail = () => {
-        document.getElementById('detail_order_admkeu').classList.add('d-none');
+        document.getElementById('detail_retur_admkeu').classList.add('d-none');
         }
 
     render() {
         return (
-            <div id='detail_order_admkeu' className={`${global.loading_background} d-none`}>
+            <div id='detail_retur_admkeu' className={`${global.loading_background} d-none`}>
                 <div className={`table-responsive`}><FiXCircle className='fs-3 align-items-center' onClick={this.CloseDetail} />
                     <div className={`${global.card_detail}`}>
                         <p className='fs-5 fw-bold text-center'>Detail Order Pembelian</p>
@@ -24,10 +24,9 @@ export class detail_order_admkeu extends Component {
                                     <td>Kode Bahan/Alat</td>
                                     <td>Nama Bahan/Alat</td>
                                     <td>Satuan</td>
-                                    <td>Jumlah Beli</td>
+                                    <td>Jumlah Retur</td>
                                     <td>Harga</td>
                                     <td>Total Harga</td>
-                                    <td>Aksi</td>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -37,7 +36,7 @@ export class detail_order_admkeu extends Component {
                                 <button type='button' className={`${global.button} w-100`}>Setuju</button>
                             </div>
                             <div className='col-6 ps-2'>
-                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Bayar</button>
+                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Terima Kas</button>
                             </div>
                         </div>
                     </div>
@@ -47,4 +46,4 @@ export class detail_order_admkeu extends Component {
     }
 }
 
-export default detail_order_admkeu
+export default detail_retur_admkeu

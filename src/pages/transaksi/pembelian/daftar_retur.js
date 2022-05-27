@@ -5,6 +5,9 @@ import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 
+import DetailRetur from './detail_retur_admkeu';
+import DetailRetur2 from './detail_retur_gudang';
+
 // Import CSS
 import global from '../../../css/global.module.css';
 import style from '../../../css/transaksi/pembelian/retur_pembelian.module.css';
@@ -15,9 +18,18 @@ export class daftar_retur extends Component {
         $('#table-data').DataTable();
     }
 
+    SelectDetail = () => {
+    document.getElementById('detail_retur_admkeu').classList.remove('d-none');
+    }
+    SelectDetail2 = () => {
+    document.getElementById('detail_retur_gudang').classList.remove('d-none');
+    }
+
     render() {
         return (
             <>
+                <DetailRetur />
+                <DetailRetur2 />
                 <div className={style.header}>
                     <p className={style.title}>Retur Pembelian</p>
                     <p className={style.pathname}>Transaksi / Pembelian / Retur Pembelian</p>
@@ -40,6 +52,12 @@ export class daftar_retur extends Component {
                                         <td>Total Retur</td>
                                         <td>Status</td>
                                         <td>Aksi</td>
+                                        <td>
+                                        <button type='button' className={global.button} onClick={this.SelectDetail}>Detail</button>
+                                        </td>
+                                        <td>
+                                        <button type='button' className={global.button} onClick={this.SelectDetail2}>Detail2</button>
+                                        </td>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

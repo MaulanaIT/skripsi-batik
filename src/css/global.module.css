@@ -42,6 +42,27 @@
     filter: brightness(120%);
 }
 
+.card_detail {
+    background-color: rgba(99, 99, 99, 0.9);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+}
+
+.card_detail>.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card_detail>.header>.title {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    margin-bottom: 6px;
+}
+
 .card {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
