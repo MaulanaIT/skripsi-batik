@@ -14,7 +14,7 @@ export class detail_order_gudang extends Component {
     render() {
         return (
             <div id='detail_order_gudang' className={`${global.loading_background} d-none`}>
-                <div className={`table-responsive`}><FiXCircle className='fs-3 align-items-center' onClick={this.CloseDetail} />
+                <div className={`table-responsive`}><FiXCircle className='fs-3 col-12' onClick={this.CloseDetail} />
                     <div className={`${global.card_detail}`}>
                         <p className='fs-5 fw-bold text-center'>Detail Order Pembelian</p>
                         <table id='table-data' className={`table w-100`}>
