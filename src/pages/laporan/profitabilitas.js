@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 // Import Library
 import $ from 'jquery';
+import { TiExport } from 'react-icons/ti';
+import { AiFillPrinter } from 'react-icons/ai';
 
 // Import CSS
 import global from '../../css/global.module.css';
@@ -44,8 +46,16 @@ export class profitabilitas extends Component {
                         </div>
                     </div>
                     <div className={`${global.card} col-12`}>
-                        <div className={`${global.header}`}>
-                            <p className={global.title}>Laporan Profitabilitas</p>
+                        <div className='d-flex'>
+                            <div className='col-10'>
+                                <p className={global.title}>Laporan Profitabilitas</p>
+                            </div>
+                            <div className='col-1 ps-5'>
+                                <TiExport className='fs-4' />
+                            </div>
+                            <div className='col-1 pe-5'>
+                                <AiFillPrinter className='fs-4' />
+                            </div>
                         </div>
                         <div className={global.card}>
                             <div className={`table-responsive`}>
@@ -54,7 +64,7 @@ export class profitabilitas extends Component {
                                         <tr>
                                             <th>No.</th>
                                             <th>Kode Akun</th>
-                                            <th>Nama AKun</th>
+                                            <th>Nama Akun</th>
                                             <th>Debit</th>
                                             <th>Kredit</th>
                                         </tr>
