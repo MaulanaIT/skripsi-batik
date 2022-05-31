@@ -39,8 +39,8 @@ render() {
 
                 <div className={`${style.content}`}>
                     <div className={`${global.card} col-12`}>
-                    <p className={style.title}>Leksana Batik Jaya</p>
-                    <p className={style.title}>Kartu Alat</p>
+                    <p className={`${style.title} text-center w-100 fw-bold`} style={{ fontSize: 18 }}>LEKSANA BATIK JAYA</p>
+                    <p className={`${style.title} text-center w-100`} style={{ fontSize: 17 }}>KARTU ALAT</p>
                     
                     <div className={`${bootstrap['d-flex']}`}>
                         <div className={`${global.input_group} col-3 pe-2`}>
@@ -53,7 +53,7 @@ render() {
                         </div>
                     </div>
                     <div className={`table-responsive`}>
-                        <table id='table-data' className={`table table-striped table-hover w-100`}>
+                        <table id='table-data' className={`table table-bordered table-striped table-hover w-100`}>
                             <thead className='text-nowrap'>
                                 <tr>
                                     <td>Tanggal</td>

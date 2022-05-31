@@ -86,8 +86,8 @@ render() {
 
                 <div className={`${style.content}`}>
                     <div className={`${global.card} col-12`}>
-                    <p className={style.title}>Leksana Batik Jaya</p>
-                    <p className={style.title}>Kartu Persediaan Bahan Penolong</p>
+                    <p className={`${style.title} text-center w-100 fw-bold`} style={{ fontSize: 18 }}>LEKSANA BATIK JAYA</p>
+                    <p className={`${style.title} text-center w-100`} style={{ fontSize: 17 }}>KARTU PERSEDIAAN BAHAN PENOLONG</p>
                     
                     <div className={`${bootstrap['d-flex']}`}>
                         <div className={`${global.input_group} col-3 pe-2`}>
@@ -100,20 +100,23 @@ render() {
                         </div>
                     </div>
                     <div className={`table-responsive`}>
-                        <table id='table-data' className={`table table-striped table-hover w-100`}>
-                            <thead className='text-nowrap'>
+                        <table id='table-data' className={`table table-bordered table-striped table-hover w-100`}>
+                            <thead className='text-center'>
+                                <tr>
+                                    <td colSpan={2}></td>
+                                    <td colSpan={3}>Persediaan Masuk</td>
+                                    <td colSpan={3}>Persediaan Keluar</td>
+                                    <td colSpan={3}>Saldo</td>
+                                </tr>
                                 <tr>
                                     <td>Tanggal</td>
                                     <td>Keterangan</td>
-                                    "persediaan masuk"
                                     <td>Unit</td>
                                     <td>Harga</td>
                                     <td>Jumlah</td>
-                                    "persediaan keluar"
                                     <td>Unit</td>
                                     <td>Harga</td>
                                     <td>Jumlah</td>
-                                    "saldo"
                                     <td>Unit</td>
                                     <td>Harga</td>
                                     <td>Jumlah</td>

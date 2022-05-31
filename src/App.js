@@ -38,6 +38,7 @@ import TransaksiPenerimaanKasUangMukaPesanan from './pages/transaksi/penerimaan_
 import TransaksiPenerimaanKasDaftarUangMuka from './pages/transaksi/penerimaan_kas/daftar_uangmuka';
 import TransaksiPenerimaanKasKonsinyasi from './pages/transaksi/penerimaan_kas/konsinyasi';
 import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
+import TransaksiPermintaanBahan from './pages/transaksi/produksi/permintaan_bahan';
 import DaftarProduksi from './pages/transaksi/produksi/daftar_produksi';
 import DaftarHargaPokokProduksi from './pages/transaksi/produksi/daftar_hpp';
 import Produksi from './pages/transaksi/produksi/produksi';
@@ -109,6 +110,7 @@ export class App extends Component {
                                 <Route path={'/transaksi/penerimaan-kas/daftar-uangmuka'} element={<TransaksiPenerimaanKasDaftarUangMuka />} />
                                 <Route path={'/transaksi/penerimaan-kas/konsinyasi'} element={<TransaksiPenerimaanKasKonsinyasi />} />
                                 <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
+                                <Route path={'/transaksi/produksi/permintaan_bahan'} element={<TransaksiPermintaanBahan />} />
                                 <Route path={'/transaksi/produksi/daftar_produksi'} element={<DaftarProduksi />} />
                                 <Route path={'/transaksi/produksi/produksi'} element={<Produksi/>} />
                                 <Route path={'/transaksi/produksi/daftar_hpp'} element={<DaftarHargaPokokProduksi/>} />

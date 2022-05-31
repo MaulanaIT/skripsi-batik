@@ -36,8 +36,8 @@ export class laporan_hpp extends Component {
                 </div>
                 <div className={`${style.content}`}>
                     <div className={`${global.card} col-12`}>
-                    <p className={`${style.title} text-center w-100 fw-bold`}>Leksana Batik Jaya</p>
-                    <p className={`${style.title} text-center w-100 fw-bold`}>Laporan Harga Pokok Produksi</p>
+                    <p className={`${style.title} text-center w-100 fw-bold`}>LEKSANA BATIK JAYA</p>
+                    <p className={`${style.title} text-center w-100 fw-bold`}>LAPORAN HARGA POKOK PRODUKSI</p>
                     
                     <div className={`${bootstrap['d-flex']}`}>
                         <div className={`${global.input_group} col-3 pe-2`}>

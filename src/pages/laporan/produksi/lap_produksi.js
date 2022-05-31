@@ -88,8 +88,8 @@ render() {
                 </div>
                 <div className={`${style.content}`}>
                     <div className={`${global.card} col-12`}>
-                    <p className={`${style.title} text-center w-100 fw-bold`} style={{fontSize: 18}}>Leksana Batik Jaya</p>
-                    <p className={`${style.title} text-center w-100`} style={{fontSize: 17}}>Laporan Produksi</p>
+                    <p className={`${style.title} text-center w-100 fw-bold`} style={{fontSize: 18}}>LEKSANA BATIK JAYA</p>
+                    <p className={`${style.title} text-center w-100`} style={{fontSize: 17}}>LAPORAN PRODUKSI</p>
                     
                     <div>
                         <p className={style.title}>Tanggal</p>

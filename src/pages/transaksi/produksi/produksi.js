@@ -132,7 +132,8 @@ export class produksi extends Component {
                                             ]} placeholder={'Select Status...'} styles={CustomSelect} />
                                         </div>
                                     </div>
-                                    <button type='button' className={global.button}><MdAdd /> Tambah</button>
+                                    <button type='button' className={global.button}><MdAdd /> Tambah Permintaan Bahan</button>
+                                    <button type='button' className={global.button}><MdAdd /> Simpan</button>
                                 </>
                                 : 
                                 this.state.pilihProduksi === 'Stok' ?
@@ -156,23 +157,23 @@ export class produksi extends Component {
                                                     </div>
                                                     <div className={`${global.input_group} col-6 pe-2`}>
                                                         <p className={global.title}>Nama Customer</p>
-                                                        <input type="date" id='input-nama-customer' name='input-nama-customer' readOnly />
+                                                        <input type="text" id='input-nama-customer' name='input-nama-customer' readOnly />
                                                     </div>
                                                     <div className={`${global.input_group} col-6 ps-2`}>
                                                         <p className={global.title}>Nama Pesanan</p>
-                                                        <input type="date" id='input-nama-pesanan' name='input-nama-pesanan' readOnly />
+                                                        <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' readOnly />
                                                     </div>
                                                     <div className={`${global.input_group} col-6 pe-2`}>
                                                         <p className={global.title}>Jumlah</p>
-                                                        <input type="date" id='input-jumlah' name='input-jumlah' readOnly />
+                                                        <input type="text" id='input-jumlah' name='input-jumlah' readOnly />
                                                     </div>
                                                     <div className={`${global.input_group} col-6 ps-2`}>
                                                         <p className={global.title}>Lama Produksi</p>
-                                                        <input type="date" id='input-lama-produksi' name='input-lama-produksi' />
+                                                        <input type="text" id='input-lama-produksi' name='input-lama-produksi' />
                                                     </div>
                                                     <div className={`${global.input_group} col-6 pe-2`}>
                                                         <p className={global.title}>Deskripsi</p>
-                                                        <input type="date" id='input-deskripsi' name='input-deskripsi' />
+                                                        <input type="text" id='input-deskripsi' name='input-deskripsi' />
                                                     </div>
                                                     <div className={`${global.input_group} col-5 ps-2`}>
                                                         <p className={global.title}>Status</p>
@@ -182,9 +183,9 @@ export class produksi extends Component {
                                                         ]} placeholder={'Select Status...'} styles={CustomSelect} />
                                                     </div>
                                                 </div>
-                                                      
                                                 </div>
-                                                <button type='button' className={global.button}><MdAdd /> Tambah</button> 
+                                                <button type='button' className={global.button}><MdAdd /> Tambah Permintaan Bahan</button>
+                                                <button type='button' className={global.button}><MdAdd /> Simpan</button> 
                                                     </>
                                                     :
                                                     null
