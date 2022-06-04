@@ -23,7 +23,7 @@ export class consignee extends Component {
     }
 
     GetConsignee = () => {
-        axios.get(`${baseURL}/api/master-consignee/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/master/consignee/select.php`, config).then(response => {
             ShowLoading();
 
             let dataConsignee = response.data.data;
@@ -71,7 +71,7 @@ export class consignee extends Component {
         formData.append('alamat', GetValue('input-alamat-consignee'));
         formData.append('telepon', GetValue('input-telepon-consignee'));
 
-        axios.post(`${baseURL}/api/master-consignee/insert.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/consignee/insert.php`, formData, config).then(() => {
             ResetForm('form-data');
 
             this.GetConsignee();

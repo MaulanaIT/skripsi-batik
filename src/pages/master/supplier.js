@@ -24,7 +24,7 @@ export class supplier extends Component {
     }
 
     GetSupplier = () => {
-        axios.get(`${baseURL}/api/master-supplier/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/master/supplier/select.php`, config).then(response => {
             ShowLoading();
 
             let dataSupplier = response.data.data;
@@ -103,7 +103,7 @@ export class supplier extends Component {
         formData.append('telepon', telepon);
         formData.append('rekening', rekening);
 
-        axios.post(`${baseURL}/api/master-supplier/update.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/supplier/update.php`, formData, config).then(() => {
             document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
             document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
 
@@ -122,7 +122,7 @@ export class supplier extends Component {
 
         formData.append('id', id);
 
-        axios.post(`${baseURL}/api/master-supplier/delete.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/supplier/delete.php`, formData, config).then(() => {
             this.GetSupplier();
         }).catch(error => {
             HideLoading();
@@ -149,7 +149,7 @@ export class supplier extends Component {
         formData.append('telepon', GetValue('input-telepon-supplier'));
         formData.append('rekening', GetValue('input-rekening-supplier'));
 
-        axios.post(`${baseURL}/api/master-supplier/insert.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/supplier/insert.php`, formData, config).then(() => {
             ResetForm('form-data');
 
             this.GetSupplier();

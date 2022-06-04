@@ -53,7 +53,7 @@ export class tenaga_kerja extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${baseURL}/api/master-tenaga-kerja/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/master/tenaga-kerja/select.php`, config).then(response => {
             let dataTenagaKerja = response.data.data;
 
             this.setState({ dataTenagaKerja: dataTenagaKerja });
@@ -75,7 +75,7 @@ export class tenaga_kerja extends Component {
         formData.append('telepon', GetValue('input-telepon-tenaga-kerja'));
         formData.append('upah', GetValue('input-upah-tenaga-kerja'));
 
-        axios.post(`${baseURL}/api/master-tenaga-kerja/insert.php`, formData, config).then(response => {
+        axios.post(`${baseURL}/api/master/tenaga-kerja/insert.php`, formData, config).then(response => {
             window.location.reload();
         }).catch(error => {
             console.log(error);

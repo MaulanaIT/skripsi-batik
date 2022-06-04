@@ -42,7 +42,7 @@ export class daftar_bp extends Component {
         formData.append('stok_minimal', stok_minimal);
         formData.append('harga', harga);
 
-        axios.post(`${baseURL}/api/master-inventory-bahan-penolong/update.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/inventory-bahan-penolong/update.php`, formData, config).then(() => {
             document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
             document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
 
@@ -61,7 +61,7 @@ export class daftar_bp extends Component {
 
         formData.append('id', id);
 
-        axios.post(`${baseURL}/api/master-inventory-bahan-penolong/delete.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/inventory-bahan-penolong/delete.php`, formData, config).then(() => {
             this.GetBahanPenolong();
         }).catch(error => {
             HideLoading();
@@ -76,7 +76,7 @@ export class daftar_bp extends Component {
     }
 
     GetBahanPenolong = () => {
-        axios.get(`${baseURL}/api/master-inventory-bahan-penolong/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/master/inventory-bahan-penolong/select.php`, config).then(response => {
             let dataBahanBaku = response.data.data;
 
             let htmlTableDaftarBahanBaku = [];

@@ -15,7 +15,7 @@ export class akun extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${baseURL}/api/master-akun/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/master/akun/select.php`, config).then(response => {
             let dataAkun = response.data.data;
 
             this.setState({ dataAkun: dataAkun });
@@ -35,7 +35,7 @@ export class akun extends Component {
         formData.append('nama', GetValue('input-nama-akun'));
         formData.append('saldo', GetValue('input-saldo-akun'));
 
-        axios.post(`${baseURL}/api/master-akun/insert.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/akun/insert.php`, formData, config).then(() => {
             window.location.href = '/master/daftar-akun';
         }).catch(error => {
             console.log(error);

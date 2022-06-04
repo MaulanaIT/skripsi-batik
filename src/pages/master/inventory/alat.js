@@ -17,7 +17,7 @@ export class alat extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${baseURL}/api/master-inventory-alat/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/master/inventory-alat/select.php`, config).then(response => {
             let dataAlat = response.data.data;
 
             this.setState({ dataAlat: dataAlat });
@@ -39,7 +39,7 @@ export class alat extends Component {
         formData.append('harga', GetValue('input-harga-alat'));
         formData.append('kapasitas', GetValue('input-kapasitas-alat'));
 
-        axios.post(`${baseURL}/api/master-inventory-alat/insert.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/inventory-alat/insert.php`, formData, config).then(() => {
             window.location.href = '/master/inventory/daftar-alat';
         }).catch(error => {
             console.log(error);

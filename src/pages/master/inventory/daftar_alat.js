@@ -41,7 +41,7 @@ export class daftar_bp extends Component {
         formData.append('harga', harga);
         formData.append('kapasitas', kapasitas);
 
-        axios.post(`${baseURL}/api/master-inventory-alat/update.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/inventory-alat/update.php`, formData, config).then(() => {
             document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
             document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
 
@@ -60,7 +60,7 @@ export class daftar_bp extends Component {
 
         formData.append('id', id);
 
-        axios.post(`${baseURL}/api/master-inventory-alat/delete.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/inventory-alat/delete.php`, formData, config).then(() => {
             this.GetAlat();
         }).catch(error => {
             HideLoading();
@@ -75,7 +75,7 @@ export class daftar_bp extends Component {
     }
 
     GetAlat = () => {
-        axios.get(`${baseURL}/api/master-inventory-alat/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/master/inventory-alat/select.php`, config).then(response => {
             ShowLoading();
 
             let dataAlat = response.data.data;

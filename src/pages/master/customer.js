@@ -39,7 +39,7 @@ export class customer extends Component {
         formData.append('alamat', alamat);
         formData.append('telepon', telepon);
 
-        axios.post(`${baseURL}/api/master-customer/update.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/customer/update.php`, formData, config).then(() => {
             document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
             document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
 
@@ -58,7 +58,7 @@ export class customer extends Component {
 
         formData.append('id', id);
 
-        axios.post(`${baseURL}/api/master-customer/delete.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/customer/delete.php`, formData, config).then(() => {
             this.GetCustomer();
         }).catch(error => {
             HideLoading();
@@ -73,7 +73,7 @@ export class customer extends Component {
     }
 
     GetCustomer = () => {
-        axios.get(`${baseURL}/api/master-customer/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/master/customer/select.php`, config).then(response => {
             ShowLoading();
 
             let dataCustomer = response.data.data;
@@ -140,7 +140,7 @@ export class customer extends Component {
         formData.append('alamat', GetValue('input-alamat-customer'));
         formData.append('telepon', GetValue('input-telepon-customer'));
 
-        axios.post(`${baseURL}/api/master-customer/insert.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/customer/insert.php`, formData, config).then(() => {
             ResetForm('form-data');
 
             this.GetCustomer();

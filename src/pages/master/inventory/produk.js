@@ -68,7 +68,7 @@ export class produk extends Component {
         formData.append('hpp', GetValue('input-hpp-produk'));
         formData.append('harga_jual', GetValue('input-harga-jual-produk'));
 
-        axios.post(`${baseURL}/api/master-inventory-produk/insert.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/inventory-produk/insert.php`, formData, config).then(() => {
             window.location.reload();
         }).catch(error => {
             console.log(error);

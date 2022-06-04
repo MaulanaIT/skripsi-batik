@@ -37,7 +37,7 @@ export class daftar_akun extends Component {
         formData.append('nama', nama);
         formData.append('saldo', saldo);
 
-        axios.post(`${baseURL}/api/master-akun/update.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/akun/update.php`, formData, config).then(() => {
             document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
             document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
 
@@ -56,7 +56,7 @@ export class daftar_akun extends Component {
 
         formData.append('id', id);
 
-        axios.post(`${baseURL}/api/master-akun/delete.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/akun/delete.php`, formData, config).then(() => {
             this.GetAkun();
         }).catch(error => {
             HideLoading();
@@ -71,7 +71,7 @@ export class daftar_akun extends Component {
     }
 
     GetAkun = () => {
-        axios.get(`${baseURL}/api/master-akun/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/master/akun/select.php`, config).then(response => {
             ShowLoading();
 
             let dataAkun = response.data.data;
