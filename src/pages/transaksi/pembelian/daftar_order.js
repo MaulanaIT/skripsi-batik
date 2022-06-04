@@ -5,6 +5,9 @@ import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 
+import DetailOrder from './detail_order_admkeu';
+import DetailOrder2 from './detail_order_gudang';
+
 // Import CSS
 import global from '../../../css/global.module.css';
 import style from '../../../css/transaksi/pembelian/order_pembelian.module.css';
@@ -15,9 +18,18 @@ export class daftar_order extends Component {
         $('#table-data').DataTable();
     }
 
+    SelectDetail = () => {
+    document.getElementById('detail_order_admkeu').classList.remove('d-none');
+    }
+    SelectDetail2 = () => {
+    document.getElementById('detail_order_gudang').classList.remove('d-none');
+    }
+
     render() {
         return (
             <>
+                <DetailOrder />
+                <DetailOrder2 />
                 <div className={style.header}>
                     <p className={style.title}>Order Pembelian</p>
                     <p className={style.pathname}>Transaksi / Pembelian / Order Pembelian</p>
@@ -40,9 +52,16 @@ export class daftar_order extends Component {
                                         <td>Total Harga</td>
                                         <td>Status</td>
                                         <td>Aksi</td>
+                                        <td>
+                                            <button type='button' className={global.button} onClick={this.SelectDetail}>Detail</button>
+                                        </td>
+                                        <td>
+                                            <button type='button' className={global.button} onClick={this.SelectDetail2}>Detail2</button>
+                                        </td>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                </tbody>
                             </table>
                         </div>
                     </div>

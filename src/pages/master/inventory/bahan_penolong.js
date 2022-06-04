@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 // Import Library
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import { baseURL, CheckInputValidity, config, GenerateCode, GetValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 
@@ -55,8 +56,11 @@ export class bahan_penolong extends Component {
                     <p className={style.pathname}>Master / Inventory / Bahan Penolong </p>
                 </div>
                 <div className={style.content}>
-                    <form id='form-data' className={global.card}>
-                        <p className={global.title}>Tambah Bahan Penolong</p>
+                    <div className={global.card}>
+                        <div className={`${global.header}`}>
+                            <p className={global.title}>Tambah Bahan Penolong</p>
+                            <Link to={'/master/inventory/daftar-bp'} className={`${global.button}`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Kembali</Link>
+                        </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Bahan Penolong</p>
                             <input type="text" className="col col-lg-2 col-md-3" id='input-kode-bahan-penolong' name='input-kode-bahan-penolong' value={GenerateCode('BP', this.state.dataBahanPenolong.length + 1)} maxLength={10} readOnly={true} required={true} />

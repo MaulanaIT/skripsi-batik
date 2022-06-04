@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 // Import Library
 import $ from 'jquery';
+import { TiExport } from 'react-icons/ti';
+import { AiFillPrinter } from 'react-icons/ai';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -88,8 +90,16 @@ export class transaksi_pembelian extends Component {
                         </div>
                     </div>
                     <div className={`${global.card} col-12`}>
-                        <div className={`${global.header}`}>
-                            <p className={global.title}>Daftar Penjualan</p>
+                        <div className='d-flex'>
+                            <div className='col-10'>
+                                <p className={global.title}>Daftar Penjualan</p>
+                            </div>
+                            <div className='col-1 ps-5'>
+                                <TiExport className='fs-4' />
+                            </div>
+                            <div className='col-1 pe-5'>
+                                <AiFillPrinter className='fs-4' />
+                            </div>
                         </div>
                         <div className={global.card}>
                             <div className={`table-responsive`}>
