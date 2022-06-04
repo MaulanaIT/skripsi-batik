@@ -56,7 +56,7 @@ export class alat extends Component {
                     <p className={style.pathname}>Master / Inventory / Alat </p>
                 </div>
                 <div className={style.content}>
-                    <div className={global.card}>
+                    <form className={global.card}>
                         <div className={`${global.header}`}>
                             <p className={global.title}>Tambah Alat</p>
                             <Link to={'/master/inventory/daftar-alat'} className={`${global.button}`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Kembali</Link>
