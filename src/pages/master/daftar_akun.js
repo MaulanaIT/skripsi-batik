@@ -4,9 +4,9 @@ import React, { Component } from 'react'
 import $ from 'jquery';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { FaCheck, FaPen, FaTrash } from 'react-icons/fa';
 import { MdAdd } from 'react-icons/md';
-import { FaPen, FaTrash } from 'react-icons/fa';
-import { baseURL, config } from '../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, ShowLoading } from '../../component/helper';
 
 // Import CSS
 import global from '../../css/global.module.css';
@@ -20,7 +20,60 @@ export class daftar_akun extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${baseURL}/api/master-akun/select.php`, config).then(response => {
+        this.GetAkun();
+    }
+
+    ApplyAkun = (id) => {
+        if (!CheckInputValidity('form-table')) return;
+
+        ShowLoading();
+
+        let nama = GetValue(`edit-nama-${id}`);
+        let saldo = GetValue(`edit-saldo-${id}`);
+
+        const formData = new FormData();
+
+        formData.append('id', id);
+        formData.append('nama', nama);
+        formData.append('saldo', saldo);
+
+        axios.post(`${baseURL}/api/master/akun/update.php`, formData, config).then(() => {
+            document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
+            document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
+
+            this.GetAkun();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
+    DeleteAkun = (id) => {
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('id', id);
+
+        axios.post(`${baseURL}/api/master/akun/delete.php`, formData, config).then(() => {
+            this.GetAkun();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
+    EditAkun = (id) => {
+        document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.add('d-none'));
+        document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.remove('d-none'));
+    }
+
+    GetAkun = () => {
+        axios.get(`${baseURL}/api/master/akun/select.php`, config).then(response => {
+            ShowLoading();
+
             let dataAkun = response.data.data;
 
             let htmlTableDaftarAkun = [];
@@ -30,12 +83,25 @@ export class daftar_akun extends Component {
                     htmlTableDaftarAkun.push(
                         <tr key={index} className={`align-middle`}>
                             <td className={`text-center`}>{index + 1}.</td>
-                            <td>{item.kode}</td>
-                            <td>{item.nama}</td>
-                            <td className={`text-end`}>{item.saldo}</td>
+                            <td>
+                                <div id={`data-kode-${item.id}`}>{item.kode}</div>
+                            </td>
+                            <td>
+                                <div id={`data-nama-${item.id}`} className={`data-${item.id}`}>{item.nama}</div>
+                                <div className={global.input_group_row}>
+                                    <input type="text" id={`edit-nama-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.nama} required={true} />
+                                </div>
+                            </td>
+                            <td>
+                                <div id={`data-saldo-${item.id}`} className={`data-${item.id} text-end`}>{item.saldo}</div>
+                                <div className={global.input_group_row}>
+                                    <input type="text" id={`edit-saldo-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.saldo} required={true} />
+                                </div>
+                            </td>
                             <td className={global.table_action}>
-                                <button type='button' className={global.edit} onClick={this.EditAkun}><FaPen /> Edit</button>
-                                <button type='button' className={global.delete} onClick={() => this.DeleteAkun(item.id)}><FaTrash />Delete</button>
+                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyAkun(item.id)}><FaCheck /> Apply</button>
+                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditAkun(item.id)}><FaPen /> Edit</button>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteAkun(item.id)}><FaTrash />Delete</button>
                             </td>
                         </tr>
                     );
@@ -46,28 +112,14 @@ export class daftar_akun extends Component {
 
             this.setState({ htmlTableDaftarAkun: htmlTableDaftarAkun }, () => {
                 $('#table-data').DataTable();
+
+                HideLoading();
             });
         }).catch(error => {
+            HideLoading();
+
             console.log(error);
         });
-    }
-
-    DeleteAkun = (id) => {
-        const formData = new FormData();
-
-        formData.append('id', id);
-
-        axios.post(`${baseURL}/api/master-akun/delete.php`, formData, config).then(response => {
-            let dataAkun = response.data;
-
-            console.log(dataAkun);
-        }).catch(error => {
-            console.log(error);
-        });
-    }
-
-    EditAkun = () => {
-        return;
     }
 
     render() {
@@ -84,7 +136,7 @@ export class daftar_akun extends Component {
                             <Link to={'/master/akun'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
                         </div>
                         <div className={global.card}>
-                            <div className={`table-responsive`}>
+                            <form id='form-table' className={`table-responsive`}>
                                 <table id='table-data' className={`table w-100`}>
                                     <thead className="align-middle text-center text-nowrap">
                                         <tr>
@@ -99,7 +151,7 @@ export class daftar_akun extends Component {
                                         {this.state.htmlTableDaftarAkun}
                                     </tbody>
                                 </table>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

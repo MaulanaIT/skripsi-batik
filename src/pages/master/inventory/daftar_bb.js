@@ -5,7 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, GetValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 
 
 // Import CSS
@@ -20,7 +20,64 @@ export class daftar_bb extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${baseURL}/api/master-inventory-bahan-baku/select.php`, config).then(response => {
+        this.GetBahanBaku();
+    }
+
+    ApplyBahanBaku = (id) => {
+        if (!CheckInputValidity('form-table')) return;
+
+        ShowLoading();
+
+        let nama = GetValue(`edit-nama-${id}`);
+        let satuan = GetValue(`edit-satuan-${id}`);
+        let jumlah = GetValue(`edit-jumlah-${id}`);
+        let stok_minimal = GetValue(`edit-stok-minimal-${id}`);
+        let harga = GetValue(`edit-harga-${id}`);
+
+        const formData = new FormData();
+
+        formData.append('id', id);
+        formData.append('nama', nama);
+        formData.append('satuan', satuan);
+        formData.append('jumlah', jumlah);
+        formData.append('stok_minimal', stok_minimal);
+        formData.append('harga', harga);
+
+        axios.post(`${baseURL}/api/master/inventory/bahan-baku/update.php`, formData, config).then(() => {
+            document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
+            document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
+
+            this.GetBahanBaku();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
+    DeleteBahanBaku = (id) => {
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('id', id);
+
+        axios.post(`${baseURL}/api/master/inventory/bahan-baku/delete.php`, formData, config).then(() => {
+            this.GetBahanBaku();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
+    EditBahanBaku = (id) => {
+        document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.add('d-none'));
+        document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.remove('d-none'));
+    }
+
+    GetBahanBaku = () => {
+        axios.get(`${baseURL}/api/master/inventory/bahan-baku/select.php`, config).then(response => {
             let dataBahanBaku = response.data.data;
 
             let htmlTableDaftarBahanBaku = [];
@@ -31,11 +88,36 @@ export class daftar_bb extends Component {
                         <tr key={index} className={`align-middle`}>
                             <td className={`text-center`}>{index + 1}.</td>
                             <td>{item.kode}</td>
-                            <td>{item.nama}</td>
-                            <td>{item.satuan}</td>
-                            <td>{item.jumlah}</td>
-                            <td>{item.stok_minimal}</td>
-                            <td>{item.harga}</td>
+                            <td>
+                                <div id={`data-nama-${item.id}`} className={`data-${item.id}`}>{item.nama}</div>
+                                <div className={global.input_group_row}>
+                                    <input type="text" id={`edit-nama-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.nama} required={true} />
+                                </div>
+                            </td>
+                            <td>
+                                <div id={`data-satuan-${item.id}`} className={`data-${item.id}`}>{item.satuan}</div>
+                                <div className={global.input_group_row}>
+                                    <input type="text" id={`edit-satuan-${item.id}`} className={`edit-${item.id} d-none`} maxLength={20} defaultValue={item.satuan} required={true} />
+                                </div>
+                            </td>
+                            <td>
+                                <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{item.jumlah}</div>
+                                <div className={global.input_group_row}>
+                                    <input type="text" id={`edit-jumlah-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.jumlah} required={true} />
+                                </div>
+                            </td>
+                            <td>
+                                <div id={`data-stok-minimal-${item.id}`} className={`data-${item.id}`}>{item.stok_minimal}</div>
+                                <div className={global.input_group_row}>
+                                    <input type="text" id={`edit-stok-minimal-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.stok_minimal} onInput={InputFormatNumber} required={true} />
+                                </div>
+                            </td>
+                            <td>
+                                <div id={`data-harga-${item.id}`} className={`data-${item.id}`}>{item.harga}</div>
+                                <div className={global.input_group_row}>
+                                    <input type="text" id={`edit-harga-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.harga} onInput={InputFormatNumber} required={true} />
+                                </div>
+                            </td>
                             <td></td>
                         </tr>
                     );
@@ -66,7 +148,7 @@ export class daftar_bb extends Component {
                             <Link to={'/master/inventory/bahan-baku'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
                         </div>
                         <div className={global.card}>
-                            <div className={`table-responsive`}>
+                            <form id='form-table' className={`table-responsive`}>
                                 <table id='table-data' className={`table w-100`}>
                                     <thead className="align-middle text-center text-nowrap">
                                         <tr>
@@ -84,7 +166,7 @@ export class daftar_bb extends Component {
                                         {this.state.htmlTableDaftarBahanBaku}
                                     </tbody>
                                 </table>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config, GenerateCode, GetInputValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, GenerateCode, GetValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -17,7 +17,7 @@ export class alat extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${baseURL}/api/master-inventory-alat/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/master/inventory/alat/select.php`, config).then(response => {
             let dataAlat = response.data.data;
 
             this.setState({ dataAlat: dataAlat });
@@ -27,19 +27,19 @@ export class alat extends Component {
     }
 
     InsertAlat = () => {
+        if (!CheckInputValidity('form-data')) return;
+
         ShowLoading();
 
         const formData = new FormData();
 
-        formData.append('kode', GetInputValue('input-kode-alat'));
-        formData.append('nama', GetInputValue('input-nama-alat'));
-        formData.append('satuan', GetInputValue('input-satuan-alat'));
-        formData.append('jumlah', GetInputValue('input-jumlah-alat'));
-        formData.append('harga', GetInputValue('input-harga-alat'));
+        formData.append('kode', GetValue('input-kode-alat'));
+        formData.append('nama', GetValue('input-nama-alat'));
+        formData.append('jumlah', GetValue('input-jumlah-alat'));
+        formData.append('harga', GetValue('input-harga-alat'));
+        formData.append('kapasitas', GetValue('input-kapasitas-alat'));
 
-        axios.post(`${baseURL}/api/master-inventory-alat/insert.php`, formData, config).then(response => {
-            HideLoading();
-
+        axios.post(`${baseURL}/api/master/inventory/alat/insert.php`, formData, config).then(() => {
             window.location.href = '/master/inventory/daftar-alat';
         }).catch(error => {
             console.log(error);
@@ -56,33 +56,33 @@ export class alat extends Component {
                     <p className={style.pathname}>Master / Inventory / Alat </p>
                 </div>
                 <div className={style.content}>
-                    <div className={global.card}>
+                    <form className={global.card}>
                         <div className={`${global.header}`}>
-                            <p className={global.title}>Tambah Bahan Penolong</p>
+                            <p className={global.title}>Tambah Alat</p>
                             <Link to={'/master/inventory/daftar-alat'} className={`${global.button}`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Kembali</Link>
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Alat</p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-alat' name='input-kode-alat' value={GenerateCode('A', this.state.dataAlat.length + 1)} maxLength={13} readOnly={true} />
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-alat' name='input-kode-alat' value={GenerateCode('A', this.state.dataAlat.length + 1)} maxLength={13} readOnly={true} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Alat</p>
-                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-alat' name='input-nama-alat' maxLength={50} />
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-alat' name='input-nama-alat' maxLength={50} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jumlah Unit</p>
-                            <input type="text" className="col col-lg-1 col-md-2" id='input-jumlah-unit-alat' name='input-jumlah-unit-alat' onInput={InputFormatNumber} />
+                            <input type="text" className="col col-lg-1 col-md-2" id='input-jumlah-alat' name='input-jumlah-alat' onInput={InputFormatNumber} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Harga Perolehan</p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-harga-perolehan-alat' name='input-harga-perolehan-alat' onInput={InputFormatNumber} />
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-harga-alat' name='input-harga-alat' onInput={InputFormatNumber} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kapasitas per Unit</p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-kapasitas-alat' name='input-kapasitas-alat' onInput={InputFormatNumber} />
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kapasitas-alat' name='input-kapasitas-alat' onInput={InputFormatNumber} required={true} />
                         </div>
                         <button type='button' className={global.button} onClick={this.InsertAlat}><MdAdd /> Simpan</button>
-                    </div>
+                    </form>
                 </div>
             </>
         )

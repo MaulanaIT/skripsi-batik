@@ -38,7 +38,11 @@ import TransaksiPenerimaanKasUangMukaPesanan from './pages/transaksi/penerimaan_
 import TransaksiPenerimaanKasDaftarUangMuka from './pages/transaksi/penerimaan_kas/daftar_uangmuka';
 import TransaksiPenerimaanKasKonsinyasi from './pages/transaksi/penerimaan_kas/konsinyasi';
 import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
+import TransaksiPermintaanBahan from './pages/transaksi/produksi/permintaan_bahan';
 import DaftarProduksi from './pages/transaksi/produksi/daftar_produksi';
+import DaftarHargaPokokProduksi from './pages/transaksi/produksi/daftar_hpp';
+import Produksi from './pages/transaksi/produksi/produksi';
+import HargaPokokProduksi from './pages/transaksi/produksi/hpp';
 import LaporanPembelianTransaksiPembelian from './pages/laporan/pembelian/transaksi_pembelian';
 import LaporanPembelianReturPembelian from './pages/laporan/pembelian/retur_pembelian';
 import LaporanPenjualanTransaksiPenjualan from './pages/laporan/penjualan/transaksi_penjualan';
@@ -47,6 +51,12 @@ import LaporanPenjualanPiutangKonsinyasi from './pages/laporan/penjualan/piutang
 import LaporanKasPenerimaanKas from './pages/laporan/kas/penerimaan_kas';
 import LaporanKasPengeluaranKas from './pages/laporan/kas/pengeluaran_kas';
 import LaporanProfitabilitas from './pages/laporan/profitabilitas';
+import LaporanHargaPokokProduksi from './pages/laporan/produksi/lap_hpp';
+import LaporanProduksi from './pages/laporan/produksi/lap_produksi';
+import LaporanTenagaKerja from './pages/laporan/produksi/lap_tenaga_kerja';
+import KartuAlat from './pages/laporan/produksi/kartu_alat';
+import KartuPersediaanBahanBaku from './pages/laporan/produksi/kartu_persediaan_bb';
+import KartuPersediaanBahanPenolong from './pages/laporan/produksi/kartu_persediaan_bp';
 
 // Import CSS
 import 'bootstrap/dist/css/bootstrap.css'
@@ -100,7 +110,11 @@ export class App extends Component {
                                 <Route path={'/transaksi/penerimaan-kas/daftar-uangmuka'} element={<TransaksiPenerimaanKasDaftarUangMuka />} />
                                 <Route path={'/transaksi/penerimaan-kas/konsinyasi'} element={<TransaksiPenerimaanKasKonsinyasi />} />
                                 <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
+                                <Route path={'/transaksi/produksi/permintaan_bahan'} element={<TransaksiPermintaanBahan />} />
                                 <Route path={'/transaksi/produksi/daftar_produksi'} element={<DaftarProduksi />} />
+                                <Route path={'/transaksi/produksi/produksi'} element={<Produksi/>} />
+                                <Route path={'/transaksi/produksi/daftar_hpp'} element={<DaftarHargaPokokProduksi/>} />
+                                <Route path={'/transaksi/produksi/hpp'} element={<HargaPokokProduksi/>} />
                                 <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<LaporanPembelianTransaksiPembelian />} />
                                 <Route path={'/laporan/pembelian/retur-pembelian'} element={<LaporanPembelianReturPembelian />} />
                                 <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<LaporanPenjualanTransaksiPenjualan />} />
@@ -108,7 +122,12 @@ export class App extends Component {
                                 <Route path={'/laporan/penjualan/piutang-konsinyasi'} element={<LaporanPenjualanPiutangKonsinyasi />} />
                                 <Route path={'/laporan/kas/penerimaan-kas'} element={<LaporanKasPenerimaanKas />} />
                                 <Route path={'/laporan/kas/pengeluaran-kas'} element={<LaporanKasPengeluaranKas />} />
-                                <Route path={'/laporan/produksi/produksi'} element={<Dashboard />} />
+                                <Route path={'/laporan/produksi/lap_produksi'} element={<LaporanProduksi />} />
+                                <Route path={'/laporan/produksi/lap_hpp'} element={<LaporanHargaPokokProduksi />} />
+                                <Route path={'/laporan/produksi/lap_tenaga_kerja'} element={<LaporanTenagaKerja />} />
+                                <Route path={'/laporan/produksi/kartu_alat'} element={<KartuAlat />} />
+                                <Route path={'/laporan/produksi/kartu_persediaan_bb'} element={<KartuPersediaanBahanBaku />} />
+                                <Route path={'/laporan/produksi/kartu_persediaan_bp'} element={<KartuPersediaanBahanPenolong />} />
                                 <Route path={'/laporan/profitabilitas'} element={<LaporanProfitabilitas />} />
                             </Routes>
                         </div>

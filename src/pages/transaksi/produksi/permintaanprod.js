@@ -36,6 +36,27 @@ export class permintaanproduksi extends Component {
                         </div>
                         <button type='button' className={global.button}><MdAdd /> Simpan</button>
                     </div>
+                <div className={`${global.card} col-12`}>
+                    <div className={`${global.header}`}>
+                        <p className={global.title}>Daftar Permintaan Produksi</p>
+                    </div>
+                <div className={global.card}>
+                    <div className={`table-responsive`}>
+                        <table id='table-data' className={`table w-100`}>
+                            <thead className="align-middle text-center text-nowrap">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Kode Permintaan</th>
+                                    <th>Kode Produk</th>
+                                    <th>Nama Produk</th>
+                                    <th>Jumlah Produksi</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                </div>
                 </div>
             </>
         )
