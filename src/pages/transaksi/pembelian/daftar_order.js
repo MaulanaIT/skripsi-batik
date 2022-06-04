@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
+import { ShowLoading } from '../../../component/helper';
 
 import DetailOrder from './detail_order_admkeu';
 import DetailOrder2 from './detail_order_gudang';
@@ -15,7 +16,59 @@ import style from '../../../css/transaksi/pembelian/order_pembelian.module.css';
 export class daftar_order extends Component {
 
     componentDidMount() {
-        $('#table-data').DataTable();
+        this.GetOrder();
+    }
+
+    GetOrder = () => {
+        axios.get(`${baseURL}/api/transaksi/pembelian/order/select.php`, config).then(response => {
+            ShowLoading();
+
+            let dataAkun = response.data.data;
+
+            let htmlTableDaftarAkun = [];
+
+            if (dataAkun.length > 0) {
+                dataAkun.forEach((item, index) => {
+                    htmlTableDaftarAkun.push(
+                        <tr key={index} className={`align-middle`}>
+                            <td className={`text-center`}>{index + 1}.</td>
+                            <td>
+                                <div id={`data-kode-${item.id}`}>{item.kode}</div>
+                            </td>
+                            <td>
+                                <div id={`data-nama-${item.id}`} className={`data-${item.id}`}>{item.nama}</div>
+                                <div className={global.input_group_row}>
+                                    <input type="text" id={`edit-nama-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.nama} required={true} />
+                                </div>
+                            </td>
+                            <td>
+                                <div id={`data-saldo-${item.id}`} className={`data-${item.id} text-end`}>{item.saldo}</div>
+                                <div className={global.input_group_row}>
+                                    <input type="text" id={`edit-saldo-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.saldo} required={true} />
+                                </div>
+                            </td>
+                            <td className={global.table_action}>
+                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyAkun(item.id)}><FaCheck /> Apply</button>
+                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditAkun(item.id)}><FaPen /> Edit</button>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteAkun(item.id)}><FaTrash />Delete</button>
+                            </td>
+                        </tr>
+                    );
+                });
+            }
+
+            $('#table-data').DataTable().destroy();
+
+            this.setState({ htmlTableDaftarAkun: htmlTableDaftarAkun }, () => {
+                $('#table-data').DataTable();
+
+                HideLoading();
+            });
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
     }
 
     SelectDetail = () => {

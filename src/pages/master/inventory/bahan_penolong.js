@@ -17,7 +17,7 @@ export class bahan_penolong extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${baseURL}/api/master/inventory-bahan-penolong/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/master/inventory/bahan-penolong/select.php`, config).then(response => {
             let dataBahanPenolong = response.data.data;
 
             this.setState({ dataBahanPenolong: dataBahanPenolong });
@@ -39,7 +39,7 @@ export class bahan_penolong extends Component {
         formData.append('jumlah', GetValue('input-jumlah-bahan-penolong'));
         formData.append('harga', GetValue('input-harga-bahan-penolong'));
 
-        axios.post(`${baseURL}/api/master/inventory-bahan-penolong/insert.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/inventory/bahan-penolong/insert.php`, formData, config).then(() => {
             window.location.href = '/master/inventory/daftar-penolong';
         }).catch(error => {
             console.log(error);

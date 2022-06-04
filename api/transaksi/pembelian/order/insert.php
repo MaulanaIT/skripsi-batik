@@ -3,9 +3,11 @@
 require_once '../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
+    $kode = $_POST['kode'];
+    $nama = $_POST['nama'];
+    $saldo = $_POST['saldo'];
     
-    $query = "DELETE FROM master_inventory_bahanpenolong WHERE id='".$id."'";
+    $query = "INSERT INTO master_akun(kode, nama, saldo) VALUES('".$kode."', '".$nama."', '".$saldo."')";
     
     $result = $conn->query($query);
 

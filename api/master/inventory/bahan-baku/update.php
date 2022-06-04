@@ -1,15 +1,17 @@
 <?php
 
-require_once '../../config/connection.php';
+require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $kode = $_POST['kode'];
+    $id = $_POST['id'];
     $nama = $_POST['nama'];
+    $satuan = $_POST['satuan'];
+    $stok_minimal = $_POST['stok_minimal'];
     $jumlah = $_POST['jumlah'];
     $harga = $_POST['harga'];
-    $kapasitas = $_POST['kapasitas'];
     
-    $query = "INSERT INTO master_inventory_alat(kode, nama, jumlah, harga, kapasitas) VALUES('".$kode."', '".$nama."', '".$jumlah."', '".$harga."', '".$kapasitas."')";
+    $query = "UPDATE master_inventory_bahanbaku SET nama='".$nama."', satuan='".$satuan."', stok_minimal='".$stok_minimal."', jumlah='".$jumlah."', harga='".$harga."' WHERE id='".$id."'";
+
     
     $result = $conn->query($query);
 

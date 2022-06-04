@@ -5,7 +5,7 @@ require_once '../../config/connection.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
     
-    $query = "DELETE FROM master_inventory_produk WHERE id='".$id."'";
+    $query = "DELETE FROM master_akun WHERE id='".$id."'";
     
     $result = $conn->query($query);
 

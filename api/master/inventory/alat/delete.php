@@ -1,16 +1,11 @@
 <?php
 
-require_once '../../config/connection.php';
+require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
-    $nama = $_POST['nama'];
-    $jumlah = $_POST['jumlah'];
-    $harga = $_POST['harga'];
-    $kapasitas = $_POST['kapasitas'];
     
-    $query = "UPDATE master_inventory_alat SET nama='".$nama."', jumlah='".$jumlah."', harga='".$harga."', kapasitas='".$kapasitas."' WHERE id='".$id."'";
-
+    $query = "DELETE FROM master_inventory_alat WHERE id='".$id."'";
     
     $result = $conn->query($query);
 

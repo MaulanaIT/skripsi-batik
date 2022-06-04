@@ -17,7 +17,7 @@ export class bahan_baku extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${baseURL}/api/master/inventory-bahan-baku/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/master/inventory/bahan-baku/select.php`, config).then(response => {
             let dataBahanBaku = response.data.data;
 
             this.setState({ dataBahanBaku: dataBahanBaku });
@@ -39,7 +39,7 @@ export class bahan_baku extends Component {
         formData.append('jumlah', GetValue('input-jumlah-bahan-baku'));
         formData.append('harga', GetValue('input-harga-bahan-baku'));
 
-        axios.post(`${baseURL}/api/master/inventory-bahan-baku/insert.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/inventory/bahan-baku/insert.php`, formData, config).then(() => {
             window.location.href = '/master/inventory/daftar-bb';
         }).catch(error => {
             console.log(error);

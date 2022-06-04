@@ -1,5 +1,6 @@
 <?php
-require_once '../../config/connection.php';
+
+require_once '../../../config/connection.php';
 
 $query = "SELECT * FROM master_inventory_produk";
 

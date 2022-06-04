@@ -1,11 +1,15 @@
 <?php
 
-require_once '../../config/connection.php';
+require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
+    $kode = $_POST['kode'];
+    $nama = $_POST['nama'];
+    $jumlah = $_POST['jumlah'];
+    $harga = $_POST['harga'];
+    $kapasitas = $_POST['kapasitas'];
     
-    $query = "DELETE FROM master_inventory_bahanbaku WHERE id='".$id."'";
+    $query = "INSERT INTO master_inventory_alat(kode, nama, jumlah, harga, kapasitas) VALUES('".$kode."', '".$nama."', '".$jumlah."', '".$harga."', '".$kapasitas."')";
     
     $result = $conn->query($query);
 

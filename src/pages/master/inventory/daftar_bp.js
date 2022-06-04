@@ -15,7 +15,7 @@ import style from '../../../css/master.module.css';
 export class daftar_bp extends Component {
 
     state = {
-        htmlTableDaftarBahanBaku: []
+        htmlTableDaftarBahanPenolong: []
     }
 
     componentDidMount() {
@@ -42,7 +42,7 @@ export class daftar_bp extends Component {
         formData.append('stok_minimal', stok_minimal);
         formData.append('harga', harga);
 
-        axios.post(`${baseURL}/api/master/inventory-bahan-penolong/update.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/inventory/bahan-penolong/update.php`, formData, config).then(() => {
             document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
             document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
 
@@ -61,7 +61,7 @@ export class daftar_bp extends Component {
 
         formData.append('id', id);
 
-        axios.post(`${baseURL}/api/master/inventory-bahan-penolong/delete.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/master/inventory/bahan-penolong/delete.php`, formData, config).then(() => {
             this.GetBahanPenolong();
         }).catch(error => {
             HideLoading();
@@ -76,14 +76,14 @@ export class daftar_bp extends Component {
     }
 
     GetBahanPenolong = () => {
-        axios.get(`${baseURL}/api/master/inventory-bahan-penolong/select.php`, config).then(response => {
-            let dataBahanBaku = response.data.data;
+        axios.get(`${baseURL}/api/master/inventory/bahan-penolong/select.php`, config).then(response => {
+            let dataBahanPenolong = response.data.data;
 
-            let htmlTableDaftarBahanBaku = [];
+            let htmlTableDaftarBahanPenolong = [];
 
-            if (dataBahanBaku.length > 0) {
-                dataBahanBaku.forEach((item, index) => {
-                    htmlTableDaftarBahanBaku.push(
+            if (dataBahanPenolong.length > 0) {
+                dataBahanPenolong.forEach((item, index) => {
+                    htmlTableDaftarBahanPenolong.push(
                         <tr key={index} className={`align-middle`}>
                             <td className={`text-center`}>{index + 1}.</td>
                             <td>{item.kode}</td>
@@ -100,7 +100,7 @@ export class daftar_bp extends Component {
 
             $('#table-data').DataTable().destroy();
 
-            this.setState({ htmlTableDaftarBahanBaku: htmlTableDaftarBahanBaku }, () => {
+            this.setState({ htmlTableDaftarBahanPenolong: htmlTableDaftarBahanPenolong }, () => {
                 $('#table-data').DataTable();
             });
         }).catch(error => {
@@ -137,7 +137,7 @@ export class daftar_bp extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.htmlTableDaftarBahanBaku}
+                                        {this.state.htmlTableDaftarBahanPenolong}
                                     </tbody>
                                 </table>
                             </div>

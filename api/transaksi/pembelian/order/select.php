@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/connection.php';
 
-$query = "SELECT * FROM master_inventory_alat";
+$query = "SELECT * FROM master_akun";
 
 $result = $conn->query($query);
 

@@ -5,13 +5,9 @@ require_once '../../config/connection.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
     $nama = $_POST['nama'];
-    $satuan = $_POST['satuan'];
-    $stok_minimal = $_POST['stok_minimal'];
-    $jumlah = $_POST['jumlah'];
-    $harga = $_POST['harga'];
+    $saldo = $_POST['saldo'];
     
-    $query = "UPDATE master_inventory_bahanbaku SET nama='".$nama."', satuan='".$satuan."', stok_minimal='".$stok_minimal."', jumlah='".$jumlah."', harga='".$harga."' WHERE id='".$id."'";
-
+    $query = "UPDATE master_akun SET nama='".$nama."', saldo='".$saldo."' WHERE id='".$id."'";
     
     $result = $conn->query($query);
 
