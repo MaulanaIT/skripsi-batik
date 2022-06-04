@@ -99,7 +99,7 @@ export class uang_muka_pesanan extends Component {
                                     </div>
                                     <div className={`${global.input_group} col-7 pe-2`}>
                                         <p className={global.title}>Nama Pesanan</p>
-                                        <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' placeholder='Nama Bahan...' />
+                                        <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' placeholder='Nama Pesanan...' />
                                     </div>
                                 </div>      
                                 <div className={`d-flex`}>
