@@ -27,9 +27,10 @@ export class permintaanproduksi extends Component {
                                 <tr>
                                     <th>No.</th>
                                     <th>Kode Permintaan</th>
-                                    <th>Kode Produk</th>
-                                    <th>Nama Produk</th>
-                                    <th>Jumlah Produksi</th>
+                                    <th>Kode Produksi</th>
+                                    <th>Jenis Bahan</th>
+                                    <th>Nama Bahan</th>
+                                    <th>Jumlah Permintaan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>

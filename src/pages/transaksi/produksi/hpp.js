@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import Select from 'react-select';
 
+import AddHPP from './add_hpp';
+
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
@@ -46,10 +48,17 @@ const CustomSelect = {
     })
 }
 
+
 export class hpp extends Component {
+
+    SelectAddHPP = () => {
+        document.getElementById('add_hpp').classList.remove('d-none');
+    }
+
     render() {
         return (
             <>
+            <AddHPP/>
             <div className={style.header}>
                     <p className={style.title}>Produksi</p>
                     <p className={style.pathname}>Transaksi / Produksi / Perhitungan HPP</p>
@@ -71,13 +80,7 @@ export class hpp extends Component {
                         </div>
                         <div className='d-flex flex-wrap'>
                             <div className='col-12 col-md-4 pe-2'>
-                            <Link to={'/'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah Bahan Baku</Link>
-                            </div>
-                            <div className='col-12 col-md-4 px-2'>
-                            <Link to={'/'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah Tenaga Kerja</Link>
-                            </div>
-                            <div className='col-12 col-md-4 ps-2'>
-                            <Link to={'/'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah BOP</Link>
+                            <button type='button' className={global.button} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={this.SelectAddHPP}>Tambah Perhitungan HPP</button>
                             </div>
                         </div>
                     </div>
