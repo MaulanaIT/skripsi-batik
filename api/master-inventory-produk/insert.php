@@ -5,11 +5,13 @@ require_once '../config/connection.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
     $nama = $_POST['nama'];
-    $jumlah = $_POST['jumlah'];
-    $harga = $_POST['harga'];
-    $kapasitas = $_POST['kapasitas'];
+    $jenis = $_POST['jenis'];
+    $wrana = $_POST['wrana'];
+    $stok_minimal = $_POST['stok_minimal'];
+    $hpp = $_POST['hpp'];
+    $harga_jual = $_POST['harga_jual'];
     
-    $query = "INSERT INTO master_inventory_alat(kode, nama, jumlah, harga, kapasitas) VALUES('".$kode."', '".$nama."', '".$jumlah."', '".$harga."', '".$kapasitas."')";
+    $query = "INSERT INTO master_inventory_produk(kode, nama, jenis, wrana, stok_minimal, hpp, harga_jual) VALUES('".$kode."', '".$nama."', '".$jenis."', '".$wrana."', '".$stok_minimal."', '".$hpp."', '".$harga_jual."')";
     
     $result = $conn->query($query);
 

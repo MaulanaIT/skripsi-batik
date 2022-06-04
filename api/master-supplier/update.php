@@ -3,13 +3,13 @@
 require_once '../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $kode = $_POST['kode'];
+    $id = $_POST['id'];
     $nama = $_POST['nama'];
-    $jumlah = $_POST['jumlah'];
-    $harga = $_POST['harga'];
-    $kapasitas = $_POST['kapasitas'];
+    $alamat = $_POST['alamat'];
+    $telepon = $_POST['telepon'];
+    $rekening = $_POST['rekening'];
     
-    $query = "INSERT INTO master_inventory_alat(kode, nama, jumlah, harga, kapasitas) VALUES('".$kode."', '".$nama."', '".$jumlah."', '".$harga."', '".$kapasitas."')";
+    $query = "UPDATE master_supplier SET nama='".$nama."', alamat='".$alamat."', telepon='".$telepon."', rekening='".$rekening."' WHERE id='".$id."'";
     
     $result = $conn->query($query);
 

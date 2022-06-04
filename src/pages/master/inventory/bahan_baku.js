@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // Import Library
 import axios from 'axios';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config, GenerateCode, GetInputValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, GenerateCode, GetValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -26,19 +26,19 @@ export class bahan_baku extends Component {
     }
 
     InsertBahanBaku = () => {
+        if (!CheckInputValidity('form-data')) return;
+
         ShowLoading();
 
         const formData = new FormData();
 
-        formData.append('kode', GetInputValue('input-kode-bahan-baku'));
-        formData.append('nama', GetInputValue('input-nama-bahan-baku'));
-        formData.append('satuan', GetInputValue('input-satuan-bahan-baku'));
-        formData.append('jumlah', GetInputValue('input-jumlah-bahan-baku'));
-        formData.append('harga', GetInputValue('input-harga-bahan-baku'));
+        formData.append('kode', GetValue('input-kode-bahan-baku'));
+        formData.append('nama', GetValue('input-nama-bahan-baku'));
+        formData.append('satuan', GetValue('input-satuan-bahan-baku'));
+        formData.append('jumlah', GetValue('input-jumlah-bahan-baku'));
+        formData.append('harga', GetValue('input-harga-bahan-baku'));
 
-        axios.post(`${baseURL}/api/master-inventory-bahan-baku/insert.php`, formData, config).then(response => {
-            HideLoading();
-
+        axios.post(`${baseURL}/api/master-inventory-bahan-baku/insert.php`, formData, config).then(() => {
             window.location.href = '/master/inventory/daftar-bb';
         }).catch(error => {
             console.log(error);
@@ -55,30 +55,30 @@ export class bahan_baku extends Component {
                     <p className={style.pathname}>Master / Inventory / Bahan Baku </p>
                 </div>
                 <div className={style.content}>
-                    <div className={global.card}>
-                    <p className={global.title}>Tambah Bahan Baku</p>
+                    <form id='form-data' className={global.card}>
+                        <p className={global.title}>Tambah Bahan Baku</p>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Bahan Baku</p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-bahan-baku' name='input-kode-bahan-baku' value={GenerateCode('BB', this.state.dataBahanBaku.length + 1)} maxLength={10} readOnly={true} />
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-bahan-baku' name='input-kode-bahan-baku' value={GenerateCode('BB', this.state.dataBahanBaku.length + 1)} maxLength={10} readOnly={true} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Bahan Baku</p>
-                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-bahan-baku' name='input-nama-bahan-baku' maxLength={50} />
+                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-bahan-baku' name='input-nama-bahan-baku' maxLength={50} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Satuan</p>
-                            <input type="text" className="col col-lg-1 col-md-2" id='input-satuan-bahan-baku' name='input-satuan-bahan-baku' maxLength={20} />
+                            <input type="text" className="col col-lg-1 col-md-2" id='input-satuan-bahan-baku' name='input-satuan-bahan-baku' maxLength={20} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jumlah</p>
-                            <input type="text" className="col col-lg-1 col-md-2" id='input-jumlah-bahan-baku' name='input-jumlah-bahan-baku' onInput={InputFormatNumber} />
+                            <input type="text" className="col col-lg-1 col-md-2" id='input-jumlah-bahan-baku' name='input-jumlah-bahan-baku' onInput={InputFormatNumber} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Harga</p>
-                            <input type="text" className="col col-lg-2 col-md-2" id='input-harga-bahan-baku' name='input-harga-bahan-baku' onInput={InputFormatNumber} />
+                            <input type="text" className="col col-lg-2 col-md-2" id='input-harga-bahan-baku' name='input-harga-bahan-baku' onInput={InputFormatNumber} required={true} />
                         </div>
                         <button type='button' className={global.button} onClick={this.InsertBahanBaku}><MdAdd /> Simpan</button>
-                    </div>
+                    </form>
                 </div>
             </>
         )

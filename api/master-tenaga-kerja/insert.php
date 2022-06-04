@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $telepon = $_POST['telepon'];
     $upah = $_POST['upah'];
     
-    $query = "INSERT INTO master_supplier(kode, nama, departemen, telepon, upah) VALUES('".$kode."', '".$nama."', '".$departemen."', '".$telepon."', '".$upah."')";
+    $query = "INSERT INTO master_tenagakerja(kode, nama, departemen, telepon, upah) VALUES('".$kode."', '".$nama."', '".$departemen."', '".$telepon."', '".$upah."')";
     
     $result = $conn->query($query);
 

@@ -5,7 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, GetValue, HideLoading, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -19,7 +19,64 @@ export class daftar_bp extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${baseURL}/api/master-inventory-bahan-baku/select.php`, config).then(response => {
+        this.GetBahanPenolong();
+    }
+
+    ApplyBahanPenolong = (id) => {
+        if (!CheckInputValidity('form-table')) return;
+
+        ShowLoading();
+
+        let nama = GetValue(`edit-nama-${id}`);
+        let satuan = GetValue(`edit-satuan-${id}`);
+        let jumlah = GetValue(`edit-jumlah-${id}`);
+        let stok_minimal = GetValue(`edit-stok-minimal-${id}`);
+        let harga = GetValue(`edit-harga-${id}`);
+
+        const formData = new FormData();
+
+        formData.append('id', id);
+        formData.append('nama', nama);
+        formData.append('satuan', satuan);
+        formData.append('jumlah', jumlah);
+        formData.append('stok_minimal', stok_minimal);
+        formData.append('harga', harga);
+
+        axios.post(`${baseURL}/api/master-inventory-bahan-penolong/update.php`, formData, config).then(() => {
+            document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
+            document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
+
+            this.GetBahanPenolong();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
+    DeleteBahanPenolong = (id) => {
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('id', id);
+
+        axios.post(`${baseURL}/api/master-inventory-bahan-penolong/delete.php`, formData, config).then(() => {
+            this.GetBahanPenolong();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
+    EditBahanPenolong = (id) => {
+        document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.add('d-none'));
+        document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.remove('d-none'));
+    }
+
+    GetBahanPenolong = () => {
+        axios.get(`${baseURL}/api/master-inventory-bahan-penolong/select.php`, config).then(response => {
             let dataBahanBaku = response.data.data;
 
             let htmlTableDaftarBahanBaku = [];

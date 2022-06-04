@@ -24,7 +24,7 @@
     content: '';
     height: 100%;
     left: 0;
-    opacity: 0.1;
+    opacity: 0.2;
     position: absolute;
     top: 0;
     width: 100%;
@@ -90,7 +90,7 @@ textarea {
     border-radius: 2px;
     font-size: 12px !important;
     outline: none;
-    padding: 10px 12px;
+    padding: 6px 12px;
 }
 
 .loading_background {
@@ -188,12 +188,30 @@ textarea {
     grid-template-columns: auto auto;
     justify-content: center;
     outline: none;
+    position: relative;
     padding: 6px 12px;
 }
 
 .table_action>button>* {
     color: white;
     font-size: 12px;
+}
+
+.table_action>button::before {
+    background: url(../assets/images/batik-button-background.png) no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    content: '';
+    height: 100%;
+    left: 0;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.table_action>.apply {
+    background-color: #20da3f;
 }
 
 .table_action>.edit {
