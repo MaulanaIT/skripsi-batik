@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 // Import Library
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import { baseURL, config, GenerateCode, GetInputValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 
@@ -56,7 +57,10 @@ export class alat extends Component {
                 </div>
                 <div className={style.content}>
                     <div className={global.card}>
-                    <p className={global.title}>Tambah Alat</p>
+                        <div className={`${global.header}`}>
+                            <p className={global.title}>Tambah Bahan Penolong</p>
+                            <Link to={'/master/inventory/daftar-alat'} className={`${global.button}`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Kembali</Link>
+                        </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Alat</p>
                             <input type="text" className="col col-lg-2 col-md-3" id='input-kode-alat' name='input-kode-alat' value={GenerateCode('A', this.state.dataAlat.length + 1)} maxLength={13} readOnly={true} />

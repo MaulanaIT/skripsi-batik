@@ -91,11 +91,11 @@ export class retur_pembelian extends Component {
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-6 pe-2`}>
                                         <p className={global.title}>Tanggal Terima</p>
-                                        <input type="text" id='input-tanggal-terima' name='input-tanggal-terima' />
+                                        <input type="date" id='input-tanggal-terima' name='input-tanggal-terima' />
                                     </div>
                                     <div className={`${global.input_group} col-6 ps-2`}>
                                         <p className={global.title}>Kode Penerimaan</p>
-                                        <input type="date" id='input-kode-penerimaan' name='input-kode-penerimaan' maxLength={10} />
+                                        <input type="text" id='input-kode-penerimaan' name='input-kode-penerimaan' maxLength={10} />
                                     </div>
                                 </div>
                                 <div className={`d-flex`}>
@@ -175,7 +175,7 @@ export class retur_pembelian extends Component {
                                                     <td>Kode Bahan</td>
                                                     <td>Nama Bahan</td>
                                                     <td>Satuan</td>
-                                                    <td>Jumlah Beli</td>
+                                                    <td>Jumlah Retur</td>
                                                     <td>Harga</td>
                                                     <td>Total Harga</td>
                                                     <td>Aksi</td>
@@ -195,7 +195,7 @@ export class retur_pembelian extends Component {
                                                     <td>Kode Alat</td>
                                                     <td>Nama Alat</td>
                                                     <td>Satuan</td>
-                                                    <td>Jumlah Beli</td>
+                                                    <td>Jumlah Retur</td>
                                                     <td>Harga</td>
                                                     <td>Total Harga</td>
                                                     <td>Aksi</td>
@@ -212,7 +212,7 @@ export class retur_pembelian extends Component {
                                     <input type="text" id='input-detail-total-jual' name='input-detail-total-jual' />
                                 </div>
                                 <div className='align-items-center d-flex justify-content-between'>
-                                    <p>Upload File Transfer</p>
+                                    <p>Upload Nota Pembelian</p>
                                     <input type="file" accept='.pdf' id='input-detail-file' name='input-detail-file' />
                                 </div>
                             </div>

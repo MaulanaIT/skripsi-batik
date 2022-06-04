@@ -341,15 +341,11 @@ export class transaksi_penjualan extends Component {
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Piutang</p>
-                                                <input type="text" id='input-detail-piutang' name='input-detail-piutang' className={`col-9`} />
+                                                <input type="text" id='input-detail-piutang' name='input-detail-piutang' className={`${this.state.jenisTransaksi === 'Konsinyasi' ? 'col-6' : 'col-9'}`} />
                                             </div>
                                         </>
                                     }
                                     <div className='d-flex flex-column gap-2 pt-2'>
-                                        <div className='align-items-center d-flex justify-content-between'>
-                                            <p>Upload File Transfer</p>
-                                            <input type="file" accept='.pdf' id='input-detail-file' name='input-detail-file' />
-                                        </div>
                                         <div className='d-flex'>
                                             <div className='col-6 pe-2'>
                                                 <button type='button' className={`${global.button} w-100`}>Simpan</button>

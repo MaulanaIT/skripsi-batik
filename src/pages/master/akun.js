@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 // Import Library
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { baseURL, config, GenerateCode, GetInputValue, HideLoading, InputFormatNumber, ShowLoading } from '../../component/helper';
 
 // Import CSS
@@ -55,7 +56,10 @@ export class akun extends Component {
                 </div>
                 <div className={style.content}>
                     <div className={global.card}>
-                        <p className={global.title}>Tambah Akun</p>
+                        <div className={`${global.header}`}>
+                            <p className={global.title}>Tambah Akun</p>
+                            <Link to={'/master/daftar-akun'} className={`${global.button}`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Kembali</Link>
+                        </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Akun</p>
                             <input type="text" className="col col-lg-2 col-md-3" id='input-kode-akun' name='input-kode-akun' maxLength={10} value={GenerateCode('A', this.state.dataAkun.length + 1)} readOnly={true} />
