@@ -138,6 +138,14 @@ export class daftar_retur extends Component {
                         </div>
                     </div>
                 </div>
+                <div className='d-flex flex-column gap-2 pt-2'>
+                    <div>
+                        <button type='button' className={global.button} onClick={this.SelectDetail}>Detail AdmKeu</button>
+                    </div>
+                    <div>
+                        <button type='button' className={global.button} onClick={this.SelectDetail2}>Detail Gudang</button>
+                    </div>
+                </div>
             </>
         )
     }

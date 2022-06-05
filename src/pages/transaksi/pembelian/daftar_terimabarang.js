@@ -103,7 +103,6 @@ export class daftar_terimabarang extends Component {
                     <div className={`${global.card} col-12`}>
                         <div className={`${global.header}`}>
                             <p className={global.title}>List Penerimaan Barang</p>
-                            <Link to={'/transaksi/pembelian/penerimaan-barang'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
                         </div>
                         <div className={`table-responsive`}>
                             <table id='table-data' className={`table w-100`}>
