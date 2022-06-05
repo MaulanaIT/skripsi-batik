@@ -163,12 +163,12 @@ export class produksi extends Component {
                                                         <input type="date" id='input-tanggal-produksi' name='input-tanggal-produksi'/>
                                                     </div>
                                                     <div className={`${global.input_group} col-6 pe-2`}>
-                                                        <p className={global.title}>Nama Customer</p>
-                                                        <input type="text" id='input-nama-customer' name='input-nama-customer' readOnly />
+                                                        <p className={global.title}>Kode Produk</p>
+                                                        <input type="text" id='input-kode-produk' name='input-kode-produk' readOnly />
                                                     </div>
                                                     <div className={`${global.input_group} col-6 ps-2`}>
-                                                        <p className={global.title}>Nama Pesanan</p>
-                                                        <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' readOnly />
+                                                        <p className={global.title}>Nama Produk</p>
+                                                        <input type="text" id='input-nama-produk' name='input-nama-produk' readOnly />
                                                     </div>
                                                     <div className={`${global.input_group} col-6 pe-2`}>
                                                         <p className={global.title}>Jumlah</p>
@@ -178,11 +178,7 @@ export class produksi extends Component {
                                                         <p className={global.title}>Lama Produksi</p>
                                                         <input type="text" id='input-lama-produksi' name='input-lama-produksi' />
                                                     </div>
-                                                    <div className={`${global.input_group} col-6 pe-2`}>
-                                                        <p className={global.title}>Deskripsi</p>
-                                                        <input type="text" id='input-deskripsi' name='input-deskripsi' />
-                                                    </div>
-                                                    <div className={`${global.input_group} col-5 ps-2`}>
+                                                    <div className={`${global.input_group} col-12 ps-2`}>
                                                         <p className={global.title}>Status</p>
                                                         <Select id='select-status' name='select-status' isClearable={true} isSearchable={true} options={[
                                                             { value: 'Proses', label: 'Proses' },

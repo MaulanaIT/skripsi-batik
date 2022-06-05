@@ -76,12 +76,6 @@ export class add_hpp extends Component {
                     <div className={style.content}>
                         <div className={global.card}>
                             <p className={global.title}>Tambah Perhitungan Harga Pokok Produksi</p>
-                                <div className='d-flex'>
-                                    <div className={`${global.input_group} col-6 pe-2`}>
-                                        <p className={global.title}>Kode Produksi</p>
-                                        <input type="text" id='input-kode-produksi' name='input-kode-produksi' readOnly />
-                                    </div>
-                                </div>
                                 <div className={`col-12 col-md-7 ps-md-2 pt-2 pt-md-0`}>
                                     <div className={`${global.tab_card} pb-2`}>
                                         <div className={`${global.item} ${this.state.tabSelected === 0 ? global.active : ''}`} onClick={() => this.SelectTab(0)}>
@@ -99,6 +93,16 @@ export class add_hpp extends Component {
                                     </div>
                                 </div>
                                 <div className={`${global.card} ${this.state.tabSelected === 0 ? '' : 'd-none'}`}>
+                                    <div className='d-flex'>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Kode Biaya Bahan Baku </p>
+                                            <input type="text" id='input-kode-biaya-bahan-baku' name='input-biaya-bahan-baku' />
+                                        </div>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Tanggal </p>
+                                            <input type="date" id='input-tanggal-bbb' name='input-tanggal-bbb' />
+                                        </div>
+                                    </div>
                                     <div className='d-flex'>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Kode Produksi </p>
@@ -152,9 +156,22 @@ export class add_hpp extends Component {
                                             <tbody></tbody>
                                         </table>
                                     </div>
+                                    <div className={`${global.input_group} col-12 ms-auto`}>
+                                        <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Simpan</button>
+                                    </div>
                                 </div>
                             <div className={`${global.card} ${this.state.tabSelected === 1 ? '' : 'd-none'}`}>
-                            <div className='d-flex'>
+                                    <div className='d-flex'>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Kode Biaya Bahan Penolong </p>
+                                            <input type="text" id='input-kode-biaya-bahan-penolong' name='input-biaya-bahan-penolong' />
+                                        </div>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Tanggal </p>
+                                            <input type="date" id='input-tanggal-bop-penolong' name='input-tanggal-bop-penolong' />
+                                        </div>
+                                    </div>
+                                    <div className='d-flex'>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Kode Produksi </p>
                                             <input type="text" id='input-kode-produksi' name='input-kode-produksi' />
@@ -207,8 +224,25 @@ export class add_hpp extends Component {
                                             <tbody></tbody>
                                         </table>
                                     </div>
+                                    <div className={`${global.input_group} col-12 ms-auto`}>
+                                        <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Simpan</button>
+                                    </div>
                                 </div>
                             <div className={`${global.card} ${this.state.tabSelected === 2 ? '' : 'd-none'}`}>
+                                <div className='d-flex'>
+                                    <div className={`${global.input_group} col-4 pe-2`}>
+                                        <p className={global.title}>Kode BOP Alat </p>
+                                        <input type="text" id='input-kode-bop-alat' name='input-kode-bop-alat' />
+                                    </div>
+                                    <div className={`${global.input_group} col-4 pe-2`}>
+                                        <p className={global.title}>Kode Produksi </p>
+                                        <input type="text" id='input-kode-produksi' name='input-kode-produksi' />
+                                    </div>
+                                    <div className={`${global.input_group} col-4 pe-2`}>
+                                        <p className={global.title}>Tanggal </p>
+                                        <input type="date" id='input-tanggal-bop-alat' name='input-tanggal-bop-alat' />
+                                    </div>
+                                </div>
                                 <div className='d-flex'>
                                     <div className={`${global.input_group} col-4 pe-2`}>
                                         <p className={global.title}>Kode Alat</p>
@@ -261,8 +295,25 @@ export class add_hpp extends Component {
                                         <tbody></tbody>
                                     </table>
                                 </div>
+                                <div className={`${global.input_group} col-12 ms-auto`}>
+                                    <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Simpan</button>
+                                </div>
                             </div>
                         <div className={`${global.card} ${this.state.tabSelected === 3 ? '' : 'd-none'}`}>
+                            <div className='d-flex'>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Kode Biaya Tenaga Kerja </p>
+                                            <input type="text" id='input-kode-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' />
+                                        </div>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Kode Produksi </p>
+                                            <input type="text" id='input-kode-produksi' name='input-kode-produksi' />
+                                        </div>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Tanggal </p>
+                                            <input type="date" id='input-tanggal-btk' name='input-tanggal-btk' />
+                                        </div>
+                                    </div>
                             <div className='d-flex'>
                                     <div className={`${global.input_group} col-4 pe-2`}>
                                         <p className={global.title}>Kode Tenaga Kerja</p>
@@ -272,7 +323,9 @@ export class add_hpp extends Component {
                                         <p className={global.title}>Departemen</p>
                                         <Select id='select-departemen' name='select-departemen' isClearable={true} isSearchable={true} options={[
                                             { value: 'Desain', label: 'Desain' },
-                                            { value: 'Canting', label: 'Canting' }
+                                            { value: 'Canting', label: 'Canting' },
+                                            { value: 'Warna', label: 'Warna' },
+                                            { value: 'Packing', label: 'Packing' }
                                         ]} placeholder={'Select Departemen...'} styles={CustomSelect} />
                                     </div>
                                 </div>
@@ -316,6 +369,9 @@ export class add_hpp extends Component {
                                         </thead>
                                         <tbody></tbody>
                                     </table>
+                                </div>
+                                <div className={`${global.input_group} col-12 ms-auto`}>
+                                    <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Simpan</button>
                                 </div>
                             </div> 
                         </div>

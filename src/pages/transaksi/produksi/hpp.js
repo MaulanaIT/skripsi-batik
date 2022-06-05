@@ -97,6 +97,10 @@ export class hpp extends Component {
                                     <input type="text" id='input-kode-produksi' name='input-kode-produksi' readOnly />
                                 </div>
                                 <div className={`${global.input_group} col-3 ps-4`}>
+                                    <p className={global.title}>Kode HPP</p>
+                                    <input type="text" id='input-kode-hpp' name='input-kode-hpp' readOnly />
+                                </div>
+                                <div className={`${global.input_group} col-3 ps-4`}>
                                     <p className={global.title}>Kode Pesanan</p>
                                     <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' readOnly/>
                                 </div>
