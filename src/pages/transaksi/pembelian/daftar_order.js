@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 
 // Import Library
+import axios from 'axios';
+import { baseURL, CheckInputValidity, config, cx, GenerateCode, GetValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 import $ from 'jquery';
+import { FaCheck, FaPen, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
-import { ShowLoading } from '../../../component/helper';
 
 import DetailOrder from './detail_order_admkeu';
 import DetailOrder2 from './detail_order_gudang';
