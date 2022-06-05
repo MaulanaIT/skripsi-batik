@@ -300,7 +300,7 @@ export class transaksi_penjualan extends Component {
                                                 <input type="text" id='input-detail-uang-muka' name='input-detail-uang-muka' className={`col-6`} readOnly />
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Sisa Terima Uang</p>
+                                                <p className={`${global.title} col-3`}>Sisa</p>
                                                 <input type="text" id='input-detail-sisa-terima-uang' name='input-detail-sisa-terima-uang' className={`col-6`} readOnly />
                                                 <div className='col-3 ps-2'>
                                                     <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={[
@@ -309,6 +309,20 @@ export class transaksi_penjualan extends Component {
                                                     ]} placeholder={'Select Akun...'} styles={CustomSelect} />
                                                 </div>
                                             </div>
+                                            <div className={`align-items-center ${global.input_group_row}`}>
+                                                <p className={`${global.title} col-3`}>Bayar</p>
+                                                <input type="text" id='input-detail-bayar' name='input-detail-bayar' className={`col-6`} />
+                                            </div>
+                                            <div className={`align-items-center ${global.input_group_row}`}>
+                                                <p className={`${global.title} col-3`}>Kembalian</p>
+                                                <input type="text" id='input-detail-kembalian' name='input-detail-kembalian' className={`col-6`} />
+                                            </div>
+                                            <div className='d-flex flex-column gap-5 pt-2'>
+                                                <div>
+                                                    <p>Upload File Transfer</p>
+                                                    <input type="file" accept='.pdf' id='input-detail-file' name='input-detail-file' />
+                                                </div>
+                                            </div>    
                                             
                                         </>
                                         :

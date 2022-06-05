@@ -105,8 +105,8 @@ export class kalkulator_estimasi extends Component {
                             <div className={`${global.input_group}`}>
                                 <p className={global.title}>Jenis Produk</p>
                                 <Select id='select-jenis-produk' name='select-jenis-produk' isClearable={true} isSearchable={true} options={[
-                                    { value: 'Alat', label: 'Alat' },
-                                    { value: 'Bahan', label: 'Bahan' }
+                                    { value: 'Kain', label: 'Kain' },
+                                    { value: 'Pakaian', label: 'Pakaian' }
                                 ]} placeholder={'Select Jenis Produk...'} styles={CustomSelect} />
                             </div>
                             <div className='d-flex'>
@@ -202,6 +202,12 @@ export class kalkulator_estimasi extends Component {
                                     <tbody></tbody>
                                 </table>
                             </div>
+                            <div className={`d-flex flex-column gap-2 pb-2`}>
+                                <div className={`align-items-center ${global.input_group_row}`}>
+                                    <p className={`${global.title} col-3`}>Total Bahan Baku</p>
+                                    <input type="text" id='input-total-bahan-baku' name='input-total-bahan-baku' />
+                                </div>
+                            </div>
                         </div>
                         <div className={`${global.card} ${this.state.tabSelected === 1 ? '' : 'd-none'}`}>
                             <div className='d-flex'>
@@ -250,18 +256,24 @@ export class kalkulator_estimasi extends Component {
                                     <tbody></tbody>
                                 </table>
                             </div>
+                            <div className={`d-flex flex-column gap-2 pb-2`}>
+                                <div className={`align-items-center ${global.input_group_row}`}>
+                                    <p className={`${global.title} col-3`}>Total BOP Penolong</p>
+                                    <input type="text" id='input-total-bahan-penolong' name='input-total-bahan-penolong' />
+                                </div>
+                            </div>
                         </div>
                         <div className={`${global.card} ${this.state.tabSelected === 2 ? '' : 'd-none'}`}>
                             <div className='d-flex'>
                                 <div className={`${global.input_group} col-4 pe-2`}>
-                                    <p className={global.title}>Kode Bahan</p>
+                                    <p className={global.title}>Kode Alat</p>
                                     <Select id='select-kode-bahan-bop-alat' name='select-kode-bahan-bop-alat' isClearable={true} isSearchable={true} options={[
                                         { value: 'B0001', label: 'B0001' },
                                         { value: 'B0002', label: 'B0002' }
                                     ]} placeholder={'Select Kode...'} styles={CustomSelect} />
                                 </div>
                                 <div className={`${global.input_group} col-8 px-2`}>
-                                    <p className={global.title}>Nama Bahan</p>
+                                    <p className={global.title}>Nama Alat</p>
                                     <Select id='select-nama-bahan-bop-alat' name='select-nama-bahan-bop-alat' isClearable={true} isSearchable={true} options={[
                                         { value: 'Bahan 1', label: 'Bahan 1' },
                                         { value: 'Bahan 2', label: 'Bahan 2' }
@@ -270,11 +282,11 @@ export class kalkulator_estimasi extends Component {
                             </div>
                             <div className={`d-flex`}>
                                 <div className={`${global.input_group} col-4 pe-2`}>
-                                    <p className={global.title}>Harga</p>
+                                    <p className={global.title}>Tarif</p>
                                     <input type="text" id='input-harga-bop-alat' name='input-harga-bop-alat' />
                                 </div>
                                 <div className={`${global.input_group} col-4 px-2`}>
-                                    <p className={global.title}>Jumlah</p>
+                                    <p className={global.title}>Jumlah Kain</p>
                                     <input type="text" id='input-harga-bop-alat' name='input-harga-bop-alat' />
                                 </div>
                                 <div className={`${global.input_group} col-3 ms-auto ps-2`}>
@@ -287,9 +299,9 @@ export class kalkulator_estimasi extends Component {
                                     <thead className='text-nowrap'>
                                         <tr>
                                             <td>No.</td>
-                                            <td>Kode Bahan</td>
-                                            <td>Nama Bahan</td>
-                                            <td>Jumlah</td>
+                                            <td>Kode Alat</td>
+                                            <td>Nama Alat</td>
+                                            <td>Jumlah Kain</td>
                                             <td>Harga</td>
                                             <td>Biaya</td>
                                             <td>Aksi</td>
@@ -297,6 +309,12 @@ export class kalkulator_estimasi extends Component {
                                     </thead>
                                     <tbody></tbody>
                                 </table>
+                            </div>
+                            <div className={`d-flex flex-column gap-2 pb-2`}>
+                                <div className={`align-items-center ${global.input_group_row}`}>
+                                    <p className={`${global.title} col-3`}>Total BOP Alat</p>
+                                    <input type="text" id='input-total-bahan-baku' name='input-total-bahan-baku' />
+                                </div>
                             </div>
                         </div>
                         <div className={`${global.card} ${this.state.tabSelected === 3 ? '' : 'd-none'}`}>
@@ -345,6 +363,12 @@ export class kalkulator_estimasi extends Component {
                                     </thead>
                                     <tbody></tbody>
                                 </table>
+                            </div>
+                            <div className={`d-flex flex-column gap-2 pb-2`}>
+                                <div className={`align-items-center ${global.input_group_row}`}>
+                                    <p className={`${global.title} col-3`}>Total BTKL</p>
+                                    <input type="text" id='input-total-bahan-baku' name='input-total-bahan-baku' />
+                                </div>
                             </div>
                         </div>
                         <div className={`${global.card} ${this.state.tabSelected === 4 ? '' : 'd-none'}`}>
