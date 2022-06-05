@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2022 at 05:38 AM
+-- Generation Time: Jun 05, 2022 at 12:49 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -46,12 +46,24 @@ CREATE TABLE `detail_order_pembelian_alat` (
 CREATE TABLE `detail_order_pembelian_bahanbaku` (
   `id` int(11) NOT NULL,
   `kode` varchar(10) NOT NULL,
-  `kode_bahanpenolong` varchar(10) NOT NULL,
+  `kode_bahanbaku` varchar(10) NOT NULL,
   `kuantitas` int(11) NOT NULL,
   `harga` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `detail_order_pembelian_bahanbaku`
+--
+
+INSERT INTO `detail_order_pembelian_bahanbaku` (`id`, `kode`, `kode_bahanbaku`, `kuantitas`, `harga`, `created_at`, `updated_at`) VALUES
+(1, 'O0001', 'BB0001', 5, 10000, '2022-06-05 08:36:53', '2022-06-05 08:36:53'),
+(2, 'O0001', 'BB0001', 5, 15000, '2022-06-05 08:36:53', '2022-06-05 08:36:53'),
+(3, 'O0002', 'BB0001', 5, 1600, '2022-06-05 08:46:07', '2022-06-05 08:46:07'),
+(4, 'O0002', 'BB0001', 5, 4600, '2022-06-05 08:46:07', '2022-06-05 08:46:07'),
+(5, 'O0003', 'BB0001', 5, 15000, '2022-06-05 08:46:59', '2022-06-05 08:46:59'),
+(6, 'O0003', 'BB0001', 5, 35000, '2022-06-05 08:46:59', '2022-06-05 08:46:59');
 
 -- --------------------------------------------------------
 
@@ -62,7 +74,7 @@ CREATE TABLE `detail_order_pembelian_bahanbaku` (
 CREATE TABLE `detail_order_pembelian_bahanpenolong` (
   `id` int(11) NOT NULL,
   `kode` varchar(10) NOT NULL,
-  `kode_bahanbaku` varchar(10) NOT NULL,
+  `kode_bahanpenolong` varchar(10) NOT NULL,
   `kuantitas` int(11) NOT NULL,
   `harga` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -382,7 +394,8 @@ INSERT INTO `master_akun` (`id`, `kode`, `nama`, `saldo`, `created_at`, `updated
 (3, 'A0003', 'Akun 3', 3000000, '2022-05-24 13:08:00', '2022-05-24 13:08:00'),
 (4, 'A0004', 'Akun 4', 700000, '2022-05-24 15:12:11', '2022-05-24 15:12:11'),
 (5, 'A0005', 'Akun 5', 10000000, '2022-05-24 15:17:25', '2022-05-24 15:17:25'),
-(6, 'A0006', 'Akun 6', 1000000, '2022-05-26 00:14:49', '2022-05-26 00:14:49');
+(6, 'A0006', 'Akun 6', 1000000, '2022-05-26 00:14:49', '2022-05-26 00:14:49'),
+(7, '', '', 0, '2022-06-05 07:27:41', '2022-06-05 07:27:41');
 
 -- --------------------------------------------------------
 
@@ -460,6 +473,13 @@ CREATE TABLE `master_inventory_bahanbaku` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `master_inventory_bahanbaku`
+--
+
+INSERT INTO `master_inventory_bahanbaku` (`id`, `kode`, `nama`, `satuan`, `stok_minimal`, `jumlah`, `harga`, `created_at`, `updated_at`) VALUES
+(1, 'BB0001', 'Botol', 'Buah', 0, 100, 5000, '2022-06-05 03:51:14', '2022-06-05 03:51:14');
+
 -- --------------------------------------------------------
 
 --
@@ -515,6 +535,13 @@ CREATE TABLE `master_supplier` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `master_supplier`
+--
+
+INSERT INTO `master_supplier` (`id`, `kode`, `nama`, `alamat`, `telepon`, `rekening`, `created_at`, `updated_at`) VALUES
+(1, 'SUP0001', 'Supplier 1', 'Semarang', '0810248102848', '455552342398237491279384791080', '2022-06-05 03:48:55', '2022-06-05 03:48:55');
+
 -- --------------------------------------------------------
 
 --
@@ -565,10 +592,20 @@ CREATE TABLE `order_pembelian` (
   `kode` varchar(10) NOT NULL,
   `tanggal` date NOT NULL,
   `kode_supplier` varchar(10) NOT NULL,
-  `status` int(11) NOT NULL,
+  `total_harga` double NOT NULL,
+  `status` varchar(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_pembelian`
+--
+
+INSERT INTO `order_pembelian` (`id`, `kode`, `tanggal`, `kode_supplier`, `total_harga`, `status`, `created_at`, `updated_at`) VALUES
+(11, 'O0001', '2022-06-05', 'SUP0001', 0, 'Menunggu', '2022-06-05 08:36:27', '2022-06-05 09:23:22'),
+(13, 'O0002', '2022-06-05', 'SUP0001', 0, 'Menunggu', '2022-06-05 08:46:07', '2022-06-05 09:23:26'),
+(14, 'O0003', '2022-06-05', 'SUP0001', 175000, 'Menunggu', '2022-06-05 08:46:59', '2022-06-05 09:23:31');
 
 -- --------------------------------------------------------
 
@@ -965,7 +1002,7 @@ ALTER TABLE `detail_order_pembelian_alat`
 -- AUTO_INCREMENT for table `detail_order_pembelian_bahanbaku`
 --
 ALTER TABLE `detail_order_pembelian_bahanbaku`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `detail_order_pembelian_bahanpenolong`
@@ -1079,7 +1116,7 @@ ALTER TABLE `kartu_persediaan_produk`
 -- AUTO_INCREMENT for table `master_akun`
 --
 ALTER TABLE `master_akun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `master_consignee`
@@ -1103,7 +1140,7 @@ ALTER TABLE `master_inventory_alat`
 -- AUTO_INCREMENT for table `master_inventory_bahanbaku`
 --
 ALTER TABLE `master_inventory_bahanbaku`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `master_inventory_bahanpenolong`
@@ -1121,7 +1158,7 @@ ALTER TABLE `master_inventory_produk`
 -- AUTO_INCREMENT for table `master_supplier`
 --
 ALTER TABLE `master_supplier`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `master_tenagakerja`
@@ -1139,7 +1176,7 @@ ALTER TABLE `master_user`
 -- AUTO_INCREMENT for table `order_pembelian`
 --
 ALTER TABLE `order_pembelian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `pembelian`

@@ -43,33 +43,18 @@ export class daftar_order extends Component {
                             </td>
                             <td>
                                 <div id={`data-tanggal-${item.id}`} className={`data-${item.id}`}>{item.tanggal}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="date" id={`edit-tanggal-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.tanggal} required={true} />
-                                </div> */}
                             </td>
                             <td>
                                 <div id={`data-kode-supplier-${item.id}`} className={`data-${item.id} text-end`}>{item.kode_supplier}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-kode-supplier-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.kode_supplier} required={true} />
-                                </div> */}
                             </td>
                             <td>
                                 <div id={`data-nama-supplier-${item.id}`} className={`data-${item.id}`}>{item.nama_supplier}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="date" id={`edit-nama-supplier-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.nama_supplier} required={true} />
-                                </div> */}
                             </td>
                             <td>
                                 <div id={`data-total-harga-${item.id}`} className={`data-${item.id}`}>{item.total_harga}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="date" id={`edit-total-harga-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.total_harga} required={true} />
-                                </div> */}
                             </td>
                             <td>
                                 <div id={`data-status-${item.id}`} className={`data-${item.id}`}>{item.status}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="date" id={`edit-status-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.status} required={true} />
-                                </div> */}
                             </td>
                             <td className={global.table_action}>
                                 <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyOrder(item.id)}><FaCheck /> Apply</button>
@@ -129,12 +114,6 @@ export class daftar_order extends Component {
                                         <td>Total Harga</td>
                                         <td>Status</td>
                                         <td>Aksi</td>
-                                        <td>
-                                            <button type='button' className={global.button} onClick={this.SelectDetail}>Detail</button>
-                                        </td>
-                                        <td>
-                                            <button type='button' className={global.button} onClick={this.SelectDetail2}>Detail2</button>
-                                        </td>
                                     </tr>
                                 </thead>
                                 <tbody>

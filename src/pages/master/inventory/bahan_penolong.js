@@ -56,7 +56,7 @@ export class bahan_penolong extends Component {
                     <p className={style.pathname}>Master / Inventory / Bahan Penolong </p>
                 </div>
                 <div className={style.content}>
-                    <form className={global.card}>
+                    <form id='form-data' className={global.card}>
                         <div className={`${global.header}`}>
                             <p className={global.title}>Tambah Bahan Penolong</p>
                             <Link to={'/master/inventory/daftar-bp'} className={`${global.button}`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Kembali</Link>

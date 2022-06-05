@@ -7,7 +7,7 @@ import moment from 'moment';
 import Select from 'react-select';
 import { MdAdd } from 'react-icons/md'
 import { FaTrash } from 'react-icons/fa';
-import { baseURL, config, GenerateCode, GetValue, HideLoading, InputFormatNumber, SetValue, ShowLoading } from '../../../component/helper';
+import { baseURL, config, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -68,6 +68,9 @@ export class order_pembelian extends Component {
         htmlTableDaftarAlat: [],
         htmlTableDaftarBahan: [],
 
+        valueHarga: 0,
+        valueJumlah: 0,
+        valueKalkulasiTotalHarga: 0,
         valueKodeAlat: null,
         valueKodeBahan: null,
         valueKodeOrder: null,
@@ -75,61 +78,65 @@ export class order_pembelian extends Component {
         valueNamaAlat: null,
         valueNamaBahan: null,
         valueNamaSupplier: null,
+        valueTanggal: moment().format('YYYY-MM-DD'),
+        valueTotalHarga: 0,
 
         jenisPembelian: ''
     }
 
     async componentDidMount() {
+        await this.GetAlat();
+        await this.GetBahan();
         await this.GetSupplier();
         await this.GetOrder();
     }
 
     AddDetail = () => {
-        let kode = GetValue('input-kode-order');
-        let tanggal = GetValue('input-tanggal-order');
-        let kode_supplier = GetValue('input-kode-supplier');
-        let nama_supplier = GetValue('input-nama-supplier');
-        let jumlah = GetValue('input-jumlah-beli');
-        let harga = GetValue('input-harga-beli');
-        let total_harga = GetValue('input-total-harga-beli');
+        const {
+            valueHarga,
+            valueJumlah,
+            valueKodeAlat,
+            valueKodeBahan,
+            valueKodeOrder,
+            valueKodeSupplier,
+            valueNamaAlat,
+            valueNamaBahan,
+            valueNamaSupplier,
+            valueTanggal,
+            valueTotalHarga
+        } = this.state;
 
         if (this.state.jenisPembelian.toLowerCase() === 'alat') {
-            let kode_alat = GetValue('select-kode-alat');
-            let nama_alat = GetValue('input-nama-alat');
-
             let dataAlat = this.state.dataAlat;
 
             dataAlat.push({
-                kode: kode,
-                tanggal: tanggal,
-                kode_supplier: kode_supplier,
-                nama_supplier: nama_supplier,
-                kode_alat: kode_alat,
-                nama_alat: nama_alat,
-                jumlah: jumlah,
-                harga: harga,
-                total_harga: total_harga
+                kode: valueKodeOrder,
+                tanggal: valueTanggal,
+                kode_supplier: valueKodeSupplier.value,
+                nama_supplier: valueNamaSupplier.value,
+                kode_alat: valueKodeAlat.value,
+                nama_alat: valueNamaAlat.value,
+                jumlah: valueJumlah,
+                harga: valueHarga,
+                total_harga: valueTotalHarga
             });
 
             this.setState({ dataAlat: dataAlat }, () => {
                 this.GetDetailAlat();
             });
         } else if (this.state.jenisPembelian.toLowerCase() === 'bahan') {
-            let kode_bahan = GetValue('select-kode-bahan');
-            let nama_bahan = GetValue('input-nama-bahan');
-
             let dataBahan = this.state.dataBahan;
 
             dataBahan.push({
-                kode: kode,
-                tanggal: tanggal,
-                kode_supplier: kode_supplier,
-                nama_supplier: nama_supplier,
-                kode_alat: kode_bahan,
-                nama_alat: nama_bahan,
-                jumlah: jumlah,
-                harga: harga,
-                total_harga: total_harga
+                kode: valueKodeOrder,
+                tanggal: valueTanggal,
+                kode_supplier: valueKodeSupplier.value,
+                nama_supplier: valueNamaSupplier.value,
+                kode_bahan: valueKodeBahan.value,
+                nama_bahan: valueNamaBahan.value,
+                jumlah: valueJumlah,
+                harga: valueHarga,
+                total_harga: valueTotalHarga
             });
 
             this.setState({ dataBahan: dataBahan }, () => {
@@ -165,17 +172,19 @@ export class order_pembelian extends Component {
             let dataSelectKodeAlat = [];
             let dataSelectNamaAlat = [];
 
-            dataAlat.forEach(item => {
-                dataSelectKodeAlat.push([{
-                    value: item.kode,
-                    label: item.kode
-                }]);
+            if (dataAlat.length > 0) {
+                dataAlat.forEach(item => {
+                    dataSelectKodeAlat.push({
+                        value: item.kode,
+                        label: item.kode
+                    });
 
-                dataSelectNamaAlat.push([{
-                    value: item.kode,
-                    label: item.nama
-                }]);
-            });
+                    dataSelectNamaAlat.push({
+                        value: item.kode,
+                        label: item.nama
+                    });
+                });
+            }
 
             this.setState({ dataSelectKodeAlat: dataSelectKodeAlat, dataSelectNamaAlat: dataSelectNamaAlat });
         }).catch(error => {
@@ -190,17 +199,19 @@ export class order_pembelian extends Component {
             let dataSelectKodeBahan = [];
             let dataSelectNamaBahan = [];
 
-            dataBahan.forEach(item => {
-                dataSelectKodeBahan.push([{
-                    value: item.kode,
-                    label: item.kode
-                }]);
+            if (dataBahan.length > 0) {
+                dataBahan.forEach(item => {
+                    dataSelectKodeBahan.push({
+                        value: item.kode,
+                        label: item.kode
+                    });
 
-                dataSelectNamaBahan.push([{
-                    value: item.kode,
-                    label: item.nama
-                }]);
-            });
+                    dataSelectNamaBahan.push({
+                        value: item.kode,
+                        label: item.nama
+                    });
+                });
+            }
 
             this.setState({ dataSelectKodeBahan: dataSelectKodeBahan, dataSelectNamaBahan: dataSelectNamaBahan });
         }).catch(error => {
@@ -235,8 +246,10 @@ export class order_pembelian extends Component {
 
         $('#table-data').DataTable().destroy();
 
-        this.setState({ htmlTableDaftarAlat: htmlTableDaftarAlat, }, () => {
+        this.setState({ htmlTableDaftarAlat: htmlTableDaftarAlat }, () => {
             $('#table-data').DataTable();
+
+            this.KalkulasiTotalHarga();
 
             HideLoading();
         });
@@ -271,6 +284,8 @@ export class order_pembelian extends Component {
 
         this.setState({ htmlTableDaftarBahan: htmlTableDaftarBahan }, () => {
             $('#table-data').DataTable();
+
+            this.KalkulasiTotalHarga();
 
             HideLoading();
         });
@@ -313,7 +328,67 @@ export class order_pembelian extends Component {
     }
 
     InputChange = (event) => {
-        this.setState({ [event.target.name]: event.target.id });
+        this.setState({ [event.target.id]: event.target.value }, () => {
+            this.setState({ valueTotalHarga: this.state.valueHarga * this.state.valueJumlah });
+        });
+    }
+
+    InsertOrder = () => {
+        const {
+            valueKodeOrder,
+            valueKodeSupplier,
+            valueTanggal,
+            valueTotalHarga
+        } = this.state;
+
+        let jenisPembelian = this.state.jenisPembelian;
+
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('kode', valueKodeOrder);
+        formData.append('tanggal', valueTanggal);
+        formData.append('kode_supplier', valueKodeSupplier.value);
+        formData.append('total_harga', valueTotalHarga);
+
+        formData.append('jenis_pembelian', jenisPembelian.toLowerCase());
+
+        if (jenisPembelian.toLowerCase() === 'alat')
+            formData.append('data', JSON.stringify(this.state.dataAlat));
+        else if (jenisPembelian.toLowerCase() === 'bahan')
+            formData.append('data', JSON.stringify(this.state.dataBahan));
+
+        axios.post(`${baseURL}/api/transaksi/pembelian/order/insert.php`, formData, config).then(() => {
+            HideLoading();
+
+            window.location.href = '/transaksi/pembelian/daftar-order';
+        }).catch(error => {
+            console.log(error);
+
+            HideLoading();
+        });
+    }
+
+    KalkulasiTotalHarga = () => {
+        let totalHarga = 0;
+        let jenisPembelian = this.state.jenisPembelian;
+
+        if (jenisPembelian && jenisPembelian.toString().toLowerCase() === 'alat') {
+            let dataAlat = this.state.dataAlat;
+
+            dataAlat.forEach(item => {
+                totalHarga += item.total_harga;
+            });
+        } else if (jenisPembelian && jenisPembelian.toString().toLowerCase() === 'bahan') {
+            let dataBahan = this.state.dataBahan;
+
+            dataBahan.forEach(item => {
+                totalHarga += item.total_harga;
+            });
+        }
+
+        this.setState({ valueKalkulasiTotalHarga: totalHarga });
     }
 
     SelectBahan = (data) => {
@@ -327,12 +402,12 @@ export class order_pembelian extends Component {
         }
     }
 
-    SelectPembelian = (value) => {
+    SelectPembelian = (data) => {
         $('#table-data').DataTable().destroy();
 
-        this.setState({ jenisPembelian: value ? value.value : '' }, () => {
-            if (value && value.toString().toLowerCase() === 'alat') this.GetDetailAlat()
-            else if (value && value.toString().toLowerCase() === 'bahan') this.GetDetailBahan();
+        this.setState({ jenisPembelian: data ? data.value : '' }, () => {
+            if (data && data.value.toString().toLowerCase() === 'alat') this.GetDetailAlat();
+            else if (data && data.value.toString().toLowerCase() === 'bahan') this.GetDetailBahan();
         });
     }
 
@@ -350,12 +425,18 @@ export class order_pembelian extends Component {
     render() {
 
         const {
+            valueHarga,
+            valueJumlah,
+            valueKalkulasiTotalHarga,
             valueKodeAlat,
             valueKodeBahan,
+            valueKodeOrder,
             valueKodeSupplier,
             valueNamaAlat,
             valueNamaBahan,
             valueNamaSupplier,
+            valueTanggal,
+            valueTotalHarga
         } = this.state;
 
         return (
@@ -380,11 +461,11 @@ export class order_pembelian extends Component {
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-6 pe-2`}>
                                             <p className={global.title}>Kode Order</p>
-                                            <input type="text" id='valueKodeOrder' maxLength={10} value={this.state.valueKodeOrder} readOnly />
+                                            <input type="text" id='valueKodeOrder' maxLength={10} value={valueKodeOrder} readOnly />
                                         </div>
                                         <div className={`${global.input_group} col-6 ps-2`}>
                                             <p className={global.title}>Tanggal</p>
-                                            <input type="date" id='valueTanggal' value={this.state.valueTanggal} onChange={this.InputChange} />
+                                            <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} />
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
@@ -433,15 +514,15 @@ export class order_pembelian extends Component {
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Jumlah</p>
-                                            <input type="text" id='valueJumlah' className='text-end' value={this.state.valueJumlah} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                            <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={this.InputChange} />
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Harga</p>
-                                            <input type="text" id='valueHarga' className='text-end' value={this.state.valueHarga} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                            <input type="text" id='valueHarga' className='text-end' value={valueHarga} onInput={InputFormatNumber} onChange={this.InputChange} />
                                         </div>
                                         <div className={`${global.input_group} col-4 ps-2`}>
                                             <p className={global.title}>Total Harga</p>
-                                            <input type="text" id='valueTotalHarga' className='text-end' value={this.state.valueTotalHarga} readOnly={true} />
+                                            <input type="text" id='valueTotalHarga' className='text-end' value={valueTotalHarga} readOnly={true} />
                                         </div>
                                     </div>
                                     <button type='button' className={global.button} onClick={this.AddDetail}><MdAdd /> Tambah</button>
@@ -505,13 +586,13 @@ export class order_pembelian extends Component {
                                 <div className={`d-flex flex-column gap-2 pb-2`}>
                                     <div className={`align-items-center ${global.input_group_row}`}>
                                         <p className={`${global.title} col-3`}>Total Harga</p>
-                                        <input type="text" id='input-detail-total-jual' onInput={InputFormatNumber} />
+                                        <input type="text" id='valueKalkulasiTotalHarga' value={valueKalkulasiTotalHarga} readOnly />
                                     </div>
                                 </div>
                                 <div className='d-flex flex-column gap-2 pt-2'>
                                     <div className='d-flex'>
                                         <div className='col-6 pe-2'>
-                                            <button type='button' className={`${global.button} w-100`}>Simpan</button>
+                                            <button type='button' className={`${global.button} w-100`} onClick={this.InsertOrder}>Simpan</button>
                                         </div>
                                         <div className='col-6 ps-2'>
                                             <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>

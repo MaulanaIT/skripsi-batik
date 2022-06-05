@@ -56,7 +56,7 @@ export class bahan_baku extends Component {
                     <p className={style.pathname}>Master / Inventory / Bahan Baku </p>
                 </div>
                 <div className={style.content}>
-                    <form className={global.card}>
+                    <form id='form-data' className={global.card}>
                         <div className={`${global.header}`}>
                             <p className={global.title}>Tambah Bahan Baku</p>
                             <Link to={'/master/inventory/daftar-bb'} className={`${global.button}`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Kembali</Link>

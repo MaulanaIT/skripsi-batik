@@ -23,6 +23,57 @@ export class supplier extends Component {
         this.GetSupplier();
     }
 
+    ApplySupplier = (id) => {
+        if (!CheckInputValidity('form-table')) return;
+
+        ShowLoading();
+
+        let nama = GetValue(`edit-nama-${id}`);
+        let alamat = GetValue(`edit-alamat-${id}`);
+        let telepon = GetValue(`edit-telepon-${id}`);
+        let rekening = GetValue(`edit-rekening-${id}`);
+
+        const formData = new FormData();
+
+        formData.append('id', id);
+        formData.append('nama', nama);
+        formData.append('alamat', alamat);
+        formData.append('telepon', telepon);
+        formData.append('rekening', rekening);
+
+        axios.post(`${baseURL}/api/master/supplier/update.php`, formData, config).then(() => {
+            document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
+            document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
+
+            this.GetSupplier();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
+    DeleteSupplier = (id) => {
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('id', id);
+
+        axios.post(`${baseURL}/api/master/supplier/delete.php`, formData, config).then(() => {
+            this.GetSupplier();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
+    EditSupplier = (id) => {
+        document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.add('d-none'));
+        document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.remove('d-none'));
+    }
+
     GetSupplier = () => {
         axios.get(`${baseURL}/api/master/supplier/select.php`, config).then(response => {
             ShowLoading();
@@ -83,57 +134,6 @@ export class supplier extends Component {
 
             console.log(error);
         });
-    }
-
-    ApplySupplier = (id) => {
-        if (!CheckInputValidity('form-table')) return;
-
-        ShowLoading();
-
-        let nama = GetValue(`edit-nama-${id}`);
-        let alamat = GetValue(`edit-alamat-${id}`);
-        let telepon = GetValue(`edit-telepon-${id}`);
-        let rekening = GetValue(`edit-rekening-${id}`);
-
-        const formData = new FormData();
-
-        formData.append('id', id);
-        formData.append('nama', nama);
-        formData.append('alamat', alamat);
-        formData.append('telepon', telepon);
-        formData.append('rekening', rekening);
-
-        axios.post(`${baseURL}/api/master/supplier/update.php`, formData, config).then(() => {
-            document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
-            document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
-
-            this.GetSupplier();
-        }).catch(error => {
-            HideLoading();
-
-            console.log(error);
-        });
-    }
-
-    DeleteSupplier = (id) => {
-        ShowLoading();
-
-        const formData = new FormData();
-
-        formData.append('id', id);
-
-        axios.post(`${baseURL}/api/master/supplier/delete.php`, formData, config).then(() => {
-            this.GetSupplier();
-        }).catch(error => {
-            HideLoading();
-
-            console.log(error);
-        });
-    }
-
-    EditSupplier = (id) => {
-        document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.add('d-none'));
-        document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.remove('d-none'));
     }
 
     InsertSupplier = () => {
