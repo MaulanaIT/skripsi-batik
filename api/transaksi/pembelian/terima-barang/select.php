@@ -1,10 +1,12 @@
 <?php
 require_once '../../../config/connection.php';
 
-$query = "SELECT order_pembelian.*, master_supplier.nama AS nama_supplier 
-            FROM order_pembelian 
-            INNER JOIN master_supplier 
-            ON order_pembelian.kode_supplier = master_supplier.kode";
+$query = "SELECT nested.*, order_pembelian.kode AS kode_order
+            FROM (SELECT terima_barang.*, master_supplier.nama AS nama_supplier 
+                FROM terima_barang 
+                INNER JOIN master_supplier 
+                ON terima_barang.kode_supplier = master_supplier.kode) AS nested 
+            INNER JOIN order_pembelian ON nested.kode_order = order_pembelian.kode";
 
 $result = $conn->query($query);
 

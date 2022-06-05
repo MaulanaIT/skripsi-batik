@@ -106,6 +106,16 @@
 
 input,
 textarea {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: none;
+    border-radius: 2px;
+    font-size: 12px !important;
+    outline: none;
+    padding: 6px 12px;
+}
+
+input:read-only,
+textarea:read-only {
     background-color: rgba(0, 0, 0, 0.2);
     border: none;
     border-radius: 2px;

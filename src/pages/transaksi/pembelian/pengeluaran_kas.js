@@ -11,7 +11,7 @@ import { InputFormatNumber } from '../../../component/helper';
 
 const CustomSelect = {
     control: (provided, state) => ({
-        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
         color: 'white',
         cursor: 'pointer',
         display: 'flex',
@@ -22,7 +22,7 @@ const CustomSelect = {
         color: 'white'
     }),
     menu: (provided, state) => ({
-        backgroundColor: 'rgba(0, 0, 0, 1)',
+        backgroundColor: 'rgba(0, 0, 0, 3)',
         fontSize: 12,
         position: 'absolute',
         width: '100%',
@@ -30,7 +30,7 @@ const CustomSelect = {
     }),
     option: (provided, state) => ({
         ...provided,
-        backgroundColor: state.isFocused ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.2)',
+        backgroundColor: state.isFocused ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.4)',
         fontSize: 12
     }),
     placeholder: (provided, state) => ({

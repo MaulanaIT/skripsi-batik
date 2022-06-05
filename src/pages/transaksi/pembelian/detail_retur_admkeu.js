@@ -17,7 +17,7 @@ export class detail_retur_admkeu extends Component {
                 <div className={`table-responsive`}><FiXCircle className='fs-3 col-12' onClick={this.CloseDetail} />
                     <div className={`${global.card_detail}`}>
                         <p className='fs-5 fw-bold text-center'>Detail Order Pembelian</p>
-                        <table id='table-data' className={`table w-100`}>
+                        <table id='table-detail-data-keuangan' className={`table w-100`}>
                             <thead>
                                 <tr>
                                     <td>No.</td>
