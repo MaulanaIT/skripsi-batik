@@ -102,7 +102,7 @@ export class sidebar extends Component {
                                     <li><Link to={'/master/inventory/daftar-bb'}><span>Bahan Baku</span></Link></li>
                                     <li><Link to={'/master/inventory/daftar-bp'}><span>Bahan Penolong</span></Link></li>
                                     <li><Link to={'/master/inventory/daftar-alat'}><span>Alat</span></Link></li>
-                                    <li><Link to={'/master/inventory/produk'}><span>Produk</span></Link></li>
+                                    <li><Link to={'/master/inventory/daftar_produk'}><span>Produk</span></Link></li>
                                 </ul>
                             </li>
                             <li><Link to={'/master/tenaga-kerja'}><span>Tenaga Kerja</span></Link></li>
