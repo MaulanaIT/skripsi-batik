@@ -184,7 +184,6 @@ export class sidebar extends Component {
                                 </div>
                                 <ul className={style.dropdown_menu}>
                                     <li><Link to={'/laporan/penjualan/transaksi-penjualan'}><span>Transaksi Penjualan</span></Link></li>
-                                    <li><Link to={'/laporan/penjualan/piutang-pesanan'}><span>Piutang Pesanan</span></Link></li>
                                     <li><Link to={'/laporan/penjualan/piutang-konsinyasi'}><span>Piutang Konsinyasi</span></Link></li>
                                 </ul>
                             </li>

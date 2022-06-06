@@ -105,14 +105,12 @@ export class penerimaan_barang extends Component {
         });
     }
 
-    SelectPembelian = (value) => {
-        this.setState({ jenisPembelian: value ? value.value : '' });
-    }
 
     render() {
 
         const {
-            dataSelectKodeOrder,
+            valueJenisPembelian,
+            valueKodeOrder,
             valueKodePenerimaan,
             valueTanggal
         } = this.state;
@@ -129,10 +127,7 @@ export class penerimaan_barang extends Component {
                             <p className={global.title}>Input Penerimaan Barang</p>
                             <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Jenis Pembelian</p>
-                                <Select isClearable={true} isSearchable={true} options={[
-                                    { value: 'Bahan', label: 'Bahan' },
-                                    { value: 'Alat', label: 'Alat' }
-                                ]} placeholder={'Select Pembelian...'} styles={CustomSelect} onChange={(value) => this.SelectPembelian(value)} />
+                                <input type="text" id='valueJenisPembelian' value={valueJenisPembelian} readOnly />
                             </div>
                             <div className={`d-flex`}>
                                 <div className={`${global.input_group} col-6 pe-2`}>
@@ -147,7 +142,7 @@ export class penerimaan_barang extends Component {
                             <div className={`d-flex`}>
                                 <div className={`${global.input_group} col-3 px-2`}>
                                     <p className={global.title}>Kode Order</p>
-                                    <Select isClearable={true} isSearchable={true} options={dataSelectKodeOrder} placeholder={'Select Pembelian...'} styles={CustomSelect} onChange={(value) => this.SelectPembelian(value)} />
+                                    <input type="text" id='valueKodeOrder' value={valueKodeOrder} readOnly />
                                 </div>
                                 <div className={`${global.input_group} col-5 ps-2`}>
                                     <p className={global.title}>Tanggal Order</p>
