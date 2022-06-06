@@ -1,4 +1,5 @@
 // Import Library
+import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { FiXCircle } from 'react-icons/fi';
 
@@ -16,7 +17,7 @@ export class detail_retur_admkeu extends Component {
             <div id='detail_retur_admkeu' className={`${global.loading_background} d-none`}>
                 <div className={`table-responsive`}><FiXCircle className='fs-3 col-12' onClick={this.CloseDetail} />
                     <div className={`${global.card_detail}`}>
-                        <p className='fs-5 fw-bold text-center'>Detail Order Pembelian</p>
+                        <p className='fs-5 fw-bold text-center'>Detail Retur Pembelian</p>
                         <table id='table-detail-data-keuangan' className={`table w-100`}>
                             <thead>
                                 <tr>
@@ -36,7 +37,7 @@ export class detail_retur_admkeu extends Component {
                                 <button type='button' className={`${global.button} w-100`}>Setuju</button>
                             </div>
                             <div className='col-6 ps-2'>
-                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Terima Kas</button>
+                                <Link to={'/transaksi/penerimaan-kas/pengembalian-dana'} className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Terima Kas</Link>
                             </div>
                         </div>
                     </div>

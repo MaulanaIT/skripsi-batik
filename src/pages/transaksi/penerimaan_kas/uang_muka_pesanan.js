@@ -167,7 +167,7 @@ export class uang_muka_pesanan extends Component {
                                         </div>
                                     </div>
                                     <div className={`align-items-center ${global.input_group_row}`}>
-                                        <p className={`${global.title} col-3`}>Piutang</p>
+                                        <p className={`${global.title} col-3`}>Sisa</p>
                                         <input type="text" id='input-detail-piutang' name='input-detail-piutang' className={`col-6`} />
                                     </div>
                             <div className='d-flex flex-column gap-3 pt-2'>

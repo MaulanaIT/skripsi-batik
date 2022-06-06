@@ -182,7 +182,8 @@ export class penerimaan_barang extends Component {
     render() {
 
         const {
-            dataSelectKodeOrder,
+            valueJenisPembelian,
+            valueKodeOrder,
             valueKodePenerimaan,
             valueKodeSupplier,
             valueNamaSupplier,
