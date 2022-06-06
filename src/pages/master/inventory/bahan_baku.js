@@ -67,7 +67,7 @@ export class bahan_baku extends Component {
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Bahan Baku</p>
-                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-bahan-baku' name='input-nama-bahan-baku' maxLength={50} required={true} />
+                            <input type="text" className="col-12 col-md-8 col-lg-6" id='input-nama-bahan-baku' name='input-nama-bahan-baku' maxLength={50} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Satuan</p>
