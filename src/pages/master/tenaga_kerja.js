@@ -7,7 +7,7 @@ import { MdAdd } from 'react-icons/md'
 import Select from 'react-select';
 
 // Import CSS
-import global from '../../css/master.module.css';
+import global from '../../css/global.module.css';
 import style from '../../css/master.module.css';
 
 const CustomSelect = {
@@ -122,6 +122,31 @@ export class tenaga_kerja extends Component {
                         </div>
                         <button type='button' className={global.button} onClick={this.InsertTenagaKerja}><MdAdd /> Simpan</button>
                     </form>
+                <div className={`${global.card} col-12`}>
+                    <div className={`${global.header}`}>
+                        <p className={global.title}>Daftar Tenaga Kerja</p>
+                    </div>
+                <div className={global.card}>
+                    <form id='form-table' className={`table-responsive`}>
+                        <table id='table-data' className={`table w-100`}>
+                            <thead className="align-middle text-center text-nowrap">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Kode Tenaga Kerja</th>
+                                    <th>Nama Tenaga Kerja</th>
+                                    <th>Departemen</th>
+                                    <th>No. Telp</th>
+                                    <th>Upah</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                </div>
                 </div>
             </>
         )
