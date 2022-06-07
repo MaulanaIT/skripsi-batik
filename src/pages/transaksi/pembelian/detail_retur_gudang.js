@@ -16,7 +16,7 @@ export class detail_retur_gudang extends Component {
             <div id='detail_retur_gudang' className={`${global.loading_background} d-none`}>
                 <div className={`table-responsive`}><FiXCircle className='fs-3 col-12' onClick={this.CloseDetail} />
                     <div className={`${global.card_detail}`}>
-                        <p className='fs-5 fw-bold text-center'>Detail Order Pembelian</p>
+                        <p className='fs-5 fw-bold text-center'>Detail Retur Pembelian</p>
                         <table id='table-detail-data-gudang' className={`table w-100`}>
                             <thead>
                                 <tr>

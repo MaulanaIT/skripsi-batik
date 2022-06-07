@@ -37,8 +37,9 @@ export class daftar_uangmuka extends Component {
                                         <td>Tanggal</td>
                                         <td>Kode Customer</td>
                                         <td>Nama Customer</td>
-                                        <td>Nilai Transaksi</td>
+                                        <td>Total Harga</td>
                                         <td>Uang Muka</td>
+                                        <td>Sisa</td>
                                         <td>Aksi</td>
                                     </tr>
                                 </thead>

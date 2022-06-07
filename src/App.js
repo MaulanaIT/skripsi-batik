@@ -49,7 +49,6 @@ import AddPermintaanBahan from './pages/transaksi/produksi/add_permintaan_bahan'
 import LaporanPembelianTransaksiPembelian from './pages/laporan/pembelian/transaksi_pembelian';
 import LaporanPembelianReturPembelian from './pages/laporan/pembelian/retur_pembelian';
 import LaporanPenjualanTransaksiPenjualan from './pages/laporan/penjualan/transaksi_penjualan';
-import LaporanPenjualanPiutangPesanan from './pages/laporan/penjualan/piutang_pesanan';
 import LaporanPenjualanPiutangKonsinyasi from './pages/laporan/penjualan/piutang_konsinyasi';
 import LaporanKasPenerimaanKas from './pages/laporan/kas/penerimaan_kas';
 import LaporanKasPengeluaranKas from './pages/laporan/kas/pengeluaran_kas';
@@ -124,7 +123,6 @@ export class App extends Component {
                                 <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<LaporanPembelianTransaksiPembelian />} />
                                 <Route path={'/laporan/pembelian/retur-pembelian'} element={<LaporanPembelianReturPembelian />} />
                                 <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<LaporanPenjualanTransaksiPenjualan />} />
-                                <Route path={'/laporan/penjualan/piutang-pesanan'} element={<LaporanPenjualanPiutangPesanan />} />
                                 <Route path={'/laporan/penjualan/piutang-konsinyasi'} element={<LaporanPenjualanPiutangKonsinyasi />} />
                                 <Route path={'/laporan/kas/penerimaan-kas'} element={<LaporanKasPenerimaanKas />} />
                                 <Route path={'/laporan/kas/pengeluaran-kas'} element={<LaporanKasPengeluaranKas />} />

@@ -132,9 +132,8 @@ export class sidebar extends Component {
                                 </div>
                                 <ul className={style.dropdown_menu}>
                                     <li><Link to={'/transaksi/pembelian/daftar-order'}><span>Order Pembelian</span></Link></li>
-                                    <li><Link to={'/transaksi/pembelian/pengeluaran-kas'}><span>Pengeluaran Kas</span></Link></li>
-                                    <li><Link to={'/transaksi/pembelian/daftar-terimabarang'}><span>Penerimaan Barang</span></Link></li>
                                     <li><Link to={'/transaksi/pembelian/daftar-retur'}><span>Retur Pembelian</span></Link></li>
+                                    <li><Link to={'/transaksi/pembelian/daftar-terimabarang'}><span>Penerimaan Barang</span></Link></li>
                                 </ul>
                             </li>
                             <li className={style.dropdown}>
@@ -143,7 +142,6 @@ export class sidebar extends Component {
                                     <MdExpandMore className={style.toggle} />
                                 </div>
                                 <ul className={style.dropdown_menu}>
-                                    <li><Link to={'/transaksi/penerimaan-kas/pengembalian-dana'}><span>Pengembalian Dana</span></Link></li>
                                     <li><Link to={'/transaksi/penerimaan-kas/daftar-uangmuka'}><span>Uang Muka Pesanan</span></Link></li>
                                     <li><Link to={'/transaksi/penerimaan-kas/konsinyasi'}><span>Konsinyasi</span></Link></li>
                                 </ul>
@@ -186,7 +184,6 @@ export class sidebar extends Component {
                                 </div>
                                 <ul className={style.dropdown_menu}>
                                     <li><Link to={'/laporan/penjualan/transaksi-penjualan'}><span>Transaksi Penjualan</span></Link></li>
-                                    <li><Link to={'/laporan/penjualan/piutang-pesanan'}><span>Piutang Pesanan</span></Link></li>
                                     <li><Link to={'/laporan/penjualan/piutang-konsinyasi'}><span>Piutang Konsinyasi</span></Link></li>
                                 </ul>
                             </li>

@@ -49,25 +49,31 @@ const CustomSelect = {
 export class penerimaan_barang extends Component {
 
     state = {
+        dataDetailOrder: [],
         dataOrder: [],
 
         dataSelectKodeOrder: [],
 
-        valueKodePenerimaan: null,
+        htmlTableDaftarDetailOrder: [],
+
+        valueKodePenerimaan: '',
+        valueKodeSupplier: '',
+        valueNamaSupplier: '',
         valueTanggal: moment().format('YYYY-MM-DD'),
+        valueTanggalOrder: '',
 
         jenisPembelian: '',
     }
 
     async componentDidMount() {
-        await this.GetOrder();
         await this.GetPenerimaanBarang();
+        await this.GetOrder();
     }
 
     GetOrder = async () => {
         axios.get(`${baseURL}/api/transaksi/pembelian/order/select.php`, config).then(response => {
             ShowLoading();
-            let dataOrder = response.data.data;
+            let dataOrder = response.data.data.filter(item => item.status === '0');
 
             let dataSelectKodeOrder = [];
 
@@ -94,8 +100,10 @@ export class penerimaan_barang extends Component {
         axios.get(`${baseURL}/api/transaksi/pembelian/terima-barang/select.php`, config).then(response => {
             ShowLoading();
             let dataPenerimaan = response.data.data;
-            
+
             this.setState({ valueKodePenerimaan: GenerateCode('TB', dataPenerimaan) }, () => {
+                $(`#table-data`).DataTable();
+
                 HideLoading();
             });
         }).catch(error => {
@@ -105,16 +113,83 @@ export class penerimaan_barang extends Component {
         });
     }
 
-    SelectPembelian = (value) => {
-        this.setState({ jenisPembelian: value ? value.value : '' });
+    InputChange = (event) => {
+        this.setState({ [event.target.id]: event.target.value }, () => {
+            this.setState({ valueTotalHarga: this.state.valueHarga * this.state.valueJumlah });
+        });
+    }
+
+    SelectKodeOrder = (data) => {
+        if (data) {
+            let dataOrder = this.state.dataOrder;
+            let kodeOrder = data.value;
+
+            let selectedOrder = dataOrder.find(item => item.kode === kodeOrder);
+
+            this.setState({
+                valueKodeSupplier: selectedOrder.kode_supplier,
+                valueNamaSupplier: selectedOrder.nama_supplier,
+                valueTanggalOrder: selectedOrder.tanggal
+            }, () => {
+                const formData = new FormData();
+
+                formData.append('kode', kodeOrder);
+
+                axios.post(`${baseURL}/api/transaksi/pembelian/detail-order/select.php`, formData, config).then(response => {
+                    let dataDetailOrder = response.data.data;
+
+                    let htmlTableDaftarDetailOrder = [];
+
+                    if (dataDetailOrder.length > 0) {
+                        dataDetailOrder.forEach((item, index) => {
+                            htmlTableDaftarDetailOrder.push(
+                                <tr key={index}>
+                                    <td>{index + 1}.</td>
+                                    <td>{item.kode_item}</td>
+                                    <td>{item.nama_item}</td>
+                                    <td></td>
+                                    <td>{item.jumlah}</td>
+                                    <td>{item.harga}</td>
+                                    <td>{parseInt(item.jumlah) * parseInt(item.harga)}</td>
+                                </tr>
+                            );
+                        });
+                    }
+
+                    $('#table-data').DataTable().destroy();
+
+                    this.setState({ htmlTableDaftarDetailOrder: htmlTableDaftarDetailOrder }, () => {
+                        $('#table-data').DataTable();
+                    });
+                }).catch(error => {
+                    console.log(error);
+                });
+            });
+        } else {
+            $('#table-data').DataTable().destroy();
+
+            this.setState({
+                htmlTableDaftarDetailOrder: [],
+                valueKodeSupplier: '',
+                valueNamaSupplier: '',
+                valueTanggalOrder: ''
+            }, () => {
+                $('#table-data').DataTable();
+            });
+        }
     }
 
     render() {
 
         const {
             dataSelectKodeOrder,
+            valueJenisPembelian,
+            valueKodeOrder,
             valueKodePenerimaan,
-            valueTanggal
+            valueKodeSupplier,
+            valueNamaSupplier,
+            valueTanggal,
+            valueTanggalOrder
         } = this.state;
 
         return (
@@ -127,13 +202,13 @@ export class penerimaan_barang extends Component {
                     <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
                         <div className={`${global.card}`}>
                             <p className={global.title}>Input Penerimaan Barang</p>
-                            <div className={`${global.input_group} col-4 pe-2`}>
+                            {/* <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Jenis Pembelian</p>
                                 <Select isClearable={true} isSearchable={true} options={[
                                     { value: 'Bahan', label: 'Bahan' },
                                     { value: 'Alat', label: 'Alat' }
                                 ]} placeholder={'Select Pembelian...'} styles={CustomSelect} onChange={(value) => this.SelectPembelian(value)} />
-                            </div>
+                            </div> */}
                             <div className={`d-flex`}>
                                 <div className={`${global.input_group} col-6 pe-2`}>
                                     <p className={global.title}>Kode Penerimaan</p>
@@ -141,95 +216,72 @@ export class penerimaan_barang extends Component {
                                 </div>
                                 <div className={`${global.input_group} col-6 ps-2`}>
                                     <p className={global.title}>Tanggal Terima</p>
-                                    <input type="date" id='valueTanggal' value={valueTanggal} />
+                                    <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} />
                                 </div>
                             </div>
                             <div className={`d-flex`}>
                                 <div className={`${global.input_group} col-3 px-2`}>
                                     <p className={global.title}>Kode Order</p>
-                                    <Select isClearable={true} isSearchable={true} options={dataSelectKodeOrder} placeholder={'Select Pembelian...'} styles={CustomSelect} onChange={(value) => this.SelectPembelian(value)} />
+                                    <Select isClearable={true} isSearchable={true} options={dataSelectKodeOrder} placeholder={'Select Pembelian...'} styles={CustomSelect} onChange={(value) => this.SelectKodeOrder(value)} />
                                 </div>
                                 <div className={`${global.input_group} col-5 ps-2`}>
                                     <p className={global.title}>Tanggal Order</p>
-                                    <input type="text" id='input-tanggal-order' name='input-tanggal-order' readOnly />
+                                    <input type="text" id='valueTanggalOrder' value={valueTanggalOrder} readOnly />
                                 </div>
                             </div>
                             <div className={`d-flex`}>
                                 <div className={`${global.input_group} col-3 px-2`}>
                                     <p className={global.title}>Kode Supplier</p>
-                                    <input type="text" id='input-kode-supplier' name='input-kode-supplier' readOnly />
+                                    <input type="text" id='valueKodeSupplier' value={valueKodeSupplier} readOnly />
                                 </div>
                                 <div className={`${global.input_group} col-5 ps-2`}>
                                     <p className={global.title}>Nama Supplier</p>
-                                    <input type="text" id='input-nama-supplier' name='input-nama-supplier' maxLength={10} readOnly />
+                                    <input type="text" id='valueNamaSupplier' value={valueNamaSupplier} readOnly />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {this.state.jenisPembelian !== '' ?
-                        <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
-                            <div className={global.card}>
-                                <div className={`${global.header}`}>
-                                    <p className={global.title}>Daftar Pembelian</p>
+                    <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                        <div className={global.card}>
+                            <div className={`${global.header}`}>
+                                <p className={global.title}>Daftar Pembelian</p>
+                            </div>
+                            <div className={`table-responsive`}>
+                                <table id='table-data' className={`table w-100`}>
+                                    <thead>
+                                        <tr>
+                                            <td>No.</td>
+                                            <td>Kode Alat/Bahan</td>
+                                            <td>Nama Alat/Bahan</td>
+                                            <td>Satuan</td>
+                                            <td>Jumlah</td>
+                                            <td>Harga</td>
+                                            <td>Total Harga</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.htmlTableDaftarDetailOrder}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className={`d-flex flex-column gap-2 pb-2`}>
+                                <div className={`align-items-center ${global.input_group_row}`}>
+                                    <p className={`${global.title} col-3`}>Total Barang</p>
+                                    <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-3`} onInput={InputFormatNumber} />
                                 </div>
-                                {this.state.jenisPembelian === 'Bahan' ?
-                                    <>
-                                        <div className={`table-responsive`}>
-                                            <table id='table-data' className={`table w-100`}>
-                                                <thead>
-                                                    <tr>
-                                                        <td>No.</td>
-                                                        <td>Kode Bahan</td>
-                                                        <td>Nama Bahan</td>
-                                                        <td>Satuan</td>
-                                                        <td>Jumlah</td>
-                                                        <td>Harga</td>
-                                                        <td>Total Harga</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
-                                        </div>
-                                    </>
-                                    :
-                                    <>
-                                        <div className={`table-responsive`}>
-                                            <table id='table-data' className={`table w-100`}>
-                                                <thead>
-                                                    <tr>
-                                                        <td>No.</td>
-                                                        <td>Kode Alat</td>
-                                                        <td>Nama Alat</td>
-                                                        <td>Satuan</td>
-                                                        <td>Jumlah</td>
-                                                        <td>Harga</td>
-                                                        <td>Total Harga</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
-                                        </div>
-                                    </>
-                                }
-                                <div className={`d-flex flex-column gap-2 pb-2`}>
-                                    <div className={`align-items-center ${global.input_group_row}`}>
-                                        <p className={`${global.title} col-3`}>Total Barang</p>
-                                        <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-3`} onInput={InputFormatNumber} />
+                            </div>
+                            <div className='d-flex flex-column gap-2 pt-2'>
+                                <div className='d-flex'>
+                                    <div className='col-6 pe-2'>
+                                        <button type='button' className={`${global.button} w-100`}>Simpan</button>
                                     </div>
-                                </div>
-                                <div className='d-flex flex-column gap-2 pt-2'>
-                                    <div className='d-flex'>
-                                        <div className='col-6 pe-2'>
-                                            <button type='button' className={`${global.button} w-100`}>Simpan</button>
-                                        </div>
-                                        <div className='col-6 ps-2'>
-                                            <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>
-                                        </div>
+                                    <div className='col-6 ps-2'>
+                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        : null}
+                    </div>
                 </div>
             </>
         )

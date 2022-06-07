@@ -291,9 +291,21 @@ export class transaksi_penjualan extends Component {
                                                     <tbody></tbody>
                                                 </table>
                                             </div>
-                                        <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Nilai Transaksi</p>
-                                                <input type="text" id='input-nilai-transaksi' name='input-nilai-transaksi' className={`col-6`} readOnly />
+                                            <div className={`align-items-center ${global.input_group_row}`}>
+                                                <p className={`${global.title} col-3`}>Total Jual</p>
+                                                <input type="text" id='input-detail-total-jual' name='input-detail-total-jual' className={`col-6`} readOnly />
+                                            </div>
+                                            <div className={`align-items-center ${global.input_group_row}`}>
+                                                <p className={`${global.title} col-3`}>Diskon</p>
+                                                <input type="text" id='input-detail-diskon' name='input-detail-diskon' className={'col-6'} readOnly />
+                                            </div>                                
+                                            <div className={`align-items-center ${global.input_group_row}`}>
+                                                <p className={`${global.title} col-3`}>Ongkos Kirim</p>
+                                                <input type="text" id='input-detail-ongkos-kirim' name='input-detail-ongkos-kirim' className={`col-6`} readOnly />
+                                            </div>
+                                            <div className={`align-items-center ${global.input_group_row}`}>
+                                                <p className={`${global.title} col-3`}>Total Harga</p>
+                                                <input type="text" id='input-detail-total-harga' name='input-detail-total-harga' className={`col-6`} readOnly />
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Uang Muka</p>
@@ -301,9 +313,9 @@ export class transaksi_penjualan extends Component {
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Sisa</p>
-                                                <input type="text" id='input-detail-sisa-terima-uang' name='input-detail-sisa-terima-uang' className={`col-6`} readOnly />
+                                                <input type="text" id='input-detail-piutang' name='input-detail-piutang' className={`col-6`} readOnly />
                                                 <div className='col-3 ps-2'>
-                                                    <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={[
+                                                    <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={[
                                                         { value: '1', label: 'Akun 1' },
                                                         { value: '2', label: 'Akun 2' }
                                                     ]} placeholder={'Select Akun...'} styles={CustomSelect} />
@@ -315,7 +327,7 @@ export class transaksi_penjualan extends Component {
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Kembalian</p>
-                                                <input type="text" id='input-detail-kembalian' name='input-detail-kembalian' className={`col-6`} />
+                                                <input type="text" id='input-detail-kembalian' name='input-detail-kembalian' className={`col-6`} readOnly />
                                             </div>
                                             <div className='d-flex flex-column gap-5 pt-2'>
                                                 <div>

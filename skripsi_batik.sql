@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2022 at 12:49 PM
+-- Generation Time: Jun 07, 2022 at 01:38 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -20,6 +20,23 @@ SET time_zone = "+00:00";
 --
 -- Database: `skripsi_batik`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detail_order_pembelian`
+--
+
+CREATE TABLE `detail_order_pembelian` (
+  `id` int(11) NOT NULL,
+  `kode` varchar(10) NOT NULL,
+  `kode_item` varchar(10) NOT NULL,
+  `nama_item` varchar(50) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `harga` double NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -76,6 +93,23 @@ CREATE TABLE `detail_order_pembelian_bahanpenolong` (
   `kode` varchar(10) NOT NULL,
   `kode_bahanpenolong` varchar(10) NOT NULL,
   `kuantitas` int(11) NOT NULL,
+  `harga` double NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detail_pembelian`
+--
+
+CREATE TABLE `detail_pembelian` (
+  `id` int(11) NOT NULL,
+  `kode` varchar(10) NOT NULL,
+  `kode_item` varchar(10) NOT NULL,
+  `nama_item` varchar(50) NOT NULL,
+  `jumlah` int(11) NOT NULL,
   `harga` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -755,6 +789,12 @@ INSERT INTO `token` (`id`, `token`, `created_at`, `updated_at`) VALUES
 --
 
 --
+-- Indexes for table `detail_order_pembelian`
+--
+ALTER TABLE `detail_order_pembelian`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `detail_order_pembelian_alat`
 --
 ALTER TABLE `detail_order_pembelian_alat`
@@ -770,6 +810,12 @@ ALTER TABLE `detail_order_pembelian_bahanbaku`
 -- Indexes for table `detail_order_pembelian_bahanpenolong`
 --
 ALTER TABLE `detail_order_pembelian_bahanpenolong`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `detail_pembelian`
+--
+ALTER TABLE `detail_pembelian`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -993,6 +1039,12 @@ ALTER TABLE `token`
 --
 
 --
+-- AUTO_INCREMENT for table `detail_order_pembelian`
+--
+ALTER TABLE `detail_order_pembelian`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `detail_order_pembelian_alat`
 --
 ALTER TABLE `detail_order_pembelian_alat`
@@ -1008,6 +1060,12 @@ ALTER TABLE `detail_order_pembelian_bahanbaku`
 -- AUTO_INCREMENT for table `detail_order_pembelian_bahanpenolong`
 --
 ALTER TABLE `detail_order_pembelian_bahanpenolong`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `detail_pembelian`
+--
+ALTER TABLE `detail_pembelian`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

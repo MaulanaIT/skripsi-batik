@@ -113,9 +113,11 @@ export class order_pembelian extends Component {
                 kode: valueKodeOrder,
                 tanggal: valueTanggal,
                 kode_supplier: valueKodeSupplier.value,
-                nama_supplier: valueNamaSupplier.value,
+                nama_supplier: valueNamaSupplier.label,
                 kode_alat: valueKodeAlat.value,
-                nama_alat: valueNamaAlat.value,
+                nama_alat: valueNamaAlat.label,
+                kode_item: valueKodeAlat.value,
+                nama_item: valueNamaAlat.label,
                 jumlah: valueJumlah,
                 harga: valueHarga,
                 total_harga: valueTotalHarga
@@ -131,9 +133,11 @@ export class order_pembelian extends Component {
                 kode: valueKodeOrder,
                 tanggal: valueTanggal,
                 kode_supplier: valueKodeSupplier.value,
-                nama_supplier: valueNamaSupplier.value,
+                nama_supplier: valueNamaSupplier.label,
                 kode_bahan: valueKodeBahan.value,
-                nama_bahan: valueNamaBahan.value,
+                nama_bahan: valueNamaBahan.label,
+                kode_item: valueKodeBahan.value,
+                nama_item: valueNamaBahan.label,
                 jumlah: valueJumlah,
                 harga: valueHarga,
                 total_harga: valueTotalHarga
@@ -360,8 +364,6 @@ export class order_pembelian extends Component {
             formData.append('data', JSON.stringify(this.state.dataBahan));
 
         axios.post(`${baseURL}/api/transaksi/pembelian/order/insert.php`, formData, config).then(() => {
-            HideLoading();
-
             window.location.href = '/transaksi/pembelian/daftar-order';
         }).catch(error => {
             console.log(error);

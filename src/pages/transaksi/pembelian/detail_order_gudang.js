@@ -1,4 +1,5 @@
 // Import Library
+import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { FiXCircle } from 'react-icons/fi';
 
@@ -36,7 +37,7 @@ export class detail_order_gudang extends Component {
                                 <button type='button' className={`${global.button} w-100`}>Order</button>
                             </div>
                             <div className='col-6 ps-2'>
-                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Terima Barang</button>
+                                <Link to={'/transaksi/pembelian/penerimaan-barang'} className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Terima Barang</Link>
                             </div>
                         </div>
                     </div>
