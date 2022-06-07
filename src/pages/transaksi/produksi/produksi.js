@@ -131,7 +131,7 @@ export class produksi extends Component {
                                             <p className={global.title}>Deskripsi</p>
                                             <input type="text" id='input-deskripsi' name='input-deskripsi' />
                                         </div>
-                                        <div className={`${global.input_group} col-5 pe-2`}>
+                                        <div className={`${global.input_group} col-6 ps-2`}>
                                             <p className={global.title}>Status</p>
                                             <Select id='select-status' name='select-status' isClearable={true} isSearchable={true} options={[
                                                 { value: 'Proses', label: 'Proses' },
