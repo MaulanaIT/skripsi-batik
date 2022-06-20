@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // Import Library
 import $ from 'jquery';
 import axios from 'axios';
-import { FaCheck, FaPen, FaTrash } from 'react-icons/fa';
+import { FaClipboardList, FaPrint, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import { baseURL, config, cx, HideLoading, ShowLoading } from '../../../component/helper';
@@ -57,9 +57,9 @@ export class daftar_order extends Component {
                                 <div id={`data-status-${item.id}`} className={`data-${item.id}`}>{item.status}</div>
                             </td>
                             <td className={global.table_action}>
-                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyOrder(item.id)}><FaCheck /> Apply</button>
-                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditOrder(item.id)}><FaPen /> Edit</button>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.id)}><FaTrash />Delete</button>
+                                <button type='button' id='button-detail' className={global.edit} style={{gridColumn: '2 span'}}><FaClipboardList /> Detail</button>
+                                <button type='button' id='button-print' className={global.apply}><FaPrint /> Print</button>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.id)}><FaTrash /> Delete</button>
                             </td>
                         </tr>
                     );
@@ -81,10 +81,10 @@ export class daftar_order extends Component {
     }
 
     SelectDetail = () => {
-    document.getElementById('detail_order_admkeu').classList.remove('d-none');
+        document.getElementById('detail_order_admkeu').classList.remove('d-none');
     }
     SelectDetail2 = () => {
-    document.getElementById('detail_order_gudang').classList.remove('d-none');
+        document.getElementById('detail_order_gudang').classList.remove('d-none');
     }
 
     render() {
@@ -104,7 +104,7 @@ export class daftar_order extends Component {
                         </div>
                         <form className={`table-responsive`}>
                             <table id='table-data' className={`table w-100`}>
-                                <thead className='text-nowrap'>
+                                <thead className='text-center text-nowrap'>
                                     <tr>
                                         <td>No.</td>
                                         <td>Kode Order</td>
