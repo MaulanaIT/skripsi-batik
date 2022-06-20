@@ -21,8 +21,8 @@ export class laporan_hpp extends Component {
                 <div className={`${style.content}`}>
                     <div className={`${global.card} col-12`}>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-2`}>Kode Permintaan</p>
-                            <input type="text" className={global.input1} id='input-kode-permintaan' name='input-kode-permintaan'/>
+                            <p className={`${global.title} col-2`}>Nama Produksi</p>
+                            <input type="text" className={global.input1} id='input-nama-produksi' name='input-nama-produksi'/>
                         </div>
                         <div className='d-flex'>
                                 <div className='col-6 pe-3'>
