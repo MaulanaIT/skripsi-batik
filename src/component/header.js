@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // Import Library
 import { MdAccountCircle } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { FaCog, FaSignOutAlt } from 'react-icons/fa';
 
 // Import Assets
 import Logo from '../assets/images/logo.jpg';
@@ -28,8 +29,8 @@ export class header extends Component {
                         <p className={style.title}>ADMIN & KEUANGAN</p>
                         <MdAccountCircle className={style.icon} />
                         <ul className={style.dropdown_menu}>
-                            <li><div>SETTING</div></li>
-                            <li><Link to={'/login'}>LOGOUT</Link></li>
+                            <li><div><FaCog /> SETTING</div></li>
+                            <li><Link to={'/login'}><FaSignOutAlt /> LOGOUT</Link></li>
                         </ul>
                     </div>
                 </div>

@@ -41,7 +41,7 @@
 }
 
 .container>.menu>.account>ul.dropdown_menu {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #745139;
     border: 2px solid #504651;
     border-radius: 8px;
     display: none;
@@ -50,7 +50,7 @@
     padding: 0;
     position: absolute;
     right: 0;
-    top: 64px;
+    top: 56px;
     width: 130px;
 }
 
@@ -68,9 +68,12 @@
 
 .container>.menu>.account>ul.dropdown_menu>li>a,
 .container>.menu>.account>ul.dropdown_menu>li>div {
-    display: block;
+    align-items: center;
+    color: white;
+    display: flex;
     font-size: 12px;
     font-weight: bold;
+    gap: 6px;
     padding: 8px 12px;
     position: relative;
     text-decoration: none;
