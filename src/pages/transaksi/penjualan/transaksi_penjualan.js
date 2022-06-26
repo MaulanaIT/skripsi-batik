@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 // Import Library
 import $ from 'jquery';
 import { MdAdd } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
 // Import CSS
@@ -143,26 +144,7 @@ export class transaksi_penjualan extends Component {
                                         :
                                     this.state.jenisTransaksi === 'Pesanan' ?
                                         <>
-                                            <div className={`${bootstrap['d-flex']}`}>
-                                                <div className={`${global.input_group} col-5 pe-2`}>
-                                                    <p className={global.title}>Kode Customer</p>
-                                                    <Select id='select-kode-customer' name='select-kode-customer' isClearable={true} isSearchable={true} options={[
-                                                        { value: 'CS0001', label: 'CS0001' },
-                                                        { value: 'CS0002', label: 'CS0002' }
-                                                    ]} placeholder={'Select Kode...'} styles={CustomSelect} />
-                                                </div>
-                                                <div className={`${global.input_group} col-7 pe-2`}>
-                                                    <p className={global.title}>Nama Customer</p>
-                                                    <Select id='select-nama-customer' name='select-nama-customer' isClearable={true} isSearchable={true} options={[
-                                                        { value: 'Customer 1', label: 'Customer 1' },
-                                                        { value: 'Customer 2', label: 'Customer 2' }
-                                                    ]} placeholder={'Select Nama Customer...'} styles={CustomSelect} />
-                                                </div>
-                                            </div>
-                                            <div className={`${global.input_group} col-6 pe-2`}>
-                                                <p className={global.title}>Kode Kas Masuk</p>
-                                                <input type="text" id='input-kode-kas-masuk' name='input-kode-kas-masuk' />
-                                            </div>
+                                            <Link to={'/transaksi/penjualan/kalkulator-estimasi'}></Link>
                                         </>
                                         :
                                         <>
@@ -276,66 +258,7 @@ export class transaksi_penjualan extends Component {
                                         :
                                     this.state.jenisTransaksi === 'Pesanan' ?
                                         <>
-                                        <div className={`table-responsive`}>
-                                                <table id='table-data' className={`table w-100`}>
-                                                    <thead>
-                                                        <tr>
-                                                            <td>No.</td>
-                                                            <td>Kode Pesanan</td>
-                                                            <td>Nama Pesanan</td>
-                                                            <td>Jumlah Jual</td>
-                                                            <td>Harga Jual</td>
-                                                            <td>Total Harga</td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody></tbody>
-                                                </table>
-                                            </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Total Jual</p>
-                                                <input type="text" id='input-detail-total-jual' name='input-detail-total-jual' className={`col-6`} readOnly />
-                                            </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Diskon</p>
-                                                <input type="text" id='input-detail-diskon' name='input-detail-diskon' className={'col-6'} readOnly />
-                                            </div>                                
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Ongkos Kirim</p>
-                                                <input type="text" id='input-detail-ongkos-kirim' name='input-detail-ongkos-kirim' className={`col-6`} readOnly />
-                                            </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Total Harga</p>
-                                                <input type="text" id='input-detail-total-harga' name='input-detail-total-harga' className={`col-6`} readOnly />
-                                            </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Uang Muka</p>
-                                                <input type="text" id='input-detail-uang-muka' name='input-detail-uang-muka' className={`col-6`} readOnly />
-                                            </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Sisa</p>
-                                                <input type="text" id='input-detail-piutang' name='input-detail-piutang' className={`col-6`} readOnly />
-                                                <div className='col-3 ps-2'>
-                                                    <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={[
-                                                        { value: '1', label: 'Akun 1' },
-                                                        { value: '2', label: 'Akun 2' }
-                                                    ]} placeholder={'Select Akun...'} styles={CustomSelect} />
-                                                </div>
-                                            </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Bayar</p>
-                                                <input type="text" id='input-detail-bayar' name='input-detail-bayar' className={`col-6`} />
-                                            </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Kembalian</p>
-                                                <input type="text" id='input-detail-kembalian' name='input-detail-kembalian' className={`col-6`} readOnly />
-                                            </div>
-                                            <div className='d-flex flex-column gap-5 pt-2'>
-                                                <div>
-                                                    <p>Upload File Transfer</p>
-                                                    <input type="file" accept='.pdf' id='input-detail-file' name='input-detail-file' />
-                                                </div>
-                                            </div>    
-                                            
+
                                         </>
                                         :
                                         <>

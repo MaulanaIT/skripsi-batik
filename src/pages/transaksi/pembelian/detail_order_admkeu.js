@@ -35,10 +35,9 @@ export class detail_order_admkeu extends Component {
                         </table>
                         <div className='d-flex'>
                             <div className='col-6 pe-2'>
-                                <button type='button' className={`${global.button} w-100`}>Setuju</button>
                             </div>
-                            <div className='col-6 ps-2'>
-                                <Link to={'/transaksi/pembelian/pengeluaran-kas'} className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Bayar</Link>
+                            <div className='col-6 pe-2'>
+                                <button type='button' className={`${global.button} w-100`}>Setuju</button>
                             </div>
                         </div>
                     </div>
