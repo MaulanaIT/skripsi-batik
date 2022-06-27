@@ -10,7 +10,6 @@ import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
 import style from '../../../css/transaksi/produksi/produksi.module.css';
 
-import AddPermintaanBahan from './add_permintaan_bahan';
 
 const CustomSelect = {
     control: (provided, state) => ({
@@ -62,17 +61,12 @@ export class produksi extends Component {
         this.setState({ pilihProduksi: value ? value.value : '' });
     }
 
-    SelectAddPermintaanBahan = () => {
-        document.getElementById('add_permintaan_bahan').classList.remove('d-none');
-    }
-
     render() {
         return (
             <>
-            <AddPermintaanBahan/>
                 <div className={style.header}>
-                    <p className={style.title}>Produksi</p>
-                    <p className={style.pathname}>Transaksi / Produksi / Produksi</p>
+                    <p className={style.title}>Perencanaan Produksi</p>
+                    <p className={style.pathname}>Transaksi / Produksi / Perencanaan Produksi</p>
                 </div>
                 <div className={style.content}>
                     <div className={`col-12 pe-md-2 pb-2 pb-md-0`}>
@@ -139,7 +133,6 @@ export class produksi extends Component {
                                             ]} placeholder={'Select Status...'} styles={CustomSelect} />
                                         </div>
                                     </div>
-                                    <button type='button' className={global.button} onClick={this.SelectAddPermintaanBahan}><MdAdd /> Tambah Permintaan Bahan</button>
                                     <button type='button' className={global.button}><MdAdd /> Simpan</button>
                                 </>
                                 : 
@@ -187,7 +180,6 @@ export class produksi extends Component {
                                                     </div>
                                                 </div>
                                                 </div>
-                                                <button type='button' className={global.button} onClick={this.SelectAddPermintaanBahan}><MdAdd /> Tambah Permintaan Bahan</button>
                                                 <button type='button' className={global.button}><MdAdd /> Simpan</button> 
                                                     </>
                                                     :

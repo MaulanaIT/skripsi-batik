@@ -49,12 +49,20 @@ const CustomSelect = {
 
 export class kartu_persediaan_bp extends Component {
 
+    state = {
+        pilihLaporan: '',
+    }
+
+    SelectKartu = (value) => {
+        this.setState({ pilihLaporan: value ? value.value : '' });
+    }
+
 render() {
     return (
         <>
         <div className={style.header}>
                     <p className={style.title}>Kartu Produksi</p>
-                    <p className={style.pathname}>Laporan / Produksi / Kartu Persediaan Bahan Baku</p>
+                    <p className={style.pathname}>Laporan / Produksi / Kartu Persediaan Bahan Penolong</p>
         </div>
             <div className={`${style.content}`}>
                 <div className={`${global.card} col-12`}>
@@ -65,16 +73,26 @@ render() {
                                 { value: 'Bahan Penolong', label: 'Bahan Penolong' }
                             ]} placeholder={'Pilih Kartu...'} styles={CustomSelect} onChange={(value) => this.SelectKartu(value)} />
                     </div>
+                    {this.state.pilihLaporan === 'Tanggal' ?
+                    <>
                     <div className={`${global.input_group_row}`}>
                         <p className={`${global.title} col-2`}>Tanggal</p>
                         <input type="date" className={global.input1} id='input-tanggal-awal' name='input-tanggal-awal'/>
                         <p className={`${global.title} col-1`}></p>
                         <input type="date" className={global.input1} id='input-tanggal-akhir' name='input-tanggal-akhir'/>
                     </div>
+                    </>
+                     : 
+                     this.state.pilihLaporan === 'Bahan Penolong' ?
+                     <>
                     <div className={`${global.input_group_row}`}>
                         <p className={`${global.title} col-2`}>Nama Bahan Penolong</p>
                         <input type="text" className={global.input1} id='input-nama-bahan-penolong' name='input-nama-bahan-penolong'/>
                     </div>
+                    </>
+                    :
+                    null
+                }
                 <div className='d-flex'>
                     <div className='col-6 pe-3'>
                         <button type='button' className={`${global.button} w-100`}>Lihat</button>

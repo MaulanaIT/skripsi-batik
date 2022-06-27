@@ -19,13 +19,13 @@ export class daftar_produksi extends Component {
         return (
             <>
             <div className={style.header}>
-                    <p className={style.title}>Produksi</p>
-                    <p className={style.pathname}>Transaksi / Produksi / Harga Pokok Produksi</p>
+                    <p className={style.title}>Proses Produksi</p>
+                    <p className={style.pathname}>Transaksi / Produksi / Proses Produksi</p>
                 </div>
                 <div className={`${style.content}`}>
                     <div className={`${global.card} col-12`}>
                         <div className={`${global.header}`}>
-                            <p className={global.title}>Daftar Perhitungan HPP</p>
+                            <p className={global.title}>Daftar Proses Produksi</p>
                             <Link to={'/transaksi/produksi/hpp'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
                         </div>
                         <div className={`table-responsive`}>
@@ -40,7 +40,7 @@ export class daftar_produksi extends Component {
                                         <td>BOP</td>
                                         <td>Harga Pokok Produksi</td>
                                         <td>Harga Jual</td>
-                                        <td>Opsi</td>
+                                        <td>Aksi</td>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

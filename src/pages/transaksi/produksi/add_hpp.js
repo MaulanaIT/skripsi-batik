@@ -49,6 +49,10 @@ const CustomSelect = {
 
 export class add_hpp extends Component {
 
+    CloseDetail = () => {
+        document.getElementById('add_hpp').classList.add('d-none');
+    }
+
     state = {
         tabSelected: 0
     }
@@ -64,17 +68,13 @@ export class add_hpp extends Component {
         this.setState({ tabSelected: index });
     }
 
-    CloseAddHPP = () => {
-        document.getElementById('add_hpp').classList.add('d-none');
-    }
-
     render() {
         return (
             <>
             <div id='add_hpp' className={`${global.loading_background} d-none`}>
-                <div><FiXCircle className='fs-4 col-12' onclick={this.CloseAddHPP}/>
+                <div><FiXCircle className='fs-4 col-12' onclick={this.CloseDetail} />
                     <div className={style.content}>
-                        <div className={global.card}>
+                        <div className={global.card_detail}>
                             <p className={global.title}>Tambah Perhitungan Harga Pokok Produksi</p>
                                 <div className={`col-12 col-md-7 ps-md-2 pt-2 pt-md-0`}>
                                     <div className={`${global.tab_card} pb-2`}>

@@ -48,18 +48,16 @@ export class laporan_tenaga_kerja extends Component {
                                 <p className={`${style.title} text-center w-100 fw-bold`} style={{ fontSize: 18 }}>LEKSANA BATIK JAYA</p>
                                 <p className={`${style.title} text-center w-100`} style={{ fontSize: 17 }}>LAPORAN TENAGA KERJA</p>
 
-                                <div>
-                                    <p className={global.input_group_row}>Tanggal</p>
-                                    <div className={`d-flex`}>
-                                        <div className={'col-3'}>
-                                            <input type="date" id='input-tanggal-awal' name='input-tanggal-awal' className={'w-100'} readOnly />
-                                        </div>
-                                        <div className={'d-flex align-items-center px-3'}>
-                                            <p className={global.title}> sampai </p>
-                                        </div>
-                                        <div className={'col-3'}>
-                                            <input type="date" id='input-tanggal-akhir' name='input-tanggal-akhir' className={'w-100'} readOnly />
-                                        </div>
+                                <div className={`${global.input_group_row}`}>
+                                    <p className={style.title}>Tanggal</p>
+                                    <div className={'col-3'}>
+                                        <input type="date" id='input-tanggal-awal' name='input-tanggal-awal' className={'w-100'} readOnly />
+                                    </div>
+                                    <div className={'d-flex align-items-center px-3'}>
+                                        <p className={global.title}> sampai </p>
+                                    </div>
+                                    <div className={'col-3'}>
+                                        <input type="date" id='input-tanggal-akhir' name='input-tanggal-akhir' className={'w-100'} readOnly />
                                     </div>
                                 </div>
 

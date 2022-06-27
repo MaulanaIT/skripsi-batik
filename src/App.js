@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 // Import Component
+
 import Dashboard from './pages/dashboard';
 import Header from './component/header';
 import Loading from './component/loading';
@@ -13,6 +14,7 @@ import Sidebar from './component/sidebar';
 import TransaksiPenjualanKalkulatorEstimasi from './pages/transaksi/penjualan/kalkulator_estimasi';
 import TransaksiPenjualanPerhitunganHarga from './pages/transaksi/penjualan/perhitungan_harga';
 import TransaksiPenjualanTransaksiPenjualan from './pages/transaksi/penjualan/transaksi_penjualan';
+import MasterUser from './pages/master/user';
 import MasterAkun from './pages/master/akun';
 import MasterDaftarAkun from './pages/master/daftar_akun';
 import MasterSupplier from './pages/master/supplier';
@@ -39,13 +41,12 @@ import TransaksiPenerimaanKasUangMukaPesanan from './pages/transaksi/penerimaan_
 import TransaksiPenerimaanKasDaftarUangMuka from './pages/transaksi/penerimaan_kas/daftar_uangmuka';
 import TransaksiPenerimaanKasKonsinyasi from './pages/transaksi/penerimaan_kas/konsinyasi';
 import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
-import TransaksiPermintaanBahan from './pages/transaksi/produksi/permintaan_bahan';
+import TransaksiPermintaanProduksiPesanan from './pages/transaksi/produksi/permintaan_prod_pesanan';
 import DaftarProduksi from './pages/transaksi/produksi/daftar_produksi';
 import DaftarHargaPokokProduksi from './pages/transaksi/produksi/daftar_hpp';
 import Produksi from './pages/transaksi/produksi/produksi';
 import HargaPokokProduksi from './pages/transaksi/produksi/hpp';
 import AddHPP from './pages/transaksi/produksi/add_hpp';
-import AddPermintaanBahan from './pages/transaksi/produksi/add_permintaan_bahan';
 import LaporanPembelianTransaksiPembelian from './pages/laporan/pembelian/transaksi_pembelian';
 import LaporanPembelianReturPembelian from './pages/laporan/pembelian/retur_pembelian';
 import LaporanPenjualanTransaksiPenjualan from './pages/laporan/penjualan/transaksi_penjualan';
@@ -83,7 +84,7 @@ export class App extends Component {
                             <Routes>
                                 <Route path={'/'} element={<Navigate to={'/dashboard'} />} />
                                 <Route path={'/dashboard'} element={<Dashboard />} />
-                                <Route path={'/master/user'} element={<Dashboard />} />
+                                <Route path={'/master/user'} element={<MasterUser />} />
                                 <Route path={'/master/akun'} element={<MasterAkun />} />
                                 <Route path={'/master/daftar-akun'} element={<MasterDaftarAkun />} />
                                 <Route path={'/master/supplier'} element={<MasterSupplier />} />
@@ -113,13 +114,12 @@ export class App extends Component {
                                 <Route path={'/transaksi/penerimaan-kas/daftar-uangmuka'} element={<TransaksiPenerimaanKasDaftarUangMuka />} />
                                 <Route path={'/transaksi/penerimaan-kas/konsinyasi'} element={<TransaksiPenerimaanKasKonsinyasi />} />
                                 <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
-                                <Route path={'/transaksi/produksi/permintaan_bahan'} element={<TransaksiPermintaanBahan />} />
+                                <Route path={'/transaksi/produksi/permintaan_prod_pesanan'} element={<TransaksiPermintaanProduksiPesanan />} />
                                 <Route path={'/transaksi/produksi/daftar_produksi'} element={<DaftarProduksi />} />
                                 <Route path={'/transaksi/produksi/produksi'} element={<Produksi/>} />
                                 <Route path={'/transaksi/produksi/daftar_hpp'} element={<DaftarHargaPokokProduksi/>} />
                                 <Route path={'/transaksi/produksi/hpp'} element={<HargaPokokProduksi/>} />
                                 <Route path={'/transaksi/produksi/add_hpp'} element={<AddHPP/>} />
-                                <Route path={'/transaksi/produksi/add_permintaan_bahan'} element={<AddPermintaanBahan/>} />
                                 <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<LaporanPembelianTransaksiPembelian />} />
                                 <Route path={'/laporan/pembelian/retur-pembelian'} element={<LaporanPembelianReturPembelian />} />
                                 <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<LaporanPenjualanTransaksiPenjualan />} />
