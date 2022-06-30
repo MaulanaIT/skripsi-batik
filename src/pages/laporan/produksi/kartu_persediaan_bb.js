@@ -49,6 +49,14 @@ const CustomSelect = {
 
 export class laporan_produksi extends Component {
 
+    state = {
+        pilihLaporan: '',
+    }
+
+    SelectKartu = (value) => {
+        this.setState({ pilihLaporan: value ? value.value : '' });
+    }
+
 render() {
     return (
         <>
@@ -65,16 +73,26 @@ render() {
                                 { value: 'Bahan Baku', label: 'Bahan Baku' }
                             ]} placeholder={'Pilih Kartu...'} styles={CustomSelect} onChange={(value) => this.SelectKartu(value)} />
                     </div>
+                {this.state.pilihLaporan === 'Tanggal' ?
+                    <>
                     <div className={`${global.input_group_row}`}>
                         <p className={`${global.title} col-2`}>Tanggal</p>
                         <input type="date" className={global.input1} id='input-tanggal-awal' name='input-tanggal-awal'/>
                         <p className={`${global.title} col-1`}></p>
                         <input type="date" className={global.input1} id='input-tanggal-akhir' name='input-tanggal-akhir'/>
                     </div>
+                    </>
+                     : 
+                this.state.pilihLaporan === 'Bahan Baku' ?
+                    <>
                     <div className={`${global.input_group_row}`}>
                         <p className={`${global.title} col-2`}>Nama Bahan Baku</p>
                         <input type="text" className={global.input1} id='input-nama-bahan-baku' name='input-nama-bahan-baku'/>
                     </div>
+                    </>
+                    :
+                    null
+                }
                 <div className='d-flex'>
                     <div className='col-6 pe-3'>
                         <button type='button' className={`${global.button} w-100`}>Lihat</button>

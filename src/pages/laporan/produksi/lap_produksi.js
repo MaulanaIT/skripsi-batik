@@ -86,14 +86,15 @@ render() {
                         <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Cetak</button>
                     </div>
                 </div>
+                </div>
                 <div className={`${style.content}`}>
                     <div className={`${global.card} col-12`}>
-                    <p className={`${style.title} text-center w-100 fw-bold`} style={{fontSize: 18}}>LEKSANA BATIK JAYA</p>
-                    <p className={`${style.title} text-center w-100`} style={{fontSize: 17}}>LAPORAN PRODUKSI</p>
+                        <p className={`${style.title} text-center w-100 fw-bold`} style={{fontSize: 18}}>LEKSANA BATIK JAYA</p>
+                        <p className={`${style.title} text-center w-100`} style={{fontSize: 17}}>LAPORAN PRODUKSI</p>
                     
-                    <div>
+
+                        <div className={`${global.input_group_row}`}>
                         <p className={style.title}>Tanggal</p>
-                        <div className={`d-flex`}>
                             <div className={'col-3'}>
                             <input type="date" id='input-tanggal-awal' name='input-tanggal-awal' className={'w-100'} readOnly={true} />
                             </div>
@@ -104,7 +105,7 @@ render() {
                             <input type="date" id='input-tanggal-akhir' name='input-tanggal-akhir' className={'w-100'} readOnly={true} />
                             </div>
                         </div>
-                    </div>
+                    
                     <div className={`table-responsive`}>
                         <table id='table-data' className={`table table-bordered table-striped table-hover w-100`}>
                             <thead className='text-nowrap'>
@@ -119,10 +120,9 @@ render() {
                             </thead>
                         </table>
                     </div>
-                    </div>
-                </div>
                 </div>
             </div>
+        </div>
         </>
     )
 }
