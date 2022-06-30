@@ -92,7 +92,7 @@ render() {
                     <div className={`${bootstrap['d-flex']}`}>
                         <div className={`${global.input_group} col-3 pe-2`}>
                             <p className={global.title}>Nama Bahan</p>
-                            <input type="text" id='input-nama-bahan' name='input-nama-bahan' readOnly />
+                            <input type="text" id='input-nama-bahan' name='input-nama-bahan' readOnly={true} />
                         </div>
                         <div className={`${global.input_group} col-3 ps-2`}>
                             <p className={global.title}>Jenis Bahan</p>

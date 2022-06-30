@@ -42,17 +42,17 @@ export class laporan_hpp extends Component {
                     <div className={`${bootstrap['d-flex']}`}>
                         <div className={`${global.input_group} col-3 pe-2`}>
                             <p className={global.title}>Kode Pesanan</p>
-                            <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' readOnly />
+                            <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' readOnly={true} />
                         </div>
                         <div className={`${global.input_group} col-3 ps-2`}>
                             <p className={global.title}>Tanggal Pesanan</p>
-                            <input type="date" id='input-tanggal-pesanan' name='input-tanggal-pesanan' readOnly />
+                            <input type="date" id='input-tanggal-pesanan' name='input-tanggal-pesanan' readOnly={true} />
                         </div>
                     </div>
                     <div className={`${bootstrap['d-flex']}`}>
                         <div className={`${global.input_group} col-3 pe-2`}>
                             <p className={global.title}>Nama Pelanggan</p>
-                            <input type="text" id='input-nama-pelanggan' name='input-nama-pelanggan' readOnly />
+                            <input type="text" id='input-nama-pelanggan' name='input-nama-pelanggan' readOnly={true} />
                         </div>
                         <div className={`${global.input_group} col-3 ps-2`}>
                             <p className={global.title}>Nama Produksi</p>
@@ -62,7 +62,7 @@ export class laporan_hpp extends Component {
                     <div className={`${bootstrap['d-flex']}`}>
                         <div className={`${global.input_group} col-3 pe-2`}>
                             <p className={global.title}>Jumlah Produksi</p>
-                            <input type="text" id='input-jumlah-pesanan' name='input-jumlah-pesanan' readOnly />
+                            <input type="text" id='input-jumlah-pesanan' name='input-jumlah-pesanan' readOnly={true} />
                         </div>
                     </div>
 
@@ -70,30 +70,30 @@ export class laporan_hpp extends Component {
                     <div className={`${bootstrap['d-flex']}`}>
                         <div className={`${global.input_group} col-3 pe-2`}>
                             <p className={global.title}>Biaya Bahan Baku</p>
-                            <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' readOnly />
+                            <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' readOnly={true} />
                         </div>
                         <div className={`${global.input_group} col-3 pe-2`}>
                             <p className={global.title}>Biaya Tenaga Kerja</p>
-                            <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' readOnly />
+                            <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' readOnly={true} />
                         </div>
                         <div className={`${global.input_group} col-3 pe-2`}>
                             <p className={global.title}>Biaya Overhead</p>
-                            <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' readOnly />
+                            <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' readOnly={true} />
                         </div>
                     </div>
                         <div className={`d-flex`}>
                             <p className={`${global.title} col-3`}>Harga Pokok Produksi</p>
-                            <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' className='col-6' readOnly />
+                            <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' className='col-6' readOnly={true} />
                         </div>
 
                         <div className='d-flex'>
                             <p className={`${global.title} col-3`}>Jumlah Produksi</p>
-                            <input type="text" id='input-jumlah-produksi' name='input-jumlah-produksi'className='col-6' readOnly />
+                            <input type="text" id='input-jumlah-produksi' name='input-jumlah-produksi'className='col-6' readOnly={true} />
                         </div>
 
                         <div className='d-flex'>
                             <p className={`${global.title} col-3`}>Harga Pokok Produksi / Unit</p>
-                            <input type="text" id='input-harga-pokok-produksi-unit' name='input-harga-pokok-produksi-unit' className='col-6' readOnly />
+                            <input type="text" id='input-harga-pokok-produksi-unit' name='input-harga-pokok-produksi-unit' className='col-6' readOnly={true} />
                         </div>
                     </div>
                 </div>

@@ -75,7 +75,7 @@ export class kalkulator_estimasi extends Component {
                             <div className='d-flex'>
                                 <div className={`${global.input_group} col-6 pe-2`}>
                                     <p className={global.title}>Kode Pesanan</p>
-                                    <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' readOnly />
+                                    <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' readOnly={true} />
                                 </div>
                                 <div className={`${global.input_group} col-6 ps-2`}>
                                     <p className={global.title}>Tanggal</p>
@@ -116,7 +116,7 @@ export class kalkulator_estimasi extends Component {
                                 </div>
                                 <div className={`${global.input_group} col-4 px-2`}>
                                     <p className={global.title}>HPP</p>
-                                    <input type="text" id='input-hpp-pesanan' name='input-hpp-pesanan' readOnly />
+                                    <input type="text" id='input-hpp-pesanan' name='input-hpp-pesanan' readOnly={true} />
                                 </div>
                                 <div className={`${global.input_group} col-4 ps-2`}>
                                     <p className={global.title}>% Profit</p>
@@ -125,7 +125,7 @@ export class kalkulator_estimasi extends Component {
                             </div>
                             <div className={`${global.input_group}`}>
                                 <p className={global.title}>Harga Jual</p>
-                                <input type="text" id='input-harga-jual-pesanan' name='input-harga-jual-pesanan' readOnly />
+                                <input type="text" id='input-harga-jual-pesanan' name='input-harga-jual-pesanan' readOnly={true} />
                             </div>
                             <div className='d-flex'>
                                 <div className='col-6 pe-2'>

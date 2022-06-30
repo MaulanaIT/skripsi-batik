@@ -212,7 +212,7 @@ export class penerimaan_barang extends Component {
                             <div className={`d-flex`}>
                                 <div className={`${global.input_group} col-6 pe-2`}>
                                     <p className={global.title}>Kode Penerimaan</p>
-                                    <input type="text" id='valueKodePenerimaan' value={valueKodePenerimaan} readOnly />
+                                    <input type="text" id='valueKodePenerimaan' value={valueKodePenerimaan} readOnly={true} />
                                 </div>
                                 <div className={`${global.input_group} col-6 ps-2`}>
                                     <p className={global.title}>Tanggal Terima</p>
@@ -226,17 +226,17 @@ export class penerimaan_barang extends Component {
                                 </div>
                                 <div className={`${global.input_group} col-5 ps-2`}>
                                     <p className={global.title}>Tanggal Order</p>
-                                    <input type="text" id='valueTanggalOrder' value={valueTanggalOrder} readOnly />
+                                    <input type="text" id='valueTanggalOrder' value={valueTanggalOrder} readOnly={true} />
                                 </div>
                             </div>
                             <div className={`d-flex`}>
                                 <div className={`${global.input_group} col-3 px-2`}>
                                     <p className={global.title}>Kode Supplier</p>
-                                    <input type="text" id='valueKodeSupplier' value={valueKodeSupplier} readOnly />
+                                    <input type="text" id='valueKodeSupplier' value={valueKodeSupplier} readOnly={true} />
                                 </div>
                                 <div className={`${global.input_group} col-5 ps-2`}>
                                     <p className={global.title}>Nama Supplier</p>
-                                    <input type="text" id='valueNamaSupplier' value={valueNamaSupplier} readOnly />
+                                    <input type="text" id='valueNamaSupplier' value={valueNamaSupplier} readOnly={true} />
                                 </div>
                             </div>
                         </div>

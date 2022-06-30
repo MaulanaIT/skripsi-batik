@@ -99,13 +99,13 @@ export class produksi extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-6 ps-2`}>
                                             <p className={global.title}>Tanggal Pesan</p>
-                                            <input type="date" id='input-tanggal-jual' name='input-tanggal-jual' readOnly />
+                                            <input type="date" id='input-tanggal-jual' name='input-tanggal-jual' readOnly={true} />
                                         </div>
                                     </div>
                                     <div className={`d-flex flex-wrap`}>
                                         <div className={`${global.input_group} col-6 pe-2`}>
                                             <p className={global.title}>Kode Produksi</p>
-                                            <input type="text" id='input-kode-produksi' name='input-kode-produksi' readOnly />
+                                            <input type="text" id='input-kode-produksi' name='input-kode-produksi' readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-6 ps-2`}>
                                             <p className={global.title}>Tanggal Produksi</p>
@@ -113,15 +113,15 @@ export class produksi extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-6 pe-2`}>
                                             <p className={global.title}>Nama Customer</p>
-                                            <input type="text" id='input-nama-customer' name='input-nama-customer' readOnly />
+                                            <input type="text" id='input-nama-customer' name='input-nama-customer' readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-6 ps-2`}>
                                             <p className={global.title}>Nama Pesanan</p>
-                                            <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' readOnly />
+                                            <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-6 pe-2`}>
                                             <p className={global.title}>Jumlah</p>
-                                            <input type="text" id='input-jumlah' name='input-jumlah' readOnly />
+                                            <input type="text" id='input-jumlah' name='input-jumlah' readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-6 ps-2`}>
                                             <p className={global.title}>Lama Produksi</p>
@@ -156,7 +156,7 @@ export class produksi extends Component {
                                                 <div className={`d-flex flex-wrap`}>
                                                     <div className={`${global.input_group} col-6 pe-2`}>
                                                         <p className={global.title}>Kode Produksi</p>
-                                                        <input type="text" id='input-kode-produksi' name='input-kode-produksi' readOnly />
+                                                        <input type="text" id='input-kode-produksi' name='input-kode-produksi' readOnly={true} />
                                                     </div>
                                                     <div className={`${global.input_group} col-6 ps-2`}>
                                                         <p className={global.title}>Tanggal Produksi</p>
@@ -164,15 +164,15 @@ export class produksi extends Component {
                                                     </div>
                                                     <div className={`${global.input_group} col-6 pe-2`}>
                                                         <p className={global.title}>Kode Produk</p>
-                                                        <input type="text" id='input-kode-produk' name='input-kode-produk' readOnly />
+                                                        <input type="text" id='input-kode-produk' name='input-kode-produk' readOnly={true} />
                                                     </div>
                                                     <div className={`${global.input_group} col-6 ps-2`}>
                                                         <p className={global.title}>Nama Produk</p>
-                                                        <input type="text" id='input-nama-produk' name='input-nama-produk' readOnly />
+                                                        <input type="text" id='input-nama-produk' name='input-nama-produk' readOnly={true} />
                                                     </div>
                                                     <div className={`${global.input_group} col-6 pe-2`}>
                                                         <p className={global.title}>Jumlah</p>
-                                                        <input type="text" id='input-jumlah' name='input-jumlah' readOnly />
+                                                        <input type="text" id='input-jumlah' name='input-jumlah' readOnly={true} />
                                                     </div>
                                                     <div className={`${global.input_group} col-6 ps-2`}>
                                                         <p className={global.title}>Lama Produksi</p>

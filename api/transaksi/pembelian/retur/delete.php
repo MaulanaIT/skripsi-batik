@@ -3,9 +3,9 @@
 require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
+    $kode = $_POST['kode'];
     
-    $query = "DELETE FROM master_akun WHERE id='".$id."'";
+    $query = "DELETE FROM retur_pembelian WHERE kode='".$kode."'";
     
     $result = $conn->query($query);
 
@@ -16,7 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response['data'] = [];
     
         if ($result) {
-            $response['data'] = $result;
+    
+            $query = "DELETE FROM detail_retur WHERE kode='".$kode."'";
+            
+            $result = $conn->query($query);
+    
+            if ($result) {
+                $response['data'] = $result;
+            } else {
+                $response['data'] = [];
+            }
         } else {
             $response['data'] = [];
         }

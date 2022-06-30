@@ -95,13 +95,13 @@ render() {
                         <p className={style.title}>Tanggal</p>
                         <div className={`d-flex`}>
                             <div className={'col-3'}>
-                            <input type="date" id='input-tanggal-awal' name='input-tanggal-awal' className={'w-100'} readOnly />
+                            <input type="date" id='input-tanggal-awal' name='input-tanggal-awal' className={'w-100'} readOnly={true} />
                             </div>
                             <div className={'d-flex align-items-center px-3'}>
                             <p className={global.title}> sampai </p>
                             </div>
                             <div className={'col-3'}>
-                            <input type="date" id='input-tanggal-akhir' name='input-tanggal-akhir' className={'w-100'} readOnly />
+                            <input type="date" id='input-tanggal-akhir' name='input-tanggal-akhir' className={'w-100'} readOnly={true} />
                             </div>
                         </div>
                     </div>

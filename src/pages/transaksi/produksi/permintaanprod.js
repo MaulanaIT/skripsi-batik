@@ -85,7 +85,7 @@ export class permintaanprod extends Component {
                                     <div className={`d-flex flex-wrap`}>
                                         <div className={`${global.input_group} col-6 pe-2`}>
                                             <p className={global.title}>Kode Permintaan</p>
-                                            <input type="text" className={global.input1} id='input-kode-permintaan' name='input-kode-permintaan' readOnly />
+                                            <input type="text" className={global.input1} id='input-kode-permintaan' name='input-kode-permintaan' readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-6 ps-2`}>
                                             <p className={global.title}>Kode Produk</p>
@@ -131,7 +131,7 @@ export class permintaanprod extends Component {
                                     <div className={`d-flex flex-wrap`}>
                                         <div className={`${global.input_group} col-6 pe-2`}>
                                             <p className={global.title}>Kode Permintaan</p>
-                                            <input type="text" className={global.input1} id='input-kode-permintaan' name='input-kode-permintaan' readOnly />
+                                            <input type="text" className={global.input1} id='input-kode-permintaan' name='input-kode-permintaan' readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-6 ps-2`}>
                                             <p className={global.title}>Kode Pesanan</p>
@@ -141,7 +141,7 @@ export class permintaanprod extends Component {
                                     <div className={`d-flex flex-wrap`}>
                                         <div className={`${global.input_group} col-6 pe-2`}>
                                             <p className={global.title}>Nama Pesanan</p>
-                                            <input type="text" className={global.input1} id='input-nama-pesanan' name='input-nama-pesanan' readOnly />
+                                            <input type="text" className={global.input1} id='input-nama-pesanan' name='input-nama-pesanan' readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-6 ps-2`}>
                                             <p className={global.title}>Nama Customer</p>
@@ -151,7 +151,7 @@ export class permintaanprod extends Component {
                                     <div className={`d-flex flex-wrap`}>
                                         <div className={`${global.input_group} col-6 pe-2`}>
                                             <p className={global.title}>Jumlah Pesanan</p>
-                                            <input type="text" className={global.input1} id='input-jumlah-pesanan' name='input-jumlah-pesanan' readOnly />
+                                            <input type="text" className={global.input1} id='input-jumlah-pesanan' name='input-jumlah-pesanan' readOnly={true} />
                                         </div>
                                     </div>
                                         <button type='button' className={global.button}><MdAdd /> Simpan</button> 

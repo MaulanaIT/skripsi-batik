@@ -72,7 +72,7 @@ export class uang_muka_pesanan extends Component {
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-6 pe-2`}>
                                         <p className={global.title}>Kode Kas Masuk</p>
-                                        <input type="text" id='input-kode-kas-masuk' name='input-kode-kas-masuk' readOnly />
+                                        <input type="text" id='input-kode-kas-masuk' name='input-kode-kas-masuk' readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-6 ps-2`}>
                                         <p className={global.title}>Tanggal</p>
@@ -105,7 +105,7 @@ export class uang_muka_pesanan extends Component {
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-4 pe-2`}>
                                         <p className={global.title}>Jumlah</p>
-                                        <input type="text" id='input-jumlah-beli' name='input-jumlah-beli' readOnly />
+                                        <input type="text" id='input-jumlah-beli' name='input-jumlah-beli' readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-4 px-2`}>
                                         <p className={global.title}>Harga</p>

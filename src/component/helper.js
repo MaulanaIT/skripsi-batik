@@ -7,7 +7,15 @@ const config = {
     }
 };
 
-export const CheckInputValidity = (form) => {
+const Calculate = (number = []) => {
+    let result = 0;
+
+    number.length > 0 && number.forEach(value => result += parseInt(value === '' ? 0 : value));
+
+    return result;
+}
+
+const CheckInputValidity = (form) => {
     let result = false;
 
     let input = document.getElementById(form).querySelectorAll('input[required]');
@@ -85,4 +93,4 @@ const ShowLoading = () => {
     document.getElementById('loading').classList.remove('d-none');
 }
 
-export { baseURL, config, cx, GenerateCode, GetValue, HideLoading, InputFormatNumber, ResetForm, SetValue, ShowLoading };
+export { baseURL, Calculate, CheckInputValidity, config, cx, GenerateCode, GetValue, HideLoading, InputFormatNumber, ResetForm, SetValue, ShowLoading };

@@ -25,6 +25,22 @@ export class daftar_order extends Component {
         this.GetOrder();
     }
 
+    DeleteOrder = (kode) => {
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('kode', kode);
+
+        axios.post(`${baseURL}/api/transaksi/pembelian/order/delete.php`, formData, config).then(() => {
+            this.GetOrder();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
     GetOrder = () => {
         axios.get(`${baseURL}/api/transaksi/pembelian/order/select.php`, config).then(response => {
             ShowLoading();
@@ -39,27 +55,27 @@ export class daftar_order extends Component {
                         <tr key={index} className={`align-middle`}>
                             <td className={`text-center`}>{index + 1}.</td>
                             <td>
-                                <div id={`data-kode-${item.id}`}>{item.kode}</div>
+                                <div id={`data-kode-${item.id}`} className={'text-center'}>{item.kode}</div>
                             </td>
                             <td>
-                                <div id={`data-tanggal-${item.id}`} className={`data-${item.id}`}>{item.tanggal}</div>
+                                <div id={`data-tanggal-${item.id}`} className={`data-${item.id} text-center`}>{item.tanggal}</div>
                             </td>
                             <td>
-                                <div id={`data-kode-supplier-${item.id}`} className={`data-${item.id} text-end`}>{item.kode_supplier}</div>
+                                <div id={`data-kode-supplier-${item.id}`} className={`data-${item.id} text-center`}>{item.kode_supplier}</div>
                             </td>
                             <td>
                                 <div id={`data-nama-supplier-${item.id}`} className={`data-${item.id}`}>{item.nama_supplier}</div>
                             </td>
                             <td>
-                                <div id={`data-total-harga-${item.id}`} className={`data-${item.id}`}>{item.total_harga}</div>
+                                <div id={`data-total-harga-${item.id}`} className={`data-${item.id} text-end`}>{item.total_harga}</div>
                             </td>
                             <td>
-                                <div id={`data-status-${item.id}`} className={`data-${item.id}`}>{item.status}</div>
+                                <div id={`data-status-${item.id}`} className={`data-${item.id} text-center`}>{item.status}</div>
                             </td>
                             <td className={global.table_action}>
                                 <button type='button' id='button-detail' className={global.edit} style={{gridColumn: '2 span'}}><FaClipboardList /> Detail</button>
                                 <button type='button' id='button-print' className={global.apply}><FaPrint /> Print</button>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.id)}><FaTrash /> Delete</button>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
                             </td>
                         </tr>
                     );
@@ -80,10 +96,10 @@ export class daftar_order extends Component {
         });
     }
 
-    SelectDetail = () => {
+    SelectDetailKeuangan = () => {
         document.getElementById('detail_order_admkeu').classList.remove('d-none');
     }
-    SelectDetail2 = () => {
+    SelectDetailGudang = () => {
         document.getElementById('detail_order_gudang').classList.remove('d-none');
     }
 
@@ -125,10 +141,10 @@ export class daftar_order extends Component {
                 </div>
                 <div className='d-flex flex-column gap-2 pt-2'>
                     <div>
-                        <button type='button' className={global.button} onClick={this.SelectDetail}>Detail AdmKeu</button>
+                        <button type='button' className={global.button} onClick={this.SelectDetailKeuangan}>Detail AdmKeu</button>
                     </div>
                     <div>
-                        <button type='button' className={global.button} onClick={this.SelectDetail2}>Detail Gudang</button>
+                        <button type='button' className={global.button} onClick={this.SelectDetailGudang}>Detail Gudang</button>
                     </div>
                 </div>
             </>

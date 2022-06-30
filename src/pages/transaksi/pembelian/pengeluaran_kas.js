@@ -78,12 +78,12 @@ export class pengeluaran_kas extends Component {
                             <p className={global.title}>Input Pengeluaran Kas</p>
                             <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Jenis Pembelian</p>
-                                <input type="text" id='valueJenisPembelian' value={valueJenisPembelian} readOnly />
+                                <input type="text" id='valueJenisPembelian' value={valueJenisPembelian} readOnly={true} />
                             </div>
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-6 pe-2`}>
                                         <p className={global.title}>Kode Kas Keluar</p>
-                                        <input type="text" id='input-kode-kas-keluar' name='input-kode-kas-keluar' maxLength={10} readOnly />
+                                        <input type="text" id='input-kode-kas-keluar' name='input-kode-kas-keluar' maxLength={10} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-6 ps-2`}>
                                         <p className={global.title}>Tanggal Bayar</p>
@@ -93,7 +93,7 @@ export class pengeluaran_kas extends Component {
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-3 px-2`}>
                                         <p className={global.title}>Kode Order</p>
-                                        <input type="text" id='input-kode-order' name='input-kode-order' maxLength={10} readOnly />
+                                        <input type="text" id='input-kode-order' name='input-kode-order' maxLength={10} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-5 ps-2`}>
                                         <p className={global.title}>Tanggal Order</p>

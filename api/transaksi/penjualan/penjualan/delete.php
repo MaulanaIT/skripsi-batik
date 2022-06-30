@@ -3,9 +3,18 @@
 require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $jenis_penjualan = $_POST['jenis_penjualan'];
     $kode = $_POST['kode'];
-    
-    $query = "DELETE FROM order_pembelian WHERE kode='".$kode."'";
+
+    $query = '';
+
+    if ($jenis_penjualan == 'tunai') {
+        $query = "DELETE FROM penjualan_tunai WHERE kode='".$kode."'";
+    } else if ($jenis_penjualan == 'konsinyasi') {
+        $query = "DELETE FROM penjualan_konsinyasi WHERE kode='".$kode."'";
+    } else {
+        $query = "DELETE FROM penjualan_pesanan WHERE kode='".$kode."'";
+    }
     
     $result = $conn->query($query);
 
@@ -16,8 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response['data'] = [];
     
         if ($result) {
-    
-            $query = "DELETE FROM detail_order_pembelian WHERE kode='".$kode."'";
+
+            if ($jenis_penjualan == 'tunai' || $jenis_penjualan == 'konsinyasi') {
+                $query = "DELETE FROM detail_penjualan WHERE kode='".$kode."'";
+            } else {
+                $query = "DELETE FROM detail_penjualan_pesanan WHERE kode='".$kode."'";
+            }
             
             $result = $conn->query($query);
     

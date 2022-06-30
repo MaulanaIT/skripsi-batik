@@ -393,6 +393,17 @@ export class order_pembelian extends Component {
         this.setState({ valueKalkulasiTotalHarga: totalHarga });
     }
 
+    SelectAlat = (data) => {
+        if (data) {
+            let valueKode = this.state.dataSelectKodeAlat.find(item => item.value === data?.value);
+            let valueNama = this.state.dataSelectNamaAlat.find(item => item.value === data?.value);
+
+            this.setState({ valueKodeAlat: valueKode, valueNamaAlat: valueNama });
+        } else {
+            this.setState({ valueKodeAlat: '', valueNamaAlat: '' });
+        }
+    }
+
     SelectBahan = (data) => {
         if (data) {
             let valueKode = this.state.dataSelectKodeBahan.find(item => item.value === data?.value);
@@ -463,7 +474,7 @@ export class order_pembelian extends Component {
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-6 pe-2`}>
                                             <p className={global.title}>Kode Order</p>
-                                            <input type="text" id='valueKodeOrder' maxLength={10} value={valueKodeOrder} readOnly />
+                                            <input type="text" id='valueKodeOrder' maxLength={10} value={valueKodeOrder} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-6 ps-2`}>
                                             <p className={global.title}>Tanggal</p>
@@ -471,7 +482,7 @@ export class order_pembelian extends Component {
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
-                                        <div className={`${global.input_group} col-3 px-2`}>
+                                        <div className={`${global.input_group} col-3 pe-2`}>
                                             <p className={global.title}>Kode Supplier</p>
                                             <Select escapeClearsValue={false} isClearable={true} isSearchable={true} options={this.state.dataSelectKodeSupplier} placeholder={'Select Kode...'} styles={CustomSelect} value={valueKodeSupplier} onChange={(data) => this.SelectSupplier(data)} />
                                         </div>
@@ -498,11 +509,11 @@ export class order_pembelian extends Component {
                                             <div className={`d-flex`}>
                                                 <div className={`${global.input_group} col-5 pe-2`}>
                                                     <p className={global.title}>Kode Alat</p>
-                                                    <Select id='select-kode-alat' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeAlat} placeholder={'Select Kode...'} styles={CustomSelect} value={valueKodeAlat} onChange={(data) => this.SelectBahan(data)} />
+                                                    <Select id='select-kode-alat' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeAlat} placeholder={'Select Kode...'} styles={CustomSelect} value={valueKodeAlat} onChange={(data) => this.SelectAlat(data)} />
                                                 </div>
                                                 <div className={`${global.input_group} col-7 pe-2`}>
                                                     <p className={global.title}>Nama Alat</p>
-                                                    <Select id='select-nama-alat' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeAlat} placeholder={'Select Nama...'} styles={CustomSelect} value={valueNamaAlat} onChange={(data) => this.SelectBahan(data)} />
+                                                    <Select id='select-nama-alat' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeAlat} placeholder={'Select Nama...'} styles={CustomSelect} value={valueNamaAlat} onChange={(data) => this.SelectAlat(data)} />
                                                 </div>
                                             </div>
                                             <div className={`d-flex`}>
@@ -588,7 +599,7 @@ export class order_pembelian extends Component {
                                 <div className={`d-flex flex-column gap-2 pb-2`}>
                                     <div className={`align-items-center ${global.input_group_row}`}>
                                         <p className={`${global.title} col-3`}>Total Harga</p>
-                                        <input type="text" id='valueKalkulasiTotalHarga' value={valueKalkulasiTotalHarga} readOnly />
+                                        <input type="text" id='valueKalkulasiTotalHarga' value={valueKalkulasiTotalHarga} readOnly={true} />
                                     </div>
                                 </div>
                                 <div className='d-flex flex-column gap-2 pt-2'>

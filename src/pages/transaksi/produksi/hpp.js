@@ -94,11 +94,11 @@ export class hpp extends Component {
                             <div className={`${bootstrap['d-flex']}`}>
                                 <div className={`${global.input_group} col-3 pe-2`}>
                                     <p className={global.title}>Kode Produksi</p>
-                                    <input type="text" id='input-kode-produksi' name='input-kode-produksi' readOnly />
+                                    <input type="text" id='input-kode-produksi' name='input-kode-produksi' readOnly={true} />
                                 </div>
                                 <div className={`${global.input_group} col-3 ps-4`}>
                                     <p className={global.title}>Kode HPP</p>
-                                    <input type="text" id='input-kode-hpp' name='input-kode-hpp' readOnly />
+                                    <input type="text" id='input-kode-hpp' name='input-kode-hpp' readOnly={true} />
                                 </div>
                                 <div className={`${global.input_group} col-3 ps-4`}>
                                     <p className={global.title}>Kode Pesanan</p>

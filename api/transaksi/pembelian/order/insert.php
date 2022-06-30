@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jenis_pembelian = $_POST['jenis_pembelian'];
     $data = json_decode($_POST['data']);
 
-    $query = "INSERT INTO order_pembelian(kode, tanggal, kode_supplier, total_harga, status) VALUES('" . $kode . "', '" . $tanggal . "', '" . $kode_supplier . "', '" . $total_harga . "', 0)";
+    $query = "INSERT INTO order_pembelian(kode, tanggal, kode_supplier, total_harga, status) VALUES('" . $kode . "', '" . $tanggal . "', '" . $kode_supplier . "', '" . $total_harga . "', 'Menunggu')";
 
     $result = $conn->query($query);
 
@@ -38,10 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (!$result) break;
             }
         } */
-        
+
         foreach ($data as $key) {
-            $query = "INSERT INTO detail_order_pembelian (kode, kode_item, nama_item, jumlah, harga) VALUES('" . $key->kode . "', '" . $key->kode_item . "', '" . $key->nama_item . "', '" . $key->jumlah . "', '" . $key->harga . "')";
-        
+            $query = "INSERT INTO detail_order_pembelian (kode, kode_item, nama_item, jumlah, harga, total_harga) VALUES('" . $key->kode . "', '" . $key->kode_item . "', '" . $key->nama_item . "', '" . $key->jumlah . "', '" . $key->harga . "', '" . $key->jumlah * $key->harga . "')";
+
             $result = $conn->query($query);
 
             if (!$result) break;

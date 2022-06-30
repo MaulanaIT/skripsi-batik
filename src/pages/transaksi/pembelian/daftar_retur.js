@@ -4,9 +4,9 @@ import React, { Component } from 'react'
 import $ from 'jquery';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { FaCheck, FaPen, FaTrash } from 'react-icons/fa';
+import { FaClipboardList, FaTrash } from 'react-icons/fa';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config, cx, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
 
 import DetailRetur from './detail_retur_admkeu';
 import DetailRetur2 from './detail_retur_gudang';
@@ -25,7 +25,22 @@ export class daftar_retur extends Component {
         this.GetRetur();
     }
 
-    GetRetur = () => {
+    DeleteRetur = (kode) => {
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('kode', kode);
+
+        axios.post(`${baseURL}/api/transaksi/pembelian/retur/delete.php`, formData, config).then(() => {
+            this.GetRetur();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+    GetRetur = async () => {
         axios.get(`${baseURL}/api/transaksi/pembelian/retur/select.php`, config).then(response => {
             ShowLoading();
 
@@ -39,42 +54,26 @@ export class daftar_retur extends Component {
                         <tr key={index} className={`align-middle`}>
                             <td className={`text-center`}>{index + 1}.</td>
                             <td>
-                                <div id={`data-kode-${item.id}`}>{item.kode}</div>
+                                <div id={`data-kode-${item.id}`} className={'text-center'}>{item.kode}</div>
                             </td>
                             <td>
-                                <div id={`data-tanggal-${item.id}`} className={`data-${item.id}`}>{item.tanggal}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="date" id={`edit-tanggal-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.tanggal} required={true} />
-                                </div> */}
+                                <div id={`data-tanggal-${item.id}`} className={`data-${item.id} text-center`}>{item.tanggal}</div>
                             </td>
                             <td>
-                                <div id={`data-kode-supplier-${item.id}`} className={`data-${item.id} text-end`}>{item.kode_supplier}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-kode-supplier-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.kode_supplier} required={true} />
-                                </div> */}
+                                <div id={`data-kode-supplier-${item.id}`} className={`data-${item.id} text-center`}>{item.kode_supplier}</div>
                             </td>
                             <td>
                                 <div id={`data-nama-supplier-${item.id}`} className={`data-${item.id}`}>{item.nama_supplier}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="date" id={`edit-nama-supplier-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.nama_supplier} required={true} />
-                                </div> */}
                             </td>
                             <td>
-                                <div id={`data-total-harga-${item.id}`} className={`data-${item.id}`}>{item.total_harga}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="date" id={`edit-total-harga-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.total_harga} required={true} />
-                                </div> */}
+                                <div id={`data-jumlah-retur-${item.id}`} className={`data-${item.id} text-center`}>{item.jumlah_retur}</div>
                             </td>
                             <td>
-                                <div id={`data-status-${item.id}`} className={`data-${item.id}`}>{item.status}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="date" id={`edit-status-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.status} required={true} />
-                                </div> */}
+                                <div id={`data-status-${item.id}`} className={`data-${item.id} text-center`}>{item.status}</div>
                             </td>
                             <td className={global.table_action}>
-                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyRetur(item.id)}><FaCheck /> Apply</button>
-                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditRetur(item.id)}><FaPen /> Edit</button>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteRetur(item.id)}><FaTrash />Delete</button>
+                                <button type='button' id='button-detail' className={global.edit}><FaClipboardList /> Detail</button>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteRetur(item.kode)}><FaTrash /> Delete</button>
                             </td>
                         </tr>
                     );
@@ -95,11 +94,12 @@ export class daftar_retur extends Component {
         });
     }
 
-    SelectDetail = () => {
-    document.getElementById('detail_retur_admkeu').classList.remove('d-none');
+    SelectDetailKeuangan = () => {
+        document.getElementById('detail_retur_admkeu').classList.remove('d-none');
     }
-    SelectDetail2 = () => {
-    document.getElementById('detail_retur_gudang').classList.remove('d-none');
+
+    SelectDetailGudang = () => {
+        document.getElementById('detail_retur_gudang').classList.remove('d-none');
     }
 
     render() {
@@ -140,10 +140,10 @@ export class daftar_retur extends Component {
                 </div>
                 <div className='d-flex flex-column gap-2 pt-2'>
                     <div>
-                        <button type='button' className={global.button} onClick={this.SelectDetail}>Detail AdmKeu</button>
+                        <button type='button' className={global.button} onClick={this.SelectDetailKeuangan}>Detail AdmKeu</button>
                     </div>
                     <div>
-                        <button type='button' className={global.button} onClick={this.SelectDetail2}>Detail Gudang</button>
+                        <button type='button' className={global.button} onClick={this.SelectDetailGudang}>Detail Gudang</button>
                     </div>
                 </div>
             </>

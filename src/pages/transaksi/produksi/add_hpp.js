@@ -123,17 +123,17 @@ export class add_hpp extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Harga</p>
-                                            <input type="text" id='input-harga-bahan-baku' name='input-harga-bahan-baku' readOnly />
+                                            <input type="text" id='input-harga-bahan-baku' name='input-harga-bahan-baku' readOnly={true} />
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Jumlah</p>
-                                            <input type="text" id='input-jumlah-bahan-baku' name='input-jumlah-bahan-baku' readOnly />
+                                            <input type="text" id='input-jumlah-bahan-baku' name='input-jumlah-bahan-baku' readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Biaya</p>
-                                            <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' readOnly />
+                                            <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                             <p className={global.title}>Aksi</p>
@@ -191,17 +191,17 @@ export class add_hpp extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Harga</p>
-                                            <input type="text" id='input-harga-bahan-penolong' name='input-harga-bahan-penolong' readOnly />
+                                            <input type="text" id='input-harga-bahan-penolong' name='input-harga-bahan-penolong' readOnly={true} />
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Jumlah</p>
-                                            <input type="text" id='input-jumlah-bahan-penolong' name='input-jumlah-bahan-penolong' readOnly />
+                                            <input type="text" id='input-jumlah-bahan-penolong' name='input-jumlah-bahan-penolong' readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Biaya</p>
-                                            <input type="text" id='input-biaya-bahan-penolong' name='input-biaya-bahan-penolong' readOnly />
+                                            <input type="text" id='input-biaya-bahan-penolong' name='input-biaya-bahan-penolong' readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                             <p className={global.title}>Aksi</p>
@@ -317,7 +317,7 @@ export class add_hpp extends Component {
                             <div className='d-flex'>
                                     <div className={`${global.input_group} col-4 pe-2`}>
                                         <p className={global.title}>Kode Tenaga Kerja</p>
-                                        <input type="text" id='input-kode-tenaga-kerja' name='input-kode-tenaga-kerja' readOnly />
+                                        <input type="text" id='input-kode-tenaga-kerja' name='input-kode-tenaga-kerja' readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-8 px-2`}>
                                         <p className={global.title}>Departemen</p>

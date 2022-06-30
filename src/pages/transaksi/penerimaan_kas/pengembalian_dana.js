@@ -62,7 +62,7 @@ export class pengembalian_dana extends Component {
                         <div className={`${bootstrap['d-flex']}`}>
                             <div className={`${global.input_group_row} col-6`}>
                                 <p className={`${global.title} col-12 col-lg-4 col-md-3 pb-2 pb-md-0`}>Kode Kas Masuk</p>
-                                <input type="text" id='input-kode-kas-masuk' name='input-kode-kas-masuk' readOnly />
+                                <input type="text" id='input-kode-kas-masuk' name='input-kode-kas-masuk' readOnly={true} />
                             </div>
                             <div className={`${global.input_group_row} col-6`}>
                                 <p className={`${global.title} col-12 col-lg-4 col-md-3 pb-2 pb-md-0`}>Kode Supplier</p>
