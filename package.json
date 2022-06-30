@@ -17,7 +17,7 @@
     "ignore-styles": "^5.0.1",
     "jquery": "^3.6.0",
     "moment": "^2.29.3",
-    "react": "^18.0.0",
+    "react": "^18.2.0",
     "react-bootstrap": "^2.2.3",
     "react-css-modules": "^4.7.11",
     "react-dom": "^18.0.0",
