@@ -72,7 +72,10 @@ export class daftar_retur extends Component {
                                 <div id={`data-status-${item.id}`} className={`data-${item.id} text-center`}>{item.status}</div>
                             </td>
                             <td className={global.table_action}>
-                                <button type='button' id='button-detail' className={global.edit}><FaClipboardList /> Detail</button>
+                                {localStorage.getItem('leksana_jabatan').toLowerCase() !== 'owner' &&
+                                    <button type='button' id='button-detail' className={global.edit} onClick={
+                                        localStorage.getItem('leksana_jabatan').toLowerCase() === 'admin, keuangan' ? this.SelectDetailKeuangan : this.SelectDetailGudang}><FaClipboardList /> Detail</button>
+                                }
                                 <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteRetur(item.kode)}><FaTrash /> Delete</button>
                             </td>
                         </tr>
@@ -136,14 +139,6 @@ export class daftar_retur extends Component {
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                </div>
-                <div className='d-flex flex-column gap-2 pt-2'>
-                    <div>
-                        <button type='button' className={global.button} onClick={this.SelectDetailKeuangan}>Detail AdmKeu</button>
-                    </div>
-                    <div>
-                        <button type='button' className={global.button} onClick={this.SelectDetailGudang}>Detail Gudang</button>
                     </div>
                 </div>
             </>

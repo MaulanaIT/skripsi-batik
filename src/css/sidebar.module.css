@@ -150,7 +150,7 @@ ul>li.dropdown>ul.dropdown_menu>li.active>p>.toggle {
     transform: rotate(180deg);
 }
 
-@media screen and (max-width: 991px) {
+/* @media screen and (max-width: 991px) {
     .container {
         left: -230px;
         position: fixed;
@@ -162,4 +162,4 @@ ul>li.dropdown>ul.dropdown_menu>li.active>p>.toggle {
         position: fixed;
         width: 230px;
     }
-}
+} */

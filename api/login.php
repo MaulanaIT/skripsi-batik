@@ -1,13 +1,12 @@
 <?php
 
-require_once '../../config/connection.php';
+require_once './config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $jabatan = $_POST['jabatan'];
-    
-    $query = "INSERT INTO master_user(username, password, jabatan) VALUES('".$username."', '".$password."', '".$jabatan."')";
+
+    $query = "SELECT jabatan FROM master_user WHERE username='".$username."' AND password='".$password."'";
     
     $result = $conn->query($query);
 
@@ -17,8 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response['status'] = 200;
         $response['data'] = [];
     
-        if ($result) {
-            $response['data'] = $result;
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $response['data'] = [
+                    'data' => $row,
+                    'status' => true
+                ];
+            }
         } else {
             $response['data'] = [];
         }
@@ -32,5 +36,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $conn->close();
-
-?>

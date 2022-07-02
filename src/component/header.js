@@ -13,7 +13,14 @@ import style from '../css/header.module.css';
 
 export class header extends Component {
 
-    ToggleAccont = (event) => {
+    Logout = () => {
+        localStorage.removeItem('leksana_login');
+        localStorage.removeItem('leksana_username');
+        localStorage.removeItem('leksana_token');
+        localStorage.removeItem('leksana_jabatan');
+    }
+
+    ToggleAccount = (event) => {
         event.currentTarget.querySelector(`ul.${style.dropdown_menu}`).classList.toggle(style.active);
     }
 
@@ -25,12 +32,12 @@ export class header extends Component {
                     <p className={style.title}>LEKSANA BATIK JAYA</p>
                 </div>
                 <div className={style.menu}>
-                    <div className={style.account} onClick={this.ToggleAccont}>
-                        <p className={style.title}>ADMIN & KEUANGAN</p>
+                    <div className={style.account} onClick={this.ToggleAccount}>
+                        <p className={style.title}>{this.props.jabatan.toUpperCase()}</p>
                         <MdAccountCircle className={style.icon} />
                         <ul className={style.dropdown_menu}>
                             <li><div><FaCog /> SETTING</div></li>
-                            <li><Link to={'/login'}><FaSignOutAlt /> LOGOUT</Link></li>
+                            <li><Link to={'/login'} onClick={this.Logout}><FaSignOutAlt /> LOGOUT</Link></li>
                         </ul>
                     </div>
                 </div>

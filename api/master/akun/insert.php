@@ -6,8 +6,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
     $nama = $_POST['nama'];
     $saldo = $_POST['saldo'];
+    $jenis = $_POST['jenis'];
+
+    $query;
     
-    $query = "INSERT INTO master_akun(kode, nama, saldo) VALUES('".$kode."', '".$nama."', '".$saldo."')";
+    if ($jenis == 'debit') {
+        $query = "INSERT INTO master_akun(kode, nama, saldo, jenis) VALUES('".$kode."', '".$nama."', '".$saldo."', 0)";
+    } else if ($jenis == 'kredit') {
+        $query = "INSERT INTO master_akun(kode, nama, saldo, jenis) VALUES('".$kode."', '".$nama."', '".$saldo."', 1)";
+    }
     
     $result = $conn->query($query);
 

@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // Import Library
-import { Navigate, Route, Routes } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { baseURL, config } from './component/helper';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 // Import Component
-
 import Dashboard from './pages/dashboard';
 import Header from './component/header';
 import Loading from './component/loading';
 import Sidebar from './component/sidebar';
-import Login from './component/login';
+import Login from './pages/login';
 
 // Import Page - Format: MenuSubmenu
 import TransaksiPenjualanKalkulatorEstimasi from './pages/transaksi/penjualan/kalkulator_estimasi';
@@ -70,21 +72,48 @@ import style from './App.module.css';
 // Import Javascript
 import 'datatables.net-bs5/js/dataTables.bootstrap5';
 
-export class App extends Component {
 
-    render() {
-        return (
-            <React.Fragment>
-                <Loading />
+export default function App() {
+    const [getJabatan, setJabatan] = useState('');
+
+    const location = useLocation();
+
+    useEffect(() => {
+        login();
+    }, []);
+
+    const login = () => {
+        const formData = new FormData();
+
+        formData.append('username', localStorage.getItem('leksana_username'));
+        formData.append('password', localStorage.getItem('leksana_token'));
+
+        axios.post(`${baseURL}/api/login.php`, formData, config).then(response => {
+            let login = response.data.data;
+            
+            setJabatan(login.data.jabatan);
+        }).catch(error => {
+            if (location.pathname !== '/' && location.pathname !== '/login') window.location.href = '/login';
+            console.log(error);
+        });
+    }
+
+    return (
+        <React.Fragment>
+            <Loading />
+            {location.pathname === '/' || location.pathname === '/login' ?
+                <Routes>
+                    <Route path={'/login'} element={<Login />} />
+                    <Route path={'/'} element={<Navigate to={'/login'} />} />
+                </Routes>
+                :
                 <div className={style.container}>
-                    <Header />
+                    <Header jabatan={getJabatan} />
                     <div className={style.container_content}>
-                        <Sidebar />
+                        <Sidebar jabatan={getJabatan} />
 
                         <div className={style.content}>
                             <Routes>
-                                <Route path={'/component/login'} element={<Login />} />
-                                <Route path={'/'} element={<Navigate to={'/dashboard'} />} />
                                 <Route path={'/dashboard'} element={<Dashboard />} />
                                 <Route path={'/master/user'} element={<MasterUser />} />
                                 <Route path={'/master/akun'} element={<MasterAkun />} />
@@ -118,10 +147,10 @@ export class App extends Component {
                                 <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
                                 <Route path={'/transaksi/produksi/permintaan_prod_pesanan'} element={<TransaksiPermintaanProduksiPesanan />} />
                                 <Route path={'/transaksi/produksi/daftar_produksi'} element={<DaftarProduksi />} />
-                                <Route path={'/transaksi/produksi/produksi'} element={<Produksi/>} />
-                                <Route path={'/transaksi/produksi/daftar_hpp'} element={<DaftarHargaPokokProduksi/>} />
-                                <Route path={'/transaksi/produksi/hpp'} element={<HargaPokokProduksi/>} />
-                                <Route path={'/transaksi/produksi/add_hpp'} element={<AddHPP/>} />
+                                <Route path={'/transaksi/produksi/produksi'} element={<Produksi />} />
+                                <Route path={'/transaksi/produksi/daftar_hpp'} element={<DaftarHargaPokokProduksi />} />
+                                <Route path={'/transaksi/produksi/hpp'} element={<HargaPokokProduksi />} />
+                                <Route path={'/transaksi/produksi/add_hpp'} element={<AddHPP />} />
                                 <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<LaporanPembelianTransaksiPembelian />} />
                                 <Route path={'/laporan/pembelian/retur-pembelian'} element={<LaporanPembelianReturPembelian />} />
                                 <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<LaporanPenjualanTransaksiPenjualan />} />
@@ -139,9 +168,7 @@ export class App extends Component {
                         </div>
                     </div>
                 </div>
-            </React.Fragment>
-        )
-    }
+            }
+        </React.Fragment>
+    )
 }
-
-export default App

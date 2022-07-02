@@ -4,11 +4,11 @@ require_once '../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
-    $nama = $_POST['nama'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
     $jabatan = $_POST['jabatan'];
     
-    $query = "UPDATE master_user SET nama='".$nama."', password='".$password."', jabatan='".$jabatan."' WHERE id='".$id."'";
+    $query = "UPDATE master_user SET username='".$username."', password='".$password."', jabatan='".$jabatan."' WHERE id='".$id."'";
     
     $result = $conn->query($query);
 
