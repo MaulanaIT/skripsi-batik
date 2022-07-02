@@ -55,9 +55,37 @@ export class user extends Component {
 
         valueJabatan: []
     }
-    
+
     componentDidMount() {
         this.GetUser();
+    }
+
+    ApplyUser = (id) => {
+        if (!CheckInputValidity('form-table')) return;
+
+        ShowLoading();
+
+        let username = GetValue(`edit-username-${id}`);
+        let password = GetValue(`edit-password-${id}`);
+        let jabatan = GetValue(`edit-jabatan-${id}`);
+
+        const formData = new FormData();
+
+        formData.append('id', id);
+        formData.append('username', username);
+        formData.append('password', password);
+        formData.append('jabatan', jabatan);
+
+        axios.post(`${baseURL}/api/master/user/update.php`, formData, config).then(() => {
+            document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
+            document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
+
+            this.GetUser();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
     }
 
     DeleteUser = (id) => {
@@ -109,13 +137,19 @@ export class user extends Component {
                             <td>
                                 <div id={`data-jabatan-${item.id}`} className={`data-${item.id} text-end`}>{item.jabatan}</div>
                                 <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-jabatan-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.jabatan} required={true} />
+                                    <select name={`edit-jabatan-${item.id}`} id={`edit-jabatan-${item.id}`} className={`edit-${item.id} d-none`} required={true}>
+                                        <option value="Owner" selected={item.jabatan === 'Owner' && true}>Owner</option>
+                                        <option value="Admin, Keuangan" selected={item.jabatan === 'Admin, Keuangan' && true}>Admin, Keuangan</option>
+                                        <option value="Gudang, Pembelian" selected={item.jabatan === 'Gudang, Pembelian' && true}>Gudang, Pembelian</option>
+                                    </select>
                                 </div>
                             </td>
                             <td className={global.table_action}>
                                 <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyUser(item.id)}><FaCheck /> Apply</button>
                                 <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditUser(item.id)}><FaPen /> Edit</button>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteUser(item.id)}><FaTrash />Delete</button>
+                                {item.username !== localStorage.getItem('leksana_username') && item.password !== localStorage.getItem('leksana_token') &&
+                                    <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteUser(item.id)}><FaTrash />Delete</button>
+                                }
                             </td>
                         </tr>
                     );
