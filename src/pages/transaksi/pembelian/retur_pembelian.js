@@ -481,14 +481,18 @@ export class retur_pembelian extends Component {
                                             <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} />
                                         </div>
                                     </div>
+                                        <div className={`${global.input_group} col-6 pe-2`}>
+                                            <p className={global.title}>Kode Terima</p>
+                                            <Select escapeClearsValue={false} isClearable={true} isSearchable={true} placeholder={'Select Kode...'} styles={CustomSelect} />
+                                        </div>
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-3 pe-2`}>
                                             <p className={global.title}>Kode Supplier</p>
-                                            <Select escapeClearsValue={false} isClearable={true} isSearchable={true} options={this.state.dataSelectKodeSupplier} placeholder={'Select Kode...'} styles={CustomSelect} value={valueKodeSupplier} onChange={(data) => this.SelectSupplier(data)} />
+                                            <input type="text" id='valueKodeSupplier' maxLength={10} value={valueKodeSupplier} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-5 ps-2`}>
                                             <p className={global.title}>Nama Supplier</p>
-                                            <Select isClearable={true} isSearchable={true} options={this.state.dataSelectNamaSupplier} placeholder={'Select Nama...'} styles={CustomSelect} value={valueNamaSupplier} onChange={(data) => this.SelectSupplier(data)} />
+                                            <input type="text" id='valueNamaSupplier' maxLength={10} value={valueNamaSupplier} readOnly={true} />
                                         </div>
                                     </div>
                                     {this.state.jenisRetur === 'Bahan' ?
@@ -516,24 +520,22 @@ export class retur_pembelian extends Component {
                                                     <Select id='select-nama-alat' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeAlat} placeholder={'Select Nama...'} styles={CustomSelect} value={valueNamaAlat} onChange={(data) => this.SelectAlat(data)} />
                                                 </div>
                                             </div>
-                                            <div className={`d-flex`}>
-                                                <div className={`${global.input_group}`}>
-                                                    <p>Upload File Desain</p>
-                                                    <input type="file" accept='.pdf' id='input-detail-file' />
-                                                </div>
-                                            </div>
                                         </>
                                     }
                                     <div className={`d-flex`}>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                        <div className={`${global.input_group} col-3 pe-2`}>
                                             <p className={global.title}>Jumlah</p>
-                                            <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                            <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} readOnly={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-4 px-2`}>
+                                        <div className={`${global.input_group} col-3 px-2`}>
+                                            <p className={global.title}>Jumlah Retur</p>
+                                            <input type="text" id='valueJumlahRetur' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                        </div>
+                                        <div className={`${global.input_group} col-3 px-2`}>
                                             <p className={global.title}>Harga</p>
-                                            <input type="text" id='valueHarga' className='text-end' value={valueHarga} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                            <input type="text" id='valueHarga' className='text-end' value={valueHarga} readOnly={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-4 ps-2`}>
+                                        <div className={`${global.input_group} col-3 ps-2`}>
                                             <p className={global.title}>Total Harga</p>
                                             <input type="text" id='valueTotalHarga' className='text-end' value={valueTotalHarga} readOnly={true} />
                                         </div>

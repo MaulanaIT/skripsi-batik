@@ -269,6 +269,10 @@ export class penerimaan_barang extends Component {
                                     <p className={`${global.title} col-3`}>Total Barang</p>
                                     <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-3`} onInput={InputFormatNumber} />
                                 </div>
+                                <div className='align-items-center d-flex justify-content-between'>
+                                    <p>Upload Nota Pembelian</p>
+                                    <input type="file" accept='.pdf' id='input-detail-file' name='input-detail-file' />
+                                </div>
                             </div>
                             <div className='d-flex flex-column gap-2 pt-2'>
                                 <div className='d-flex'>
