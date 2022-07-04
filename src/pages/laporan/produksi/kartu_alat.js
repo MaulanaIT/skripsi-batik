@@ -23,10 +23,16 @@ render() {
             <div className={`${style.content}`}>
                 <div className={`${global.card} col-12`}>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-2`}>Tanggal</p>
-                        <input type="date" className={global.input1} id='input-tanggal-awal' name='input-tanggal-awal'/>
-                        <p className={`${global.title} col-1`}></p>
-                        <input type="date" className={global.input1} id='input-tanggal-akhir' name='input-tanggal-akhir'/>
+                            <p className={`${global.title} col-2`}>Tanggal</p>
+                            <div>
+                                <input type="date" className={global.input1} id='input-tanggal-awal' name='input-tanggal-awal' />
+                            </div>
+                            <div>
+                                <p className={`${global.title} col-auto px-3`}>sampai</p>
+                            </div>
+                            <div>
+                                <input type="date" className={global.input1} id='input-tanggal-akhir' name='input-tanggal-akhir' />
+                            </div>
                     </div>
                 <div className='d-flex'>
                     <div className='col-6 pe-3'>
