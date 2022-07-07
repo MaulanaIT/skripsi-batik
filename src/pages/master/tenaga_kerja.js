@@ -94,29 +94,28 @@ export class tenaga_kerja extends Component {
                 <div className={style.content}>
                     <form id='form-data' className={global.card}>
                         <p className={global.title}>Tambah Tenaga Kerja</p>
-                        <div className={`${global.input_group}`}>
+                        <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Kode Tenaga Kerja</p>
                             <input type="text" className={global.input1} id='input-kode-tenaga-kerja' name='input-kode-tenaga-kerja' value={GenerateCode('TK', this.state.dataTenagaKerja.length + 1)} maxLength={10} readOnly={true} required={true} />
                         </div>
-                        <div className={`${global.input_group}`}>
+                        <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Nama Tenaga Kerja</p>
                             <input type="text" className={global.input2} id='input-nama-tenaga-kerja' name='input-nama-tenaga-kerja' maxLength={50} required={true} />
                         </div>
-                        <div className={`${global.input_group}`}>
+                        <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Departemen</p>
                             <Select id='select-departemen-tenaga-kerja' name='select-departemen-tenaga-kerja' isClearable={true} isSearchable={true} options={[
                                 { value: 'Desain', label: 'Desain' },
-                                { value: 'Canting', label: 'Canting' },
-                                { value: 'Cap', label: 'Cap' },
+                                { value: 'Canting/Cap', label: 'Canting/Cap' },
                                 { value: 'Pewarnaan', label: 'Pewarnaan' },
                                 { value: 'Packing', label: 'Packing' }
                             ]} placeholder={'Pilih Departemen...'} styles={CustomSelect} required={true} />
                         </div>
-                        <div className={`${global.input_group}`}>
+                        <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>No. Telp</p>
                             <input type="text" className={global.input3} id='input-telepon-tenaga-kerja' name='input-telepon-tenaga-kerja' maxLength={13} onInput={InputFormatNumber} required={true} />
                         </div>
-                        <div className={`${global.input_group}`}>
+                        <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Upah</p>
                             <input type="text" className={global.input3} id='input-upah-tenaga-kerja' name='input-upah-tenaga-kerja' onInput={InputFormatNumber} required={true} />
                         </div>

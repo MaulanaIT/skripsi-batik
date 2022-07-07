@@ -348,27 +348,6 @@ export class add_hpp extends Component {
                                         <p className={global.title}>Biaya</p>
                                         <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' />
                                     </div>
-                                    <div className={`${global.input_group} col-3 ms-auto ps-2`}>
-                                        <p className={global.title}>Aksi</p>
-                                        <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</button>
-                                    </div>
-                                </div>
-                                <div className={`table-responsive`}>
-                                    <table id='table-data-biaya-tenaga-kerja' className={`table w-100`}>
-                                        <thead className='text-nowrap'>
-                                            <tr>
-                                                <td>No.</td>
-                                                <td>Kode Tenaga Kerja</td>
-                                                <td>Departemen</td>
-                                                <td>Nama Tenaga Kerja</td>
-                                                <td>Upah</td>
-                                                <td>Jumlah Pengerjaan</td>
-                                                <td>Biaya</td>
-                                                <td>Aksi</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
                                 </div>
                                 <div className={`${global.input_group} col-12 ms-auto`}>
                                     <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Simpan</button>
