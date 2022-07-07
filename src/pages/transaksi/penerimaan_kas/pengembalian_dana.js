@@ -84,6 +84,10 @@ export class pengembalian_dana extends Component {
                             <input type="text" className="col col-lg-2 col-md-3" id='input-kode-retur' name='input-kode-retur' />
                         </div>
                         <div className={`${global.input_group_row}`}>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Total Retur</p>
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-total-retur' name='input-total-retur' readOnly />
+                        </div>
+                        <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jumlah Uang yang Diterima</p>
                             <input type="text" className="col col-lg-2 col-md-3"id='input-detail-jumlah-uang' name='input-detail-jumlah-uang' />
                             <div className='col-2 ps-2'>

@@ -67,7 +67,55 @@ export class konsinyasi extends Component {
                     <p className={style.pathname}>Transaksi / Penerimaan Kas / Konsinyasi</p>
                 </div>
                 <div className={`${style.content}`}>
-                    <div className={`col-12 col-md-5 pe-md-2 pb-2 pb-md-0`}>
+                    <div className={`col-12 col-md-7 pe-md-2 pb-2 pb-md-0`}>
+                        <div className={`${global.tab_card} pb-2`}>
+                            <div className={`${global.item} ${this.state.tabSelected === 0 ? global.active : ''}`} onClick={() => this.SelectTab(0)}>
+                                <p className={`${global.name}`}>Belum Lunas</p>
+                            </div>
+                            <div className={`${global.item} ${this.state.tabSelected === 1 ? global.active : ''}`} onClick={() => this.SelectTab(1)}>
+                                <p className={`${global.name}`}>Sudah Lunas</p>
+                            </div>
+                        </div>
+                        <div className={`${global.card} ${this.state.tabSelected === 0 ? '' : 'd-none'}`}>
+                            <div className={`table-responsive`}>
+                                <table id='table-data' className={`table w-100`}>
+                                    <thead className='text-nowrap'>
+                                        <tr>
+                                            <td>No.</td>
+                                            <td>Kode Jual</td>
+                                            <td>Tanggal</td>
+                                            <td>Kode Consignee</td>
+                                            <td>Nama Consignee</td>
+                                            <td>Jumlah Piutang</td>
+                                            <td>Terima Piutang</td>
+                                            <td>Sisa Piutang</td>
+                                            <td>Aksi</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div className={`${global.card} ${this.state.tabSelected === 1 ? '' : 'd-none'}`}>
+                            <div className={`table-responsive`}>
+                                    <table id='table-data' className={`table w-100`}>
+                                        <thead className='text-nowrap'>
+                                            <tr>
+                                                <td>No.</td>
+                                                <td>Kode Jual</td>
+                                                <td>Tanggal</td>
+                                                <td>Kode Consignee</td>
+                                                <td>Nama Consignee</td>
+                                                <td>Jumlah Piutang</td>
+                                                <td>Aksi</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                    </div>
+                    <div className={`col-12 col-md-5 ps-md-2 pt-2 pt-md-0`}>
                         <div className={`${global.card}`}>
                             <div className={`${global.header}`}>
                                 <p className={global.title}>Konsinyasi</p>
@@ -134,54 +182,7 @@ export class konsinyasi extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className={`col-12 col-md-7 ps-md-2 pt-2 pt-md-0`}>
-                        <div className={`${global.tab_card} pb-2`}>
-                            <div className={`${global.item} ${this.state.tabSelected === 0 ? global.active : ''}`} onClick={() => this.SelectTab(0)}>
-                                <p className={`${global.name}`}>Belum Lunas</p>
-                            </div>
-                            <div className={`${global.item} ${this.state.tabSelected === 1 ? global.active : ''}`} onClick={() => this.SelectTab(1)}>
-                                <p className={`${global.name}`}>Sudah Lunas</p>
-                            </div>
-                        </div>
-                        <div className={`${global.card} ${this.state.tabSelected === 0 ? '' : 'd-none'}`}>
-                            <div className={`table-responsive`}>
-                                <table id='table-data' className={`table w-100`}>
-                                    <thead className='text-nowrap'>
-                                        <tr>
-                                            <td>No.</td>
-                                            <td>Kode Jual</td>
-                                            <td>Tanggal</td>
-                                            <td>Kode Consignee</td>
-                                            <td>Nama Consignee</td>
-                                            <td>Jumlah Piutang</td>
-                                            <td>Terima Piutang</td>
-                                            <td>Sisa Piutang</td>
-                                            <td>Aksi</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div className={`${global.card} ${this.state.tabSelected === 1 ? '' : 'd-none'}`}>
-                            <div className={`table-responsive`}>
-                                    <table id='table-data' className={`table w-100`}>
-                                        <thead className='text-nowrap'>
-                                            <tr>
-                                                <td>No.</td>
-                                                <td>Kode Jual</td>
-                                                <td>Tanggal</td>
-                                                <td>Kode Consignee</td>
-                                                <td>Nama Consignee</td>
-                                                <td>Jumlah Piutang</td>
-                                                <td>Aksi</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                    </div>
+                    
                 </div>
             </>
         )

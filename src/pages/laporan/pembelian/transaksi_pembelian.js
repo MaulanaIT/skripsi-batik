@@ -114,6 +114,7 @@ export class transaksi_pembelian extends Component {
                                             <th>Kode Supplier</th>
                                             <th>Nama Supplier</th>
                                             <th>Total Pembelian</th>
+                                            <th>Nota</th>
                                         </tr>
                                     </thead>
                                 </table>

@@ -215,8 +215,19 @@ export default function Penerimaan_barang() {
                                 <div className='col-6 pe-2'>
                                     <button type='button' className={`${global.button} w-100`} onClick={TerimaBarang}>Simpan</button>
                                 </div>
-                                <div className='col-6 ps-2'>
-                                    <Link to={'/transaksi/pembelian/daftar-order'} className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</Link>
+                                <div className='align-items-center d-flex justify-content-between'>
+                                    <p>Upload Nota Pembelian</p>
+                                    <input type="file" accept='.pdf' id='input-detail-file' name='input-detail-file' />
+                                </div>
+                            </div>
+                            <div className='d-flex flex-column gap-2 pt-2'>
+                                <div className='d-flex'>
+                                    <div className='col-6 pe-2'>
+                                        <button type='button' className={`${global.button} w-100`}>Simpan</button>
+                                    </div>
+                                    <div className='col-6 ps-2'>
+                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
