@@ -95,13 +95,13 @@ export class daftar_akun extends Component {
                             <td>
                                 <div id={`data-debit-${item.id}`} className={`data-${item.id} text-end`}>{parseInt(item.jenis) === 0 ? item.saldo : 0}</div>
                                 <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-debit-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.jenis === 0 ? item.debit : 0} required={true} readOnly={parseInt(item.jenis) === 1 && true } />
+                                    <input type="text" id={`edit-debit-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={parseInt(item.jenis) === 0 ? item.saldo : 0} required={true} readOnly={parseInt(item.jenis) === 1 && true } />
                                 </div>
                             </td>
                             <td>
                                 <div id={`data-kredit-${item.id}`} className={`data-${item.id} text-end`}>{parseInt(item.jenis) === 1 ? item.saldo : 0}</div>
                                 <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-kredit-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.jenis === 1 ? item.kredit : 0} required={true} readOnly={parseInt(item.jenis) === 0 && true} />
+                                    <input type="text" id={`edit-kredit-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={parseInt(item.jenis) === 1 ? item.saldo : 0} required={true} readOnly={parseInt(item.jenis) === 0 && true} />
                                 </div>
                             </td>
                             <td className={global.table_action}>

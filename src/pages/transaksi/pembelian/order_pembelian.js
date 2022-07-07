@@ -109,41 +109,69 @@ export class order_pembelian extends Component {
         if (this.state.jenisPembelian.toLowerCase() === 'alat') {
             let dataAlat = this.state.dataAlat;
 
-            dataAlat.push({
-                kode: valueKodeOrder,
-                tanggal: valueTanggal,
-                kode_supplier: valueKodeSupplier.value,
-                nama_supplier: valueNamaSupplier.label,
-                kode_alat: valueKodeAlat.value,
-                nama_alat: valueNamaAlat.label,
-                kode_item: valueKodeAlat.value,
-                nama_item: valueNamaAlat.label,
-                jumlah: valueJumlah,
-                harga: valueHarga,
-                total_harga: valueTotalHarga
-            });
+            let check = dataAlat.findIndex(item => item.kode_item === valueKodeAlat.value && item.harga === valueHarga);
 
-            this.setState({ dataAlat: dataAlat }, () => {
+            if (check < 0) {
+                dataAlat.push({
+                    kode: valueKodeOrder,
+                    tanggal: valueTanggal,
+                    kode_supplier: valueKodeSupplier.value,
+                    nama_supplier: valueNamaSupplier.label,
+                    kode_alat: valueKodeAlat.value,
+                    nama_alat: valueNamaAlat.label,
+                    kode_item: valueKodeAlat.value,
+                    nama_item: valueNamaAlat.label,
+                    jumlah: valueJumlah,
+                    harga: valueHarga,
+                    total_harga: valueTotalHarga
+                });
+            } else {
+                dataAlat[check].jumlah = +dataAlat[check].jumlah + +valueJumlah;
+                dataAlat[check].total_harga = +dataAlat[check].total_harga + +valueTotalHarga;
+            }
+
+            this.setState({
+                dataAlat: dataAlat,
+                valueKodeAlat: null,
+                valueNamaAlat: null,
+                valueJumlah: 0,
+                valueHarga: 0,
+                valueTotalHarga: 0
+            }, () => {
                 this.GetDetailAlat();
             });
         } else if (this.state.jenisPembelian.toLowerCase() === 'bahan') {
             let dataBahan = this.state.dataBahan;
 
-            dataBahan.push({
-                kode: valueKodeOrder,
-                tanggal: valueTanggal,
-                kode_supplier: valueKodeSupplier.value,
-                nama_supplier: valueNamaSupplier.label,
-                kode_bahan: valueKodeBahan.value,
-                nama_bahan: valueNamaBahan.label,
-                kode_item: valueKodeBahan.value,
-                nama_item: valueNamaBahan.label,
-                jumlah: valueJumlah,
-                harga: valueHarga,
-                total_harga: valueTotalHarga
-            });
+            let check = dataBahan.findIndex(item => item.kode_item === valueKodeAlat.value && item.harga === valueHarga);
 
-            this.setState({ dataBahan: dataBahan }, () => {
+            if (check < 0) {
+                dataBahan.push({
+                    kode: valueKodeOrder,
+                    tanggal: valueTanggal,
+                    kode_supplier: valueKodeSupplier.value,
+                    nama_supplier: valueNamaSupplier.label,
+                    kode_bahan: valueKodeBahan.value,
+                    nama_bahan: valueNamaBahan.label,
+                    kode_item: valueKodeBahan.value,
+                    nama_item: valueNamaBahan.label,
+                    jumlah: valueJumlah,
+                    harga: valueHarga,
+                    total_harga: valueTotalHarga
+                });
+            } else {
+                dataBahan[check].jumlah = +dataBahan[check].jumlah + +valueJumlah;
+                dataBahan[check].total_harga = +dataBahan[check].total_harga + +valueTotalHarga;
+            }
+
+            this.setState({ 
+                dataBahan: dataBahan, 
+                valueKodeBahan: null,
+                valueNamaBahan: null,
+                valueJumlah: 0,
+                valueHarga: 0,
+                valueTotalHarga: 0
+            }, () => {
                 this.GetDetailBahan();
             });
         }

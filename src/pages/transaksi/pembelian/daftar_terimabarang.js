@@ -54,7 +54,11 @@ export class daftar_terimabarang extends Component {
                             </td>
                             {jabatan === 'admin, keuangan' &&
                                 <td className={global.table_action}>
-                                    <Link to={'/transaksi/pembelian/pengeluaran-kas'} state={{ kode: item.kode_order }} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}>Bayar</Link>
+                                    {item.status === '0' ?
+                                        <Link to={'/transaksi/pembelian/pengeluaran-kas'} state={{ kode: item.kode_order }} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}>Bayar</Link>
+                                        :
+                                        'Dibayar'
+                                    }
                                 </td>
                             }
                         </tr>

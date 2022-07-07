@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $total_bayar = $_POST['total_bayar'];
     $file = $_FILES['file'];
     $nama_file = $_POST['nama_file'];
+    $kode_akun = $_POST['kode_akun'];
     
     $query = "INSERT INTO pengeluaran_kas(kode, tanggal, kode_order, kode_supplier, diskon, ongkos_kirim, total_bayar, file) VALUES('".$kode."', '".$tanggal."', '".$kode_order."', '".$kode_supplier."', '".$diskon."', '".$ongkos_kirim."', '".$total_bayar."', '".$nama_file."')";
     
@@ -24,7 +25,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response['data'] = [];
     
         if ($result) {
-            $response['data'] = $result;
+            $query = "UPDATE master_akun SET saldo=(saldo-".$total_bayar.") WHERE kode='".$kode_akun."'";
+            
+            $result = $conn->query($query);
+    
+            if ($result) {
+                $query = "UPDATE terima_barang SET status=1 WHERE kode_order='".$kode_order."'";
+                
+                $result = $conn->query($query);
+        
+                if ($result) {
+                    $response['data'] = $result;
+                } else {
+                    $response['data'] = [];
+                }
+            } else {
+                $response['data'] = [];
+            }
         } else {
             $response['data'] = [];
         }
@@ -38,5 +55,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $conn->close();
-
-?>

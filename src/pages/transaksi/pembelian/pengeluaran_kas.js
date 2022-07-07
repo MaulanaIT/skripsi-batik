@@ -5,7 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import moment from 'moment';
 import Select from 'react-select';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { baseURL, Calculate, config, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 
 // Import CSS
@@ -49,8 +49,10 @@ const CustomSelect = {
 
 export default function Pengeluaran_kas() {
 
-    const [getHTMLDetailOrder, setHTMLDetailOrder] = useState([]);
+    const [getDataAkun, setDataAkun] = useState([]);
+    const [getDataDetailPembelian, setDataDetailPembelian] = useState([]);
     const [getDataSelectAkun, setDataSelectAkun] = useState([]);
+    const [getHTMLDetailOrder, setHTMLDetailOrder] = useState([]);
     const [getValueDiskon, setValueDiskon] = useState(0);
     const [getValueJenisPembelian, setValueJenisPembelian] = useState('');
     const [getValueKodeOrder, setValueKodeOrder] = useState('');
@@ -58,6 +60,7 @@ export default function Pengeluaran_kas() {
     const [getValueKodeSupplier, setValueKodeSupplier] = useState('');
     const [getValueNamaSupplier, setValueNamaSupplier] = useState('');
     const [getValueOngkosKirim, setValueOngkosKirim] = useState(0);
+    const [getValueSelectedAkun, setValueSelectedAkun] = useState([]);
     const [getValueTanggalBayar, setValueTanggalBayar] = useState('');
     const [getValueTanggalOrder, setValueTanggalOrder] = useState('');
     const [getValueTotalBayar, setValueTotalBayar] = useState(0);
@@ -87,7 +90,7 @@ export default function Pengeluaran_kas() {
         ShowLoading();
 
         axios.get(`${baseURL}/api/master/akun/select.php`, config).then(response => {
-            let data = response.data.data;
+            let data = response.data.data.filter(item => ['1101', '1102'].includes(item.kode));
 
             let dataSelectAkun = [];
 
@@ -100,6 +103,7 @@ export default function Pengeluaran_kas() {
             }
 
             setDataSelectAkun(dataSelectAkun);
+            setDataAkun(data);
 
             HideLoading();
         }).catch(error => {
@@ -121,6 +125,7 @@ export default function Pengeluaran_kas() {
 
             let htmlDetailOrder = [];
             let totalPembelian = 0;
+            let dataDetailPembelian = [];
 
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
@@ -137,6 +142,15 @@ export default function Pengeluaran_kas() {
                     );
 
                     totalPembelian += parseInt(item.total_harga);
+
+                    dataDetailPembelian.push({
+                        kode: getValueKodePengeluaranKas,
+                        kode_item: item.kode_item,
+                        nama_item: item.nama_item,
+                        jumlah: item.jumlah,
+                        harga: item.harga,
+                        total_harga: item.total_harga
+                    })
                 });
             }
 
@@ -144,6 +158,7 @@ export default function Pengeluaran_kas() {
 
             setHTMLDetailOrder(htmlDetailOrder);
             setValueTotalPembelian(totalPembelian);
+            setDataDetailPembelian(dataDetailPembelian);
 
             HideLoading();
         }).catch(error => {
@@ -183,6 +198,51 @@ export default function Pengeluaran_kas() {
             HideLoading();
         }).catch(error => {
             console.log(error);
+
+            HideLoading();
+        });
+    }
+
+    const InsertPengeluaranKas = () => {
+        if (getDataAkun.find(item => item.kode === getValueSelectedAkun.value).saldo < getValueTotalBayar) {
+            alert('Saldo Tidak Mencukupi');
+
+            return;
+        }
+
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('kode', getValueKodePengeluaranKas)
+        formData.append('tanggal', getValueTanggalBayar)
+        formData.append('kode_order', getValueKodeOrder)
+        formData.append('kode_supplier', getValueKodeSupplier)
+        formData.append('diskon', getValueDiskon)
+        formData.append('ongkos_kirim', getValueOngkosKirim)
+        formData.append('total_bayar', getValueTotalBayar)
+        formData.append('file', document.getElementById('input-file-transfer').files[0]);
+        formData.append('nama_file', `File Transfer - ${getValueKodePengeluaranKas} - ${getValueTanggalBayar}`);
+        formData.append('kode_akun', getValueSelectedAkun.value);
+
+        axios.post(`${baseURL}/api/transaksi/pembelian/pengeluaran-kas/insert.php`, formData, config).then(() => {
+            const formDetailData = new FormData();
+
+            formDetailData.append('data', JSON.stringify(getDataDetailPembelian));
+
+            axios.post(`${baseURL}/api/transaksi/pembelian/detail-pengeluaran-kas/insert.php`, formDetailData, config).then(() => {
+                window.location.href = '/transaksi/pembelian/daftar-terima-barang';
+            }).catch(error => {
+                console.log(error);
+
+                alert(error);
+
+                HideLoading();
+            })
+        }).catch(error => {
+            console.log(error);
+
+            alert(error);
 
             HideLoading();
         });
@@ -300,7 +360,7 @@ export default function Pengeluaran_kas() {
                                     <p className={`${global.title} col-3`}>Total Bayar</p>
                                     <input type="text" id='input-detail-total-harga' name='input-detail-total-harga' className={`col-3`} value={getValueTotalBayar} readOnly={true} />
                                     <div className='col-6 ps-2'>
-                                        <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Akun...'} styles={CustomSelect} />
+                                        <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Akun...'} styles={CustomSelect} value={getValueSelectedAkun} onChange={e => setValueSelectedAkun(e)} />
                                     </div>
                                 </div>
                             </div>
@@ -311,10 +371,10 @@ export default function Pengeluaran_kas() {
                                 </div>
                                 <div className='d-flex'>
                                     <div className='col-6 pe-2'>
-                                        <button type='button' className={`${global.button} w-100`}>Simpan</button>
+                                        <button type='button' className={`${global.button} w-100`} onClick={InsertPengeluaranKas}>Simpan</button>
                                     </div>
                                     <div className='col-6 ps-2'>
-                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>
+                                        <Link to={'/transaksi/pembelian/daftar-terima-barang'} className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</Link>
                                     </div>
                                 </div>
                             </div>
