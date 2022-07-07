@@ -1,10 +1,10 @@
 <?php
 require_once '../../../config/connection.php';
 
-$query = "SELECT terima_barang.*, master_supplier.nama AS nama_supplier 
-            FROM terima_barang 
+$query = "SELECT pengeluaran_kas.*, master_supplier.nama AS nama_supplier 
+            FROM pengeluaran_kas 
             INNER JOIN master_supplier
-            ON terima_barang.kode_supplier = master_supplier.kode";
+            ON pengeluaran_kas.kode_supplier = master_supplier.kode";
 
 $result = $conn->query($query);
 

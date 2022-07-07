@@ -5,7 +5,7 @@ require_once '../../../config/connection.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
     
-    $query = "DELETE FROM terima_barang WHERE kode='".$kode."'";
+    $query = "DELETE FROM detail_pengeluaran_kas WHERE kode='".$kode."'";
     
     $result = $conn->query($query);
 

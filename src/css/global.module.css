@@ -17,7 +17,7 @@
     transition: 0.2s ease-in-out;
 }
 
-.button:before {
+/* .button:before {
     background: url(../assets/images/batik-button-background.png) no-repeat;
     background-size: cover;
     background-position: bottom;
@@ -28,7 +28,7 @@
     position: absolute;
     top: 0;
     width: 100%;
-}
+} */
 
 .button,
 .button * {
@@ -40,6 +40,10 @@
 .button:hover {
     color: white;
     filter: brightness(120%);
+}
+
+.button:disabled {
+    filter: brightness(80%);
 }
 
 .card_detail {
@@ -64,7 +68,8 @@
 }
 
 .card {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #623e2d;
+    border: 2px solid #966948;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
@@ -181,6 +186,19 @@ textarea:read-only {
     width: 36px;
 }
 
+.popup_detail {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    left: 0px;
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    z-index: 2;
+}
+
 .tab_card {
     align-items: center;
     display: flex;
@@ -233,7 +251,7 @@ textarea:read-only {
     font-size: 12px;
 }
 
-.table_action>button::before {
+/* .table_action>button::before {
     background: url(../assets/images/batik-button-background.png) no-repeat;
     background-size: cover;
     background-position: bottom;
@@ -244,6 +262,10 @@ textarea:read-only {
     position: absolute;
     top: 0;
     width: 100%;
+} */
+
+.table_action>button:disabled {
+    filter: brightness(80%);
 }
 
 .table_action>.apply {

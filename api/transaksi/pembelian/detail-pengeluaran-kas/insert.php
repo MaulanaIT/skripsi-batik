@@ -3,11 +3,15 @@
 require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $kode = $_POST['kode'];
-    
-    $query = "DELETE FROM terima_barang WHERE kode='".$kode."'";
-    
-    $result = $conn->query($query);
+    $data = json_decode($_POST['data']);
+
+    foreach ($data as $key) {
+        $query = "INSERT INTO detail_order_pembelian (kode, kode_item, nama_item, jumlah, harga, total_harga) VALUES('" . $key->kode . "', '" . $key->kode_item . "', '" . $key->nama_item . "', '" . $key->jumlah . "', '" . $key->harga . "', '" . $key->jumlah * $key->harga . "')";
+
+        $result = $conn->query($query);
+
+        if (!$result) break;
+    }
 
     $response = [];
     

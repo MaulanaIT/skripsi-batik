@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 
 // Import Library
+import { cx } from './helper';
 import { Link } from 'react-router-dom';
 import { MdDashboard, MdExpandMore, MdLibraryBooks, MdStackedBarChart, MdStickyNote2 } from 'react-icons/md';
 
@@ -73,7 +74,7 @@ export default function Sidebar(props) {
     }
 
     return (
-        <div className={style.container}>
+        <div id='sidebar' className={cx([style.container, window.innerWidth > 991 && style.active])}>
             <ul>
                 {props.jabatan.toLowerCase() === 'owner' &&
                     <React.Fragment>
@@ -135,7 +136,7 @@ export default function Sidebar(props) {
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/pembelian/daftar-order'}><span>Order Pembelian</span></Link></li>
                                         <li><Link to={'/transaksi/pembelian/daftar-retur'}><span>Retur Pembelian</span></Link></li>
-                                        <li><Link to={'/transaksi/pembelian/daftar-terimabarang'}><span>Penerimaan Barang</span></Link></li>
+                                        <li><Link to={'/transaksi/pembelian/daftar-terima-barang'}><span>Penerimaan Barang</span></Link></li>
                                     </ul>
                                 </li>
                                 <li className={style.dropdown}>
@@ -275,7 +276,7 @@ export default function Sidebar(props) {
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/pembelian/daftar-order'}><span>Order Pembelian</span></Link></li>
                                         <li><Link to={'/transaksi/pembelian/daftar-retur'}><span>Retur Pembelian</span></Link></li>
-                                        <li><Link to={'/transaksi/pembelian/daftar-terimabarang'}><span>Penerimaan Barang</span></Link></li>
+                                        <li><Link to={'/transaksi/pembelian/daftar-terima-barang'}><span>Penerimaan Barang</span></Link></li>
                                     </ul>
                                 </li>
                                 <li className={style.dropdown}>
@@ -377,7 +378,7 @@ export default function Sidebar(props) {
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/pembelian/daftar-order'}><span>Order Pembelian</span></Link></li>
                                         <li><Link to={'/transaksi/pembelian/daftar-retur'}><span>Retur Pembelian</span></Link></li>
-                                        <li><Link to={'/transaksi/pembelian/daftar-terimabarang'}><span>Penerimaan Barang</span></Link></li>
+                                        <li><Link to={'/transaksi/pembelian/daftar-terima-barang'}><span>Penerimaan Barang</span></Link></li>
                                     </ul>
                                 </li>
                             </ul>

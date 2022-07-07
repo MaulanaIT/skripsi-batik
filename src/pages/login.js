@@ -14,10 +14,6 @@ export class login extends Component {
         isLogin: localStorage.getItem('leksana_login')
     }
 
-    componentDidMount() {
-        if (this.state.isLogin) window.location.href = '/dashboard';
-    }
-
     Login = () => {
         if (!CheckInputValidity('form-data')) return;
 
@@ -42,6 +38,8 @@ export class login extends Component {
             });
         }).catch(error => {
             console.log(error);
+
+            alert(error.message);
 
             HideLoading();
         });

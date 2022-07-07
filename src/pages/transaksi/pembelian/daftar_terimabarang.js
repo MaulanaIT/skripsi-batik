@@ -4,9 +4,7 @@ import React, { Component } from 'react'
 import $ from 'jquery';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { FaCheck, FaPen, FaTrash } from 'react-icons/fa';
-import { MdAdd } from 'react-icons/md';
-import { baseURL, config, cx, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -27,6 +25,7 @@ export class daftar_terimabarang extends Component {
             ShowLoading();
 
             let dataTerimaBarang = response.data.data;
+            let jabatan = localStorage.getItem('leksana_jabatan').toLowerCase();
 
             let htmlTableDaftarTerimaBarang = [];
 
@@ -40,39 +39,24 @@ export class daftar_terimabarang extends Component {
                             </td>
                             <td>
                                 <div id={`data-tanggal-${item.id}`} className={`data-${item.id}`}>{item.tanggal}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="date" id={`edit-tanggal-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.tanggal} required={true} />
-                                </div> */}
                             </td>
                             <td>
                                 <div id={`data-kode-order-${item.id}`} className={`data-${item.id}`}>{item.kode_order}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="date" id={`edit-kode-order-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.kode_order} required={true} />
-                                </div> */}
                             </td>
                             <td>
                                 <div id={`data-kode-supplier-${item.id}`} className={`data-${item.id} text-end`}>{item.kode_supplier}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-kode-supplier-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.kode_supplier} required={true} />
-                                </div> */}
                             </td>
                             <td>
                                 <div id={`data-nama-supplier-${item.id}`} className={`data-${item.id}`}>{item.nama_supplier}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="date" id={`edit-nama-supplier-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.nama_supplier} required={true} />
-                                </div> */}
                             </td>
                             <td>
                                 <div id={`data-total-barang-${item.id}`} className={`data-${item.id}`}>{item.total_barang}</div>
-                                {/* <div className={global.input_group_row}>
-                                    <input type="date" id={`edit-total-barang-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.total_barang} required={true} />
-                                </div> */}
                             </td>
-                            <td className={global.table_action}>
-                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyTerimaBarang(item.id)}><FaCheck /> Apply</button>
-                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditTerimaBarang(item.id)}><FaPen /> Edit</button>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteTerimaBarang(item.id)}><FaTrash />Delete</button>
-                            </td>
+                            {jabatan === 'admin, keuangan' &&
+                                <td className={global.table_action}>
+                                    <Link to={'/transaksi/pembelian/pengeluaran-kas'} state={{ kode: item.kode_order }} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}>Bayar</Link>
+                                </td>
+                            }
                         </tr>
                     );
                 });
@@ -115,7 +99,9 @@ export class daftar_terimabarang extends Component {
                                         <td>Kode Supplier</td>
                                         <td>Nama Supplier</td>
                                         <td>Total Barang</td>
-                                        <td>Aksi</td>
+                                        {localStorage.getItem('leksana_jabatan').toLowerCase() === 'admin, keuangan' &&
+                                            <td>Aksi</td>
+                                        }
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -1,13 +1,16 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // Import Library
 import $ from 'jquery';
+import axios from 'axios';
+import moment from 'moment';
 import Select from 'react-select';
+import { useLocation } from 'react-router-dom';
+import { baseURL, Calculate, config, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
 import style from '../../../css/transaksi/pembelian/pengeluaran_kas.module.css';
-import { InputFormatNumber } from '../../../component/helper';
 
 const CustomSelect = {
     control: (provided, state) => ({
@@ -44,81 +47,200 @@ const CustomSelect = {
     })
 }
 
-export class pengeluaran_kas extends Component {
+export default function Pengeluaran_kas() {
 
-    state = {
-        jenisPembelian: '',
+    const [getHTMLDetailOrder, setHTMLDetailOrder] = useState([]);
+    const [getDataSelectAkun, setDataSelectAkun] = useState([]);
+    const [getValueDiskon, setValueDiskon] = useState(0);
+    const [getValueJenisPembelian, setValueJenisPembelian] = useState('');
+    const [getValueKodeOrder, setValueKodeOrder] = useState('');
+    const [getValueKodePengeluaranKas, setValueKodePengeluaranKas] = useState('');
+    const [getValueKodeSupplier, setValueKodeSupplier] = useState('');
+    const [getValueNamaSupplier, setValueNamaSupplier] = useState('');
+    const [getValueOngkosKirim, setValueOngkosKirim] = useState(0);
+    const [getValueTanggalBayar, setValueTanggalBayar] = useState('');
+    const [getValueTanggalOrder, setValueTanggalOrder] = useState('');
+    const [getValueTotalBayar, setValueTotalBayar] = useState(0);
+    const [getValueTotalPembelian, setValueTotalPembelian] = useState(0);
+
+    const location = useLocation();
+
+    useEffect(() => {
+        GetAkun();
+        GetPengeluaranKas();
+        GetTerimaBarang();
+    }, []);
+
+    useEffect(() => {
+        if (getValueKodeOrder) GetDetailOrder();
+    }, [getValueKodeOrder]);
+
+    useEffect(() => {
+        setValueTotalBayar(Calculate([getValueTotalPembelian, getValueDiskon, getValueOngkosKirim]));
+    }, [getValueTotalPembelian, getValueDiskon, getValueOngkosKirim]);
+
+    useEffect(() => {
+        $(`#table-data`).DataTable();
+    }, [getHTMLDetailOrder]);
+
+    const GetAkun = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/master/akun/select.php`, config).then(response => {
+            let data = response.data.data;
+
+            let dataSelectAkun = [];
+
+            if (data && data.length > 0) {
+                for (let item of data) {
+                    dataSelectAkun.push(
+                        { value: item.kode, label: item.nama }
+                    );
+                }
+            }
+
+            setDataSelectAkun(dataSelectAkun);
+
+            HideLoading();
+        }).catch(error => {
+            console.log(error);
+
+            HideLoading();
+        });
     }
 
-    componentDidMount() {
-        $('#table-data').DataTable();
+    const GetDetailOrder = () => {
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('kode', getValueKodeOrder);
+
+        axios.post(`${baseURL}/api/transaksi/pembelian/detail-order/select.php`, formData, config).then(response => {
+            let data = response.data.data;
+
+            let htmlDetailOrder = [];
+            let totalPembelian = 0;
+
+            if (data && data.length > 0) {
+                data.forEach((item, index) => {
+                    htmlDetailOrder.push(
+                        <tr key={index}>
+                            <td>{index + 1}.</td>
+                            <td>{item.kode_item}</td>
+                            <td>{item.nama_item}</td>
+                            <td></td>
+                            <td>{item.jumlah}</td>
+                            <td>{item.harga}</td>
+                            <td>{item.total_harga}</td>
+                        </tr>
+                    );
+
+                    totalPembelian += parseInt(item.total_harga);
+                });
+            }
+
+            $(`#table-data`).DataTable().destroy();
+
+            setHTMLDetailOrder(htmlDetailOrder);
+            setValueTotalPembelian(totalPembelian);
+
+            HideLoading();
+        }).catch(error => {
+            console.log(error);
+
+            HideLoading();
+        });
     }
 
-    SelectPembelian = (value) => {
-        this.setState({ jenisPembelian: value ? value.value : '' });
+    const GetPengeluaranKas = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/transaksi/pembelian/pengeluaran-kas/select.php`, config).then(response => {
+            let data = response.data.data;
+
+            setValueKodePengeluaranKas(GenerateCode('KK', data));
+        }).catch(error => {
+            console.log(error);
+
+            HideLoading();
+        });
     }
 
-    render() {
-        const {
-            valueJenisPembelian,
-            valueKodeOrder,
-            valueKodePenerimaan,
-            valueTanggal
-        } = this.state;
-        
-        return (
-            <>
-                <div className={style.header}>
-                    <p className={style.title}>Pengeluaran Kas</p>
-                    <p className={style.pathname}>Transaksi / Pembelian / Pengeluaran Kas</p>
-                </div>
-                <div className={style.content}>
-                    <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
-                        <div className={`${global.card}`}>
-                            <p className={global.title}>Input Pengeluaran Kas</p>
-                            <div className={`${global.input_group} col-4 pe-2`}>
-                                <p className={global.title}>Jenis Pembelian</p>
-                                <input type="text" id='valueJenisPembelian' value={valueJenisPembelian} readOnly={true} />
+    const GetTerimaBarang = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/transaksi/pembelian/terima-barang/select.php`, config).then(response => {
+            let data = response.data.data.find(item => item.kode_order === location.state.kode);
+
+            setValueJenisPembelian(data.jenis_pembelian.replace(/\b\w/g, c => c.toUpperCase()));
+            setValueKodeOrder(data.kode_order);
+            setValueKodeSupplier(data.kode_supplier);
+            setValueNamaSupplier(data.nama_supplier);
+            setValueTanggalBayar(moment().format('YYYY-MM-DD'));
+            setValueTanggalOrder(data.tanggal);
+
+            HideLoading();
+        }).catch(error => {
+            console.log(error);
+
+            HideLoading();
+        });
+    }
+
+    return (
+        <React.Fragment>
+            <div className={style.header}>
+                <p className={style.title}>Pengeluaran Kas</p>
+                <p className={style.pathname}>Transaksi / Pembelian / Pengeluaran Kas</p>
+            </div>
+            <div className={style.content}>
+                <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
+                    <div className={`${global.card}`}>
+                        <p className={global.title}>Input Pengeluaran Kas</p>
+                        <div className={`${global.input_group} col-4 pe-2`}>
+                            <p className={global.title}>Jenis Pembelian</p>
+                            <input type="text" id='input-jenis-pembelian' value={getValueJenisPembelian} readOnly={true} />
+                        </div>
+                        <div className={`d-flex`}>
+                            <div className={`${global.input_group} col-6 pe-2`}>
+                                <p className={global.title}>Kode Kas Keluar</p>
+                                <input type="text" id='input-kode-kas-keluar' name='input-kode-kas-keluar' value={getValueKodePengeluaranKas} readOnly={true} />
                             </div>
-                                <div className={`d-flex`}>
-                                    <div className={`${global.input_group} col-6 pe-2`}>
-                                        <p className={global.title}>Kode Kas Keluar</p>
-                                        <input type="text" id='input-kode-kas-keluar' name='input-kode-kas-keluar' maxLength={10} readOnly={true} />
-                                    </div>
-                                    <div className={`${global.input_group} col-6 ps-2`}>
-                                        <p className={global.title}>Tanggal Bayar</p>
-                                        <input type="date" id='input-tanggal-bayar' name='input-tanggal-bayar' />
-                                    </div>
-                                </div>
-                                <div className={`d-flex`}>
-                                    <div className={`${global.input_group} col-3 px-2`}>
-                                        <p className={global.title}>Kode Order</p>
-                                        <input type="text" id='input-kode-order' name='input-kode-order' maxLength={10} readOnly={true} />
-                                    </div>
-                                    <div className={`${global.input_group} col-5 ps-2`}>
-                                        <p className={global.title}>Tanggal Order</p>
-                                        <input type="text" id='input-tanggal-order' name='input-tanggal-order' readOnly/>
-                                    </div>
-                                </div>
-                                <div className={`d-flex`}>
-                                    <div className={`${global.input_group} col-3 px-2`}>
-                                        <p className={global.title}>Kode Supplier</p>
-                                        <input type="text" id='input-kode-supplier' name='input-kode-supplier' maxLength={10} readOnly/>
-                                    </div>
-                                    <div className={`${global.input_group} col-5 ps-2`}>
-                                        <p className={global.title}>Nama Supplier</p>
-                                        <input type="text" id='input-nama-supplier' name='input-nama-supplier' maxLength={50} readOnly/>
-                                    </div>
-                                </div> 
+                            <div className={`${global.input_group} col-6 ps-2`}>
+                                <p className={global.title}>Tanggal Bayar</p>
+                                <input type="date" id='input-tanggal-bayar' name='input-tanggal-bayar' value={getValueTanggalBayar} onChange={e => setValueTanggalBayar(e.target.value)} />
                             </div>
                         </div>
-                    {this.state.jenisPembelian !== '' ?   
-                        <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
-                            <div className={global.card}>
-                                <div className={`${global.header}`}>
-                                    <p className={global.title}>Daftar Pembelian</p>
-                                </div>
-                                {this.state.jenisPembelian === 'Bahan' ?
+                        <div className={`d-flex`}>
+                            <div className={`${global.input_group} col-3 pe-2`}>
+                                <p className={global.title}>Kode Order</p>
+                                <input type="text" id='input-kode-order' name='input-kode-order' value={getValueKodeOrder} readOnly={true} />
+                            </div>
+                            <div className={`${global.input_group} col-5 ps-2`}>
+                                <p className={global.title}>Tanggal Order</p>
+                                <input type="text" id='input-tanggal-order' name='input-tanggal-order' value={getValueTanggalOrder} readOnly={true} />
+                            </div>
+                        </div>
+                        <div className={`d-flex`}>
+                            <div className={`${global.input_group} col-3 pe-2`}>
+                                <p className={global.title}>Kode Supplier</p>
+                                <input type="text" id='input-kode-supplier' name='input-kode-supplier' value={getValueKodeSupplier} readOnly={true} />
+                            </div>
+                            <div className={`${global.input_group} col-5 ps-2`}>
+                                <p className={global.title}>Nama Supplier</p>
+                                <input type="text" id='input-nama-supplier' name='input-nama-supplier' value={getValueNamaSupplier} readOnly={true} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {getValueJenisPembelian !== '' ?
+                    <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                        <div className={global.card}>
+                            <div className={`${global.header}`}>
+                                <p className={global.title}>Daftar Pembelian</p>
+                            </div>
+                            {getValueJenisPembelian === 'Bahan' ?
                                 <>
                                     <div className={`table-responsive`}>
                                         <table id='table-data' className={`table w-100`}>
@@ -133,7 +255,9 @@ export class pengeluaran_kas extends Component {
                                                     <td>Total Harga</td>
                                                 </tr>
                                             </thead>
-                                            <tbody></tbody>
+                                            <tbody>
+                                                {getHTMLDetailOrder}
+                                            </tbody>
                                         </table>
                                     </div>
                                 </>
@@ -152,39 +276,38 @@ export class pengeluaran_kas extends Component {
                                                     <td>Total Harga</td>
                                                 </tr>
                                             </thead>
-                                            <tbody></tbody>
+                                            <tbody>
+                                                {getHTMLDetailOrder}
+                                            </tbody>
                                         </table>
                                     </div>
                                 </>
-                                }
+                            }
                             <div className={`d-flex flex-column gap-2 pb-2`}>
                                 <div className={`align-items-center ${global.input_group_row}`}>
                                     <p className={`${global.title} col-3`}>Total Pembelian</p>
-                                    <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-6`} onInput={InputFormatNumber} />
+                                    <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-3`} value={getValueTotalPembelian} readOnly={true} />
                                 </div>
                                 <div className={`align-items-center ${global.input_group_row}`}>
                                     <p className={`${global.title} col-3`}>Diskon</p>
-                                    <input type="text" id='input-detail-diskon' name='input-detail-diskon' className={`col-6`} onInput={InputFormatNumber} />
+                                    <input type="text" id='input-detail-diskon' name='input-detail-diskon' className={`col-3`} value={getValueDiskon} onInput={InputFormatNumber} onChange={e => setValueDiskon(e.target.value)} />
                                 </div>
                                 <div className={`align-items-center ${global.input_group_row}`}>
                                     <p className={`${global.title} col-3`}>Ongkos Kirim</p>
-                                    <input type="text" id='input-detail-ongkos-kirim' name='input-detail-ongkos-kirim' className={`col-6`} onInput={InputFormatNumber} />
+                                    <input type="text" id='input-detail-ongkos-kirim' name='input-detail-ongkos-kirim' className={`col-3`} value={getValueOngkosKirim} onInput={InputFormatNumber} onChange={e => setValueOngkosKirim(e.target.value)} />
                                 </div>
                                 <div className={`align-items-center ${global.input_group_row}`}>
                                     <p className={`${global.title} col-3`}>Total Bayar</p>
-                                    <input type="text" id='input-detail-total-harga' name='input-detail-total-harga' className={`col-6`} onInput={InputFormatNumber} />
-                                    <div className='col-3 ps-2'>
-                                        <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={[
-                                            { value: '1', label: 'Akun 1' },
-                                            { value: '2', label: 'Akun 2' }
-                                        ]} placeholder={'Select Akun...'} styles={CustomSelect} />
+                                    <input type="text" id='input-detail-total-harga' name='input-detail-total-harga' className={`col-3`} value={getValueTotalBayar} readOnly={true} />
+                                    <div className='col-6 ps-2'>
+                                        <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Akun...'} styles={CustomSelect} />
                                     </div>
                                 </div>
                             </div>
                             <div className='d-flex flex-column gap-2 pt-2'>
                                 <div className='align-items-center d-flex justify-content-between'>
                                     <p>Upload File Transfer</p>
-                                    <input type="file" accept='.pdf' id='input-detail-file' name='input-detail-file' />
+                                    <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' />
                                 </div>
                                 <div className='d-flex'>
                                     <div className='col-6 pe-2'>
@@ -195,12 +318,10 @@ export class pengeluaran_kas extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>    
+                        </div>
                     </div>
                     : null}
-                </div>
-            </>
-        )
-    }
+            </div>
+        </React.Fragment>
+    )
 }
-export default pengeluaran_kas

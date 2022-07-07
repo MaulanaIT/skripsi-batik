@@ -95,6 +95,8 @@ export default function App() {
         }).catch(error => {
             if (location.pathname !== '/' && location.pathname !== '/login') window.location.href = '/login';
             console.log(error);
+
+            alert(error.message);
         });
     }
 
@@ -137,7 +139,7 @@ export default function App() {
                                 <Route path={'/transaksi/pembelian/daftar-order'} element={<TransaksiPembelianDaftarOrder />} />
                                 <Route path={'/transaksi/pembelian/pengeluaran-kas'} element={<TransaksiPembelianPengeluaranKas />} />
                                 <Route path={'/transaksi/pembelian/penerimaan-barang'} element={<TransaksiPembelianPenerimaanBarang />} />
-                                <Route path={'/transaksi/pembelian/daftar-terimabarang'} element={<TransaksiPembelianDaftarTerimaBarang />} />
+                                <Route path={'/transaksi/pembelian/daftar-terima-barang'} element={<TransaksiPembelianDaftarTerimaBarang />} />
                                 <Route path={'/transaksi/pembelian/retur-pembelian'} element={<TransaksiPembelianReturPembelian />} />
                                 <Route path={'/transaksi/pembelian/daftar-retur'} element={<TransaksiPembelianDaftarRetur />} />
                                 <Route path={'/transaksi/penerimaan-kas/pengembalian-dana'} element={<TransaksiPenerimaanKasPengembalianDana />} />

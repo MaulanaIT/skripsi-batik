@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jenis_pembelian = $_POST['jenis_pembelian'];
     $data = json_decode($_POST['data']);
 
-    $query = "INSERT INTO order_pembelian(kode, tanggal, kode_supplier, total_harga, status) VALUES('" . $kode . "', '" . $tanggal . "', '" . $kode_supplier . "', '" . $total_harga . "', 'Menunggu')";
+    $query = "INSERT INTO order_pembelian(kode, jenis_pembelian, tanggal, kode_supplier, total_harga, status) VALUES('" . $kode . "', '" . $jenis_pembelian . "', '" . $tanggal . "', '" . $kode_supplier . "', '" . $total_harga . "', 'Menunggu')";
 
     $result = $conn->query($query);
 

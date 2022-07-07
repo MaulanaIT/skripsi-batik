@@ -3,9 +3,11 @@
 require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $kode = $_POST['kode'];
+    $id = $_POST['id'];
+    $nama = $_POST['nama'];
+    $saldo = $_POST['saldo'];
     
-    $query = "DELETE FROM terima_barang WHERE kode='".$kode."'";
+    $query = "UPDATE master_akun SET nama='".$nama."', saldo='".$saldo."' WHERE id='".$id."'";
     
     $result = $conn->query($query);
 
