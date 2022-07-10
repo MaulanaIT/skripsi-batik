@@ -214,6 +214,10 @@ export default function Pengeluaran_kas() {
 
         const formData = new FormData();
 
+        let file = document.getElementById('input-file-transfer').files[0];
+        let arg = file.name.split('.');
+        let extension = arg[arg.length - 1];
+
         formData.append('kode', getValueKodePengeluaranKas)
         formData.append('tanggal', getValueTanggalBayar)
         formData.append('kode_order', getValueKodeOrder)
@@ -221,17 +225,19 @@ export default function Pengeluaran_kas() {
         formData.append('diskon', getValueDiskon)
         formData.append('ongkos_kirim', getValueOngkosKirim)
         formData.append('total_bayar', getValueTotalBayar)
-        formData.append('file', document.getElementById('input-file-transfer').files[0]);
-        formData.append('nama_file', `File Transfer - ${getValueKodePengeluaranKas} - ${getValueTanggalBayar}`);
+        formData.append('file_transfer', file);
+        formData.append('nama_file', `File Transfer - ${getValueKodePengeluaranKas} - ${getValueTanggalBayar}.${extension}`);
         formData.append('kode_akun', getValueSelectedAkun.value);
 
-        axios.post(`${baseURL}/api/transaksi/pembelian/pengeluaran-kas/insert.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/transaksi/pembelian/pengeluaran-kas/insert.php`, formData, config).then(response => {
+            console.log(response);
+
             const formDetailData = new FormData();
 
             formDetailData.append('data', JSON.stringify(getDataDetailPembelian));
 
             axios.post(`${baseURL}/api/transaksi/pembelian/detail-pengeluaran-kas/insert.php`, formDetailData, config).then(() => {
-                window.location.href = '/transaksi/pembelian/daftar-terima-barang';
+                // window.location.href = '/transaksi/pembelian/daftar-terima-barang';
             }).catch(error => {
                 console.log(error);
 

@@ -44,7 +44,7 @@ export class daftar_terimabarang extends Component {
                                 <div id={`data-kode-order-${item.id}`} className={`data-${item.id}`}>{item.kode_order}</div>
                             </td>
                             <td>
-                                <div id={`data-kode-supplier-${item.id}`} className={`data-${item.id} text-end`}>{item.kode_supplier}</div>
+                                <div id={`data-kode-supplier-${item.id}`} className={`data-${item.id}`}>{item.kode_supplier}</div>
                             </td>
                             <td>
                                 <div id={`data-nama-supplier-${item.id}`} className={`data-${item.id}`}>{item.nama_supplier}</div>

@@ -2,6 +2,8 @@
 
 require_once 'header.php';
 
+$base_url = 'http://leksana-batik.virtusrox.me/';
+
 $username = "root";
 $password = "";
 $host = "localhost";
@@ -15,4 +17,3 @@ if ($conn -> connect_errno) {
 }
 
 require_once 'token.php';
-?>
