@@ -58,10 +58,6 @@ export default function Detail_order_gudang(props) {
 
     const CloseDetail = () => {
         document.getElementById('detail_order_gudang').classList.add('d-none');
-
-        $(`#table-detail-data-gudang`).DataTable().destroy();
-
-        setHTMLTable([]);
     }
 
     const UpdateStatus = (status) => {

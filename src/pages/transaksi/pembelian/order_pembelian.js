@@ -370,7 +370,7 @@ export class order_pembelian extends Component {
             valueKodeOrder,
             valueKodeSupplier,
             valueTanggal,
-            valueTotalHarga
+            valueKalkulasiTotalHarga
         } = this.state;
 
         let jenisPembelian = this.state.jenisPembelian;
@@ -382,7 +382,7 @@ export class order_pembelian extends Component {
         formData.append('kode', valueKodeOrder);
         formData.append('tanggal', valueTanggal);
         formData.append('kode_supplier', valueKodeSupplier.value);
-        formData.append('total_harga', valueTotalHarga);
+        formData.append('total_harga', valueKalkulasiTotalHarga);
 
         formData.append('jenis_pembelian', jenisPembelian.toLowerCase());
 

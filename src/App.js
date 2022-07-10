@@ -97,6 +97,8 @@ export default function App() {
             if (location.pathname !== '/' && location.pathname !== '/login') window.location.href = '/login';
             console.log(error);
 
+            localStorage.clear();
+
             alert(error.message);
         });
     }

@@ -8,8 +8,8 @@ import { FaClipboardList, FaTrash } from 'react-icons/fa';
 import { MdAdd } from 'react-icons/md';
 import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
 
-import DetailRetur from './detail_retur_admkeu';
-import DetailRetur2 from './detail_retur_gudang';
+import DetailReturAdmin from './detail_retur_admkeu';
+import DetailReturGudang from './detail_retur_gudang';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -18,7 +18,10 @@ import style from '../../../css/transaksi/pembelian/retur_pembelian.module.css';
 export class daftar_retur extends Component {
 
     state = {
-        htmlTableDaftarRetur: []
+        htmlTableDaftarRetur: [],
+
+        selectedKodeRetur: '', 
+        selectedStatusRetur: 0
     }
 
     componentDidMount() {
@@ -40,11 +43,13 @@ export class daftar_retur extends Component {
             console.log(error);
         });
     }
+
     GetRetur = async () => {
         axios.get(`${baseURL}/api/transaksi/pembelian/retur/select.php`, config).then(response => {
             ShowLoading();
 
             let dataRetur = response.data.data;
+            let jabatan = localStorage.getItem('leksana_jabatan').toLowerCase();
 
             let htmlTableDaftarRetur = [];
 
@@ -69,14 +74,20 @@ export class daftar_retur extends Component {
                                 <div id={`data-jumlah-retur-${item.id}`} className={`data-${item.id} text-center`}>{item.jumlah_retur}</div>
                             </td>
                             <td>
-                                <div id={`data-status-${item.id}`} className={`data-${item.id} text-center`}>{item.status}</div>
+                                <div id={`data-status-${item.id}`} className={`data-${item.id} text-center`}>{item.status === '0' ? 'Menunggu' :
+                                    item.status === '1' ? 'Disetujui' :
+                                        item.status === '2' ? 'Proses Order' :
+                                            item.status === '3' && 'Dibayar'}</div>
                             </td>
                             <td className={global.table_action}>
-                                {localStorage.getItem('leksana_jabatan').toLowerCase() !== 'owner' &&
-                                    <button type='button' id='button-detail' className={global.edit} onClick={
-                                        localStorage.getItem('leksana_jabatan').toLowerCase() === 'admin, keuangan' ? this.SelectDetailKeuangan : this.SelectDetailGudang}><FaClipboardList /> Detail</button>
+                                {jabatan !== 'owner' &&
+                                    <button type='button' id='button-detail' className={global.edit} style={{ gridColumn: '2 span' }}
+                                        onClick={() => jabatan === 'admin, keuangan' ?
+                                            this.SelectDetailKeuangan(item.kode, parseInt(item.status)) :
+                                            this.SelectDetailGudang(item.kode, parseInt(item.status))
+                                        }><FaClipboardList /> Detail</button>
                                 }
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteRetur(item.kode)}><FaTrash /> Delete</button>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
                             </td>
                         </tr>
                     );
@@ -97,19 +108,22 @@ export class daftar_retur extends Component {
         });
     }
 
-    SelectDetailKeuangan = () => {
-        document.getElementById('detail_retur_admkeu').classList.remove('d-none');
+    SelectDetailKeuangan = (data, status) => {
+        this.setState({ selectedKodeRetur: data, selectedStatusRetur: status }, () => {
+            document.getElementById('detail_retur_admkeu').classList.remove('d-none');
+        });
     }
-
-    SelectDetailGudang = () => {
-        document.getElementById('detail_retur_gudang').classList.remove('d-none');
+    SelectDetailGudang = (data, status) => {
+        this.setState({ selectedKodeRetur: data, selectedStatusRetur: status }, () => {
+            document.getElementById('detail_retur_gudang').classList.remove('d-none');
+        });
     }
 
     render() {
         return (
             <>
-                <DetailRetur />
-                <DetailRetur2 />
+                <DetailReturAdmin kode={this.state.selectedKodeRetur} status={this.state.selectedStatusRetur} />
+                <DetailReturGudang kode={this.state.selectedKodeRetur} status={this.state.selectedStatusRetur} />
                 <div className={style.header}>
                     <p className={style.title}>Retur Pembelian</p>
                     <p className={style.pathname}>Transaksi / Pembelian / Retur Pembelian</p>

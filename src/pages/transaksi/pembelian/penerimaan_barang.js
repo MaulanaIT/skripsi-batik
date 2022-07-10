@@ -113,11 +113,17 @@ export default function Penerimaan_barang() {
 
         const formData = new FormData();
 
+        let file = document.getElementById('input-file-nota').files[0];
+        let arg = file.name.split('.');
+        let extension = arg[arg.length - 1];
+
         formData.append('kode', getValueKodePenerimaan);
         formData.append('kode_order', getValueKodeOrder);
         formData.append('jenis_pembelian', getValueJenisPembelian);
         formData.append('kode_supplier', getValueKodeSupplier);
         formData.append('total_barang', getValueTotalBarang);
+        formData.append('file_nota', file);
+        formData.append('nama_file', `File Nota Pembelian - ${getValueKodePenerimaan} - ${getValueTanggal}.${extension}`);
 
         axios.post(`${baseURL}/api/transaksi/pembelian/terima-barang/insert.php`, formData, config).then(() => {
             const formData = new FormData();
@@ -156,7 +162,7 @@ export default function Penerimaan_barang() {
                             </div>
                             <div className={`${global.input_group} col-6 ps-2`}>
                                 <p className={global.title}>Tanggal Terima</p>
-                                <input type="date" id='input-tanggal-terima-barang' value={getValueTanggal} onClick={e => setValueTanggal(e.target.value)} />
+                                <input type="date" id='input-tanggal-terima-barang' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
                             </div>
                         </div>
                         <div className={`d-flex`}>
@@ -212,18 +218,15 @@ export default function Penerimaan_barang() {
                         </div>
                         <div className='d-flex flex-column gap-2 pt-2'>
                             <div className='d-flex'>
-                                <div className='col-6 pe-2'>
-                                    <button type='button' className={`${global.button} w-100`} onClick={TerimaBarang}>Simpan</button>
-                                </div>
                                 <div className='align-items-center d-flex justify-content-between'>
                                     <p>Upload Nota Pembelian</p>
-                                    <input type="file" accept='.pdf' id='input-detail-file' name='input-detail-file' />
+                                    <input type="file" accept='.pdf' id='input-file-nota' name='input-file-nota' />
                                 </div>
                             </div>
                             <div className='d-flex flex-column gap-2 pt-2'>
                                 <div className='d-flex'>
                                     <div className='col-6 pe-2'>
-                                        <button type='button' className={`${global.button} w-100`}>Simpan</button>
+                                        <button type='button' className={`${global.button} w-100`} onClick={TerimaBarang}>Simpan</button>
                                     </div>
                                     <div className='col-6 ps-2'>
                                         <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>

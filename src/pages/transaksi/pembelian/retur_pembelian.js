@@ -350,10 +350,17 @@ export default function Retur_pembelian() {
 
         const formData = new FormData();
 
+        let file = document.getElementById('input-file-nota').files[0];
+        let arg = file.name.split('.');
+        let extension = arg[arg.length - 1];
+
         formData.append('kode', getValueKodeRetur);
+        formData.append('kode_kas_keluar', getValueKodePengeluaranKas.value);
         formData.append('tanggal', getValueTanggal);
-        formData.append('kode_supplier', getValueKodeSupplier.value);
-        formData.append('total_harga', getValueTotalHarga);
+        formData.append('kode_supplier', getValueKodeSupplier);
+        formData.append('total_harga', getValueKalkulasiTotalHarga);
+        formData.append('file_nota', file);
+        formData.append('nama_file', `File Nota Pembelian - ${getValueKodeRetur} - ${getValueTanggal}.${extension}`);
 
         formData.append('jenis_retur', jenisRetur.toLowerCase());
 
@@ -592,7 +599,7 @@ export default function Retur_pembelian() {
                                 </div>
                                 <div className='align-items-center d-flex justify-content-between'>
                                     <p>Upload Nota Pembelian</p>
-                                    <input type="file" accept='.pdf' id='input-detail-file' name='input-detail-file' />
+                                    <input type="file" accept='.pdf' id='input-file-nota' name='input-file-nota' />
                                 </div>
                             </div>
                             <div className='d-flex flex-column gap-2 pt-2'>

@@ -58,10 +58,6 @@ export default function Detail_order_admkeu(props) {
 
     const CloseDetail = () => {
         document.getElementById('detail_order_admkeu').classList.add('d-none');
-
-        $(`#table-detail-data-keuangan`).DataTable().destroy();
-
-        setHTMLTable([]);
     }
 
     const UpdateStatus = (status) => {

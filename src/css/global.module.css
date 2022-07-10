@@ -227,8 +227,7 @@ textarea:read-only {
 }
 
 .table_action {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
     gap: 12px;
 }
 
