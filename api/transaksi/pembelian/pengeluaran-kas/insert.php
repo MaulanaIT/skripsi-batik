@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response['data'] = [];
 
         if ($result) {
-            $upload_directory = "/upload/File Transfer/";
+            $upload_directory = $base_url . "File Transfer/";
 
             if (!file_exists($upload_directory) && !is_dir($upload_directory)) {
                 mkdir($upload_directory, 0777, true);
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response = mysqli_error($conn);
     }
 
-    $response = json_encode($upload_transfer);
+    $response = json_encode($response);
 
     if ($token) print $response;
 }
