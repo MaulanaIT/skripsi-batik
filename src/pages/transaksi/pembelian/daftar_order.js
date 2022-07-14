@@ -88,7 +88,9 @@ export class daftar_order extends Component {
                                             }><FaClipboardList /> Detail</button>
                                     }
                                     <button type='button' id='button-print' className={global.apply}><FaPrint /> Print</button>
-                                    <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
+                                    {+item.status <= 1 &&
+                                        <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
+                                    }
                                 </td>
                             </tr>
                         );

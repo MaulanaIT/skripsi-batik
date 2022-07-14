@@ -20,7 +20,7 @@ export class daftar_retur extends Component {
     state = {
         htmlTableDaftarRetur: [],
 
-        selectedKodeRetur: '', 
+        selectedKodeRetur: '',
         selectedStatusRetur: 0
     }
 
@@ -76,8 +76,8 @@ export class daftar_retur extends Component {
                             <td>
                                 <div id={`data-status-${item.id}`} className={`data-${item.id} text-center`}>{item.status === '0' ? 'Menunggu' :
                                     item.status === '1' ? 'Disetujui' :
-                                        item.status === '2' ? 'Proses Order' :
-                                            item.status === '3' && 'Dibayar'}</div>
+                                        item.status === '2' ? 'Proses Retur' :
+                                            item.status === '3' && 'Selesai'}</div>
                             </td>
                             <td className={global.table_action}>
                                 {jabatan !== 'owner' &&
@@ -87,7 +87,9 @@ export class daftar_retur extends Component {
                                             this.SelectDetailGudang(item.kode, parseInt(item.status))
                                         }><FaClipboardList /> Detail</button>
                                 }
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
+                                {+item.status <= 1 &&
+                                    <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
+                                }
                             </td>
                         </tr>
                     );
