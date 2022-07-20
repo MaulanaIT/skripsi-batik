@@ -36,6 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $result = $conn->query($query);
 
             if ($result) {
+                $query = "UPDATE master_akun SET saldo=(saldo+" . $uang_muka . ") WHERE kode='2101'";
+                $result = $conn->query($query);
+
                 $query = "UPDATE master_akun SET saldo=(saldo+" . $uang_muka . ") WHERE kode='" . $kode_akun . "'";
                 $result = $conn->query($query);
 

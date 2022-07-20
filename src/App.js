@@ -43,7 +43,7 @@ import TransaksiPembelianDaftarRetur from './pages/transaksi/pembelian/daftar_re
 import TransaksiPenerimaanKasPengembalianDana from './pages/transaksi/penerimaan_kas/pengembalian_dana';
 import TransaksiPenerimaanKasUangMukaPesanan from './pages/transaksi/penerimaan_kas/uang_muka_pesanan';
 import TransaksiPenerimaanKasDaftarUangMuka from './pages/transaksi/penerimaan_kas/daftar_uangmuka';
-import TransaksiPenerimaanKasKonsinyasi from './pages/transaksi/penerimaan_kas/konsinyasi';
+import TransaksiPenerimaanKasTerimaPiutang from './pages/transaksi/penerimaan_kas/terima_piutang';
 import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
 import TransaksiPermintaanProduksiPesanan from './pages/transaksi/produksi/permintaan_prod_pesanan';
 import DaftarProduksi from './pages/transaksi/produksi/daftar_produksi';
@@ -149,7 +149,7 @@ export default function App() {
                                 <Route path={'/transaksi/penerimaan-kas/pengembalian-dana'} element={<TransaksiPenerimaanKasPengembalianDana />} />
                                 <Route path={'/transaksi/penerimaan-kas/uang-muka-pesanan'} element={<TransaksiPenerimaanKasUangMukaPesanan />} />
                                 <Route path={'/transaksi/penerimaan-kas/daftar-uangmuka'} element={<TransaksiPenerimaanKasDaftarUangMuka />} />
-                                <Route path={'/transaksi/penerimaan-kas/konsinyasi'} element={<TransaksiPenerimaanKasKonsinyasi />} />
+                                <Route path={'/transaksi/penerimaan-kas/terima-piutang'} element={<TransaksiPenerimaanKasTerimaPiutang />} />
                                 <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
                                 <Route path={'/transaksi/produksi/permintaan_prod_pesanan'} element={<TransaksiPermintaanProduksiPesanan />} />
                                 <Route path={'/transaksi/produksi/daftar_produksi'} element={<DaftarProduksi />} />

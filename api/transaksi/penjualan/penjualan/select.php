@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($jenis_penjualan == 'tunai') {
         $query = "SELECT * FROM penjualan_tunai";
     } else if ($jenis_penjualan == 'konsinyasi') {
-        $query = "SELECT * FROM penjualan_konsinyasi";
+        $query = "SELECT penjualan_konsinyasi.*, master_consignee.nama AS nama_consignee FROM penjualan_konsinyasi INNER JOIN master_consignee ON penjualan_konsinyasi.kode_consignee = master_consignee.kode";
     } else if ($jenis_penjualan == 'pesanan') {
         $query = "SELECT * FROM penjualan_pesanan";
     }

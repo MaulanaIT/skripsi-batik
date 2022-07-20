@@ -145,7 +145,7 @@ export default function Sidebar(props) {
                                         <MdExpandMore className={style.toggle} />
                                     </div>
                                     <ul className={style.dropdown_menu}>
-                                        <li><Link to={'/transaksi/penerimaan-kas/konsinyasi'}><span>Konsinyasi</span></Link></li>
+                                        <li><Link to={'/transaksi/penerimaan-kas/terima-piutang'}><span>Terima Piutang</span></Link></li>
                                     </ul>
                                 </li>
                                 <li className={style.dropdown}>
@@ -284,7 +284,7 @@ export default function Sidebar(props) {
                                         <MdExpandMore className={style.toggle} />
                                     </div>
                                     <ul className={style.dropdown_menu}>
-                                        <li><Link to={'/transaksi/penerimaan-kas/konsinyasi'}><span>Konsinyasi</span></Link></li>
+                                        <li><Link to={'/transaksi/penerimaan-kas/terima-piutang'}><span>Terima Piutang</span></Link></li>
                                     </ul>
                                 </li>
                             </ul>
