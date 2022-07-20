@@ -15,7 +15,7 @@ import Login from './pages/login';
 
 // Import Page - Format: MenuSubmenu
 import TransaksiPenjualanKalkulatorEstimasi from './pages/transaksi/penjualan/kalkulator_estimasi';
-import TransaksiPenjualanPerhitunganHarga from './pages/transaksi/penjualan/perhitungan_harga';
+import TransaksiPenjualanDaftarPesanan from './pages/transaksi/penjualan/daftar_pesanan';
 import TransaksiPenjualanTransaksiPenjualan from './pages/transaksi/penjualan/transaksi_penjualan';
 import TransaksiPenjualanJualPesan from './pages/transaksi/penjualan/jual_pesan';
 import MasterUser from './pages/master/user';
@@ -127,18 +127,18 @@ export default function App() {
                                 <Route path={'/master/customer'} element={<MasterCustomer />} />
                                 <Route path={'/master/consignee'} element={<MasterConsignee />} />
                                 <Route path={'/master/inventory/bahan-baku'} element={<MasterBahanBaku />} />
-                                <Route path={'/master/inventory/daftar-bb'} element={<MasterDaftarBB />} />
+                                <Route path={'/master/inventory/daftar-bahan-baku'} element={<MasterDaftarBB />} />
                                 <Route path={'/master/inventory/bahan-penolong'} element={<MasterBahanPenolong />} />
-                                <Route path={'/master/inventory/daftar-bp'} element={<MasterDaftarBP />} />
+                                <Route path={'/master/inventory/daftar-bahan-penolong'} element={<MasterDaftarBP />} />
                                 <Route path={'/master/inventory/alat'} element={<MasterAlat />} />
                                 <Route path={'/master/inventory/daftar-alat'} element={<MasterDaftarAlat />} />
                                 <Route path={'/master/inventory/daftar-produk'} element={<MasterDaftarProduk />} />
                                 <Route path={'/master/inventory/produk'} element={<MasterProduk />} />
                                 <Route path={'/master/tenaga-kerja'} element={<MasterTenagaKerja />} />
                                 <Route path={'/transaksi/penjualan/transaksi-penjualan'} element={<TransaksiPenjualanTransaksiPenjualan />} />
-                                <Route path={'/transaksi/penjualan/perhitungan-harga'} element={<TransaksiPenjualanPerhitunganHarga />} />
+                                <Route path={'/transaksi/penjualan/daftar-pesanan'} element={<TransaksiPenjualanDaftarPesanan />} />
                                 <Route path={'/transaksi/penjualan/jual-pesan'} element={<TransaksiPenjualanJualPesan />} />
-                                <Route path={'/transaksi/penjualan/perhitungan-harga/kalkulator-estimasi'} element={<TransaksiPenjualanKalkulatorEstimasi />} />
+                                <Route path={'/transaksi/penjualan/daftar-pesanan/kalkulator-estimasi'} element={<TransaksiPenjualanKalkulatorEstimasi />} />
                                 <Route path={'/transaksi/pembelian/order-pembelian'} element={<TransaksiPembelianOrderPembelian />} />
                                 <Route path={'/transaksi/pembelian/daftar-order'} element={<TransaksiPembelianDaftarOrder />} />
                                 <Route path={'/transaksi/pembelian/pengeluaran-kas'} element={<TransaksiPembelianPengeluaranKas />} />

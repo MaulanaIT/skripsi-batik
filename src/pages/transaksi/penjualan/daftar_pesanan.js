@@ -3,29 +3,45 @@ import React, { Component } from 'react'
 // Import Library
 import $ from 'jquery';
 import axios from 'axios';
-import { FaClipboardList, FaPrint, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { MdAdd } from 'react-icons/md';
+import { FaPrint, FaTrash } from 'react-icons/fa';
 import { baseURL, config, cx, HideLoading, ShowLoading } from '../../../component/helper';
-
-import DetailPesanan from './detail_aksi_pesan';
 
 // Import CSS
 import global from '../../../css/global.module.css';
-import style from '../../../css/transaksi/penjualan/perhitungan_harga.module.css';
+import style from '../../../css/transaksi/penjualan/daftar_pesanan.module.css';
 
-export class perhitungan_harga extends Component {
+export class daftar_pesanan extends Component {
 
     state = {
-        htmlTableDaftarPesanan: []
+        dataSelectedPesanan: [],
+
+        htmlTableDaftarPesanan: [],
+        htmlTableDaftarDetailPesanan: []
     }
 
     componentDidMount() {
         this.GetPesanan();
     }
 
+    DeletePesanan = (kode) => {
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('kode', kode);
+
+        axios.post(`${baseURL}/api/transaksi/penjualan/estimasi-pesanan/delete.php`, formData, config).then(() => {
+            this.GetPesanan();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
     GetPesanan = () => {
-        axios.get(`${baseURL}/api/transaksi/penjualan/kalkulator-estimasi/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/transaksi/penjualan/estimasi-pesanan/select.php`, config).then(response => {
             ShowLoading();
 
             let dataPesanan = response.data.data;
@@ -41,7 +57,7 @@ export class perhitungan_harga extends Component {
                                 <div id={`data-kode-${item.id}`}>{item.kode}</div>
                             </td>
                             <td>
-                                <div id={`data-nama-pesanan-${item.id}`} className={`data-${item.id}`}>{item.nama_pesanan}</div>
+                                <div id={`data-nama-pesanan-${item.id}`} className={`data-${item.id}`}>{item.nama}</div>
                             </td>
                             <td>
                                 <div id={`data-tanggal-${item.id}`} className={`data-${item.id}`}>{item.tanggal}</div>
@@ -62,12 +78,21 @@ export class perhitungan_harga extends Component {
                                 <div id={`data-harga-jual-${item.id}`} className={`data-${item.id}`}>{item.harga_jual}</div>
                             </td>
                             <td>
-                                <div id={`data-status-${item.id}`} className={`data-${item.id}`}>{item.status}</div>
+                                <div id={`data-status-${item.id}`} className={`data-${item.id}`}>{+item.status === 0 ? 'Menunggu' : +item.status === 1 ? 'Uang Muka Diterima' : 'Selesai'}</div>
                             </td>
-                            <td className={global.table_action}>
-                                <button type='button' id='button-detail' className={global.edit} style={{gridColumn: '2 span'}}><FaClipboardList /> Detail</button>
+                            <td className={cx([global.table_action, 'text-nowrap'])}>
+                                {+item.status === 0 ?
+                                    <Link to={'/transaksi/penerimaan-kas/uang-muka-pesanan'} state={{ data: item }} className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Terima Uang Muka</Link>
+                                    :
+                                    <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} disabled={true}>Terima Uang Muka</button>
+                                }
+                                {+item.status === 1 ?
+                                    <Link to={'/transaksi/penjualan/jual-pesan'} state={{ data: item }} className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Penyerahan Pesanan</Link>
+                                    :
+                                    <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }} disabled={true}>Penyerahan Pesanan</button>
+                                }
                                 <button type='button' id='button-print' className={global.apply}><FaPrint /> Print</button>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeletePesanan(item.id)}><FaTrash /> Delete</button>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeletePesanan(item.kode)} disabled={+item.status === 2 && true}><FaTrash /> Delete</button>
                             </td>
                         </tr>
                     );
@@ -88,18 +113,13 @@ export class perhitungan_harga extends Component {
         });
     }
 
-    componentDidMount() {
-        $('#table-data').DataTable();
-    }
-
-    SelectDetail = () => {
-        document.getElementById('detail_aksi_pesan').classList.remove('d-none');
+    SelectDetail = (data) => {
+        $(`#table-detail-data-pesanan`).DataTable();
     }
 
     render() {
         return (
-            <>
-            <DetailPesanan />
+            <React.Fragment>
                 <div className={style.header}>
                     <p className={style.title}>Transaksi Penjualan</p>
                     <p className={style.pathname}>Transaksi / Penjualan / Perhitungan Harga</p>
@@ -126,19 +146,16 @@ export class perhitungan_harga extends Component {
                                         <td>Aksi</td>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    {this.state.htmlTableDaftarPesanan}
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div className='d-flex flex-column gap-2 pt-2'>
-                    <div>
-                        <button type='button' className={global.button} onClick={this.SelectDetail}>Detail Pesanan</button>
-                    </div>
-                </div>
-            </>
+            </React.Fragment>
         )
     }
 }
 
-export default perhitungan_harga
+export default daftar_pesanan

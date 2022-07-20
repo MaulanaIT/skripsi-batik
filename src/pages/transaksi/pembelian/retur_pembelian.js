@@ -192,7 +192,7 @@ export default function Retur_pembelian() {
     }
 
     const DeleteAlat = (id) => {
-        let dataAlat = getDataAlat;
+        let dataAlat = [...getDataAlat];
 
         dataAlat.splice(id, 1);
 
@@ -200,7 +200,7 @@ export default function Retur_pembelian() {
     }
 
     const DeleteBahan = (id) => {
-        let dataBahan = getDataBahan;
+        let dataBahan = [...getDataBahan];
 
         dataBahan.splice(id, 1);
 
@@ -225,7 +225,7 @@ export default function Retur_pembelian() {
                         <td>{item.harga}</td>
                         <td>{item.total_harga}</td>
                         <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteAlat(item.id)}><FaTrash />Delete</button>
+                            <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteAlat(index)}><FaTrash />Delete</button>
                         </td>
                     </tr>
                 );
@@ -255,7 +255,7 @@ export default function Retur_pembelian() {
                         <td>{item.harga}</td>
                         <td>{item.total_harga}</td>
                         <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteBahan(item.id)}><FaTrash />Delete</button>
+                            <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteBahan(index)}><FaTrash />Delete</button>
                         </td>
                     </tr>
                 );
@@ -431,6 +431,8 @@ export default function Retur_pembelian() {
     }
 
     const SelectRetur = (data) => {
+        if (getJenisRetur === data?.value) return;
+
         $('#table-data').DataTable().destroy();
 
         setDataAlat([]);

@@ -4,8 +4,9 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { FaCheck, FaPen, FaTrash } from 'react-icons/fa';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, CheckInputValidity, config, GetValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 
 
 // Import CSS
@@ -118,7 +119,11 @@ export class daftar_bb extends Component {
                                     <input type="text" id={`edit-harga-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.harga} onInput={InputFormatNumber} required={true} />
                                 </div>
                             </td>
-                            <td></td>
+                            <td className={global.table_action}>
+                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyBahanBaku(item.id)}><FaCheck /> Apply</button>
+                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditBahanBaku(item.id)}><FaPen /> Edit</button>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteBahanBaku(item.id)}><FaTrash />Delete</button>
+                            </td>
                         </tr>
                     );
                 });
@@ -128,6 +133,8 @@ export class daftar_bb extends Component {
 
             this.setState({ htmlTableDaftarBahanBaku: htmlTableDaftarBahanBaku }, () => {
                 $('#table-data').DataTable();
+
+                HideLoading();
             });
         }).catch(error => {
             console.log(error);

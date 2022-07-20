@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $query = "SELECT * FROM penjualan_tunai";
     } else if ($jenis_penjualan == 'konsinyasi') {
         $query = "SELECT * FROM penjualan_konsinyasi";
-    } else {
+    } else if ($jenis_penjualan == 'pesanan') {
         $query = "SELECT * FROM penjualan_pesanan";
     }
 

@@ -87,9 +87,7 @@ export class daftar_retur extends Component {
                                             this.SelectDetailGudang(item.kode, parseInt(item.status))
                                         }><FaClipboardList /> Detail</button>
                                 }
-                                {+item.status <= 1 &&
-                                    <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
-                                }
+                                <button type='button' id='button-delete' className={global.delete} disabled={+item.status > 1 && true} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
                             </td>
                         </tr>
                     );

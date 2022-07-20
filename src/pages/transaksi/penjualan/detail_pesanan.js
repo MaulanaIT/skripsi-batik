@@ -1,4 +1,5 @@
 // Import Library
+import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { FiXCircle } from 'react-icons/fi';
@@ -9,27 +10,29 @@ import global from '../../../css/global.module.css';
 export class detail_aksi_pesan extends Component {
 
     CloseDetail = () => {
-        document.getElementById('detail_aksi_pesan').classList.add('d-none');
-        }
+        document.getElementById('detail_pesanan').classList.add('d-none');
+    }
 
     render() {
         return (
-            <div id='detail_aksi_pesan' className={`${global.loading_background} d-none`}>
+            <div id='detail_pesanan' className={`${global.popup_detail} d-none`}>
                 <div className={`table-responsive`}><FiXCircle className='fs-3 col-12' onClick={this.CloseDetail} />
                     <div className={`${global.card_detail}`}>
                         <p className='fs-5 fw-bold text-center'>Detail Pesanan</p>
                         <table id='table-detail-data-pesanan' className={`table w-100`}>
                             <thead>
-                                <tr>
-                                    <td>No.</td>
-                                    <td>Kode Pesanan</td>
-                                    <td>Nama Pesanan</td>
-                                    <td>Jumlah Jual</td>
-                                    <td>Harga Jual</td>
-                                    <td>Total Harga</td>
+                                <tr className={'align-middle'}>
+                                    <th>No.</th>
+                                    <th>Kode Pesanan</th>
+                                    <th>Nama Pesanan</th>
+                                    <th>Jumlah Jual</th>
+                                    <th>Harga Jual</th>
+                                    <th>Total Harga</th>
                                 </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                                {this.props.htmlTableDaftarDetailPesanan}
+                            </tbody>
                         </table>
                         <div className='d-flex'>
                             <div className='col-6 pe-2'>

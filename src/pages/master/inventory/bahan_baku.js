@@ -40,7 +40,7 @@ export class bahan_baku extends Component {
         formData.append('harga', GetValue('input-harga-bahan-baku'));
 
         axios.post(`${baseURL}/api/master/inventory/bahan-baku/insert.php`, formData, config).then(() => {
-            window.location.href = '/master/inventory/daftar-bb';
+            window.location.href = '/master/inventory/daftar-bahan-baku';
         }).catch(error => {
             console.log(error);
 
@@ -59,11 +59,11 @@ export class bahan_baku extends Component {
                     <form id='form-data' className={global.card}>
                         <div className={`${global.header}`}>
                             <p className={global.title}>Tambah Bahan Baku</p>
-                            <Link to={'/master/inventory/daftar-bb'} className={`${global.button}`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Kembali</Link>
+                            <Link to={'/master/inventory/daftar-bahan-baku'} className={`${global.button}`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Kembali</Link>
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Bahan Baku</p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-bahan-baku' name='input-kode-bahan-baku' value={GenerateCode('BB', this.state.dataBahanBaku.length + 1)} maxLength={10} readOnly={true} required={true} />
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-bahan-baku' name='input-kode-bahan-baku' value={GenerateCode('BB', this.state.dataBahanBaku)} maxLength={10} readOnly={true} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Bahan Baku</p>

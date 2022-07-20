@@ -103,7 +103,7 @@ export default function Pengembalian_dana() {
         axios.get(`${baseURL}/api/transaksi/pembelian/refund/select.php`, config).then(response => {
             let data = response.data.data;
             
-            setValueKodeKasMasuk(GenerateCode('KMR', data));
+            setValueKodeKasMasuk(GenerateCode('REF', data));
 
             HideLoading();
         }).catch(error => {

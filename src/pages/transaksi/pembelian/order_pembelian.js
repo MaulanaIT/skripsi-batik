@@ -73,7 +73,7 @@ export class order_pembelian extends Component {
         valueKalkulasiTotalHarga: 0,
         valueKodeAlat: null,
         valueKodeBahan: null,
-        valueKodeOrder: null,
+        valueKodeOrder: '',
         valueKodeSupplier: null,
         valueNamaAlat: null,
         valueNamaBahan: null,
@@ -437,16 +437,40 @@ export class order_pembelian extends Component {
             let valueKode = this.state.dataSelectKodeBahan.find(item => item.value === data?.value);
             let valueNama = this.state.dataSelectNamaBahan.find(item => item.value === data?.value);
 
-            this.setState({ valueKodeBahan: valueKode, valueNamaBahan: valueNama });
+            this.setState({ 
+                valueKodeBahan: valueKode, 
+                valueNamaBahan: valueNama 
+            });
         } else {
-            this.setState({ valueKodeBahan: '', valueNamaBahan: '' });
+            this.setState({ 
+                valueKodeBahan: '', 
+                valueNamaBahan: '' 
+            });
         }
+
+
     }
 
     SelectPembelian = (data) => {
+        if (this.state.jenisPembelian === data?.value) return;
+
         $('#table-data').DataTable().destroy();
 
-        this.setState({ jenisPembelian: data ? data.value : '' }, () => {
+        this.setState({ 
+            jenisPembelian: data ? data.value : '',
+    
+            valueHarga: 0,
+            valueJumlah: 0,
+            valueKalkulasiTotalHarga: 0,
+            valueKodeAlat: null,
+            valueKodeBahan: null,
+            valueKodeSupplier: null,
+            valueNamaAlat: null,
+            valueNamaBahan: null,
+            valueNamaSupplier: null,
+            valueTanggal: moment().format('YYYY-MM-DD'),
+            valueTotalHarga: 0,
+        }, () => {
             if (data && data.value.toString().toLowerCase() === 'alat') this.GetDetailAlat();
             else if (data && data.value.toString().toLowerCase() === 'bahan') this.GetDetailBahan();
         });
@@ -466,6 +490,8 @@ export class order_pembelian extends Component {
     render() {
 
         const {
+            dataAlat,
+            dataBahan,
             valueHarga,
             valueJumlah,
             valueKalkulasiTotalHarga,
@@ -512,11 +538,11 @@ export class order_pembelian extends Component {
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-3 pe-2`}>
                                             <p className={global.title}>Kode Supplier</p>
-                                            <Select escapeClearsValue={false} isClearable={true} isSearchable={true} options={this.state.dataSelectKodeSupplier} placeholder={'Select Kode...'} styles={CustomSelect} value={valueKodeSupplier} onChange={(data) => this.SelectSupplier(data)} />
+                                            <Select escapeClearsValue={false} isClearable={true} isSearchable={true} options={this.state.dataSelectKodeSupplier} placeholder={'Select Kode...'} styles={CustomSelect} value={valueKodeSupplier} onChange={(data) => this.SelectSupplier(data)} isDisabled={dataAlat.length > 0 || dataBahan.length > 0} />
                                         </div>
                                         <div className={`${global.input_group} col-5 ps-2`}>
                                             <p className={global.title}>Nama Supplier</p>
-                                            <Select isClearable={true} isSearchable={true} options={this.state.dataSelectNamaSupplier} placeholder={'Select Nama...'} styles={CustomSelect} value={valueNamaSupplier} onChange={(data) => this.SelectSupplier(data)} />
+                                            <Select isClearable={true} isSearchable={true} options={this.state.dataSelectNamaSupplier} placeholder={'Select Nama...'} styles={CustomSelect} value={valueNamaSupplier} onChange={(data) => this.SelectSupplier(data)} isDisabled={dataAlat.length > 0 || dataBahan.length > 0 && false} />
                                         </div>
                                     </div>
                                     {this.state.jenisPembelian === 'Bahan' ?

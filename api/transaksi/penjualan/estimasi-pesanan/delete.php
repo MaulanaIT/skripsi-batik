@@ -4,13 +4,8 @@ require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
-    $kode_akun = $_POST['kode_akun'];
-    $total_bayar = $_POST['total_bayar'];
-    $jenis_penjualan = $_POST['jenis_penjualan'];
-    
-    if ($jenis_penjualan == 'pesanan') {
-        $query = "UPDATE penjualan_pesanan SET total_bayar=(total_bayar + ".$total_bayar."), sisa=(sisa-".$total_bayar.") WHERE kode='".$kode."'";
-    }
+
+    $query = "DELETE FROM estimasi_pesanan WHERE kode='".$kode."'";
     
     $result = $conn->query($query);
 

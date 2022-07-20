@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2022 at 09:17 AM
+-- Generation Time: Jul 20, 2022 at 06:57 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -430,9 +430,18 @@ CREATE TABLE `estimasi_pesanan` (
   `hpp` double NOT NULL,
   `profit` double NOT NULL,
   `harga_jual` double NOT NULL,
+  `status` int(11) NOT NULL COMMENT '0 = Menunggu,\r\n1 = Uang Muka Dibayar,\r\n2 = Selesai',
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `estimasi_pesanan`
+--
+
+INSERT INTO `estimasi_pesanan` (`id`, `kode`, `nama`, `tanggal`, `kode_customer`, `jenis_produk`, `jumlah`, `deskripsi`, `hpp`, `profit`, `harga_jual`, `status`, `created_at`, `updated_at`) VALUES
+(3, 'PESAN0001', 'Pesanan 1', '2022-07-20', 'CUS0001', 'Kain', 5, 'Catatan', 20000, 10, 110000, 2, '2022-07-20 02:29:37', '2022-07-20 03:56:33'),
+(4, 'PESAN0002', 'Pesanan 1', '2022-07-20', 'CUS0001', 'Kain', 3, 'Catatan', 18000, 20, 64800, 2, '2022-07-20 02:43:48', '2022-07-20 04:24:55');
 
 -- --------------------------------------------------------
 
@@ -531,12 +540,12 @@ CREATE TABLE `master_akun` (
 
 INSERT INTO `master_akun` (`id`, `kode`, `nama`, `saldo`, `jenis`, `created_at`, `updated_at`) VALUES
 (9, '1101', 'Kas di Tangan', 135000, 0, '2022-07-02 03:35:56', '2022-07-14 07:14:09'),
-(10, '1102', 'Kas Bank', -25000, 0, '2022-07-02 03:36:09', '2022-07-14 07:11:34'),
+(10, '1102', 'Kas Bank', 42800, 0, '2022-07-02 03:36:09', '2022-07-20 02:53:29'),
 (11, '1103', 'Piutang Konsinyasi', 0, 0, '2022-07-02 03:36:21', '2022-07-02 03:36:21'),
 (12, '2101', 'Uang Muka Pesanan', 0, 1, '2022-07-02 03:36:48', '2022-07-02 03:36:48'),
-(13, '4101', 'Penjualan', 0, 1, '2022-07-02 03:40:10', '2022-07-02 03:40:10'),
-(14, '4201', 'Potongan Penjualan', 0, 0, '2022-07-02 03:40:22', '2022-07-02 03:40:22'),
-(15, '4202', 'Beban Angkut Penjualan', 0, 0, '2022-07-02 03:40:32', '2022-07-02 03:40:32'),
+(13, '4101', 'Penjualan', 174800, 1, '2022-07-02 03:40:10', '2022-07-20 02:53:29'),
+(14, '4201', 'Potongan Penjualan', 10000, 0, '2022-07-02 03:40:22', '2022-07-20 02:53:29'),
+(15, '4202', 'Beban Angkut Penjualan', 16000, 0, '2022-07-02 03:40:32', '2022-07-20 02:53:29'),
 (16, '5101', 'HPP', 0, 0, '2022-07-02 03:40:42', '2022-07-02 03:40:42'),
 (17, '5201', 'Potongan Pembelian', 0, 1, '2022-07-02 03:40:51', '2022-07-02 03:40:51'),
 (18, '5202', 'Retur Pembelian', 0, 1, '2022-07-02 03:41:06', '2022-07-02 03:41:06'),
@@ -868,14 +877,26 @@ CREATE TABLE `penjualan_konsinyasi` (
 CREATE TABLE `penjualan_pesanan` (
   `id` int(11) NOT NULL,
   `kode` varchar(10) NOT NULL,
+  `kode_pesanan` varchar(10) NOT NULL,
+  `tanggal` date NOT NULL,
+  `kode_customer` varchar(10) NOT NULL,
   `total_jual` double NOT NULL,
-  `biaya_kirim` double NOT NULL,
-  `uang_muka` double NOT NULL,
   `diskon` double NOT NULL,
+  `ongkos_kirim` double NOT NULL,
+  `total_harga` double NOT NULL,
   `total_bayar` double NOT NULL,
+  `sisa` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `penjualan_pesanan`
+--
+
+INSERT INTO `penjualan_pesanan` (`id`, `kode`, `kode_pesanan`, `tanggal`, `kode_customer`, `total_jual`, `diskon`, `ongkos_kirim`, `total_harga`, `total_bayar`, `sisa`, `created_at`, `updated_at`) VALUES
+(1, 'JP0001', 'PESAN0001', '2022-07-20', 'CUS0001', 110000, 5000, 8000, 113000, 113000, 0, '2022-07-20 02:50:14', '2022-07-20 03:56:33'),
+(2, 'JP0002', 'PESAN0002', '2022-07-20', 'CUS0001', 64800, 5000, 8000, 67800, 67800, 0, '2022-07-20 02:53:29', '2022-07-20 03:55:55');
 
 -- --------------------------------------------------------
 
@@ -895,21 +916,6 @@ CREATE TABLE `penjualan_tunai` (
   `total_bayar` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `piutang`
---
-
-CREATE TABLE `piutang` (
-  `id` int(11) NOT NULL,
-  `kode_jual` varchar(10) NOT NULL,
-  `kode_customer` varchar(10) NOT NULL,
-  `piutang` double NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -999,6 +1005,21 @@ INSERT INTO `terima_barang` (`id`, `kode`, `kode_order`, `jenis_pembelian`, `tan
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `terima_piutang`
+--
+
+CREATE TABLE `terima_piutang` (
+  `id` int(11) NOT NULL,
+  `kode_jual` varchar(10) NOT NULL,
+  `kode_customer` varchar(10) NOT NULL,
+  `piutang` double NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `token`
 --
 
@@ -1015,6 +1036,37 @@ CREATE TABLE `token` (
 
 INSERT INTO `token` (`id`, `token`, `created_at`, `updated_at`) VALUES
 (1, '$2a$16$V8nX0lYVYeAdzmwd2qaV.egge8PmIYEzrI6uksbt.HmTpWElFOou.', '2022-04-27 03:35:00', '2022-04-27 03:35:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `uang_muka_pesanan`
+--
+
+CREATE TABLE `uang_muka_pesanan` (
+  `id` int(11) NOT NULL,
+  `kode` varchar(10) NOT NULL,
+  `tanggal` date NOT NULL,
+  `kode_customer` varchar(10) NOT NULL,
+  `total_jual` double NOT NULL,
+  `uang_muka` double NOT NULL,
+  `sisa` double NOT NULL,
+  `file` longtext NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `uang_muka_pesanan`
+--
+
+INSERT INTO `uang_muka_pesanan` (`id`, `kode`, `tanggal`, `kode_customer`, `total_jual`, `uang_muka`, `sisa`, `file`, `created_at`, `updated_at`) VALUES
+(2, 'PESAN0001', '2022-07-20', 'CUS0001', 113000, 50000, 63000, 'File Uang Muka - PESAN0001 - 2022-07-20.pdf', '2022-07-20 02:45:28', '2022-07-20 02:45:28'),
+(3, 'PESAN0001', '2022-07-20', 'CUS0001', 113000, 50000, 63000, 'File Uang Muka - PESAN0001 - 2022-07-20.pdf', '2022-07-20 02:46:50', '2022-07-20 02:46:50'),
+(4, 'PESAN0001', '2022-07-20', 'CUS0001', 113000, 50000, 63000, 'File Uang Muka - PESAN0001 - 2022-07-20.pdf', '2022-07-20 02:48:54', '2022-07-20 02:48:54'),
+(5, 'PESAN0001', '2022-07-20', 'CUS0001', 113000, 50000, 63000, 'File Uang Muka - PESAN0001 - 2022-07-20.pdf', '2022-07-20 02:49:24', '2022-07-20 02:49:24'),
+(6, 'PESAN0001', '2022-07-20', 'CUS0001', 113000, 50000, 63000, 'File Uang Muka - PESAN0001 - 2022-07-20.pdf', '2022-07-20 02:50:14', '2022-07-20 02:50:14'),
+(7, 'PESAN0002', '2022-07-20', 'CUS0001', 67800, 50000, 17800, 'File Uang Muka - PESAN0002 - 2022-07-20.pdf', '2022-07-20 02:53:29', '2022-07-20 02:53:29');
 
 --
 -- Indexes for dumped tables
@@ -1273,12 +1325,6 @@ ALTER TABLE `penjualan_tunai`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `piutang`
---
-ALTER TABLE `piutang`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `refund`
 --
 ALTER TABLE `refund`
@@ -1297,9 +1343,21 @@ ALTER TABLE `terima_barang`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `terima_piutang`
+--
+ALTER TABLE `terima_piutang`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `token`
 --
 ALTER TABLE `token`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `uang_muka_pesanan`
+--
+ALTER TABLE `uang_muka_pesanan`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1436,7 +1494,7 @@ ALTER TABLE `detail_terima_bahanpenolong`
 -- AUTO_INCREMENT for table `estimasi_pesanan`
 --
 ALTER TABLE `estimasi_pesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `kartu_ketersediaan_alat`
@@ -1550,18 +1608,12 @@ ALTER TABLE `penjualan_konsinyasi`
 -- AUTO_INCREMENT for table `penjualan_pesanan`
 --
 ALTER TABLE `penjualan_pesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `penjualan_tunai`
 --
 ALTER TABLE `penjualan_tunai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `piutang`
---
-ALTER TABLE `piutang`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -1583,10 +1635,22 @@ ALTER TABLE `terima_barang`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `terima_piutang`
+--
+ALTER TABLE `terima_piutang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `token`
 --
 ALTER TABLE `token`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `uang_muka_pesanan`
+--
+ALTER TABLE `uang_muka_pesanan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
