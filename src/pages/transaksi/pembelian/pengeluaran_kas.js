@@ -364,7 +364,7 @@ export default function Pengeluaran_kas() {
                                     <p className={`${global.title} col-3`}>Total Bayar</p>
                                     <input type="text" id='input-detail-total-harga' name='input-detail-total-harga' className={`col-3`} value={getValueTotalBayar} readOnly={true} />
                                     <div className='col-6 ps-2'>
-                                        <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Akun...'} styles={CustomSelect} value={getValueSelectedAkun} onChange={e => setValueSelectedAkun(e)} />
+                                        <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Akun...'} styles={CustomSelect} value={getValueSelectedAkun} onChange={e => setValueSelectedAkun(e)} />
                                     </div>
                                 </div>
                             </div>

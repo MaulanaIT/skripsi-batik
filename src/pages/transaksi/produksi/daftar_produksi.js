@@ -1,59 +1,91 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // Import Library
 import $ from 'jquery';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
+import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
 import style from '../../../css/transaksi/produksi/daftar_produksi.module.css';
 
-export class daftar_produksi extends Component {
+export default function Daftar_produksi() {
 
-    componentDidMount() {
-        $('#table-data').DataTable();
+    const [getHTMLTableDaftarPerencanaan, setHTMLTableDaftarPerencanaan] = useState([]);
+
+    const [getValueJenisProduksi, setValueJenisProduksi] = useState(null);
+
+    const GetPerencanaanProduksi = () => {
+        let htmlTableDaftarPerencanaan = [];
+
+        ['stok', 'pesanan'].forEach(item => {
+            ShowLoading();
+    
+            const formData = new FormData();
+    
+            formData.append('jenis_produksi', item);
+    
+            axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/select.php`, formData, config).then(response => {
+                let data = response.data.data;
+
+                if (data && data.length > 0) {
+                    data.forEach((item, index) => {
+                        htmlTableDaftarPerencanaan.push(
+                            <tr key={index} className={'align-middle'}>
+                                <td></td>
+                            </tr>
+                        );
+                    });
+                }
+    
+                HideLoading();
+            }).catch(error => {
+                console.log(error);
+    
+                alert(error);
+    
+                HideLoading();
+            });
+        });
     }
 
-    render() {
-        return (
-            <>
-                <div className={style.header}>
-                    <p className={style.title}>Produksi</p>
-                    <p className={style.pathname}>Transaksi / Produksi / Produksi</p>
-                </div>
-                <div className={`${style.content}`}>
-                    <div className={`${global.card} col-12`}>
-                        <div className={`${global.header}`}>
-                            <p className={global.title}>Daftar Perencanaan Produksi</p>
-                            <Link to={'/transaksi/produksi/produksi'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
-                        </div>
-                        <div className={`table-responsive`}>
-                            <table id='table-data' className={`table w-100`}>
-                                <thead className='text-nowrap'>
-                                    <tr>
-                                        <td>No.</td>
-                                        <td>Tanggal Pesan</td>
-                                        <td>Tanggal Produksi</td>
-                                        <td>Tanggal</td>
-                                        <td>Kode Produksi</td>
-                                        <td>Nama Pesanan</td>
-                                        <td>Nama Customer</td>
-                                        <td>Nama Produk</td>
-                                        <td>Jumlah</td>
-                                        <td>Lama Produksi</td>
-                                        <td>Status</td>
-                                        <td>Aksi</td>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
+    return (
+        <React.Fragment>
+            <div className={style.header}>
+                <p className={style.title}>Produksi</p>
+                <p className={style.pathname}>Transaksi / Produksi / Perencanaan Produksi</p>
+            </div>
+            <div className={`${style.content}`}>
+                <div className={`${global.card} col-12`}>
+                    <div className={`${global.header}`}>
+                        <p className={global.title}>Daftar Perencanaan Produksi</p>
+                        <Link to={'/transaksi/produksi/produksi'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
+                    </div>
+                    <div className={`table-responsive`}>
+                        <table id='table-data' className={`table w-100`}>
+                            <thead className='text-nowrap'>
+                                <tr>
+                                    <td>No.</td>
+                                    <td>Tanggal Pesan</td>
+                                    <td>Tanggal Produksi</td>
+                                    <td>Tanggal</td>
+                                    <td>Kode Produksi</td>
+                                    <td>Nama Pesanan</td>
+                                    <td>Nama Customer</td>
+                                    <td>Nama Produk</td>
+                                    <td>Jumlah</td>
+                                    <td>Lama Produksi</td>
+                                    <td>Status</td>
+                                    <td>Aksi</td>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
-            </>
-        )
-    }
+            </div>
+        </React.Fragment>
+    )
 }
-
-export default daftar_produksi
