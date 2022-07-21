@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $kode_consignee = $_POST['kode_consignee'];
         $piutang = $_POST['piutang'];
 
-        $query = "INSERT INTO penjualan_konsinyasi(kode, tanggal, kode_consignee, total_jual, diskon, piutang, terima_piutang, sisa) VALUES('" . $kode . "', '" . $tanggal . "', '" . $kode_consignee . "', '" . $total_jual . "', '" . $diskon . "', '" . $piutang . "', 0, '" . $total_harga . "')";
+        $query = "INSERT INTO penjualan_konsinyasi(kode, tanggal, kode_consignee, total_jual, diskon, piutang, terima_piutang, sisa) VALUES('" . $kode . "', '" . $tanggal . "', '" . $kode_consignee . "', '" . $total_jual . "', '" . $diskon . "', '" . $piutang . "', 0, '" . $piutang . "')";
     } else if ($jenis_penjualan == 'pesanan') {
         $kode_pesanan = $_POST['kode_pesanan'];
         $kode_customer = $_POST['kode_customer'];
