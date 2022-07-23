@@ -3,11 +3,14 @@
 require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
-    $nama = $_POST['nama'];
-    $saldo = $_POST['saldo'];
+    $kode = $_POST['kode'];
+    $kode_akun = $_POST['kode_akun'];
+    $total_bayar = $_POST['total_bayar'];
+    $jenis_penjualan = $_POST['jenis_penjualan'];
     
-    $query = "UPDATE detail_order_pembelian SET nama='".$nama."', saldo='".$saldo."' WHERE id='".$id."'";
+    if ($jenis_penjualan == 'pesanan') {
+        $query = "UPDATE penjualan_pesanan SET total_bayar=(total_bayar + ".$total_bayar."), sisa=(sisa-".$total_bayar.") WHERE kode='".$kode."'";
+    }
     
     $result = $conn->query($query);
 

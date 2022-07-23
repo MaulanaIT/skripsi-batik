@@ -53,6 +53,15 @@ const CustomSelect = {
 export class transaksi_penjualan extends Component {
 
     state = {
+        dataAkun: [],
+        dataAlat: [],
+        dataBahan: [],
+        dataBTKL: [],
+        dataPenolong: [],
+        dataDetailAlat: [],
+        dataDetailBahan: [],
+        dataDetailBTKL: [],
+        dataDetailPenolong: [],
         dataJual: [],
         dataKonsinyasi: [],
         dataPesanan: [],
@@ -62,6 +71,15 @@ export class transaksi_penjualan extends Component {
 
         kode: '',
 
+        dataSelectAkun: [],
+        dataSelectKodeAlat: [],
+        dataSelectNamaAlat: [],
+        dataSelectKodeBahan: [],
+        dataSelectNamaBahan: [],
+        dataSelectKodeBTKL: [],
+        dataSelectNamaBTKL: [],
+        dataSelectKodePenolong: [],
+        dataSelectNamaPenolong: [],
         dataSelectKodeProduk: [],
         dataSelectNamaProduk: [],
         dataSelectKodeConsignee: [],
@@ -71,34 +89,70 @@ export class transaksi_penjualan extends Component {
 
         htmlTableDaftarTunai: [],
         htmlTableDaftarKonsinyasi: [],
-        htmlTableDaftarPesanan: [],
+        htmlTableDaftarDetailAlat: [],
+        htmlTableDaftarDetailBahan: [],
+        htmlTableDaftarDetailBTKL: [],
+        htmlTableDaftarDetailPenolong: [],
 
+        valueDeskripsiPesanan: '',
         valueDiskon: 0,
         valueHarga: 0,
+        valueHargaAlat: 0,
+        valueHargaBahan: 0,
+        valueHargaPenolong: 0,
+        valueHargaJual: 0,
+        valueHpp: 0,
         valueJumlah: 0,
+        valueJumlahAlat: 0,
+        valueJumlahBahan: 0,
+        valueJumlahBTKL: 0,
+        valueJumlahPenolong: 0,
+        valueJenisProduk: null,
+        valueJenisPenjualan: null,
+        valueKodeAkun: null,
+        valueKodeAlat: null,
+        valueKodeBTKL: null,
+        valueKodeBahan: null,
+        valueKodePenolong: null,
         valueKodeProduk: null,
         valueKodeJual: '',
         valueKodeConsignee: null,
         valueKodeCustomer: null,
         valueKodeKasMasuk: '',
-        valueNamaProduk: null,
+        valueKodePesanan: '',
+        valueNamaAlat: null,
+        valueNamaBahan: null,
+        valueNamaBTKL: null,
         valueNamaConsignee: null,
         valueNamaCustomer: null,
+        valueNamaPenolong: null,
+        valueNamaProduk: null,
         valueOngkosKirim: 0,
-        valuePiutang: 0,
+        valueProfit: 0,
         valueSisa: 0,
         valueTanggal: moment().format('YYYY-MM-DD'),
+        valueTotalAlat: 0,
+        valueTotalBahan: 0,
+        valueTotalBTKL: 0,
         valueTotalBayar: 0,
         valueTotalKembalian: 0,
         valueTotalJual: 0,
+        valueTotalPenolong: 0,
         valueUangMuka: 0,
+
+        tabSelected: 0,
 
         jenisPenjualan: ''
     }
 
     async componentDidMount() {
+        await this.GetAkun();
+        await this.GetAlat();
+        await this.GetBahan();
+        await this.GetPenolong();
         await this.GetCustomer();
         await this.GetConsignee();
+        await this.GetPesanan();
         await this.GetProduk();
     }
 
@@ -109,36 +163,65 @@ export class transaksi_penjualan extends Component {
             valueKodeJual,
             valueKodeProduk,
             valueNamaProduk,
+            valueTotalJual
         } = this.state;
 
         if (this.state.jenisPenjualan.toLowerCase() === 'tunai') {
             let dataTunai = this.state.dataTunai;
 
-            dataTunai.push({
-                kode: valueKodeJual,
-                kode_item: valueKodeProduk.value,
-                nama_item: valueNamaProduk.label,
-                jumlah: valueJumlah,
-                harga: valueHarga,
-                total_harga: valueJumlah * valueHarga
-            });
+            let check = dataTunai.findIndex(item => item.kode_item === valueKodeProduk.value && item.harga === valueHarga);
 
-            this.setState({ dataTunai: dataTunai }, () => {
+            if (check < 0) {
+                dataTunai.push({
+                    kode: valueKodeJual,
+                    kode_item: valueKodeProduk.value,
+                    nama_item: valueNamaProduk.label,
+                    jumlah: valueJumlah,
+                    harga: valueHarga,
+                    total_harga: valueJumlah * valueHarga
+                });
+            } else {
+                dataTunai[check].jumlah = +dataTunai[check].jumlah + +valueJumlah;
+                dataTunai[check].total_harga = +dataTunai[check].total_harga + valueJumlah * valueHarga;
+            }
+
+            this.setState({
+                dataTunai: dataTunai,
+                valueKodeProduk: null,
+                valueNamaProduk: null,
+                valueHarga: 0,
+                valueJumlah: 0,
+                valueTotalJual: 0
+            }, () => {
                 this.GetDetailTunai();
             });
         } else if (this.state.jenisPenjualan.toLowerCase() === 'konsinyasi') {
             let dataKonsinyasi = this.state.dataKonsinyasi;
 
-            dataKonsinyasi.push({
-                kode: valueKodeJual,
-                kode_item: valueKodeProduk.value,
-                nama_item: valueNamaProduk.label,
-                jumlah: valueJumlah,
-                harga: valueHarga,
-                total_harga: valueJumlah * valueHarga
-            });
+            let check = dataKonsinyasi.findIndex(item => item.kode_item === valueKodeProduk.value && item.harga === valueHarga);
 
-            this.setState({ dataKonsinyasi: dataKonsinyasi }, () => {
+            if (check < 0) {
+                dataKonsinyasi.push({
+                    kode: valueKodeJual,
+                    kode_item: valueKodeProduk.value,
+                    nama_item: valueNamaProduk.label,
+                    jumlah: valueJumlah,
+                    harga: valueHarga,
+                    total_harga: valueJumlah * valueHarga
+                });
+            } else {
+                dataKonsinyasi[check].jumlah = +dataKonsinyasi[check].jumlah + +valueJumlah;
+                dataKonsinyasi[check].total_harga = +dataKonsinyasi[check].total_harga + valueJumlah * valueHarga;
+            }
+
+            this.setState({
+                dataKonsinyasi: dataKonsinyasi,
+                valueKodeProduk: null,
+                valueNamaProduk: null,
+                valueHarga: 0,
+                valueJumlah: 0,
+                valueTotalJual: 0
+            }, () => {
                 this.GetDetailKonsinyasi();
             });
         } else if (this.state.jenisPenjualan.toLowerCase() === 'pesanan') {
@@ -157,6 +240,156 @@ export class transaksi_penjualan extends Component {
         }
     }
 
+    AddDetailAlat = () => {
+        const {
+            valueHargaAlat,
+            valueJumlahAlat,
+            valueKodePesanan,
+            valueKodeAlat
+        } = this.state;
+
+        let dataAlat = this.state.dataAlat.find(item => item.kode === valueKodeAlat.value);
+        let dataDetailAlat = this.state.dataDetailAlat;
+
+        let check = dataDetailAlat.findIndex(item => item.kode_alat === valueKodeAlat.value);
+
+        if (check < 0) {
+            dataDetailAlat.push({
+                kode: valueKodePesanan,
+                kode_alat: dataAlat.kode,
+                nama_alat: dataAlat.nama,
+                jumlah: +valueJumlahAlat,
+                harga: +valueHargaAlat,
+                total_harga: +valueHargaAlat * +valueJumlahAlat
+            });
+        } else {
+            dataDetailAlat[check].jumlah = +dataDetailAlat[check].jumlah + +valueJumlahAlat;
+            dataDetailAlat[check].total_harga = +dataDetailAlat[check].total_harga + +valueHargaAlat * +valueJumlahAlat;
+
+            if (dataDetailAlat[check].jumlah > +dataAlat.jumlah) {
+                dataDetailAlat[check].jumlah = +dataAlat.jumlah;
+                dataDetailAlat[check].total_harga = +dataAlat.harga * +dataAlat.jumlah;
+            }
+        }
+
+        let valueTotalAlat = 0;
+
+        dataDetailAlat.forEach(item => {
+            valueTotalAlat += +item.total_harga;
+        });
+
+        this.setState({
+            dataDetailAlat: dataDetailAlat,
+            valueKodeAlat: null,
+            valueNamaAlat: null,
+            valueHargaAlat: 0,
+            valueJumlahAlat: 0,
+            valueTotalAlat: valueTotalAlat
+        }, () => {
+            this.GetDetailAlat();
+        });
+    }
+
+    AddDetailBahan = () => {
+        const {
+            valueHargaBahan,
+            valueJumlahBahan,
+            valueKodePesanan,
+            valueKodeBahan
+        } = this.state;
+
+        let dataBahan = this.state.dataBahan.find(item => item.kode === valueKodeBahan.value);
+        let dataDetailBahan = this.state.dataDetailBahan;
+
+        let check = dataDetailBahan.findIndex(item => item.kode_bahan === valueKodeBahan.value);
+
+        if (check < 0) {
+            dataDetailBahan.push({
+                kode: valueKodePesanan,
+                kode_bahan: dataBahan.kode,
+                nama_bahan: dataBahan.nama,
+                jumlah: +valueJumlahBahan,
+                harga: +valueHargaBahan,
+                total_harga: +valueHargaBahan * +valueJumlahBahan
+            });
+        } else {
+            dataDetailBahan[check].jumlah = +dataDetailBahan[check].jumlah + +valueJumlahBahan;
+            dataDetailBahan[check].total_harga = +dataDetailBahan[check].total_harga + +valueHargaBahan * +valueJumlahBahan;
+
+            if (dataDetailBahan[check].jumlah > +dataBahan.jumlah) {
+                dataDetailBahan[check].jumlah = +dataBahan.jumlah;
+                dataDetailBahan[check].total_harga = +dataBahan.harga * +dataBahan.jumlah;
+            }
+        }
+
+        let valueTotalBahan = 0;
+
+        dataDetailBahan.forEach(item => {
+            valueTotalBahan += +item.total_harga;
+        });
+
+        this.setState({
+            dataDetailBahan: dataDetailBahan,
+            valueKodeBahan: null,
+            valueNamaBahan: null,
+            valueHargaBahan: 0,
+            valueJumlahBahan: 0,
+            valueTotalBahan: valueTotalBahan
+        }, () => {
+            this.GetDetailBahan();
+        });
+    }
+
+    AddDetailPenolong = () => {
+        const {
+            valueHargaPenolong,
+            valueJumlahPenolong,
+            valueKodePesanan,
+            valueKodePenolong
+        } = this.state;
+
+        let dataPenolong = this.state.dataPenolong.find(item => item.kode === valueKodePenolong.value);
+        let dataDetailPenolong = this.state.dataDetailPenolong;
+
+        let check = dataDetailPenolong.findIndex(item => item.kode_penolong === valueKodePenolong.value);
+
+        if (check < 0) {
+            dataDetailPenolong.push({
+                kode: valueKodePesanan,
+                kode_penolong: dataPenolong.kode,
+                nama_penolong: dataPenolong.nama,
+                jumlah: +valueJumlahPenolong,
+                harga: +valueHargaPenolong,
+                total_harga: +valueHargaPenolong * +valueJumlahPenolong
+            });
+        } else {
+            dataDetailPenolong[check].jumlah = +dataDetailPenolong[check].jumlah + +valueJumlahPenolong;
+            dataDetailPenolong[check].total_harga = +dataDetailPenolong[check].total_harga + +valueHargaPenolong * +valueJumlahPenolong;
+
+            if (dataDetailPenolong[check].jumlah > +dataPenolong.jumlah) {
+                dataDetailPenolong[check].jumlah = +dataPenolong.jumlah;
+                dataDetailPenolong[check].total_harga = +dataPenolong.harga * +dataPenolong.jumlah;
+            }
+        }
+
+        let valueTotalPenolong = 0;
+
+        dataDetailPenolong.forEach(item => {
+            valueTotalPenolong += +item.total_harga;
+        });
+
+        this.setState({
+            dataDetailPenolong: dataDetailPenolong,
+            valueKodePenolong: null,
+            valueNamaPenolong: null,
+            valueHargaPenolong: 0,
+            valueJumlahPenolong: 0,
+            valueTotalPenolong: valueTotalPenolong
+        }, () => {
+            this.GetDetailPenolong();
+        });
+    }
+
     DeleteKonsinyasi = (id) => {
         let dataKonsinyasi = this.state.dataKonsinyasi;
 
@@ -167,13 +400,60 @@ export class transaksi_penjualan extends Component {
         });
     }
 
-    DeletePesanan = (id) => {
-        let dataPesanan = this.state.dataPesanan;
+    DeleteDetailAlat = (id) => {
+        let dataDetailAlat = this.state.dataDetailAlat;
 
-        dataPesanan.splice(id, 1);
+        dataDetailAlat.splice(id, 1);
 
-        this.setState({ dataPesanan: dataPesanan }, () => {
-            this.GetDetailPesanan();
+        let valueTotalAlat = 0;
+
+        dataDetailAlat.forEach(item => {
+            valueTotalAlat += +item.total_harga;
+        });
+
+        this.setState({
+            dataDetailAlat: dataDetailAlat,
+            valueTotalAlat: valueTotalAlat
+        }, () => {
+            this.GetDetailAlat();
+        });
+    }
+
+    DeleteDetailBahan = (id) => {
+        let dataDetailBahan = this.state.dataDetailBahan;
+
+        dataDetailBahan.splice(id, 1);
+
+        let valueTotalBahan = 0;
+
+        dataDetailBahan.forEach(item => {
+            valueTotalBahan += +item.total_harga;
+        });
+
+        this.setState({
+            dataDetailBahan: dataDetailBahan,
+            valueTotalBahan: valueTotalBahan
+        }, () => {
+            this.GetDetailBahan();
+        });
+    }
+
+    DeleteDetailPenolong = (id) => {
+        let dataDetailPenolong = this.state.dataDetailPenolong;
+
+        dataDetailPenolong.splice(id, 1);
+
+        let valueTotalPenolong = 0;
+
+        dataDetailPenolong.forEach(item => {
+            valueTotalPenolong += +item.total_harga;
+        });
+
+        this.setState({
+            dataDetailPenolong: dataDetailPenolong,
+            valueTotalPenolong: valueTotalPenolong
+        }, () => {
+            this.GetDetailPenolong();
         });
     }
 
@@ -184,6 +464,230 @@ export class transaksi_penjualan extends Component {
 
         this.setState({ dataTunai: dataTunai }, () => {
             this.GetDetailTunai();
+        });
+    }
+
+    GetAkun = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/master/akun/select.php`, config).then(response => {
+            let data = response.data.data.filter(item => ['1101', '1102'].includes(item.kode));
+
+            let dataSelectAkun = [];
+
+            if (data && data.length > 0) {
+                for (let item of data) {
+                    dataSelectAkun.push(
+                        { value: item.kode, label: item.nama }
+                    );
+                }
+            }
+
+            this.setState({ dataAkun: data, dataSelectAkun: dataSelectAkun }, () => {
+                HideLoading();
+            });
+        }).catch(error => {
+            console.log(error);
+
+            HideLoading();
+        });
+    }
+
+    GetAlat = async () => {
+        axios.get(`${baseURL}/api/master/inventory/alat/select.php`, config).then(response => {
+            let dataAlat = response.data.data;
+
+            let dataSelectKodeAlat = [];
+            let dataSelectNamaAlat = [];
+
+            if (dataAlat.length > 0) {
+                dataAlat.forEach(item => {
+                    dataSelectKodeAlat.push({
+                        value: item.kode,
+                        label: item.kode
+                    });
+
+                    dataSelectNamaAlat.push({
+                        value: item.kode,
+                        label: item.nama
+                    });
+                });
+            }
+
+            this.setState({ dataAlat: dataAlat, dataSelectKodeAlat: dataSelectKodeAlat, dataSelectNamaAlat: dataSelectNamaAlat });
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    GetBahan = async () => {
+        axios.get(`${baseURL}/api/master/inventory/bahan-baku/select.php`, config).then(response => {
+            let dataBahan = response.data.data;
+
+            let dataSelectKodeBahan = [];
+            let dataSelectNamaBahan = [];
+
+            if (dataBahan.length > 0) {
+                dataBahan.forEach(item => {
+                    dataSelectKodeBahan.push({
+                        value: item.kode,
+                        label: item.kode
+                    });
+
+                    dataSelectNamaBahan.push({
+                        value: item.kode,
+                        label: item.nama
+                    });
+                });
+            }
+
+            this.setState({ dataBahan: dataBahan, dataSelectKodeBahan: dataSelectKodeBahan, dataSelectNamaBahan: dataSelectNamaBahan });
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    GetDetailAlat = () => {
+        const {
+            dataDetailAlat
+        } = this.state;
+
+        ShowLoading();
+
+        let htmlTableDaftarDetailAlat = [];
+
+        if (dataDetailAlat.length > 0) {
+            dataDetailAlat.forEach((item, index) => {
+                htmlTableDaftarDetailAlat.push(
+                    <tr key={index} className={'align-middle'}>
+                        <td>{index + 1}.</td>
+                        <td>{item.kode}</td>
+                        <td>{item.kode_alat}</td>
+                        <td>{item.nama_alat}</td>
+                        <td>{item.jumlah}</td>
+                        <td>{item.harga}</td>
+                        <td>{item.total_harga}</td>
+                        <td className={global.table_action}>
+                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailAlat(index)}><FaTrash />Delete</button>
+                        </td>
+                    </tr>
+                );
+            });
+        }
+
+        $('#table-data-bop-alat').DataTable().destroy();
+
+        this.setState({ htmlTableDaftarDetailAlat: htmlTableDaftarDetailAlat }, () => {
+            $('#table-data-bop-alat').DataTable();
+
+            this.KalkulasiHpp();
+
+            HideLoading();
+        });
+    }
+
+    GetDetailBahan = () => {
+        const {
+            dataDetailBahan
+        } = this.state;
+
+        ShowLoading();
+
+        let htmlTableDaftarDetailBahan = [];
+
+        if (dataDetailBahan.length > 0) {
+            dataDetailBahan.forEach((item, index) => {
+                htmlTableDaftarDetailBahan.push(
+                    <tr key={index} className={'align-middle'}>
+                        <td>{index + 1}.</td>
+                        <td>{item.kode}</td>
+                        <td>{item.kode_bahan}</td>
+                        <td>{item.nama_bahan}</td>
+                        <td>{item.jumlah}</td>
+                        <td>{item.harga}</td>
+                        <td>{item.total_harga}</td>
+                        <td className={global.table_action}>
+                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailBahan(index)}><FaTrash />Delete</button>
+                        </td>
+                    </tr>
+                );
+            });
+        }
+
+        $('#table-data-bahan-baku').DataTable().destroy();
+
+        this.setState({ htmlTableDaftarDetailBahan: htmlTableDaftarDetailBahan }, () => {
+            $('#table-data-bahan-baku').DataTable();
+
+            this.KalkulasiHpp();
+
+            HideLoading();
+        });
+    }
+
+    GetDetailPenolong = () => {
+        const {
+            dataDetailPenolong
+        } = this.state;
+
+        ShowLoading();
+
+        let htmlTableDaftarDetailPenolong = [];
+
+        if (dataDetailPenolong.length > 0) {
+            dataDetailPenolong.forEach((item, index) => {
+                htmlTableDaftarDetailPenolong.push(
+                    <tr key={index} className={'align-middle'}>
+                        <td>{index + 1}.</td>
+                        <td>{item.kode}</td>
+                        <td>{item.kode_penolong}</td>
+                        <td>{item.nama_penolong}</td>
+                        <td>{item.jumlah}</td>
+                        <td>{item.harga}</td>
+                        <td>{item.total_harga}</td>
+                        <td className={global.table_action}>
+                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailPenolong(index)}><FaTrash />Delete</button>
+                        </td>
+                    </tr>
+                );
+            });
+        }
+
+        $('#table-data-bop-penolong').DataTable().destroy();
+
+        this.setState({ htmlTableDaftarDetailPenolong: htmlTableDaftarDetailPenolong }, () => {
+            $('#table-data-bop-penolong').DataTable();
+
+            this.KalkulasiHpp();
+
+            HideLoading();
+        });
+    }
+
+    GetPenolong = async () => {
+        axios.get(`${baseURL}/api/master/inventory/bahan-penolong/select.php`, config).then(response => {
+            let dataPenolong = response.data.data;
+
+            let dataSelectKodePenolong = [];
+            let dataSelectNamaPenolong = [];
+
+            if (dataPenolong.length > 0) {
+                dataPenolong.forEach(item => {
+                    dataSelectKodePenolong.push({
+                        value: item.kode,
+                        label: item.kode
+                    });
+
+                    dataSelectNamaPenolong.push({
+                        value: item.kode,
+                        label: item.nama
+                    });
+                });
+            }
+
+            this.setState({ dataPenolong: dataPenolong, dataSelectKodePenolong: dataSelectKodePenolong, dataSelectNamaPenolong: dataSelectNamaPenolong });
+        }).catch(error => {
+            console.log(error);
         });
     }
 
@@ -342,6 +846,32 @@ export class transaksi_penjualan extends Component {
         });
     }
 
+    GetPesanan = () => {
+        ShowLoading();
+
+        $('#table-data-bahan-baku').DataTable().destroy();
+        $('#table-data-bop-penolong').DataTable().destroy();
+        $('#table-data-bop-alat').DataTable().destroy();
+        $('#table-data-btkl').DataTable().destroy();
+
+        axios.get(`${baseURL}/api/transaksi/penjualan/estimasi-pesanan/select.php`, config).then(response => {
+            let data = response.data.data;
+
+            this.setState({
+                dataPesanan: data,
+                valueKodePesanan: GenerateCode('PESAN', data)
+            }, () => {
+                $('#table-data-bahan-baku').DataTable();
+            });
+        }).catch(error => {
+            console.log(error)
+
+            alert(error);
+
+            HideLoading();
+        });
+    }
+
     GetJual = async () => {
         let jenisPenjualan = this.state.jenisPenjualan;
 
@@ -362,6 +892,7 @@ export class transaksi_penjualan extends Component {
                 )
             }, () => {
                 $(`#table-data`).DataTable();
+                $('#table-data-bahan-baku').DataTable();
             });
         }).catch(error => {
             console.log(error);
@@ -395,20 +926,28 @@ export class transaksi_penjualan extends Component {
         });
     }
 
-    InputChange = (event) => {
+    InputChange = async (event) => {
         this.setState({ [event.target.id]: event.target.value });
     }
 
     InsertJual = () => {
         const {
-            valueHarga,
-            valueJumlah,
+            dataKonsinyasi,
+            dataTunai,
+            jenisPenjualan,
+            valueDiskon,
+            valueKodeAkun,
+            valueKodeConsignee,
+            valueKodeCustomer,
             valueKodeJual,
-            valueKodeSupplier,
-            valueTanggal
+            valueOngkosKirim,
+            valueTanggal,
+            valueTotalBayar,
+            valueTotalJual
         } = this.state;
 
-        let jenisPenjualan = this.state.jenisPenjualan;
+        const valueTotalHarga = Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim]);
+        const valuePiutang = Calculate([valueTotalJual, -valueDiskon]);
 
         ShowLoading();
 
@@ -416,22 +955,97 @@ export class transaksi_penjualan extends Component {
 
         formData.append('kode', valueKodeJual);
         formData.append('tanggal', valueTanggal);
-        formData.append('kode_supplier', valueKodeSupplier.value);
-        formData.append('total_harga', parseInt(valueJumlah) * parseInt(valueHarga));
+        formData.append('kode_customer', valueKodeCustomer?.value);
+        formData.append('kode_consignee', valueKodeConsignee?.value);
+        formData.append('total_jual', valueTotalJual);
+        formData.append('diskon', valueDiskon);
+        formData.append('ongkos_kirim', valueOngkosKirim);
+        formData.append('piutang', valuePiutang);
+        formData.append('total_harga', valueTotalHarga);
+        formData.append('total_bayar', valueTotalBayar);
+        formData.append('kode_akun', valueKodeAkun?.value);
 
-        formData.append('jenis_pembelian', jenisPenjualan.toLowerCase());
+        formData.append('jenis_penjualan', jenisPenjualan.toLowerCase());
 
-        if (jenisPenjualan.toLowerCase() === 'alat')
-            formData.append('data', JSON.stringify(this.state.dataAlat));
-        else if (jenisPenjualan.toLowerCase() === 'bahan')
-            formData.append('data', JSON.stringify(this.state.dataBahan));
+        if (jenisPenjualan.toLowerCase() === 'tunai')
+            formData.append('data', JSON.stringify(dataTunai));
+        else if (jenisPenjualan.toLowerCase() === 'konsinyasi')
+            formData.append('data', JSON.stringify(dataKonsinyasi));
 
-        axios.post(`${baseURL}/api/transaksi/pembelian/order/insert.php`, formData, config).then(() => {
-            window.location.href = '/transaksi/pembelian/daftar-order';
+        axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/insert.php`, formData, config).then(() => {
+            window.location.reload();
         }).catch(error => {
             console.log(error);
 
+            alert(error)
+
             HideLoading();
+        });
+    }
+
+    InsertPesanan = () => {
+        const {
+            valueKodePesanan,
+            valueNamaPesanan,
+            valueTanggal,
+            valueKodeCustomer,
+            valueJenisProduk,
+            valueJumlah,
+            valueHpp,
+            valueProfit,
+            valueHargaJual,
+            valueDeskripsiPesanan
+        } = this.state;
+
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('kode', valueKodePesanan);
+        formData.append('nama', valueNamaPesanan);
+        formData.append('tanggal', valueTanggal);
+        formData.append('kode_customer', valueKodeCustomer.value);
+        formData.append('jenis_produk', valueJenisProduk.value);
+        formData.append('jumlah', valueJumlah);
+        formData.append('hpp', valueHpp);
+        formData.append('profit', valueProfit);
+        formData.append('harga_jual', valueHargaJual);
+        formData.append('deskripsi', valueDeskripsiPesanan);
+
+        axios.post(`${baseURL}/api/transaksi/penjualan/estimasi-pesanan/insert.php`, formData, config).then(() => {
+            window.location.reload();
+        }).catch(error => {
+            console.log(error);
+
+            alert(error);
+
+            HideLoading();
+        });
+    }
+
+    KalkulasiHargaJual = () => {
+        const {
+            valueHpp,
+            valueJumlah,
+            valueProfit
+        } = this.state;
+        this.setState({
+            valueHargaJual: +valueJumlah * +valueHpp * (100 + +valueProfit) / 100
+        });
+    }
+
+    KalkulasiHpp = () => {
+        const {
+            valueTotalAlat,
+            valueTotalBahan,
+            valueTotalBTKL,
+            valueTotalPenolong
+        } = this.state;
+
+        this.setState({
+            valueHpp: +valueTotalAlat + +valueTotalBahan + +valueTotalBTKL + +valueTotalPenolong
+        }, () => {
+            this.KalkulasiHargaJual();
         });
     }
 
@@ -445,8 +1059,6 @@ export class transaksi_penjualan extends Component {
             dataTunai.forEach(item => {
                 totalHarga += item.total_harga;
             });
-
-            console.log(dataTunai)
         } else if (jenisPenjualan && jenisPenjualan.toString().toLowerCase() === 'konsinyasi') {
             let dataKonsinyasi = this.state.dataKonsinyasi;
 
@@ -462,6 +1074,48 @@ export class transaksi_penjualan extends Component {
         }
 
         this.setState({ valueTotalJual: totalHarga });
+    }
+
+    SelectAlat = (data) => {
+        if (data) {
+            let valueKode = this.state.dataSelectKodeAlat.find(item => item.value === data?.value);
+            let valueNama = this.state.dataSelectNamaAlat.find(item => item.value === data?.value);
+
+            let dataAlat = this.state.dataAlat.find(item => item.kode === valueKode.value);
+
+            this.setState({
+                valueKodeAlat: valueKode,
+                valueNamaAlat: valueNama,
+                valueHargaAlat: dataAlat.harga
+            });
+        } else {
+            this.setState({
+                valueKodeAlat: '',
+                valueNamaAlat: '',
+                valueHargaAlat: 0
+            });
+        }
+    }
+
+    SelectBahan = (data) => {
+        if (data) {
+            let valueKode = this.state.dataSelectKodeBahan.find(item => item.value === data?.value);
+            let valueNama = this.state.dataSelectNamaBahan.find(item => item.value === data?.value);
+
+            let dataBahan = this.state.dataBahan.find(item => item.kode === valueKode.value);
+
+            this.setState({
+                valueKodeBahan: valueKode,
+                valueNamaBahan: valueNama,
+                valueHargaBahan: dataBahan.harga
+            });
+        } else {
+            this.setState({
+                valueKodeBahan: '',
+                valueNamaBahan: '',
+                valueHargaBahan: 0
+            });
+        }
     }
 
     SelectConsignee = (data) => {
@@ -486,6 +1140,27 @@ export class transaksi_penjualan extends Component {
         }
     }
 
+    SelectPenolong = (data) => {
+        if (data) {
+            let valueKode = this.state.dataSelectKodePenolong.find(item => item.value === data?.value);
+            let valueNama = this.state.dataSelectNamaPenolong.find(item => item.value === data?.value);
+
+            let dataPenolong = this.state.dataPenolong.find(item => item.kode === valueKode.value);
+
+            this.setState({
+                valueKodePenolong: valueKode,
+                valueNamaPenolong: valueNama,
+                valueHargaPenolong: dataPenolong.harga
+            });
+        } else {
+            this.setState({
+                valueKodePenolong: '',
+                valueNamaPenolong: '',
+                valueHargaPenolong: 0
+            });
+        }
+    }
+
     SelectProduk = (data) => {
         if (data) {
             let valueKode = this.state.dataSelectKodeProduk.find(item => item.value === data?.value);
@@ -499,47 +1174,103 @@ export class transaksi_penjualan extends Component {
     }
 
     SelectPenjualan = (data) => {
+        if (this.state.jenisPenjualan === data?.value) return;
+
         $('#table-data').DataTable().destroy();
+        $('#table-data-bahan-baku').DataTable().destroy();
 
-        this.setState({ jenisPenjualan: data ? data.value : '' }, () => {
-            // if (data && data.value.toString().toLowerCase() === 'tunai') this.GetDetailTunai();
-            // else if (data && data.value.toString().toLowerCase() === 'konsinyasi') this.GetDetailKonsinyasi();
-            // else if (data && data.value.toString().toLowerCase() === 'pesanan') this.GetDetailPesanan();
+        this.setState({
+            jenisPenjualan: data ? data.value : '',
 
+            dataTunai: [],
+            dataKonsinyasi: [],
+            dataPesanan: [],
+
+            valueDiskon: 0,
+            valueHarga: 0,
+            valueHargaJual: 0,
+            valueHpp: 0,
+            valueJumlah: 0,
+            valueJenisPenjualan: data ? data : null,
+            valueKodeProduk: null,
+            valueKodeJual: '',
+            valueKodeConsignee: null,
+            valueKodeCustomer: null,
+            valueKodeKasMasuk: '',
+            valueNamaProduk: null,
+            valueNamaConsignee: null,
+            valueNamaCustomer: null,
+            valueNamaPesanan: '',
+            valueOngkosKirim: 0,
+            valuePiutang: 0,
+            valueSisa: 0,
+            valueTanggal: moment().format('YYYY-MM-DD'),
+            valueTotalBayar: 0,
+            valueTotalKembalian: 0,
+            valueTotalJual: 0,
+            valueUangMuka: 0,
+        }, () => {
             this.GetJual();
+        });
+    }
 
-            this.setState({
-                valueHarga: 0,
-                valueJumlah: 0,
-                valueKodeProduk: null,
-                valueKodeCongsignee: null,
-                valueKodeCustomer: null,
-                valueKodeKasMasuk: '',
-                valueNamaProduk: null,
-                valueNamaCongsignee: null,
-                valueNamaCustomer: null,
-                valueTanggal: moment().format('YYYY-MM-DD')
-            })
+    SelectTab = (index) => {
+        this.setState({ tabSelected: index }, () => {
+            if (index === 0) this.GetDetailBahan();
+            if (index === 1) this.GetDetailPenolong();
+            if (index === 2) this.GetDetailAlat();
         });
     }
 
     render() {
-
         const {
+            dataKonsinyasi,
+            dataPesanan,
+            dataSelectAkun,
+            dataTunai,
+            valueDeskripsiPesanan,
             valueDiskon,
             valueHarga,
+            valueHargaAlat,
+            valueHargaBahan,
+            valueHargaPenolong,
+            valueHargaBTKL,
+            valueHargaJual,
+            valueHpp,
             valueJumlah,
-            valueKodeProduk,
-            valueKodeJual,
+            valueJumlahAlat,
+            valueJumlahBahan,
+            valueJumlahPenolong,
+            valueJumlahBTKL,
+            valueJenisProduk,
+            valueJenisPenjualan,
+            valueKodeAkun,
+            valueKodeAlat,
+            valueKodeBahan,
+            valueKodeBTKL,
             valueKodeConsignee,
             valueKodeCustomer,
+            valueKodeJual,
             valueKodeKasMasuk,
-            valueNamaProduk,
+            valueKodePesanan,
+            valueKodePenolong,
+            valueKodeProduk,
+            valueNamaAlat,
+            valueNamaBahan,
+            valueNamaBTKL,
             valueNamaConsignee,
             valueNamaCustomer,
+            valueNamaPesanan,
+            valueNamaPenolong,
+            valueNamaProduk,
             valueOngkosKirim,
+            valueProfit,
             valueTanggal,
+            valueTotalAlat,
+            valueTotalBahan,
             valueTotalBayar,
+            valueTotalPenolong,
+            valueTotalBTKL,
             valueTotalJual,
             valueUangMuka
         } = this.state;
@@ -562,30 +1293,30 @@ export class transaksi_penjualan extends Component {
                                     { value: 'Tunai', label: 'Tunai' },
                                     { value: 'Konsinyasi', label: 'Konsinyasi' },
                                     { value: 'Pesanan', label: 'Pesanan' }
-                                ]} placeholder={'Select Transaksi...'} styles={CustomSelect} onChange={(value) => this.SelectPenjualan(value)} />
+                                ]} placeholder={'Select Transaksi...'} value={valueJenisPenjualan} styles={CustomSelect} onChange={(e) => this.SelectPenjualan(e)} />
                             </div>
                             {this.state.jenisPenjualan !== '' ?
-                                <>
-                                    <div className={`${bootstrap['d-flex']}`}>
-                                        <div className={`${global.input_group} col-6 pe-2`}>
-                                            <p className={global.title}>Kode Jual</p>
-                                            <input type="text" id='valueKodeJual' maxLength={10} value={valueKodeJual} readOnly={true} />
-                                        </div>
-                                        <div className={`${global.input_group} col-6 ps-2`}>
-                                            <p className={global.title}>Tanggal</p>
-                                            <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} />
-                                        </div>
-                                    </div>
+                                <React.Fragment>
                                     {this.state.jenisPenjualan === 'Tunai' ?
-                                        <>
+                                        <React.Fragment>
+                                            <div className={`${bootstrap['d-flex']}`}>
+                                                <div className={`${global.input_group} col-6 pe-2`}>
+                                                    <p className={global.title}>Kode Jual</p>
+                                                    <input type="text" id='valueKodeJual' maxLength={10} value={valueKodeJual} readOnly={true} />
+                                                </div>
+                                                <div className={`${global.input_group} col-6 ps-2`}>
+                                                    <p className={global.title}>Tanggal</p>
+                                                    <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} />
+                                                </div>
+                                            </div>
                                             <div className={`${bootstrap['d-flex']}`}>
                                                 <div className={`${global.input_group} col-5 pe-2`}>
                                                     <p className={global.title}>Kode Customer</p>
-                                                    <Select id='select-kode-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeCustomer} placeholder={'Select Kode...'} value={valueKodeCustomer} styles={CustomSelect} onChange={(data) => this.SelectCustomer(data)} />
+                                                    <Select id='select-kode-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeCustomer} placeholder={'Select Kode...'} value={valueKodeCustomer} styles={CustomSelect} onChange={(data) => this.SelectCustomer(data)} isDisabled={[dataKonsinyasi.length, dataPesanan.length, dataTunai.length].some(item => item > 0)} />
                                                 </div>
                                                 <div className={`${global.input_group} col-7 pe-2`}>
                                                     <p className={global.title}>Nama Customer</p>
-                                                    <Select id='select-nama-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaCustomer} placeholder={'Select Nama...'} value={valueNamaCustomer} styles={CustomSelect} onChange={(data) => this.SelectCustomer(data)} />
+                                                    <Select id='select-nama-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaCustomer} placeholder={'Select Nama...'} value={valueNamaCustomer} styles={CustomSelect} onChange={(data) => this.SelectCustomer(data)} isDisabled={[dataKonsinyasi.length, dataPesanan.length, dataTunai.length].some(item => item > 0)} />
                                                 </div>
                                             </div>
                                             <div className={`${bootstrap['d-flex']}`}>
@@ -609,32 +1340,90 @@ export class transaksi_penjualan extends Component {
                                                 </div>
                                                 <div className={`${global.input_group} col-4 ps-2`}>
                                                     <p className={global.title}>Total Harga</p>
-                                                    <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah) * parseInt(valueHarga)} readOnly={true} />
+                                                    <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga)} readOnly={true} />
                                                 </div>
                                             </div>
                                             <button type='button' className={global.button} onClick={this.AddDetail}><MdAdd /> Tambah</button>
-                                        </>
+                                        </React.Fragment>
                                         :
                                         this.state.jenisPenjualan === 'Pesanan' ?
-                                            <>
-                                                <div className={`${bootstrap['d-flex']}`}>
-                                                    <div className={`${global.input_group} col-5 pe-2`}>
+                                            <React.Fragment>
+                                                <div className='d-flex'>
+                                                    <div className={`${global.input_group} col-6 pe-2`}>
+                                                        <p className={global.title}>Kode Pesanan</p>
+                                                        <input type="text" id='valueKodePesanan' value={valueKodePesanan} readOnly={true} />
+                                                    </div>
+                                                    <div className={`${global.input_group} col-6 ps-2`}>
+                                                        <p className={global.title}>Tanggal</p>
+                                                        <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} />
+                                                    </div>
+                                                </div>
+                                                <div className={`${global.input_group}`}>
+                                                    <p className={global.title}>Nama Pesanan</p>
+                                                    <input type="text" id='valueNamaPesanan' value={valueNamaPesanan} onChange={this.InputChange} />
+                                                </div>
+                                                <div className='d-flex'>
+                                                    <div className={`${global.input_group} col-4 pe-2`}>
                                                         <p className={global.title}>Kode Customer</p>
-                                                        <Select id='select-kode-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeCustomer} placeholder={'Select Kode...'} value={valueKodeCustomer} styles={CustomSelect} onChange={(data) => this.SelectCustomer(data)} />
+                                                        <Select id='select-kode-customer' name='select-kode-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeCustomer} placeholder={'Select Kode...'} value={valueKodeCustomer} onChange={e => this.SelectCustomer(e)} styles={CustomSelect} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-7 pe-2`}>
+                                                    <div className={`${global.input_group} col-8 ps-2`}>
                                                         <p className={global.title}>Nama Customer</p>
-                                                        <Select id='select-nama-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaCustomer} placeholder={'Select Nama...'} value={valueNamaCustomer} styles={CustomSelect} onChange={(data) => this.SelectCustomer(data)} />
+                                                        <Select id='select-nama-customer' name='select-nama-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaCustomer} placeholder={'Select Nama Customer...'} value={valueNamaCustomer} onChange={e => this.SelectCustomer(e)} styles={CustomSelect} />
                                                     </div>
                                                 </div>
-                                                <div className={`${global.input_group} col-6 pe-2`}>
-                                                    <p className={global.title}>Kode Kas Masuk</p>
-                                                    <input type="text" id='valueKodeKasMasuk' value={valueKodeKasMasuk} onChange={this.InputChange} />
+                                                <div className={`${global.input_group}`}>
+                                                    <p className={global.title}>Jenis Produk</p>
+                                                    <Select id='select-jenis-produk' name='select-jenis-produk' isClearable={true} isSearchable={true} options={[
+                                                        { value: 'Kain', label: 'Kain' },
+                                                        { value: 'Pakaian', label: 'Pakaian' }
+                                                    ]} placeholder={'Select Jenis Produk...'} value={valueJenisProduk} onChange={e => this.setState({ valueJenisProduk: e })} styles={CustomSelect} />
                                                 </div>
-                                                <button type='button' className={global.button} onClick={this.AddDetail}><MdAdd /> Tambah</button>
-                                            </>
+                                                <div className='d-flex'>
+                                                    <div className={`${global.input_group} col-4 pe-2`}>
+                                                        <p className={global.title}>Jumlah</p>
+                                                        <input type="text" id='valueJumlah' value={valueJumlah} onChange={async e => {
+                                                            await this.InputChange(e);
+                                                            this.KalkulasiHargaJual();
+                                                        }} />
+                                                    </div>
+                                                    <div className={`${global.input_group} col-4 px-2`}>
+                                                        <p className={global.title}>HPP</p>
+                                                        <input type="text" id='valueHpp' value={valueHpp} readOnly={true} />
+                                                    </div>
+                                                    <div className={`${global.input_group} col-4 ps-2`}>
+                                                        <p className={global.title}>Profit (%)</p>
+                                                        <input type="text" id='valueProfit' value={valueProfit} onChange={async e => {
+                                                            await this.InputChange(e);
+                                                            this.KalkulasiHargaJual();
+                                                        }} />
+                                                    </div>
+                                                </div>
+                                                <div className={`${global.input_group}`}>
+                                                    <p className={global.title}>Harga Jual</p>
+                                                    <input type="text" id='valueHargaJual' value={valueHargaJual} readOnly={true} />
+                                                </div>
+                                                <div className='d-flex'>
+                                                    <div className='col-6 pe-2'>
+                                                        <button type='button' className={`${global.button} w-100`} onClick={this.InsertPesanan}>Simpan</button>
+                                                    </div>
+                                                    <div className='col-6 ps-2'>
+                                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }} onClick={() => this.SelectPenjualan(null)}>Batal</button>
+                                                    </div>
+                                                </div>
+                                            </React.Fragment>
                                             :
-                                            <>
+                                            <React.Fragment>
+                                                <div className={`${bootstrap['d-flex']}`}>
+                                                    <div className={`${global.input_group} col-6 pe-2`}>
+                                                        <p className={global.title}>Kode Jual</p>
+                                                        <input type="text" id='valueKodeJual' maxLength={10} value={valueKodeJual} readOnly={true} />
+                                                    </div>
+                                                    <div className={`${global.input_group} col-6 ps-2`}>
+                                                        <p className={global.title}>Tanggal</p>
+                                                        <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} />
+                                                    </div>
+                                                </div>
                                                 <div className={`${bootstrap['d-flex']}`}>
                                                     <div className={`${global.input_group} col-5 pe-2`}>
                                                         <p className={global.title}>Kode Consignee</p>
@@ -666,78 +1455,253 @@ export class transaksi_penjualan extends Component {
                                                     </div>
                                                     <div className={`${global.input_group} col-4 ps-2`}>
                                                         <p className={global.title}>Total Harga</p>
-                                                        <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah) * parseInt(valueHarga)} readOnly={true} />
+                                                        <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga)} readOnly={true} />
                                                     </div>
                                                 </div>
                                                 <button type='button' className={global.button} onClick={this.AddDetail}><MdAdd /> Tambah</button>
-                                            </>
+                                            </React.Fragment>
                                     }
-                                </>
+                                </React.Fragment>
                                 : null}
                         </div>
                     </div>
                     {this.state.jenisPenjualan !== '' ?
-                        <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
-                            <div className={`${global.card}`}>
-                                <div className={`${global.header}`}>
-                                    <p className={global.title}>Daftar Penjualan</p>
+                        this.state.jenisPenjualan === 'Pesanan' ?
+                            <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                                <div className={`${global.tab_card} pb-2`}>
+                                    <div className={`${global.item} ${this.state.tabSelected === 0 ? global.active : ''}`} onClick={() => this.SelectTab(0)}>
+                                        <p className={`${global.name}`}>Bahan Baku</p>
+                                    </div>
+                                    <div className={`${global.item} ${this.state.tabSelected === 1 ? global.active : ''}`} onClick={() => this.SelectTab(1)}>
+                                        <p className={`${global.name}`}>BOP (Penolong)</p>
+                                    </div>
+                                    <div className={`${global.item} ${this.state.tabSelected === 2 ? global.active : ''}`} onClick={() => this.SelectTab(2)}>
+                                        <p className={`${global.name}`}>BOP (Alat)</p>
+                                    </div>
+                                    <div className={`${global.item} ${this.state.tabSelected === 3 ? global.active : ''}`} onClick={() => this.SelectTab(3)}>
+                                        <p className={`${global.name}`}>BTKL</p>
+                                    </div>
+                                    <div className={`${global.item} ${this.state.tabSelected === 4 ? global.active : ''}`} onClick={() => this.SelectTab(4)}>
+                                        <p className={`${global.name}`}>Catatan Pesanan</p>
+                                    </div>
                                 </div>
-                                {this.state.jenisPenjualan === 'Tunai' ?
-                                    <>
-                                        <div className={`table-responsive`}>
-                                            <table id='table-data' className={`table w-100`}>
-                                                <thead>
-                                                    <tr>
-                                                        <td>No.</td>
-                                                        <td>Kode</td>
-                                                        <td>Kode Produk</td>
-                                                        <td>Nama Produk</td>
-                                                        <td>Jumlah Jual</td>
-                                                        <td>Harga Jual</td>
-                                                        <td>Total Harga</td>
-                                                        <td>Aksi</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {this.state.htmlTableDaftarTunai}
-                                                </tbody>
-                                            </table>
+                                <div className={`${global.card} ${this.state.tabSelected === 0 ? '' : 'd-none'}`}>
+                                    <div className='d-flex'>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Kode Bahan</p>
+                                            <Select id='select-kode-bahan-bahan-baku' name='select-kode-bahan-bahan-baku' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeBahan} value={valueKodeBahan} placeholder={'Select Kode...'} onChange={e => this.SelectBahan(e)} styles={CustomSelect} />
                                         </div>
-                                        <div className={`d-flex flex-column gap-2 pb-2`}>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Total Jual</p>
-                                                <input type="text" id='valueTotalJual' className={`${this.state.jenisPenjualan === 'Tunai' ? 'col-6' : 'col-9'}`} value={valueTotalJual} readOnly={true} />
-                                            </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Diskon</p>
-                                                <input type="text" id='valueDiskon' className={`${this.state.jenisPenjualan === 'Tunai' ? 'col-6' : 'col-9'}`} value={valueDiskon} onInput={InputFormatNumber} onChange={this.InputChange} onBlur={(e) => parseInt(e.target.value) > parseInt(valueTotalJual) && this.setState({valueDiskon: valueTotalJual})} />
-                                            </div>
+                                        <div className={`${global.input_group} col-8 px-2`}>
+                                            <p className={global.title}>Nama Bahan</p>
+                                            <Select id='select-nama-bahan-bahan-baku' name='select-nama-bahan-bahan-baku' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaBahan} value={valueNamaBahan} placeholder={'Select Nama Bahan...'} onChange={e => this.SelectBahan(e)} styles={CustomSelect} />
                                         </div>
+                                    </div>
+                                    <div className={`d-flex`}>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Harga</p>
+                                            <input type="text" id='valueHargaBahan' value={valueHargaBahan} readOnly={true} />
+                                        </div>
+                                        <div className={`${global.input_group} col-4 px-2`}>
+                                            <p className={global.title}>Jumlah</p>
+                                            <input type="text" id='valueJumlahBahan' value={valueJumlahBahan} onChange={this.InputChange} />
+                                        </div>
+                                        <div className={`${global.input_group} col-3 ms-auto ps-2`}>
+                                            <p className={global.title}>Aksi</p>
+                                            <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={this.AddDetailBahan}><MdAdd /> Tambah</button>
+                                        </div>
+                                    </div>
+                                    <div className={`table-responsive`}>
+                                        <table id='table-data-bahan-baku' className={`table w-100`}>
+                                            <thead className='text-nowrap'>
+                                                <tr>
+                                                    <td>No.</td>
+                                                    <td>Kode</td>
+                                                    <td>Kode Bahan</td>
+                                                    <td>Nama Bahan</td>
+                                                    <td>Jumlah</td>
+                                                    <td>Harga</td>
+                                                    <td>Biaya</td>
+                                                    <td>Aksi</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {this.state.htmlTableDaftarDetailBahan}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className={`d-flex flex-column gap-2 pb-2`}>
                                         <div className={`align-items-center ${global.input_group_row}`}>
-                                            <p className={`${global.title} col-3`}>Ongkos Kirim</p>
-                                            <input type="text" id='valueOngkosKirim' className={`col-6`} value={valueOngkosKirim} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                            <p className={`${global.title} col-3`}>Total Bahan Baku</p>
+                                            <input type="text" id='valueTotalBahan' value={valueTotalBahan} readOnly={true} />
                                         </div>
+                                    </div>
+                                </div>
+                                <div className={`${global.card} ${this.state.tabSelected === 1 ? '' : 'd-none'}`}>
+                                    <div className='d-flex'>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Kode Bahan</p>
+                                            <Select id='select-kode-bahan-bop-penolong' name='select-kode-bahan-bop-penolong' isClearable={true} isSearchable={true} options={this.state.dataSelectKodePenolong} placeholder={'Select Kode...'} value={valueKodePenolong} onChange={e => this.SelectPenolong(e)} styles={CustomSelect} />
+                                        </div>
+                                        <div className={`${global.input_group} col-8 px-2`}>
+                                            <p className={global.title}>Nama Bahan</p>
+                                            <Select id='select-nama-bahan-bop-penolong' name='select-nama-bahan-bop-penolong' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaPenolong} placeholder={'Select Nama Bahan...'} value={valueNamaPenolong} onChange={e => this.SelectPenolong(e)} styles={CustomSelect} />
+                                        </div>
+                                    </div>
+                                    <div className={`d-flex`}>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Harga</p>
+                                            <input type="text" id='valueHargaPenolong' value={valueHargaPenolong} readOnly={true} />
+                                        </div>
+                                        <div className={`${global.input_group} col-4 px-2`}>
+                                            <p className={global.title}>Jumlah</p>
+                                            <input type="text" id='valueJumlahPenolong' value={valueJumlahPenolong} onChange={this.InputChange} />
+                                        </div>
+                                        <div className={`${global.input_group} col-3 ms-auto ps-2`}>
+                                            <p className={global.title}>Aksi</p>
+                                            <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={this.AddDetailPenolong}><MdAdd /> Tambah</button>
+                                        </div>
+                                    </div>
+                                    <div className={`table-responsive`}>
+                                        <table id='table-data-bop-penolong' className={`table w-100`}>
+                                            <thead className='text-nowrap'>
+                                                <tr>
+                                                    <td>No.</td>
+                                                    <td>Kode</td>
+                                                    <td>Kode Bahan</td>
+                                                    <td>Nama Bahan</td>
+                                                    <td>Jumlah</td>
+                                                    <td>Harga</td>
+                                                    <td>Biaya</td>
+                                                    <td>Aksi</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {this.state.htmlTableDaftarDetailPenolong}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className={`d-flex flex-column gap-2 pb-2`}>
                                         <div className={`align-items-center ${global.input_group_row}`}>
-                                            <p className={`${global.title} col-3`}>Total Harga</p>
-                                            <input type="text" id='valueTotalHarga' className={`col-6`} value={Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim])} readOnly={true} />
-                                            <div className='col-3 ps-2'>
-                                                <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={[
-                                                    { value: '1', label: 'Akun 1' },
-                                                    { value: '2', label: 'Akun 2' }
-                                                ]} placeholder={'Select Akun...'} styles={CustomSelect} />
-                                            </div>
+                                            <p className={`${global.title} col-3`}>Total BOP Penolong</p>
+                                            <input type="text" id='valueTotalPenolong' value={valueTotalPenolong} readOnly={true} />
                                         </div>
+                                    </div>
+                                </div>
+                                <div className={`${global.card} ${this.state.tabSelected === 2 ? '' : 'd-none'}`}>
+                                    <div className='d-flex'>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Kode Alat</p>
+                                            <Select id='select-kode-bahan-bop-alat' name='select-kode-bahan-bop-alat' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeAlat} value={valueKodeAlat} placeholder={'Select Kode...'} onChange={e => this.SelectAlat(e)} styles={CustomSelect} />
+                                        </div>
+                                        <div className={`${global.input_group} col-8 px-2`}>
+                                            <p className={global.title}>Nama Alat</p>
+                                            <Select id='select-nama-bahan-bop-alat' name='select-nama-bahan-bop-alat' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaAlat} value={valueNamaAlat} placeholder={'Select Nama Bahan...'} onChange={e => this.SelectAlat(e)} styles={CustomSelect} />
+                                        </div>
+                                    </div>
+                                    <div className={`d-flex`}>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Harga</p>
+                                            <input type="text" id='valueHargaAlat' value={valueHargaAlat} readOnly={true} />
+                                        </div>
+                                        <div className={`${global.input_group} col-4 px-2`}>
+                                            <p className={global.title}>Jumlah</p>
+                                            <input type="text" id='valueJumlahAlat' value={valueJumlahAlat} onChange={this.InputChange} />
+                                        </div>
+                                        <div className={`${global.input_group} col-3 ms-auto ps-2`}>
+                                            <p className={global.title}>Aksi</p>
+                                            <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={this.AddDetailAlat}><MdAdd /> Tambah</button>
+                                        </div>
+                                    </div>
+                                    <div className={`table-responsive`}>
+                                        <table id='table-data-bop-alat' className={`table w-100`}>
+                                            <thead className='text-nowrap'>
+                                                <tr>
+                                                    <td>No.</td>
+                                                    <td>Kode</td>
+                                                    <td>Kode Alat</td>
+                                                    <td>Nama Alat</td>
+                                                    <td>Jumlah</td>
+                                                    <td>Harga</td>
+                                                    <td>Biaya</td>
+                                                    <td>Aksi</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {this.state.htmlTableDaftarDetailAlat}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className={`d-flex flex-column gap-2 pb-2`}>
                                         <div className={`align-items-center ${global.input_group_row}`}>
-                                            <p className={`${global.title} col-3`}>Bayar</p>
-                                            <input type="text" id='valueTotalBayar' className={`col-6`} value={valueTotalBayar} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                            <p className={`${global.title} col-3`}>Total BOP Alat</p>
+                                            <input type="text" id='valueTotalAlat' value={valueTotalAlat} readOnly={true} />
                                         </div>
+                                    </div>
+                                </div>
+                                <div className={`${global.card} ${this.state.tabSelected === 3 ? '' : 'd-none'}`}>
+                                    <div className='d-flex'>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Kode BTKL</p>
+                                            <Select id='select-kode-btkl' name='select-kode-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeBTKL} placeholder={'Select Kode...'} value={valueKodeBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
+                                        </div>
+                                        <div className={`${global.input_group} col-8 px-2`}>
+                                            <p className={global.title}>Bagian</p>
+                                            <Select id='select-bagian-btkl' name='select-bagian-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaBTKL} placeholder={'Select Bagian...'} value={valueNamaBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
+                                        </div>
+                                    </div>
+                                    <div className={`d-flex`}>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Harga</p>
+                                            <input type="text" id='valueHargaBTKL' value={valueHargaBTKL} readOnly={true} />
+                                        </div>
+                                        <div className={`${global.input_group} col-4 px-2`}>
+                                            <p className={global.title}>Jumlah</p>
+                                            <input type="text" id='valueJumlahBTKL' value={valueJumlahBTKL} onChange={this.InputChange} />
+                                        </div>
+                                        <div className={`${global.input_group} col-3 ms-auto ps-2`}>
+                                            <p className={global.title}>Aksi</p>
+                                            <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</button>
+                                        </div>
+                                    </div>
+                                    <div className={`table-responsive`}>
+                                        <table id='table-data-btkl' className={`table w-100`}>
+                                            <thead className='text-nowrap'>
+                                                <tr>
+                                                    <td>No.</td>
+                                                    <td>Kode</td>
+                                                    <td>Kode BTKL</td>
+                                                    <td>Nama BTKL</td>
+                                                    <td>Bagian</td>
+                                                    <td>Jumlah</td>
+                                                    <td>Tarif</td>
+                                                    <td>Biaya</td>
+                                                    <td>Aksi</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                    <div className={`d-flex flex-column gap-2 pb-2`}>
                                         <div className={`align-items-center ${global.input_group_row}`}>
-                                            <p className={`${global.title} col-3`}>Kembalian</p>
-                                            <input type="text" id='valueTotalKembalian' className={`col-6`} value={Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim])} readOnly={true} />
+                                            <p className={`${global.title} col-3`}>Total BTKL</p>
+                                            <input type="text" id='valueTotalBTKL' readOnly={true} />
                                         </div>
-                                    </>
-                                    :
-                                    this.state.jenisPenjualan === 'Pesanan' ?
+                                    </div>
+                                </div>
+                                <div className={`${global.card} ${this.state.tabSelected === 4 ? '' : 'd-none'}`}>
+                                    <div className={`${global.input_group}`}>
+                                        <p className={global.title}>Deskripsi Pesanan</p>
+                                        <textarea id="valueDeskripsiPesanan" cols="30" rows="10" value={valueDeskripsiPesanan} onChange={this.InputChange}></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            :
+                            <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                                <div className={`${global.card}`}>
+                                    <div className={`${global.header}`}>
+                                        <p className={global.title}>Daftar Penjualan</p>
+                                    </div>
+                                    {this.state.jenisPenjualan === 'Tunai' ?
                                         <>
                                             <div className={`table-responsive`}>
                                                 <table id='table-data' className={`table w-100`}>
@@ -745,66 +1709,52 @@ export class transaksi_penjualan extends Component {
                                                         <tr>
                                                             <td>No.</td>
                                                             <td>Kode</td>
-                                                            <td>Kode Pesanan</td>
-                                                            <td>Nama Pesanan</td>
+                                                            <td>Kode Produk</td>
+                                                            <td>Nama Produk</td>
                                                             <td>Jumlah Jual</td>
                                                             <td>Harga Jual</td>
                                                             <td>Total Harga</td>
+                                                            <td>Aksi</td>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {this.state.htmlTableDaftarPesanan}
+                                                        {this.state.htmlTableDaftarTunai}
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Total Jual</p>
-                                                <input type="text" id='valueTotalJual' className={`col-6`} value={valueTotalJual} readOnly={true} />
-                                            </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Diskon</p>
-                                                <input type="text" id='valueDiskon' className={'col-6'} value={valueDiskon} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                            <div className={`d-flex flex-column gap-2 pb-2`}>
+                                                <div className={`align-items-center ${global.input_group_row}`}>
+                                                    <p className={`${global.title} col-3`}>Total Jual</p>
+                                                    <input type="text" id='valueTotalJual' className={'col-4'} value={valueTotalJual} readOnly={true} />
+                                                </div>
+                                                <div className={`align-items-center ${global.input_group_row}`}>
+                                                    <p className={`${global.title} col-3`}>Diskon</p>
+                                                    <input type="text" id='valueDiskon' className={'col-4'} value={valueDiskon} onInput={InputFormatNumber} onChange={this.InputChange} onBlur={(e) => parseInt(e.target.value) > parseInt(valueTotalJual) && this.setState({ valueDiskon: valueTotalJual })} />
+                                                </div>
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Ongkos Kirim</p>
-                                                <input type="text" id='valueOngkosKirim' className={`col-6`} value={valueOngkosKirim} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                                <input type="text" id='valueOngkosKirim' className={`col-4`} value={valueOngkosKirim} onInput={InputFormatNumber} onChange={this.InputChange} />
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Total Harga</p>
-                                                <input type="text" id='valueTotalHarga' className={`col-6`} value={Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim])} readOnly={true} />
-                                            </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Uang Muka</p>
-                                                <input type="text" id='valueUangMuka' className={`col-6`} value={valueUangMuka} onInput={InputFormatNumber} onChange={this.InputChange} />
-                                            </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Sisa</p>
-                                                <input type="text" id='valueSisa' className={`col-6`} value={Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim, -valueUangMuka])} readOnly={true} />
-                                                <div className='col-3 ps-2'>
-                                                    <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={[
-                                                        { value: '1', label: 'Akun 1' },
-                                                        { value: '2', label: 'Akun 2' }
-                                                    ]} placeholder={'Select Akun...'} styles={CustomSelect} />
+                                                <input type="text" id='valueTotalHarga' className={`col-4`} value={Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim])} readOnly={true} />
+                                                <div className='col-5 ps-2'>
+                                                    <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={dataSelectAkun} placeholder={'Select Akun...'} value={valueKodeAkun} styles={CustomSelect} onChange={e => this.setState({ valueKodeAkun: e })} />
                                                 </div>
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Bayar</p>
-                                                <input type="text" id='valueTotalBayar' className={`col-6`} value={valueTotalBayar} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                                <input type="text" id='valueTotalBayar' className={`col-4`} value={valueTotalBayar} onInput={InputFormatNumber} onChange={this.InputChange} />
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Kembalian</p>
-                                                <input type="text" id='valueTotalKembalian' className={`col-6`} value={Calculate([valueTotalBayar, -valueUangMuka])} readOnly={true} />
+                                                <input type="text" id='valueTotalKembalian' className={`col-4`} value={Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim])} readOnly={true} />
                                             </div>
-                                            <div className='d-flex flex-column gap-5 pt-2'>
-                                                <div>
-                                                    <p>Upload File Transfer</p>
-                                                    <input type="file" accept='.pdf' id='input-detail-file' name='input-detail-file' />
-                                                </div>
-                                            </div>
-
                                         </>
                                         :
-                                        <>
+                                        this.state.jenisPenjualan === 'Konsinyasi' &&
+                                        <React.Fragment>
                                             <div className={`table-responsive`}>
                                                 <table id='table-data' className={`table w-100`}>
                                                     <thead>
@@ -827,31 +1777,31 @@ export class transaksi_penjualan extends Component {
                                             <div className={`d-flex flex-column gap-2 pb-2`}>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Total Jual</p>
-                                                    <input type="text" id='valueTotalJual' className={`${this.state.jenisPenjualan === 'Konsinyasi' ? 'col-6' : 'col-9'}`} value={valueTotalJual} readOnly={true} />
+                                                    <input type="text" id='valueTotalJual' className={'col-6'} value={valueTotalJual} readOnly={true} />
                                                 </div>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Diskon</p>
-                                                    <input type="text" id='valueDiskon' className={`${this.state.jenisPenjualan === 'Konsinyasi' ? 'col-6' : 'col-9'}`} value={valueDiskon} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                                    <input type="text" id='valueDiskon' className={'col-6'} value={valueDiskon} onInput={InputFormatNumber} onChange={this.InputChange} />
                                                 </div>
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Piutang</p>
-                                                <input type="text" id='valuePiutang' className={`${this.state.jenisPenjualan === 'Konsinyasi' ? 'col-6' : 'col-9'}`} value={Calculate([valueTotalJual, -valueDiskon])} readOnly={true} />
+                                                <input type="text" id='valuePiutang' className={'col-6'} value={Calculate([valueTotalJual, -valueDiskon])} readOnly={true} />
                                             </div>
-                                        </>
-                                }
-                                <div className='d-flex flex-column gap-2 pt-2'>
-                                    <div className='d-flex'>
-                                        <div className='col-6 pe-2'>
-                                            <button type='button' className={`${global.button} w-100`}>Simpan</button>
-                                        </div>
-                                        <div className='col-6 ps-2'>
-                                            <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>
+                                        </React.Fragment>
+                                    }
+                                    <div className='d-flex flex-column gap-2 pt-2'>
+                                        <div className='d-flex'>
+                                            <div className='col-6 pe-2'>
+                                                <button type='button' className={`${global.button} w-100`} onClick={this.InsertJual}>Simpan</button>
+                                            </div>
+                                            <div className='col-6 ps-2'>
+                                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }} onClick={() => this.SelectPenjualan(null)}>Batal</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         : null}
                 </div>
             </>

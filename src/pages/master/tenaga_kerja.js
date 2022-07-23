@@ -96,7 +96,7 @@ export class tenaga_kerja extends Component {
                         <p className={global.title}>Tambah Tenaga Kerja</p>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Kode Tenaga Kerja</p>
-                            <input type="text" className={global.input1} id='input-kode-tenaga-kerja' name='input-kode-tenaga-kerja' value={GenerateCode('TK', this.state.dataTenagaKerja.length + 1)} maxLength={10} readOnly={true} required={true} />
+                            <input type="text" className={global.input1} id='input-kode-tenaga-kerja' name='input-kode-tenaga-kerja' value={GenerateCode('TK', this.state.dataTenagaKerja)} maxLength={10} readOnly={true} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Nama Tenaga Kerja</p>

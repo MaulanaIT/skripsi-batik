@@ -15,7 +15,7 @@ import Login from './pages/login';
 
 // Import Page - Format: MenuSubmenu
 import TransaksiPenjualanKalkulatorEstimasi from './pages/transaksi/penjualan/kalkulator_estimasi';
-import TransaksiPenjualanPerhitunganHarga from './pages/transaksi/penjualan/perhitungan_harga';
+import TransaksiPenjualanDaftarPesanan from './pages/transaksi/penjualan/daftar_pesanan';
 import TransaksiPenjualanTransaksiPenjualan from './pages/transaksi/penjualan/transaksi_penjualan';
 import TransaksiPenjualanJualPesan from './pages/transaksi/penjualan/jual_pesan';
 import MasterUser from './pages/master/user';
@@ -43,7 +43,7 @@ import TransaksiPembelianDaftarRetur from './pages/transaksi/pembelian/daftar_re
 import TransaksiPenerimaanKasPengembalianDana from './pages/transaksi/penerimaan_kas/pengembalian_dana';
 import TransaksiPenerimaanKasUangMukaPesanan from './pages/transaksi/penerimaan_kas/uang_muka_pesanan';
 import TransaksiPenerimaanKasDaftarUangMuka from './pages/transaksi/penerimaan_kas/daftar_uangmuka';
-import TransaksiPenerimaanKasKonsinyasi from './pages/transaksi/penerimaan_kas/konsinyasi';
+import TransaksiPenerimaanKasTerimaPiutang from './pages/transaksi/penerimaan_kas/terima_piutang';
 import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
 import TransaksiPermintaanProduksiPesanan from './pages/transaksi/produksi/permintaan_prod_pesanan';
 import DaftarProduksi from './pages/transaksi/produksi/daftar_produksi';
@@ -127,18 +127,18 @@ export default function App() {
                                 <Route path={'/master/customer'} element={<MasterCustomer />} />
                                 <Route path={'/master/consignee'} element={<MasterConsignee />} />
                                 <Route path={'/master/inventory/bahan-baku'} element={<MasterBahanBaku />} />
-                                <Route path={'/master/inventory/daftar-bb'} element={<MasterDaftarBB />} />
+                                <Route path={'/master/inventory/daftar-bahan-baku'} element={<MasterDaftarBB />} />
                                 <Route path={'/master/inventory/bahan-penolong'} element={<MasterBahanPenolong />} />
-                                <Route path={'/master/inventory/daftar-bp'} element={<MasterDaftarBP />} />
+                                <Route path={'/master/inventory/daftar-bahan-penolong'} element={<MasterDaftarBP />} />
                                 <Route path={'/master/inventory/alat'} element={<MasterAlat />} />
                                 <Route path={'/master/inventory/daftar-alat'} element={<MasterDaftarAlat />} />
                                 <Route path={'/master/inventory/daftar-produk'} element={<MasterDaftarProduk />} />
                                 <Route path={'/master/inventory/produk'} element={<MasterProduk />} />
                                 <Route path={'/master/tenaga-kerja'} element={<MasterTenagaKerja />} />
                                 <Route path={'/transaksi/penjualan/transaksi-penjualan'} element={<TransaksiPenjualanTransaksiPenjualan />} />
-                                <Route path={'/transaksi/penjualan/perhitungan-harga'} element={<TransaksiPenjualanPerhitunganHarga />} />
+                                <Route path={'/transaksi/penjualan/daftar-pesanan'} element={<TransaksiPenjualanDaftarPesanan />} />
                                 <Route path={'/transaksi/penjualan/jual-pesan'} element={<TransaksiPenjualanJualPesan />} />
-                                <Route path={'/transaksi/penjualan/perhitungan-harga/kalkulator-estimasi'} element={<TransaksiPenjualanKalkulatorEstimasi />} />
+                                <Route path={'/transaksi/penjualan/daftar-pesanan/kalkulator-estimasi'} element={<TransaksiPenjualanKalkulatorEstimasi />} />
                                 <Route path={'/transaksi/pembelian/order-pembelian'} element={<TransaksiPembelianOrderPembelian />} />
                                 <Route path={'/transaksi/pembelian/daftar-order'} element={<TransaksiPembelianDaftarOrder />} />
                                 <Route path={'/transaksi/pembelian/pengeluaran-kas'} element={<TransaksiPembelianPengeluaranKas />} />
@@ -149,26 +149,26 @@ export default function App() {
                                 <Route path={'/transaksi/penerimaan-kas/pengembalian-dana'} element={<TransaksiPenerimaanKasPengembalianDana />} />
                                 <Route path={'/transaksi/penerimaan-kas/uang-muka-pesanan'} element={<TransaksiPenerimaanKasUangMukaPesanan />} />
                                 <Route path={'/transaksi/penerimaan-kas/daftar-uangmuka'} element={<TransaksiPenerimaanKasDaftarUangMuka />} />
-                                <Route path={'/transaksi/penerimaan-kas/konsinyasi'} element={<TransaksiPenerimaanKasKonsinyasi />} />
+                                <Route path={'/transaksi/penerimaan-kas/terima-piutang'} element={<TransaksiPenerimaanKasTerimaPiutang />} />
                                 <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
-                                <Route path={'/transaksi/produksi/permintaan_prod_pesanan'} element={<TransaksiPermintaanProduksiPesanan />} />
-                                <Route path={'/transaksi/produksi/daftar_produksi'} element={<DaftarProduksi />} />
+                                <Route path={'/transaksi/produksi/permintaan-prod-pesanan'} element={<TransaksiPermintaanProduksiPesanan />} />
+                                <Route path={'/transaksi/produksi/daftar-produksi'} element={<DaftarProduksi />} />
                                 <Route path={'/transaksi/produksi/produksi'} element={<Produksi />} />
-                                <Route path={'/transaksi/produksi/daftar_hpp'} element={<DaftarHargaPokokProduksi />} />
+                                <Route path={'/transaksi/produksi/daftar-hpp'} element={<DaftarHargaPokokProduksi />} />
                                 <Route path={'/transaksi/produksi/hpp'} element={<HargaPokokProduksi />} />
-                                <Route path={'/transaksi/produksi/add_hpp'} element={<AddHPP />} />
+                                <Route path={'/transaksi/produksi/add-hpp'} element={<AddHPP />} />
                                 <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<LaporanPembelianTransaksiPembelian />} />
                                 <Route path={'/laporan/pembelian/retur-pembelian'} element={<LaporanPembelianReturPembelian />} />
                                 <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<LaporanPenjualanTransaksiPenjualan />} />
                                 <Route path={'/laporan/penjualan/piutang-konsinyasi'} element={<LaporanPenjualanPiutangKonsinyasi />} />
                                 <Route path={'/laporan/kas/penerimaan-kas'} element={<LaporanKasPenerimaanKas />} />
                                 <Route path={'/laporan/kas/pengeluaran-kas'} element={<LaporanKasPengeluaranKas />} />
-                                <Route path={'/laporan/produksi/lap_produksi'} element={<LaporanProduksi />} />
-                                <Route path={'/laporan/produksi/lap_hpp'} element={<LaporanHargaPokokProduksi />} />
-                                <Route path={'/laporan/produksi/lap_tenaga_kerja'} element={<LaporanTenagaKerja />} />
-                                <Route path={'/laporan/produksi/kartu_alat'} element={<KartuAlat />} />
-                                <Route path={'/laporan/produksi/kartu_persediaan_bb'} element={<KartuPersediaanBahanBaku />} />
-                                <Route path={'/laporan/produksi/kartu_persediaan_bp'} element={<KartuPersediaanBahanPenolong />} />
+                                <Route path={'/laporan/produksi/lap-produksi'} element={<LaporanProduksi />} />
+                                <Route path={'/laporan/produksi/lap-hpp'} element={<LaporanHargaPokokProduksi />} />
+                                <Route path={'/laporan/produksi/lap-tenaga_kerja'} element={<LaporanTenagaKerja />} />
+                                <Route path={'/laporan/produksi/kartu-alat'} element={<KartuAlat />} />
+                                <Route path={'/laporan/produksi/kartu-persediaan-bb'} element={<KartuPersediaanBahanBaku />} />
+                                <Route path={'/laporan/produksi/kartu-persediaan-bp'} element={<KartuPersediaanBahanPenolong />} />
                                 <Route path={'/laporan/profitabilitas'} element={<LaporanProfitabilitas />} />
                             </Routes>
                         </div>

@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama_file = $_POST['nama_file'];
     $kode_akun = $_POST['kode_akun'];
 
-    $query = "INSERT INTO refund(kode, kode_retur, tanggal, jumlah_terima, file) VALUES('" . $kode . "', '" . $tanggal . "', '" . $kode_retur . "', '" . $jumlah_terima . "', '" . $nama_file . "')";
+    $query = "INSERT INTO refund(kode, kode_retur, tanggal, jumlah_terima, file) VALUES('" . $kode . "', '" . $kode_retur . "', '" . $tanggal . "', '" . $jumlah_terima . "', '" . $nama_file . "')";
 
     $result = $conn->query($query);
 

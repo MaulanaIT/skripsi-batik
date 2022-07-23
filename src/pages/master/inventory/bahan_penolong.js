@@ -40,7 +40,7 @@ export class bahan_penolong extends Component {
         formData.append('harga', GetValue('input-harga-bahan-penolong'));
 
         axios.post(`${baseURL}/api/master/inventory/bahan-penolong/insert.php`, formData, config).then(() => {
-            window.location.href = '/master/inventory/daftar-penolong';
+            window.location.href = '/master/inventory/daftar-bahan-penolong';
         }).catch(error => {
             console.log(error);
 
@@ -59,11 +59,11 @@ export class bahan_penolong extends Component {
                     <form id='form-data' className={global.card}>
                         <div className={`${global.header}`}>
                             <p className={global.title}>Tambah Bahan Penolong</p>
-                            <Link to={'/master/inventory/daftar-bp'} className={`${global.button}`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Kembali</Link>
+                            <Link to={'/master/inventory/daftar-bahan-penolong'} className={`${global.button}`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Kembali</Link>
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Bahan Penolong</p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-bahan-penolong' name='input-kode-bahan-penolong' value={GenerateCode('BP', this.state.dataBahanPenolong.length + 1)} maxLength={10} readOnly={true} required={true} />
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-bahan-penolong' name='input-kode-bahan-penolong' value={GenerateCode('BP', this.state.dataBahanPenolong)} maxLength={10} readOnly={true} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Bahan Penolong</p>

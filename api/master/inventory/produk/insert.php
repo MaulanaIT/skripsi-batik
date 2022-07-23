@@ -7,11 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama = $_POST['nama'];
     $jenis = $_POST['jenis'];
     $warna = $_POST['warna'];
+    $jumlah = $_POST['jumlah'];
     $stok_minimal = $_POST['stok_minimal'];
     $hpp = $_POST['hpp'];
     $harga_jual = $_POST['harga_jual'];
     
-    $query = "INSERT INTO master_inventory_produk(kode, nama, jenis, warna, stok_minimal, hpp, harga_jual) VALUES('".$kode."', '".$nama."', '".$jenis."', '".$warna."', '".$stok_minimal."', '".$hpp."', '".$harga_jual."')";
+    $query = "INSERT INTO master_inventory_produk(kode, nama, jenis, warna, jumlah, stok_minimal, hpp, harga_jual) VALUES('".$kode."', '".$nama."', '".$jenis."', '".$warna."', '".$jumlah."', '".$stok_minimal."', '".$hpp."', '".$harga_jual."')";
     
     $result = $conn->query($query);
 

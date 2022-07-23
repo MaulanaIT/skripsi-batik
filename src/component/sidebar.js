@@ -102,8 +102,8 @@ export default function Sidebar(props) {
                                         <MdExpandMore className={style.toggle} />
                                     </div>
                                     <ul className={style.dropdown_menu}>
-                                        <li><Link to={'/master/inventory/daftar-bb'}><span>Bahan Baku</span></Link></li>
-                                        <li><Link to={'/master/inventory/daftar-bp'}><span>Bahan Penolong</span></Link></li>
+                                        <li><Link to={'/master/inventory/daftar-bahan-baku'}><span>Bahan Baku</span></Link></li>
+                                        <li><Link to={'/master/inventory/daftar-bahan-penolong'}><span>Bahan Penolong</span></Link></li>
                                         <li><Link to={'/master/inventory/daftar-alat'}><span>Alat</span></Link></li>
                                         <li><Link to={'/master/inventory/daftar-produk'}><span>Produk</span></Link></li>
                                     </ul>
@@ -125,7 +125,7 @@ export default function Sidebar(props) {
                                     </div>
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/penjualan/transaksi-penjualan'}><span>Transaksi Penjualan</span></Link></li>
-                                        <li><Link to={'/transaksi/penjualan/perhitungan-harga'}><span>Data Pesanan</span></Link></li>
+                                        <li><Link to={'/transaksi/penjualan/daftar-pesanan'}><span>Data Pesanan</span></Link></li>
                                     </ul>
                                 </li>
                                 <li className={style.dropdown}>
@@ -145,8 +145,7 @@ export default function Sidebar(props) {
                                         <MdExpandMore className={style.toggle} />
                                     </div>
                                     <ul className={style.dropdown_menu}>
-                                        <li><Link to={'/transaksi/penerimaan-kas/daftar-uangmuka'}><span>Uang Muka Pesanan</span></Link></li>
-                                        <li><Link to={'/transaksi/penerimaan-kas/konsinyasi'}><span>Konsinyasi</span></Link></li>
+                                        <li><Link to={'/transaksi/penerimaan-kas/terima-piutang'}><span>Terima Piutang</span></Link></li>
                                     </ul>
                                 </li>
                                 <li className={style.dropdown}>
@@ -156,9 +155,9 @@ export default function Sidebar(props) {
                                     </div>
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/produksi/permintaanprod'}><span>Input Permintaan Produksi Stok</span></Link></li>
-                                        <li><Link to={'/transaksi/produksi/permintaan_prod_pesanan'}><span>Daftar Permintaan Produksi Pesanan</span></Link></li>
-                                        <li><Link to={'/transaksi/produksi/daftar_produksi'}><span>Daftar Perencanaan Produksi</span></Link></li>
-                                        <li><Link to={'/transaksi/produksi/daftar_hpp'}><span>Daftar Proses Produksi</span></Link></li>
+                                        <li><Link to={'/transaksi/produksi/permintaan-prod-pesanan'}><span>Daftar Permintaan Produksi Pesanan</span></Link></li>
+                                        <li><Link to={'/transaksi/produksi/daftar-produksi'}><span>Daftar Perencanaan Produksi</span></Link></li>
+                                        <li><Link to={'/transaksi/produksi/daftar-hpp'}><span>Daftar Proses Produksi</span></Link></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -206,12 +205,12 @@ export default function Sidebar(props) {
                                         <MdExpandMore className={style.toggle} />
                                     </div>
                                     <ul className={style.dropdown_menu}>
-                                        <li><Link to={'/laporan/produksi/lap_produksi'}><span>Laporan Produksi</span></Link></li>
-                                        <li><Link to={'/laporan/produksi/lap_hpp'}><span>Laporan Harga Pokok Produksi</span></Link></li>
-                                        <li><Link to={'/laporan/produksi/lap_tenaga_kerja'}><span>Laporan Tenaga Kerja</span></Link></li>
-                                        <li><Link to={'/laporan/produksi/kartu_alat'}><span>Kartu Alat</span></Link></li>
-                                        <li><Link to={'/laporan/produksi/kartu_persediaan_bb'}><span>Kartu Persediaan Bahan Baku</span></Link></li>
-                                        <li><Link to={'/laporan/produksi/kartu_persediaan_bp'}><span>Kartu Persediaan Bahan Penolong</span></Link></li>
+                                        <li><Link to={'/laporan/produksi/lap-produksi'}><span>Laporan Produksi</span></Link></li>
+                                        <li><Link to={'/laporan/produksi/lap-hpp'}><span>Laporan Harga Pokok Produksi</span></Link></li>
+                                        <li><Link to={'/laporan/produksi/lap-tenaga-kerja'}><span>Laporan Tenaga Kerja</span></Link></li>
+                                        <li><Link to={'/laporan/produksi/kartu-alat'}><span>Kartu Alat</span></Link></li>
+                                        <li><Link to={'/laporan/produksi/kartu-persediaan-bb'}><span>Kartu Persediaan Bahan Baku</span></Link></li>
+                                        <li><Link to={'/laporan/produksi/kartu-persediaan-bp'}><span>Kartu Persediaan Bahan Penolong</span></Link></li>
                                     </ul>
                                 </li>
                                 <li><Link to={'/laporan/profitabilitas'}><span>Laporan Profitabilitas</span></Link></li>
@@ -243,10 +242,10 @@ export default function Sidebar(props) {
                                         <MdExpandMore className={style.toggle} />
                                     </div>
                                     <ul className={style.dropdown_menu}>
-                                        <li><Link to={'/master/inventory/daftar-bb'}><span>Bahan Baku</span></Link></li>
-                                        <li><Link to={'/master/inventory/daftar-bp'}><span>Bahan Penolong</span></Link></li>
+                                        <li><Link to={'/master/inventory/daftar-bahan-baku'}><span>Bahan Baku</span></Link></li>
+                                        <li><Link to={'/master/inventory/daftar-bahan-penolong'}><span>Bahan Penolong</span></Link></li>
                                         <li><Link to={'/master/inventory/daftar-alat'}><span>Alat</span></Link></li>
-                                        <li><Link to={'/master/inventory/daftar_produk'}><span>Produk</span></Link></li>
+                                        <li><Link to={'/master/inventory/daftar-produk'}><span>Produk</span></Link></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -265,7 +264,7 @@ export default function Sidebar(props) {
                                     </div>
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/penjualan/transaksi-penjualan'}><span>Transaksi Penjualan</span></Link></li>
-                                        <li><Link to={'/transaksi/penjualan/perhitungan-harga'}><span>Data Pesanan</span></Link></li>
+                                        <li><Link to={'/transaksi/penjualan/daftar-pesanan'}><span>Data Pesanan</span></Link></li>
                                     </ul>
                                 </li>
                                 <li className={style.dropdown}>
@@ -285,8 +284,7 @@ export default function Sidebar(props) {
                                         <MdExpandMore className={style.toggle} />
                                     </div>
                                     <ul className={style.dropdown_menu}>
-                                        <li><Link to={'/transaksi/penerimaan-kas/daftar-uangmuka'}><span>Uang Muka Pesanan</span></Link></li>
-                                        <li><Link to={'/transaksi/penerimaan-kas/konsinyasi'}><span>Konsinyasi</span></Link></li>
+                                        <li><Link to={'/transaksi/penerimaan-kas/terima-piutang'}><span>Terima Piutang</span></Link></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -355,10 +353,10 @@ export default function Sidebar(props) {
                                         <MdExpandMore className={style.toggle} />
                                     </div>
                                     <ul className={style.dropdown_menu}>
-                                        <li><Link to={'/master/inventory/daftar-bb'}><span>Bahan Baku</span></Link></li>
-                                        <li><Link to={'/master/inventory/daftar-bp'}><span>Bahan Penolong</span></Link></li>
+                                        <li><Link to={'/master/inventory/daftar-bahan-baku'}><span>Bahan Baku</span></Link></li>
+                                        <li><Link to={'/master/inventory/daftar-bahan-penolong'}><span>Bahan Penolong</span></Link></li>
                                         <li><Link to={'/master/inventory/daftar-alat'}><span>Alat</span></Link></li>
-                                        <li><Link to={'/master/inventory/daftar_produk'}><span>Produk</span></Link></li>
+                                        <li><Link to={'/master/inventory/daftar-produk'}><span>Produk</span></Link></li>
                                     </ul>
                                 </li>
                             </ul>
