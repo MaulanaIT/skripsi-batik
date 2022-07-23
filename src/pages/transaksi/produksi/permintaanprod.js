@@ -183,7 +183,7 @@ export default function Permintaanprod() {
             setHTMLTableDaftarPermintaan(htmlTableDaftarPermintaan, () => {
                 $(`#table-data`).DataTable();
 
-                setValueKodePermintaan(GenerateCode('PP', data));
+                setValueKodePermintaan(GenerateCode('MBS', data));
 
                 HideLoading();
             });

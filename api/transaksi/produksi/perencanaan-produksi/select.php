@@ -7,9 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query = '';
 
     if ($jenis_produksi == 'stok') {
-        $query = "SELECT * FROM produksi_stok";
+        $query = "SELECT a.*, b.nama AS nama_produk FROM produksi_stok AS a INNER JOIN master_inventory_produk AS b ON a.kode_produk = b.kode";
     } else if ($jenis_produksi == 'pesanan') {
-        $query = "SELECT * FROM produksi_pesanan";
+        $query = "SELECT a.*, b.nama AS nama_pesanan, c.nama AS nama_customer FROM produksi_pesanan AS a INNER JOIN estimasi_pesanan AS b ON a.kode_pesanan = b.kode INNER JOIN master_customer AS c ON a.kode_customer=c.kode";
     }
 
     $result = $conn->query($query);

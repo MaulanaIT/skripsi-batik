@@ -1,11 +1,15 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // Import Library
 import $ from 'jquery';
+import axios from 'axios';
+import moment from 'moment';
+import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
-import {FiXCircle} from 'react-icons/fi';
-import Select from 'react-select';
+import { FiXCircle } from 'react-icons/fi';
+import { baseURL, config, cx, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -13,7 +17,7 @@ import style from '../../../css/transaksi/produksi/daftar_produksi.module.css';
 
 const CustomSelect = {
     control: (provided, state) => ({
-        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
         color: 'white',
         cursor: 'pointer',
         display: 'flex',
@@ -24,7 +28,7 @@ const CustomSelect = {
         color: 'white'
     }),
     menu: (provided, state) => ({
-        backgroundColor: 'rgba(0, 0, 0, 1)',
+        backgroundColor: 'rgba(0, 0, 0, 3)',
         fontSize: 12,
         position: 'absolute',
         width: '100%',
@@ -32,7 +36,7 @@ const CustomSelect = {
     }),
     option: (provided, state) => ({
         ...provided,
-        backgroundColor: state.isFocused ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.2)',
+        backgroundColor: state.isFocused ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.4)',
         fontSize: 12
     }),
     placeholder: (provided, state) => ({
@@ -47,239 +51,784 @@ const CustomSelect = {
     })
 }
 
-export class add_hpp extends Component {
+export default function Add_hpp(props) {
 
-    CloseDetail = () => {
+    const [getHTMLTableDaftarBahanBaku, setHTMLTableDaftarBahanBaku] = useStateWithCallbackLazy([]);
+    const [getHTMLTableDaftarAlat, setHTMLTableDaftarAlat] = useStateWithCallbackLazy([]);
+    const [getHTMLTableDaftarPenolong, setHTMLTableDaftarPenolong] = useStateWithCallbackLazy([]);
+    const [getHTMLTableDaftarTenagaKerja, setHTMLTableDaftarTenagaKerja] = useStateWithCallbackLazy([]);
+
+    const [getDataAlat, setDataAlat] = useState([]);
+    const [getDataBahanBaku, setDataBahanBaku] = useState([]);
+    const [getDataPenolong, setDataPenolong] = useState([]);
+    const [getDataTenagaKerja, setDataTenagaKerja] = useState([]);
+
+    const [getDataDetailAlat, setDataDetailAlat] = useState([]);
+    const [getDataDetailBahanBaku, setDataDetailBahanBaku] = useState([]);
+    const [getDataDetailPenolong, setDataDetailPenolong] = useState([]);
+    const [getDataDetailTenagaKerja, setDataDetailTenagaKerja] = useState([]);
+
+    const [getDataSelectKodeAlat, setDataSelectKodeAlat] = useState([]);
+    const [getDataSelectNamaAlat, setDataSelectNamaAlat] = useState([]);
+    const [getDataSelectBahanBaku, setDataSelectBahanBaku] = useState([]);
+    const [getDataSelectPenolong, setDataSelectPenolong] = useState([]);
+    const [getDataSelectKodeTenagaKerja, setDataSelectKodeTenagaKerja] = useState([]);
+    const [getDataSelectNamaTenagaKerja, setDataSelectNamaTenagaKerja] = useState([]);
+
+    const [getValueKodeAlat, setValueKodeAlat] = useState([]);
+    const [getValueNamaAlat, setValueNamaAlat] = useState([]);
+    const [getValueBahanBaku, setValueBahanBaku] = useState([]);
+    const [getValueDepartemen, setValueDepartemen] = useState([]);
+    const [getValueHarga, setValueHarga] = useState(0);
+    const [getValueJumlah, setValueJumlah] = useState(0);
+    const [getValueKodeBiayaAlat, setValueKodeBiayaAlat] = useState('');
+    const [getValueKodeBiayaBahanBaku, setValueKodeBiayaBahanBaku] = useState('');
+    const [getValueKodeBiayaPenolong, setValueKodeBiayaPenolong] = useState('');
+    const [getValueKodeBiayaTenagaKerja, setValueKodeBiayaTenagaKerja] = useState('');
+    const [getValuePenolong, setValuePenolong] = useState([]);
+    const [getValueTanggal, setValueTanggal] = useState(moment().format('YYYY-MM-DD'));
+    const [getValueKodeTenagaKerja, setValueKodeTenagaKerja] = useState([]);
+    const [getValueNamaTenagaKerja, setValueNamaTenagaKerja] = useState([]);
+    const [getValueTotalHarga, setValueTotalHarga] = useState(0);
+
+    const [getSelectedTab, setSelectedTab] = useState(0);
+
+    useEffect(() => {
+        GetAlat();
+        GetBahanBaku();
+        GetPenolong();
+        GetTenagaKerja();
+        GetDetailAlat();
+        GetDetailBahanBaku();
+        GetDetailPenolong();
+        GetDetailTenagaKerja();
+    }, []);
+
+    useEffect(() => {
+        setValueHarga(0);
+        setValueJumlah(0);
+        setValueBahanBaku(null);
+        setValuePenolong(null);
+        setValueKodeAlat(null);
+        setValueNamaAlat(null);
+        setValueKodeTenagaKerja(null);
+        setValueNamaTenagaKerja(null);
+    }, [getSelectedTab]);
+
+    useEffect(() => {
+        setValueTotalHarga(+getValueHarga * +getValueJumlah);
+    }, [getValueJumlah, getValueHarga]);
+
+    useEffect(() => {
+        let dataSelected = getDataAlat?.find(item => item.kode === getValueKodeAlat?.value);
+        
+        setValueHarga(dataSelected?.harga ?? 0);
+    }, [getValueKodeAlat, getValueNamaAlat]);
+
+    useEffect(() => {
+        let dataSelected = getDataBahanBaku?.find(item => item.kode === getValueBahanBaku?.value);
+        
+        setValueHarga(dataSelected?.harga ?? 0);
+    }, [getValueBahanBaku]);
+
+    useEffect(() => {
+        let dataSelected = getDataPenolong?.find(item => item.kode === getValuePenolong?.value);
+        
+        setValueHarga(dataSelected?.harga ?? 0);
+    }, [getValuePenolong]);
+
+    useEffect(() => {
+        let dataSelected = getDataTenagaKerja?.find(item => item.kode === getValueKodeTenagaKerja?.value);
+        
+        setValueHarga(dataSelected?.upah ?? 0);
+    }, [getValueKodeTenagaKerja, getValueNamaTenagaKerja]);
+
+    const AddDetailAlat = () => {
+        ShowLoading();
+
+        $('#table-data-bop-alat').DataTable().destroy();
+
+        let dataDetailAlat = [...getDataDetailAlat];
+        let htmlTableDaftarAlat = [];
+
+        dataDetailAlat.push({
+            kode_bahan: getValueKodeAlat.value,
+            nama_bahan: getValueNamaAlat.label,
+            jumlah: getValueJumlah,
+            harga: getValueHarga,
+            total_harga: getValueTotalHarga
+        });
+
+        if (dataDetailAlat && dataDetailAlat.length > 0) {
+            dataDetailAlat.forEach((item, index) => {
+                htmlTableDaftarAlat.push(
+                    <tr key={index} className={'align-middle'}>
+                        <td>{index + 1}.</td>
+                        <td>{item.kode_bahan}</td>
+                        <td>{item.nama_bahan}</td>
+                        <td>{item.jumlah}</td>
+                        <td>{item.harga}</td>
+                        <td>{item.total_harga}</td>
+                        <td></td>
+                    </tr>
+                );
+            });
+        }
+
+        setHTMLTableDaftarAlat(htmlTableDaftarAlat, () => {
+            $('#table-data-bop-alat').DataTable();
+
+            HideLoading();
+        });
+
+        setDataDetailAlat(dataDetailAlat);
+
+        HideLoading();
+    }
+
+    const AddDetailBahanBaku = () => {
+        ShowLoading();
+
+        $('#table-data-biaya-bahan-baku').DataTable().destroy();
+
+        let dataDetailBahanBaku = [...getDataDetailBahanBaku];
+        let htmlTableDaftarBahanBaku = [];
+
+        dataDetailBahanBaku.push({
+            kode_bahan: getValueBahanBaku.value,
+            nama_bahan: getValueBahanBaku.label,
+            jumlah: getValueJumlah,
+            harga: getValueHarga,
+            total_harga: getValueTotalHarga
+        });
+
+        if (dataDetailBahanBaku && dataDetailBahanBaku.length > 0) {
+            dataDetailBahanBaku.forEach((item, index) => {
+                htmlTableDaftarBahanBaku.push(
+                    <tr key={index} className={'align-middle'}>
+                        <td>{index + 1}.</td>
+                        <td>{item.kode_bahan}</td>
+                        <td>{item.nama_bahan}</td>
+                        <td>{item.jumlah}</td>
+                        <td>{item.harga}</td>
+                        <td>{item.total_harga}</td>
+                        <td></td>
+                    </tr>
+                );
+            });
+        }
+
+        setHTMLTableDaftarBahanBaku(htmlTableDaftarBahanBaku, () => {
+            $('#table-data-biaya-bahan-baku').DataTable();
+
+            HideLoading();
+        });
+
+        setDataDetailBahanBaku(dataDetailBahanBaku);
+
+        HideLoading();
+    }
+
+    const AddDetailPenolong = () => {
+        ShowLoading();
+
+        $('#table-data-bop-penolong').DataTable().destroy();
+
+        let dataDetailPenolong = [...getDataDetailPenolong];
+        let htmlTableDaftarPenolong = [];
+
+        dataDetailPenolong.push({
+            kode_bahan: getValuePenolong.value,
+            nama_bahan: getValuePenolong.label,
+            jumlah: getValueJumlah,
+            harga: getValueHarga,
+            total_harga: getValueTotalHarga
+        });
+
+        if (dataDetailPenolong && dataDetailPenolong.length > 0) {
+            dataDetailPenolong.forEach((item, index) => {
+                htmlTableDaftarPenolong.push(
+                    <tr key={index} className={'align-middle'}>
+                        <td>{index + 1}.</td>
+                        <td>{item.kode_bahan}</td>
+                        <td>{item.nama_bahan}</td>
+                        <td>{item.jumlah}</td>
+                        <td>{item.harga}</td>
+                        <td>{item.total_harga}</td>
+                        <td></td>
+                    </tr>
+                );
+            });
+        }
+
+        setHTMLTableDaftarPenolong(htmlTableDaftarPenolong, () => {
+            $('#table-data-bop-penolong').DataTable();
+
+            HideLoading();
+        });
+
+        setDataDetailPenolong(dataDetailPenolong);
+
+        HideLoading();
+    }
+
+    const AddDetailTenagaKerja = () => {
+        ShowLoading();
+
+        $('#table-data-biaya-tenaga-kerja').DataTable().destroy();
+
+        let dataDetailTenagaKerja = [...getDataDetailTenagaKerja];
+        let htmlTableDaftarTenagaKerja = [];
+
+        dataDetailTenagaKerja.push({
+            kode_bahan: getValueKodeTenagaKerja.value,
+            nama_bahan: getValueNamaTenagaKerja.label,
+            jumlah: getValueJumlah,
+            harga: getValueHarga,
+            total_harga: getValueTotalHarga
+        });
+
+        if (dataDetailTenagaKerja && dataDetailTenagaKerja.length > 0) {
+            dataDetailTenagaKerja.forEach((item, index) => {
+                htmlTableDaftarTenagaKerja.push(
+                    <tr key={index} className={'align-middle'}>
+                        <td>{index + 1}.</td>
+                        <td>{item.kode_bahan}</td>
+                        <td>{item.nama_bahan}</td>
+                        <td>{item.jumlah}</td>
+                        <td>{item.harga}</td>
+                        <td>{item.total_harga}</td>
+                        <td></td>
+                    </tr>
+                );
+            });
+        }
+
+        setHTMLTableDaftarTenagaKerja(htmlTableDaftarTenagaKerja, () => {
+            $('#table-data-biaya-tenaga-kerja').DataTable();
+
+            HideLoading();
+        });
+
+        setDataDetailTenagaKerja(dataDetailTenagaKerja);
+
+        HideLoading();
+    }
+
+    const CloseDetail = () => {
         document.getElementById('add_hpp').classList.add('d-none');
     }
 
-    state = {
-        tabSelected: 0
+    const GetAlat = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/master/inventory/alat/select.php`, config).then(response => {
+            let data = response.data.data;
+
+            let dataSelectKodeAlat = [];
+            let dataSelectNamaAlat = [];
+            
+            if (data && data.length > 0) {
+                for (const item of data) {
+                    dataSelectKodeAlat.push({
+                        value: item.kode,
+                        label: item.kode
+                    });
+
+                    dataSelectNamaAlat.push({
+                        value: item.kode,
+                        label: item.nama
+                    });
+                }
+            }
+
+            setDataSelectKodeAlat(dataSelectKodeAlat);
+            setDataSelectNamaAlat(dataSelectNamaAlat);
+            setDataAlat(data);
+
+            HideLoading();
+        }).catch(error => {
+            console.log(error);
+
+            alert(error);
+
+            HideLoading();
+        });
     }
 
-    componentDidMount() {
-        $('#table-data-biaya-bahan-baku').DataTable();
-        $('#table-data-bop-bahan-penolong').DataTable();
-        $('#table-data-bop-alat').DataTable();
-        $('#table-data-biaya-tenaga-kerja').DataTable();
+    const GetBahanBaku = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/master/inventory/bahan-baku/select.php`, config).then(response => {
+            let data = response.data.data;
+
+            let dataSelectBahanBaku = [];
+            
+            if (data && data.length > 0) {
+                for (const item of data) {
+                    dataSelectBahanBaku.push({
+                        value: item.kode,
+                        label: item.nama
+                    });
+                }
+            }
+
+            setDataSelectBahanBaku(dataSelectBahanBaku);
+            setDataBahanBaku(data);
+
+            HideLoading();
+        }).catch(error => {
+            console.log(error);
+
+            alert(error);
+
+            HideLoading();
+        });
     }
 
-    SelectTab = (index) => {
-        this.setState({ tabSelected: index });
+    const GetPenolong = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/master/inventory/bahan-penolong/select.php`, config).then(response => {
+            let data = response.data.data;
+
+            let dataSelectPenolong = [];
+            
+            if (data && data.length > 0) {
+                for (const item of data) {
+                    dataSelectPenolong.push({
+                        value: item.kode,
+                        label: item.nama
+                    });
+                }
+            }
+
+            setDataSelectPenolong(dataSelectPenolong);
+            setDataPenolong(data);
+
+            HideLoading();
+        }).catch(error => {
+            console.log(error);
+
+            alert(error);
+
+            HideLoading();
+        });
     }
 
-    render() {
-        return (
-            <>
+    const GetTenagaKerja = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/master/tenaga-kerja/select.php`, config).then(response => {
+            let data = response.data.data;
+
+            let dataSelectKodeTenagaKerja = [];
+            let dataSelectNamaTenagaKerja = [];
+            
+            if (data && data.length > 0) {
+                for (const item of data) {
+                    dataSelectKodeTenagaKerja.push({
+                        value: item.kode,
+                        label: item.nama
+                    });
+
+                    dataSelectNamaTenagaKerja.push({
+                        value: item.kode,
+                        label: item.nama
+                    });
+                }
+            }
+
+            setDataSelectKodeTenagaKerja(dataSelectKodeTenagaKerja);
+            setDataSelectNamaTenagaKerja(dataSelectNamaTenagaKerja);
+            setDataTenagaKerja(data);
+
+            HideLoading();
+        }).catch(error => {
+            console.log(error);
+
+            alert(error);
+
+            HideLoading();
+        });
+    }
+
+    const GetDetailAlat = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/transaksi/produksi/detail-alat/select.php`, config).then(response => {
+            let data = response.data.data;
+
+            setValueKodeBiayaAlat(GenerateCode('BOPAlat', data));
+            setHTMLTableDaftarAlat([], () => {
+                $('#table-data-bop-alat').DataTable();
+
+                HideLoading();
+            });
+        }).catch(error => {
+            console.log(error);
+
+            alert(error);
+
+            HideLoading();
+        });
+    }
+
+    const GetDetailBahanBaku = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/transaksi/produksi/detail-bahan-baku/select.php`, config).then(response => {
+            let data = response.data.data;
+
+            setValueKodeBiayaBahanBaku(GenerateCode('BBB', data));
+            setHTMLTableDaftarBahanBaku([], () => {
+                $('#table-data-biaya-bahan-baku').DataTable();
+
+                HideLoading();
+            });
+        }).catch(error => {
+            console.log(error);
+
+            alert(error);
+
+            HideLoading();
+        });
+    }
+
+    const GetDetailPenolong = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/transaksi/produksi/detail-penolong/select.php`, config).then(response => {
+            let data = response.data.data;
+
+            setValueKodeBiayaPenolong(GenerateCode('BBP', data));
+            setHTMLTableDaftarPenolong([], () => {
+                $('#table-data-bop-bahan-penolong').DataTable();
+
+                HideLoading();
+            });
+        }).catch(error => {
+            console.log(error);
+
+            alert(error);
+
+            HideLoading();
+        });
+    }
+
+    const GetDetailTenagaKerja = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/transaksi/produksi/detail-tenaga-kerja/select.php`, config).then(response => {
+            let data = response.data.data;
+
+            setValueKodeBiayaTenagaKerja(GenerateCode('BTKL', data));
+            setHTMLTableDaftarTenagaKerja([], () => {
+                $('#table-data-biaya-tenaga-kerja').DataTable();
+
+                HideLoading();
+            });
+        }).catch(error => {
+            console.log(error);
+
+            alert(error);
+
+            HideLoading();
+        });
+    }
+
+    const SelectAlat = (e) => {
+        let data = e?.value;
+
+        let valueKode = getDataSelectKodeAlat.find(item => item.value === data);
+        let valueNama = getDataSelectNamaAlat.find(item => item.value === data);
+
+        if (data) {
+            setValueKodeAlat(valueKode);
+            setValueNamaAlat(valueNama);
+        } else {
+            setValueKodeAlat(null);
+            setValueNamaAlat(null);
+        }
+    }
+
+    const SelectTenagaKerja = (e) => {
+        let data = e?.value;
+
+        let valueKode = getDataSelectKodeTenagaKerja.find(item => item.value === data);
+        let valueNama = getDataSelectNamaTenagaKerja.find(item => item.value === data);
+
+        if (data) {
+            setValueKodeTenagaKerja(valueKode);
+            setValueNamaTenagaKerja(valueNama);
+        } else {
+            setValueKodeTenagaKerja(null);
+            setValueNamaTenagaKerja(null);
+        }
+    }
+
+    return (
+        <React.Fragment>
             <div id='add_hpp' className={`${global.loading_background} d-none`}>
-                <div><FiXCircle className='fs-4 col-12' onclick={this.CloseDetail} />
+                <div><FiXCircle className='fs-4 col-12' onClick={CloseDetail} />
                     <div className={style.content}>
                         <div className={global.card_detail}>
                             <p className={global.title}>Tambah Perhitungan Harga Pokok Produksi</p>
-                                <div className={`col-12 col-md-7 ps-md-2 pt-2 pt-md-0`}>
-                                    <div className={`${global.tab_card} pb-2`}>
-                                        <div className={`${global.item} ${this.state.tabSelected === 0 ? global.active : ''}`} onClick={() => this.SelectTab(0)}>
-                                            <p className={`${global.name}`}>Bahan Baku</p>
-                                        </div>
-                                        <div className={`${global.item} ${this.state.tabSelected === 1 ? global.active : ''}`} onClick={() => this.SelectTab(1)}>
-                                            <p className={`${global.name}`}>BOP (Penolong)</p>
-                                        </div>
-                                        <div className={`${global.item} ${this.state.tabSelected === 2 ? global.active : ''}`} onClick={() => this.SelectTab(2)}>
-                                            <p className={`${global.name}`}>BOP (Alat)</p>
-                                        </div>
-                                        <div className={`${global.item} ${this.state.tabSelected === 3 ? global.active : ''}`} onClick={() => this.SelectTab(3)}>
-                                            <p className={`${global.name}`}>BTKL</p>
-                                        </div>
+                            <div className={`col-12 col-md-7 ps-md-2 pt-2 pt-md-0`}>
+                                <div className={`${global.tab_card} pb-2`}>
+                                    <div className={`${global.item} ${+getSelectedTab === 0 ? global.active : ''}`} onClick={() => setSelectedTab(0)}>
+                                        <p className={`${global.name}`}>Bahan Baku</p>
+                                    </div>
+                                    <div className={`${global.item} ${+getSelectedTab === 1 ? global.active : ''}`} onClick={() => setSelectedTab(1)}>
+                                        <p className={`${global.name}`}>BOP (Penolong)</p>
+                                    </div>
+                                    <div className={`${global.item} ${+getSelectedTab === 2 ? global.active : ''}`} onClick={() => setSelectedTab(2)}>
+                                        <p className={`${global.name}`}>BOP (Alat)</p>
+                                    </div>
+                                    <div className={`${global.item} ${+getSelectedTab === 3 ? global.active : ''}`} onClick={() => setSelectedTab(3)}>
+                                        <p className={`${global.name}`}>BTKL</p>
                                     </div>
                                 </div>
-                                <div className={`${global.card} ${this.state.tabSelected === 0 ? '' : 'd-none'}`}>
-                                    <div className='d-flex'>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Kode Biaya Bahan Baku </p>
-                                            <input type="text" id='input-kode-biaya-bahan-baku' name='input-biaya-bahan-baku' />
+                            </div>
+                            <div className={`${global.card}`}>
+                                {+getSelectedTab === 0 &&
+                                    <React.Fragment>
+                                        <div className='d-flex'>
+                                            <div className={`${global.input_group} col-4 pe-2`}>
+                                                <p className={global.title}>Kode Biaya Bahan Baku </p>
+                                                <input type="text" id='input-kode-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueKodeBiayaBahanBaku} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 px-2`}>
+                                                <p className={global.title}>Tanggal</p>
+                                                <input type="date" id='input-tanggal-bbb' name='input-tanggal-bbb' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
+                                            </div>
                                         </div>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Tanggal </p>
-                                            <input type="date" id='input-tanggal-bbb' name='input-tanggal-bbb' />
+                                        <div className='d-flex'>
+                                            <div className={`${global.input_group} col-4 pe-2`}>
+                                                <p className={global.title}>Kode Produksi</p>
+                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props.kodeProduksi} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-8 ps-2`}>
+                                                <p className={global.title}>Kode Permintaan Bahan</p>
+                                                <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' readOnly={true} />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='d-flex'>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Kode Produksi </p>
-                                            <input type="text" id='input-kode-produksi' name='input-kode-produksi' />
+                                        <div className={`d-flex`}>
+                                            <div className={`${global.input_group} col-8 pe-2`}>
+                                                <p className={global.title}>Pilih Bahan Baku</p>
+                                                <Select id='select-nama-bahan-bahan-baku' name='select-nama-bahan-bahan-baku' isClearable={true} isSearchable={true} options={getDataSelectBahanBaku} placeholder={'Select Nama Bahan...'} value={getValueBahanBaku} styles={CustomSelect} onChange={e => setValueBahanBaku(e)} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 ps-2`}>
+                                                <p className={global.title}>Harga</p>
+                                                <input type="text" id='input-harga-bahan-baku' name='input-harga-bahan-baku' value={getValueHarga} readOnly={true} />
+                                            </div>
                                         </div>
-                                        <div className={`${global.input_group} col-8 px-2`}>
-                                            <p className={global.title}>Kode Permintaan Bahan</p>
-                                            <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' />
+                                        <div className={`d-flex`}>
+                                            <div className={`${global.input_group} col-4 px-2`}>
+                                                <p className={global.title}>Jumlah</p>
+                                                <input type="text" id='input-jumlah-bahan-baku' name='input-jumlah-bahan-baku' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 px-2`}>
+                                                <p className={global.title}>Biaya</p>
+                                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueTotalHarga} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-3 ms-auto ps-2`}>
+                                                <p className={global.title}>Aksi</p>
+                                                <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={AddDetailBahanBaku}><MdAdd /> Tambah</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className={`d-flex`}>
-                                        <div className={`${global.input_group} col-8 pe-2`}>
-                                            <p className={global.title}>Pilih Bahan Baku</p>
-                                            <Select id='select-nama-bahan-bahan-baku' name='select-nama-bahan-bahan-baku' isClearable={true} isSearchable={true} options={[
-                                                { value: 'Bahan 1', label: 'Bahan 1' },
-                                                { value: 'Bahan 2', label: 'Bahan 2' }
-                                            ]} placeholder={'Select Nama Bahan...'} styles={CustomSelect} />
+                                    </React.Fragment>
+                                }
+                                {+getSelectedTab === 1 &&
+                                    <React.Fragment>
+                                        <div className='d-flex'>
+                                            <div className={`${global.input_group} col-4 pe-2`}>
+                                                <p className={global.title}>Kode Biaya Bahan Penolong </p>
+                                                <input type="text" id='input-kode-biaya-bahan-penolong' name='input-biaya-bahan-penolong' value={getValueKodeBiayaPenolong} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 ps-2`}>
+                                                <p className={global.title}>Tanggal </p>
+                                                <input type="date" id='input-tanggal-bop-penolong' name='input-tanggal-bop-penolong' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
+                                            </div>
                                         </div>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Harga</p>
-                                            <input type="text" id='input-harga-bahan-baku' name='input-harga-bahan-baku' readOnly={true} />
+                                        <div className='d-flex'>
+                                            <div className={`${global.input_group} col-4 pe-2`}>
+                                                <p className={global.title}>Kode Produksi </p>
+                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props.kodeProduksi} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-8 ps-2`}>
+                                                <p className={global.title}>Kode Permintaan Bahan</p>
+                                                <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' readOnly={true} />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className={`d-flex`}>
-                                        <div className={`${global.input_group} col-4 px-2`}>
-                                            <p className={global.title}>Jumlah</p>
-                                            <input type="text" id='input-jumlah-bahan-baku' name='input-jumlah-bahan-baku' readOnly={true} />
+                                        <div className={`d-flex`}>
+                                            <div className={`${global.input_group} col-8 pe-2`}>
+                                                <p className={global.title}>Pilih Bahan Penolong</p>
+                                                <Select id='select-nama-bahan-bahan-penolong' name='select-nama-bahan-bahan-penolong' isClearable={true} isSearchable={true} options={getDataSelectPenolong} placeholder={'Select Nama Bahan...'} value={getValuePenolong} styles={CustomSelect} onChange={e => setValuePenolong(e)} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 ps-2`}>
+                                                <p className={global.title}>Harga</p>
+                                                <input type="text" id='input-harga-bahan-penolong' name='input-harga-bahan-penolong' value={getValueHarga} readOnly={true} />
+                                            </div>
                                         </div>
-                                        <div className={`${global.input_group} col-4 px-2`}>
-                                            <p className={global.title}>Biaya</p>
-                                            <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' readOnly={true} />
+                                        <div className={`d-flex`}>
+                                            <div className={`${global.input_group} col-4 px-2`}>
+                                                <p className={global.title}>Jumlah</p>
+                                                <input type="text" id='input-jumlah-bahan-penolong' name='input-jumlah-bahan-penolong' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 px-2`}>
+                                                <p className={global.title}>Biaya</p>
+                                                <input type="text" id='input-biaya-bahan-penolong' name='input-biaya-bahan-penolong' value={getValueTotalHarga} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-3 ms-auto ps-2`}>
+                                                <p className={global.title}>Aksi</p>
+                                                <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={AddDetailPenolong}><MdAdd /> Tambah</button>
+                                            </div>
                                         </div>
-                                        <div className={`${global.input_group} col-3 ms-auto ps-2`}>
-                                            <p className={global.title}>Aksi</p>
-                                            <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</button>
+                                    </React.Fragment>
+                                }
+                                {+getSelectedTab === 2 &&
+                                    <React.Fragment>
+                                        <div className='d-flex'>
+                                            <div className={`${global.input_group} col-4 pe-2`}>
+                                                <p className={global.title}>Kode BOP Alat </p>
+                                                <input type="text" id='input-kode-bop-alat' name='input-kode-bop-alat' value={getValueKodeBiayaAlat} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 px-2`}>
+                                                <p className={global.title}>Kode Produksi </p>
+                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props.kodeProduksi} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 ps-2`}>
+                                                <p className={global.title}>Tanggal</p>
+                                                <input type="date" id='input-tanggal-bop-alat' name='input-tanggal-bop-alat' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className={`table-responsive`}>
-                                        <table id='table-data-biaya-bahan-baku' className={`table w-100`}>
-                                            <thead className='text-nowrap'>
-                                                <tr>
-                                                    <td>No.</td>
-                                                    <td>Kode Bahan</td>
-                                                    <td>Nama Bahan</td>
-                                                    <td>Jumlah</td>
-                                                    <td>Harga</td>
-                                                    <td>Biaya</td>
-                                                    <td>Aksi</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                    </div>
-                                    <div className={`${global.input_group} col-12 ms-auto`}>
-                                        <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Simpan</button>
-                                    </div>
+                                        <div className='d-flex'>
+                                            <div className={`${global.input_group} col-4 pe-2`}>
+                                                <p className={global.title}>Kode Alat</p>
+                                                <Select id='select-kode-bop-alat' name='select-kode-bop-alat' isClearable={true} isSearchable={true} options={getDataSelectKodeAlat} placeholder={'Select Kode...'} value={getValueKodeAlat} styles={CustomSelect} onChange={e => SelectAlat(e)} />
+                                            </div>
+                                            <div className={`${global.input_group} col-8 ps-2`}>
+                                                <p className={global.title}>Nama Alat</p>
+                                                <Select id='select-nama-bop-alat' name='select-nama-bop-alat' isClearable={true} isSearchable={true} options={getDataSelectNamaAlat} placeholder={'Select Nama Alat...'} value={getValueNamaAlat} styles={CustomSelect} onChange={e => SelectAlat(e)} />
+                                            </div>
+                                        </div>
+                                        <div className={`d-flex`}>
+                                            <div className={`${global.input_group} col-12`}>
+                                                <p className={global.title}>Tarif</p>
+                                                <input type="text" id='input-tarif-bop-alat' name='input-tarif-bop-alat' value={getValueHarga} readOnly={true} />
+                                            </div>
+                                        </div>
+                                        <div className={`d-flex`}>
+                                            <div className={`${global.input_group} col-4 pe-2`}>
+                                                <p className={global.title}>Pemakaian</p>
+                                                <input type="text" id='input-pemakaian-bop-alat' name='input-pemakian-bop-alat' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 ps-2`}>
+                                                <p className={global.title}>Biaya</p>
+                                                <input type="text" id='input-biaya-bop-alat' name='input-biaya-bop-alat' value={getValueTotalHarga} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-3 ms-auto ps-2`}>
+                                                <p className={global.title}>Aksi</p>
+                                                <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={AddDetailAlat}><MdAdd /> Tambah</button>
+                                            </div>
+                                        </div>
+                                    </React.Fragment>
+                                }
+                                {+getSelectedTab === 3 &&
+                                    <React.Fragment>
+                                        <div className='d-flex'>
+                                            <div className={`${global.input_group} col-4 pe-2`}>
+                                                <p className={global.title}>Kode Biaya Tenaga Kerja </p>
+                                                <input type="text" id='input-kode-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueKodeBiayaTenagaKerja} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 px-2`}>
+                                                <p className={global.title}>Kode Produksi </p>
+                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props.kodeProduksi} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 ps-2`}>
+                                                <p className={global.title}>Tanggal</p>
+                                                <input type="date" id='input-tanggal-btk' name='input-tanggal-btk' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
+                                            </div>
+                                        </div>
+                                        <div className='d-flex'>
+                                            <div className={`${global.input_group} col-4 pe-2`}>
+                                                <p className={global.title}>Kode Tenaga Kerja</p>
+                                                <Select id='select-kode-tenaga-kerja' name='select-kode-tenaga-kerja' isClearable={true} isSearchable={true} options={getDataSelectKodeTenagaKerja} placeholder={'Select Tenaga Kerja...'} value={getValueKodeTenagaKerja} styles={CustomSelect} onChange={e => SelectTenagaKerja(e)} />
+                                            </div>
+                                            <div className={`${global.input_group} col-8 ps-2`}>
+                                                <p className={global.title}>Nama Tenaga Kerja</p>
+                                                <Select id='select-nama-tenaga-kerja' name='select-nama-tenaga-kerja' isClearable={true} isSearchable={true} options={getDataSelectNamaTenagaKerja} placeholder={'Select Tenaga Kerja...'} value={getValueNamaTenagaKerja} styles={CustomSelect} onChange={e => SelectTenagaKerja(e)} />
+                                            </div>
+                                        </div>
+                                        <div className={`d-flex`}>
+                                            <div className={`${global.input_group} col-8 pe-2`}>
+                                                <p className={global.title}>Departemen</p>
+                                                <Select id='select-departemen' name='select-departemen' isClearable={true} isSearchable={true} options={[
+                                                    { value: 'Desain', label: 'Desain' },
+                                                    { value: 'Canting/Cap', label: 'Canting/Cap' },
+                                                    { value: 'Warna', label: 'Warna' },
+                                                    { value: 'Packing', label: 'Packing' }
+                                                ]} placeholder={'Select Departemen...'} value={getValueDepartemen} styles={CustomSelect} onChange={e => setValueDepartemen(e)} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 ps-2`}>
+                                                <p className={global.title}>Upah</p>
+                                                <input type="text" id='input-upah-tenaga-kerja' name='input-upah-tenaga-kerja' value={getValueHarga} readOnly={true} />
+                                            </div>
+                                        </div>
+                                        <div className={`d-flex`}>
+                                            <div className={`${global.input_group} col-4 pe-2`}>
+                                                <p className={global.title}>Jumlah Pengerjaan</p>
+                                                <input type="text" id='input-jumlah-pengerjaan' name='input-jumlah-pengerjaan' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} />
+                                            </div>
+                                            <div className={`${global.input_group} col-4 px-2`}>
+                                                <p className={global.title}>Biaya</p>
+                                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueTotalHarga} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-3 ms-auto ps-2`}>
+                                                <p className={global.title}>Aksi</p>
+                                                <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={AddDetailTenagaKerja}><MdAdd /> Tambah</button>
+                                            </div>
+                                        </div>
+                                    </React.Fragment>
+                                }
+                                <div className={`table-responsive ${+getSelectedTab !== 0 && 'd-none'}`}>
+                                    <table id='table-data-biaya-bahan-baku' className={`table w-100`}>
+                                        <thead className='text-nowrap'>
+                                            <tr>
+                                                <td>No.</td>
+                                                <td>Kode Bahan</td>
+                                                <td>Nama Bahan</td>
+                                                <td>Jumlah</td>
+                                                <td>Harga</td>
+                                                <td>Biaya</td>
+                                                <td>Aksi</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {getHTMLTableDaftarBahanBaku}
+                                        </tbody>
+                                    </table>
                                 </div>
-                            <div className={`${global.card} ${this.state.tabSelected === 1 ? '' : 'd-none'}`}>
-                                    <div className='d-flex'>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Kode Biaya Bahan Penolong </p>
-                                            <input type="text" id='input-kode-biaya-bahan-penolong' name='input-biaya-bahan-penolong' />
-                                        </div>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Tanggal </p>
-                                            <input type="date" id='input-tanggal-bop-penolong' name='input-tanggal-bop-penolong' />
-                                        </div>
-                                    </div>
-                                    <div className='d-flex'>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Kode Produksi </p>
-                                            <input type="text" id='input-kode-produksi' name='input-kode-produksi' />
-                                        </div>
-                                        <div className={`${global.input_group} col-8 px-2`}>
-                                            <p className={global.title}>Kode Permintaan Bahan</p>
-                                            <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' />
-                                        </div>
-                                    </div>
-                                    <div className={`d-flex`}>
-                                        <div className={`${global.input_group} col-8 pe-2`}>
-                                            <p className={global.title}>Pilih Bahan Penolong</p>
-                                            <Select id='select-nama-bahan-bahan-penolong' name='select-nama-bahan-bahan-penolong' isClearable={true} isSearchable={true} options={[
-                                                { value: 'Bahan Penolong 1', label: 'Bahan Penolong 1' },
-                                                { value: 'Bahan Penolong 2', label: 'Bahan Penolong 2' }
-                                            ]} placeholder={'Select Nama Bahan...'} styles={CustomSelect} />
-                                        </div>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Harga</p>
-                                            <input type="text" id='input-harga-bahan-penolong' name='input-harga-bahan-penolong' readOnly={true} />
-                                        </div>
-                                    </div>
-                                    <div className={`d-flex`}>
-                                        <div className={`${global.input_group} col-4 px-2`}>
-                                            <p className={global.title}>Jumlah</p>
-                                            <input type="text" id='input-jumlah-bahan-penolong' name='input-jumlah-bahan-penolong' readOnly={true} />
-                                        </div>
-                                        <div className={`${global.input_group} col-4 px-2`}>
-                                            <p className={global.title}>Biaya</p>
-                                            <input type="text" id='input-biaya-bahan-penolong' name='input-biaya-bahan-penolong' readOnly={true} />
-                                        </div>
-                                        <div className={`${global.input_group} col-3 ms-auto ps-2`}>
-                                            <p className={global.title}>Aksi</p>
-                                            <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</button>
-                                        </div>
-                                    </div>
-                                    <div className={`table-responsive`}>
-                                        <table id='table-data-bop-bahan-penolong' className={`table w-100`}>
-                                            <thead className='text-nowrap'>
-                                                <tr>
-                                                    <td>No.</td>
-                                                    <td>Kode Bahan</td>
-                                                    <td>Nama Bahan</td>
-                                                    <td>Jumlah</td>
-                                                    <td>Harga</td>
-                                                    <td>Biaya</td>
-                                                    <td>Aksi</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                    </div>
-                                    <div className={`${global.input_group} col-12 ms-auto`}>
-                                        <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Simpan</button>
-                                    </div>
+                                <div className={`table-responsive ${+getSelectedTab !== 1 && 'd-none'}`}>
+                                    <table id='table-data-bop-bahan-penolong' className={`table w-100`}>
+                                        <thead className='text-nowrap'>
+                                            <tr>
+                                                <td>No.</td>
+                                                <td>Kode Bahan</td>
+                                                <td>Nama Bahan</td>
+                                                <td>Jumlah</td>
+                                                <td>Harga</td>
+                                                <td>Biaya</td>
+                                                <td>Aksi</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {getHTMLTableDaftarPenolong}
+                                        </tbody>
+                                    </table>
                                 </div>
-                            <div className={`${global.card} ${this.state.tabSelected === 2 ? '' : 'd-none'}`}>
-                                <div className='d-flex'>
-                                    <div className={`${global.input_group} col-4 pe-2`}>
-                                        <p className={global.title}>Kode BOP Alat </p>
-                                        <input type="text" id='input-kode-bop-alat' name='input-kode-bop-alat' />
-                                    </div>
-                                    <div className={`${global.input_group} col-4 pe-2`}>
-                                        <p className={global.title}>Kode Produksi </p>
-                                        <input type="text" id='input-kode-produksi' name='input-kode-produksi' />
-                                    </div>
-                                    <div className={`${global.input_group} col-4 pe-2`}>
-                                        <p className={global.title}>Tanggal </p>
-                                        <input type="date" id='input-tanggal-bop-alat' name='input-tanggal-bop-alat' />
-                                    </div>
-                                </div>
-                                <div className='d-flex'>
-                                    <div className={`${global.input_group} col-4 pe-2`}>
-                                        <p className={global.title}>Kode Alat</p>
-                                        <Select id='select-kode-bop-alat' name='select-kode-bop-alat' isClearable={true} isSearchable={true} options={[
-                                            { value: 'B0001', label: 'B0001' },
-                                            { value: 'B0002', label: 'B0002' }
-                                        ]} placeholder={'Select Kode...'} styles={CustomSelect} />
-                                    </div>
-                                    <div className={`${global.input_group} col-8 px-2`}>
-                                        <p className={global.title}>Nama Alat</p>
-                                        <Select id='select-nama-bop-alat' name='select-nama-bop-alat' isClearable={true} isSearchable={true} options={[
-                                            { value: 'Alat 1', label: 'Alat 1' },
-                                            { value: 'Alat 2', label: 'Alat 2' }
-                                        ]} placeholder={'Select Nama Alat...'} styles={CustomSelect} />
-                                    </div>
-                                </div>
-                                <div className={`d-flex`}>
-                                <div className={`${global.input_group} col-12 pe-2`}>
-                                        <p className={global.title}>Tarif</p>
-                                        <input type="text" id='input-tarif-bop-alat' name='input-tarif-bop-alat' />
-                                    </div>
-                                </div>
-                                <div className={`d-flex`}>
-                                    <div className={`${global.input_group} col-4 px-2`}>
-                                        <p className={global.title}>Pemakaian</p>
-                                        <input type="text" id='input-pemakaian-bop-alat' name='input-pemakian-bop-alat' />
-                                    </div>
-                                    <div className={`${global.input_group} col-4 pe-2`}>
-                                        <p className={global.title}>Biaya</p>
-                                        <input type="text" id='input-biaya-bop-alat' name='input-biaya-bop-alat' />
-                                    </div>
-                                    <div className={`${global.input_group} col-3 ms-auto ps-2`}>
-                                        <p className={global.title}>Aksi</p>
-                                        <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</button>
-                                    </div>
-                                </div>
-                                <div className={`table-responsive`}>
+                                <div className={`table-responsive ${+getSelectedTab !== 2 && 'd-none'}`}>
                                     <table id='table-data-bop-alat' className={`table w-100`}>
                                         <thead className='text-nowrap'>
                                             <tr>
@@ -292,74 +841,37 @@ export class add_hpp extends Component {
                                                 <td>Aksi</td>
                                             </tr>
                                         </thead>
-                                        <tbody></tbody>
+                                        <tbody>
+                                            {getHTMLTableDaftarAlat}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className={`table-responsive ${+getSelectedTab !== 3 && 'd-none'}`}>
+                                    <table id='table-data-biaya-tenaga-kerja' className={`table w-100`}>
+                                        <thead className='text-nowrap'>
+                                            <tr>
+                                                <td>No.</td>
+                                                <td>Kode Alat</td>
+                                                <td>Nama Alat</td>
+                                                <td>Tarif</td>
+                                                <td>Pemakaian</td>
+                                                <td>Biaya</td>
+                                                <td>Aksi</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {getHTMLTableDaftarTenagaKerja}
+                                        </tbody>
                                     </table>
                                 </div>
                                 <div className={`${global.input_group} col-12 ms-auto`}>
                                     <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Simpan</button>
                                 </div>
                             </div>
-                        <div className={`${global.card} ${this.state.tabSelected === 3 ? '' : 'd-none'}`}>
-                            <div className='d-flex'>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Kode Biaya Tenaga Kerja </p>
-                                            <input type="text" id='input-kode-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' />
-                                        </div>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Kode Produksi </p>
-                                            <input type="text" id='input-kode-produksi' name='input-kode-produksi' />
-                                        </div>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Tanggal </p>
-                                            <input type="date" id='input-tanggal-btk' name='input-tanggal-btk' />
-                                        </div>
-                                    </div>
-                            <div className='d-flex'>
-                                    <div className={`${global.input_group} col-4 pe-2`}>
-                                        <p className={global.title}>Kode Tenaga Kerja</p>
-                                        <input type="text" id='input-kode-tenaga-kerja' name='input-kode-tenaga-kerja' readOnly={true} />
-                                    </div>
-                                    <div className={`${global.input_group} col-8 px-2`}>
-                                        <p className={global.title}>Departemen</p>
-                                        <Select id='select-departemen' name='select-departemen' isClearable={true} isSearchable={true} options={[
-                                            { value: 'Desain', label: 'Desain' },
-                                            { value: 'Canting', label: 'Canting' },
-                                            { value: 'Warna', label: 'Warna' },
-                                            { value: 'Packing', label: 'Packing' }
-                                        ]} placeholder={'Select Departemen...'} styles={CustomSelect} />
-                                    </div>
-                                </div>
-                                <div className={`d-flex`}>
-                                    <div className={`${global.input_group} col-8 pe-2`}>
-                                        <p className={global.title}>Nama Tenaga Kerja</p>
-                                        <input type="text" id='input-nama-tenaga-kerja' name='input-nama-tenaga-kerja' />
-                                    </div>
-                                    <div className={`${global.input_group} col-4 px-2`}>
-                                        <p className={global.title}>Upah</p>
-                                        <input type="text" id='input-upah-tenaga-kerja' name='input-upah-tenaga-kerja' />
-                                    </div>
-                                </div>
-                                <div className={`d-flex`}>
-                                    <div className={`${global.input_group} col-4 pe-2`}>
-                                        <p className={global.title}>Jumlah Pengerjaan</p>
-                                        <input type="text" id='input-jumlah-pengerjaan' name='input-jumlah-pengerjaan' />
-                                    </div>
-                                    <div className={`${global.input_group} col-4 px-2`}>
-                                        <p className={global.title}>Biaya</p>
-                                        <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' />
-                                    </div>
-                                </div>
-                                <div className={`${global.input_group} col-12 ms-auto`}>
-                                    <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Simpan</button>
-                                </div>
-                            </div> 
                         </div>
                     </div>
                 </div>
             </div>
-            </>
-        )
-    }
+        </React.Fragment>
+    )
 }
-
-export default add_hpp

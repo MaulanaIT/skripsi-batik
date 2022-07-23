@@ -3,13 +3,13 @@
 require_once '../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
+    $kode = $_POST['kode'];
     $nama = $_POST['nama'];
     $departemen = $_POST['departemen'];
     $telepon = $_POST['telepon'];
     $upah = $_POST['upah'];
     
-    $query = "UPDATE master_tenagakerja SET nama='".$nama."', departemen='".$departemen."', telepon='".$telepon."', upah='".$upah."' WHERE id='".$id."'";
+    $query = "UPDATE master_tenagakerja SET nama='".$nama."', departemen='".$departemen."', telepon='".$telepon."', upah='".$upah."' WHERE kode='".$kode."'";
     
     $result = $conn->query($query);
 
