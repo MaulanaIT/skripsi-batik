@@ -1664,7 +1664,11 @@ export class transaksi_penjualan extends Component {
                                             <p className={global.title}>Kode TKL</p>
                                             <Select id='select-kode-btkl' name='select-kode-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeBTKL} placeholder={'Select Kode...'} value={valueKodeBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
                                         </div>
-                                        <div className={`${global.input_group} col-8 px-2`}>
+                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                            <p className={global.title}>Nama Tenaga Kerja</p>
+                                            <Select id='select-kode-btkl' name='select-kode-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeBTKL} placeholder={'Select Kode...'} value={valueKodeBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
+                                        </div>
+                                        <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Departemen</p>
                                             <Select id='select-bagian-btkl' name='select-bagian-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaBTKL} placeholder={'Select Bagian...'} value={valueNamaBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
                                         </div>
