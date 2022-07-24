@@ -23,8 +23,10 @@ export default function Permintaan_prod_pesanan() {
     const GetPesananProduk = () => {
         ShowLoading();
 
-        axios.get(`${baseURL}/api/transaksi/penjualan/estimasi-pesanan/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/transaksi/produksi/permintaan-pesanan/select.php`, config).then(response => {
             let data = response.data.data;
+
+            console.log(data);
 
             let htmlTableDaftarPesanan = [];
 
@@ -33,9 +35,9 @@ export default function Permintaan_prod_pesanan() {
                     htmlTableDaftarPesanan.push(
                         <tr key={index} className={'align-middle'}>
                             <td>{index + 1}.</td>
-                            <td>Kode</td>
                             <td>{item.kode}</td>
-                            <td>{item.nama}</td>
+                            <td>{item.kode_pesanan}</td>
+                            <td>{item.nama_pesanan}</td>
                             <td>{item.kode_customer}</td>
                             <td>{item.nama_customer}</td>
                             <td>{item.jumlah}</td>

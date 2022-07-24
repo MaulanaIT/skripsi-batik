@@ -5,7 +5,7 @@ require_once '../../../config/connection.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
 
-    $query = "UPDATE permintaan_produksi SET status=1 WHERE kode='".$kode."'";
+    $query = "UPDATE permintaan_stok SET status=1 WHERE kode='".$kode."'";
 
     $result = $conn->query($query);
 

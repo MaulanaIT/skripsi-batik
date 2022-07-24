@@ -151,7 +151,7 @@ export default function Permintaanprod() {
     const GetPermintaanProduksi = () => {
         ShowLoading();
 
-        axios.get(`${baseURL}/api/transaksi/produksi/permintaan-produksi/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/transaksi/produksi/permintaan-stok/select.php`, config).then(response => {
             let data = response.data.data;
 
             let htmlTableDaftarPermintaan = [];
@@ -183,7 +183,7 @@ export default function Permintaanprod() {
             setHTMLTableDaftarPermintaan(htmlTableDaftarPermintaan, () => {
                 $(`#table-data`).DataTable();
 
-                setValueKodePermintaan(GenerateCode('MBS', data));
+                setValueKodePermintaan(GenerateCode('PPS', data));
 
                 HideLoading();
             });
