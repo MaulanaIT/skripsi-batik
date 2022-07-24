@@ -223,6 +223,10 @@ export default function Jual_pesan() {
                             <input type="text" id='input-detail-total-jual' value={getValueTotalJual} className={`col-4`} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
+                            <p className={`${global.title} col-3`}>Harga Pokok Penjualan</p>
+                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={getValueTotalJual} readOnly={true} />
+                        </div>
+                        <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Diskon</p>
                             <input type="text" id='input-detail-diskon' value={getValueDiskon} className={'col-4'} readOnly={true} />
                         </div>

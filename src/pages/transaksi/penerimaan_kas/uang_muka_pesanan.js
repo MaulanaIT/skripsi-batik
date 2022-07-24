@@ -229,16 +229,20 @@ export default function Uang_muka_pesanan() {
                             </div>
                         </div>
                         <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-4 pe-2`}>
+                            <div className={`${global.input_group} col-3 pe-2`}>
                                 <p className={global.title}>Jumlah</p>
                                 <input type="text" id='input-jumlah-beli' value={getValueJumlah} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-4 px-2`}>
+                            <div className={`${global.input_group} col-3 px-2`}>
                                 <p className={global.title}>Harga</p>
                                 <input type="text" id='input-harga-beli' value={getValueHarga} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-4 ps-2`}>
+                            <div className={`${global.input_group} col-3 px-2`}>
                                 <p className={global.title}>Total Harga</p>
+                                <input type="text" id='input-total-harga-beli' value={getValueTotalHarga} readOnly={true} />
+                            </div>
+                            <div className={`${global.input_group} col-3 ps-2`}>
+                                <p className={global.title}>HPP</p>
                                 <input type="text" id='input-total-harga-beli' value={getValueTotalHarga} readOnly={true} />
                             </div>
                         </div>
@@ -270,6 +274,10 @@ export default function Uang_muka_pesanan() {
                         </div> */}
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Total Jual</p>
+                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={getValueTotalJual} readOnly={true} />
+                        </div>
+                        <div className={`align-items-center ${global.input_group_row}`}>
+                            <p className={`${global.title} col-3`}>Harga Pokok Penjualan</p>
                             <input type="text" id='input-detail-total-jual' className={`col-4`} value={getValueTotalJual} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>

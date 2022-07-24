@@ -1343,6 +1343,16 @@ export class transaksi_penjualan extends Component {
                                                     <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga)} readOnly={true} />
                                                 </div>
                                             </div>
+                                            <div className={`${bootstrap['d-flex']}`}>
+                                                <div className={`${global.input_group} col-4 pe-2`}>
+                                                    <p className={global.title}>Harga Pokok Penjualan</p>
+                                                    <input type="text" id='valueHarga' className='text-end' value={valueHarga} readOnly={true} />
+                                                </div>
+                                                <div className={`${global.input_group} col-4 px-2`}>
+                                                    <p className={global.title}>Total HPP</p>
+                                                    <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga)} readOnly={true} />
+                                                </div>
+                                            </div>
                                             <button type='button' className={global.button} onClick={this.AddDetail}><MdAdd /> Tambah</button>
                                         </React.Fragment>
                                         :
@@ -1457,7 +1467,17 @@ export class transaksi_penjualan extends Component {
                                                         <p className={global.title}>Total Harga</p>
                                                         <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga)} readOnly={true} />
                                                     </div>
-                                                </div>
+                                                        </div>
+                                                        <div className={`${bootstrap['d-flex']}`}>
+                                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                                            <p className={global.title}>Harga Pokok Penjualan</p>
+                                                            <input type="text" id='valueHarga' className='text-end' value={valueHarga} readOnly={true} />
+                                                        </div>
+                                                        <div className={`${global.input_group} col-4 px-2`}>
+                                                            <p className={global.title}>Total HPP</p>
+                                                            <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga)} readOnly={true} />
+                                                        </div>
+                                                    </div>
                                                 <button type='button' className={global.button} onClick={this.AddDetail}><MdAdd /> Tambah</button>
                                             </React.Fragment>
                                     }
@@ -1600,7 +1620,7 @@ export class transaksi_penjualan extends Component {
                                     </div>
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Harga</p>
+                                            <p className={global.title}>Tarif BOP</p>
                                             <input type="text" id='valueHargaAlat' value={valueHargaAlat} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
@@ -1621,7 +1641,7 @@ export class transaksi_penjualan extends Component {
                                                     <td>Kode Alat</td>
                                                     <td>Nama Alat</td>
                                                     <td>Jumlah</td>
-                                                    <td>Harga</td>
+                                                    <td>Tarif BOP</td>
                                                     <td>Biaya</td>
                                                     <td>Aksi</td>
                                                 </tr>
@@ -1641,17 +1661,17 @@ export class transaksi_penjualan extends Component {
                                 <div className={`${global.card} ${this.state.tabSelected === 3 ? '' : 'd-none'}`}>
                                     <div className='d-flex'>
                                         <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Kode BTKL</p>
+                                            <p className={global.title}>Kode TKL</p>
                                             <Select id='select-kode-btkl' name='select-kode-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeBTKL} placeholder={'Select Kode...'} value={valueKodeBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
                                         </div>
                                         <div className={`${global.input_group} col-8 px-2`}>
-                                            <p className={global.title}>Bagian</p>
+                                            <p className={global.title}>Departemen</p>
                                             <Select id='select-bagian-btkl' name='select-bagian-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaBTKL} placeholder={'Select Bagian...'} value={valueNamaBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Harga</p>
+                                            <p className={global.title}>Upah</p>
                                             <input type="text" id='valueHargaBTKL' value={valueHargaBTKL} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
@@ -1669,11 +1689,11 @@ export class transaksi_penjualan extends Component {
                                                 <tr>
                                                     <td>No.</td>
                                                     <td>Kode</td>
-                                                    <td>Kode BTKL</td>
-                                                    <td>Nama BTKL</td>
-                                                    <td>Bagian</td>
+                                                    <td>Kode TKL</td>
+                                                    <td>Nama Tenaga Kerja</td>
+                                                    <td>Departemen</td>
                                                     <td>Jumlah</td>
-                                                    <td>Tarif</td>
+                                                    <td>Upah</td>
                                                     <td>Biaya</td>
                                                     <td>Aksi</td>
                                                 </tr>
@@ -1714,6 +1734,8 @@ export class transaksi_penjualan extends Component {
                                                             <td>Jumlah Jual</td>
                                                             <td>Harga Jual</td>
                                                             <td>Total Harga</td>
+                                                            <td>Harga Pokok Penjualan</td>
+                                                            <td>Total HPP</td>
                                                             <td>Aksi</td>
                                                         </tr>
                                                     </thead>
@@ -1725,6 +1747,10 @@ export class transaksi_penjualan extends Component {
                                             <div className={`d-flex flex-column gap-2 pb-2`}>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Total Jual</p>
+                                                    <input type="text" id='valueTotalJual' className={'col-4'} value={valueTotalJual} readOnly={true} />
+                                                </div>
+                                                <div className={`align-items-center ${global.input_group_row}`}>
+                                                    <p className={`${global.title} col-3`}>Total Harga Pokok Penjualan</p>
                                                     <input type="text" id='valueTotalJual' className={'col-4'} value={valueTotalJual} readOnly={true} />
                                                 </div>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
@@ -1766,6 +1792,8 @@ export class transaksi_penjualan extends Component {
                                                             <td>Jumlah Jual</td>
                                                             <td>Harga Jual</td>
                                                             <td>Total Harga</td>
+                                                            <td>Harga Pokok Penjualan</td>
+                                                            <td>Total HPP</td>
                                                             <td>Aksi</td>
                                                         </tr>
                                                     </thead>
@@ -1777,6 +1805,10 @@ export class transaksi_penjualan extends Component {
                                             <div className={`d-flex flex-column gap-2 pb-2`}>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Total Jual</p>
+                                                    <input type="text" id='valueTotalJual' className={'col-6'} value={valueTotalJual} readOnly={true} />
+                                                </div>
+                                                <div className={`align-items-center ${global.input_group_row}`}>
+                                                    <p className={`${global.title} col-3`}>Total Harga Pokok Penjualan</p>
                                                     <input type="text" id='valueTotalJual' className={'col-6'} value={valueTotalJual} readOnly={true} />
                                                 </div>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
