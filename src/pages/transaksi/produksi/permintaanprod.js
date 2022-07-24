@@ -74,7 +74,7 @@ export default function Permintaanprod() {
 
         formData.append('kode', kode);
 
-        axios.post(`${baseURL}/api/transaksi/produksi/permintaan-produksi/update.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/transaksi/produksi/permintaan-stok/update.php`, formData, config).then(() => {
             HideLoading();
 
             $(`#table-data`).DataTable().destroy();
@@ -96,7 +96,7 @@ export default function Permintaanprod() {
 
         formData.append('kode', kode);
 
-        axios.post(`${baseURL}/api/transaksi/produksi/permintaan-produksi/delete.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/transaksi/produksi/permintaan-stok/delete.php`, formData, config).then(() => {
             HideLoading();
 
             $(`#table-data`).DataTable().destroy();
@@ -205,7 +205,7 @@ export default function Permintaanprod() {
         formData.append('kode_produk', getValueKodeProduk.value);
         formData.append('jumlah', getValueJumlah);
 
-        axios.post(`${baseURL}/api/transaksi/produksi/permintaan-produksi/insert.php`, formData, config).then(response => {
+        axios.post(`${baseURL}/api/transaksi/produksi/permintaan-stok/insert.php`, formData, config).then(response => {
             HideLoading();
 
             setValueKodeProduk([]);

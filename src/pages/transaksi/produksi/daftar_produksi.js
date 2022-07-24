@@ -5,6 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
+import { FaCheck } from 'react-icons/fa';
 import { baseURL, config, cx, HideLoading, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
@@ -16,8 +17,6 @@ export default function Daftar_produksi() {
 
     const [getHTMLTableDaftarPesanan, setHTMLTableDaftarPesanan] = useStateWithCallbackLazy([]);
     const [getHTMLTableDaftarStok, setHTMLTableDaftarStok] = useStateWithCallbackLazy([]);
-
-    const [getValueJenisProduksi, setValueJenisProduksi] = useState(null);
 
     const [getSelectedTab, setSelectedTab] = useState(0);
 
@@ -39,6 +38,8 @@ export default function Daftar_produksi() {
             axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/select.php`, formData, config).then(response => {
                 let data = response.data.data;
 
+                console.log(data);
+
                 if (data && data.length > 0 && jenis === 'stok') {
                     data.forEach((item, index) => {
                         htmlTableDaftarStok.push(
@@ -49,11 +50,19 @@ export default function Daftar_produksi() {
                                 <td>{item.nama_produk}</td>
                                 <td>{item.jumlah}</td>
                                 <td>{item.lama}</td>
-                                <td>{+item.status === 0 ? 'Proses' : 'Selesai'}</td>
-                                <td className={cx([global.table_action, 'text-nowrap'])}>
-                                    <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} disabled={+item.status === 1 && true} onClick={() => UpdateStatus(jenis, item.kode)}>Selesai</button>
-                                </td>
-                            </tr>
+                                <td>{+item.status === 0 ? 'Menunggu' : +item.status === 1 ? 'Proses' : 'Selesai'}</td>
+                                {+item.status === 0 && <td>Menunggu</td>}
+                                {+item.status === 1 &&
+                                    <td className={cx([global.table_action, 'text-nowrap'])}>
+                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateStatus(jenis, item)}>Selesai</button>
+                                    </td>
+                                }
+                                {+item.status === 2 &&
+                                    <td>
+                                        <FaCheck />
+                                    </td>
+                                }
+                            </tr >
                         );
                     });
 
@@ -74,10 +83,16 @@ export default function Daftar_produksi() {
                                 <td>{item.nama_customer}</td>
                                 <td>{item.jumlah}</td>
                                 <td>{item.lama}</td>
-                                <td>{+item.status === 0 ? 'Proses' : 'Selesai'}</td>
-                                <td className={cx([global.table_action, 'text-nowrap'])}>
-                                    <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} disabled={+item.status === 1 && true} onClick={() => UpdateStatus(jenis, item.kode)}>Selesai</button>
-                                </td>
+                                <td>{+item.status === 0 ? 'Menunggu' : +item.status === 1 ? 'Proses' : 'Selesai'}</td>
+                                {+item.status === 0 ?
+                                    <td className={cx([global.table_action, 'text-nowrap'])}>
+                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateStatus(jenis, item)}>Selesai</button>
+                                    </td>
+                                    :
+                                    <td>
+                                        <FaCheck />
+                                    </td>
+                                }
                             </tr>
                         );
                     });
@@ -98,12 +113,17 @@ export default function Daftar_produksi() {
         });
     }
 
-    const UpdateStatus = (jenis, kode) => {
+    const UpdateStatus = (jenis, data) => {
         ShowLoading();
 
         const formData = new FormData();
 
-        formData.append('kode', kode);
+        formData.append('kode', data.kode);
+        formData.append('kode_produk', data.kode_produk);
+        formData.append('jumlah', data.jumlah);
+        formData.append('hpp_per_produk', data.hpp_per_produk);
+        formData.append('harga_jual', data.harga_jual);
+        formData.append('status', 2);
         formData.append('jenis_produksi', jenis);
 
         axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/update.php`, formData, config).then(response => {

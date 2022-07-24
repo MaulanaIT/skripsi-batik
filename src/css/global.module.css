@@ -270,14 +270,14 @@ textarea:read-only {
     filter: brightness(80%);
 }
 
-.table_action>.apply {
+.apply {
     background-color: #20da3f;
 }
 
-.table_action>.edit {
+.edit {
     background-color: goldenrod;
 }
 
-.table_action>.delete {
+.delete {
     background-color: red;
 }

@@ -10,9 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $biaya_bahan_baku = $_POST['biaya_bahan_baku'];
     $biaya_tenaga_kerja = $_POST['biaya_tenaga_kerja'];
     $biaya_overhead_pabrik = $_POST['biaya_overhead_pabrik'];
+    $jumlah = $_POST['jumlah'];
     $hpp = $_POST['hpp'];
 
-    $query = "INSERT INTO hpp(kode, kode_produksi, tanggal_mulai, tanggal_selesai, biaya_bahan_baku, biaya_tenaga_kerja, biaya_overhead_pabrik, hpp) VALUES('" . $kode . "', '" . $kode_produksi . "', '" . $tanggal_mulai . "', '" . $tanggal_selesai . "', '" . $biaya_bahan_baku . "', '" . $biaya_tenaga_kerja . "', '" . $biaya_overhead_pabrik . "', '" . $hpp . "')";
+    $query = "INSERT INTO hpp(kode, kode_produksi, tanggal_mulai, tanggal_selesai, biaya_bahan_baku, biaya_tenaga_kerja, biaya_overhead_pabrik, jumlah, hpp) VALUES('" . $kode . "', '" . $kode_produksi . "', '" . $tanggal_mulai . "', '" . $tanggal_selesai . "', '" . $biaya_bahan_baku . "', '" . $biaya_tenaga_kerja . "', '" . $biaya_overhead_pabrik . "', '" . $jumlah . "', '" . $hpp . "')";
 
     $result = $conn->query($query);
 

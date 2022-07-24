@@ -120,7 +120,7 @@ export default function Produksi() {
     const GetPermintaanProduksi = () => {
         ShowLoading();
 
-        axios.get(`${baseURL}/api/transaksi/produksi/permintaan-produksi/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/transaksi/produksi/permintaan-stok/select.php`, config).then(response => {
             let data = response.data.data;
 
             let dataSelectKodePermintaan = [];
@@ -222,7 +222,7 @@ export default function Produksi() {
         }
 
         axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/insert.php`, formData, config).then(() => {
-            window.location.reload();
+            window.location.href = '/transaksi/produksi/daftar-produksi';
         }).catch(error => {
             console.log(error);
 

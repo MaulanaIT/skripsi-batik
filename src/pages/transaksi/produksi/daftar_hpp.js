@@ -5,7 +5,8 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { FaCheck, FaPen } from 'react-icons/fa';
+import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 // Import CSS
@@ -19,6 +20,35 @@ export default function Daftar_hpp() {
     useEffect(() => {
         GetHPP();
     }, []);
+
+    const ApplyHPP = (kode) => {
+        if (!CheckInputValidity('form-table')) return;
+
+        ShowLoading();
+
+        let hargaJual = GetValue(`edit-harga-jual-${kode}`);
+
+        const formData = new FormData();
+
+        formData.append('kode', kode);
+        formData.append('harga_jual', hargaJual);
+
+        axios.post(`${baseURL}/api/transaksi/produksi/hpp/update.php`, formData, config).then(() => {
+            document.querySelectorAll(`.data-${kode}`).forEach(item => item.classList.remove('d-none'));
+            document.querySelectorAll(`.edit-${kode}`).forEach(item => item.classList.add('d-none'));
+
+            GetHPP();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
+    const EditHPP = (kode) => {
+        document.querySelectorAll(`.data-${kode}`).forEach(item => item.classList.add('d-none'));
+        document.querySelectorAll(`.edit-${kode}`).forEach(item => item.classList.remove('d-none'));
+    }
 
     const GetHPP = () => {
         ShowLoading();
@@ -41,8 +71,17 @@ export default function Daftar_hpp() {
                             <td>{item.biaya_tenaga_kerja}</td>
                             <td>{item.biaya_overhead_pabrik}</td>
                             <td>{item.hpp}</td>
-                            <td>{item.harga_jual}</td>
-                            <td></td>
+                            <td>{item.jumlah}</td>
+                            <td>
+                                <div id={`data-harga-jual-${item.kode}`} className={`data-${item.kode}`}>{item.harga_jual}</div>
+                                <div className={global.input_group_row}>
+                                    <input type="text" id={`edit-harga-jual-${item.kode}`} className={`edit-${item.kode} d-none`} defaultValue={item.harga_jual} onInput={InputFormatNumber} required={true} />
+                                </div>
+                            </td>
+                            <td className={global.table_action}>
+                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.kode}`])} onClick={() => ApplyHPP(item.kode)}><FaCheck /> Apply</button>
+                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.kode}`])} onClick={() => EditHPP(item.kode)}><FaPen /> Edit</button>
+                            </td>
                         </tr>
                     );
                 });
@@ -74,7 +113,7 @@ export default function Daftar_hpp() {
                         <p className={global.title}>Daftar Proses Produksi</p>
                         <Link to={'/transaksi/produksi/hpp'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
                     </div>
-                    <div className={`table-responsive`}>
+                    <form id='form-table' className={`table-responsive`}>
                         <table id='table-data' className={`table w-100`}>
                             <thead className='text-nowrap'>
                                 <tr>
@@ -87,6 +126,7 @@ export default function Daftar_hpp() {
                                     <td>Biaya Tenaga Kerja</td>
                                     <td>Biaya Overhead Pabrik</td>
                                     <td>HPP</td>
+                                    <td>Jumlah</td>
                                     <td>Harga Jual</td>
                                     <td>Aksi</td>
                                 </tr>
@@ -95,7 +135,7 @@ export default function Daftar_hpp() {
                                 {getHTMLTableDaftarHPP}
                             </tbody>
                         </table>
-                    </div>
+                    </form>
                 </div>
             </div>
         </React.Fragment>

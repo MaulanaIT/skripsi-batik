@@ -584,8 +584,6 @@ const Add_hpp = (props, ref) => {
         formData.append('data', JSON.stringify(getDataDetailAlat));
 
         axios.post(`${baseURL}/api/transaksi/produksi/detail-alat/insert.php`, formData, config).then(response => {
-            console.log(response);
-
             HideLoading();
         }).catch(error => {
             console.log(error);
@@ -609,8 +607,6 @@ const Add_hpp = (props, ref) => {
         formData.append('data', JSON.stringify(getDataDetailBahanBaku));
 
         axios.post(`${baseURL}/api/transaksi/produksi/detail-bahan-baku/insert.php`, formData, config).then(response => {
-            console.log(response);
-
             HideLoading();
         }).catch(error => {
             console.log(error);
@@ -634,8 +630,6 @@ const Add_hpp = (props, ref) => {
         formData.append('data', JSON.stringify(getDataDetailPenolong));
 
         axios.post(`${baseURL}/api/transaksi/produksi/detail-penolong/insert.php`, formData, config).then(response => {
-            console.log(response);
-
             HideLoading();
         }).catch(error => {
             console.log(error);
@@ -659,8 +653,6 @@ const Add_hpp = (props, ref) => {
         formData.append('data', JSON.stringify(getDataDetailTenagaKerja));
 
         axios.post(`${baseURL}/api/transaksi/produksi/detail-tenaga-kerja/insert.php`, formData, config).then(response => {
-            console.log(response);
-
             HideLoading();
         }).catch(error => {
             console.log(error);

@@ -89,7 +89,7 @@ export default function Hpp() {
     }, []);
 
     useEffect(() => {
-        if (getDataHPP && getDataHPP.length > 0) GetPerencanaanProduksi();
+        GetPerencanaanProduksi();
     }, [getDataHPP]);
 
     const GetHPP = async () => {
@@ -123,6 +123,8 @@ export default function Hpp() {
 
             axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/select.php`, formData, config).then(response => {
                 let data = response.data.data;
+
+                console.log(data);
 
                 if (data && data.length > 0 && jenis === 'stok') {
                     for (let item of data) {
@@ -177,6 +179,7 @@ export default function Hpp() {
         formData.append('biaya_bahan_baku', getValueBiayaBahanBaku);
         formData.append('biaya_tenaga_kerja', getValueBiayaTenagaKerja);
         formData.append('biaya_overhead_pabrik', getValueBiayaOverheadPabrik);
+        formData.append('jumlah', getValueJumlah);
         formData.append('hpp', getValueHPP);
 
         await axios.post(`${baseURL}/api/transaksi/produksi/hpp/insert.php`, formData, config).then(async response => {
@@ -185,7 +188,21 @@ export default function Hpp() {
             await addReff.current?.InsertDetailPenolong();
             await addReff.current?.InsertDetailTenagaKerja();
 
-            window.location.href = '/transaksi/produksi/daftar-hpp';
+            const formData = new FormData();
+
+            formData.append('kode', getValueKodeProduksi.value);
+            formData.append('status', 1);
+            formData.append('jenis_produksi', getValueKodeProduksi?.value?.includes('PS') ? 'stok' : getValueKodeProduksi?.value?.includes('PP') && 'pesanan');
+
+            axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/update.php`, formData, config).then(() => {
+                window.location.href = '/transaksi/produksi/daftar-hpp';
+            }).catch(error => {
+                console.log(error);
+
+                alert(error);
+
+                HideLoading();
+            })
         }).catch(error => {
             console.log(error);
 
