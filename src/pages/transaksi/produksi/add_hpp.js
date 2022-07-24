@@ -750,10 +750,6 @@ const Add_hpp = (props, ref) => {
                                                 <p className={global.title}>Kode Produksi</p>
                                                 <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} readOnly={true} />
                                             </div>
-                                            <div className={`${global.input_group} col-8 ps-2`}>
-                                                <p className={global.title}>Kode Permintaan Bahan</p>
-                                                <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' value={props?.kodePermintaan ?? ''} readOnly={true} />
-                                            </div>
                                         </div>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-8 pe-2`}>
@@ -797,10 +793,6 @@ const Add_hpp = (props, ref) => {
                                             <div className={`${global.input_group} col-4 pe-2`}>
                                                 <p className={global.title}>Kode Produksi </p>
                                                 <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} readOnly={true} />
-                                            </div>
-                                            <div className={`${global.input_group} col-8 ps-2`}>
-                                                <p className={global.title}>Kode Permintaan Bahan</p>
-                                                <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' value={props?.kodePermintaan ?? ''} readOnly={true} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
