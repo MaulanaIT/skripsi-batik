@@ -137,7 +137,10 @@ export class supplier extends Component {
     }
 
     InsertSupplier = () => {
-        if (!CheckInputValidity('form-data')) return;
+        if (!CheckInputValidity('form-data')) {
+            alert('Isi data dengan benar');
+            return;
+        }
 
         ShowLoading();
 
@@ -171,23 +174,23 @@ export class supplier extends Component {
                     <form id='form-data' className={global.card}>
                         <p className={global.title}>Tambah Supplier</p>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>Kode Supplier</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>Kode Supplier <span className={global.important}>*</span></p>
                             <input type="text" className="col col-lg-2 col-md-3" id='input-kode-supplier' name='input-kode-supplier' value={GenerateCode('SUP', this.state.dataSupplier)} maxLength={10} readOnly={true} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>Nama Supplier</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>Nama Supplier <span className={global.important}>*</span></p>
                             <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-supplier' name='input-nama-supplier' maxLength={50} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>Alamat</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>Alamat <span className={global.important}>*</span></p>
                             <input type="text" className="col12 col-md-8 col-lg-6" id='input-alamat-supplier' name='input-alamat-supplier' maxLength={100} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>No. Telp</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>No. Telp <span className={global.important}>*</span></p>
                             <input type="text" className="col col-lg-3 col-md-6" id='input-telepon-supplier' name='input-telp-supplier' maxLength={13} onInput={InputFormatNumber} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>No. Rek. Bank</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3`}>No. Rek. Bank <span className={global.important}>*</span></p>
                             <input type="text" className="col col-lg-3 col-md-6" id='input-rekening-supplier' name='input-rekening-supplier' maxLength={30} required={true} />
                         </div>
                         <button type='button' className={global.button} onClick={this.InsertSupplier}><MdAdd /> Simpan</button>

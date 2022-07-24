@@ -86,7 +86,10 @@ export default function Produk() {
     }
 
     const InsertProduk = () => {
-        if (!CheckInputValidity('form-data')) return;
+        if (!CheckInputValidity('form-data')) {
+            alert('Isi data dengan benar');
+            return;
+        }
 
         ShowLoading();
 
@@ -126,15 +129,15 @@ export default function Produk() {
                     </div>
                     <p className={global.title}>Tambah Produk</p>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Produk</p>
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Produk <span className={global.important}>*</span></p>
                         <input type="text" className="col col-lg-2 col-md-3" value={getValueKodeProduk} maxLength={10} readOnly={true} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Produk</p>
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Produk <span className={global.important}>*</span></p>
                         <input type="text" className="col-12 col-md-8 col-lg-6" value={getValueNamaProduk} maxLength={50} onChange={e => setValueNamaProduk(e.target.value)} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jenis Produk</p>
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jenis Produk <span className={global.important}>*</span></p>
                         <Select id='select-jenis-produk' name='select-jenis-produk' value={getSelectedJenisProduk} isClearable={true} isSearchable={true} options={[
                             { value: 'Cap', label: 'Cap' },
                             { value: 'Tulis', label: 'Tulis' },
@@ -142,26 +145,26 @@ export default function Produk() {
                         ]} placeholder={'Pilih Jenis Produk...'} styles={CustomSelect} onChange={e => setSelectedJenisProduk(e)} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jenis Warna</p>
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jenis Warna <span className={global.important}>*</span></p>
                         <Select id='select-warna-produk' name='select-warna-produk' value={getSelectedWarnaProduk} isClearable={true} isSearchable={true} options={[
                             { value: 'Alami', label: 'Alami' },
                             { value: 'Sintetis', label: 'Sintetis' }
                         ]} placeholder={'Pilih Jenis Warna...'} styles={CustomSelect} onChange={e => setSelectedWarnaProduk(e)} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jumlah</p>
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jumlah <span className={global.important}>*</span></p>
                         <input type="text" className="col col-lg-2 col-md-3" value={getValueJumlahProduk} onInput={InputFormatNumber} onChange={e => setValueJumlahProduk(e.target.value)} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Stok Minimal</p>
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Stok Minimal <span className={global.important}>*</span></p>
                         <input type="text" className="col col-lg-2 col-md-3" value={getValueStokMinimalProduk} onInput={InputFormatNumber} onChange={e => setValueStokMinimalProduk(e.target.value)} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>HPP</p>
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>HPP <span className={global.important}>*</span></p>
                         <input type="text" className="col col-lg-2 col-md-3" value={getValueHppProduk} onInput={InputFormatNumber} onChange={e => setValueHppProduk(e.target.value)} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Harga Jual</p>
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Harga Jual <span className={global.important}>*</span></p>
                         <input type="text" className="col col-lg-2 col-md-3" value={getValueHargaJualProduk} onInput={InputFormatNumber} onChange={e => setValueHargaJualProduk(e.target.value)} required={true} />
                     </div>
                     <button type='button' className={global.button} onClick={   InsertProduk}><MdAdd /> Simpan</button>

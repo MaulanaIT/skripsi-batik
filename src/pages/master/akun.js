@@ -63,7 +63,7 @@ export class akun extends Component {
     }
 
     InsertAkun = () => {
-        if (!CheckInputValidity('form-data') || !this.state.valueJenisAkun.length > 0) {
+        if (!CheckInputValidity('form-data') || !this.state.valueJenisAkun === null) {
             alert('Isi data dengan benar');
             return;
         }
