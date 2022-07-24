@@ -4,10 +4,8 @@ require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
-    $kode_produk = $_POST['kode_produk'];
-    $jumlah = $_POST['jumlah'];
 
-    $query = "INSERT INTO permintaan_produksi(kode, kode_produk, jumlah, status) VALUES('" . $kode . "', '" . $kode_produk . "', '" . $jumlah . "', 0)";
+    $query = "UPDATE permintaan_stok SET status=1 WHERE kode='".$kode."'";
 
     $result = $conn->query($query);
 

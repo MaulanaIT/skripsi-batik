@@ -567,7 +567,7 @@ export class order_pembelian extends Component {
                                                 </div>
                                                 <div className={`${global.input_group} col-7 pe-2`}>
                                                     <p className={global.title}>Nama Alat</p>
-                                                    <Select id='select-nama-alat' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeAlat} placeholder={'Select Nama...'} styles={CustomSelect} value={valueNamaAlat} onChange={(data) => this.SelectAlat(data)} />
+                                                    <Select id='select-nama-alat' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaAlat} placeholder={'Select Nama...'} styles={CustomSelect} value={valueNamaAlat} onChange={(data) => this.SelectAlat(data)} />
                                                 </div>
                                             </div>
                                             <div className={`d-flex`}>

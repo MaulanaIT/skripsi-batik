@@ -1,24 +1,20 @@
 <?php
 
-require_once '../../config/connection.php';
+require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
-    $nama = $_POST['nama'];
-    $departemen = $_POST['departemen'];
-    $telepon = $_POST['telepon'];
-    $upah = $_POST['upah'];
-    
-    $query = "UPDATE master_tenagakerja SET nama='".$nama."', departemen='".$departemen."', telepon='".$telepon."', upah='".$upah."' WHERE kode='".$kode."'";
-    
+
+    $query = "UPDATE permintaan_pesanan SET status=1 WHERE kode='".$kode."'";
+
     $result = $conn->query($query);
 
     $response = [];
-    
+
     if ($result) {
         $response['status'] = 200;
         $response['data'] = [];
-    
+
         if ($result) {
             $response['data'] = $result;
         } else {
@@ -27,12 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $response = mysqli_error($conn);
     }
-    
+
     $response = json_encode($response);
-    
+
     if ($token) print $response;
 }
 
 $conn->close();
-
-?>

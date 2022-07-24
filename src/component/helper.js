@@ -59,6 +59,10 @@ const CheckInputValidity = (form) => {
     return result;
 }
 
+const ClosePopupResonse = () => {
+    document.getElementById('popup-response').classList.add('d-none');
+}
+
 const cx = (classname = []) => {
     return classname.join(' ');
 }
@@ -93,4 +97,8 @@ const ShowLoading = () => {
     document.getElementById('loading').classList.remove('d-none');
 }
 
-export { baseURL, Calculate, CheckInputValidity, config, cx, GenerateCode, GetValue, HideLoading, InputFormatNumber, ResetForm, SetValue, ShowLoading };
+const ShowPopupResonse = () => {
+    document.getElementById('popup-response').classList.remove('d-none');
+}
+
+export { baseURL, Calculate, ClosePopupResonse, CheckInputValidity, config, cx, GenerateCode, GetValue, HideLoading, InputFormatNumber, ResetForm, SetValue, ShowLoading, ShowPopupResonse };

@@ -65,6 +65,8 @@ import KartuAlat from './pages/laporan/produksi/kartu_alat';
 import KartuPersediaanBahanBaku from './pages/laporan/produksi/kartu_persediaan_bb';
 import KartuPersediaanBahanPenolong from './pages/laporan/produksi/kartu_persediaan_bp';
 
+import PopupResponse from './component/popup_response';
+
 // Import CSS
 import 'bootstrap/dist/css/bootstrap.css'
 import 'datatables.net-bs5/css/dataTables.bootstrap5.css';
@@ -106,6 +108,7 @@ export default function App() {
     return (
         <React.Fragment>
             <Loading />
+            <PopupResponse />
             {location.pathname === '/' || location.pathname === '/login' ?
                 <Routes>
                     <Route path={'/login'} element={<Login />} />

@@ -3,9 +3,9 @@
 require_once '../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
+    $kode = $_POST['kode'];
     
-    $query = "DELETE FROM master_tenaga_kerja WHERE id='".$id."'";
+    $query = "DELETE FROM master_tenaga_kerja WHERE kode='".$kode."'";
     
     $result = $conn->query($query);
 

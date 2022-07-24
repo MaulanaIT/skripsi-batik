@@ -202,11 +202,12 @@ textarea:read-only {
 .tab_card {
     align-items: center;
     display: flex;
+    gap: 6px;
 }
 
 .tab_card>.item {
     align-items: center;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: #966948aa;
     border-radius: 4px;
     cursor: pointer;
     display: flex;
@@ -215,11 +216,12 @@ textarea:read-only {
 }
 
 .tab_card>.item:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #966948;
 }
 
 .tab_card>.item.active {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #623e2d;
+    border: 1px solid #966948;
 }
 
 .tab_card>.item>.name {
@@ -268,14 +270,14 @@ textarea:read-only {
     filter: brightness(80%);
 }
 
-.table_action>.apply {
+.apply {
     background-color: #20da3f;
 }
 
-.table_action>.edit {
+.edit {
     background-color: goldenrod;
 }
 
-.table_action>.delete {
+.delete {
     background-color: red;
 }

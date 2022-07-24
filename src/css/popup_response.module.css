@@ -1,0 +1,27 @@
+.popup {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    position: fixed;
+    width: 100vw;
+    z-index: 10;
+}
+
+.popup>.container {
+    align-items: center;
+    background-color: #623e2d;
+    border: 2px solid #966948;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px;
+}
+
+.popup>.container>.response {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}

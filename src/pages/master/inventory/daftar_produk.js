@@ -34,7 +34,7 @@ export default function Daftar_produk() {
         let warna = GetValue(`edit-warna-${id}`);
         let jumlah = GetValue(`edit-jumlah-${id}`);
         let stok_minimal = GetValue(`edit-stok-minimal-${id}`);
-        let hpp = GetValue(`edit-hpp-${id}`);
+        let hpp_per_produk = GetValue(`edit-hpp-per-produk-${id}`);
         let harga_jual = GetValue(`edit-harga-jual-${id}`);
 
         const formData = new FormData();
@@ -45,7 +45,7 @@ export default function Daftar_produk() {
         formData.append('warna', warna);
         formData.append('jumlah', jumlah);
         formData.append('stok_minimal', stok_minimal);
-        formData.append('hpp', hpp);
+        formData.append('hpp_per_produk', hpp_per_produk);
         formData.append('harga_jual', harga_jual);
 
         axios.post(`${baseURL}/api/master/inventory/produk/update.php`, formData, config).then(() => {
@@ -132,9 +132,9 @@ export default function Daftar_produk() {
                                 </div>
                             </td>
                             <td>
-                                <div id={`data-hpp-${item.id}`} className={`data-${item.id} text-end`}>{item.hpp}</div>
+                                <div id={`data-hpp-per-produk-${item.id}`} className={`data-${item.id} text-end`}>{item.hpp_per_produk}</div>
                                 <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-hpp-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.hpp} required={true} />
+                                    <input type="text" id={`edit-hpp-per-produk-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.hpp_per_produk} required={true} />
                                 </div>
                             </td>
                             <td>
@@ -191,7 +191,7 @@ export default function Daftar_produk() {
                                         <th>Jenis Warna</th>
                                         <th>Jumlah</th>
                                         <th>Stok Minimal</th>
-                                        <th>Harga Pokok Produk</th>
+                                        <th>HPP Per Produk</th>
                                         <th>Harga Jual</th>
                                         <th>Aksi</th>
                                     </tr>

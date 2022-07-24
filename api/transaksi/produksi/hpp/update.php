@@ -4,8 +4,9 @@ require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
+    $harga_jual = $_POST['harga_jual'];
 
-    $query = "UPDATE permintaan_produksi SET status=1 WHERE kode='".$kode."'";
+    $query = "UPDATE hpp SET harga_jual='".$harga_jual."' WHERE kode='".$kode."'";
 
     $result = $conn->query($query);
 
