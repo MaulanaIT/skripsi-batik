@@ -171,7 +171,7 @@ export class user extends Component {
     }
 
     InsertUser = () => {
-        if (!CheckInputValidity('form-data') || !this.state.valueJabatan.value) {
+        if (!CheckInputValidity('form-data') || !this.state.valueJabatan === null) {
             alert('Isi data dengan benar');
             return;
         }

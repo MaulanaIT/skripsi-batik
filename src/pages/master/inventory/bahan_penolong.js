@@ -27,7 +27,10 @@ export class bahan_penolong extends Component {
     }
 
     InsertBahanPenolong = () => {
-        if (!CheckInputValidity('form-data')) return;
+        if (!CheckInputValidity('form-data')) {
+            alert('Isi data dengan benar');
+            return;
+        }
 
         ShowLoading();
 
@@ -62,23 +65,23 @@ export class bahan_penolong extends Component {
                             <Link to={'/master/inventory/daftar-bahan-penolong'} className={`${global.button}`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Kembali</Link>
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Bahan Penolong</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Bahan Penolong <span className={global.important}>*</span></p>
                             <input type="text" className="col col-lg-2 col-md-3" id='input-kode-bahan-penolong' name='input-kode-bahan-penolong' value={GenerateCode('BP', this.state.dataBahanPenolong)} maxLength={10} readOnly={true} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Bahan Penolong</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Bahan Penolong <span className={global.important}>*</span></p>
                             <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-bahan-penolong' name='input-nama-bahan-penolong' maxLength={50} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Satuan</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Satuan <span className={global.important}>*</span></p>
                             <input type="text" className="col col-lg-1 col-md-2" id='input-satuan-bahan-penolong' name='input-satuan-bahan-penolong' maxLength={20} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jumlah</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jumlah <span className={global.important}>*</span></p>
                             <input type="text" className="col col-lg-1 col-md-2" id='input-jumlah-bahan-penolong' name='input-jumlah-bahan-penolong' onInput={InputFormatNumber} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Harga</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Harga <span className={global.important}>*</span></p>
                             <input type="text" className="col col-lg-2 col-md-2" id='input-harga-bahan-penolong' name='input-harga-bahan-penolong' onInput={InputFormatNumber} required={true} />
                         </div>
                         <button type='button' className={global.button} onClick={this.InsertBahanPenolong}><MdAdd /> Simpan</button>

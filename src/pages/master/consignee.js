@@ -60,7 +60,10 @@ export class consignee extends Component {
     }
 
     InsertConsignee = () => {
-        if (!CheckInputValidity('form-data')) return;
+        if (!CheckInputValidity('form-data')) {
+            alert('Isi data dengan benar');
+            return;
+        }
 
         ShowLoading();
 
@@ -93,19 +96,19 @@ export class consignee extends Component {
                     <form id='form-data' className={global.card}>
                         <p className={global.title}>Tambah Consignee</p>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Consignee</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Consignee <span className={global.important}>*</span></p>
                             <input type="text" className="col col-lg-2 col-md-3" id='input-kode-consignee' name='input-kode-consignee' value={GenerateCode('CONS', this.state.dataConsignee)} maxLength={10} readOnly={true} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Consignee</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Consignee <span className={global.important}>*</span></p>
                             <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-consignee' name='input-nama-consignee' maxLength={50} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Alamat</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Alamat <span className={global.important}>*</span></p>
                             <input type="text" className="col12 col-md-8 col-lg-6" id='input-alamat-consignee' name='input-alamat-consignee' maxLength={100} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>No. Telp</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>No. Telp <span className={global.important}>*</span></p>
                             <input type="text" className="col col-lg-3 col-md-6" id='input-telepon-consignee' name='input-telepon-consignee' maxLength={13} onInput={InputFormatNumber} required={true} />
                         </div>
                         <button type='button' className={global.button} onClick={this.InsertConsignee}><MdAdd /> Simpan</button>
