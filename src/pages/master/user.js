@@ -171,7 +171,10 @@ export class user extends Component {
     }
 
     InsertUser = () => {
-        if (!CheckInputValidity('form-data')) return;
+        if (!CheckInputValidity('form-data') || !this.state.valueJabatan.value) {
+            alert('Isi data dengan benar');
+            return;
+        }
 
         ShowLoading();
 
@@ -212,15 +215,15 @@ export class user extends Component {
                     <form id='form-data' className={global.card}>
                         <p className={global.title}>Tambah User</p>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Username</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Username <span className={global.important}>*</span></p>
                             <input type="text" className="col12 col-md-8 col-lg-6" id='input-username' name='input-username' required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Password</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Password <span className={global.important}>*</span></p>
                             <input type="password" className="col12 col-md-8 col-lg-6" id='input-password' name='input-password' required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jabatan</p>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jabatan <span className={global.important}>*</span></p>
                             <Select id='select-jabatan' isClearable={true} isSearchable={true} options={[
                                 { value: 'Owner', label: 'Owner' },
                                 { value: 'Admin, Keuangan', label: 'Admin, Keuangan' },

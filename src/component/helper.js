@@ -25,10 +25,12 @@ const CheckInputValidity = (form) => {
         while (i < lenInput) {
             if (!input[i].checkValidity()) {
                 input[i].focus();
+                // if(input[i].nextElementSibling) input[i].nextElementSibling.innerHTML = "Data Invalid";
                 result = false;
 
                 break;
             }
+            // if(input[i].nextElementSibling) input[i].nextElementSibling.innerHTML = "";
 
             result = true;
 

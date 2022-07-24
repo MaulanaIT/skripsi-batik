@@ -75,6 +75,7 @@
     flex-direction: column;
     gap: 12px;
     padding: 12px;
+    width: 100%;
 }
 
 .card>.header {
@@ -109,6 +110,22 @@
     margin: 0;
 }
 
+.input_group_row>.title>.important,
+.input_group>.title>.important {
+    color: red;
+    font-size: 12px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.input_group_row>.error,
+.input_group>.error {
+    color: red;
+    font-size: 12px;
+    font-weight: normal;
+    margin: 0;
+}
+
 input,
 select,
 textarea {
@@ -118,6 +135,12 @@ textarea {
     font-size: 12px !important;
     outline: none;
     padding: 6px 12px;
+}
+
+input:invalid,
+select:invalid,
+textarea:invalid {
+    border: 2px solid rgba(255, 0, 0, 0.6);
 }
 
 option {
