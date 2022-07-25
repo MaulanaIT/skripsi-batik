@@ -6,7 +6,7 @@ import axios from 'axios';
 import moment from 'moment';
 import Select from 'react-select';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config, GenerateCode, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, GenerateCode, HideLoading, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
@@ -212,9 +212,19 @@ export default function Produksi() {
         formData.append('jenis_produksi', getValueJenisProduksi.value.toLowerCase());
 
         if (getValueJenisProduksi.value === 'Stok') {
+            if (!CheckInputValidity('form-data') || getValueKodePermintaan.length <= 0 || getValueStatus.length <= 0) {
+                alert('Isi data dengan benar');
+                return;
+            }
+    
             formData.append('kode_permintaan', getValueKodePermintaan.value);
             formData.append('kode_produk', getValueKodeProduk);
         } else if (getValueJenisProduksi.value === 'Pesanan') {
+            if (!CheckInputValidity('form-data') || getValueKodePesanan.length <= 0 || getValueStatus.length <= 0) {
+                alert('Isi data dengan benar');
+                return;
+            }
+    
             formData.append('kode_pesanan', getValueKodePesanan.value);
             formData.append('tanggal_pesan', getValueTanggalPesanan);
             formData.append('kode_customer', getValueKodeCustomer);
@@ -240,7 +250,7 @@ export default function Produksi() {
             </div>
             <div className={style.content}>
                 <div className={`col-12 pe-md-2 pb-2 pb-md-0`}>
-                    <div className={`${global.card}`}>
+                    <form id='form-data' className={`${global.card}`}>
                         <div className={`${global.header}`}>
                             <p className={global.title}>Input Produksi</p>
                         </div>
@@ -255,19 +265,19 @@ export default function Produksi() {
                             {getValueJenisProduksi?.value === 'Pesanan' ?
                                 <React.Fragment>
                                     <div className={`${global.input_group} col-6 mb-2 pe-2`}>
-                                        <p className={global.title}>Kode Pesanan</p>
+                                        <p className={global.title}>Kode Pesanan <span className={global.important}>*</span></p>
                                         <Select id='select-kode-pesanan' name='select-kode-pesanan' isClearable={true} isSearchable={true} options={getDataSelectKodePesanan} placeholder={'Select Kode...'} value={getValueKodePesanan} styles={CustomSelect} onChange={e => setValueKodePesanan(e)} />
                                     </div>
                                     <div className={`${global.input_group} col-6 mb-2 ps-2`}>
-                                        <p className={global.title}>Tanggal Pesan</p>
-                                        <input type="date" id='input-tanggal-pesan' name='input-tanggal-pesan' value={getValueTanggalPesanan} readOnly={true} />
+                                        <p className={global.title}>Tanggal Pesan <span className={global.important}>*</span></p>
+                                        <input type="date" id='input-tanggal-pesan' name='input-tanggal-pesan' value={getValueTanggalPesanan} required={true} readOnly={true} />
                                     </div>
                                 </React.Fragment>
                                 :
                                 getValueJenisProduksi?.value === 'Stok' &&
                                 <React.Fragment>
                                     <div className={`${global.input_group} col-6 mb-2`}>
-                                        <p className={global.title}>Kode Permintaan</p>
+                                        <p className={global.title}>Kode Permintaan <span className={global.important}>*</span></p>
                                         <Select id='select-kode-permintaan' name='select-kode-permintaan' isClearable={true} isSearchable={true} options={getDataSelectKodePermintaan} placeholder={'Select Kode...'} value={getValueKodePermintaan} styles={CustomSelect} onChange={e => setValueKodePermintaan(e)} />
                                     </div>
                                 </React.Fragment>
@@ -276,44 +286,44 @@ export default function Produksi() {
                                 {getValueJenisProduksi &&
                                     <React.Fragment>
                                         <div className={`${global.input_group} col-6 mb-2 pe-2`}>
-                                            <p className={global.title}>Kode Produksi</p>
-                                            <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={getValueKodeProduksi} readOnly={true} />
+                                            <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
+                                            <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={getValueKodeProduksi} required={true} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-6 mb-2 ps-2`}>
-                                            <p className={global.title}>Tanggal Produksi</p>
-                                            <input type="date" id='input-tanggal-produksi' name='input-tanggal-produksi' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
+                                            <p className={global.title}>Tanggal Produksi <span className={global.important}>*</span></p>
+                                            <input type="date" id='input-tanggal-produksi' name='input-tanggal-produksi' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} required={true} />
                                         </div>
                                         {getValueJenisProduksi?.value === 'Pesanan' &&
                                             <React.Fragment>
                                                 <div className={`${global.input_group} col-6 mb-2 pe-2`}>
-                                                    <p className={global.title}>Nama Customer</p>
-                                                    <input type="text" id='input-nama-customer' name='input-nama-customer' value={getValueNamaCustomer} readOnly={true} />
+                                                    <p className={global.title}>Nama Customer <span className={global.important}>*</span></p>
+                                                    <input type="text" id='input-nama-customer' name='input-nama-customer' value={getValueNamaCustomer} required={true} readOnly={true} />
                                                 </div>
                                                 <div className={`${global.input_group} col-6 mb-2 ps-2`}>
-                                                    <p className={global.title}>Nama Pesanan</p>
-                                                    <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' value={getValueNamaPesanan} readOnly={true} />
+                                                    <p className={global.title}>Nama Pesanan <span className={global.important}>*</span></p>
+                                                    <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' value={getValueNamaPesanan} required={true} readOnly={true} />
                                                 </div>
                                             </React.Fragment>
                                         }
                                         {getValueJenisProduksi?.value === 'Stok' &&
                                             <React.Fragment>
                                                 <div className={`${global.input_group} col-6 mb-2 pe-2`}>
-                                                    <p className={global.title}>Kode Produk</p>
-                                                    <input type="text" id='input-kode-produk' name='input-kode-produk' value={getValueKodeProduk} readOnly={true} />
+                                                    <p className={global.title}>Kode Produk <span className={global.important}>*</span></p>
+                                                    <input type="text" id='input-kode-produk' name='input-kode-produk' value={getValueKodeProduk} required={true} readOnly={true} />
                                                 </div>
                                                 <div className={`${global.input_group} col-6 mb-2 ps-2`}>
-                                                    <p className={global.title}>Nama Produk</p>
-                                                    <input type="text" id='input-nama-produk' name='input-nama-produk' value={getValueNamaProduk} readOnly={true} />
+                                                    <p className={global.title}>Nama Produk <span className={global.important}>*</span></p>
+                                                    <input type="text" id='input-nama-produk' name='input-nama-produk' value={getValueNamaProduk} required={true} readOnly={true} />
                                                 </div>
                                             </React.Fragment>
                                         }
                                         <div className={`${global.input_group} col-6 mb-2 pe-2`}>
-                                            <p className={global.title}>Jumlah</p>
-                                            <input type="text" id='input-jumlah' name='input-jumlah' value={getValueJumlah} readOnly={true} />
+                                            <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
+                                            <input type="text" id='input-jumlah' name='input-jumlah' required={true} value={getValueJumlah} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-6 mb-2 ps-2`}>
-                                            <p className={global.title}>Lama Produksi</p>
-                                            <input type="text" id='input-lama-produksi' name='input-lama-produksi' value={getValueLamaProduksi} onChange={e => setValueLamaProduksi(e.target.value)} />
+                                            <p className={global.title}>Lama Produksi <span className={global.important}>*</span></p>
+                                            <input type="text" id='input-lama-produksi' name='input-lama-produksi' value={getValueLamaProduksi} onChange={e => setValueLamaProduksi(e.target.value)} required={true} />
                                         </div>
                                     </React.Fragment>
                                 }
@@ -321,11 +331,11 @@ export default function Produksi() {
                                 {getValueJenisProduksi?.value === 'Pesanan' ?
                                     <React.Fragment>
                                         <div className={`${global.input_group} col-6 mb-2 pe-2`}>
-                                            <p className={global.title}>Deskripsi</p>
-                                            <input type="text" id='input-deskripsi' name='input-deskripsi' value={getValueDeskripsi} readOnly={true} />
+                                            <p className={global.title}>Deskripsi <span className={global.important}>*</span></p>
+                                            <input type="text" id='input-deskripsi' name='input-deskripsi' value={getValueDeskripsi} required={true} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-6 mb-2 ps-2`}>
-                                            <p className={global.title}>Status</p>
+                                            <p className={global.title}>Status <span className={global.important}>*</span></p>
                                             <Select id='select-status' name='select-status' isClearable={true} isSearchable={true} options={[
                                                 { value: '0', label: 'Proses' },
                                                 { value: '1', label: 'Selesai' }
@@ -335,7 +345,7 @@ export default function Produksi() {
                                     :
                                     getValueJenisProduksi?.value === 'Stok' &&
                                     <div className={`${global.input_group} col-12 mb-2`}>
-                                        <p className={global.title}>Status</p>
+                                        <p className={global.title}>Status <span className={global.important}>*</span></p>
                                         <Select id='select-status' name='select-status' isClearable={true} isSearchable={true} options={[
                                             { value: '0', label: 'Proses' },
                                             { value: '1', label: 'Selesai' }
@@ -347,7 +357,7 @@ export default function Produksi() {
                         {getValueJenisProduksi &&
                             <button type='button' className={global.button} onClick={InsertProduksi}><MdAdd /> Simpan</button>
                         }
-                    </div>
+                    </form>
                 </div>
             </div>
         </React.Fragment>

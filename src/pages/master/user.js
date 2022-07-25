@@ -6,7 +6,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import sha256 from 'crypto-js/sha256';
 import { FaCheck, FaPen, FaTrash } from 'react-icons/fa';
-import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, ShowLoading } from '../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, SetValue, ShowLoading } from '../../component/helper';
 import { MdAdd } from 'react-icons/md'
 
 // Import CSS
@@ -137,18 +137,22 @@ export class user extends Component {
                             <td>
                                 <div id={`data-jabatan-${item.id}`} className={`data-${item.id} text-end`}>{item.jabatan}</div>
                                 <div className={global.input_group_row}>
-                                    <select name={`edit-jabatan-${item.id}`} id={`edit-jabatan-${item.id}`} className={`edit-${item.id} d-none`} required={true}>
-                                        <option value="Owner" selected={item.jabatan === 'Owner' && true}>Owner</option>
-                                        <option value="Admin, Keuangan" selected={item.jabatan === 'Admin, Keuangan' && true}>Admin, Keuangan</option>
-                                        <option value="Gudang, Pembelian" selected={item.jabatan === 'Gudang, Pembelian' && true}>Gudang, Pembelian</option>
+                                    <select name={`edit-jabatan-${item.id}`} id={`edit-jabatan-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={
+                                        item.jabatan === 'Owner' ? 'Owner' : 
+                                        item.jabatan === 'Admin, Keuangan' ? 'Admin, Keuangan' :
+                                        item.jabatan === 'Gudang, Pembelian' && 'Gudang, Pembelian'
+                                    } required={true}>
+                                        <option value="Owner">Owner</option>
+                                        <option value="Admin, Keuangan">Admin, Keuangan</option>
+                                        <option value="Gudang, Pembelian">Gudang, Pembelian</option>
                                     </select>
                                 </div>
                             </td>
                             <td className={global.table_action}>
-                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyUser(item.id)}><FaCheck /> Apply</button>
-                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditUser(item.id)}><FaPen /> Edit</button>
+                                <button type='button' id={`button-apply-${item.id}`} className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyUser(item.id)}><FaCheck /> Apply</button>
+                                <button type='button' id={`button-edit-${item.id}`} className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditUser(item.id)}><FaPen /> Edit</button>
                                 {item.username !== localStorage.getItem('leksana_username') && item.password !== localStorage.getItem('leksana_token') &&
-                                    <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteUser(item.id)}><FaTrash />Delete</button>
+                                    <button type='button' id={`button-delete-${item.id}`} className={global.delete} onClick={() => this.DeleteUser(item.id)}><FaTrash />Delete</button>
                                 }
                             </td>
                         </tr>
@@ -171,7 +175,7 @@ export class user extends Component {
     }
 
     InsertUser = () => {
-        if (!CheckInputValidity('form-data') || !this.state.valueJabatan === null) {
+        if (!CheckInputValidity('form-data') || this.state.valueJabatan.length <= 0) {
             alert('Isi data dengan benar');
             return;
         }
@@ -185,7 +189,13 @@ export class user extends Component {
         formData.append('jabatan', this.state.valueJabatan.value);
 
         axios.post(`${baseURL}/api/master/user/insert.php`, formData, config).then(() => {
-            this.GetUser();
+            this.setState({
+                valuejabatan: []
+            }, () => {
+                SetValue('input-username', '');
+                SetValue('input-password', '');
+                this.GetUser();
+            });
         }).catch(error => {
             console.log(error);
 
@@ -197,7 +207,7 @@ export class user extends Component {
         if (data) {
             this.setState({ valueJabatan: { value: data?.value, label: data?.label } });
         } else {
-            this.setState({ valueJabatan: '' });
+            this.setState({ valueJabatan: [] });
         }
     }
 
@@ -227,7 +237,11 @@ export class user extends Component {
                             <Select id='select-jabatan' isClearable={true} isSearchable={true} options={[
                                 { value: 'Owner', label: 'Owner' },
                                 { value: 'Admin, Keuangan', label: 'Admin, Keuangan' },
-                                { value: 'Gudang, Pembelian', label: 'Gudang, Pembelian' }
+                                { value: 'Gudang, Pembelian', label: 'Gudang, Pembelian' },
+                                { value: 'Designer', label: 'Designer' },
+                                { value: 'Cap/Canting', label: 'Cap/Canting' },
+                                { value: 'Pewarnaan', label: 'Pewarnaan' },
+                                { value: 'Packing', label: 'Packing' }
                             ]} placeholder={'Select Jabatan...'} styles={CustomSelect} value={valueJabatan} onChange={(data) => this.SelectJabatan(data)} />
                         </div>
                         <button type='button' className={global.button} onClick={this.InsertUser}><MdAdd /> Simpan</button>

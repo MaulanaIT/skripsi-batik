@@ -7,7 +7,7 @@ import moment from 'moment';
 import Select from 'react-select';
 import { MdAdd } from 'react-icons/md'
 import { FaTrash } from 'react-icons/fa';
-import { baseURL, Calculate, config, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { baseURL, Calculate, CheckInputValidity, config, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -116,6 +116,11 @@ export default function Retur_pembelian() {
     }, [getHTMLTableDaftarAlat, getHTMLTableDaftarBahan]);
 
     const AddDetail = () => {
+        if (!CheckInputValidity('form-data') || getValueKodePengeluaranKas.length <= 0 || getValueKodeItem.length <= 0) {
+            alert('Isi data dengan benar');
+            return;
+        }
+        
         if (getJenisRetur.toLowerCase() === 'alat') {
             let dataAlat = [...getDataAlat];
 
@@ -350,17 +355,22 @@ export default function Retur_pembelian() {
 
         const formData = new FormData();
 
-        let file = document.getElementById('input-file-nota').files[0];
-        let arg = file.name.split('.');
-        let extension = arg[arg.length - 1];
 
         formData.append('kode', getValueKodeRetur);
         formData.append('kode_kas_keluar', getValueKodePengeluaranKas.value);
         formData.append('tanggal', getValueTanggal);
         formData.append('kode_supplier', getValueKodeSupplier);
         formData.append('total_harga', getValueKalkulasiTotalHarga);
-        formData.append('file_nota', file);
-        formData.append('nama_file', `File Nota Pembelian - ${getValueKodeRetur} - ${getValueTanggal}.${extension}`);
+
+        let file = document.getElementById('input-file-nota').files[0];
+
+        if (file) {
+            let arg = file.name.split('.');
+            let extension = arg[arg.length - 1];
+            
+            formData.append('file_nota', file);
+            formData.append('nama_file', `File Nota Pembelian - ${getValueKodeRetur} - ${getValueTanggal}.${extension}`);
+        }
 
         formData.append('jenis_retur', jenisRetur.toLowerCase());
 
@@ -369,8 +379,9 @@ export default function Retur_pembelian() {
         else if (jenisRetur.toLowerCase() === 'bahan')
             formData.append('data', JSON.stringify(getDataBahan));
 
-        axios.post(`${baseURL}/api/transaksi/pembelian/retur/insert.php`, formData, config).then(() => {
-            window.location.href = '/transaksi/pembelian/daftar-retur';
+        axios.post(`${baseURL}/api/transaksi/pembelian/retur/insert.php`, formData, config).then((response) => {
+            console.log(response);
+            window.location.href = '/#/transaksi/pembelian/daftar-retur';
         }).catch(error => {
             console.log(error);
 
@@ -456,7 +467,7 @@ export default function Retur_pembelian() {
             </div>
             <div className={style.content}>
                 <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
-                    <div className={`${global.card}`}>
+                    <form id='form-data' className={`${global.card}`}>
                         <p className={global.title}>Input Retur Pembelian</p>
                         <div className={`${global.input_group} col-4 pe-2`}>
                             <p className={global.title}>Jenis Retur</p>
@@ -469,56 +480,56 @@ export default function Retur_pembelian() {
                             <>
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-6 pe-2`}>
-                                        <p className={global.title}>Kode Retur</p>
-                                        <input type="text" id='valueKodeRetur' maxLength={10} value={getValueKodeRetur} readOnly={true} />
+                                        <p className={global.title}>Kode Retur <span className={global.important}>*</span></p>
+                                        <input type="text" id='valueKodeRetur' maxLength={10} value={getValueKodeRetur} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-6 ps-2`}>
-                                        <p className={global.title}>Tanggal</p>
-                                        <input type="date" id='valueTanggal' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
+                                        <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
+                                        <input type="date" id='valueTanggal' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} required={true} />
                                     </div>
                                 </div>
                                 <div className={`${global.input_group} col-6 pe-2`}>
-                                    <p className={global.title}>Kode Kas Keluar</p>
+                                    <p className={global.title}>Kode Kas Keluar <span className={global.important}>*</span></p>
                                     <Select escapeClearsValue={false} isClearable={true} isSearchable={true} options={getDataSelectKodePengeluaranKas} placeholder={'Select Kode...'} value={getValueKodePengeluaranKas} onChange={(data) => SelectKodePengeluaranKas(data)} styles={CustomSelect} isDisabled={(getDataAlat.length > 0 || getDataBahan.length > 0) ?? false} />
                                 </div>
                                 <div className={`d-flex`}>
                                     <div className={`${global.input_group} col-3 pe-2`}>
-                                        <p className={global.title}>Kode Supplier</p>
-                                        <input type="text" id='valueKodeSupplier' maxLength={10} value={getValueKodeSupplier} readOnly={true} />
+                                        <p className={global.title}>Kode Supplier <span className={global.important}>*</span></p>
+                                        <input type="text" id='valueKodeSupplier' maxLength={10} value={getValueKodeSupplier} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-5 ps-2`}>
-                                        <p className={global.title}>Nama Supplier</p>
-                                        <input type="text" id='valueNamaSupplier' maxLength={10} value={getValueNamaSupplier} readOnly={true} />
+                                        <p className={global.title}>Nama Supplier <span className={global.important}>*</span></p>
+                                        <input type="text" id='valueNamaSupplier' maxLength={10} value={getValueNamaSupplier} required={true} readOnly={true} />
                                     </div>
                                 </div>
                                 {getJenisRetur === 'Bahan' ?
                                     <>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-5 pe-2`}>
-                                                <p className={global.title}>Kode Bahan</p>
+                                                <p className={global.title}>Kode Bahan <span className={global.important}>*</span></p>
                                                 <Select id='select-kode-bahan' isClearable={true} isSearchable={true} options={getDataSelectKodeItem} placeholder={'Select Kode...'} styles={CustomSelect} value={getValueKodeItem} onChange={(data) => SelectItem(data)} />
                                             </div>
                                             <div className={`${global.input_group} col-7 pe-2`}>
-                                                <p className={global.title}>Nama Bahan</p>
+                                                <p className={global.title}>Nama Bahan <span className={global.important}>*</span></p>
                                                 <Select id='select-nama-bahan' isClearable={true} isSearchable={true} options={getDataSelectNamaItem} placeholder={'Select Nama...'} styles={CustomSelect} value={getValueNamaItem} onChange={(data) => SelectItem(data)} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-3 pe-2`}>
-                                                <p className={global.title}>Jumlah</p>
-                                                <input type="text" id='valueJumlah' className='text-end' value={getValueJumlah} readOnly={true} />
+                                                <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
+                                                <input type="text" id='valueJumlah' className='text-end' value={getValueJumlah} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-3 px-2`}>
-                                                <p className={global.title}>Jumlah Retur</p>
-                                                <input type="text" id='valueJumlahRetur' className='text-end' value={getValueJumlahRetur} onInput={InputFormatNumber} onChange={e => setValueJumlahRetur(e.target.value)} />
+                                                <p className={global.title}>Jumlah Retur <span className={global.important}>*</span></p>
+                                                <input type="text" id='valueJumlahRetur' className='text-end' value={getValueJumlahRetur} onInput={InputFormatNumber} onChange={e => setValueJumlahRetur(e.target.value)} required={true} />
                                             </div>
                                             <div className={`${global.input_group} col-3 px-2`}>
-                                                <p className={global.title}>Harga</p>
-                                                <input type="text" id='valueHarga' className='text-end' value={getValueHarga} readOnly={true} />
+                                                <p className={global.title}>Harga <span className={global.important}>*</span></p>
+                                                <input type="text" id='valueHarga' className='text-end' value={getValueHarga} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-3 ps-2`}>
-                                                <p className={global.title}>Total Harga</p>
-                                                <input type="text" id='valueTotalHarga' className='text-end' value={getValueTotalHarga} readOnly={true} />
+                                                <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
+                                                <input type="text" id='valueTotalHarga' className='text-end' value={getValueTotalHarga} required={true} readOnly={true} />
                                             </div>
                                         </div>
                                     </>
@@ -526,36 +537,36 @@ export default function Retur_pembelian() {
                                     <>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-5 pe-2`}>
-                                                <p className={global.title}>Kode Alat</p>
+                                                <p className={global.title}>Kode Alat <span className={global.important}>*</span></p>
                                                 <Select id='select-kode-alat' isClearable={true} isSearchable={true} options={getDataSelectKodeItem} placeholder={'Select Kode...'} styles={CustomSelect} value={getValueKodeItem} onChange={(data) => SelectItem(data)} />
                                             </div>
                                             <div className={`${global.input_group} col-7 pe-2`}>
-                                                <p className={global.title}>Nama Alat</p>
+                                                <p className={global.title}>Nama Alat <span className={global.important}>*</span></p>
                                                 <Select id='select-nama-alat' isClearable={true} isSearchable={true} options={getDataSelectNamaItem} placeholder={'Select Nama...'} styles={CustomSelect} value={getValueNamaItem} onChange={(data) => SelectItem(data)} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-4 pe-2`}>
-                                                <p className={global.title}>Jumlah</p>
-                                                <input type="text" id='valueJumlah' className='text-end' value={getValueJumlah} readOnly={true} />
+                                                <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
+                                                <input type="text" id='valueJumlah' className='text-end' value={getValueJumlah} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 px-2`}>
-                                                <p className={global.title}>Jumlah Retur</p>
-                                                <input type="text" id='valueJumlahRetur' className='text-end' value={getValueJumlahRetur} onInput={InputFormatNumber} onChange={e => setValueJumlahRetur(e.target.value)} />
+                                                <p className={global.title}>Jumlah Retur <span className={global.important}>*</span></p>
+                                                <input type="text" id='valueJumlahRetur' className='text-end' value={getValueJumlahRetur} onInput={InputFormatNumber} onChange={e => setValueJumlahRetur(e.target.value)} required={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 ps-2`}>
-                                                <p className={global.title}>Pengurangan Kapasitas</p>
-                                                <input type="text" id='valueJumlahRetur' className='text-end' value={getValueJumlahRetur} onInput={InputFormatNumber} onChange={e => setValueJumlahRetur(e.target.value)} />
+                                                <p className={global.title}>Pengurangan Kapasitas <span className={global.important}>*</span></p>
+                                                <input type="text" id='valueJumlahRetur' className='text-end' value={getValueJumlahRetur} onInput={InputFormatNumber} onChange={e => setValueJumlahRetur(e.target.value)} required={true} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-6 pe-2`}>
-                                                <p className={global.title}>Harga</p>
-                                                <input type="text" id='valueHarga' className='text-end' value={getValueHarga} readOnly={true} />
+                                                <p className={global.title}>Harga <span className={global.important}>*</span></p>
+                                                <input type="text" id='valueHarga' className='text-end' value={getValueHarga} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-6 ps-2`}>
-                                                <p className={global.title}>Total Harga</p>
-                                                <input type="text" id='valueTotalHarga' className='text-end' value={getValueTotalHarga} readOnly={true} />
+                                                <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
+                                                <input type="text" id='valueTotalHarga' className='text-end' value={getValueTotalHarga} required={true} readOnly={true} />
                                             </div>
                                         </div>
                                     </>
@@ -564,7 +575,7 @@ export default function Retur_pembelian() {
                                 <button type='button' className={global.button} onClick={AddDetail}><MdAdd /> Tambah</button>
                             </>
                             : null}
-                    </div>
+                    </form>
                 </div>
                 {getJenisRetur !== '' ?
                     <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>

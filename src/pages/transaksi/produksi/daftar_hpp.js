@@ -111,7 +111,9 @@ export default function Daftar_hpp() {
                 <div className={`${global.card} col-12`}>
                     <div className={`${global.header}`}>
                         <p className={global.title}>Daftar Proses Produksi</p>
-                        <Link to={'/transaksi/produksi/hpp'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
+                        {['desainer', 'cap/canting', 'pewarnaan', 'packing'].some(item => item === localStorage.getItem('leksana_jabatan').toLowerCase()) &&
+                            <Link to={'/transaksi/produksi/hpp'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
+                        }
                     </div>
                     <form id='form-table' className={`table-responsive`}>
                         <table id='table-data' className={`table w-100`}>

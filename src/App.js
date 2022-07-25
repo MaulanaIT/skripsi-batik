@@ -3,7 +3,7 @@ import React from 'react';
 // Import Library
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { baseURL, config } from './component/helper';
+import { baseURL, config, HideLoading, ShowLoading } from './component/helper';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 // Import Component
@@ -82,10 +82,12 @@ export default function App() {
     const location = useLocation();
 
     useEffect(() => {
-        login();
+        localStorage.getItem('leksana_token') && login();
     }, []);
 
     const login = () => {
+        ShowLoading();
+        
         const formData = new FormData();
 
         formData.append('username', localStorage.getItem('leksana_username'));
@@ -95,13 +97,17 @@ export default function App() {
             let login = response.data.data;
             
             setJabatan(login.data.jabatan);
+
+            HideLoading();
         }).catch(error => {
-            if (location.pathname !== '/' && location.pathname !== '/login') window.location.href = '/login';
+            if (location.pathname !== '/' && location.pathname !== '/login') window.location.href = '/#/login';
             console.log(error);
 
             localStorage.clear();
 
             alert(error.message);
+
+            HideLoading();
         });
     }
 

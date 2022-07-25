@@ -1,3 +1,4 @@
+// const baseURL = 'http://leksana-batik.virtusrox.me/';
 const baseURL = 'http://localhost/skripsi-batik';
 const config = {
     headers: {

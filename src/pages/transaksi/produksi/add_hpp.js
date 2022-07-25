@@ -8,7 +8,7 @@ import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import { FiXCircle } from 'react-icons/fi';
-import { baseURL, config, cx, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 // Import CSS
@@ -108,12 +108,12 @@ const Add_hpp = (props, ref) => {
     useEffect(() => {
         setValueHarga(0);
         setValueJumlah(0);
-        setValueBahanBaku(null);
-        setValuePenolong(null);
-        setValueKodeAlat(null);
-        setValueNamaAlat(null);
-        setValueKodeTenagaKerja(null);
-        setValueNamaTenagaKerja(null);
+        setValueBahanBaku([]);
+        setValuePenolong([]);
+        setValueKodeAlat([]);
+        setValueNamaAlat([]);
+        setValueKodeTenagaKerja([]);
+        setValueNamaTenagaKerja([]);
     }, [getSelectedTab]);
 
     useEffect(() => {
@@ -150,6 +150,11 @@ const Add_hpp = (props, ref) => {
     }));
 
     const AddDetailAlat = () => {
+        if (!CheckInputValidity('form-data') || getValueKodeAlat.length <= 0) {
+            alert('Isi data dengan benar');
+            return;
+        }
+
         ShowLoading();
 
         $('#table-data-bop-alat').DataTable().destroy();
@@ -198,6 +203,11 @@ const Add_hpp = (props, ref) => {
     }
 
     const AddDetailBahanBaku = () => {
+        if (!CheckInputValidity('form-data') || getValueBahanBaku.length <= 0) {
+            alert('Isi data dengan benar');
+            return;
+        }
+
         ShowLoading();
 
         $('#table-data-biaya-bahan-baku').DataTable().destroy();
@@ -247,6 +257,11 @@ const Add_hpp = (props, ref) => {
     }
 
     const AddDetailPenolong = () => {
+        if (!CheckInputValidity('form-data') || getValuePenolong.length <= 0) {
+            alert('Isi data dengan benar');
+            return;
+        }
+
         ShowLoading();
 
         $('#table-data-bop-penolong').DataTable().destroy();
@@ -295,6 +310,11 @@ const Add_hpp = (props, ref) => {
     }
 
     const AddDetailTenagaKerja = () => {
+        if (!CheckInputValidity('form-data') || getValueKodeTenagaKerja.length <= 0) {
+            alert('Isi data dengan benar');
+            return;
+        }
+
         ShowLoading();
 
         $('#table-data-biaya-tenaga-kerja').DataTable().destroy();
@@ -732,43 +752,47 @@ const Add_hpp = (props, ref) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className={`${global.card}`}>
+                            <form id='form-data' className={`${global.card}`}>
                                 {+getSelectedTab === 0 &&
                                     <React.Fragment>
                                         <div className='d-flex'>
                                             <div className={`${global.input_group} col-4 pe-2`}>
-                                                <p className={global.title}>Kode Biaya Bahan Baku </p>
-                                                <input type="text" id='input-kode-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueKodeBiayaBahanBaku} readOnly={true} />
+                                                <p className={global.title}>Kode Biaya Bahan Baku <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-kode-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueKodeBiayaBahanBaku} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 px-2`}>
-                                                <p className={global.title}>Tanggal</p>
-                                                <input type="date" id='input-tanggal-bbb' name='input-tanggal-bbb' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
+                                                <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
+                                                <input type="date" id='input-tanggal-bbb' name='input-tanggal-bbb' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} required={true} />
                                             </div>
                                         </div>
                                         <div className='d-flex'>
                                             <div className={`${global.input_group} col-4 pe-2`}>
-                                                <p className={global.title}>Kode Produksi</p>
-                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} readOnly={true} />
+                                                <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} required={true} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-8 ps-2`}>
+                                                <p className={global.title}>Kode Permintaan Bahan <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' value={props?.kodePermintaan ?? ''} required={true} readOnly={true} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-8 pe-2`}>
-                                                <p className={global.title}>Pilih Bahan Baku</p>
+                                                <p className={global.title}>Pilih Bahan Baku <span className={global.important}>*</span></p>
                                                 <Select id='select-nama-bahan-bahan-baku' name='select-nama-bahan-bahan-baku' isClearable={true} isSearchable={true} options={getDataSelectBahanBaku} placeholder={'Select Nama Bahan...'} value={getValueBahanBaku} styles={CustomSelect} onChange={e => setValueBahanBaku(e)} />
                                             </div>
                                             <div className={`${global.input_group} col-4 ps-2`}>
-                                                <p className={global.title}>Harga</p>
-                                                <input type="text" id='input-harga-bahan-baku' name='input-harga-bahan-baku' value={getValueHarga} readOnly={true} />
+                                                <p className={global.title}>Harga <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-harga-bahan-baku' name='input-harga-bahan-baku' value={getValueHarga} required={true} readOnly={true} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-4 pe-2`}>
-                                                <p className={global.title}>Jumlah</p>
-                                                <input type="text" id='input-jumlah-bahan-baku' name='input-jumlah-bahan-baku' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} />
+                                                <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-jumlah-bahan-baku' name='input-jumlah-bahan-baku' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} required={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 px-2`}>
-                                                <p className={global.title}>Biaya</p>
-                                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueTotalHarga} readOnly={true} />
+                                                <p className={global.title}>Biaya <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueTotalHarga} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                                 <p className={global.title}>Aksi</p>
@@ -791,28 +815,32 @@ const Add_hpp = (props, ref) => {
                                         </div>
                                         <div className='d-flex'>
                                             <div className={`${global.input_group} col-4 pe-2`}>
-                                                <p className={global.title}>Kode Produksi </p>
-                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} readOnly={true} />
+                                                <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} required={true} readOnly={true} />
+                                            </div>
+                                            <div className={`${global.input_group} col-8 ps-2`}>
+                                                <p className={global.title}>Kode Permintaan Bahan <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' value={props?.kodePermintaan ?? ''} required={true} readOnly={true} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-8 pe-2`}>
-                                                <p className={global.title}>Pilih Bahan Penolong</p>
+                                                <p className={global.title}>Pilih Bahan Penolong <span className={global.important}>*</span></p>
                                                 <Select id='select-nama-bahan-bahan-penolong' name='select-nama-bahan-bahan-penolong' isClearable={true} isSearchable={true} options={getDataSelectPenolong} placeholder={'Select Nama Bahan...'} value={getValuePenolong} styles={CustomSelect} onChange={e => setValuePenolong(e)} />
                                             </div>
                                             <div className={`${global.input_group} col-4 ps-2`}>
-                                                <p className={global.title}>Harga</p>
-                                                <input type="text" id='input-harga-bahan-penolong' name='input-harga-bahan-penolong' value={getValueHarga} readOnly={true} />
+                                                <p className={global.title}>Harga <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-harga-bahan-penolong' name='input-harga-bahan-penolong' value={getValueHarga} required={true} readOnly={true} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
-                                            <div className={`${global.input_group} col-4 px-2`}>
-                                                <p className={global.title}>Jumlah</p>
-                                                <input type="text" id='input-jumlah-bahan-penolong' name='input-jumlah-bahan-penolong' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} />
+                                            <div className={`${global.input_group} col-4 pe-2`}>
+                                                <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-jumlah-bahan-penolong' name='input-jumlah-bahan-penolong' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} required={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 px-2`}>
-                                                <p className={global.title}>Biaya</p>
-                                                <input type="text" id='input-biaya-bahan-penolong' name='input-biaya-bahan-penolong' value={getValueTotalHarga} readOnly={true} />
+                                                <p className={global.title}>Biaya <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-biaya-bahan-penolong' name='input-biaya-bahan-penolong' value={getValueTotalHarga} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                                 <p className={global.title}>Aksi</p>
@@ -825,42 +853,42 @@ const Add_hpp = (props, ref) => {
                                     <React.Fragment>
                                         <div className='d-flex'>
                                             <div className={`${global.input_group} col-4 pe-2`}>
-                                                <p className={global.title}>Kode BOP Alat </p>
-                                                <input type="text" id='input-kode-bop-alat' name='input-kode-bop-alat' value={getValueKodeBiayaAlat} readOnly={true} />
+                                                <p className={global.title}>Kode BOP Alat <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-kode-bop-alat' name='input-kode-bop-alat' value={getValueKodeBiayaAlat} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 px-2`}>
-                                                <p className={global.title}>Kode Produksi </p>
-                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} readOnly={true} />
+                                                <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 ps-2`}>
-                                                <p className={global.title}>Tanggal</p>
-                                                <input type="date" id='input-tanggal-bop-alat' name='input-tanggal-bop-alat' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
+                                                <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
+                                                <input type="date" id='input-tanggal-bop-alat' name='input-tanggal-bop-alat' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} required={true} />
                                             </div>
                                         </div>
                                         <div className='d-flex'>
                                             <div className={`${global.input_group} col-4 pe-2`}>
-                                                <p className={global.title}>Kode Alat</p>
+                                                <p className={global.title}>Kode Alat <span className={global.important}>*</span></p>
                                                 <Select id='select-kode-bop-alat' name='select-kode-bop-alat' isClearable={true} isSearchable={true} options={getDataSelectKodeAlat} placeholder={'Select Kode...'} value={getValueKodeAlat} styles={CustomSelect} onChange={e => SelectAlat(e)} />
                                             </div>
                                             <div className={`${global.input_group} col-8 ps-2`}>
-                                                <p className={global.title}>Nama Alat</p>
+                                                <p className={global.title}>Nama Alat <span className={global.important}>*</span></p>
                                                 <Select id='select-nama-bop-alat' name='select-nama-bop-alat' isClearable={true} isSearchable={true} options={getDataSelectNamaAlat} placeholder={'Select Nama Alat...'} value={getValueNamaAlat} styles={CustomSelect} onChange={e => SelectAlat(e)} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-12`}>
-                                                <p className={global.title}>Tarif</p>
-                                                <input type="text" id='input-tarif-bop-alat' name='input-tarif-bop-alat' value={getValueHarga} readOnly={true} />
+                                                <p className={global.title}>Tarif <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-tarif-bop-alat' name='input-tarif-bop-alat' value={getValueHarga} required={true} readOnly={true} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-4 pe-2`}>
-                                                <p className={global.title}>Pemakaian</p>
-                                                <input type="text" id='input-pemakaian-bop-alat' name='input-pemakian-bop-alat' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} />
+                                                <p className={global.title}>Pemakaian <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-pemakaian-bop-alat' name='input-pemakian-bop-alat' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} required={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 ps-2`}>
-                                                <p className={global.title}>Biaya</p>
-                                                <input type="text" id='input-biaya-bop-alat' name='input-biaya-bop-alat' value={getValueTotalHarga} readOnly={true} />
+                                                <p className={global.title}>Biaya <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-biaya-bop-alat' name='input-biaya-bop-alat' value={getValueTotalHarga} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                                 <p className={global.title}>Aksi</p>
@@ -873,31 +901,31 @@ const Add_hpp = (props, ref) => {
                                     <React.Fragment>
                                         <div className='d-flex'>
                                             <div className={`${global.input_group} col-4 pe-2`}>
-                                                <p className={global.title}>Kode Biaya Tenaga Kerja </p>
-                                                <input type="text" id='input-kode-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueKodeBiayaTenagaKerja} readOnly={true} />
+                                                <p className={global.title}>Kode Biaya Tenaga Kerja <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-kode-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueKodeBiayaTenagaKerja} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 px-2`}>
-                                                <p className={global.title}>Kode Produksi </p>
-                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} readOnly={true} />
+                                                <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 ps-2`}>
-                                                <p className={global.title}>Tanggal</p>
-                                                <input type="date" id='input-tanggal-btk' name='input-tanggal-btk' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
+                                                <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
+                                                <input type="date" id='input-tanggal-btk' name='input-tanggal-btk' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} required={true} />
                                             </div>
                                         </div>
                                         <div className='d-flex'>
                                             <div className={`${global.input_group} col-4 pe-2`}>
-                                                <p className={global.title}>Kode Tenaga Kerja</p>
+                                                <p className={global.title}>Kode Tenaga Kerja <span className={global.important}>*</span></p>
                                                 <Select id='select-kode-tenaga-kerja' name='select-kode-tenaga-kerja' isClearable={true} isSearchable={true} options={getDataSelectKodeTenagaKerja} placeholder={'Select Tenaga Kerja...'} value={getValueKodeTenagaKerja} styles={CustomSelect} onChange={e => SelectTenagaKerja(e)} />
                                             </div>
                                             <div className={`${global.input_group} col-8 ps-2`}>
-                                                <p className={global.title}>Nama Tenaga Kerja</p>
+                                                <p className={global.title}>Nama Tenaga Kerja <span className={global.important}>*</span></p>
                                                 <Select id='select-nama-tenaga-kerja' name='select-nama-tenaga-kerja' isClearable={true} isSearchable={true} options={getDataSelectNamaTenagaKerja} placeholder={'Select Tenaga Kerja...'} value={getValueNamaTenagaKerja} styles={CustomSelect} onChange={e => SelectTenagaKerja(e)} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-8 pe-2`}>
-                                                <p className={global.title}>Departemen</p>
+                                                <p className={global.title}>Departemen <span className={global.important}>*</span></p>
                                                 <Select id='select-departemen' name='select-departemen' isClearable={true} isSearchable={true} options={[
                                                     { value: 'Desain', label: 'Desain' },
                                                     { value: 'Canting/Cap', label: 'Canting/Cap' },
@@ -906,18 +934,18 @@ const Add_hpp = (props, ref) => {
                                                 ]} placeholder={'Select Departemen...'} value={getValueDepartemen} styles={CustomSelect} onChange={e => setValueDepartemen(e)} />
                                             </div>
                                             <div className={`${global.input_group} col-4 ps-2`}>
-                                                <p className={global.title}>Upah</p>
-                                                <input type="text" id='input-upah-tenaga-kerja' name='input-upah-tenaga-kerja' value={getValueHarga} readOnly={true} />
+                                                <p className={global.title}>Upah <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-upah-tenaga-kerja' name='input-upah-tenaga-kerja' value={getValueHarga} required={true} readOnly={true} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-4 pe-2`}>
-                                                <p className={global.title}>Jumlah Pengerjaan</p>
-                                                <input type="text" id='input-jumlah-pengerjaan' name='input-jumlah-pengerjaan' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} />
+                                                <p className={global.title}>Jumlah Pengerjaan <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-jumlah-pengerjaan' name='input-jumlah-pengerjaan' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} required={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 px-2`}>
-                                                <p className={global.title}>Biaya</p>
-                                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueTotalHarga} readOnly={true} />
+                                                <p className={global.title}>Biaya <span className={global.important}>*</span></p>
+                                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueTotalHarga} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                                 <p className={global.title}>Aksi</p>
@@ -1001,7 +1029,7 @@ const Add_hpp = (props, ref) => {
                                 <div className={`${global.input_group} col-12 ms-auto`}>
                                     <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={SaveDetail}><MdAdd /> Simpan</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

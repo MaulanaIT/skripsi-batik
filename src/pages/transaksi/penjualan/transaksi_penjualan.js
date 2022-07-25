@@ -167,7 +167,7 @@ export class transaksi_penjualan extends Component {
         } = this.state;
 
         if (this.state.jenisPenjualan.toLowerCase() === 'tunai') {
-            if (!CheckInputValidity('form-data') || this.state.valueKodeCustomer === null || valueKodeProduk === null) {
+            if (!CheckInputValidity('form-data') || this.state.valueKodeCustomer.length <= 0 || valueKodeProduk.length <= 0) {
                 alert('Isi data dengan benar');
                 return;
             }
@@ -201,7 +201,7 @@ export class transaksi_penjualan extends Component {
                 this.GetDetailTunai();
             });
         } else if (this.state.jenisPenjualan.toLowerCase() === 'konsinyasi') {
-            if (!CheckInputValidity('form-data') || this.state.valueKodeConsignee === null || valueKodeProduk === null) {
+            if (!CheckInputValidity('form-data') || this.state.valueKodeConsignee.length <= 0 || valueKodeProduk.length <= 0) {
                 alert('Isi data dengan benar');
                 return;
             }
@@ -1006,7 +1006,7 @@ export class transaksi_penjualan extends Component {
             valueDeskripsiPesanan
         } = this.state;
 
-        if (!CheckInputValidity('form-data') || this.state.valueKodeCustomer === null || this.state.valueJenisProduk === null) {
+        if (!CheckInputValidity('form-data') || this.state.valueKodeCustomer.length <= 0 || this.state.valueJenisProduk.length <= 0) {
             alert('Isi data dengan benar');
             return;
         }
