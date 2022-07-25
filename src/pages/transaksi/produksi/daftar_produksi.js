@@ -149,7 +149,7 @@ export default function Daftar_produksi() {
                     <div className={`${global.item} ${getSelectedTab === 1 ? global.active : ''}`} onClick={() => setSelectedTab(1)}>
                         <p className={`${global.name}`}>Produksi Pesanan</p>
                     </div>
-                    {localStorage.getItem('leksana_jabatan').toLowerCase() === 'desainer' &&
+                    {localStorage.getItem('leksana_jabatan').toLowerCase() === 'designer' &&
                         <Link to={'/transaksi/produksi/produksi'} className={`${global.button} ms-auto`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
                     }
                 </div>
