@@ -5,7 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
-import { FaCheck, FaPen } from 'react-icons/fa';
+import { FaCheck, FaPen, FaPlus } from 'react-icons/fa';
 import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
@@ -78,9 +78,10 @@ export default function Daftar_hpp() {
                                     <input type="text" id={`edit-harga-jual-${item.kode}`} className={`edit-${item.kode} d-none`} defaultValue={item.harga_jual} onInput={InputFormatNumber} required={true} />
                                 </div>
                             </td>
-                            <td className={global.table_action}>
-                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.kode}`])} onClick={() => ApplyHPP(item.kode)}><FaCheck /> Apply</button>
-                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.kode}`])} onClick={() => EditHPP(item.kode)}><FaPen /> Edit</button>
+                            <td className={cx([global.table_action, 'text-nowrap'])}>
+                                <button type='button' id={`button-apply-${item.kode}`} className={cx([global.apply, `d-none edit-${item.kode}`])} onClick={() => ApplyHPP(item.kode)}><FaCheck /> Apply</button>
+                                <button type='button' id={`button-edit-${item.kode}`} className={cx([global.edit, `data-${item.kode}`])} onClick={() => EditHPP(item.kode)}><FaPen /> Edit</button>
+                                <Link to={'/transaksi/produksi/hpp'} state={{ data: item }} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><FaPlus /> Tambah Biaya</Link>
                             </td>
                         </tr>
                     );

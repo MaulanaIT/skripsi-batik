@@ -1,7 +1,8 @@
 <?php
 require_once '../../../config/connection.php';
 
-$query = "SELECT * FROM hpp_detail_tenaga_kerja";
+$query = "SELECT a.*, b.nama AS nama_tenaga_kerja FROM hpp_detail_tenaga_kerja a 
+INNER JOIN master_tenagakerja b ON a.kode_tenaga_kerja=b.kode";
 
 $result = $conn->query($query);
 

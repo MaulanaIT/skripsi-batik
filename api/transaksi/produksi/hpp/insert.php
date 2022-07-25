@@ -4,7 +4,9 @@ require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
+    $kode_produk = $_POST['kode_produk'];
     $kode_produksi = $_POST['kode_produksi'];
+    $kode_permintaan = $_POST['kode_permintaan'];
     $tanggal_mulai = $_POST['tanggal_mulai'];
     $tanggal_selesai = $_POST['tanggal_selesai'];
     $biaya_bahan_baku = $_POST['biaya_bahan_baku'];
@@ -13,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jumlah = $_POST['jumlah'];
     $hpp = $_POST['hpp'];
 
-    $query = "INSERT INTO hpp(kode, kode_produksi, tanggal_mulai, tanggal_selesai, biaya_bahan_baku, biaya_tenaga_kerja, biaya_overhead_pabrik, jumlah, hpp) VALUES('" . $kode . "', '" . $kode_produksi . "', '" . $tanggal_mulai . "', '" . $tanggal_selesai . "', '" . $biaya_bahan_baku . "', '" . $biaya_tenaga_kerja . "', '" . $biaya_overhead_pabrik . "', '" . $jumlah . "', '" . $hpp . "')";
+    $query = "INSERT INTO hpp(kode, kode_produk, kode_produksi, kode_permintaan, tanggal_mulai, tanggal_selesai, biaya_bahan_baku, biaya_tenaga_kerja, biaya_overhead_pabrik, jumlah, hpp) VALUES('" . $kode . "', '" . $kode_produk . "', '" . $kode_produksi . "', '" . $kode_permintaan . "', '" . $tanggal_mulai . "', '" . $tanggal_selesai . "', '" . $biaya_bahan_baku . "', '" . $biaya_tenaga_kerja . "', '" . $biaya_overhead_pabrik . "', '" . $jumlah . "', '" . $hpp . "')";
 
     $result = $conn->query($query);
 

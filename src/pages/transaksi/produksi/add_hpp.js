@@ -513,12 +513,51 @@ const Add_hpp = (props, ref) => {
         axios.get(`${baseURL}/api/transaksi/produksi/detail-alat/select.php`, config).then(response => {
             let data = response.data.data;
 
-            setValueKodeBiayaAlat(GenerateCode('BOPAlat', data));
-            setHTMLTableDaftarAlat([], () => {
-                $('#table-data-bop-alat').DataTable();
+            if (props.isUpdate && data) {
+                let filter = data.filter(item => item.kode_produksi === props.dataSelected.kode_produksi);
+                let htmlTableDaftarAlat = [];
+                let dataDetailAlat = [];
 
-                HideLoading();
-            });
+                if (filter && filter.length > 0) {
+                    filter.forEach((item, index) => {
+                        htmlTableDaftarAlat.push(
+                            <tr key={index} className={'align-middle'}>
+                                <td>{index + 1}.</td>
+                                <td>{item.kode_alat}</td>
+                                <td>{item.nama_alat}</td>
+                                <td>{item.jumlah}</td>
+                                <td>{item.harga}</td>
+                                <td>{item.total_harga}</td>
+                                <td></td>
+                            </tr>
+                        );
+
+                        dataDetailAlat.push({
+                            tanggal: item.tanggal,
+                            kode_bahan: item.kode_alat,
+                            nama_bahan: item.nama_alat,
+                            jumlah: item.jumlah,
+                            harga: item.harga,
+                            total_harga: item.total_harga
+                        });
+                    });
+                }
+
+                setDataDetailAlat(dataDetailAlat);
+                setValueKodeBiayaAlat(props.dataSelected.kode);
+                setHTMLTableDaftarAlat(htmlTableDaftarAlat, () => {
+                    $('#table-data-bop-alat').DataTable();
+
+                    HideLoading();
+                });
+            } else {
+                setValueKodeBiayaAlat(GenerateCode('BOPAlat', data));
+                setHTMLTableDaftarAlat([], () => {
+                    $('#table-data-bop-alat').DataTable();
+
+                    HideLoading();
+                });
+            }
         }).catch(error => {
             console.log(error);
 
@@ -534,12 +573,51 @@ const Add_hpp = (props, ref) => {
         axios.get(`${baseURL}/api/transaksi/produksi/detail-bahan-baku/select.php`, config).then(response => {
             let data = response.data.data;
 
-            setValueKodeBiayaBahanBaku(GenerateCode('BBB', data));
-            setHTMLTableDaftarBahanBaku([], () => {
-                $('#table-data-biaya-bahan-baku').DataTable();
+            if (props.isUpdate && data) {
+                let filter = data.filter(item => item.kode_produksi === props.dataSelected.kode_produksi);
+                let htmlTableDaftarBahanBaku = [];
+                let dataDetailBahanBaku = [];
 
-                HideLoading();
-            });
+                if (filter && filter.length > 0) {
+                    filter.forEach((item, index) => {
+                        htmlTableDaftarBahanBaku.push(
+                            <tr key={index} className={'align-middle'}>
+                                <td>{index + 1}.</td>
+                                <td>{item.kode_bahan_baku}</td>
+                                <td>{item.nama_bahan_baku}</td>
+                                <td>{item.jumlah}</td>
+                                <td>{item.harga}</td>
+                                <td>{item.total_harga}</td>
+                                <td></td>
+                            </tr>
+                        );
+
+                        dataDetailBahanBaku.push({
+                            tanggal: item.tanggal,
+                            kode_bahan: item.kode_bahan_baku,
+                            nama_bahan: item.nama_bahan_baku,
+                            jumlah: item.jumlah,
+                            harga: item.harga,
+                            total_harga: item.total_harga
+                        });
+                    });
+                }
+
+                setDataDetailBahanBaku(dataDetailBahanBaku);
+                setValueKodeBiayaBahanBaku(props.dataSelected.kode);
+                setHTMLTableDaftarBahanBaku(htmlTableDaftarBahanBaku, () => {
+                    $('#table-data-biaya-bahan-baku').DataTable();
+
+                    HideLoading();
+                });
+            } else {
+                setValueKodeBiayaBahanBaku(GenerateCode('BBB', data));
+                setHTMLTableDaftarBahanBaku([], () => {
+                    $('#table-data-biaya-bahan-baku').DataTable();
+
+                    HideLoading();
+                });
+            }
         }).catch(error => {
             console.log(error);
 
@@ -555,12 +633,51 @@ const Add_hpp = (props, ref) => {
         axios.get(`${baseURL}/api/transaksi/produksi/detail-penolong/select.php`, config).then(response => {
             let data = response.data.data;
 
-            setValueKodeBiayaPenolong(GenerateCode('BBP', data));
-            setHTMLTableDaftarPenolong([], () => {
-                $('#table-data-bop-bahan-penolong').DataTable();
+            if (props.isUpdate && data) {
+                let filter = data.filter(item => item.kode_produksi === props.dataSelected.kode_produksi);
+                let htmlTableDaftarPenolong = [];
+                let dataDetailPenolong = [];
 
-                HideLoading();
-            });
+                if (filter && filter.length > 0) {
+                    filter.forEach((item, index) => {
+                        htmlTableDaftarPenolong.push(
+                            <tr key={index} className={'align-middle'}>
+                                <td>{index + 1}.</td>
+                                <td>{item.kode_penolong}</td>
+                                <td>{item.nama_penolong}</td>
+                                <td>{item.jumlah}</td>
+                                <td>{item.harga}</td>
+                                <td>{item.total_harga}</td>
+                                <td></td>
+                            </tr>
+                        );
+
+                        dataDetailPenolong.push({
+                            tanggal: item.tanggal,
+                            kode_bahan: item.kode_penolong,
+                            nama_bahan: item.nama_penolong,
+                            jumlah: item.jumlah,
+                            harga: item.harga,
+                            total_harga: item.total_harga
+                        });
+                    });
+                }
+
+                setDataDetailPenolong(dataDetailPenolong);
+                setValueKodeBiayaPenolong(props.dataSelected.kode);
+                setHTMLTableDaftarPenolong(htmlTableDaftarPenolong, () => {
+                    $('#table-data-bop-bahan-penolong').DataTable();
+
+                    HideLoading();
+                });
+            } else {
+                setValueKodeBiayaPenolong(GenerateCode('BBP', data));
+                setHTMLTableDaftarPenolong([], () => {
+                    $('#table-data-bop-bahan-penolong').DataTable();
+
+                    HideLoading();
+                });
+            }
         }).catch(error => {
             console.log(error);
 
@@ -576,12 +693,51 @@ const Add_hpp = (props, ref) => {
         axios.get(`${baseURL}/api/transaksi/produksi/detail-tenaga-kerja/select.php`, config).then(response => {
             let data = response.data.data;
 
-            setValueKodeBiayaTenagaKerja(GenerateCode('BTKL', data));
-            setHTMLTableDaftarTenagaKerja([], () => {
-                $('#table-data-biaya-tenaga-kerja').DataTable();
+            if (props.isUpdate && data) {
+                let filter = data.filter(item => item.kode_produksi === props.dataSelected.kode_produksi);
+                let htmlTableDaftarTenagaKerja = [];
+                let dataDetailTenagaKerja = [];
 
-                HideLoading();
-            });
+                if (filter && filter.length > 0) {
+                    filter.forEach((item, index) => {
+                        htmlTableDaftarTenagaKerja.push(
+                            <tr key={index} className={'align-middle'}>
+                                <td>{index + 1}.</td>
+                                <td>{item.kode_tenaga_kerja}</td>
+                                <td>{item.nama_tenaga_kerja}</td>
+                                <td>{item.jumlah}</td>
+                                <td>{item.harga}</td>
+                                <td>{item.total_harga}</td>
+                                <td></td>
+                            </tr>
+                        );
+
+                        dataDetailTenagaKerja.push({
+                            tanggal: item.tanggal,
+                            kode_bahan: item.kode_tenaga_kerja,
+                            nama_bahan: item.nama_tenaga_kerja,
+                            jumlah: item.jumlah,
+                            harga: item.harga,
+                            total_harga: item.total_harga
+                        });
+                    });
+                }
+
+                setDataDetailTenagaKerja(dataDetailTenagaKerja);
+                setValueKodeBiayaTenagaKerja(props.dataSelected.kode);
+                setHTMLTableDaftarTenagaKerja(htmlTableDaftarTenagaKerja, () => {
+                    $('#table-data-biaya-tenaga-kerja').DataTable();
+
+                    HideLoading();
+                });
+            } else {
+                setValueKodeBiayaTenagaKerja(GenerateCode('BTKL', data));
+                setHTMLTableDaftarTenagaKerja([], () => {
+                    $('#table-data-biaya-tenaga-kerja').DataTable();
+
+                    HideLoading();
+                });
+            }
         }).catch(error => {
             console.log(error);
 
@@ -768,11 +924,11 @@ const Add_hpp = (props, ref) => {
                                         <div className='d-flex'>
                                             <div className={`${global.input_group} col-4 pe-2`}>
                                                 <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
-                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} required={true} readOnly={true} />
+                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props.isUpdate ? props.dataSelected.kode_produksi : props.kodeProduksi} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-8 ps-2`}>
                                                 <p className={global.title}>Kode Permintaan Bahan <span className={global.important}>*</span></p>
-                                                <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' value={props?.kodePermintaan ?? ''} required={true} readOnly={true} />
+                                                <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' value={props.isUpdate ? props.dataSelected.kode_permintaan : props.kodePermintaan} required={true} readOnly={true} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
@@ -816,11 +972,11 @@ const Add_hpp = (props, ref) => {
                                         <div className='d-flex'>
                                             <div className={`${global.input_group} col-4 pe-2`}>
                                                 <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
-                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} required={true} readOnly={true} />
+                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props.isUpdate ? props.dataSelected.kode_produksi : props.kodeProduksi} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-8 ps-2`}>
                                                 <p className={global.title}>Kode Permintaan Bahan <span className={global.important}>*</span></p>
-                                                <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' value={props?.kodePermintaan ?? ''} required={true} readOnly={true} />
+                                                <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' value={props.isUpdate ? props.dataSelected.kode_permintaan : props.kodePermintaan} required={true} readOnly={true} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>
@@ -858,7 +1014,7 @@ const Add_hpp = (props, ref) => {
                                             </div>
                                             <div className={`${global.input_group} col-4 px-2`}>
                                                 <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
-                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} required={true} readOnly={true} />
+                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props.isUpdate ? props.dataSelected.kode_produksi : props.kodeProduksi} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 ps-2`}>
                                                 <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
@@ -906,7 +1062,7 @@ const Add_hpp = (props, ref) => {
                                             </div>
                                             <div className={`${global.input_group} col-4 px-2`}>
                                                 <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
-                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props?.kodeProduksi ?? ''} required={true} readOnly={true} />
+                                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props.isUpdate ? props.dataSelected.kode_produksi : props.kodeProduksi} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 ps-2`}>
                                                 <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
