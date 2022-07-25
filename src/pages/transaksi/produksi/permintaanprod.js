@@ -248,36 +248,38 @@ export default function Permintaanprod() {
                 <p className={style.title}>Produksi</p>
                 <p className={style.pathname}>Transaksi / Produksi / Permintaan Produksi</p>
             </div>
-            <div className={style.content}>
-                <div className={`col-12 pe-md-2 pb-2 pb-md-0`}>
-                    <form id='form-data' className={`${global.card}`}>
-                        <div className={`${global.header}`}>
-                            <p className={global.title}>Input Permintaan Produksi Stok</p>
-                        </div>
-                        <div className={`d-flex flex-wrap`}>
-                            <div className={`${global.input_group} col-6 pe-2`}>
-                                <p className={global.title}>Kode Permintaan <span className={global.important}>*</span></p>
-                                <input type="text" id='input-kode-permintaan' name='input-kode-permintaan' value={getValueKodePermintaan} required={true} readOnly={true} />
+            {localStorage.getItem('leksana_jabatan').toLowerCase() !== 'owner' &&
+                <div className={style.content}>
+                    <div className={`col-12 pe-md-2 pb-2 pb-md-0`}>
+                        <form id='form-data' className={`${global.card}`}>
+                            <div className={`${global.header}`}>
+                                <p className={global.title}>Input Permintaan Produksi Stok</p>
                             </div>
-                            <div className={`${global.input_group} col-6 ps-2`}>
-                                <p className={global.title}>Kode Produk <span className={global.important}>*</span></p>
-                                <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={getDataSelectKodeProduk} placeholder={'Select Kode...'} styles={CustomSelect} value={getValueKodeProduk} onChange={SelectProduk} />
+                            <div className={`d-flex flex-wrap`}>
+                                <div className={`${global.input_group} col-6 pe-2`}>
+                                    <p className={global.title}>Kode Permintaan <span className={global.important}>*</span></p>
+                                    <input type="text" id='input-kode-permintaan' name='input-kode-permintaan' value={getValueKodePermintaan} required={true} readOnly={true} />
+                                </div>
+                                <div className={`${global.input_group} col-6 ps-2`}>
+                                    <p className={global.title}>Kode Produk <span className={global.important}>*</span></p>
+                                    <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={getDataSelectKodeProduk} placeholder={'Select Kode...'} styles={CustomSelect} value={getValueKodeProduk} onChange={SelectProduk} />
+                                </div>
                             </div>
-                        </div>
-                        <div className={`d-flex flex-wrap`}>
-                            <div className={`${global.input_group} col-6 pe-2`}>
-                                <p className={global.title}>Nama Produk <span className={global.important}>*</span></p>
-                                <Select id='select-nama-produk' name='select-nama-produk' isClearable={true} isSearchable={true} options={getDataSelectNamaProduk} placeholder={'Select Nama...'} styles={CustomSelect} value={getValueNamaProduk} onChange={SelectProduk} />
+                            <div className={`d-flex flex-wrap`}>
+                                <div className={`${global.input_group} col-6 pe-2`}>
+                                    <p className={global.title}>Nama Produk <span className={global.important}>*</span></p>
+                                    <Select id='select-nama-produk' name='select-nama-produk' isClearable={true} isSearchable={true} options={getDataSelectNamaProduk} placeholder={'Select Nama...'} styles={CustomSelect} value={getValueNamaProduk} onChange={SelectProduk} />
+                                </div>
+                                <div className={`${global.input_group} col-6 ps-2`}>
+                                    <p className={global.title}>Jumlah Produksi <span className={global.important}>*</span></p>
+                                    <input type="text" id='input-jumlah-produksi' name='input-jumlah-produksi' value={getValueJumlah} onChange={e => setValueJumlah(e.target.value)} required={true} />
+                                </div>
                             </div>
-                            <div className={`${global.input_group} col-6 ps-2`}>
-                                <p className={global.title}>Jumlah Produksi <span className={global.important}>*</span></p>
-                                <input type="text" id='input-jumlah-produksi' name='input-jumlah-produksi' value={getValueJumlah} onChange={e => setValueJumlah(e.target.value)} required={true} />
-                            </div>
-                        </div>
-                        <button type='button' className={global.button} onClick={InsertPermintaan}><MdAdd /> Simpan</button>
-                    </form>
+                            <button type='button' className={global.button} onClick={InsertPermintaan}><MdAdd /> Simpan</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            }
             <div className={style.content}>
                 <div className={`${global.card} col-12`}>
                     <div className={`${global.header}`}>
