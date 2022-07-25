@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2022 at 02:25 AM
+-- Generation Time: Jul 25, 2022 at 05:07 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -465,7 +465,9 @@ INSERT INTO `estimasi_pesanan` (`id`, `kode`, `nama`, `tanggal`, `kode_customer`
 CREATE TABLE `hpp` (
   `id` int(11) NOT NULL,
   `kode` varchar(10) NOT NULL,
+  `kode_produk` varchar(10) NOT NULL,
   `kode_produksi` varchar(10) NOT NULL,
+  `kode_permintaan` varchar(10) NOT NULL,
   `tanggal_mulai` date NOT NULL,
   `tanggal_selesai` date NOT NULL,
   `biaya_bahan_baku` decimal(10,2) NOT NULL,
@@ -482,8 +484,8 @@ CREATE TABLE `hpp` (
 -- Dumping data for table `hpp`
 --
 
-INSERT INTO `hpp` (`id`, `kode`, `kode_produksi`, `tanggal_mulai`, `tanggal_selesai`, `biaya_bahan_baku`, `biaya_tenaga_kerja`, `biaya_overhead_pabrik`, `hpp`, `jumlah`, `harga_jual`, `created_at`, `updated_at`) VALUES
-(7, 'HPP0001', 'PS0001', '2022-07-24', '2022-08-03', '10000.00', '100001.00', '16000.00', '126001.00', 5, '0.00', '2022-07-24 03:37:11', '2022-07-24 05:23:18');
+INSERT INTO `hpp` (`id`, `kode`, `kode_produk`, `kode_produksi`, `kode_permintaan`, `tanggal_mulai`, `tanggal_selesai`, `biaya_bahan_baku`, `biaya_tenaga_kerja`, `biaya_overhead_pabrik`, `hpp`, `jumlah`, `harga_jual`, `created_at`, `updated_at`) VALUES
+(7, 'HPP0001', 'PROD0001', 'PS0001', 'PPS0001', '2022-07-24', '2022-08-03', '10000.00', '100001.00', '16000.00', '126001.00', 5, '0.00', '2022-07-24 03:37:11', '2022-07-25 02:37:49');
 
 -- --------------------------------------------------------
 

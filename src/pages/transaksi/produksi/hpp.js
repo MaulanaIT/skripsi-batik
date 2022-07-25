@@ -92,7 +92,7 @@ export default function Hpp() {
         if (location.state === null) {
             setIsUpdateData(false);
         } else {
-            console.log(location.state.data);
+            // console.log(location.state.data);
             setDataSelected(location.state.data);
             setIsUpdateData(true);
         }
@@ -186,7 +186,7 @@ export default function Hpp() {
         const formData = new FormData();
 
         formData.append('kode', getValueKodeHPP);
-        formData.append('kode_produksi', getValueKodeProduk);
+        formData.append('kode_produk', getValueKodeProduk);
         formData.append('kode_produksi', getValueKodeProduksi.value);
         formData.append('kode_permintaan', getValueKodePermintaan);
         formData.append('tanggal_mulai', getValueTanggalMulai);
@@ -547,9 +547,9 @@ export default function Hpp() {
                             </div>
                         </div>
                         {getIsUpdateData ?
-                            <button type='button' className={global.button} onClick={InsertHPP}><MdAdd className='me-2' />  Simpan</button>
-                            :
                             <button type='button' className={global.button} onClick={UpdateHPP}><MdEdit className='me-2' />  Update</button>
+                            :
+                            <button type='button' className={global.button} onClick={InsertHPP}><MdAdd className='me-2' />  Simpan</button>
                         }
                     </form>
                 </div>

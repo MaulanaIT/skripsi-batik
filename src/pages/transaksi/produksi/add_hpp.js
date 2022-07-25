@@ -534,8 +534,8 @@ const Add_hpp = (props, ref) => {
 
                         dataDetailAlat.push({
                             tanggal: item.tanggal,
-                            kode_bahan: item.kode_alat,
-                            nama_bahan: item.nama_alat,
+                            kode_alat: item.kode_alat,
+                            nama_alat: item.nama_alat,
                             jumlah: item.jumlah,
                             harga: item.harga,
                             total_harga: item.total_harga
@@ -654,8 +654,8 @@ const Add_hpp = (props, ref) => {
 
                         dataDetailPenolong.push({
                             tanggal: item.tanggal,
-                            kode_bahan: item.kode_penolong,
-                            nama_bahan: item.nama_penolong,
+                            kode_penolong: item.kode_penolong,
+                            nama_penolong: item.nama_penolong,
                             jumlah: item.jumlah,
                             harga: item.harga,
                             total_harga: item.total_harga
@@ -714,8 +714,8 @@ const Add_hpp = (props, ref) => {
 
                         dataDetailTenagaKerja.push({
                             tanggal: item.tanggal,
-                            kode_bahan: item.kode_tenaga_kerja,
-                            nama_bahan: item.nama_tenaga_kerja,
+                            kode_tenaga_kerja: item.kode_tenaga_kerja,
+                            nama_tenaga_kerja: item.nama_tenaga_kerja,
                             jumlah: item.jumlah,
                             harga: item.harga,
                             total_harga: item.total_harga
@@ -1151,8 +1151,8 @@ const Add_hpp = (props, ref) => {
                                         <thead className='text-nowrap'>
                                             <tr>
                                                 <td>No.</td>
-                                                <td>Kode Alat</td>
-                                                <td>Nama Alat</td>
+                                                <td>Kode Tenaga Kerja</td>
+                                                <td>Nama Tenaga Kerja</td>
                                                 <td>Tarif</td>
                                                 <td>Pemakaian</td>
                                                 <td>Biaya</td>
