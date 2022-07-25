@@ -22,7 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $response['data'][] = $row;
+                if ($row["kode"] != null) {
+                    $response['data'][] = $row;
+                }
             }
         } else {
             $response['data'] = [];

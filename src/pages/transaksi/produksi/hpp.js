@@ -221,11 +221,11 @@ export default function Hpp() {
 
             if (getIsUpdateData) {
                 formData.append('kode', getDataSelected.kode_produksi);
-                formData.append('status', 1);
+                formData.append('status', 0);
                 formData.append('jenis_produksi', getDataSelected.kode_produksi.includes('PS') ? 'stok' : getValueKodeProduksi?.value?.includes('PP') && 'pesanan');
             } else {
                 formData.append('kode', getValueKodeProduksi.value);
-                formData.append('status', 1);
+                formData.append('status', 0);
                 formData.append('jenis_produksi', getValueKodeProduksi?.value?.includes('PS') ? 'stok' : getValueKodeProduksi?.value?.includes('PP') && 'pesanan');
             }
 

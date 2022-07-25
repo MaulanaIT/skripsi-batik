@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response['status'] = 200;
         $response['data'] = [];
 
-        if ($status == 2) {
+        if ($status == 1) {
             $query = "UPDATE master_inventory_produk SET hpp_per_produk=(((hpp_per_produk*jumlah)+(".$hpp_per_produk."*".$jumlah."))/(jumlah+".$jumlah.")), jumlah=(jumlah+".$jumlah."), harga_jual='".$harga_jual."' WHERE kode='".$kode_produk."'";
 
             $result = $conn->query($query);

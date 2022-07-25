@@ -38,6 +38,8 @@ export default function Daftar_produksi() {
             axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/select.php`, formData, config).then(response => {
                 let data = response.data.data;
 
+                data.splice(data.findIndex(item => item.kode === null), 1);
+
                 if (data && data.length > 0 && jenis === 'stok') {
                     data.forEach((item, index) => {
                         htmlTableDaftarStok.push(
@@ -121,10 +123,10 @@ export default function Daftar_produksi() {
         formData.append('jumlah', data.jumlah);
         formData.append('hpp_per_produk', data.hpp_per_produk);
         formData.append('harga_jual', data.harga_jual);
-        formData.append('status', 2);
+        formData.append('status', 1);
         formData.append('jenis_produksi', jenis);
 
-        axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/update.php`, formData, config).then(response => {
+        axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/update.php`, formData, config).then(() => {
             window.location.reload();
         }).catch(error => {
             console.log(error);
