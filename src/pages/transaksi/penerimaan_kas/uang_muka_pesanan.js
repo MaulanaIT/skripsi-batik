@@ -246,6 +246,10 @@ export default function Uang_muka_pesanan() {
                                 <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
                                 <input type="text" id='input-total-harga-beli' value={getValueTotalHarga} required={true} readOnly={true} />
                             </div>
+                            <div className={`${global.input_group} col-3 ps-2`}>
+                                <p className={global.title}>HPP</p>
+                                <input type="text" id='input-total-harga-beli' value={getValueTotalHarga} readOnly={true} />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -277,8 +281,12 @@ export default function Uang_muka_pesanan() {
                             <input type="text" id='input-detail-total-jual' className={`col-4`} value={getValueTotalJual} required={true} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
-                            <p className={`${global.title} col-3`}>Diskon <span className={global.important}>*</span></p>
-                            <input type="text" id='input-detail-diskon' className={'col-4'} value={getValueDiskon} onChange={e => setValueDiskon(e.target.value)} required={true} />
+                            <p className={`${global.title} col-3`}>Harga Pokok Penjualan</p>
+                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={getValueTotalJual} readOnly={true} />
+                        </div>
+                        <div className={`align-items-center ${global.input_group_row}`}>
+                            <p className={`${global.title} col-3`}>Diskon</p>
+                            <input type="text" id='input-detail-diskon' className={'col-4'} value={getValueDiskon} onChange={e => setValueDiskon(e.target.value)} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Ongkos Kirim <span className={global.important}>*</span></p>
