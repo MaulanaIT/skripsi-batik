@@ -144,6 +144,9 @@ const Add_hpp = (props, ref) => {
         setValueHarga(dataSelected?.upah ?? 0);
     }, [getValueKodeTenagaKerja, getValueNamaTenagaKerja]);
 
+    useEffect(() => {
+        if (props?.isUpdate) SaveDetail();
+    }, [getDataDetailAlat, getDataDetailBahanBaku, getDataDetailPenolong, getDataDetailTenagaKerja]);
 
     useImperativeHandle(ref, () => ({
         InsertDetailAlat, InsertDetailBahanBaku, InsertDetailPenolong, InsertDetailTenagaKerja
@@ -517,9 +520,12 @@ const Add_hpp = (props, ref) => {
                 let filter = data.filter(item => item.kode_produksi === props.dataSelected.kode_produksi);
                 let htmlTableDaftarAlat = [];
                 let dataDetailAlat = [];
+                let kodeBiayaAlat = '';
 
                 if (filter && filter.length > 0) {
                     filter.forEach((item, index) => {
+                        kodeBiayaAlat = item.kode;
+
                         htmlTableDaftarAlat.push(
                             <tr key={index} className={'align-middle'}>
                                 <td>{index + 1}.</td>
@@ -544,7 +550,7 @@ const Add_hpp = (props, ref) => {
                 }
 
                 setDataDetailAlat(dataDetailAlat);
-                setValueKodeBiayaAlat(props.dataSelected.kode);
+                setValueKodeBiayaAlat(kodeBiayaAlat);
                 setHTMLTableDaftarAlat(htmlTableDaftarAlat, () => {
                     $('#table-data-bop-alat').DataTable();
 
@@ -577,9 +583,12 @@ const Add_hpp = (props, ref) => {
                 let filter = data.filter(item => item.kode_produksi === props.dataSelected.kode_produksi);
                 let htmlTableDaftarBahanBaku = [];
                 let dataDetailBahanBaku = [];
+                let kodeBiayaBahanBaku = '';
 
                 if (filter && filter.length > 0) {
                     filter.forEach((item, index) => {
+                        kodeBiayaBahanBaku = item.kode;
+
                         htmlTableDaftarBahanBaku.push(
                             <tr key={index} className={'align-middle'}>
                                 <td>{index + 1}.</td>
@@ -604,7 +613,7 @@ const Add_hpp = (props, ref) => {
                 }
 
                 setDataDetailBahanBaku(dataDetailBahanBaku);
-                setValueKodeBiayaBahanBaku(props.dataSelected.kode);
+                setValueKodeBiayaBahanBaku(kodeBiayaBahanBaku);
                 setHTMLTableDaftarBahanBaku(htmlTableDaftarBahanBaku, () => {
                     $('#table-data-biaya-bahan-baku').DataTable();
 
@@ -637,9 +646,12 @@ const Add_hpp = (props, ref) => {
                 let filter = data.filter(item => item.kode_produksi === props.dataSelected.kode_produksi);
                 let htmlTableDaftarPenolong = [];
                 let dataDetailPenolong = [];
+                let kodeBiayaPenolong = '';
 
                 if (filter && filter.length > 0) {
                     filter.forEach((item, index) => {
+                        kodeBiayaPenolong = item.kode;
+
                         htmlTableDaftarPenolong.push(
                             <tr key={index} className={'align-middle'}>
                                 <td>{index + 1}.</td>
@@ -664,7 +676,7 @@ const Add_hpp = (props, ref) => {
                 }
 
                 setDataDetailPenolong(dataDetailPenolong);
-                setValueKodeBiayaPenolong(props.dataSelected.kode);
+                setValueKodeBiayaPenolong(kodeBiayaPenolong);
                 setHTMLTableDaftarPenolong(htmlTableDaftarPenolong, () => {
                     $('#table-data-bop-bahan-penolong').DataTable();
 
@@ -697,9 +709,12 @@ const Add_hpp = (props, ref) => {
                 let filter = data.filter(item => item.kode_produksi === props.dataSelected.kode_produksi);
                 let htmlTableDaftarTenagaKerja = [];
                 let dataDetailTenagaKerja = [];
+                let kodeBiayaTenagaKerja = '';
 
                 if (filter && filter.length > 0) {
                     filter.forEach((item, index) => {
+                        kodeBiayaTenagaKerja = item.kode;
+
                         htmlTableDaftarTenagaKerja.push(
                             <tr key={index} className={'align-middle'}>
                                 <td>{index + 1}.</td>
@@ -724,7 +739,7 @@ const Add_hpp = (props, ref) => {
                 }
 
                 setDataDetailTenagaKerja(dataDetailTenagaKerja);
-                setValueKodeBiayaTenagaKerja(props.dataSelected.kode);
+                setValueKodeBiayaTenagaKerja(kodeBiayaTenagaKerja);
                 setHTMLTableDaftarTenagaKerja(htmlTableDaftarTenagaKerja, () => {
                     $('#table-data-biaya-tenaga-kerja').DataTable();
 

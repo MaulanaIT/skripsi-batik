@@ -176,7 +176,7 @@ export default function Uang_muka_pesanan() {
             formData.append('jenis_penjualan', 'pesanan');
 
             axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/insert.php`, formData, config).then((response) => {
-                window.location.href = '/transaksi/penjualan/daftar-pesanan';
+                window.location.href = '/#/transaksi/penjualan/daftar-pesanan';
             }).catch(error => {
                 console.log(error);
 

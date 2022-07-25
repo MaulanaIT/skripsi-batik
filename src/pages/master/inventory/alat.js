@@ -45,7 +45,7 @@ export class alat extends Component {
         formData.append('bop', GetValue('input-tarif-bop'));
 
         axios.post(`${baseURL}/api/master/inventory/alat/insert.php`, formData, config).then(() => {
-            window.location.href = '/master/inventory/daftar-alat';
+            window.location.href = '/#/master/inventory/daftar-alat';
         }).catch(error => {
             console.log(error);
 

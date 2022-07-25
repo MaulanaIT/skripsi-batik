@@ -154,7 +154,7 @@ export default function Jual_pesan() {
         formData.append('nama_file', `File Uang Muka - ${getValueKodeJual} - ${getValueTanggal}.${extension}`);
 
         axios.post(`${baseURL}/api/transaksi/penjualan/penyerahan-pesanan/insert.php`, formData, config).then(() => {
-            window.location.href = '/transaksi/penjualan/daftar-pesanan';
+            window.location.href = '/#/transaksi/penjualan/daftar-pesanan';
         }).catch(error => {
             console.log(error);
 

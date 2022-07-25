@@ -43,7 +43,7 @@ export class bahan_penolong extends Component {
         formData.append('harga', GetValue('input-harga-bahan-penolong'));
 
         axios.post(`${baseURL}/api/master/inventory/bahan-penolong/insert.php`, formData, config).then(() => {
-            window.location.href = '/master/inventory/daftar-bahan-penolong';
+            window.location.href = '/#/master/inventory/daftar-bahan-penolong';
         }).catch(error => {
             console.log(error);
 

@@ -12,7 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode($_POST['data']);
 
     foreach ($data as $key) {
-        $query = "INSERT INTO hpp_detail_alat(kode, kode_hpp, kode_produksi, kode_permintaan, kode_alat, tanggal, harga, jumlah, total_harga) VALUES('" . $kode . "', '" . $kode_hpp . "', '" . $kode_produksi . "', '" . $kode_permintaan . "', '" . $key->kode_alat . "', '" . $tanggal . "', '" . $key->harga . "', '" . $key->jumlah . "', '" . $key->total_harga . "')";
+        $query = "INSERT INTO hpp_detail_alat(kode, kode_hpp, kode_produksi, kode_permintaan, kode_alat, tanggal, harga, jumlah, total_harga) VALUES('" . $kode . "', '" . $kode_hpp . "', '" . $kode_produksi . "', '" . $kode_permintaan . "', '" . $key->kode_alat . "', '" . $tanggal . "', '" . $key->harga . "', '" . $key->jumlah . "', '" . $key->total_harga . "')
+        ON DUPLICATE KEY UPDATE
+        jumlah='".$key->jumlah."', total_harga='".$key->total_harga."'";
 
         $result = $conn->query($query);
 

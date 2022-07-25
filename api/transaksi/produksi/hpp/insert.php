@@ -15,7 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jumlah = $_POST['jumlah'];
     $hpp = $_POST['hpp'];
 
-    $query = "INSERT INTO hpp(kode, kode_produk, kode_produksi, kode_permintaan, tanggal_mulai, tanggal_selesai, biaya_bahan_baku, biaya_tenaga_kerja, biaya_overhead_pabrik, jumlah, hpp) VALUES('" . $kode . "', '" . $kode_produk . "', '" . $kode_produksi . "', '" . $kode_permintaan . "', '" . $tanggal_mulai . "', '" . $tanggal_selesai . "', '" . $biaya_bahan_baku . "', '" . $biaya_tenaga_kerja . "', '" . $biaya_overhead_pabrik . "', '" . $jumlah . "', '" . $hpp . "')";
+    $query = "INSERT INTO hpp(kode, kode_produk, kode_produksi, kode_permintaan, tanggal_mulai, tanggal_selesai, biaya_bahan_baku, biaya_tenaga_kerja, biaya_overhead_pabrik, jumlah, hpp) 
+            VALUES('" . $kode . "', '" . $kode_produk . "', '" . $kode_produksi . "', '" . $kode_permintaan . "', '" . $tanggal_mulai . "', '" . $tanggal_selesai . "', '" . $biaya_bahan_baku . "', '" . $biaya_tenaga_kerja . "', '" . $biaya_overhead_pabrik . "', '" . $jumlah . "', '" . $hpp . "')
+        ON DUPLICATE KEY UPDATE
+        biaya_bahan_baku='" . $biaya_bahan_baku . "', biaya_tenaga_kerja='" . $biaya_tenaga_kerja . "', biaya_overhead_pabrik='".$biaya_overhead_pabrik."', hpp='".$hpp."'";
 
     $result = $conn->query($query);
 

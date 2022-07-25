@@ -157,7 +157,7 @@ export default function Pengembalian_dana() {
         formData.append('kode_akun', getValueSelectedAkun.value);
 
         axios.post(`${baseURL}/api/transaksi/pembelian/refund/insert.php`, formData, config).then(() => {
-            window.location.href = '/transaksi/pembelian/daftar-retur';
+            window.location.href = '/#/transaksi/pembelian/daftar-retur';
         }).catch(error => {
             console.log(error);
 

@@ -413,7 +413,7 @@ export class order_pembelian extends Component {
         }
 
         axios.post(`${baseURL}/api/transaksi/pembelian/order/insert.php`, formData, config).then(() => {
-            window.location.href = '/transaksi/pembelian/daftar-order';
+            window.location.href = '/#/transaksi/pembelian/daftar-order';
         }).catch(error => {
             console.log(error);
 

@@ -232,7 +232,7 @@ export default function Produksi() {
         }
 
         axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/insert.php`, formData, config).then(() => {
-            window.location.href = '/transaksi/produksi/daftar-produksi';
+            window.location.href = '/#/transaksi/produksi/daftar-produksi';
         }).catch(error => {
             console.log(error);
 

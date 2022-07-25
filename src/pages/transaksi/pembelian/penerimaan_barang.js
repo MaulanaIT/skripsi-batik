@@ -132,7 +132,7 @@ export default function Penerimaan_barang() {
             formData.append('status', 3);
 
             axios.post(`${baseURL}/api/transaksi/pembelian/order/update-status.php`, formData, config).then(() => {
-                window.location.href = '/transaksi/pembelian/daftar-terima-barang';
+                window.location.href = '/#/transaksi/pembelian/daftar-terima-barang';
             }).catch(error => {
                 console.log(error)
 

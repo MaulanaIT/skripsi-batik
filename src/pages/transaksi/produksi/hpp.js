@@ -92,7 +92,7 @@ export default function Hpp() {
         if (location.state === null) {
             setIsUpdateData(false);
         } else {
-            // console.log(location.state.data);
+            console.log(location.state.data);
             setDataSelected(location.state.data);
             setIsUpdateData(true);
         }
@@ -185,17 +185,31 @@ export default function Hpp() {
 
         const formData = new FormData();
 
-        formData.append('kode', getValueKodeHPP);
-        formData.append('kode_produk', getValueKodeProduk);
-        formData.append('kode_produksi', getValueKodeProduksi.value);
-        formData.append('kode_permintaan', getValueKodePermintaan);
-        formData.append('tanggal_mulai', getValueTanggalMulai);
-        formData.append('tanggal_selesai', getValueTanggalSelesai);
-        formData.append('biaya_bahan_baku', getValueBiayaBahanBaku);
-        formData.append('biaya_tenaga_kerja', getValueBiayaTenagaKerja);
-        formData.append('biaya_overhead_pabrik', getValueBiayaOverheadPabrik);
-        formData.append('jumlah', getValueJumlah);
-        formData.append('hpp', getValueHPP);
+        if (getIsUpdateData) {
+            formData.append('kode', getDataSelected.kode);
+            formData.append('kode_produk', getDataSelected.kode_produk);
+            formData.append('kode_produksi', getDataSelected.kode_produksi);
+            formData.append('kode_permintaan', getDataSelected.kode_permintaan);
+            formData.append('tanggal_mulai', getDataSelected.tanggal_mulai);
+            formData.append('tanggal_selesai', getDataSelected.tanggal_selesai);
+            formData.append('biaya_bahan_baku', getValueBiayaBahanBaku);
+            formData.append('biaya_tenaga_kerja', getValueBiayaTenagaKerja);
+            formData.append('biaya_overhead_pabrik', getValueBiayaOverheadPabrik);
+            formData.append('jumlah', getDataSelected.jumlah);
+            formData.append('hpp', getValueHPP);
+        } else {
+            formData.append('kode', getValueKodeHPP);
+            formData.append('kode_produk', getValueKodeProduk);
+            formData.append('kode_produksi', getValueKodeProduksi.value);
+            formData.append('kode_permintaan', getValueKodePermintaan);
+            formData.append('tanggal_mulai', getValueTanggalMulai);
+            formData.append('tanggal_selesai', getValueTanggalSelesai);
+            formData.append('biaya_bahan_baku', getValueBiayaBahanBaku);
+            formData.append('biaya_tenaga_kerja', getValueBiayaTenagaKerja);
+            formData.append('biaya_overhead_pabrik', getValueBiayaOverheadPabrik);
+            formData.append('jumlah', getValueJumlah);
+            formData.append('hpp', getValueHPP);
+        }
 
         await axios.post(`${baseURL}/api/transaksi/produksi/hpp/insert.php`, formData, config).then(async () => {
             await addReff.current?.InsertDetailAlat();
@@ -205,12 +219,18 @@ export default function Hpp() {
 
             const formData = new FormData();
 
-            formData.append('kode', getValueKodeProduksi.value);
-            formData.append('status', 1);
-            formData.append('jenis_produksi', getValueKodeProduksi?.value?.includes('PS') ? 'stok' : getValueKodeProduksi?.value?.includes('PP') && 'pesanan');
+            if (getIsUpdateData) {
+                formData.append('kode', getDataSelected.kode_produksi);
+                formData.append('status', 1);
+                formData.append('jenis_produksi', getDataSelected.kode_produksi.includes('PS') ? 'stok' : getValueKodeProduksi?.value?.includes('PP') && 'pesanan');
+            } else {
+                formData.append('kode', getValueKodeProduksi.value);
+                formData.append('status', 1);
+                formData.append('jenis_produksi', getValueKodeProduksi?.value?.includes('PS') ? 'stok' : getValueKodeProduksi?.value?.includes('PP') && 'pesanan');
+            }
 
             axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/update.php`, formData, config).then(() => {
-                window.location.href = '/transaksi/produksi/daftar-hpp';
+                window.location.href = '/#/transaksi/produksi/daftar-hpp';
             }).catch(error => {
                 console.log(error);
 
@@ -337,10 +357,6 @@ export default function Hpp() {
         setValueBiayaTenagaKerja(TenagaKerja);
         setValueBiayaOverheadPabrik(Overhead);
         setValueHPP(+BahanBaku + +TenagaKerja + +Overhead);
-    }
-
-    const UpdateHPP = () => {
-
     }
 
     return (
@@ -529,25 +545,25 @@ export default function Hpp() {
                         <div className={`${bootstrap['d-flex']}`}>
                             <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Biaya Bahan Baku <span className={global.important}>*</span></p>
-                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getIsUpdateData ? getDataSelected.biaya_bahan_baku : getValueBiayaBahanBaku} required={true} readOnly={true} />
+                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueBiayaBahanBaku} required={true} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-4 px-2`}>
                                 <p className={global.title}>Biaya Tenaga Kerja <span className={global.important}>*</span></p>
-                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getIsUpdateData ? getDataSelected.biaya_tenaga_kerja : getValueBiayaTenagaKerja} required={true} readOnly={true} />
+                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueBiayaTenagaKerja} required={true} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-4 ps-2`}>
                                 <p className={global.title}>Biaya Overhead <span className={global.important}>*</span></p>
-                                <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' value={getIsUpdateData ? getDataSelected.biaya_overhead_pabrik : getValueBiayaOverheadPabrik} required={true} readOnly={true} />
+                                <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' value={getValueBiayaOverheadPabrik} required={true} readOnly={true} />
                             </div>
                         </div>
                         <div className={`${bootstrap['d-flex']}`}>
                             <div className={`${global.input_group} col-4`}>
                                 <p className={`${global.title} fw-bold`} style={{ fontSize: 18 }}>Harga Pokok Produksi <span className={global.important}>*</span></p>
-                                <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' value={getIsUpdateData ? getDataSelected.hpp : getValueHPP} required={true} readOnly={true} />
+                                <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' value={getValueHPP} required={true} readOnly={true} />
                             </div>
                         </div>
                         {getIsUpdateData ?
-                            <button type='button' className={global.button} onClick={UpdateHPP}><MdEdit className='me-2' />  Update</button>
+                            <button type='button' className={global.button} onClick={InsertHPP}><MdEdit className='me-2' />  Update</button>
                             :
                             <button type='button' className={global.button} onClick={InsertHPP}><MdAdd className='me-2' />  Simpan</button>
                         }

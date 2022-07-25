@@ -105,7 +105,7 @@ export default function Produk() {
         formData.append('harga_jual', getValueHargaJualProduk);
 
         axios.post(`${baseURL}/api/master/inventory/produk/insert.php`, formData, config).then(() => {
-            window.location.href = '/master/inventory/daftar-produk';
+            window.location.href = '/#/master/inventory/daftar-produk';
         }).catch(error => {
             console.log(error);
 

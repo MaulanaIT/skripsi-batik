@@ -78,7 +78,7 @@ export class akun extends Component {
         formData.append('jenis', this.state.valueJenisAkun.value.toLowerCase());
 
         axios.post(`${baseURL}/api/master/akun/insert.php`, formData, config).then(() => {
-            window.location.href = '/master/daftar-akun';
+            window.location.href = '/#/master/daftar-akun';
         }).catch(error => {
             console.log(error);
 

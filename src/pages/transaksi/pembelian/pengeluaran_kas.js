@@ -235,7 +235,7 @@ export default function Pengeluaran_kas() {
             formDetailData.append('data', JSON.stringify(getDataDetailPembelian));
 
             axios.post(`${baseURL}/api/transaksi/pembelian/detail-pengeluaran-kas/insert.php`, formDetailData, config).then(() => {
-                window.location.href = '/transaksi/pembelian/daftar-terima-barang';
+                window.location.href = '/#/transaksi/pembelian/daftar-terima-barang';
             }).catch(error => {
                 console.log(error);
 

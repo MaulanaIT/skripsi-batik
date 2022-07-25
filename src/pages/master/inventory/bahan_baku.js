@@ -43,7 +43,7 @@ export class bahan_baku extends Component {
         formData.append('harga', GetValue('input-harga-bahan-baku'));
 
         axios.post(`${baseURL}/api/master/inventory/bahan-baku/insert.php`, formData, config).then(() => {
-            window.location.href = '/master/inventory/daftar-bahan-baku';
+            window.location.href = '/#/master/inventory/daftar-bahan-baku';
         }).catch(error => {
             console.log(error);
 
