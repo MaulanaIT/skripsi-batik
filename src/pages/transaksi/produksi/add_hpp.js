@@ -79,7 +79,7 @@ const Add_hpp = (props, ref) => {
     const [getValueKodeAlat, setValueKodeAlat] = useState([]);
     const [getValueNamaAlat, setValueNamaAlat] = useState([]);
     const [getValueBahanBaku, setValueBahanBaku] = useState([]);
-    const [getValueDepartemen, setValueDepartemen] = useState([]);
+    const [getValueDepartemen, setValueDepartemen] = useState('');
     const [getValueHarga, setValueHarga] = useState(0);
     const [getValueJumlah, setValueJumlah] = useState(0);
     const [getValueKodeBiayaAlat, setValueKodeBiayaAlat] = useState('');
@@ -95,7 +95,6 @@ const Add_hpp = (props, ref) => {
     const [getSelectedTab, setSelectedTab] = useState(0);
 
     useEffect(() => {
-        console.log(props.dataSelected);
         GetAlat();
         GetBahanBaku();
         GetPenolong();
@@ -104,6 +103,8 @@ const Add_hpp = (props, ref) => {
         GetDetailBahanBaku();
         GetDetailPenolong();
         GetDetailTenagaKerja();
+
+        setValueDepartemen(localStorage.getItem('leksana_jabatan'));
     }, []);
 
     useEffect(() => {
@@ -478,7 +479,7 @@ const Add_hpp = (props, ref) => {
         ShowLoading();
 
         axios.get(`${baseURL}/api/master/tenaga-kerja/select.php`, config).then(response => {
-            let data = response.data.data;
+            let data = response.data.data.filter(item => item.departemen === localStorage.getItem('leksana_jabatan'));
 
             let dataSelectKodeTenagaKerja = [];
             let dataSelectNamaTenagaKerja = [];
@@ -781,7 +782,7 @@ const Add_hpp = (props, ref) => {
         formData.append('tanggal', getValueTanggal);
         formData.append('data', JSON.stringify(getDataDetailAlat));
 
-        axios.post(`${baseURL}/api/transaksi/produksi/detail-alat/insert.php`, formData, config).then(response => {
+        axios.post(`${baseURL}/api/transaksi/produksi/detail-alat/insert.php`, formData, config).then(() => {
             HideLoading();
         }).catch(error => {
             console.log(error);
@@ -1124,12 +1125,7 @@ const Add_hpp = (props, ref) => {
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-8 pe-2`}>
                                                 <p className={global.title}>Departemen <span className={global.important}>*</span></p>
-                                                <Select id='select-departemen' name='select-departemen' isClearable={true} isSearchable={true} options={[
-                                                    { value: 'Desain', label: 'Desain' },
-                                                    { value: 'Canting/Cap', label: 'Canting/Cap' },
-                                                    { value: 'Warna', label: 'Warna' },
-                                                    { value: 'Packing', label: 'Packing' }
-                                                ]} placeholder={'Select Departemen...'} value={getValueDepartemen} styles={CustomSelect} onChange={e => setValueDepartemen(e)} />
+                                                <input type="text" id='input-departemen' name='input-departemen' value={getValueDepartemen} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 ps-2`}>
                                                 <p className={global.title}>Upah <span className={global.important}>*</span></p>

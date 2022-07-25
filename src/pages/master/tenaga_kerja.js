@@ -138,8 +138,8 @@ export default function Tenaga_kerja() {
                                 <div id={`data-departemen-${item.kode}`} className={`data-${item.kode}`}>{item.departemen}</div>
                                 <div className={global.input_group_row}>
                                     <select name={`edit-departemen-${item.kode}`} id={`edit-departemen-${item.kode}`} className={`edit-${item.kode} d-none`}>
-                                        <option value="Desain">Desain</option>
-                                        <option value="Canting/Cap">Canting/Cap</option>
+                                        <option value="Designer">Designer</option>
+                                        <option value="Cap/Canting">Cap/Canting</option>
                                         <option value="Pewarnaan">Pewarnaan</option>
                                         <option value="Packing">Packing</option>
                                     </select>
@@ -225,8 +225,8 @@ export default function Tenaga_kerja() {
                     <div className={`${global.input_group_row}`}>
                         <p className={`${global.title} col-3`}>Departemen <span className={global.important}>*</span></p>
                         <Select id='select-departemen-tenaga-kerja' name='select-departemen-tenaga-kerja' isClearable={true} isSearchable={true} options={[
-                            { value: 'Desain', label: 'Desain' },
-                            { value: 'Canting/Cap', label: 'Canting/Cap' },
+                            { value: 'Designer', label: 'Designer' },
+                            { value: 'Cap/Canting', label: 'Cap/Canting' },
                             { value: 'Pewarnaan', label: 'Pewarnaan' },
                             { value: 'Packing', label: 'Packing' }
                         ]} placeholder={'Pilih Departemen...'} value={getValueDepartemen} styles={CustomSelect} onChange={e => setValueDepartemen(e)} required={true} />

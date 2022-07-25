@@ -69,6 +69,10 @@ export default function Daftar_produksi() {
                     setHTMLTableDaftarStok(htmlTableDaftarStok, () => {
                         $(`#table-data-stok`).DataTable();
                     });
+                } else {
+                    setHTMLTableDaftarStok([], () => {
+                        $(`#table-data-stok`).DataTable();
+                    });
                 }
 
                 if (data && data.length > 0 && jenis === 'pesanan') {
@@ -98,6 +102,10 @@ export default function Daftar_produksi() {
                     });
 
                     setHTMLTableDaftarPesanan(htmlTableDaftarPesanan, () => {
+                        $(`#table-data-pesanan`).DataTable();
+                    });
+                } else {
+                    setHTMLTableDaftarPesanan([], () => {
                         $(`#table-data-pesanan`).DataTable();
                     });
                 }
@@ -151,13 +159,13 @@ export default function Daftar_produksi() {
                     <div className={`${global.item} ${getSelectedTab === 1 ? global.active : ''}`} onClick={() => setSelectedTab(1)}>
                         <p className={`${global.name}`}>Produksi Pesanan</p>
                     </div>
-                    {localStorage.getItem('leksana_jabatan').toLowerCase() === 'designer' &&
+                    {(localStorage.getItem('leksana_jabatan').toLowerCase() === 'designer' || localStorage.getItem('leksana_jabatan').toLowerCase() === 'super admin') &&
                         <Link to={'/transaksi/produksi/produksi'} className={`${global.button} ms-auto`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
                     }
                 </div>
                 <div className={`${global.card} col-12`}>
                     <div className={`${global.header}`}>
-                        <p className={global.title}>Daftar Perencanaan Produksi Stok</p>
+                        <p className={global.title}>Daftar Perencanaan Produksi {getSelectedTab === 0 ? 'Stok' : 'Pesanan'}</p>
                     </div>
                     <div className={`table-responsive ${getSelectedTab === 1 && 'd-none'}`}>
                         <table id='table-data-stok' className={`table w-100`}>

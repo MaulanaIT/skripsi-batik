@@ -83,7 +83,9 @@ export default function Daftar_hpp() {
                             <td className={cx([global.table_action, 'text-nowrap'])}>
                                 <button type='button' id={`button-apply-${item.kode}`} className={cx([global.apply, `d-none edit-${item.kode}`])} onClick={() => ApplyHPP(item.kode)}><FaCheck /> Apply</button>
                                 <button type='button' id={`button-edit-${item.kode}`} className={cx([global.edit, `data-${item.kode}`])} onClick={() => EditHPP(item.kode)}><FaPen /> Edit</button>
-                                <Link to={'/transaksi/produksi/hpp'} state={{ data: item }} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><FaPlus /> Tambah Biaya</Link>
+                                {localStorage.getItem('leksana_jabatan').toLowerCase() !== 'owner' &&
+                                    <Link to={'/transaksi/produksi/hpp'} state={{ data: item }} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><FaPlus /> Tambah Biaya</Link>
+                                }
                             </td>
                         </tr>
                     );
@@ -114,7 +116,7 @@ export default function Daftar_hpp() {
                 <div className={`${global.card} col-12`}>
                     <div className={`${global.header}`}>
                         <p className={global.title}>Daftar Proses Produksi</p>
-                        {['designer', 'cap/canting', 'pewarnaan', 'packing'].some(item => item === localStorage.getItem('leksana_jabatan').toLowerCase()) &&
+                        {['designer', 'cap/canting', 'pewarnaan', 'packing', 'super admin'].some(item => item === localStorage.getItem('leksana_jabatan').toLowerCase()) &&
                             <Link to={'/transaksi/produksi/hpp'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
                         }
                     </div>

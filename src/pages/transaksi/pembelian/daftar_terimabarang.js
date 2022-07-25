@@ -52,7 +52,7 @@ export class daftar_terimabarang extends Component {
                             <td>
                                 <div id={`data-total-barang-${item.id}`} className={`data-${item.id}`}>{item.total_barang}</div>
                             </td>
-                            {jabatan === 'admin, keuangan' &&
+                            {(jabatan === 'admin, keuangan' || jabatan === 'super admin') &&
                                 <td className={global.table_action}>
                                     {item.status === '0' ?
                                         <Link to={'/transaksi/pembelian/pengeluaran-kas'} state={{ kode: item.kode_order }} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}>Bayar</Link>
@@ -103,7 +103,7 @@ export class daftar_terimabarang extends Component {
                                         <td>Kode Supplier</td>
                                         <td>Nama Supplier</td>
                                         <td>Total Barang</td>
-                                        {localStorage.getItem('leksana_jabatan').toLowerCase() === 'admin, keuangan' &&
+                                        {(localStorage.getItem('leksana_jabatan').toLowerCase() === 'admin, keuangan' || localStorage.getItem('leksana_jabatan').toLowerCase() === 'super admin') &&
                                             <td>Aksi</td>
                                         }
                                     </tr>
