@@ -439,7 +439,7 @@ export default function Sidebar(props) {
                         </li>
                     </React.Fragment>
                 }
-                {props.jabatan.toLowerCase() === 'cap/canting' || props.jabatan.toLowerCase() === 'pewarnaan' || props.jabatan.toLowerCase() === 'packing'&&
+                {(props.jabatan.toLowerCase() === 'cap/canting' || props.jabatan.toLowerCase() === 'pewarnaan' || props.jabatan.toLowerCase() === 'packing') &&
                     <React.Fragment>
                         <li>
                             <Link to={'/dashboard'}>
