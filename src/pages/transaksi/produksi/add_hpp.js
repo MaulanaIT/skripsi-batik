@@ -95,6 +95,7 @@ const Add_hpp = (props, ref) => {
     const [getSelectedTab, setSelectedTab] = useState(0);
 
     useEffect(() => {
+        console.log(props.dataSelected);
         GetAlat();
         GetBahanBaku();
         GetPenolong();
@@ -768,9 +769,15 @@ const Add_hpp = (props, ref) => {
         const formData = new FormData();
 
         formData.append('kode', getValueKodeBiayaAlat);
-        formData.append('kode_hpp', props.kodeHPP);
-        formData.append('kode_produksi', props.kodeProduksi);
-        formData.append('kode_permintaan', props.kodePermintaan);
+        if (props.isUpdate) {
+            formData.append('kode_hpp', props.dataSelected.kode);
+            formData.append('kode_produksi', props.dataSelected.kode_produksi);
+            formData.append('kode_permintaan', props.dataSelected.kode_permintaan);
+        } else {
+            formData.append('kode_hpp', props.kodeHPP);
+            formData.append('kode_produksi', props.kodeProduksi);
+            formData.append('kode_permintaan', props.kodePermintaan);
+        }
         formData.append('tanggal', getValueTanggal);
         formData.append('data', JSON.stringify(getDataDetailAlat));
 
@@ -791,9 +798,15 @@ const Add_hpp = (props, ref) => {
         const formData = new FormData();
 
         formData.append('kode', getValueKodeBiayaBahanBaku);
-        formData.append('kode_hpp', props.kodeHPP);
-        formData.append('kode_produksi', props.kodeProduksi);
-        formData.append('kode_permintaan', props.kodePermintaan);
+        if (props.isUpdate) {
+            formData.append('kode_hpp', props.dataSelected.kode);
+            formData.append('kode_produksi', props.dataSelected.kode_produksi);
+            formData.append('kode_permintaan', props.dataSelected.kode_permintaan);
+        } else {
+            formData.append('kode_hpp', props.kodeHPP);
+            formData.append('kode_produksi', props.kodeProduksi);
+            formData.append('kode_permintaan', props.kodePermintaan);
+        }
         formData.append('tanggal', getValueTanggal);
         formData.append('data', JSON.stringify(getDataDetailBahanBaku));
 
@@ -814,9 +827,15 @@ const Add_hpp = (props, ref) => {
         const formData = new FormData();
 
         formData.append('kode', getValueKodeBiayaPenolong);
-        formData.append('kode_hpp', props.kodeHPP);
-        formData.append('kode_produksi', props.kodeProduksi);
-        formData.append('kode_permintaan', props.kodePermintaan);
+        if (props.isUpdate) {
+            formData.append('kode_hpp', props.dataSelected.kode);
+            formData.append('kode_produksi', props.dataSelected.kode_produksi);
+            formData.append('kode_permintaan', props.dataSelected.kode_permintaan);
+        } else {
+            formData.append('kode_hpp', props.kodeHPP);
+            formData.append('kode_produksi', props.kodeProduksi);
+            formData.append('kode_permintaan', props.kodePermintaan);
+        }
         formData.append('tanggal', getValueTanggal);
         formData.append('data', JSON.stringify(getDataDetailPenolong));
 
@@ -837,9 +856,17 @@ const Add_hpp = (props, ref) => {
         const formData = new FormData();
 
         formData.append('kode', getValueKodeBiayaTenagaKerja);
-        formData.append('kode_hpp', props.kodeHPP);
-        formData.append('kode_produksi', props.kodeProduksi);
-        formData.append('kode_permintaan', props.kodePermintaan);
+
+        if (props.isUpdate) {
+            formData.append('kode_hpp', props.dataSelected.kode);
+            formData.append('kode_produksi', props.dataSelected.kode_produksi);
+            formData.append('kode_permintaan', props.dataSelected.kode_permintaan);
+        } else {
+            formData.append('kode_hpp', props.kodeHPP);
+            formData.append('kode_produksi', props.kodeProduksi);
+            formData.append('kode_permintaan', props.kodePermintaan);
+        }
+
         formData.append('tanggal', getValueTanggal);
         formData.append('data', JSON.stringify(getDataDetailTenagaKerja));
 
