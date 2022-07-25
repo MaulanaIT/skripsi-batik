@@ -165,6 +165,7 @@ export class daftar_bp extends Component {
                                             <th>Jumlah</th>
                                             <th>Stok Min</th>
                                             <th>Harga</th>
+                                            <th>Tarif BOP</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>

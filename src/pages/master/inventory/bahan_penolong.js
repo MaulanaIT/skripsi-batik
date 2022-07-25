@@ -84,6 +84,10 @@ export class bahan_penolong extends Component {
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Harga <span className={global.important}>*</span></p>
                             <input type="text" className="col col-lg-2 col-md-2" id='input-harga-bahan-penolong' name='input-harga-bahan-penolong' onInput={InputFormatNumber} required={true} />
                         </div>
+                        <div className={`${global.input_group_row}`}>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Tarif BOP <span className={global.important}>*</span></p>
+                            <input type="text" className="col col-lg-2 col-md-2" id='input-tarif-bop-penolong' name='input-tarif-bop-penolong' onInput={InputFormatNumber} required={true} />
+                        </div>
                         <button type='button' className={global.button} onClick={this.InsertBahanPenolong}><MdAdd /> Simpan</button>
                     </form>
                 </div>

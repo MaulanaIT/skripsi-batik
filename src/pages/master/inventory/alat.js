@@ -40,7 +40,9 @@ export class alat extends Component {
         formData.append('nama', GetValue('input-nama-alat'));
         formData.append('jumlah', GetValue('input-jumlah-alat'));
         formData.append('harga', GetValue('input-harga-alat'));
-        formData.append('kapasitas', GetValue('input-kapasitas-alat'));
+        formData.append('kapasitas', GetValue('input-kapasitas-alat-per-unit'));
+        formData.append('total_kapasitas', GetValue('input-kapasitas-alat'));
+        formData.append('bop', GetValue('input-tarif-bop'));
 
         axios.post(`${baseURL}/api/master/inventory/alat/insert.php`, formData, config).then(() => {
             window.location.href = '/master/inventory/daftar-alat';
@@ -81,8 +83,16 @@ export class alat extends Component {
                             <input type="text" className="col col-lg-2 col-md-3" id='input-harga-alat' name='input-harga-alat' onInput={InputFormatNumber} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kapasitas Per Unit <span className={global.important}>*</span></p>
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-kapasitas-alat-per-unit' name='input-kapasitas-alat-per-unit' onInput={InputFormatNumber} required={true} />
+                        </div>
+                        <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Total Kapasitas <span className={global.important}>*</span></p>
                             <input type="text" className="col col-lg-2 col-md-3" id='input-kapasitas-alat' name='input-kapasitas-alat' onInput={InputFormatNumber} required={true} />
+                        </div>
+                        <div className={`${global.input_group_row}`}>
+                            <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Tarif BOP<span className={global.important}>*</span></p>
+                            <input type="text" className="col col-lg-2 col-md-3" id='input-tarif-bop' name='input-tarif-bop' onInput={InputFormatNumber} required={true} />
                         </div>
                         <button type='button' className={global.button} onClick={this.InsertAlat}><MdAdd /> Simpan</button>
                     </form>
