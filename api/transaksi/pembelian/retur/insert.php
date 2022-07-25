@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result) {
         $response['status'] = 200;
         $response['data'] = [];
-    
+
         $upload_directory = $base_url . "File Nota Retur/";
 
         if (!file_exists($upload_directory) && !is_dir($upload_directory)) {
@@ -32,20 +32,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $upload_nota = move_uploaded_file($file_nota, $upload_directory . $nama_file);
 
-        if ($upload_nota) {
-            foreach ($data as $key) {
-                $query = "INSERT INTO detail_retur (kode, kode_item, nama_item, jumlah, harga, total_harga) VALUES('" . $key->kode . "', '" . $key->kode_item . "', '" . $key->nama_item . "', '" . $key->jumlah . "', '" . $key->harga . "', '" . $key->jumlah * $key->harga . "')";
-    
-                $result = $conn->query($query);
-    
-                if (!$result) break;
-            }
-    
-            if ($result) {
-                $response['data'] = $result;
-            } else {
-                $response['data'] = [];
-            }
+        foreach ($data as $key) {
+            $query = "INSERT INTO detail_retur (kode, kode_item, nama_item, jumlah, harga, total_harga) VALUES('" . $key->kode . "', '" . $key->kode_item . "', '" . $key->nama_item . "', '" . $key->jumlah . "', '" . $key->harga . "', '" . $key->jumlah * $key->harga . "')";
+
+            $result = $conn->query($query);
+
+            if (!$result) break;
+        }
+
+        if ($result) {
+            $response['data'] = $result;
+        } else {
+            $response['data'] = [];
         }
     } else {
         $response = mysqli_error($conn);

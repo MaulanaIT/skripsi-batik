@@ -181,7 +181,7 @@ export default function Tenaga_kerja() {
     }
 
     const InsertTenagaKerja = () => {
-        if (!CheckInputValidity('form-data') || getValueDepartemen === null) {
+        if (!CheckInputValidity('form-data') || getValueDepartemen.length <= 0) {
             alert('Isi data dengan benar');
             return;
         }

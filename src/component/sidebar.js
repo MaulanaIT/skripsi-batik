@@ -154,8 +154,6 @@ export default function Sidebar(props) {
                                         <MdExpandMore className={style.toggle} />
                                     </div>
                                     <ul className={style.dropdown_menu}>
-                                        <li><Link to={'/transaksi/produksi/permintaanprod'}><span>Input Permintaan Produksi Stok</span></Link></li>
-                                        <li><Link to={'/transaksi/produksi/permintaan-prod-pesanan'}><span>Daftar Permintaan Produksi Pesanan</span></Link></li>
                                         <li><Link to={'/transaksi/produksi/daftar-produksi'}><span>Daftar Perencanaan Produksi</span></Link></li>
                                         <li><Link to={'/transaksi/produksi/daftar-hpp'}><span>Daftar Proses Produksi</span></Link></li>
                                     </ul>
@@ -379,6 +377,15 @@ export default function Sidebar(props) {
                                         <li><Link to={'/transaksi/pembelian/daftar-terima-barang'}><span>Penerimaan Barang</span></Link></li>
                                     </ul>
                                 </li>
+                                <li className={style.dropdown}>
+                                    <div>
+                                        <span>Produksi</span>
+                                        <MdExpandMore className={style.toggle} />
+                                    </div>
+                                    <ul className={style.dropdown_menu}>
+                                        <li><Link to={'/transaksi/produksi/permintaanprod'}><span>Input Permintaan Produksi Stok</span></Link></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         <li className={style.dropdown}>
@@ -396,6 +403,63 @@ export default function Sidebar(props) {
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/laporan/pembelian/transaksi-pembelian'}><span>Transaksi Pembelian</span></Link></li>
                                         <li><Link to={'/laporan/pembelian/retur-pembelian'}><span>Retur Pembelian</span></Link></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </React.Fragment>
+                }
+                {props.jabatan.toLowerCase() === 'designer' &&
+                    <React.Fragment>
+                        <li>
+                            <Link to={'/dashboard'}>
+                                <MdDashboard />
+                                <span>Dashboard</span>
+                            </Link>
+                        </li>
+                        <li className={style.dropdown}>
+                            <div>
+                                <MdStackedBarChart />
+                                <span>Transaksi</span>
+                                <MdExpandMore className={style.toggle} />
+                            </div>
+                            <ul className={style.dropdown_menu}>
+                                <li className={style.dropdown}>
+                                    <div>
+                                        <span>Produksi</span>
+                                        <MdExpandMore className={style.toggle} />
+                                    </div>
+                                    <ul className={style.dropdown_menu}>
+                                        <li><Link to={'/transaksi/produksi/daftar-produksi'}><span>Daftar Perencanaan Produksi</span></Link></li>
+                                        <li><Link to={'/transaksi/produksi/daftar-hpp'}><span>Daftar Proses Produksi</span></Link></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </React.Fragment>
+                }
+                {props.jabatan.toLowerCase() === 'cap/canting' || props.jabatan.toLowerCase() === 'pewarnaan' || props.jabatan.toLowerCase() === 'packing'&&
+                    <React.Fragment>
+                        <li>
+                            <Link to={'/dashboard'}>
+                                <MdDashboard />
+                                <span>Dashboard</span>
+                            </Link>
+                        </li>
+                        <li className={style.dropdown}>
+                            <div>
+                                <MdStackedBarChart />
+                                <span>Transaksi</span>
+                                <MdExpandMore className={style.toggle} />
+                            </div>
+                            <ul className={style.dropdown_menu}>
+                                <li className={style.dropdown}>
+                                    <div>
+                                        <span>Produksi</span>
+                                        <MdExpandMore className={style.toggle} />
+                                    </div>
+                                    <ul className={style.dropdown_menu}>
+                                        <li><Link to={'/transaksi/produksi/daftar-hpp'}><span>Daftar Proses Produksi</span></Link></li>
                                     </ul>
                                 </li>
                             </ul>

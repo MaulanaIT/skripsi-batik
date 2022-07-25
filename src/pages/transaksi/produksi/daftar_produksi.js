@@ -142,20 +142,22 @@ export default function Daftar_produksi() {
                 <p className={style.pathname}>Transaksi / Produksi / Perencanaan Produksi</p>
             </div>
             <div className={`${style.content}`}>
-                <div className={`${global.tab_card} pb-2`}>
+                <div className={`${global.tab_card} pb-2 w-100`}>
                     <div className={`${global.item} ${getSelectedTab === 0 ? global.active : ''}`} onClick={() => setSelectedTab(0)}>
                         <p className={`${global.name}`}>Produksi Stok</p>
                     </div>
                     <div className={`${global.item} ${getSelectedTab === 1 ? global.active : ''}`} onClick={() => setSelectedTab(1)}>
                         <p className={`${global.name}`}>Produksi Pesanan</p>
                     </div>
+                    {localStorage.getItem('leksana_jabatan').toLowerCase() === 'desainer' &&
+                        <Link to={'/transaksi/produksi/produksi'} className={`${global.button} ms-auto`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
+                    }
                 </div>
-                <div className={`${global.card} col-12 ${getSelectedTab === 1 && 'd-none'}`}>
+                <div className={`${global.card} col-12`}>
                     <div className={`${global.header}`}>
                         <p className={global.title}>Daftar Perencanaan Produksi Stok</p>
-                        <Link to={'/transaksi/produksi/produksi'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
                     </div>
-                    <div className={`table-responsive`}>
+                    <div className={`table-responsive ${getSelectedTab === 1 && 'd-none'}`}>
                         <table id='table-data-stok' className={`table w-100`}>
                             <thead className='text-nowrap'>
                                 <tr>
@@ -174,13 +176,7 @@ export default function Daftar_produksi() {
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div className={`${global.card} col-12 ${getSelectedTab === 0 && 'd-none'}`}>
-                    <div className={`${global.header}`}>
-                        <p className={global.title}>Daftar Perencanaan Produksi Pesanan</p>
-                        <Link to={'/transaksi/produksi/produksi'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
-                    </div>
-                    <div className={`table-responsive`}>
+                    <div className={`table-responsive ${getSelectedTab === 0 && 'd-none'}`}>
                         <table id='table-data-pesanan' className={`table w-100`}>
                             <thead className='text-nowrap'>
                                 <tr>

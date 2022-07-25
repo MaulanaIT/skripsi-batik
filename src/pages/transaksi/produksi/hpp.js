@@ -7,7 +7,7 @@ import moment from 'moment';
 import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config, cx, GenerateCode, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GenerateCode, HideLoading, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 import AddHPP from './add_hpp';
@@ -124,8 +124,6 @@ export default function Hpp() {
             axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/select.php`, formData, config).then(response => {
                 let data = response.data.data;
 
-                console.log(data);
-
                 if (data && data.length > 0 && jenis === 'stok') {
                     for (let item of data) {
                         let check = getDataHPP.findIndex(hpp => hpp.kode_produksi === item.kode);
@@ -168,6 +166,11 @@ export default function Hpp() {
     }
 
     const InsertHPP = async () => {
+        if (!CheckInputValidity('form-data')) {
+            alert('Isi data dengan benar');
+            return;
+        }
+
         ShowLoading();
 
         const formData = new FormData();
@@ -182,7 +185,7 @@ export default function Hpp() {
         formData.append('jumlah', getValueJumlah);
         formData.append('hpp', getValueHPP);
 
-        await axios.post(`${baseURL}/api/transaksi/produksi/hpp/insert.php`, formData, config).then(async response => {
+        await axios.post(`${baseURL}/api/transaksi/produksi/hpp/insert.php`, formData, config).then(async () => {
             await addReff.current?.InsertDetailAlat();
             await addReff.current?.InsertDetailBahanBaku();
             await addReff.current?.InsertDetailPenolong();
@@ -357,7 +360,7 @@ export default function Hpp() {
             <br></br>
             {getValueKodeProduksi &&
                 <div className={`${style.content}`}>
-                    <div className={`${global.card} col-12`}>
+                    <form id='form-data' className={`${global.card} col-12`}>
                         <div className={`${global.header}`}>
                             <p className={`${global.title} text-center w-100`}>Kartu Harga Pokok Produksi</p>
                         </div>
@@ -365,34 +368,34 @@ export default function Hpp() {
                             <React.Fragment>
                                 <div className={`${bootstrap['d-flex']}`}>
                                     <div className={`${global.input_group} col-3 pe-2`}>
-                                        <p className={global.title}>Kode HPP</p>
-                                        <input type="text" id='input-kode-hpp' name='input-kode-hpp' value={getValueKodeHPP} readOnly={true} />
+                                        <p className={global.title}>Kode HPP <span className={global.important}>*</span></p>
+                                        <input type="text" id='input-kode-hpp' name='input-kode-hpp' value={getValueKodeHPP} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
-                                        <p className={global.title}>Kode Produksi</p>
-                                        <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={getValueKodeProduksi?.value} readOnly={true} />
+                                        <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
+                                        <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={getValueKodeProduksi?.value} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
-                                        <p className={global.title}>Kode Produk</p>
-                                        <input type="text" id='input-kode-produk' name='input-kode-produk' value={getValueKodeProduk} readOnly={true} />
+                                        <p className={global.title}>Kode Produk <span className={global.important}>*</span></p>
+                                        <input type="text" id='input-kode-produk' name='input-kode-produk' value={getValueKodeProduk} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
-                                        <p className={global.title}>Nama Produk</p>
-                                        <input type="text" id='input-nama-produk' name='input-nama-produk' value={getValueNamaProduk} readOnly={true} />
+                                        <p className={global.title}>Nama Produk <span className={global.important}>*</span></p>
+                                        <input type="text" id='input-nama-produk' name='input-nama-produk' value={getValueNamaProduk} required={true} readOnly={true} />
                                     </div>
                                 </div>
                                 <div className={`${bootstrap['d-flex']}`}>
                                     <div className={`${global.input_group} col-3 pe-2`}>
-                                        <p className={global.title}>Tanggal Mulai</p>
-                                        <input type="date" id='input-tanggal-mulai' name='input-tanggal-mulai' value={getValueTanggalMulai} readOnly={true} />
+                                        <p className={global.title}>Tanggal Mulai <span className={global.important}>*</span></p>
+                                        <input type="date" id='input-tanggal-mulai' name='input-tanggal-mulai' value={getValueTanggalMulai} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
-                                        <p className={global.title}>Tanggal Selesai</p>
-                                        <input type="date" id='input-tanggal-selesai' name='input-tanggal-selesai' value={getValueTanggalSelesai} readOnly={true} />
+                                        <p className={global.title}>Tanggal Selesai <span className={global.important}>*</span></p>
+                                        <input type="date" id='input-tanggal-selesai' name='input-tanggal-selesai' value={getValueTanggalSelesai} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
-                                        <p className={global.title}>Jumlah</p>
-                                        <input type="text" id='input-jumlah' name='input-jumlah' value={getValueJumlah} readOnly={true} />
+                                        <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
+                                        <input type="text" id='input-jumlah' name='input-jumlah' value={getValueJumlah} required={true} readOnly={true} />
                                     </div>
                                 </div>
                             </React.Fragment>
@@ -401,44 +404,44 @@ export default function Hpp() {
                             <React.Fragment>
                                 <div className={`${bootstrap['d-flex']}`}>
                                     <div className={`${global.input_group} col-3 pe-2`}>
-                                        <p className={global.title}>Kode HPP</p>
-                                        <input type="text" id='input-kode-hpp' name='input-kode-hpp' value={getValueKodeHPP} readOnly={true} />
+                                        <p className={global.title}>Kode HPP <span className={global.important}>*</span></p>
+                                        <input type="text" id='input-kode-hpp' name='input-kode-hpp' value={getValueKodeHPP} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
-                                        <p className={global.title}>Kode Produksi</p>
-                                        <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={getValueKodeProduksi?.value} readOnly={true} />
+                                        <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
+                                        <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={getValueKodeProduksi?.value} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
-                                        <p className={global.title}>Kode Pesanan</p>
-                                        <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' value={getValueKodePesanan} readOnly={true} />
+                                        <p className={global.title}>Kode Pesanan <span className={global.important}>*</span></p>
+                                        <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' value={getValueKodePesanan} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
-                                        <p className={global.title}>Nama Pesanan</p>
-                                        <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' value={getValueNamaPesanan} readOnly={true} />
+                                        <p className={global.title}>Nama Pesanan <span className={global.important}>*</span></p>
+                                        <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' value={getValueNamaPesanan} required={true} readOnly={true} />
                                     </div>
                                 </div>
                                 <div className={`${bootstrap['d-flex']}`}>
                                     <div className={`${global.input_group} col-3 pe-2`}>
-                                        <p className={global.title}>Kode Customer</p>
-                                        <input type="text" id='input-nama-customer' name='input-nama-customer' value={getValueKodeCustomer} readOnly={true} />
+                                        <p className={global.title}>Kode Customer <span className={global.important}>*</span></p>
+                                        <input type="text" id='input-nama-customer' name='input-nama-customer' value={getValueKodeCustomer} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
-                                        <p className={global.title}>Nama Customer</p>
-                                        <input type="text" id='input-nama-customer' name='input-nama-customer' value={getValueNamaCustomer} readOnly={true} />
+                                        <p className={global.title}>Nama Customer <span className={global.important}>*</span></p>
+                                        <input type="text" id='input-nama-customer' name='input-nama-customer' value={getValueNamaCustomer} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
-                                        <p className={global.title}>Tanggal Pesan</p>
-                                        <input type="date" id='input-tanggal-pesan' name='input-tanggal-pesan' value={getValueTanggalMulai} readOnly={true} />
+                                        <p className={global.title}>Tanggal Pesan <span className={global.important}>*</span></p>
+                                        <input type="date" id='input-tanggal-pesan' name='input-tanggal-pesan' value={getValueTanggalMulai} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
-                                        <p className={global.title}>Tanggal Selesai</p>
-                                        <input type="date" id='input-tanggal-selesai' name='input-tanggal-selesai' value={getValueTanggalSelesai} readOnly={true} />
+                                        <p className={global.title}>Tanggal Selesai <span className={global.important}>*</span></p>
+                                        <input type="date" id='input-tanggal-selesai' name='input-tanggal-selesai' value={getValueTanggalSelesai} required={true} readOnly={true} />
                                     </div>
                                 </div>
                                 <div className={`${bootstrap['d-flex']}`}>
                                     <div className={`${global.input_group} col-3 pe-2`}>
-                                        <p className={global.title}>Jumlah</p>
-                                        <input type="text" id='input-jumlah' name='input-jumlah' value={getValueJumlah} readOnly={true} />
+                                        <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
+                                        <input type="text" id='input-jumlah' name='input-jumlah' value={getValueJumlah} required={true} readOnly={true} />
                                     </div>
                                 </div>
                             </React.Fragment>
@@ -509,26 +512,26 @@ export default function Hpp() {
                         </div>
                         <div className={`${bootstrap['d-flex']}`}>
                             <div className={`${global.input_group} col-4 pe-2`}>
-                                <p className={global.title}>Biaya Bahan Baku</p>
-                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueBiayaBahanBaku} readOnly={true} />
+                                <p className={global.title}>Biaya Bahan Baku <span className={global.important}>*</span></p>
+                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueBiayaBahanBaku} required={true} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-4 px-2`}>
-                                <p className={global.title}>Biaya Tenaga Kerja</p>
-                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueBiayaTenagaKerja} readOnly={true} />
+                                <p className={global.title}>Biaya Tenaga Kerja <span className={global.important}>*</span></p>
+                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueBiayaTenagaKerja} required={true} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-4 ps-2`}>
-                                <p className={global.title}>Biaya Overhead</p>
-                                <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' value={getValueBiayaOverheadPabrik} readOnly={true} />
+                                <p className={global.title}>Biaya Overhead <span className={global.important}>*</span></p>
+                                <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' value={getValueBiayaOverheadPabrik} required={true} readOnly={true} />
                             </div>
                         </div>
                         <div className={`${bootstrap['d-flex']}`}>
                             <div className={`${global.input_group} col-4`}>
-                                <p className={`${global.title} fw-bold`} style={{ fontSize: 18 }}>Harga Pokok Produksi</p>
-                                <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' value={getValueHPP} readOnly={true} />
+                                <p className={`${global.title} fw-bold`} style={{ fontSize: 18 }}>Harga Pokok Produksi <span className={global.important}>*</span></p>
+                                <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' value={getValueHPP} required={true} readOnly={true} />
                             </div>
                         </div>
                         <button type='button' className={global.button} onClick={InsertHPP}><MdAdd /> Simpan</button>
-                    </div>
+                    </form>
                 </div>
             }
         </React.Fragment>
