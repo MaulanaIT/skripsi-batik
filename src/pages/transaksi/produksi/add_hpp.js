@@ -554,7 +554,7 @@ const Add_hpp = (props, ref) => {
                 }
 
                 setDataDetailAlat(dataDetailAlat);
-                setValueKodeBiayaAlat(kodeBiayaAlat);
+                setValueKodeBiayaAlat(kodeBiayaAlat === '' ? GenerateCode('BOPAlat', data) : kodeBiayaAlat);
                 setHTMLTableDaftarAlat(htmlTableDaftarAlat, () => {
                     $('#table-data-bop-alat').DataTable();
 
@@ -617,7 +617,7 @@ const Add_hpp = (props, ref) => {
                 }
 
                 setDataDetailBahanBaku(dataDetailBahanBaku);
-                setValueKodeBiayaBahanBaku(kodeBiayaBahanBaku);
+                setValueKodeBiayaBahanBaku(kodeBiayaBahanBaku === '' ? GenerateCode('BBB', data) : kodeBiayaBahanBaku);
                 setHTMLTableDaftarBahanBaku(htmlTableDaftarBahanBaku, () => {
                     $('#table-data-biaya-bahan-baku').DataTable();
 
@@ -680,7 +680,7 @@ const Add_hpp = (props, ref) => {
                 }
 
                 setDataDetailPenolong(dataDetailPenolong);
-                setValueKodeBiayaPenolong(kodeBiayaPenolong);
+                setValueKodeBiayaPenolong(kodeBiayaPenolong === '' ? GenerateCode('BBP', data) : kodeBiayaPenolong);
                 setHTMLTableDaftarPenolong(htmlTableDaftarPenolong, () => {
                     $('#table-data-bop-bahan-penolong').DataTable();
 
@@ -743,7 +743,7 @@ const Add_hpp = (props, ref) => {
                 }
 
                 setDataDetailTenagaKerja(dataDetailTenagaKerja);
-                setValueKodeBiayaTenagaKerja(kodeBiayaTenagaKerja);
+                setValueKodeBiayaTenagaKerja(kodeBiayaTenagaKerja === '' ? GenerateCode('BTKL', data) : kodeBiayaTenagaKerja);
                 setHTMLTableDaftarTenagaKerja(htmlTableDaftarTenagaKerja, () => {
                     $('#table-data-biaya-tenaga-kerja').DataTable();
 

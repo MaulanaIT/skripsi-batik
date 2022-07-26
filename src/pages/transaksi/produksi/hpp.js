@@ -92,7 +92,7 @@ export default function Hpp() {
         if (location.state === null) {
             setIsUpdateData(false);
         } else {
-            console.log(location.state.data);
+            // console.log(location.state.data);
             setDataSelected(location.state.data);
             setIsUpdateData(true);
         }
