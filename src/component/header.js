@@ -88,7 +88,9 @@ export default function Header(props) {
             </div>
             <div className={style.menu}>
                 <div className={style.notification}>
-                    <FaBell className={style.toggle} onClick={() => setActiveNotification((prevState) => !prevState)} />
+                    <div className={style.toggle} onClick={() => setActiveNotification((prevState) => !prevState)} notifikasi={getDataNotification.length}>
+                        <FaBell  />
+                    </div>
                     <div className={cx([style.dropdown_menu, getActiveNotification && style.active])}>
                         {getDataNotification && getDataNotification.length > 0 ?
                             getDataNotification.map((item, index) =>
