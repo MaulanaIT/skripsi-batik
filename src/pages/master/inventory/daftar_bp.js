@@ -33,7 +33,7 @@ export class daftar_bp extends Component {
         let jumlah = GetValue(`edit-jumlah-${id}`);
         let stok_minimal = GetValue(`edit-stok-minimal-${id}`);
         let harga = GetValue(`edit-harga-${id}`);
-        let tarif_bop = GetValue(`edit-tarif-bop-${id}`);
+        // let tarif_bop = GetValue(`edit-tarif-bop-${id}`);
 
         const formData = new FormData();
 
@@ -43,7 +43,7 @@ export class daftar_bp extends Component {
         formData.append('jumlah', jumlah);
         formData.append('stok_minimal', stok_minimal);
         formData.append('harga', harga);
-        formData.append('tarif_bop', tarif_bop);
+        // formData.append('tarif_bop', tarif_bop);
 
         axios.post(`${baseURL}/api/master/inventory/bahan-penolong/update.php`, formData, config).then(() => {
             document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
@@ -120,12 +120,12 @@ export class daftar_bp extends Component {
                                     <input type="text" id={`edit-harga-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.harga} onInput={InputFormatNumber} required={true} />
                                 </div>
                             </td>
-                            <td>
+                            {/* <td>
                                 <div id={`data-tarif-bop-${item.id}`} className={`data-${item.id}`}>{item.tarif_bop}</div>
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-tarif-bop-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.tarif_bop} onInput={InputFormatNumber} required={true} />
                                 </div>
-                            </td>
+                            </td> */}
                             <td className={global.table_action}>
                                 <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyBahanPenolong(item.id)}><FaCheck /> Apply</button>
                                 <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditBahanPenolong(item.id)}><FaPen /> Edit</button>
@@ -173,7 +173,7 @@ export class daftar_bp extends Component {
                                             <th>Jumlah</th>
                                             <th>Stok Min</th>
                                             <th>Harga</th>
-                                            <th>Tarif BOP</th>
+                                            {/* <th>Tarif BOP</th> */}
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>

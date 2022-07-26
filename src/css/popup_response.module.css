@@ -23,5 +23,5 @@
 .popup>.container>.response {
     font-size: 14px;
     font-weight: 500;
-    margin-bottom: 12px;
+    margin-bottom: 12px !important;
 }

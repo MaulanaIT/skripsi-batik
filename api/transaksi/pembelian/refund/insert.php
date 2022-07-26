@@ -30,24 +30,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $upload_transfer = move_uploaded_file($file_transfer, $upload_directory . $nama_file);
 
-            if ($upload_transfer) {
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $jumlah_terima . ") WHERE kode='" . $kode_akun . "'";
+            $query = "UPDATE master_akun SET saldo=(saldo+" . $jumlah_terima . ") WHERE kode='" . $kode_akun . "'";
+
+            $result = $conn->query($query);
+
+            if ($result) {
+                $query = "UPDATE retur_pembelian SET status=3 WHERE kode='" . $kode_retur . "'";
 
                 $result = $conn->query($query);
 
                 if ($result) {
-                    $query = "UPDATE retur_pembelian SET status=3 WHERE kode='" . $kode_retur . "'";
-
-                    $result = $conn->query($query);
-
-                    if ($result) {
-                        $response['data'] = $result;
-                    } else {
-                        $response['data'] = [];
-                    }
+                    $response['data'] = $result;
                 } else {
                     $response['data'] = [];
                 }
+            } else {
+                $response['data'] = [];
             }
         } else {
             $response['data'] = [];

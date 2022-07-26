@@ -66,6 +66,7 @@ export default function Produksi() {
     const [getValueKodeProduk, setValueKodeProduk] = useState('');
     const [getValueNamaCustomer, setValueNamaCustomer] = useState('');
     const [getValueNamaPesanan, setValueNamaPesanan] = useState('');
+    const [getValueKodePesan, setValueKodePesan] = useState('');
     const [getValueNamaProduk, setValueNamaProduk] = useState('');
     const [getValueJumlah, setValueJumlah] = useState(0);
     const [getValueTanggal, setValueTanggal] = useState('');
@@ -101,10 +102,11 @@ export default function Produksi() {
         if (getValueKodePesanan) {
             let data = getDataPesanan.find(item => item.kode === getValueKodePesanan.value);
 
-            setValueTanggalPesanan(data.tanggal);
+            setValueTanggalPesanan(moment(data.created_at).format('YYYY-MM-DD'));
             setValueKodeCustomer(data.kode_customer);
             setValueNamaCustomer(data.nama_customer);
-            setValueNamaPesanan(data.nama);
+            setValueNamaPesanan(data.nama_pesanan);
+            setValueKodePesan(data.kode_pesanan);
             setValueJumlah(data.jumlah);
             setValueDeskripsi(data.deskripsi);
         } else {
@@ -112,6 +114,7 @@ export default function Produksi() {
             setValueKodeCustomer('');
             setValueNamaCustomer('');
             setValueNamaPesanan('');
+            setValueKodePesan('');
             setValueJumlah(0);
             setValueDeskripsi('');
         }
@@ -150,7 +153,7 @@ export default function Produksi() {
     const GetPesananProduksi = () => {
         ShowLoading();
 
-        axios.get(`${baseURL}/api/transaksi/penjualan/estimasi-pesanan/select.php`, config).then(response => {
+        axios.get(`${baseURL}/api/transaksi/produksi/permintaan-pesanan/select.php`, config).then(response => {
             let data = response.data.data;
 
             let dataSelectKodePesanan = [];
@@ -216,7 +219,7 @@ export default function Produksi() {
                 alert('Isi data dengan benar');
                 return;
             }
-    
+
             formData.append('kode_permintaan', getValueKodePermintaan.value);
             formData.append('kode_produk', getValueKodeProduk);
         } else if (getValueJenisProduksi.value === 'Pesanan') {
@@ -224,8 +227,9 @@ export default function Produksi() {
                 alert('Isi data dengan benar');
                 return;
             }
-    
-            formData.append('kode_pesanan', getValueKodePesanan.value);
+
+            formData.append('kode_permintaan', getValueKodePesanan.value);
+            formData.append('kode_pesanan', getValueKodePesan);
             formData.append('tanggal_pesan', getValueTanggalPesanan);
             formData.append('kode_customer', getValueKodeCustomer);
             formData.append('deskripsi', getValueDeskripsi);
@@ -265,8 +269,8 @@ export default function Produksi() {
                             {getValueJenisProduksi?.value === 'Pesanan' ?
                                 <React.Fragment>
                                     <div className={`${global.input_group} col-6 mb-2 pe-2`}>
-                                        <p className={global.title}>Kode Pesanan <span className={global.important}>*</span></p>
-                                        <Select id='select-kode-pesanan' name='select-kode-pesanan' isClearable={true} isSearchable={true} options={getDataSelectKodePesanan} placeholder={'Select Kode...'} value={getValueKodePesanan} styles={CustomSelect} onChange={e => setValueKodePesanan(e)} />
+                                        <p className={global.title}>Kode Permintaan <span className={global.important}>*</span></p>
+                                        <Select id='select-kode-permintaan' name='select-kode-permintaan' isClearable={true} isSearchable={true} options={getDataSelectKodePesanan} placeholder={'Select Kode...'} value={getValueKodePesanan} styles={CustomSelect} onChange={e => setValueKodePesanan(e)} />
                                     </div>
                                     <div className={`${global.input_group} col-6 mb-2 ps-2`}>
                                         <p className={global.title}>Tanggal Pesan <span className={global.important}>*</span></p>

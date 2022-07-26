@@ -31,7 +31,8 @@ export class daftar_bp extends Component {
         let nama = GetValue(`edit-nama-${id}`);
         let jumlah = GetValue(`edit-jumlah-${id}`);
         let harga = GetValue(`edit-harga-${id}`);
-        let kapasitas = GetValue(`edit-kapasitas-${id}`);
+        let total_kapasitas = GetValue(`edit-total-kapasitas-${id}`);
+        let bop = GetValue(`edit-bop-${id}`);
 
         const formData = new FormData();
 
@@ -39,7 +40,8 @@ export class daftar_bp extends Component {
         formData.append('nama', nama);
         formData.append('jumlah', jumlah);
         formData.append('harga', harga);
-        formData.append('kapasitas', kapasitas);
+        formData.append('total_kapasitas', total_kapasitas);
+        formData.append('bop', bop);
 
         axios.post(`${baseURL}/api/master/inventory/alat/update.php`, formData, config).then(() => {
             document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
@@ -107,12 +109,6 @@ export class daftar_bp extends Component {
                                 </div>
                             </td>
                             <td>
-                                <div id={`data-kapasitas-${item.id}`} className={`data-${item.id}`}>{item.kapasitas}</div>
-                                <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-kapasitas-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.kapasitas} onInput={InputFormatNumber} required={true} />
-                                </div>
-                            </td>
-                            <td>
                                 <div id={`data-total-kapasitas-${item.id}`} className={`data-${item.id}`}>{item.total_kapasitas}</div>
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-total-kapasitas-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.total_kapasitas} onInput={InputFormatNumber} required={true} />
@@ -121,7 +117,7 @@ export class daftar_bp extends Component {
                             <td>
                                 <div id={`data-bop-${item.id}`} className={`data-${item.id}`}>{item.bop}</div>
                                 <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-bop-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.bop} onInput={InputFormatNumber} required={true} />
+                                    <input type="text" id={`edit-bop-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.bop} readOnly={true} required={true} />
                                 </div>
                             </td>
                             <td className={global.table_action}>
@@ -171,7 +167,6 @@ export class daftar_bp extends Component {
                                             <th>Nama Alat</th>
                                             <th>Jumlah Unit</th>
                                             <th>Harga Perolehan</th>
-                                            <th>Kapasitas per Unit</th>
                                             <th>Total Kapasitas</th>
                                             <th>Tarif BOP</th>
                                             <th>Aksi</th>

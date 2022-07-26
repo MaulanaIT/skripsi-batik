@@ -479,7 +479,9 @@ const Add_hpp = (props, ref) => {
         ShowLoading();
 
         axios.get(`${baseURL}/api/master/tenaga-kerja/select.php`, config).then(response => {
-            let data = response.data.data.filter(item => item.departemen === localStorage.getItem('leksana_jabatan'));
+            let jabatan = localStorage.getItem('leksana_jabatan');
+
+            let data =  jabatan === 'Super Admin' ? response.data.data : response.data.data.filter(item => item.departemen === jabatan);
 
             let dataSelectKodeTenagaKerja = [];
             let dataSelectNamaTenagaKerja = [];

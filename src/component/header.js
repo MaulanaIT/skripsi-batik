@@ -127,7 +127,7 @@ export default function Header(props) {
                                         <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => InsertPermintaanPesanan(item)}>Terima</button>
                                     </div>
                                     :
-                                    <div className={style.item}>
+                                    <div key={index} className={style.item}>
                                         <p className={style.description}>Stok barang <span className={style.green}>{item.kode} - {item.nama}</span> menipis.</p>
                                     </div>
                             )

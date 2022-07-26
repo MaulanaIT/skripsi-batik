@@ -41,7 +41,7 @@ export class bahan_penolong extends Component {
         formData.append('satuan', GetValue('input-satuan-bahan-penolong'));
         formData.append('jumlah', GetValue('input-jumlah-bahan-penolong'));
         formData.append('harga', GetValue('input-harga-bahan-penolong'));
-        formData.append('tarif_bop', GetValue('input-tarif-bop-penolong'));
+        // formData.append('tarif_bop', GetValue('input-tarif-bop-penolong'));
 
         axios.post(`${baseURL}/api/master/inventory/bahan-penolong/insert.php`, formData, config).then(() => {
             window.location.href = '/#/master/inventory/daftar-bahan-penolong';
@@ -85,10 +85,10 @@ export class bahan_penolong extends Component {
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Harga <span className={global.important}>*</span></p>
                             <input type="text" className="col col-lg-2 col-md-2" id='input-harga-bahan-penolong' name='input-harga-bahan-penolong' onInput={InputFormatNumber} required={true} />
                         </div>
-                        <div className={`${global.input_group_row}`}>
+                        {/* <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Tarif BOP <span className={global.important}>*</span></p>
-                            <input type="text" className="col col-lg-2 col-md-2" id='input-tarif-bop-penolong' name='input-tarif-bop-penolong' onInput={InputFormatNumber} required={true} />
-                        </div>
+                            <input type="text" classNsame="col col-lg-2 col-md-2" id='input-tarif-bop-penolong' name='input-tarif-bop-penolong' onInput={InputFormatNumber} required={true} />
+                        </div> */}
                         <button type='button' className={global.button} onClick={this.InsertBahanPenolong}><MdAdd /> Simpan</button>
                     </form>
                 </div>

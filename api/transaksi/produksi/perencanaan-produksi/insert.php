@@ -4,6 +4,7 @@ require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
+    $kode_permintaan = $_POST['kode_permintaan'];
     $tanggal = $_POST['tanggal'];
     $jumlah = $_POST['jumlah'];
     $lama = $_POST['lama'];
@@ -11,13 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jenis_produksi = $_POST['jenis_produksi'];
 
     if ($jenis_produksi == 'pesanan') {
-        $kode_pesanan = $_POST['kode_pesanan'];
         $tanggal_pesan = $_POST['tanggal_pesan'];
         $kode_customer = $_POST['kode_customer'];
+        $kode_pesanan = $_POST['kode_pesanan'];
         $deskripsi = $_POST['deskripsi'];
-        $query = "INSERT INTO produksi_pesanan(kode, kode_pesanan, tanggal, tanggal_pesan, kode_customer, jumlah, lama, deskripsi, status) VALUES('" . $kode . "', '" . $kode_pesanan . "', '" . $tanggal . "', '" . $tanggal_pesan . "', '" . $kode_customer . "', '" . $jumlah . "', '" . $lama . "', '" . $deskripsi . "', '" . $status . "')";
+        $query = "INSERT INTO produksi_pesanan(kode, kode_permintaan, kode_pesanan, tanggal, tanggal_pesan, kode_customer, jumlah, lama, deskripsi, status) VALUES('" . $kode . "', '" . $kode_permintaan . "', '" . $kode_pesanan . "', '" . $tanggal . "', '" . $tanggal_pesan . "', '" . $kode_customer . "', '" . $jumlah . "', '" . $lama . "', '" . $deskripsi . "', '" . $status . "')";
     } else if ($jenis_produksi == 'stok') {
-        $kode_permintaan = $_POST['kode_permintaan'];
         $kode_produk = $_POST['kode_produk'];
         $query = "INSERT INTO produksi_stok(kode, kode_permintaan, kode_produk, tanggal, jumlah, lama, status) VALUES('" . $kode . "', '" . $kode_permintaan . "', '" . $kode_produk . "', '" . $tanggal . "', '" . $jumlah . "', '" . $lama . "', '" . $status . "')";
     }

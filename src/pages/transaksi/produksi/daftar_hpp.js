@@ -56,8 +56,6 @@ export default function Daftar_hpp() {
         axios.get(`${baseURL}/api/transaksi/produksi/hpp/select.php`, config).then(response => {
             let data = response.data.data;
 
-            console.log(data);
-
             let htmlTableDaftarHPP = [];
 
             if (data && data.length > 0) {

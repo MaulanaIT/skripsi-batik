@@ -3,11 +3,10 @@
 require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
-    $nama = $_POST['nama'];
-    $saldo = $_POST['saldo'];
+    $kode = $_POST['kode'];
+    $hpp = $_POST['hpp'];
     
-    $query = "UPDATE estimasi_pesanan SET nama='".$nama."' WHERE id='".$id."'";
+    $query = "UPDATE estimasi_pesanan SET hpp='".$hpp."', harga_jual=(".$hpp."*(100+profit)/100) WHERE kode='".$kode."'";
     
     $result = $conn->query($query);
 

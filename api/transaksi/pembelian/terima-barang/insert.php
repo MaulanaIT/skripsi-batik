@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $upload_nota = move_uploaded_file($file_nota, $upload_directory . $nama_file);
         
-        if ($upload_transfer) {
+        if ($result) {
             $response['data'] = $result;
         } else {
             $response['data'] = [];

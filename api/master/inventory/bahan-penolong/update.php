@@ -9,9 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stok_minimal = $_POST['stok_minimal'];
     $jumlah = $_POST['jumlah'];
     $harga = $_POST['harga'];
-    $tarif_bop = $_POST['tarif_bop'];
+    // $tarif_bop = $_POST['tarif_bop'];
     
-    $query = "UPDATE master_inventory_bahanpenolong SET nama='".$nama."', satuan='".$satuan."', stok_minimal='".$stok_minimal."', jumlah='".$jumlah."', harga='".$harga."', tarif_bop='".$tarif_bop."' WHERE id='".$id."'";
+    $query = "UPDATE master_inventory_bahanpenolong SET nama='".$nama."', satuan='".$satuan."', stok_minimal='".$stok_minimal."', jumlah='".$jumlah."', harga='".$harga."' WHERE id='".$id."'";
 
     
     $result = $conn->query($query);

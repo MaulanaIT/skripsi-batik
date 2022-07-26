@@ -9,9 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stok_minimal = $_POST['stok_minimal'];
     $jumlah = $_POST['jumlah'];
     $harga = $_POST['harga'];
-    $tarif_bop = $_POST['tarif_bop'];
+    // $tarif_bop = $_POST['tarif_bop'];
     
-    $query = "INSERT INTO master_inventory_bahanpenolong(kode, nama, satuan, stok_minimal, jumlah, harga, tarif_bop) VALUES('".$kode."', '".$nama."', '".$satuan."', '".$stok_minimal."', '".$jumlah."', '".$harga."', '".$tarif_bop."')";
+    $query = "INSERT INTO master_inventory_bahanpenolong(kode, nama, satuan, stok_minimal, jumlah, harga) VALUES('".$kode."', '".$nama."', '".$satuan."', '".$stok_minimal."', '".$jumlah."', '".$harga."')";
     
     $result = $conn->query($query);
 

@@ -4,7 +4,6 @@ require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
-    $kode_produk = $_POST['kode_produk'];
     $kode_produksi = $_POST['kode_produksi'];
     $kode_permintaan = $_POST['kode_permintaan'];
     $tanggal_mulai = $_POST['tanggal_mulai'];
@@ -15,10 +14,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jumlah = $_POST['jumlah'];
     $hpp = $_POST['hpp'];
 
-    $query = "INSERT INTO hpp(kode, kode_produk, kode_produksi, kode_permintaan, tanggal_mulai, tanggal_selesai, biaya_bahan_baku, biaya_tenaga_kerja, biaya_overhead_pabrik, jumlah, hpp) 
-            VALUES('" . $kode . "', '" . $kode_produk . "', '" . $kode_produksi . "', '" . $kode_permintaan . "', '" . $tanggal_mulai . "', '" . $tanggal_selesai . "', '" . $biaya_bahan_baku . "', '" . $biaya_tenaga_kerja . "', '" . $biaya_overhead_pabrik . "', '" . $jumlah . "', '" . $hpp . "')
-        ON DUPLICATE KEY UPDATE
-        biaya_bahan_baku='" . $biaya_bahan_baku . "', biaya_tenaga_kerja='" . $biaya_tenaga_kerja . "', biaya_overhead_pabrik='".$biaya_overhead_pabrik."', hpp='".$hpp."'";
+    if (str_contains($kode_produksi, 'PS')) {
+        $kode_produk = $_POST['kode_produk'];
+
+        $query = "INSERT INTO hpp(kode, kode_produk, kode_produksi, kode_permintaan, tanggal_mulai, tanggal_selesai, biaya_bahan_baku, biaya_tenaga_kerja, biaya_overhead_pabrik, jumlah, hpp) 
+                VALUES('" . $kode . "', '" . $kode_produk . "', '" . $kode_produksi . "', '" . $kode_permintaan . "', '" . $tanggal_mulai . "', '" . $tanggal_selesai . "', '" . $biaya_bahan_baku . "', '" . $biaya_tenaga_kerja . "', '" . $biaya_overhead_pabrik . "', '" . $jumlah . "', '" . $hpp . "')
+            ON DUPLICATE KEY UPDATE
+            biaya_bahan_baku='" . $biaya_bahan_baku . "', biaya_tenaga_kerja='" . $biaya_tenaga_kerja . "', biaya_overhead_pabrik='" . $biaya_overhead_pabrik . "', hpp='" . $hpp . "'";
+    } else if (str_contains($kode_produksi, 'PP')) {
+        $kode_pesanan = $_POST['kode_pesanan'];
+        $kode_customer = $_POST['kode_customer'];
+
+        $query = "INSERT INTO hpp(kode, kode_pesanan, kode_customer, kode_produksi, kode_permintaan, tanggal_mulai, tanggal_selesai, biaya_bahan_baku, biaya_tenaga_kerja, biaya_overhead_pabrik, jumlah, hpp) 
+                VALUES('" . $kode . "', '" . $kode_pesanan . "', '" . $kode_customer . "', '" . $kode_produksi . "', '" . $kode_permintaan . "', '" . $tanggal_mulai . "', '" . $tanggal_selesai . "', '" . $biaya_bahan_baku . "', '" . $biaya_tenaga_kerja . "', '" . $biaya_overhead_pabrik . "', '" . $jumlah . "', '" . $hpp . "')
+            ON DUPLICATE KEY UPDATE
+            biaya_bahan_baku='" . $biaya_bahan_baku . "', biaya_tenaga_kerja='" . $biaya_tenaga_kerja . "', biaya_overhead_pabrik='" . $biaya_overhead_pabrik . "', hpp='" . $hpp . "'";
+    }
 
     $result = $conn->query($query);
 

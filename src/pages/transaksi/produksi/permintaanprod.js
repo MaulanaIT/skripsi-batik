@@ -155,6 +155,7 @@ export default function Permintaanprod() {
             let data = response.data.data;
 
             let htmlTableDaftarPermintaan = [];
+            let jabatan = localStorage.getItem('leksana_jabatan').toLowerCase();
 
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
@@ -168,7 +169,9 @@ export default function Permintaanprod() {
                             <td className={+item.status === 0 ? global.table_action : 'text-center'}>
                                 {+item.status === 0 ?
                                     <React.Fragment>
-                                        <button type='button' id='button-accept' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => AcceptPermintaan(item.kode)}><FaCheck />Accept</button>
+                                        {(jabatan === 'owner' || jabatan === 'super admin') &&
+                                            <button type='button' id='button-accept' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => AcceptPermintaan(item.kode)}><FaCheck />Accept</button>
+                                        }
                                         <button type='button' id='button-delete' className={global.delete} onClick={() => DeletePermintaan(item.kode)}><FaTrash />Delete</button>
                                     </React.Fragment>
                                     :

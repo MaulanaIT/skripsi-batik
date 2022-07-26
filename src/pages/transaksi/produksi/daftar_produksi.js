@@ -40,78 +40,80 @@ export default function Daftar_produksi() {
 
                 console.log(data);
 
-                data.splice(data.findIndex(item => item.kode === null), 1);
+                let jabatan = localStorage.getItem('leksana_jabatan').toLowerCase();;
 
-                console.log(data);
+                if (jenis === 'stok') {
+                    if (data && data.length > 0) {
+                        data.forEach((item, index) => {
+                            htmlTableDaftarStok.push(
+                                <tr key={index} className={'align-middle'}>
+                                    <td>{index + 1}.</td>
+                                    <td>{item.tanggal}</td>
+                                    <td>{item.kode}</td>
+                                    <td>{item.nama_produk}</td>
+                                    <td>{item.jumlah}</td>
+                                    <td>{item.lama}</td>
+                                    <td>{+item.status === 0 ? 'Proses' : 'Selesai'}</td>
+                                    {(+item.status === 0 && (jabatan === 'packing' || jabatan === 'super admin')) &&
+                                        <td className={cx([global.table_action, 'text-nowrap'])}>
+                                            <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateStatus(jenis, item)}>Selesai</button>
+                                        </td>
+                                    }
+                                    {+item.status === 1 &&
+                                        <td>
+                                            <FaCheck />
+                                        </td>
+                                    }
+                                </tr >
+                            );
+                        });
 
-                if (data && data.length > 0 && jenis === 'stok') {
-                    data.forEach((item, index) => {
-                        htmlTableDaftarStok.push(
-                            <tr key={index} className={'align-middle'}>
-                                <td>{index + 1}.</td>
-                                <td>{item.tanggal}</td>
-                                <td>{item.kode}</td>
-                                <td>{item.nama_produk}</td>
-                                <td>{item.jumlah}</td>
-                                <td>{item.lama}</td>
-                                <td>{+item.status === 0 ? 'Menunggu' : +item.status === 1 ? 'Proses' : 'Selesai'}</td>
-                                {+item.status === 0 && <td>Menunggu</td>}
-                                {+item.status === 1 &&
-                                    <td className={cx([global.table_action, 'text-nowrap'])}>
-                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateStatus(jenis, item)}>Selesai</button>
-                                    </td>
-                                }
-                                {+item.status === 2 &&
-                                    <td>
-                                        <FaCheck />
-                                    </td>
-                                }
-                            </tr >
-                        );
-                    });
-
-                    setHTMLTableDaftarStok(htmlTableDaftarStok, () => {
-                        $(`#table-data-stok`).DataTable();
-                    });
-                } else {
-                    setHTMLTableDaftarStok([], () => {
-                        $(`#table-data-stok`).DataTable();
-                    });
+                        setHTMLTableDaftarStok(htmlTableDaftarStok, () => {
+                            $(`#table-data-stok`).DataTable();
+                        });
+                    } else {
+                        setHTMLTableDaftarStok([], () => {
+                            $(`#table-data-stok`).DataTable();
+                        });
+                    }
                 }
 
-                if (data && data.length > 0 && jenis === 'pesanan') {
-                    data.forEach((item, index) => {
-                        htmlTableDaftarPesanan.push(
-                            <tr key={index} className={'align-middle'}>
-                                <td>{index + 1}.</td>
-                                <td>{item.tanggal}</td>
-                                <td>{item.tanggal_pesan}</td>
-                                <td>{item.kode}</td>
-                                <td>{item.nama_pesanan}</td>
-                                <td>{item.nama_customer}</td>
-                                <td>{item.jumlah}</td>
-                                <td>{item.lama}</td>
-                                <td>{+item.status === 0 ? 'Menunggu' : +item.status === 1 ? 'Proses' : 'Selesai'}</td>
-                                {+item.status === 0 ?
-                                    <td className={cx([global.table_action, 'text-nowrap'])}>
-                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateStatus(jenis, item)}>Selesai</button>
-                                    </td>
-                                    :
-                                    <td>
-                                        <FaCheck />
-                                    </td>
-                                }
-                            </tr>
-                        );
-                    });
+                if (jenis === 'pesanan') {
+                    if (data && data.length > 0) {
+                        data.forEach((item, index) => {
+                            htmlTableDaftarPesanan.push(
+                                <tr key={index} className={'align-middle'}>
+                                    <td>{index + 1}.</td>
+                                    <td>{item.tanggal}</td>
+                                    <td>{item.tanggal_pesan}</td>
+                                    <td>{item.kode}</td>
+                                    <td>{item.nama_pesanan}</td>
+                                    <td>{item.nama_customer}</td>
+                                    <td>{item.jumlah}</td>
+                                    <td>{item.lama}</td>
+                                    <td>{+item.status === 0 ? 'Proses' : 'Selesai'}</td>
+                                    {(+item.status === 0 && (jabatan === 'packing' || jabatan === 'super admin')) &&
+                                        <td className={cx([global.table_action, 'text-nowrap'])}>
+                                            <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateStatus(jenis, item)}>Selesai</button>
+                                        </td>
+                                    }
+                                    {+item.status === 1 &&
+                                        <td>
+                                            <FaCheck />
+                                        </td>
+                                    }
+                                </tr>
+                            );
+                        });
 
-                    setHTMLTableDaftarPesanan(htmlTableDaftarPesanan, () => {
-                        $(`#table-data-pesanan`).DataTable();
-                    });
-                } else {
-                    setHTMLTableDaftarPesanan([], () => {
-                        $(`#table-data-pesanan`).DataTable();
-                    });
+                        setHTMLTableDaftarPesanan(htmlTableDaftarPesanan, () => {
+                            $(`#table-data-pesanan`).DataTable();
+                        });
+                    } else {
+                        setHTMLTableDaftarPesanan([], () => {
+                            $(`#table-data-pesanan`).DataTable();
+                        });
+                    }
                 }
 
                 HideLoading();
@@ -130,23 +132,39 @@ export default function Daftar_produksi() {
 
         const formData = new FormData();
 
-        formData.append('kode', data.kode);
-        formData.append('kode_produk', data.kode_produk);
-        formData.append('jumlah', data.jumlah);
-        formData.append('hpp_per_produk', data.hpp_per_produk);
-        formData.append('harga_jual', data.harga_jual);
-        formData.append('status', 1);
         formData.append('jenis_produksi', jenis);
 
-        axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/update.php`, formData, config).then(() => {
-            window.location.reload();
-        }).catch(error => {
-            console.log(error);
+        if (jenis === 'stok') {
+            formData.append('kode', data.kode);
+            formData.append('kode_produk', data.kode_produk);
+            formData.append('jumlah', data.jumlah);
+            formData.append('hpp_per_produk', data.hpp_per_produk);
+            formData.append('harga_jual', data.harga_jual);
+            formData.append('status', 1);
 
-            alert(error);
+            axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/update.php`, formData, config).then(() => {
+                window.location.reload();
+            }).catch(error => {
+                console.log(error);
+    
+                alert(error);
+    
+                HideLoading();
+            });
+        } else if (jenis === 'pesanan') {
+            formData.append('kode', data.kode_pesanan);
+            formData.append('hpp', data.hpp);
 
-            HideLoading();
-        });
+            axios.post(`${baseURL}/api/transaksi/penjualan/estimasi-pesanan/update.php`, formData, config).then(() => {
+                window.location.reload();
+            }).catch(error => {
+                console.log(error);
+    
+                alert(error);
+    
+                HideLoading();
+            });
+        }
     }
 
     return (

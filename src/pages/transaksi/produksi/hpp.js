@@ -92,7 +92,7 @@ export default function Hpp() {
         if (location.state === null) {
             setIsUpdateData(false);
         } else {
-            // console.log(location.state.data);
+            console.log(location.state.data);
             setDataSelected(location.state.data);
             setIsUpdateData(true);
         }
@@ -200,8 +200,10 @@ export default function Hpp() {
         } else {
             formData.append('kode', getValueKodeHPP);
             formData.append('kode_produk', getValueKodeProduk);
+            formData.append('kode_pesanan', getValueKodePesanan);
             formData.append('kode_produksi', getValueKodeProduksi.value);
             formData.append('kode_permintaan', getValueKodePermintaan);
+            formData.append('kode_customer', getValueKodeCustomer);
             formData.append('tanggal_mulai', getValueTanggalMulai);
             formData.append('tanggal_selesai', getValueTanggalSelesai);
             formData.append('biaya_bahan_baku', getValueBiayaBahanBaku);
@@ -384,7 +386,9 @@ export default function Hpp() {
                     </div>
                     <div className='d-flex flex-wrap'>
                         <div className='col-12 col-md-4 pe-2'>
-                            <button type='button' className={global.button} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={SelectAddHPP}>Tambah Perhitungan HPP</button>
+                            {(getIsUpdateData || getValueKodeProduksi) &&
+                                <button type='button' className={global.button} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={SelectAddHPP}>Tambah Perhitungan HPP</button>
+                            }
                         </div>
                     </div>
                 </div>
@@ -445,29 +449,29 @@ export default function Hpp() {
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
                                         <p className={global.title}>Kode Pesanan <span className={global.important}>*</span></p>
-                                        <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' value={getValueKodePesanan} required={true} readOnly={true} />
+                                        <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' value={getIsUpdateData ? getDataSelected.kode_pesanan : getValueKodePesanan} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
                                         <p className={global.title}>Nama Pesanan <span className={global.important}>*</span></p>
-                                        <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' value={getValueNamaPesanan} required={true} readOnly={true} />
+                                        <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' value={getIsUpdateData ? getDataSelected.nama_pesanan : getValueNamaPesanan} required={true} readOnly={true} />
                                     </div>
                                 </div>
                                 <div className={`${bootstrap['d-flex']}`}>
                                     <div className={`${global.input_group} col-3 pe-2`}>
                                         <p className={global.title}>Kode Customer <span className={global.important}>*</span></p>
-                                        <input type="text" id='input-nama-customer' name='input-nama-customer' value={getValueKodeCustomer} required={true} readOnly={true} />
+                                        <input type="text" id='input-nama-customer' name='input-nama-customer' value={getIsUpdateData ? getDataSelected.kode_customer : getValueKodeCustomer} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
                                         <p className={global.title}>Nama Customer <span className={global.important}>*</span></p>
-                                        <input type="text" id='input-nama-customer' name='input-nama-customer' value={getValueNamaCustomer} required={true} readOnly={true} />
+                                        <input type="text" id='input-nama-customer' name='input-nama-customer' value={getIsUpdateData ? getDataSelected.nama_customer : getValueNamaCustomer} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
                                         <p className={global.title}>Tanggal Pesan <span className={global.important}>*</span></p>
-                                        <input type="date" id='input-tanggal-pesan' name='input-tanggal-pesan' value={getValueTanggalMulai} required={true} readOnly={true} />
+                                        <input type="date" id='input-tanggal-pesan' name='input-tanggal-pesan' value={getIsUpdateData ? getDataSelected.tanggal_mulai : getValueTanggalMulai} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
                                         <p className={global.title}>Tanggal Selesai <span className={global.important}>*</span></p>
-                                        <input type="date" id='input-tanggal-selesai' name='input-tanggal-selesai' value={getValueTanggalSelesai} required={true} readOnly={true} />
+                                        <input type="date" id='input-tanggal-selesai' name='input-tanggal-selesai' value={getIsUpdateData ? getDataSelected.tanggal_selesai : getValueTanggalSelesai} required={true} readOnly={true} />
                                     </div>
                                 </div>
                                 <div className={`${bootstrap['d-flex']}`}>

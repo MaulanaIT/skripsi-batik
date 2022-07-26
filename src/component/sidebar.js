@@ -155,7 +155,7 @@ export default function Sidebar(props) {
                                     </div>
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/produksi/permintaanprod'}><span>Input Permintaan Produksi Stok</span></Link></li>
-                                        <li><Link to={'/transaksi/produksi/permintaan-prod-pesanan'}><span>Daftar Perencanaan Produksi</span></Link></li>
+                                        <li><Link to={'/transaksi/produksi/permintaan-prod-pesanan'}><span>Daftar Permintaan Produksi</span></Link></li>
                                         <li><Link to={'/transaksi/produksi/daftar-produksi'}><span>Daftar Perencanaan Produksi</span></Link></li>
                                         <li><Link to={'/transaksi/produksi/daftar-hpp'}><span>Daftar Proses Produksi</span></Link></li>
                                     </ul>

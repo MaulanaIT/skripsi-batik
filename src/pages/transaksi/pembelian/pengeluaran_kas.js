@@ -79,7 +79,7 @@ export default function Pengeluaran_kas() {
     }, [getValueKodeOrder]);
 
     useEffect(() => {
-        setValueTotalBayar(Calculate([getValueTotalPembelian, getValueDiskon, getValueOngkosKirim]));
+        setValueTotalBayar(Calculate([getValueTotalPembelian, -getValueDiskon, getValueOngkosKirim]));
     }, [getValueTotalPembelian, getValueDiskon, getValueOngkosKirim]);
 
     useEffect(() => {

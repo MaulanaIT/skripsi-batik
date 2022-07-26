@@ -26,8 +26,6 @@ export default function Permintaan_prod_pesanan() {
         axios.get(`${baseURL}/api/transaksi/produksi/permintaan-pesanan/select.php`, config).then(response => {
             let data = response.data.data;
 
-            console.log(data);
-
             let htmlTableDaftarPesanan = [];
 
             if (data && data.length > 0) {
