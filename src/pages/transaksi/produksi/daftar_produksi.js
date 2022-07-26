@@ -38,9 +38,7 @@ export default function Daftar_produksi() {
             axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/select.php`, formData, config).then(response => {
                 let data = response.data.data;
 
-                console.log(data);
-
-                let jabatan = localStorage.getItem('leksana_jabatan').toLowerCase();;
+                let jabatan = localStorage.getItem('leksana_jabatan').toLowerCase();
 
                 if (jenis === 'stok') {
                     if (data && data.length > 0) {
@@ -54,15 +52,17 @@ export default function Daftar_produksi() {
                                     <td>{item.jumlah}</td>
                                     <td>{item.lama}</td>
                                     <td>{+item.status === 0 ? 'Proses' : 'Selesai'}</td>
-                                    {(+item.status === 0 && (jabatan === 'packing' || jabatan === 'super admin')) &&
-                                        <td className={cx([global.table_action, 'text-nowrap'])}>
-                                            <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateStatus(jenis, item)}>Selesai</button>
-                                        </td>
-                                    }
-                                    {+item.status === 1 &&
-                                        <td>
-                                            <FaCheck />
-                                        </td>
+                                    {(jabatan === 'packing' || jabatan === 'super admin') ?
+                                        +item.status === 0 ?
+                                            <td className={cx([global.table_action, 'text-nowrap'])}>
+                                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateStatus(jenis, item)}>Selesai</button>
+                                            </td>
+                                            :
+                                            <td>
+                                                <FaCheck />
+                                            </td>
+                                        :
+                                        null
                                     }
                                 </tr >
                             );
@@ -92,15 +92,17 @@ export default function Daftar_produksi() {
                                     <td>{item.jumlah}</td>
                                     <td>{item.lama}</td>
                                     <td>{+item.status === 0 ? 'Proses' : 'Selesai'}</td>
-                                    {(+item.status === 0 && (jabatan === 'packing' || jabatan === 'super admin')) &&
-                                        <td className={cx([global.table_action, 'text-nowrap'])}>
-                                            <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateStatus(jenis, item)}>Selesai</button>
-                                        </td>
-                                    }
-                                    {+item.status === 1 &&
-                                        <td>
-                                            <FaCheck />
-                                        </td>
+                                    {(jabatan === 'packing' || jabatan === 'super admin') ?
+                                        +item.status === 0 ?
+                                            <td className={cx([global.table_action, 'text-nowrap'])}>
+                                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateStatus(jenis, item)}>Selesai</button>
+                                            </td>
+                                            :
+                                            <td>
+                                                <FaCheck />
+                                            </td>
+                                        :
+                                        null
                                     }
                                 </tr>
                             );
@@ -146,9 +148,9 @@ export default function Daftar_produksi() {
                 window.location.reload();
             }).catch(error => {
                 console.log(error);
-    
+
                 alert(error);
-    
+
                 HideLoading();
             });
         } else if (jenis === 'pesanan') {
@@ -159,9 +161,9 @@ export default function Daftar_produksi() {
                 window.location.reload();
             }).catch(error => {
                 console.log(error);
-    
+
                 alert(error);
-    
+
                 HideLoading();
             });
         }
@@ -200,7 +202,9 @@ export default function Daftar_produksi() {
                                     <td>Jumlah</td>
                                     <td>Lama Produksi</td>
                                     <td>Status</td>
-                                    <td>Aksi</td>
+                                    {(localStorage.getItem('leksana_jabatan').toLowerCase() === 'packing' || localStorage.getItem('leksana_jabatan').toLowerCase() === 'super admin') &&
+                                        <td>Aksi</td>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -221,7 +225,10 @@ export default function Daftar_produksi() {
                                     <td>Jumlah</td>
                                     <td>Lama Produksi</td>
                                     <td>Status</td>
-                                    <td>Aksi</td>
+                                    {(localStorage.getItem('leksana_jabatan').toLowerCase() === 'packing' || localStorage.getItem('leksana_jabatan').toLowerCase()
+                                        === 'super admin') &&
+                                        <td>Aksi</td>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
