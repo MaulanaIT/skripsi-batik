@@ -17,6 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response['status'] = 200;
         $response['data'] = [];
 
+        $query = "UPDATE estimasi_pesanan SET notifikasi=1 WHERE kode='".$kode_pesanan."'";
+    
+        $result = $conn->query($query);
+
         if ($result) {
             $response['data'] = $result;
         } else {

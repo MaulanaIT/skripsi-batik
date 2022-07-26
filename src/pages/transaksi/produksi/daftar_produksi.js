@@ -38,7 +38,11 @@ export default function Daftar_produksi() {
             axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/select.php`, formData, config).then(response => {
                 let data = response.data.data;
 
+                console.log(data);
+
                 data.splice(data.findIndex(item => item.kode === null), 1);
+
+                console.log(data);
 
                 if (data && data.length > 0 && jenis === 'stok') {
                     data.forEach((item, index) => {

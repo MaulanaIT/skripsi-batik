@@ -5,7 +5,7 @@ import axios from 'axios';
 import { MdAccountCircle } from 'react-icons/md';
 import { Link, useLocation } from 'react-router-dom';
 import { FaBars, FaBell, FaCog, FaSignOutAlt } from 'react-icons/fa';
-import { baseURL, config, cx, HideLoading, ShowLoading } from './helper';
+import { baseURL, config, cx, GenerateCode, HideLoading, ShowLoading } from './helper';
 
 // Import Assets
 import Logo from '../assets/images/logo.jpg';
@@ -21,12 +21,36 @@ export default function Header(props) {
 
     const [getDataNotification, setDataNotification] = useState([]);
 
+    const [getValueKodePesanan, setValueKodePesanan] = useState([]);
+
     const location = useLocation();
+
+    useEffect(() => {
+        GetPermintaanPesanan();
+    }, []);
 
     useEffect(() => {
         GetNotifikasi();
         setActiveNotification(false);
     }, [location.pathname]);
+
+    const GetPermintaanPesanan = () => {
+        ShowLoading();
+
+        axios.get(`${baseURL}/api/transaksi/produksi/permintaan-pesanan/select.php`, config).then(response => {
+            let data = response.data.data;
+
+            setValueKodePesanan(GenerateCode('PPP', data));
+
+            HideLoading();
+        }).catch(error => {
+            console.log(error);
+
+            alert(error);
+
+            HideLoading();
+        });
+    }
 
     const GetNotifikasi = () => {
         ShowLoading();
@@ -53,15 +77,18 @@ export default function Header(props) {
         localStorage.removeItem('leksana_jabatan');
     }
 
-    const UpdateNotifikasiPesanan = (kode) => {
+    const InsertPermintaanPesanan = (data) => {
         ShowLoading();
 
         const formData = new FormData();
 
-        formData.append('kode', kode);
+        formData.append('kode', getValueKodePesanan);
+        formData.append('kode_pesanan', data.kode);
+        formData.append('jumlah', data.jumlah);
 
-        axios.post(`${baseURL}/api/transaksi/produksi/permintaan-pesanan/update-notifikasi.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/transaksi/produksi/permintaan-pesanan/insert.php`, formData, config).then(() => {
             GetNotifikasi();
+            GetPermintaanPesanan();
         }).catch(error => {
             console.log(error);
 
@@ -97,11 +124,11 @@ export default function Header(props) {
                                 item.kode.includes('PESAN') ?
                                     <div key={index} className={cx([style.item, style.pesanan])}>
                                         <p className={style.description}>Transaksi pesanan produk telah masuk dengan nomor kode <span className={style.green}>{item.kode}</span></p>
-                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateNotifikasiPesanan(item.kode)}>Terima</button>
+                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => InsertPermintaanPesanan(item)}>Terima</button>
                                     </div>
                                     :
                                     <div className={style.item}>
-                                        <p className={style.description}>Notifikasi Kadaluwarsa</p>
+                                        <p className={style.description}>Stok barang <span className={style.green}>{item.kode} - {item.nama}</span> menipis.</p>
                                     </div>
                             )
                             :
