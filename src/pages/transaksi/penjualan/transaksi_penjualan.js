@@ -107,26 +107,26 @@ export class transaksi_penjualan extends Component {
         valueJumlahBahan: 0,
         valueJumlahBTKL: 0,
         valueJumlahPenolong: 0,
-        valueJenisProduk: null,
-        valueJenisPenjualan: null,
-        valueKodeAkun: null,
-        valueKodeAlat: null,
-        valueKodeBTKL: null,
-        valueKodeBahan: null,
-        valueKodePenolong: null,
-        valueKodeProduk: null,
+        valueJenisProduk: [],
+        valueJenisPenjualan: [],
+        valueKodeAkun: [],
+        valueKodeAlat: [],
+        valueKodeBTKL: [],
+        valueKodeBahan: [],
+        valueKodePenolong: [],
+        valueKodeProduk: [],
         valueKodeJual: '',
-        valueKodeConsignee: null,
-        valueKodeCustomer: null,
+        valueKodeConsignee: [],
+        valueKodeCustomer: [],
         valueKodeKasMasuk: '',
         valueKodePesanan: '',
-        valueNamaAlat: null,
-        valueNamaBahan: null,
-        valueNamaBTKL: null,
-        valueNamaConsignee: null,
-        valueNamaCustomer: null,
-        valueNamaPenolong: null,
-        valueNamaProduk: null,
+        valueNamaAlat: [],
+        valueNamaBahan: [],
+        valueNamaBTKL: [],
+        valueNamaConsignee: [],
+        valueNamaCustomer: [],
+        valueNamaPenolong: [],
+        valueNamaProduk: [],
         valueOngkosKirim: 0,
         valueProfit: 0,
         valueSisa: 0,
@@ -192,8 +192,8 @@ export class transaksi_penjualan extends Component {
 
             this.setState({
                 dataTunai: dataTunai,
-                valueKodeProduk: null,
-                valueNamaProduk: null,
+                valueKodeProduk: [],
+                valueNamaProduk: [],
                 valueHarga: 0,
                 valueJumlah: 0,
                 valueTotalJual: 0
@@ -225,8 +225,8 @@ export class transaksi_penjualan extends Component {
 
             this.setState({
                 dataKonsinyasi: dataKonsinyasi,
-                valueKodeProduk: null,
-                valueNamaProduk: null,
+                valueKodeProduk: [],
+                valueNamaProduk: [],
                 valueHarga: 0,
                 valueJumlah: 0,
                 valueTotalJual: 0
@@ -289,8 +289,8 @@ export class transaksi_penjualan extends Component {
 
         this.setState({
             dataDetailAlat: dataDetailAlat,
-            valueKodeAlat: null,
-            valueNamaAlat: null,
+            valueKodeAlat: [],
+            valueNamaAlat: [],
             valueHargaAlat: 0,
             valueJumlahAlat: 0,
             valueTotalAlat: valueTotalAlat
@@ -339,8 +339,8 @@ export class transaksi_penjualan extends Component {
 
         this.setState({
             dataDetailBahan: dataDetailBahan,
-            valueKodeBahan: null,
-            valueNamaBahan: null,
+            valueKodeBahan: [],
+            valueNamaBahan: [],
             valueHargaBahan: 0,
             valueJumlahBahan: 0,
             valueTotalBahan: valueTotalBahan
@@ -389,8 +389,8 @@ export class transaksi_penjualan extends Component {
 
         this.setState({
             dataDetailPenolong: dataDetailPenolong,
-            valueKodePenolong: null,
-            valueNamaPenolong: null,
+            valueKodePenolong: [],
+            valueNamaPenolong: [],
             valueHargaPenolong: 0,
             valueJumlahPenolong: 0,
             valueTotalPenolong: valueTotalPenolong
@@ -889,7 +889,7 @@ export class transaksi_penjualan extends Component {
         formData.append('jenis_penjualan', jenisPenjualan.toLowerCase());
 
         axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/select.php`, formData, config).then(response => {
-            let dataJual = response.data.data;
+            let dataJual = response.data.data ?? [];
 
             $('#table-data').DataTable().destroy();
 
@@ -1205,15 +1205,15 @@ export class transaksi_penjualan extends Component {
             valueHargaJual: 0,
             valueHpp: 0,
             valueJumlah: 0,
-            valueJenisPenjualan: data ? data : null,
-            valueKodeProduk: null,
+            valueJenisPenjualan: data ? data : [],
+            valueKodeProduk: [],
             valueKodeJual: '',
-            valueKodeConsignee: null,
-            valueKodeCustomer: null,
+            valueKodeConsignee: [],
+            valueKodeCustomer: [],
             valueKodeKasMasuk: '',
-            valueNamaProduk: null,
-            valueNamaConsignee: null,
-            valueNamaCustomer: null,
+            valueNamaProduk: [],
+            valueNamaConsignee: [],
+            valueNamaCustomer: [],
             valueNamaPesanan: '',
             valueOngkosKirim: 0,
             valuePiutang: 0,

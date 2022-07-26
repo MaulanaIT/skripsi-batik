@@ -41,6 +41,7 @@ export class bahan_penolong extends Component {
         formData.append('satuan', GetValue('input-satuan-bahan-penolong'));
         formData.append('jumlah', GetValue('input-jumlah-bahan-penolong'));
         formData.append('harga', GetValue('input-harga-bahan-penolong'));
+        formData.append('tarif_bop', GetValue('input-tarif-bop-penolong'));
 
         axios.post(`${baseURL}/api/master/inventory/bahan-penolong/insert.php`, formData, config).then(() => {
             window.location.href = '/#/master/inventory/daftar-bahan-penolong';

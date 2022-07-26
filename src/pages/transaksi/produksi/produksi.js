@@ -231,8 +231,7 @@ export default function Produksi() {
             formData.append('deskripsi', getValueDeskripsi);
         }
 
-        axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/insert.php`, formData, config).then((response) => {
-            console.log(response);
+        axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/insert.php`, formData, config).then(() => {
             window.location.href = '/#/transaksi/produksi/daftar-produksi';
         }).catch(error => {
             console.log(error);

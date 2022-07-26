@@ -36,6 +36,12 @@
     cursor: pointer;
 }
 
+.container>.menu {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+}
+
 .container>.menu>.account {
     align-items: center;
     cursor: pointer;
@@ -107,6 +113,72 @@
     letter-spacing: 0;
     margin: 0;
     transition: 0.4s ease-in-out;
+}
+
+.container>.menu>.notification {
+    position: relative;
+}
+
+.container>.menu>.notification>.dropdown_menu {
+    background-color: #623e2d;
+    border: 2px solid #745139;
+    display: none;
+    gap: 4px;
+    height: auto;
+    max-height: 260px;
+    overflow: auto;
+    padding: 4px;
+    position: absolute;
+    right: 0;
+    top: 48px;
+    width: 220px;
+}
+
+.container>.menu>.notification>.dropdown_menu.active {
+    display: block;
+}
+
+.container>.menu>.notification>.dropdown_menu>.item {
+    background-color: #794825;
+    min-height: 64px;
+    padding: 12px;
+}
+
+.container>.menu>.notification>.dropdown_menu>.item:not(:last-child) {
+    margin-bottom: 6px;
+}
+
+.container>.menu>.notification>.dropdown_menu>.item * {
+    font-size: 11px;
+}
+
+.container>.menu>.notification>.dropdown_menu>.item:hover {
+    background-color: #80502d;
+}
+
+.container>.menu>.notification>.dropdown_menu>.item.empty {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.container>.menu>.notification>.dropdown_menu>.item.pesanan {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.container>.menu>.notification>.dropdown_menu>.item>.description {
+    margin-bottom: 0;
+}
+
+.container>.menu>.notification>.dropdown_menu>.item>.description>.green {
+    color: greenyellow;
+}
+
+.container>.menu>.notification>.toggle {
+    cursor: pointer;
+    position: relative;
 }
 
 @media screen and (max-width: 495px) {
