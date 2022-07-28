@@ -8,8 +8,7 @@ import { FaClipboardList, FaTrash } from 'react-icons/fa';
 import { MdAdd } from 'react-icons/md';
 import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
 
-import DetailReturAdmin from './detail_retur_admkeu';
-import DetailReturGudang from './detail_retur_gudang';
+import DetailRetur from './detail_retur';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -82,10 +81,7 @@ export class daftar_retur extends Component {
                             <td className={global.table_action}>
                                 {jabatan !== 'owner' &&
                                     <button type='button' id='button-detail' className={global.edit} style={{ gridColumn: '2 span' }}
-                                        onClick={() => jabatan === 'admin, keuangan' ?
-                                            this.SelectDetailKeuangan(item.kode, parseInt(item.status)) :
-                                            this.SelectDetailGudang(item.kode, parseInt(item.status))
-                                        }><FaClipboardList /> Detail</button>
+                                        onClick={() => this.SelectDetail(item.kode, parseInt(item.status))}><FaClipboardList /> Detail</button>
                                 }
                                 <button type='button' id='button-delete' className={global.delete} disabled={+item.status > 1 && true} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
                             </td>
@@ -108,22 +104,16 @@ export class daftar_retur extends Component {
         });
     }
 
-    SelectDetailKeuangan = (data, status) => {
+    SelectDetail = (data, status) => {
         this.setState({ selectedKodeRetur: data, selectedStatusRetur: status }, () => {
-            document.getElementById('detail_retur_admkeu').classList.remove('d-none');
-        });
-    }
-    SelectDetailGudang = (data, status) => {
-        this.setState({ selectedKodeRetur: data, selectedStatusRetur: status }, () => {
-            document.getElementById('detail_retur_gudang').classList.remove('d-none');
+            document.getElementById('detail-retur').classList.remove('d-none');
         });
     }
 
     render() {
         return (
             <>
-                <DetailReturAdmin kode={this.state.selectedKodeRetur} status={this.state.selectedStatusRetur} />
-                <DetailReturGudang kode={this.state.selectedKodeRetur} status={this.state.selectedStatusRetur} />
+                <DetailRetur kode={this.state.selectedKodeRetur} status={this.state.selectedStatusRetur} />
                 <div className={style.header}>
                     <p className={style.title}>Retur Pembelian</p>
                     <p className={style.pathname}>Transaksi / Pembelian / Retur Pembelian</p>

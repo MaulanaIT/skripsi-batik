@@ -8,8 +8,7 @@ import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
 
-import DetailOrderAdmin from './detail_order_admkeu';
-import DetailOrderGudang from './detail_order_gudang';
+import DetailOrder from './detail_order';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -82,10 +81,7 @@ export class daftar_order extends Component {
                                 <td className={global.table_action}>
                                     {jabatan !== 'owner' &&
                                         <button type='button' id='button-detail' className={global.edit} style={{ gridColumn: '2 span' }}
-                                            onClick={() => jabatan === 'admin, keuangan' ?
-                                                this.SelectDetailKeuangan(item.kode, parseInt(item.status)) :
-                                                this.SelectDetailGudang(item.kode, parseInt(item.status))
-                                            }><FaClipboardList /> Detail</button>
+                                            onClick={() => this.SelectDetail(item.kode, parseInt(item.status))}><FaClipboardList /> Detail</button>
                                     }
                                     <button type='button' id='button-print' className={global.apply}><FaPrint /> Print</button>
                                     {+item.status <= 1 &&
@@ -112,22 +108,16 @@ export class daftar_order extends Component {
         });
     }
 
-    SelectDetailKeuangan = (data, status) => {
+    SelectDetail = (data, status) => {
         this.setState({ selectedKodeOrder: data, selectedStatusOrder: status }, () => {
-            document.getElementById('detail_order_admkeu').classList.remove('d-none');
-        });
-    }
-    SelectDetailGudang = (data, status) => {
-        this.setState({ selectedKodeOrder: data, selectedStatusOrder: status }, () => {
-            document.getElementById('detail_order_gudang').classList.remove('d-none');
+            document.getElementById('detail-order').classList.remove('d-none');
         });
     }
 
     render() {
         return (
             <>
-                <DetailOrderAdmin kode={this.state.selectedKodeOrder} status={this.state.selectedStatusOrder} />
-                <DetailOrderGudang kode={this.state.selectedKodeOrder} status={this.state.selectedStatusOrder} />
+                <DetailOrder kode={this.state.selectedKodeOrder} status={this.state.selectedStatusOrder} />
                 <div className={style.header}>
                     <p className={style.title}>Order Pembelian</p>
                     <p className={style.pathname}>Transaksi / Pembelian / Order Pembelian</p>
