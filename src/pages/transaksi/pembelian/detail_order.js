@@ -15,7 +15,8 @@ import global from '../../../css/global.module.css';
 
 export default function Detail_order(props) {
 
-    const [getHTMLTable, setHTMLTable] = useState([]);
+    const [getHTMLTableAlat, setHTMLTableAlat] = useState([]);
+    const [getHTMLTableBahan, setHTMLTableBahan] = useState([]);
 
     useEffect(() => {
         if (props.kode) {
@@ -24,8 +25,16 @@ export default function Detail_order(props) {
     }, [props.kode]);
 
     useEffect(() => {
-        if (props.jenis !== '') $(`#table-detail-data`).DataTable();
-    }, [getHTMLTable]);
+        if (props.jenis === 'alat') {
+            $(`#table-detail-data-alat`).DataTable();
+        }
+    }, [getHTMLTableAlat]);
+
+    useEffect(() => {
+        if (props.jenis === 'bahan') {
+            $(`#table-detail-data-bahan`).DataTable();
+        }
+    }, [getHTMLTableBahan]);
 
     const ApplyItem = (id) => {
         if (!CheckInputValidity('form-detail-table')) return;
@@ -72,40 +81,78 @@ export default function Detail_order(props) {
         axios.post(`${baseURL}/api/transaksi/pembelian/detail-order/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
-            let htmlTable = [];
+            let htmlTableAlat = [];
+            let htmlTableBahan = [];
 
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
-                    htmlTable.push(
-                        <tr key={index}>
-                            <td>{index + 1}.</td>
-                            <td>{item.kode_item}</td>
-                            <td>{item.nama_item}</td>
-                            <td>
-                                <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{item.jumlah}</div>
-                                <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-jumlah-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.jumlah} required={true} />
-                                </div>
-                            </td>
-                            <td>
-                                <div id={`data-harga-${item.id}`} className={`data-${item.id}`}>{item.harga}</div>
-                                <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-harga-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.harga} required={true} />
-                                </div>
-                            </td>
-                            <td>{item.total_harga}</td>
-                            <td className={global.table_action}>
-                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
-                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)}><FaPen /> Edit</button>
-                            </td>
-                        </tr>
-                    );
+                    if (props.jenis === 'alat') {
+                        htmlTableAlat.push(
+                            <tr key={index}>
+                                <td>{index + 1}.</td>
+                                <td>{item.kode_item}</td>
+                                <td>{item.nama_item}</td>
+                                <td>
+                                    <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{item.jumlah}</div>
+                                    <div className={global.input_group_row}>
+                                        <input type="text" id={`edit-jumlah-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.jumlah} required={true} />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id={`data-harga-${item.id}`} className={`data-${item.id}`}>{item.harga}</div>
+                                    <div className={global.input_group_row}>
+                                        <input type="text" id={`edit-harga-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.harga} required={true} />
+                                    </div>
+                                </td>
+                                <td>{item.total_harga}</td>
+                                <td>
+                                    <div id={`data-total-kapasitas-${item.id}`} className={`data-${item.id}`}>{item.total_kapasitas}</div>
+                                    <div className={global.input_group_row}>
+                                        <input type="text" id={`edit-total-kapasitas-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.total_kapasitas} required={true} />
+                                    </div>
+                                </td>
+                                <td className={global.table_action}>
+                                    <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
+                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)} disabled={props.status === 1 ? false : true}><FaPen /> Edit</button>
+                                </td>
+                            </tr>
+                        );
+                    }
+
+                    if (props.jenis === 'bahan') {
+                        htmlTableBahan.push(
+                            <tr key={index}>
+                                <td>{index + 1}.</td>
+                                <td>{item.kode_item}</td>
+                                <td>{item.nama_item}</td>
+                                <td>
+                                    <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{item.jumlah}</div>
+                                    <div className={global.input_group_row}>
+                                        <input type="text" id={`edit-jumlah-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.jumlah} required={true} />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id={`data-harga-${item.id}`} className={`data-${item.id}`}>{item.harga}</div>
+                                    <div className={global.input_group_row}>
+                                        <input type="text" id={`edit-harga-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.harga} required={true} />
+                                    </div>
+                                </td>
+                                <td>{item.total_harga}</td>
+                                <td className={global.table_action}>
+                                    <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
+                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)} disabled={props.status === 1 ? false : true}><FaPen /> Edit</button>
+                                </td>
+                            </tr>
+                        );
+                    }
                 });
             }
 
-            $(`#table-detail-data`).DataTable().destroy();
+            $(`#table-detail-data-alat`).DataTable().destroy();
+            $(`#table-detail-data-bahan`).DataTable().destroy();
 
-            setHTMLTable(htmlTable);
+            setHTMLTableAlat(htmlTableAlat);
+            setHTMLTableBahan(htmlTableBahan);
             HideLoading();
         }).catch(error => {
             console.log(error);
@@ -137,36 +184,37 @@ export default function Detail_order(props) {
                 <div className={`${global.card_detail}`}>
                     <p className='fs-5 fw-bold text-center'>Detail Order Pembelian</p>
                     <form id='form-detail-table' className='table-responsive'>
-                        <table id='table-detail-data' className={`table w-100`}>
+                        <table id='table-detail-data-alat' className={`${props.jenis === 'bahan' && 'd-none'} table w-100`}>
                             <thead className='text-nowrap'>
                                 <tr>
-                                    {props.jenis === 'bahan' &&
-                                        <React.Fragment>
-                                            <td>No.</td>
-                                            <td>Kode Bahan</td>
-                                            <td>Nama Bahan</td>
-                                            <td>Jumlah Beli</td>
-                                            <td>Harga</td>
-                                            <td>Total Harga</td>
-                                            <td>Aksi</td>
-                                        </React.Fragment>
-                                    }
-                                    {props.jenis === 'alat' &&
-                                        <React.Fragment>
-                                            <td>No.</td>
-                                            <td>Kode Alat</td>
-                                            <td>Nama Alat</td>
-                                            <td>Jumlah Beli</td>
-                                            <td>Harga</td>
-                                            <td>Total Harga</td>
-                                            <td>Total Kapasitas</td>
-                                            <td>Aksi</td>
-                                        </React.Fragment>
-                                    }
+                                    <td>No.</td>
+                                    <td>Kode Alat</td>
+                                    <td>Nama Alat</td>
+                                    <td>Jumlah Beli</td>
+                                    <td>Harga</td>
+                                    <td>Total Harga</td>
+                                    <td>Total Kapasitas</td>
+                                    <td>Aksi</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                {getHTMLTable}
+                                {getHTMLTableAlat}
+                            </tbody>
+                        </table>
+                        <table id='table-detail-data-bahan' className={`${props.jenis === 'alat' && 'd-none'} table w-100`}>
+                            <thead className='text-nowrap'>
+                                <tr>
+                                    <td>No.</td>
+                                    <td>Kode Bahan</td>
+                                    <td>Nama Bahan</td>
+                                    <td>Jumlah Beli</td>
+                                    <td>Harga</td>
+                                    <td>Total Harga</td>
+                                    <td>Aksi</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {getHTMLTableBahan}
                             </tbody>
                         </table>
                     </form>
