@@ -18,6 +18,7 @@ export class daftar_order extends Component {
 
     state = {
         htmlTableDaftarOrder: [],
+        selectedJenisPembelian: '',
         selectedKodeOrder: '',
         selectedStatusOrder: 0
     }
@@ -81,7 +82,7 @@ export class daftar_order extends Component {
                                 <td className={global.table_action}>
                                     {jabatan !== 'owner' &&
                                         <button type='button' id='button-detail' className={global.edit} style={{ gridColumn: '2 span' }}
-                                            onClick={() => this.SelectDetail(item.kode, parseInt(item.status))}><FaClipboardList /> Detail</button>
+                                            onClick={() => this.SelectDetail(item.kode, parseInt(item.status), item.jenis_pembelian)}><FaClipboardList /> Detail</button>
                                     }
                                     <button type='button' id='button-print' className={global.apply}><FaPrint /> Print</button>
                                     {+item.status <= 1 &&
@@ -108,8 +109,8 @@ export class daftar_order extends Component {
         });
     }
 
-    SelectDetail = (data, status) => {
-        this.setState({ selectedKodeOrder: data, selectedStatusOrder: status }, () => {
+    SelectDetail = (data, status, jenis) => {
+        this.setState({ selectedKodeOrder: data, selectedStatusOrder: status, selectedJenisPembelian: jenis }, () => {
             document.getElementById('detail-order').classList.remove('d-none');
         });
     }
@@ -117,7 +118,7 @@ export class daftar_order extends Component {
     render() {
         return (
             <>
-                <DetailOrder kode={this.state.selectedKodeOrder} status={this.state.selectedStatusOrder} />
+                <DetailOrder jenis={this.state.selectedJenisPembelian} kode={this.state.selectedKodeOrder} status={this.state.selectedStatusOrder} />
                 <div className={style.header}>
                     <p className={style.title}>Order Pembelian</p>
                     <p className={style.pathname}>Transaksi / Pembelian / Order Pembelian</p>

@@ -53,6 +53,7 @@ export default function Uang_muka_pesanan() {
     const [getDataSelectAkun, setDataSelectAkun] = useState([]);
 
     const [getValueDiskon, setValueDiskon] = useState(0);
+    const [getValueHpp, setValueHpp] = useState(0);
     const [getValueHarga, setValueHarga] = useState(0);
     const [getValueJumlah, setValueJumlah] = useState(0);
     const [getValueKalkulasiTotalHarga, setValueKalkulasiTotalHarga] = useState(0);
@@ -66,6 +67,7 @@ export default function Uang_muka_pesanan() {
     const [getValueSisa, setValueSisa] = useState(0);
     const [getValueTanggal, setValueTanggal] = useState('');
     const [getValueTotalHarga, setValueTotalHarga] = useState(0);
+    const [getValueTotalHpp, setValueTotalHpp] = useState(0);
     const [getValueTotalJual, setValueTotalJual] = useState(0);
     const [getValueUangMuka, setValueUangMuka] = useState(0);
 
@@ -82,9 +84,11 @@ export default function Uang_muka_pesanan() {
         setValueNamaCustomer(props.nama_customer);
         setValueKodePesanan(props.kode);
         setValueNamaPesanan(props.nama);
-        setValueTotalHarga(+props.harga_jual);
-        setValueTotalJual(+props.harga_jual);
-        setValueHarga(+props.hpp * (100 + +props.profit) / 100);
+        setValueTotalHpp(+props.hpp * +props.jumlah);
+        setValueTotalHarga(+props.harga_jual * +props.jumlah);
+        setValueTotalJual(+props.harga_jual * +props.jumlah);
+        setValueHpp(props.hpp);
+        setValueHarga(+props.harga_jual);
         setValueTanggal(moment().format('YYYY-MM-DD'));
     }, []);
 
@@ -154,6 +158,7 @@ export default function Uang_muka_pesanan() {
         formData.append('tanggal', getValueTanggal);
         formData.append('kode_customer', getValueKodeCustomer);
         formData.append('total_jual', getValueKalkulasiTotalHarga);
+        formData.append('total_hpp', getValueTotalHpp);
         formData.append('uang_muka', getValueUangMuka);
         formData.append('sisa', getValueSisa);
         formData.append('file_transfer', file);
@@ -234,21 +239,21 @@ export default function Uang_muka_pesanan() {
                             </div>
                         </div>
                         <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-4 pe-2`}>
+                            <div className={`${global.input_group} col-3 pe-2`}>
                                 <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                 <input type="text" id='input-jumlah-beli' value={getValueJumlah} required={true} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-4 px-2`}>
+                            <div className={`${global.input_group} col-3 px-2`}>
                                 <p className={global.title}>Harga <span className={global.important}>*</span></p>
                                 <input type="text" id='input-harga-beli' value={getValueHarga} required={true} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-4 ps-2`}>
+                            <div className={`${global.input_group} col-3 ps-2`}>
                                 <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
                                 <input type="text" id='input-total-harga-beli' value={getValueTotalHarga} required={true} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-3 ps-2`}>
                                 <p className={global.title}>HPP</p>
-                                <input type="text" id='input-total-harga-beli' value={getValueTotalHarga} readOnly={true} />
+                                <input type="text" id='input-total-harga-beli' value={getValueHpp} readOnly={true} />
                             </div>
                         </div>
                     </div>
@@ -281,8 +286,8 @@ export default function Uang_muka_pesanan() {
                             <input type="text" id='input-detail-total-jual' className={`col-4`} value={getValueTotalJual} required={true} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
-                            <p className={`${global.title} col-3`}>Harga Pokok Penjualan</p>
-                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={getValueTotalJual} readOnly={true} />
+                            <p className={`${global.title} col-3`}>Total Harga Pokok Penjualan</p>
+                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={getValueTotalHpp} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Diskon</p>

@@ -95,6 +95,7 @@ export class transaksi_penjualan extends Component {
         htmlTableDaftarDetailPenolong: [],
 
         valueDeskripsiPesanan: '',
+        valueDepartemen: '',
         valueDiskon: 0,
         valueHarga: 0,
         valueHargaAlat: 0,
@@ -109,6 +110,7 @@ export class transaksi_penjualan extends Component {
         valueJumlahPenolong: 0,
         valueJenisProduk: [],
         valueJenisPenjualan: [],
+        valueKalkulasiTotalHpp: 0,
         valueKodeAkun: [],
         valueKodeAlat: [],
         valueKodeBTKL: [],
@@ -135,10 +137,12 @@ export class transaksi_penjualan extends Component {
         valueTotalBahan: 0,
         valueTotalBTKL: 0,
         valueTotalBayar: 0,
+        valueTotalHpp: 0,
         valueTotalKembalian: 0,
         valueTotalJual: 0,
         valueTotalPenolong: 0,
         valueUangMuka: 0,
+        valueUpah: 0,
 
         tabSelected: 0,
 
@@ -154,6 +158,7 @@ export class transaksi_penjualan extends Component {
         await this.GetConsignee();
         await this.GetPesanan();
         await this.GetProduk();
+        await this.GetTenagaKerja();
     }
 
     AddDetail = () => {
@@ -163,7 +168,8 @@ export class transaksi_penjualan extends Component {
             valueKodeJual,
             valueKodeProduk,
             valueNamaProduk,
-            valueTotalJual
+            valueHpp,
+            valueTotalHpp
         } = this.state;
 
         if (this.state.jenisPenjualan.toLowerCase() === 'tunai') {
@@ -183,11 +189,14 @@ export class transaksi_penjualan extends Component {
                     nama_item: valueNamaProduk.label,
                     jumlah: valueJumlah,
                     harga: valueHarga,
-                    total_harga: valueJumlah * valueHarga
+                    total_harga: valueJumlah * valueHarga,
+                    hpp: valueHpp,
+                    total_hpp: valueTotalHpp
                 });
             } else {
                 dataTunai[check].jumlah = +dataTunai[check].jumlah + +valueJumlah;
                 dataTunai[check].total_harga = +dataTunai[check].total_harga + valueJumlah * valueHarga;
+                dataTunai[check].total_hpp = +dataTunai[check].total_hpp + valueTotalHpp;
             }
 
             this.setState({
@@ -196,7 +205,9 @@ export class transaksi_penjualan extends Component {
                 valueNamaProduk: [],
                 valueHarga: 0,
                 valueJumlah: 0,
-                valueTotalJual: 0
+                valueTotalJual: 0,
+                valueHpp: 0,
+                valueTotalHpp: 0
             }, () => {
                 this.GetDetailTunai();
             });
@@ -221,6 +232,7 @@ export class transaksi_penjualan extends Component {
             } else {
                 dataKonsinyasi[check].jumlah = +dataKonsinyasi[check].jumlah + +valueJumlah;
                 dataKonsinyasi[check].total_harga = +dataKonsinyasi[check].total_harga + valueJumlah * valueHarga;
+                dataKonsinyasi[check].total_hpp = +dataKonsinyasi[check].total_hpp + valueTotalHpp;
             }
 
             this.setState({
@@ -229,7 +241,9 @@ export class transaksi_penjualan extends Component {
                 valueNamaProduk: [],
                 valueHarga: 0,
                 valueJumlah: 0,
-                valueTotalJual: 0
+                valueTotalJual: 0,
+                valueHpp: 0,
+                valueTotalHpp: 0
             }, () => {
                 this.GetDetailKonsinyasi();
             });
@@ -254,7 +268,9 @@ export class transaksi_penjualan extends Component {
             valueHargaAlat,
             valueJumlahAlat,
             valueKodePesanan,
-            valueKodeAlat
+            valueKodeAlat,
+            valueHpp,
+            valueTotalHpp
         } = this.state;
 
         let dataAlat = this.state.dataAlat.find(item => item.kode === valueKodeAlat.value);
@@ -269,7 +285,9 @@ export class transaksi_penjualan extends Component {
                 nama_alat: dataAlat.nama,
                 jumlah: +valueJumlahAlat,
                 harga: +valueHargaAlat,
-                total_harga: +valueHargaAlat * +valueJumlahAlat
+                total_harga: +valueHargaAlat * +valueJumlahAlat,
+                hpp: valueHpp,
+                total_hpp: valueTotalHpp
             });
         } else {
             dataDetailAlat[check].jumlah = +dataDetailAlat[check].jumlah + +valueJumlahAlat;
@@ -293,7 +311,9 @@ export class transaksi_penjualan extends Component {
             valueNamaAlat: [],
             valueHargaAlat: 0,
             valueJumlahAlat: 0,
-            valueTotalAlat: valueTotalAlat
+            valueTotalAlat: valueTotalAlat,
+            valueHpp: 0,
+            valueTotalHpp: 0
         }, () => {
             this.GetDetailAlat();
         });
@@ -304,7 +324,9 @@ export class transaksi_penjualan extends Component {
             valueHargaBahan,
             valueJumlahBahan,
             valueKodePesanan,
-            valueKodeBahan
+            valueKodeBahan,
+            valueHpp,
+            valueTotalHpp
         } = this.state;
 
         let dataBahan = this.state.dataBahan.find(item => item.kode === valueKodeBahan.value);
@@ -319,7 +341,9 @@ export class transaksi_penjualan extends Component {
                 nama_bahan: dataBahan.nama,
                 jumlah: +valueJumlahBahan,
                 harga: +valueHargaBahan,
-                total_harga: +valueHargaBahan * +valueJumlahBahan
+                total_harga: +valueHargaBahan * +valueJumlahBahan,
+                hpp: valueHpp,
+                total_hpp: valueTotalHpp
             });
         } else {
             dataDetailBahan[check].jumlah = +dataDetailBahan[check].jumlah + +valueJumlahBahan;
@@ -343,9 +367,64 @@ export class transaksi_penjualan extends Component {
             valueNamaBahan: [],
             valueHargaBahan: 0,
             valueJumlahBahan: 0,
-            valueTotalBahan: valueTotalBahan
+            valueTotalBahan: valueTotalBahan,
+            valueHpp: 0,
+            valueTotalHpp: 0
         }, () => {
             this.GetDetailBahan();
+        });
+    }
+
+    AddDetailBTKL = () => {
+        const {
+            valueDepartemen,
+            valueJumlahBTKL,
+            valueKodePesanan,
+            valueKodeBTKL,
+            valueUpah
+        } = this.state;
+
+        let dataBTKL = this.state.dataBTKL.find(item => item.kode === valueKodeBTKL.value);
+        let dataDetailBTKL = this.state.dataDetailBTKL;
+
+        let check = dataDetailBTKL.findIndex(item => item.kode_tenaga_kerja === valueKodeBTKL.value);
+
+        if (check < 0) {
+            dataDetailBTKL.push({
+                kode: valueKodePesanan,
+                kode_tenaga_kerja: dataBTKL.kode,
+                nama_tenaga_kerja: dataBTKL.nama,
+                departemen: valueDepartemen,
+                jumlah: +valueJumlahBTKL,
+                harga: +valueUpah,
+                total_harga: +valueUpah * +valueJumlahBTKL
+            });
+        } else {
+            dataDetailBTKL[check].jumlah = +dataDetailBTKL[check].jumlah + +valueJumlahBTKL;
+            dataDetailBTKL[check].total_harga = +dataDetailBTKL[check].total_harga + +valueUpah * +valueJumlahBTKL;
+
+            if (dataDetailBTKL[check].jumlah > +dataBTKL.jumlah) {
+                dataDetailBTKL[check].jumlah = +dataBTKL.jumlah;
+                dataDetailBTKL[check].total_harga = +dataBTKL.harga * +dataBTKL.jumlah;
+            }
+        }
+
+        let valueTotalBTKL = 0;
+
+        dataDetailBTKL.forEach(item => {
+            valueTotalBTKL += +item.total_harga;
+        });
+
+        this.setState({
+            dataDetailBTKL: dataDetailBTKL,
+            valueKodeBTKL: [],
+            valueNamaBTKL: [],
+            valueDepartemen: '',
+            valueUpah: 0,
+            valueJumlahBTKL: 0,
+            valueTotalBTKL: valueTotalBTKL
+        }, () => {
+            this.GetDetailBTKL();
         });
     }
 
@@ -444,6 +523,25 @@ export class transaksi_penjualan extends Component {
             valueTotalBahan: valueTotalBahan
         }, () => {
             this.GetDetailBahan();
+        });
+    }
+
+    DeleteDetailBTKL = (id) => {
+        let dataDetailBTKL = this.state.dataDetailBTKL;
+
+        dataDetailBTKL.splice(id, 1);
+
+        let valueTotalBTKL = 0;
+
+        dataDetailBTKL.forEach(item => {
+            valueTotalBTKL += +item.total_harga;
+        });
+
+        this.setState({
+            dataDetailBTKL: dataDetailBTKL,
+            valueTotalBTKL: valueTotalBTKL
+        }, () => {
+            this.GetDetailBTKL();
         });
     }
 
@@ -634,6 +732,46 @@ export class transaksi_penjualan extends Component {
         });
     }
 
+    GetDetailBTKL = () => {
+        const {
+            dataDetailBTKL
+        } = this.state;
+
+        ShowLoading();
+
+        let htmlTableDaftarDetailBTKL = [];
+
+        if (dataDetailBTKL.length > 0) {
+            dataDetailBTKL.forEach((item, index) => {
+                htmlTableDaftarDetailBTKL.push(
+                    <tr key={index} className={'align-middle'}>
+                        <td>{index + 1}.</td>
+                        <td>{item.kode}</td>
+                        <td>{item.kode_tenaga_kerja}</td>
+                        <td>{item.nama_tenaga_kerja}</td>
+                        <td>{item.departemen}</td>
+                        <td>{item.jumlah}</td>
+                        <td>{item.harga}</td>
+                        <td>{item.total_harga}</td>
+                        <td className={global.table_action}>
+                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailBTKL(index)}><FaTrash />Delete</button>
+                        </td>
+                    </tr>
+                );
+            });
+        }
+
+        $('#table-data-btkl').DataTable().destroy();
+
+        this.setState({ htmlTableDaftarDetailBTKL: htmlTableDaftarDetailBTKL }, () => {
+            $('#table-data-btkl').DataTable()
+
+            this.KalkulasiHpp();
+
+            HideLoading();
+        });
+    }
+
     GetDetailPenolong = () => {
         const {
             dataDetailPenolong
@@ -757,6 +895,8 @@ export class transaksi_penjualan extends Component {
 
         let htmlTableDaftarKonsinyasi = [];
 
+        let kalkulasiTotalHpp = 0;
+
         if (this.state.dataKonsinyasi.length > 0) {
             this.state.dataKonsinyasi.forEach((item, index) => {
                 htmlTableDaftarKonsinyasi.push(
@@ -768,17 +908,21 @@ export class transaksi_penjualan extends Component {
                         <td>{item.jumlah}</td>
                         <td>{item.harga}</td>
                         <td>{item.total_harga}</td>
+                        <td>{item.hpp}</td>
+                        <td>{item.total_hpp}</td>
                         <td className={global.table_action}>
                             <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteKonsinyasi(item.id)}><FaTrash />Delete</button>
                         </td>
                     </tr>
                 );
+
+                kalkulasiTotalHpp += +item.total_hpp;
             });
         }
 
         $('#table-data').DataTable().destroy();
 
-        this.setState({ htmlTableDaftarKonsinyasi: htmlTableDaftarKonsinyasi }, () => {
+        this.setState({ htmlTableDaftarKonsinyasi: htmlTableDaftarKonsinyasi, valueKalkulasiTotalHpp: kalkulasiTotalHpp }, () => {
             $('#table-data').DataTable();
 
             this.KalkulasiTotalHarga();
@@ -825,6 +969,8 @@ export class transaksi_penjualan extends Component {
 
         let htmlTableDaftarTunai = [];
 
+        let kalkulasiTotalHpp = 0;
+
         if (this.state.dataTunai.length > 0) {
             this.state.dataTunai.forEach((item, index) => {
                 htmlTableDaftarTunai.push(
@@ -836,17 +982,21 @@ export class transaksi_penjualan extends Component {
                         <td>{item.jumlah}</td>
                         <td>{item.harga}</td>
                         <td>{item.total_harga}</td>
+                        <td>{item.hpp}</td>
+                        <td>{item.total_hpp}</td>
                         <td className={global.table_action}>
                             <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteTunai(item.id)}><FaTrash />Delete</button>
                         </td>
                     </tr>
                 );
+
+                kalkulasiTotalHpp += +item.total_hpp;
             });
         }
 
         $('#table-data').DataTable().destroy();
 
-        this.setState({ htmlTableDaftarTunai: htmlTableDaftarTunai }, () => {
+        this.setState({ htmlTableDaftarTunai: htmlTableDaftarTunai, valueKalkulasiTotalHpp: kalkulasiTotalHpp }, () => {
             $('#table-data').DataTable();
 
             this.KalkulasiTotalHarga();
@@ -878,6 +1028,33 @@ export class transaksi_penjualan extends Component {
             alert(error);
 
             HideLoading();
+        });
+    }
+
+    GetTenagaKerja = async () => {
+        axios.get(`${baseURL}/api/master/tenaga-kerja/select.php`, config).then(response => {
+            let dataTenagaKerja = response.data.data;
+
+            let dataSelectKodeBTKL = [];
+            let dataSelectNamaBTKL = [];
+
+            if (dataTenagaKerja.length > 0) {
+                dataTenagaKerja.forEach(item => {
+                    dataSelectKodeBTKL.push({
+                        value: item.kode,
+                        label: item.kode
+                    });
+
+                    dataSelectNamaBTKL.push({
+                        value: item.kode,
+                        label: item.nama
+                    });
+                });
+            }
+
+            this.setState({ dataBTKL: dataTenagaKerja, dataSelectKodeBTKL: dataSelectKodeBTKL, dataSelectNamaBTKL: dataSelectNamaBTKL });
+        }).catch(error => {
+            console.log(error);
         });
     }
 
@@ -1180,10 +1357,11 @@ export class transaksi_penjualan extends Component {
             let valueKode = this.state.dataSelectKodeProduk.find(item => item.value === data?.value);
             let valueNama = this.state.dataSelectNamaProduk.find(item => item.value === data?.value);
             let harga = this.state.dataProduk.find(item => item.kode === valueKode.value).harga_jual;
+            let hpp = this.state.dataProduk.find(item => item.kode === valueKode.value).hpp_per_produk;
 
-            this.setState({ valueHarga: harga, valueKodeProduk: valueKode, valueNamaProduk: valueNama });
+            this.setState({ valueHarga: harga, valueHpp: hpp, valueKodeProduk: valueKode, valueNamaProduk: valueNama });
         } else {
-            this.setState({ valueHarga: 0, valueKodeProduk: '', valueNamaProduk: '' });
+            this.setState({ valueHarga: 0, valueHpp: 0, valueKodeProduk: '', valueNamaProduk: '' });
         }
     }
 
@@ -1228,11 +1406,25 @@ export class transaksi_penjualan extends Component {
         });
     }
 
+    SelectBTKL = (data) => {
+        if (data) {
+            let valueKode = this.state.dataSelectKodeBTKL.find(item => item.value === data?.value);
+            let valueNama = this.state.dataSelectNamaBTKL.find(item => item.value === data?.value);
+            let departemen = this.state.dataBTKL.find(item => item.kode === data?.value).departemen;
+            let upah = this.state.dataBTKL.find(item => item.kode === data?.value).upah;
+
+            this.setState({ valueDepartemen: departemen, valueUpah: upah, valueKodeBTKL: valueKode, valueNamaBTKL: valueNama });
+        } else {
+            this.setState({ valueDepartemen: '', valueUpah: 0, valueKodeBTKL: '', valueNamaBTKL: '' });
+        }
+    }
+
     SelectTab = (index) => {
         this.setState({ tabSelected: index }, () => {
             if (index === 0) this.GetDetailBahan();
             if (index === 1) this.GetDetailPenolong();
             if (index === 2) this.GetDetailAlat();
+            if (index === 3) this.GetDetailBTKL();
         });
     }
 
@@ -1243,12 +1435,12 @@ export class transaksi_penjualan extends Component {
             dataSelectAkun,
             dataTunai,
             valueDeskripsiPesanan,
+            valueDepartemen,
             valueDiskon,
             valueHarga,
             valueHargaAlat,
             valueHargaBahan,
             valueHargaPenolong,
-            valueHargaBTKL,
             valueHargaJual,
             valueHpp,
             valueJumlah,
@@ -1258,6 +1450,7 @@ export class transaksi_penjualan extends Component {
             valueJumlahBTKL,
             valueJenisProduk,
             valueJenisPenjualan,
+            valueKalkulasiTotalHpp,
             valueKodeAkun,
             valueKodeAlat,
             valueKodeBahan,
@@ -1265,7 +1458,6 @@ export class transaksi_penjualan extends Component {
             valueKodeConsignee,
             valueKodeCustomer,
             valueKodeJual,
-            valueKodeKasMasuk,
             valueKodePesanan,
             valueKodePenolong,
             valueKodeProduk,
@@ -1285,8 +1477,9 @@ export class transaksi_penjualan extends Component {
             valueTotalBayar,
             valueTotalPenolong,
             valueTotalBTKL,
+            valueTotalHpp,
             valueTotalJual,
-            valueUangMuka
+            valueUpah
         } = this.state;
 
         return (
@@ -1346,7 +1539,10 @@ export class transaksi_penjualan extends Component {
                                             <div className={`${bootstrap['d-flex']}`}>
                                                 <div className={`${global.input_group} col-4 pe-2`}>
                                                     <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                                    <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={this.InputChange} required={true} />
+                                                    <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={e => this.setState({
+                                                        valueJumlah: e.target.value, 
+                                                        valueTotalHpp: +e.target.value * +valueHpp
+                                                    })} required={true} />
                                                 </div>
                                                 <div className={`${global.input_group} col-4 px-2`}>
                                                     <p className={global.title}>Harga <span className={global.important}>*</span></p>
@@ -1360,11 +1556,11 @@ export class transaksi_penjualan extends Component {
                                             <div className={`${bootstrap['d-flex']}`}>
                                                 <div className={`${global.input_group} col-4 pe-2`}>
                                                     <p className={global.title}>Harga Pokok Penjualan</p>
-                                                    <input type="text" id='valueHarga' className='text-end' value={valueHarga} readOnly={true} />
+                                                    <input type="text" id='valueHarga' className='text-end' value={valueHpp} readOnly={true} />
                                                 </div>
                                                 <div className={`${global.input_group} col-4 px-2`}>
                                                     <p className={global.title}>Total HPP</p>
-                                                    <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga)} readOnly={true} />
+                                                    <input type="text" id='valueTotalHarga' className='text-end' value={valueTotalHpp} readOnly={true} />
                                                 </div>
                                             </div>
                                             <button type='button' className={global.button} onClick={this.AddDetail}><MdAdd /> Tambah</button>
@@ -1409,6 +1605,10 @@ export class transaksi_penjualan extends Component {
                                                         <input type="text" id='valueJumlah' value={valueJumlah} onChange={async e => {
                                                             await this.InputChange(e);
                                                             this.KalkulasiHargaJual();
+                                                            this.setState({
+                                                                valueJumlah: e.target.value, 
+                                                                valueTotalHpp: +e.target.value * +valueHpp
+                                                            });
                                                         }} required={true} />
                                                     </div>
                                                     <div className={`${global.input_group} col-4 px-2`}>
@@ -1471,7 +1671,10 @@ export class transaksi_penjualan extends Component {
                                                 <div className={`${bootstrap['d-flex']}`}>
                                                     <div className={`${global.input_group} col-4 pe-2`}>
                                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                                        <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={this.InputChange} required={true} />
+                                                        <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={e => this.setState({
+                                                        valueJumlah: e.target.value, 
+                                                        valueTotalHpp: +e.target.value * +valueHpp
+                                                    })} required={true} />
                                                     </div>
                                                     <div className={`${global.input_group} col-4 px-2`}>
                                                         <p className={global.title}>Harga <span className={global.important}>*</span></p>
@@ -1481,17 +1684,17 @@ export class transaksi_penjualan extends Component {
                                                         <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga)} required={true} readOnly={true} />
                                                     </div>
-                                                        </div>
-                                                        <div className={`${bootstrap['d-flex']}`}>
-                                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                                            <p className={global.title}>Harga Pokok Penjualan</p>
-                                                            <input type="text" id='valueHarga' className='text-end' value={valueHarga} readOnly={true} />
-                                                        </div>
-                                                        <div className={`${global.input_group} col-4 px-2`}>
-                                                            <p className={global.title}>Total HPP</p>
-                                                            <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga)} readOnly={true} />
-                                                        </div>
+                                                </div>
+                                                <div className={`${bootstrap['d-flex']}`}>
+                                                    <div className={`${global.input_group} col-4 pe-2`}>
+                                                        <p className={global.title}>Harga Pokok Penjualan</p>
+                                                        <input type="text" id='valueHarga' className='text-end' value={valueHpp} readOnly={true} />
                                                     </div>
+                                                    <div className={`${global.input_group} col-4 px-2`}>
+                                                        <p className={global.title}>Total HPP</p>
+                                                        <input type="text" id='valueTotalHarga' className='text-end' value={valueTotalHpp} readOnly={true} />
+                                                    </div>
+                                                </div>
                                                 <button type='button' className={global.button} onClick={this.AddDetail}><MdAdd /> Tambah</button>
                                             </React.Fragment>
                                     }
@@ -1680,17 +1883,17 @@ export class transaksi_penjualan extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Nama Tenaga Kerja</p>
-                                            <Select id='select-kode-btkl' name='select-kode-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeBTKL} placeholder={'Select Kode...'} value={valueKodeBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
+                                            <Select id='select-kode-btkl' name='select-kode-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeBTKL} placeholder={'Select Kode...'} value={valueNamaBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Departemen</p>
-                                            <Select id='select-bagian-btkl' name='select-bagian-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaBTKL} placeholder={'Select Bagian...'} value={valueNamaBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
+                                            <input type="text" id='valueDepartemen' value={valueDepartemen} readOnly={true} />
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Upah</p>
-                                            <input type="text" id='valueHargaBTKL' value={valueHargaBTKL} readOnly={true} />
+                                            <input type="text" id='valueHargaBTKL' value={valueUpah} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Jumlah</p>
@@ -1698,7 +1901,7 @@ export class transaksi_penjualan extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                             <p className={global.title}>Aksi</p>
-                                            <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</button>
+                                            <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={this.AddDetailBTKL}><MdAdd /> Tambah</button>
                                         </div>
                                     </div>
                                     <div className={`table-responsive`}>
@@ -1716,7 +1919,9 @@ export class transaksi_penjualan extends Component {
                                                     <td>Aksi</td>
                                                 </tr>
                                             </thead>
-                                            <tbody></tbody>
+                                            <tbody>
+                                                {this.state.htmlTableDaftarDetailBTKL}
+                                            </tbody>
                                         </table>
                                     </div>
                                     <div className={`d-flex flex-column gap-2 pb-2`}>
@@ -1769,7 +1974,7 @@ export class transaksi_penjualan extends Component {
                                                 </div>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Total Harga Pokok Penjualan</p>
-                                                    <input type="text" id='valueTotalJual' className={'col-4'} value={valueTotalJual} readOnly={true} />
+                                                    <input type="text" id='valueTotalJual' className={'col-4'} value={valueKalkulasiTotalHpp} readOnly={true} />
                                                 </div>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Diskon</p>
@@ -1827,7 +2032,7 @@ export class transaksi_penjualan extends Component {
                                                 </div>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Total Harga Pokok Penjualan</p>
-                                                    <input type="text" id='valueTotalJual' className={'col-6'} value={valueTotalJual} readOnly={true} />
+                                                    <input type="text" id='valueTotalJual' className={'col-6'} value={valueKalkulasiTotalHpp} readOnly={true} />
                                                 </div>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Diskon</p>

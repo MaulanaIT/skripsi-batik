@@ -6,13 +6,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
     $tanggal = $_POST['tanggal'];
     $kode_customer = $_POST['kode_customer'];
+    $total_hpp = $_POST['total_hpp'];
     $total_jual = $_POST['total_jual'];
     $uang_muka = $_POST['uang_muka'];
     $sisa = $_POST['sisa'];
     $file_transfer = $_FILES['file_transfer']['tmp_name'];
     $nama_file = $_POST['nama_file'];
 
-    $query = "INSERT INTO uang_muka_pesanan(kode, tanggal, kode_customer, total_jual, uang_muka, sisa, file) VALUES('".$kode."', '".$tanggal."', '".$kode_customer."', '".$total_jual."', '".$uang_muka."', '".$sisa."', '" . $nama_file . "')";
+    $query = "INSERT INTO uang_muka_pesanan(kode, tanggal, kode_customer, total_jual, uang_muka, sisa, file) VALUES('".$kode."', '".$tanggal."', '".$kode_customer."', '".$total_hpp."', '".$total_jual."', '".$uang_muka."', '".$sisa."', '" . $nama_file . "')";
 
     $result = $conn->query($query);
 
@@ -40,6 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $result = $conn->query($query);
 
                 $query = "UPDATE master_akun SET saldo=(saldo+" . $uang_muka . ") WHERE kode='" . $kode_akun . "'";
+                $result = $conn->query($query);
+
+                $query = "UPDATE master_akun SET saldo=(saldo+" . $total_hpp . ") WHERE kode='5101'";
                 $result = $conn->query($query);
 
                 if ($result) {

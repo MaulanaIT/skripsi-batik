@@ -59,8 +59,6 @@ export default function Retur_pembelian() {
     const [getDataSelectKodeItem, setDataSelectKodeItem] = useState([]);
     const [getDataSelectNamaItem, setDataSelectNamaItem] = useState([]);
     const [getDataSelectKodePengeluaranKas, setDataSelectKodePengeluaranKas] = useState([]);
-    const [getDataSelectKodeSupplier, setDataSelectKodeSupplier] = useState([]);
-    const [getDataSelectNamaSupplier, setDataSelectNamaSupplier] = useState([]);
 
     const [getHTMLTableDaftarAlat, setHTMLTableDaftarAlat] = useState([]);
     const [getHTMLTableDaftarBahan, setHTMLTableDaftarBahan] = useState([]);
@@ -75,6 +73,7 @@ export default function Retur_pembelian() {
     const [getValueKodeSupplier, setValueKodeSupplier] = useState('');
     const [getValueNamaItem, setValueNamaItem] = useState([]);
     const [getValueNamaSupplier, setValueNamaSupplier] = useState('');
+    const [getValuePenguranganKapasitas, setValuePenguranganKapasitas] = useState(0);
     const [getValueTanggal, setValueTanggal] = useState(moment().format('YYYY-MM-DD'));
     const [getValueTotalHarga, setValueTotalHarga] = useState(0);
 
@@ -556,7 +555,7 @@ export default function Retur_pembelian() {
                                             </div>
                                             <div className={`${global.input_group} col-4 ps-2`}>
                                                 <p className={global.title}>Pengurangan Kapasitas <span className={global.important}>*</span></p>
-                                                <input type="text" id='valueJumlahRetur' className='text-end' value={getValueJumlahRetur} onInput={InputFormatNumber} onChange={e => setValueJumlahRetur(e.target.value)} required={true} />
+                                                <input type="text" id='valuePenguranganKapasitas' className='text-end' value={getValuePenguranganKapasitas} onInput={InputFormatNumber} onChange={e => setValuePenguranganKapasitas(e.target.value)} required={true} />
                                             </div>
                                         </div>
                                         <div className={`d-flex`}>

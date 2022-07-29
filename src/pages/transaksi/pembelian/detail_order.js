@@ -24,7 +24,7 @@ export default function Detail_order(props) {
     }, [props.kode]);
 
     useEffect(() => {
-        $(`#table-detail-data`).DataTable();
+        if (props.jenis !== '') $(`#table-detail-data`).DataTable();
     }, [getHTMLTable]);
 
     const ApplyItem = (id) => {
@@ -140,13 +140,29 @@ export default function Detail_order(props) {
                         <table id='table-detail-data' className={`table w-100`}>
                             <thead className='text-nowrap'>
                                 <tr>
-                                    <td>No.</td>
-                                    <td>Kode Bahan/Alat</td>
-                                    <td>Nama Bahan/Alat</td>
-                                    <td>Jumlah Beli</td>
-                                    <td>Harga</td>
-                                    <td>Total Harga</td>
-                                    <td>Aksi</td>
+                                    {props.jenis === 'bahan' &&
+                                        <React.Fragment>
+                                            <td>No.</td>
+                                            <td>Kode Bahan</td>
+                                            <td>Nama Bahan</td>
+                                            <td>Jumlah Beli</td>
+                                            <td>Harga</td>
+                                            <td>Total Harga</td>
+                                            <td>Aksi</td>
+                                        </React.Fragment>
+                                    }
+                                    {props.jenis === 'alat' &&
+                                        <React.Fragment>
+                                            <td>No.</td>
+                                            <td>Kode Alat</td>
+                                            <td>Nama Alat</td>
+                                            <td>Jumlah Beli</td>
+                                            <td>Harga</td>
+                                            <td>Total Harga</td>
+                                            <td>Total Kapasitas</td>
+                                            <td>Aksi</td>
+                                        </React.Fragment>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -156,12 +172,12 @@ export default function Detail_order(props) {
                     </form>
 
                     <div className='d-flex'>
-                        {localStorage.getItem('leksana_jabatan').toLowerCase() === 'gudang, pembelian' &&
+                        {localStorage.getItem('leksana_jabatan').toLowerCase() === 'admin, keuangan' &&
                             <div className='col-6 pe-2'>
                                 <button type='button' className={`${global.button} w-100`} onClick={() => UpdateStatus(1)} disabled={props.status === 0 ? false : true}>Setuju</button>
                             </div>
                         }
-                        {localStorage.getItem('leksana_jabatan').toLowerCase() === 'admin, keuangan' &&
+                        {localStorage.getItem('leksana_jabatan').toLowerCase() === 'gudang, pembelian' &&
                             <React.Fragment>
                                 <div className='col-6 pe-2'>
                                     <button type='button' className={`${global.button} w-100`} onClick={() => UpdateStatus(2)} disabled={props.status === 1 ? false : true}>Order</button>

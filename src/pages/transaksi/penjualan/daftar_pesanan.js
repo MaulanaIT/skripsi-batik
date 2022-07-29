@@ -75,6 +75,9 @@ export class daftar_pesanan extends Component {
                                 <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{item.jumlah}</div>
                             </td>
                             <td>
+                                <div id={`data-hpp-${item.id}`} className={`data-${item.id}`}>{item.hpp}</div>
+                            </td>
+                            <td>
                                 <div id={`data-harga-jual-${item.id}`} className={`data-${item.id}`}>{item.harga_jual}</div>
                             </td>
                             <td>
@@ -141,6 +144,7 @@ export class daftar_pesanan extends Component {
                                         <td>Nama Customer</td>
                                         <td>Jenis Produk</td>
                                         <td>Jumlah</td>
+                                        <td>Harga Pokok Produk</td>
                                         <td>Harga Jual</td>
                                         <td>Status</td>
                                         <td>Aksi</td>

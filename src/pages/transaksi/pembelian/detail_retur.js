@@ -158,7 +158,7 @@ export default function Detail_retur(props) {
                                 <button type='button' className={`${global.button} w-100`} onClick={() => UpdateStatus(2)} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }} disabled={props.status === 1 ? false : true}>Retur</button>
                             </div>
                         }
-                        {localStorage.getItem('leksana_jabatan').toLowerCase() === 'gudang, pembelian' &&
+                        {localStorage.getItem('leksana_jabatan').toLowerCase() === 'admin, keuangan' &&
                             <React.Fragment>
                                 <div className='col-6 pe-2'>
                                     <button type='button' className={`${global.button} w-100`} onClick={() => UpdateStatus(1)} disabled={props.status === 0 ? false : true}>Setuju</button>
