@@ -174,7 +174,7 @@ export default function App() {
                                 <Route path={'/laporan/kas/pengeluaran-kas'} element={<LaporanKasPengeluaranKas />} />
                                 <Route path={'/laporan/produksi/lap-produksi'} element={<LaporanProduksi />} />
                                 <Route path={'/laporan/produksi/lap-hpp'} element={<LaporanHargaPokokProduksi />} />
-                                <Route path={'/laporan/produksi/lap-tenaga_kerja'} element={<LaporanTenagaKerja />} />
+                                <Route path={'/laporan/produksi/lap-tenaga-kerja'} element={<LaporanTenagaKerja />} />
                                 <Route path={'/laporan/produksi/kartu-alat'} element={<KartuAlat />} />
                                 <Route path={'/laporan/produksi/kartu-persediaan-bb'} element={<KartuPersediaanBahanBaku />} />
                                 <Route path={'/laporan/produksi/kartu-persediaan-bp'} element={<KartuPersediaanBahanPenolong />} />
