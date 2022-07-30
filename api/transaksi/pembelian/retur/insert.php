@@ -41,7 +41,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         if ($result) {
-            $response['data'] = $result;
+
+            if ($jenis_pembelian == 'alat') {
+                foreach ($data as $key) {
+                    $query = "UPDATE master_inventory_alat SET jumlah=(jumlah-".$key->jumlah."), harga=(harga-".$key->total_harga."), total_kapasitas=(total_kapasitas-".$key->total_kapasitas."), bop=(harga/total_kapasitas) WHERE kode='".$key->kode_item."'";
+        
+                    $result = $conn->query($query);
+        
+                    if (!$result) break;
+                }
+            } else if ($jenis_pembelian == 'bahan') {
+                foreach ($data as $key) {
+                    $query = "UPDATE master_inventory_bahanbaku SET harga=(((jumlah*harga)-".$key->total_harga.")/(jumlah-".$key->jumlah.")), jumlah=(jumlah-".$key->jumlah.") WHERE kode='".$key->kode_item."'";
+        
+                    $result = $conn->query($query);
+        
+                    if (!$result) break;
+                }
+            }
+
+            if ($result) {
+                $response['data'] = $result;
+            } else {
+                $response['data'] = [];
+            }
         } else {
             $response['data'] = [];
         }

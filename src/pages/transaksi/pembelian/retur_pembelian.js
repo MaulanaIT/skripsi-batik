@@ -137,7 +137,8 @@ export default function Retur_pembelian() {
                     nama_item: getValueNamaItem.label,
                     jumlah: getValueJumlahRetur,
                     harga: getValueHarga,
-                    total_harga: getValueTotalHarga
+                    total_harga: getValueTotalHarga,
+                    total_kapasitas: getValuePenguranganKapasitas
                 });
             } else {
                 dataAlat[check].jumlah = +dataAlat[check].jumlah + +getValueJumlahRetur;
@@ -224,10 +225,10 @@ export default function Retur_pembelian() {
                         <td>{item.kode}</td>
                         <td>{item.kode_alat}</td>
                         <td>{item.nama_alat}</td>
-                        <td>{item.satuan}</td>
                         <td>{item.jumlah}</td>
                         <td>{item.harga}</td>
                         <td>{item.total_harga}</td>
+                        <td>{item.total_kapasitas}</td>
                         <td className={global.table_action}>
                             <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteAlat(index)}><FaTrash />Delete</button>
                         </td>
@@ -254,7 +255,6 @@ export default function Retur_pembelian() {
                         <td>{item.kode}</td>
                         <td>{item.kode_bahan}</td>
                         <td>{item.nama_bahan}</td>
-                        <td>{item.satuan}</td>
                         <td>{item.jumlah}</td>
                         <td>{item.harga}</td>
                         <td>{item.total_harga}</td>
@@ -314,6 +314,8 @@ export default function Retur_pembelian() {
         axios.post(`${baseURL}/api/transaksi/pembelian/retur/select-pengeluaran-kas.php`, formData, config).then(response => {
             let data = response.data.data;
 
+            console.log(data);
+
             let dataSelectKodeKasKeluar = [];
 
             if (data && data.length > 0) {
@@ -370,7 +372,7 @@ export default function Retur_pembelian() {
             formData.append('file_nota', file);
             formData.append('nama_file', `File Nota Pembelian - ${getValueKodeRetur} - ${getValueTanggal}.${extension}`);
         }
-
+        
         formData.append('jenis_retur', jenisRetur.toLowerCase());
 
         if (jenisRetur.toLowerCase() === 'alat')
@@ -592,7 +594,6 @@ export default function Retur_pembelian() {
                                                     <td>Kode</td>
                                                     <td>Kode Bahan</td>
                                                     <td>Nama Bahan</td>
-                                                    <td>Satuan</td>
                                                     <td>Jumlah Retur</td>
                                                     <td>Harga</td>
                                                     <td>Total Harga</td>
@@ -615,7 +616,6 @@ export default function Retur_pembelian() {
                                                     <td>Kode</td>
                                                     <td>Kode Alat</td>
                                                     <td>Nama Alat</td>
-                                                    <td>Satuan</td>
                                                     <td>Jumlah Retur</td>
                                                     <td>Harga</td>
                                                     <td>Total Harga</td>

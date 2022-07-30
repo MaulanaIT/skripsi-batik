@@ -143,15 +143,19 @@ export default function Jual_pesan() {
         const formData = new FormData();
 
         let file = document.getElementById('input-file-transfer').files[0];
-        let arg = file.name.split('.');
-        let extension = arg[arg.length - 1];
+
+        if (file) {
+            let arg = file.name.split('.');
+            let extension = arg[arg.length - 1];
+            formData.append('file_transfer', file);
+            formData.append('nama_file', `File Uang Muka - ${getValueKodeJual} - ${getValueTanggal}.${extension}`);
+        }
+
 
         formData.append('kode', getValueKodeJual);
         formData.append('kode_akun', getValueKodeAkun.value);
         formData.append('sisa', getValueSisa);
         formData.append('jenis_penjualan', 'pesanan');
-        formData.append('file_transfer', file);
-        formData.append('nama_file', `File Uang Muka - ${getValueKodeJual} - ${getValueTanggal}.${extension}`);
 
         axios.post(`${baseURL}/api/transaksi/penjualan/penyerahan-pesanan/insert.php`, formData, config).then(() => {
             window.location.href = '/#/transaksi/penjualan/daftar-pesanan';

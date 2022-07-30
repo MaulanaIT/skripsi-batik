@@ -43,12 +43,14 @@ export default function Detail_order(props) {
 
         let jumlah = GetValue(`edit-jumlah-${id}`);
         let harga = GetValue(`edit-harga-${id}`);
+        let total_kapasitas = GetValue(`edit-total-kapasitas-${id}`);
 
         const formData = new FormData();
 
         formData.append('id', id);
         formData.append('jumlah', jumlah);
         formData.append('harga', harga);
+        formData.append('total_kapasitas', total_kapasitas);
 
         axios.post(`${baseURL}/api/transaksi/pembelian/detail-order/update.php`, formData, config).then(() => {
             document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
@@ -113,7 +115,7 @@ export default function Detail_order(props) {
                                 </td>
                                 <td className={global.table_action}>
                                     <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
-                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)} disabled={props.status === 1 ? false : true}><FaPen /> Edit</button>
+                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)} disabled={props.status < 3 ? false : true}><FaPen /> Edit</button>
                                 </td>
                             </tr>
                         );
@@ -140,7 +142,7 @@ export default function Detail_order(props) {
                                 <td>{item.total_harga}</td>
                                 <td className={global.table_action}>
                                     <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
-                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)} disabled={props.status === 1 ? false : true}><FaPen /> Edit</button>
+                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)} disabled={props.status < 3 ? false : true}><FaPen /> Edit</button>
                                 </td>
                             </tr>
                         );
@@ -183,40 +185,44 @@ export default function Detail_order(props) {
                 <FiXCircle className='fs-3 col-12' onClick={CloseDetail} />
                 <div className={`${global.card_detail}`}>
                     <p className='fs-5 fw-bold text-center'>Detail Order Pembelian</p>
-                    <form id='form-detail-table' className='table-responsive'>
-                        <table id='table-detail-data-alat' className={`${props.jenis === 'bahan' && 'd-none'} table w-100`}>
-                            <thead className='text-nowrap'>
-                                <tr>
-                                    <td>No.</td>
-                                    <td>Kode Alat</td>
-                                    <td>Nama Alat</td>
-                                    <td>Jumlah Beli</td>
-                                    <td>Harga</td>
-                                    <td>Total Harga</td>
-                                    <td>Total Kapasitas</td>
-                                    <td>Aksi</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {getHTMLTableAlat}
-                            </tbody>
-                        </table>
-                        <table id='table-detail-data-bahan' className={`${props.jenis === 'alat' && 'd-none'} table w-100`}>
-                            <thead className='text-nowrap'>
-                                <tr>
-                                    <td>No.</td>
-                                    <td>Kode Bahan</td>
-                                    <td>Nama Bahan</td>
-                                    <td>Jumlah Beli</td>
-                                    <td>Harga</td>
-                                    <td>Total Harga</td>
-                                    <td>Aksi</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {getHTMLTableBahan}
-                            </tbody>
-                        </table>
+                    <form id='form-detail-table'>
+                        <div className={`${props.jenis === 'bahan' && 'd-none'} table-responsive`}>
+                            <table id='table-detail-data-alat' className={`table w-100`}>
+                                <thead className='text-nowrap'>
+                                    <tr>
+                                        <td>No.</td>
+                                        <td>Kode Alat</td>
+                                        <td>Nama Alat</td>
+                                        <td>Jumlah Beli</td>
+                                        <td>Harga</td>
+                                        <td>Total Harga</td>
+                                        <td>Total Kapasitas</td>
+                                        <td>Aksi</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {getHTMLTableAlat}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className={`${props.jenis === 'alat' && 'd-none'} table-responsive`}>
+                            <table id='table-detail-data-bahan' className={`table w-100`}>
+                                <thead className='text-nowrap'>
+                                    <tr>
+                                        <td>No.</td>
+                                        <td>Kode Bahan</td>
+                                        <td>Nama Bahan</td>
+                                        <td>Jumlah Beli</td>
+                                        <td>Harga</td>
+                                        <td>Total Harga</td>
+                                        <td>Aksi</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {getHTMLTableBahan}
+                                </tbody>
+                            </table>
+                        </div>
                     </form>
 
                     <div className='d-flex'>

@@ -151,8 +151,13 @@ export default function Uang_muka_pesanan() {
         const formData = new FormData();
 
         let file = document.getElementById('input-file-transfer').files[0];
-        let arg = file.name.split('.');
-        let extension = arg[arg.length - 1];
+
+        if (file) {
+            let arg = file.name.split('.');
+            let extension = arg[arg.length - 1];
+            formData.append('file_transfer', file);
+            formData.append('nama_file', `File Uang Muka - ${getValueKodePesanan} - ${getValueTanggal}.${extension}`);
+        }
 
         formData.append('kode', getValueKodePesanan);
         formData.append('tanggal', getValueTanggal);
@@ -161,8 +166,6 @@ export default function Uang_muka_pesanan() {
         formData.append('total_hpp', getValueTotalHpp);
         formData.append('uang_muka', getValueUangMuka);
         formData.append('sisa', getValueSisa);
-        formData.append('file_transfer', file);
-        formData.append('nama_file', `File Uang Muka - ${getValueKodePesanan} - ${getValueTanggal}.${extension}`);
 
         axios.post(`${baseURL}/api/transaksi/penjualan/uang-muka-pesanan/insert.php`, formData, config).then(() => {
             const formData = new FormData();

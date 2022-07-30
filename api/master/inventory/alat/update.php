@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $total_kapasitas = $_POST['total_kapasitas'];
     
     $query = "UPDATE master_inventory_alat SET nama='".$nama."', jumlah='".$jumlah."', harga='".$harga."', total_kapasitas='".$total_kapasitas."', bop=".$harga / $total_kapasitas." WHERE id='".$id."'";
-
     
     $result = $conn->query($query);
 

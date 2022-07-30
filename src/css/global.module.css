@@ -219,7 +219,7 @@ textarea:read-only {
     position: fixed;
     top: 0px;
     width: 100vw;
-    z-index: 2;
+    z-index: 4;
 }
 
 .tab_card {
