@@ -83,7 +83,7 @@ export class daftar_retur extends Component {
                                     <button type='button' id='button-detail' className={global.edit} style={{ gridColumn: '2 span' }}
                                         onClick={() => this.SelectDetail(item.kode, parseInt(item.status))}><FaClipboardList /> Detail</button>
                                 }
-                                <button type='button' id='button-delete' className={global.delete} disabled={+item.status > 1 && true} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
+                                <button type='button' id='button-delete' className={global.delete} disabled={+item.status > 1 && true} onClick={() => this.DeleteRetur(item.kode)}><FaTrash /> Delete</button>
                             </td>
                         </tr>
                     );

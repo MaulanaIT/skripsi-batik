@@ -52,6 +52,7 @@ const CustomSelect = {
 export default function Pengembalian_dana() {
 
     const [getDataAkun, setDataAkun] = useState([]);
+    const [getDataDetailRetur, setDataDetailRetur] = useState([]);
     const [getDataSelectAkun, setDataSelectAkun] = useState([]);
     const [getValueJumlahUangDiterima, setValueJumlahUangDiterima] = useState(0);
     const [getValueKodeKasMasuk, setValueKodeKasMasuk] = useState('');
@@ -66,6 +67,7 @@ export default function Pengembalian_dana() {
 
     useEffect(() => {
         GetAkun();
+        GetDetailRetur();
         GetRefund();
         GetRetur();
     }, []);
@@ -97,6 +99,28 @@ export default function Pengembalian_dana() {
         });
     }
 
+    const GetDetailRetur = () => {
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('kode', location.state.kode);
+
+        axios.post(`${baseURL}/api/transaksi/pembelian/detail-retur/select.php`, formData, config).then(response => {
+            let data = response.data.data;
+            
+            setDataDetailRetur(data);
+
+            HideLoading();
+        }).catch(error => {
+            console.log(error);
+
+            alert(error);
+
+            HideLoading();
+        });
+    }
+
     const GetRefund = () => {
         ShowLoading();
 
@@ -121,6 +145,8 @@ export default function Pengembalian_dana() {
         axios.get(`${baseURL}/api/transaksi/pembelian/retur/select.php`, config).then(response => {
             let data = response.data.data;
             data = data.find(item => item.kode === location.state.kode);
+
+            console.log(data);
 
             setValueTanggal(data.tanggal);
             setValueKodeRetur(data.kode);
@@ -158,6 +184,7 @@ export default function Pengembalian_dana() {
         formData.append('tanggal', getValueTanggal);
         formData.append('jumlah_terima', getValueJumlahUangDiterima);
         formData.append('kode_akun', getValueSelectedAkun.value);
+        formData.append('data', JSON.stringify(getDataDetailRetur));
 
         axios.post(`${baseURL}/api/transaksi/pembelian/refund/insert.php`, formData, config).then(() => {
             window.location.href = '/#/transaksi/pembelian/daftar-retur';

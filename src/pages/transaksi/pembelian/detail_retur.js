@@ -27,40 +27,40 @@ export default function Detail_retur(props) {
         $(`#table-detail-data`).DataTable();
     }, [getHTMLTable]);
 
-    const ApplyItem = (id) => {
-        if (!CheckInputValidity('form-detail-table')) return;
+    // const ApplyItem = (id) => {
+    //     if (!CheckInputValidity('form-detail-table')) return;
 
-        ShowLoading();
+    //     ShowLoading();
 
-        let jumlah = GetValue(`edit-jumlah-${id}`);
-        let harga = GetValue(`edit-harga-${id}`);
+    //     let jumlah = GetValue(`edit-jumlah-${id}`);
+    //     let harga = GetValue(`edit-harga-${id}`);
 
-        const formData = new FormData();
+    //     const formData = new FormData();
 
-        formData.append('id', id);
-        formData.append('jumlah', jumlah);
-        formData.append('harga', harga);
+    //     formData.append('id', id);
+    //     formData.append('jumlah', jumlah);
+    //     formData.append('harga', harga);
 
-        axios.post(`${baseURL}/api/transaksi/pembelian/detail-retur/update.php`, formData, config).then(() => {
-            document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
-            document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
+    //     axios.post(`${baseURL}/api/transaksi/pembelian/detail-retur/update.php`, formData, config).then(() => {
+    //         document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
+    //         document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
 
-            GetDetail();
-        }).catch(error => {
-            console.log(error);
+    //         GetDetail();
+    //     }).catch(error => {
+    //         console.log(error);
 
-            HideLoading();
-        });
-    }
+    //         HideLoading();
+    //     });
+    // }
 
     const CloseDetail = () => {
         document.getElementById('detail-retur').classList.add('d-none');
     }
 
-    const EditItem = (id) => {
-        document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.add('d-none'));
-        document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.remove('d-none'));
-    }
+    // const EditItem = (id) => {
+    //     document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.add('d-none'));
+    //     document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.remove('d-none'));
+    // }
 
     const GetDetail = () => {
         ShowLoading();
@@ -72,6 +72,8 @@ export default function Detail_retur(props) {
         axios.post(`${baseURL}/api/transaksi/pembelian/detail-retur/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
+            console.log(data);
+
             let htmlTable = [];
 
             if (data && data.length > 0) {
@@ -81,23 +83,10 @@ export default function Detail_retur(props) {
                             <td>{index + 1}.</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td>
-                                <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{item.jumlah}</div>
-                                <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-jumlah-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.jumlah} required={true} />
-                                </div>
-                            </td>
-                            <td>
-                                <div id={`data-harga-${item.id}`} className={`data-${item.id}`}>{item.harga}</div>
-                                <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-harga-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.harga} required={true} />
-                                </div>
-                            </td>
+                            <td>{item.jumlah}</td>
+                            <td>{item.harga}</td>
                             <td>{item.total_harga}</td>
-                            <td className={global.table_action}>
-                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
-                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)}><FaPen /> Edit</button>
-                            </td>
+                            <td>{item.total_kapasitas}</td>
                         </tr>
                     );
                 });
@@ -145,7 +134,7 @@ export default function Detail_retur(props) {
                                 <td>Jumlah Retur</td>
                                 <td>Harga</td>
                                 <td>Total Harga</td>
-                                <td>Aksi</td>
+                                <td>Pengurangan Kapasitas</td>
                             </tr>
                         </thead>
                         <tbody>

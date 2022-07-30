@@ -43,14 +43,21 @@ export default function Detail_order(props) {
 
         let jumlah = GetValue(`edit-jumlah-${id}`);
         let harga = GetValue(`edit-harga-${id}`);
-        let total_kapasitas = GetValue(`edit-total-kapasitas-${id}`);
+        let total_kapasitas = '';
+
+        if (props.jenis === 'alat') {
+            total_kapasitas = GetValue(`edit-total-kapasitas-${id}`);
+        }
 
         const formData = new FormData();
 
         formData.append('id', id);
         formData.append('jumlah', jumlah);
         formData.append('harga', harga);
-        formData.append('total_kapasitas', total_kapasitas);
+
+        if (props.jenis === 'alat') {
+            formData.append('total_kapasitas', total_kapasitas);
+        }
 
         axios.post(`${baseURL}/api/transaksi/pembelian/detail-order/update.php`, formData, config).then(() => {
             document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));

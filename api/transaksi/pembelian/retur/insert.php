@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $upload_nota = move_uploaded_file($file_nota, $upload_directory . $nama_file);
 
         foreach ($data as $key) {
-            $query = "INSERT INTO detail_retur (kode, kode_item, nama_item, jumlah, harga, total_harga) VALUES('" . $key->kode . "', '" . $key->kode_item . "', '" . $key->nama_item . "', '" . $key->jumlah . "', '" . $key->harga . "', '" . $key->jumlah * $key->harga . "')";
+            $query = "INSERT INTO detail_retur (kode, kode_item, nama_item, jumlah, harga, total_harga, total_kapasitas) VALUES('" . $key->kode . "', '" . $key->kode_item . "', '" . $key->nama_item . "', '" . $key->jumlah . "', '" . $key->harga . "', '" . $key->jumlah * $key->harga . "', '" . $key->total_kapasitas . "')";
 
             $result = $conn->query($query);
 

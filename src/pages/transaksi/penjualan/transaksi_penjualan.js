@@ -227,7 +227,9 @@ export class transaksi_penjualan extends Component {
                     nama_item: valueNamaProduk.label,
                     jumlah: valueJumlah,
                     harga: valueHarga,
-                    total_harga: valueJumlah * valueHarga
+                    total_harga: valueJumlah * valueHarga,
+                    hpp: valueHpp,
+                    total_hpp: valueTotalHpp
                 });
             } else {
                 dataKonsinyasi[check].jumlah = +dataKonsinyasi[check].jumlah + +valueJumlah;
