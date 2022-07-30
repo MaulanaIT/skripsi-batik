@@ -146,8 +146,6 @@ export default function Pengembalian_dana() {
             let data = response.data.data;
             data = data.find(item => item.kode === location.state.kode);
 
-            console.log(data);
-
             setValueTanggal(data.tanggal);
             setValueKodeRetur(data.kode);
             setValueTotalRetur(data.jumlah_retur);

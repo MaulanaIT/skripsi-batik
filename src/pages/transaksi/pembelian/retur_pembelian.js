@@ -314,8 +314,6 @@ export default function Retur_pembelian() {
         axios.post(`${baseURL}/api/transaksi/pembelian/retur/select-pengeluaran-kas.php`, formData, config).then(response => {
             let data = response.data.data;
 
-            console.log(data);
-
             let dataSelectKodeKasKeluar = [];
 
             if (data && data.length > 0) {
@@ -417,6 +415,8 @@ export default function Retur_pembelian() {
             let valueNama = getDataSelectNamaItem.find(item => item.value === data?.value);
 
             let dataItem = getDataItem.find(item => item.kode_item === valueKode.value);
+
+            console.log(dataItem)
 
             setValueKodeItem(valueKode);
             setValueNamaItem(valueNama);

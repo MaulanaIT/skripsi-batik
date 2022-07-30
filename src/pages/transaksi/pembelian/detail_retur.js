@@ -72,8 +72,6 @@ export default function Detail_retur(props) {
         axios.post(`${baseURL}/api/transaksi/pembelian/detail-retur/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
-            console.log(data);
-
             let htmlTable = [];
 
             if (data && data.length > 0) {

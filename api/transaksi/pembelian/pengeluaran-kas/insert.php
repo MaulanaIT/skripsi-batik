@@ -34,13 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $upload_transfer = move_uploaded_file($file_transfer, $upload_directory . $nama_file);
 
             $query = "UPDATE master_akun SET saldo=(saldo-" . $total_bayar . ") WHERE kode='" . $kode_akun . "'";
+            $result = $conn->query($query);
 
             $query = "UPDATE master_akun SET saldo=(saldo+" . $ongkos_kirim . ") WHERE kode='4202'";
             $result = $conn->query($query);
 
             $query = "UPDATE master_akun SET saldo=(saldo+" . $diskon . ") WHERE kode='4201'";
-            $result = $conn->query($query);
-
             $result = $conn->query($query);
 
             if ($result) {
