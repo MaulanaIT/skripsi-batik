@@ -134,7 +134,6 @@ export default function Pengeluaran_kas() {
                             <td>{index + 1}.</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td></td>
                             <td>{item.jumlah}</td>
                             <td>{item.harga}</td>
                             <td>{item.total_harga}</td>
@@ -316,7 +315,6 @@ export default function Pengeluaran_kas() {
                                                     <td>No.</td>
                                                     <td>Kode Bahan</td>
                                                     <td>Nama Bahan</td>
-                                                    <td>Satuan</td>
                                                     <td>Jumlah</td>
                                                     <td>Harga</td>
                                                     <td>Total Harga</td>
@@ -337,7 +335,6 @@ export default function Pengeluaran_kas() {
                                                     <td>No.</td>
                                                     <td>Kode Alat</td>
                                                     <td>Nama Alat</td>
-                                                    <td>Satuan</td>
                                                     <td>Jumlah</td>
                                                     <td>Harga</td>
                                                     <td>Total Harga</td>
