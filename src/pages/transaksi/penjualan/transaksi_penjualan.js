@@ -1227,7 +1227,7 @@ export class transaksi_penjualan extends Component {
             valueProfit
         } = this.state;
         this.setState({
-            valueHargaJual: +valueJumlah * +valueHpp * (100 + +valueProfit) / 100
+            valueHargaJual: +valueHpp * (100 + +valueProfit) / 100
         });
     }
 
@@ -1933,7 +1933,7 @@ export class transaksi_penjualan extends Component {
                                     <div className={`d-flex flex-column gap-2 pb-2`}>
                                         <div className={`align-items-center ${global.input_group_row}`}>
                                             <p className={`${global.title} col-3`}>Total BTKL</p>
-                                            <input type="text" id='valueTotalBTKL' readOnly={true} />
+                                            <input type="text" id='valueTotalBTKL' value={valueTotalBTKL} readOnly={true} />
                                         </div>
                                     </div>
                                 </div>

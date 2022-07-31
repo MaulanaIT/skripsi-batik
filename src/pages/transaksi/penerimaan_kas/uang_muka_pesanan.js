@@ -84,11 +84,11 @@ export default function Uang_muka_pesanan() {
         setValueNamaCustomer(props.nama_customer);
         setValueKodePesanan(props.kode);
         setValueNamaPesanan(props.nama);
-        setValueTotalHpp(+props.hpp * +props.jumlah);
-        setValueTotalHarga(+props.harga_jual * +props.jumlah);
-        setValueTotalJual(+props.harga_jual * +props.jumlah);
-        setValueHpp(props.hpp);
-        setValueHarga(+props.harga_jual);
+        setValueTotalHpp(props.hpp);
+        setValueTotalHarga(props.harga_jual);
+        setValueTotalJual(props.harga_jual);
+        setValueHpp(parseFloat(+props.hpp / +props.jumlah).toFixed(2));
+        setValueHarga(parseFloat(+props.harga_jual / +props.jumlah).toFixed(2));
         setValueTanggal(moment().format('YYYY-MM-DD'));
     }, []);
 
