@@ -416,8 +416,6 @@ export default function Retur_pembelian() {
 
             let dataItem = getDataItem.find(item => item.kode_item === valueKode.value);
 
-            console.log(dataItem)
-
             setValueKodeItem(valueKode);
             setValueNamaItem(valueNama);
             setValueJumlah(dataItem.jumlah);
