@@ -1131,8 +1131,11 @@ export class transaksi_penjualan extends Component {
             valueOngkosKirim,
             valueTanggal,
             valueTotalBayar,
-            valueTotalJual
+            valueTotalJual,
+            valueKalkulasiTotalHpp
         } = this.state;
+
+        if (valueKodeAkun.length <= 0) return;
 
         const valueTotalHarga = Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim]);
         const valuePiutang = Calculate([valueTotalJual, -valueDiskon]);
@@ -1149,6 +1152,7 @@ export class transaksi_penjualan extends Component {
         formData.append('diskon', valueDiskon);
         formData.append('ongkos_kirim', valueOngkosKirim);
         formData.append('piutang', valuePiutang);
+        formData.append('total_hpp', valueKalkulasiTotalHpp);
         formData.append('total_harga', valueTotalHarga);
         formData.append('total_bayar', valueTotalBayar);
         formData.append('kode_akun', valueKodeAkun?.value);
@@ -1991,7 +1995,7 @@ export class transaksi_penjualan extends Component {
                                                 <p className={`${global.title} col-3`}>Total Harga</p>
                                                 <input type="text" id='valueTotalHarga' className={`col-4`} value={Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim])} readOnly={true} />
                                                 <div className='col-5 ps-2'>
-                                                    <Select id='select-kode-produk' name='select-kode-produk' isClearable={true} isSearchable={true} options={dataSelectAkun} placeholder={'Select Akun...'} value={valueKodeAkun} styles={CustomSelect} onChange={e => this.setState({ valueKodeAkun: e })} />
+                                                    <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={dataSelectAkun} placeholder={'Select Akun...'} value={valueKodeAkun} styles={CustomSelect} onChange={e => this.setState({ valueKodeAkun: e })} />
                                                 </div>
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
