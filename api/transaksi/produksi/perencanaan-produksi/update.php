@@ -29,6 +29,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $query = "UPDATE master_inventory_produk SET hpp_per_produk=(((hpp_per_produk*jumlah)+(".$hpp_per_produk."*".$jumlah."))/(jumlah+".$jumlah.")), jumlah=(jumlah+".$jumlah."), harga_jual='".$harga_jual."' WHERE kode='".$kode_produk."'";
 
             $result = $conn->query($query);
+
+            if ($result) {
+                $query = 'SELECT * FROM hpp_detail_alat WHERE kode_hpp = (SELECT kode FROM hpp)';
+    
+                $result = $conn->query($query);
+
+                if ($result) {
+                    while($row = mysqli_fetch_assoc($result)) {
+                        $query = "UPDATE master_inventory_alat SET jumlah=(jumlah-".$row['jumlah'].") WHERE kode='".$row['kode_alat']."'";
+    
+                        $conn->query($query);
+                    }
+                }
+                $query = 'SELECT * FROM hpp_detail_bahan_baku WHERE kode_hpp = (SELECT kode FROM hpp)';
+    
+                $result = $conn->query($query);
+
+                if ($result) {
+                    while($row = mysqli_fetch_assoc($result)) {
+                        $query = "UPDATE master_inventory_bahanbaku SET jumlah=(jumlah-".$row['jumlah'].") WHERE kode='".$row['kode_bahan_baku']."'";
+    
+                        $conn->query($query);
+                    }
+                }
+                $query = 'SELECT * FROM hpp_detail_penolong WHERE kode_hpp = (SELECT kode FROM hpp)';
+    
+                $result = $conn->query($query);
+
+                if ($result) {
+                    while($row = mysqli_fetch_assoc($result)) {
+                        $query = "UPDATE master_inventory_bahanpenolong SET jumlah=(jumlah-".$row['jumlah'].") WHERE kode='".$row['kode_penolong']."'";
+    
+                        $conn->query($query);
+                    }
+                }
+            } else {
+                $response['data'] = [];
+            }
         }
 
         if ($result) {
