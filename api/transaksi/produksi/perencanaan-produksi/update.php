@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 if ($result) {
                     while($row = mysqli_fetch_assoc($result)) {
-                        $query = "UPDATE master_inventory_alat SET jumlah=(jumlah-".$row['jumlah'].") WHERE kode='".$row['kode_alat']."'";
+                        $query = "UPDATE master_inventory_alat SET total_kapasitas=(total_kapasitas-".$row['jumlah'].") WHERE kode='".$row['kode_alat']."'";
     
                         $conn->query($query);
                     }
