@@ -1193,8 +1193,8 @@ const Add_hpp = (props, ref) => {
                                                 <td>No.</td>
                                                 <td>Kode Tenaga Kerja</td>
                                                 <td>Nama Tenaga Kerja</td>
-                                                <td>Tarif</td>
                                                 <td>Pemakaian</td>
+                                                <td>Tarif</td>
                                                 <td>Biaya</td>
                                                 <td>Aksi</td>
                                             </tr>
