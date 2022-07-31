@@ -46,7 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $result = $conn->query($query);
 
                 $query = "UPDATE master_akun SET saldo=(saldo+" . $sisa . ") WHERE kode='" . $kode_akun . "'";
+                $result = $conn->query($query);
 
+                $query = "UPDATE master_akun SET saldo=(saldo+" . $total_hpp . ") WHERE kode='5101'";
                 $result = $conn->query($query);
                 if ($result) {
                     $response['data'] = $result;
