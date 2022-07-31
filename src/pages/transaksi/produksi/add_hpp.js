@@ -125,7 +125,7 @@ const Add_hpp = (props, ref) => {
     useEffect(() => {
         let dataSelected = getDataAlat?.find(item => item.kode === getValueKodeAlat?.value);
 
-        setValueHarga(dataSelected?.harga ?? 0);
+        setValueHarga(dataSelected?.bop ?? 0);
     }, [getValueKodeAlat, getValueNamaAlat]);
 
     useEffect(() => {
