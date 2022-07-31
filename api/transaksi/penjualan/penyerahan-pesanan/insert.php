@@ -30,31 +30,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $upload_nota = move_uploaded_file($file_transfer, $upload_directory . $nama_file);
 
-        if ($upload_nota) {
-            $query = "UPDATE estimasi_pesanan SET status = 2 WHERE kode=(SELECT kode_pesanan FROM penjualan_pesanan WHERE kode='".$kode."')";
+        $query = "UPDATE estimasi_pesanan SET status = 2 WHERE kode=(SELECT kode_pesanan FROM penjualan_pesanan WHERE kode='" . $kode . "')";
 
+        $result = $conn->query($query);
+
+        if ($result) {
+            $query = "UPDATE master_akun SET saldo=(saldo+" . $uang_muka . ") WHERE kode='4101'";
             $result = $conn->query($query);
 
+            $query = "UPDATE master_akun SET saldo=(saldo+" . $ongkos_kirim . ") WHERE kode='4202'";
+            $result = $conn->query($query);
+
+            $query = "UPDATE master_akun SET saldo=(saldo+" . $diskon . ") WHERE kode='4201'";
+            $result = $conn->query($query);
+
+            $query = "UPDATE master_akun SET saldo=(saldo+" . $sisa . ") WHERE kode='" . $kode_akun . "'";
+            $result = $conn->query($query);
+
+            $query = "UPDATE master_akun SET saldo=(saldo+" . $total_hpp . ") WHERE kode='5101'";
+            $result = $conn->query($query);
             if ($result) {
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $uang_muka . ") WHERE kode='4101'";
-                $result = $conn->query($query);
-
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $ongkos_kirim . ") WHERE kode='4202'";
-                $result = $conn->query($query);
-    
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $diskon . ") WHERE kode='4201'";
-                $result = $conn->query($query);
-
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $sisa . ") WHERE kode='" . $kode_akun . "'";
-                $result = $conn->query($query);
-
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $total_hpp . ") WHERE kode='5101'";
-                $result = $conn->query($query);
-                if ($result) {
-                    $response['data'] = $result;
-                } else {
-                    $response['data'] = [];
-                }
+                $response['data'] = $result;
             } else {
                 $response['data'] = [];
             }

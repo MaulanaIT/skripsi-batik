@@ -54,7 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $result = $conn->query($query);
 
-                if (!$result) break;
+                if ($result) {
+                    $query = "UPDATE master_inventory_produk SET jumlah=(jumlah-".$key->jumlah.") WHERE kode='".$key->kode_item."'";
+    
+                    $result = $conn->query($query);
+                } else {
+                    break;
+                }
             }
         }
 

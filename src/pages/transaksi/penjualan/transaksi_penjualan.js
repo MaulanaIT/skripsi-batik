@@ -1135,7 +1135,7 @@ export class transaksi_penjualan extends Component {
             valueKalkulasiTotalHpp
         } = this.state;
 
-        if (valueKodeAkun.length <= 0) return;
+        if (jenisPenjualan.toLowerCase() === 'tunai' && valueKodeAkun.length <= 0) return;
 
         const valueTotalHarga = Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim]);
         const valuePiutang = Calculate([valueTotalJual, -valueDiskon]);
