@@ -120,7 +120,8 @@ export default function Detail_retur(props) {
 
     return (
         <div id='detail-retur' className={`${global.popup_detail} d-none`}>
-            <div className={`table-responsive`}><FiXCircle className='fs-3 col-12' onClick={CloseDetail} />
+            <FiXCircle className={global.toggle} onClick={CloseDetail} />
+            <div className={`table-responsive`}>
                 <div className={`${global.card_detail}`}>
                     <p className='fs-5 fw-bold text-center'>Detail Retur Pembelian</p>
                     <table id='table-detail-data' className={`table w-100`}>
