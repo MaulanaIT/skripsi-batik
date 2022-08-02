@@ -8,23 +8,78 @@ import { AiFillPrinter } from 'react-icons/ai';
 import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
 import style from '../../../css/laporan/kas/penerimaan_kas.module.css';
+import Select from 'react-select';
+
+const CustomSelect = {
+    control: (provided, state) => ({
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        color: 'white',
+        cursor: 'pointer',
+        display: 'flex',
+        fontSize: 12
+    }),
+    input: (provided, state) => ({
+        ...provided,
+        color: 'white'
+    }),
+    menu: (provided, state) => ({
+        backgroundColor: 'rgba(0, 0, 0, 3)',
+        fontSize: 12,
+        position: 'absolute',
+        width: '100%',
+        zIndex: 1
+    }),
+    option: (provided, state) => ({
+        ...provided,
+        backgroundColor: state.isFocused ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.4)',
+        fontSize: 12
+    }),
+    placeholder: (provided, state) => ({
+        ...provided,
+        color: 'rgba(255, 255, 255, 0.6)',
+        whiteSpace: 'nowrap'
+    }),
+    singleValue: (provided, state) => ({
+        ...provided,
+        color: 'white',
+        fontSize: 12
+    })
+}
 
 
 
 export class kartu_alat extends Component {
 
+    state = {
+        pilihLaporan: '',
+    }
+
+    SelectKartu = (value) => {
+        this.setState({ pilihLaporan: value ? value.value : '' });
+    }
+
 render() {
     return (
         <>
-            <div className={style.header}>
+        <div className={style.header}>
                     <p className={style.title}>Kartu Alat</p>
                     <p className={style.pathname}>Laporan / Laporan Produksi / Kartu Alat</p>
                 </div>
                 <div className={style.content}>
                     <div className={global.card}>
                         <div className={`d-flex`}>
-                        <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-2`}>Tanggal</p>
+                        <div className={`${global.input_group_row} col-8 `}>
+                            <p className={`${global.title} col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Berdasarkan</p>
+                                <Select isClearable={true} isSearchable={true} options={[
+                                { value: 'Tanggal', label: 'Tanggal' },
+                                { value: 'Alat', label: 'Alat' }
+                                ]} placeholder={'Pilih Kartu...'} styles={CustomSelect} onChange={(value) => this.SelectKartu(value)} className='col-7' />
+                        </div>
+                        </div>
+                    {this.state.pilihLaporan === 'Tanggal' ?
+                    <>
+                    <div className={`${global.input_group_row} col-4`}>
+                        <p className={`${global.title} col-6`}>Tanggal</p>
                         <div>
                             <input type="date" className={global.input1} id='input-tanggal-awal' name='input-tanggal-awal' />
                         </div>
@@ -34,8 +89,19 @@ render() {
                         <div>
                             <input type="date" className={global.input1} id='input-tanggal-akhir' name='input-tanggal-akhir' />
                         </div>
-                        </div>
-                        </div>
+                    </div>
+                    </>
+                     : 
+                    this.state.pilihLaporan === 'Alat' ?
+                    <>
+                    <div className={`${global.input_group_row} col-4`}>
+                        <p className={`${global.title} col-6`}>Nama Alat</p>
+                        <input type="text" className={global.input1} id='input-nama-alat' name='input-nama-alat'/>
+                    </div>
+                    </>
+                    :
+                    null
+                    }
                         <div className='d-flex flex-column gap-2 pt-2'>
                             <div className='d-flex'>
                                 <div className='col-6 pe-2'>
@@ -47,6 +113,7 @@ render() {
                             </div>
                         </div>
                     </div>
+
                     <div className={`${global.card} col-12`}>
                         <div className='d-flex'>
                             <div className='col-10'>
@@ -65,24 +132,29 @@ render() {
                             <br></br>
                                 <div className={`${bootstrap[`d-flex`]}`}>
                                     <div className={`${global.input_group_row} col-6`}>
-                                        <p className={`${global.title} col-6 col-lg-3 col-md-3 pb-2 pb-md-0`}>Tanggal Produksi</p>
-                                        <input type="date" id='input-tanggal-awal-produksi' name='input-tanggal-awal-produksi' readOnly={true} />
-                                        <p className={`${global.title} col-1 ps-2`}>s/d</p>
-                                        <input type="date" id='input-tanggal-akhir-produksi' name='input-tanggal-akhir-produksi' readOnly={true} />
+                                        <p className={`${global.title} col-6 col-lg-3 col-md-3 pb-2 pb-md-0 pe-2`}>Nama Alat</p>
+                                        <input type="text" id='input-nama-bahan' name='input-nama-bahan' readOnly={true} />
                                     </div>
                                 </div>
                             <div className={`table-responsive`}>
                                 <table id='table-data' className={`table table-bordered table-striped table-hover w-100`}>
                                     <thead className="align-middle text-center text-nowrap">
-                                        <tr>
+                                    <tr>
+                                    <td colSpan={2}></td>
+                                    <td colSpan={2}>Persediaan Masuk</td>
+                                    <td colSpan={2}>Persediaan Keluar</td>
+                                    <td colSpan={2}>Saldo</td>
+                                    </tr>
+                                    <tr>
                                         <td>Tanggal</td>
-                                        <td>Kode Alat</td>
-                                        <td>Nama Alat</td>
-                                        <td>Harga Perolehan</td>
-                                        <td>Tarif BOP</td>
-                                        <td>Pemakaian</td>
-                                        <td>Sisa Taksiran</td>
-                                        </tr>
+                                        <td>Keterangan</td>
+                                        <td>Unit</td>
+                                        <td>Kapasitas</td>
+                                        <td>Unit</td>
+                                        <td>Kapasitas/Pemakaian</td>
+                                        <td>Unit</td>
+                                        <td>Kapasitas</td>
+                                    </tr>
                                     </thead>
                                 </table>
                             </div>
