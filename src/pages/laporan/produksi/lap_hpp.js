@@ -55,12 +55,21 @@ export default function Lap_hpp() {
 
     const [getDataSelectProduksi, setDataSelectProduksi] = useState([]);
 
-    const [getHTMLTableDaftarLaporan, setHTMLTableDaftarLaporan] = useStateWithCallbackLazy([]);
-
     const [getValueJenis, setValueJenis] = useState([]);
     const [getValueKode, setValueKode] = useState([]);
-    const [getValueTanggalAwal, setValueTanggalAwal] = useState(moment().format('YYYY-MM-DD'));
-    const [getValueTanggalAkhir, setValueTanggalAkhir] = useState(moment().format('YYYY-MM-DD'));
+
+    const [getValueKodeProduksi, setValueKodeProduksi] = useState('');
+    const [getValueKodeProduk, setValueKodeProduk] = useState('');
+    const [getValueNamaProduk, setValueNamaProduk] = useState('');
+    const [getValueJumlahProduksi, setValueJumlahProduksi] = useState(0);
+    const [getValueTanggalPesan, setValueTanggalPesan] = useState('');
+    const [getValueKodePesanan, setValueKodePesanan] = useState('');
+    const [getValueNamaPesanan, setValueNamaPesanan] = useState('');
+    const [getValueBiayaBahanBaku, setValueBiayaBahanBaku] = useState(0);
+    const [getValueBiayaTenagaKerja, setValueBiayaTenagaKerja] = useState(0);
+    const [getValueBiayaOverheadPabrik, setValueBiayaOverheadPabrik] = useState(0);
+    const [getValueHpp, setValueHpp] = useState(0);
+    const [getValueHppPerProduk, setValueHppPerProduk] = useState(0);
 
     useEffect(() => {
         $('#table-data').DataTable();
@@ -71,16 +80,35 @@ export default function Lap_hpp() {
     }, [getValueJenis]);
 
     const GetLaporan = () => {
+        if (!getValueJenis || getValueJenis.length <= 0 || !getValueKode || getValueKode.length <= 0) {
+            alert('Isi data dengan benar');
+            return;
+        }
+
         ShowLoading();
 
         const formData = new FormData();
 
         formData.append('jenis_produksi', getValueJenis.value.toLowerCase());
+        formData.append('kode_produksi', getValueKode.value.toLowerCase());
 
-        axios.post(`${baseURL}/api/laporan/produksi/produksi/select.php`, formData, config).then(response => {
-            let data = response.data.data;
-            
-            
+        axios.post(`${baseURL}/api/laporan/produksi/hpp/select.php`, formData, config).then(response => {
+            let data = response.data.data[0];
+
+            console.log(data);
+
+            setValueKodeProduksi(data.kode_produksi);
+            setValueKodeProduk(!data.kode_produk || data.kode_produk === '' ? '-' : data.kode_produk);
+            setValueNamaProduk(!data.nama_produk || data.nama_produk === '' ? '-' : data.nama_produk);
+            setValueJumlahProduksi(data.jumlah);
+            setValueTanggalPesan(data.tanggal);
+            setValueKodePesanan(!data.kode_pesanan || data.kode_pesanan === '' ? '-' : data.kode_pesanan);
+            setValueNamaPesanan(!data.nama_pesanan || data.nama_pesanan === '' ? '-' : data.nama_pesanan);
+            setValueBiayaBahanBaku(data.biaya_bahan_baku);
+            setValueBiayaTenagaKerja(data.biaya_tenaga_kerja);
+            setValueBiayaOverheadPabrik(data.biaya_overhead_pabrik);
+            setValueHpp(data.hpp);
+            setValueHppPerProduk(+data.hpp / +data.jumlah);
 
             HideLoading();
         }).catch(error => {
@@ -93,7 +121,10 @@ export default function Lap_hpp() {
     }
 
     const GetProduksi = () => {
-        if (!getValueJenis || getValueJenis.length === 0) return;
+        if (!getValueJenis || getValueJenis.length === 0) {
+            setValueKode([]);
+            return;
+        }
 
         const formData = new FormData();
 
@@ -135,14 +166,14 @@ export default function Lap_hpp() {
                             <Select className="col col-lg-4 col-md-3" isClearable={true} isSearchable={true} options={[
                                 { value: 'Stok', label: 'Stok' },
                                 { value: 'Pesanan', label: 'Pesanan' }
-                            ]} placeholder={'Select Produksi...'} styles={CustomSelect} value={getValueJenis} onChange={e => setValueJenis(e)} />
+                            ]} placeholder={'Select Jenis Produksi...'} styles={CustomSelect} value={getValueJenis} onChange={e => setValueJenis(e)} />
                         </div>
                     </div>
 
                     <div className={`d-flex`}>
                         <div className={`${global.input_group_row} col-4`}>
                             <p className={`${global.title} col-6`}>Kode Produksi</p>
-                            <Select className="col col-lg-8 col-md-3" isClearable={true} isSearchable={true} options={getDataSelectProduksi} placeholder={'Select Produksi...'} styles={CustomSelect} isDisabled={(!getValueJenis || getValueJenis.length === 0) && true} value={getValueKode} onChange={e => setValueKode(e)} />
+                            <Select className="col col-lg-8 col-md-3" isClearable={true} isSearchable={true} options={getDataSelectProduksi} placeholder={'Select Kode Produksi...'} styles={CustomSelect} isDisabled={(!getValueJenis || getValueJenis.length === 0) && true} value={getValueKode} onChange={e => setValueKode(e)} />
                         </div>
                     </div>
 
@@ -175,37 +206,37 @@ export default function Lap_hpp() {
                         <div className={`d-flex`}>
                             <div className={`${global.input_group_row} col-6`}>
                                 <p className={`${global.title} col-6 col-lg-3 col-md-3 pb-2 pb-md-0`}>Kode Produksi</p>
-                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' readOnly={true} className='col-lg-6' />
+                                <input type="text" id='input-kode-produksi' name='input-kode-produksi' readOnly={true} className='col-lg-6' value={getValueKodeProduksi} />
                             </div>
                             <div className={`${global.input_group_row} col-6`}>
                                 <p className={`${global.title} col-6 col-lg-3 col-md-3 pb-2 pb-md-0`}>Tanggal Pesan</p>
-                                <input type="date" id='input-tanggal-pesanan' name='input-tanggal-pesanan' readOnly={true} className='col-lg-6' />
+                                <input type="date" id='input-tanggal-pesanan' name='input-tanggal-pesanan' readOnly={true} className='col-lg-6' value={getValueTanggalPesan} />
                             </div>
                         </div>
                         <div className={`${bootstrap[`d-flex`]}`}>
                             <div className={`${global.input_group_row} col-6`}>
                                 <p className={`${global.title} col-6 col-lg-3 col-md-3 pb-2 pb-md-0`}>Kode Produk</p>
-                                <input type="text" id='input-kode-produk' name='input-kode-produk' readOnly={true} className='col-lg-6' />
+                                <input type="text" id='input-kode-produk' name='input-kode-produk' readOnly={true} className='col-lg-6' value={getValueKodeProduk} />
                             </div>
                             <div className={`${global.input_group_row} col-6`}>
                                 <p className={`${global.title} col-6 col-lg-3 col-md-3 pb-2 pb-md-0`}>Kode Pesanan</p>
-                                <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' readOnly={true} className='col-lg-6' />
+                                <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' readOnly={true} className='col-lg-6' value={getValueKodePesanan} />
                             </div>
                         </div>
                         <div className={`${bootstrap[`d-flex`]}`}>
                             <div className={`${global.input_group_row} col-6`}>
                                 <p className={`${global.title} col-6 col-lg-3 col-md-3 pb-2 pb-md-0`}>Nama Produk</p>
-                                <input type="text" id='input-nama-produk' name='input-nama-produk' readOnly={true} className='col-lg-6' />
+                                <input type="text" id='input-nama-produk' name='input-nama-produk' readOnly={true} className='col-lg-6' value={getValueNamaProduk} />
                             </div>
                             <div className={`${global.input_group_row} col-6`}>
                                 <p className={`${global.title} col-6 col-lg-3 col-md-3 pb-2 pb-md-0`}>Nama Pesanan</p>
-                                <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' readOnly={true} className='col-lg-6' />
+                                <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' readOnly={true} className='col-lg-6' value={getValueNamaPesanan} />
                             </div>
                         </div>
                         <div className={`${bootstrap[`d-flex`]}`}>
                             <div className={`${global.input_group_row} col-6`}>
                                 <p className={`${global.title} col-6 col-lg-3 col-md-3 pb-2 pb-md-0`}>Jumlah Produksi</p>
-                                <input type="text" id='input-jumlah-produksi' name='input-jumlah-produksi' readOnly={true} className='col-lg-6' />
+                                <input type="text" id='input-jumlah-produksi' name='input-jumlah-produksi' readOnly={true} className='col-lg-6' value={getValueJumlahProduksi} />
                             </div>
                         </div>
                         <br></br>
@@ -213,33 +244,33 @@ export default function Lap_hpp() {
                         <div className={`${bootstrap['d-flex']}`}>
                             <div className={`${global.input_group} col-3 pe-2`}>
                                 <p className={global.title}>Biaya Bahan Baku</p>
-                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' readOnly={true} />
+                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueBiayaBahanBaku} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-3 pe-2`}>
                                 <p className={global.title}>Biaya Tenaga Kerja</p>
-                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' readOnly={true} />
+                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueBiayaTenagaKerja} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-3 pe-2`}>
                                 <p className={global.title}>Biaya Overhead</p>
-                                <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' readOnly={true} />
+                                <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' value={getValueBiayaOverheadPabrik} readOnly={true} />
                             </div>
                         </div>
                         <div className={`${global.input_group} col-8 pe-2`}>
                             <div className={`d-flex`}>
                                 <p className={`${global.title} col-3 style.title fw-bold`}>Harga Pokok Produksi</p>
-                                <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' className='col-6' readOnly={true} />
+                                <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' className='col-6' value={getValueHpp} readOnly={true} />
                             </div>
                         </div>
                         <div className={`${global.input_group} col-8 pe-2`}>
                             <div className='d-flex'>
                                 <p className={`${global.title} col-3 style.title fw-bold`}>Jumlah Produksi</p>
-                                <input type="text" id='input-jumlah-produksi' name='input-jumlah-produksi' className='col-6' readOnly={true} />
+                                <input type="text" id='input-jumlah-produksi' name='input-jumlah-produksi' className='col-6' value={getValueJumlahProduksi} readOnly={true} />
                             </div>
                         </div>
                         <div className={`${global.input_group} col-8 pe-2`}>
                             <div className='d-flex'>
                                 <p className={`${global.title} col-3 style.title fw-bold`}>Harga Pokok Produk</p>
-                                <input type="text" id='input-harga-pokok-produksi-unit' name='input-harga-pokok-produksi-unit' className='col-6' readOnly={true} />
+                                <input type="text" id='input-harga-pokok-produksi-unit' name='input-harga-pokok-produksi-unit' className='col-6' value={getValueHppPerProduk} readOnly={true} />
                             </div>
                         </div>
                     </div>
