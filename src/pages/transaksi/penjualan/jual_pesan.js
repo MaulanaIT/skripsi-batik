@@ -149,6 +149,10 @@ export default function Jual_pesan() {
             let extension = arg[arg.length - 1];
             formData.append('file_transfer', file);
             formData.append('nama_file', `File Uang Muka - ${getValueKodeJual} - ${getValueTanggal}.${extension}`);
+        } else {
+            alert('Isi data dengan benar');
+            HideLoading();
+            return;
         }
 
 

@@ -369,6 +369,10 @@ export default function Retur_pembelian() {
             
             formData.append('file_nota', file);
             formData.append('nama_file', `File Nota Pembelian - ${getValueKodeRetur} - ${getValueTanggal}.${extension}`);
+        } else {
+            alert('Isi data dengan benar');
+            HideLoading();
+            return;
         }
         
         formData.append('jenis_retur', jenisRetur.toLowerCase());

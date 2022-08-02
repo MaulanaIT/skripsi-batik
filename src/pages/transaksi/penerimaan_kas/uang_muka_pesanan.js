@@ -157,6 +157,10 @@ export default function Uang_muka_pesanan() {
             let extension = arg[arg.length - 1];
             formData.append('file_transfer', file);
             formData.append('nama_file', `File Uang Muka - ${getValueKodePesanan} - ${getValueTanggal}.${extension}`);
+        } else {
+            alert('Isi data dengan benar');
+            HideLoading();
+            return;
         }
 
         formData.append('kode', getValueKodePesanan);

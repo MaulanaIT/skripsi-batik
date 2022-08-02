@@ -220,6 +220,10 @@ export default function Pengeluaran_kas() {
             let extension = arg[arg.length - 1];
             formData.append('file_transfer', file);
             formData.append('nama_file', `File Transfer - ${getValueKodePengeluaranKas} - ${getValueTanggalBayar}.${extension}`);
+        } else {
+            alert('Isi data dengan benar');
+            HideLoading();
+            return;
         }
 
         formData.append('kode', getValueKodePengeluaranKas)

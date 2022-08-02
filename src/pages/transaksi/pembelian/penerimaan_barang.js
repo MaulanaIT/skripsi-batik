@@ -152,6 +152,10 @@ export default function Penerimaan_barang() {
             formData.append('file_nota', file);
             
             formData.append('nama_file', `File Nota Pembelian - ${getValueKodePenerimaan} - ${getValueTanggal}.${extension}`);
+        } else {
+            alert('Isi data dengan benar');
+            HideLoading();
+            return;
         }
 
         formData.append('kode', getValueKodePenerimaan);

@@ -175,6 +175,10 @@ export default function Pengembalian_dana() {
             let extension = arg[arg.length - 1];
             formData.append('file_transfer', file);
             formData.append('nama_file', `File Transfer - ${getValueKodeKasMasuk} - ${getValueTanggal}.${extension}`);
+        } else {
+            alert('Isi data dengan benar');
+            HideLoading();
+            return;
         }
         
         formData.append('kode', getValueKodeKasMasuk);

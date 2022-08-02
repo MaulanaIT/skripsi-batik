@@ -46,6 +46,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response['status'] = 200;
         $response['data'] = [];
 
+        if ($jenis_penjualan == 'tunai') {
+            $file_transfer = $_FILES['file_transfer']['tmp_name'];
+            $nama_file = $_POST['nama_file'];
+
+            $upload_directory = $base_url . "File Penjualan Tunai/";
+    
+            if (!file_exists($upload_directory) && !is_dir($upload_directory)) {
+                mkdir($upload_directory, 0777, true);
+            }
+    
+            $upload_nota = move_uploaded_file($file_transfer, $upload_directory . $nama_file);
+        }
+
         if ($jenis_penjualan == 'tunai' || $jenis_penjualan == 'konsinyasi') {
             $data = json_decode($_POST['data']);
 

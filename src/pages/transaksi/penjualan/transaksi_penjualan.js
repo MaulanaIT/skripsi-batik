@@ -1135,7 +1135,10 @@ export class transaksi_penjualan extends Component {
             valueKalkulasiTotalHpp
         } = this.state;
 
-        if (jenisPenjualan.toLowerCase() === 'tunai' && valueKodeAkun.length <= 0) return;
+        if (jenisPenjualan.toLowerCase() === 'tunai' && valueKodeAkun.length <= 0) {
+            alert('Isi data dengan benar');
+            return;
+        }
 
         const valueTotalHarga = Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim]);
         const valuePiutang = Calculate([valueTotalJual, -valueDiskon]);
@@ -1159,10 +1162,24 @@ export class transaksi_penjualan extends Component {
 
         formData.append('jenis_penjualan', jenisPenjualan.toLowerCase());
 
-        if (jenisPenjualan.toLowerCase() === 'tunai')
+        if (jenisPenjualan.toLowerCase() === 'tunai') {
+            let file = document.getElementById('input-file-transfer').files[0];
+
+            if (file) {
+                let arg = file.name.split('.');
+                let extension = arg[arg.length - 1];
+                formData.append('file_transfer', file);
+                formData.append('nama_file', `File Transfer - ${valueKodeJual} - ${valueTanggal}.${extension}`);
+            } else {
+                alert('Isi data dengan benar');
+                HideLoading();
+                return;
+            }
+
             formData.append('data', JSON.stringify(dataTunai));
-        else if (jenisPenjualan.toLowerCase() === 'konsinyasi')
+        } else if (jenisPenjualan.toLowerCase() === 'konsinyasi') {
             formData.append('data', JSON.stringify(dataKonsinyasi));
+        }
 
         axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/insert.php`, formData, config).then(() => {
             window.location.reload();
@@ -1546,7 +1563,7 @@ export class transaksi_penjualan extends Component {
                                                 <div className={`${global.input_group} col-4 pe-2`}>
                                                     <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                                     <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={e => this.setState({
-                                                        valueJumlah: e.target.value, 
+                                                        valueJumlah: e.target.value,
                                                         valueTotalHpp: +e.target.value * +valueHpp
                                                     })} required={true} />
                                                 </div>
@@ -1612,7 +1629,7 @@ export class transaksi_penjualan extends Component {
                                                             await this.InputChange(e);
                                                             this.KalkulasiHargaJual();
                                                             this.setState({
-                                                                valueJumlah: e.target.value, 
+                                                                valueJumlah: e.target.value,
                                                                 valueTotalHpp: +e.target.value * +valueHpp
                                                             });
                                                         }} required={true} />
@@ -1678,9 +1695,9 @@ export class transaksi_penjualan extends Component {
                                                     <div className={`${global.input_group} col-4 pe-2`}>
                                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={e => this.setState({
-                                                        valueJumlah: e.target.value, 
-                                                        valueTotalHpp: +e.target.value * +valueHpp
-                                                    })} required={true} />
+                                                            valueJumlah: e.target.value,
+                                                            valueTotalHpp: +e.target.value * +valueHpp
+                                                        })} required={true} />
                                                     </div>
                                                     <div className={`${global.input_group} col-4 px-2`}>
                                                         <p className={global.title}>Harga <span className={global.important}>*</span></p>
@@ -2006,6 +2023,12 @@ export class transaksi_penjualan extends Component {
                                                 <p className={`${global.title} col-3`}>Kembalian</p>
                                                 <input type="text" id='valueTotalKembalian' className={`col-4`} value={Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim])} readOnly={true} />
                                             </div>
+                                            {valueKodeAkun.value === '1102' &&
+                                                <div className='align-items-center d-flex justify-content-between'>
+                                                    <p>Upload File Transfer</p>
+                                                    <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
+                                                </div>
+                                            }
                                         </>
                                         :
                                         this.state.jenisPenjualan === 'Konsinyasi' &&
