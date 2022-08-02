@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2022 at 02:45 PM
+-- Generation Time: Aug 02, 2022 at 03:07 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -219,7 +219,9 @@ INSERT INTO `detail_penjualan` (`id`, `kode`, `kode_item`, `nama_item`, `jumlah`
 (5, 'JT0004', 'PROD0001', 'Produk 1', 10, '0.00', '0.00', '10000.00', '100000.00', '2022-07-31 10:10:04', '2022-07-31 10:10:04'),
 (6, 'JT0005', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '10000.00', '50000.00', '2022-07-31 10:10:48', '2022-07-31 10:10:48'),
 (7, 'JK0002', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '10000.00', '50000.00', '2022-07-31 10:12:56', '2022-07-31 10:12:56'),
-(8, 'JT0006', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '10000.00', '50000.00', '2022-07-31 11:14:22', '2022-07-31 11:14:22');
+(8, 'JT0006', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '10000.00', '50000.00', '2022-07-31 11:14:22', '2022-07-31 11:14:22'),
+(9, 'JT0007', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '63161.47', '315807.35', '2022-08-01 13:50:55', '2022-08-01 13:50:55'),
+(10, 'JT0008', 'PROD0001', 'Kain Batik Mangrove Api-api Sintetis 1 Warna', 5, '0.00', '0.00', '0.00', '0.00', '2022-08-01 15:46:28', '2022-08-01 15:46:28');
 
 -- --------------------------------------------------------
 
@@ -682,17 +684,17 @@ CREATE TABLE `master_akun` (
 --
 
 INSERT INTO `master_akun` (`id`, `kode`, `nama`, `saldo`, `jenis`, `created_at`, `updated_at`) VALUES
-(9, '1101', 'Kas di Tangan', '7040000.00', 0, '2022-07-02 03:35:56', '2022-07-31 02:00:24'),
-(10, '1102', 'Kas Bank', '6980000.00', 0, '2022-07-02 03:36:09', '2022-07-31 02:02:01'),
-(11, '1103', 'Piutang Konsinyasi', '0.00', 0, '2022-07-02 03:36:21', '2022-07-30 15:33:15'),
-(12, '2101', 'Uang Muka Pesanan', '0.00', 1, '2022-07-02 03:36:48', '2022-07-02 03:36:48'),
-(13, '4101', 'Penjualan', '4000000.00', 1, '2022-07-02 03:40:10', '2022-07-31 02:02:01'),
-(14, '4201', 'Potongan Penjualan', '700000.00', 0, '2022-07-02 03:40:22', '2022-07-31 02:02:01'),
-(15, '4202', 'Beban Angkut Penjualan', '20000.00', 0, '2022-07-02 03:40:32', '2022-07-31 02:02:01'),
-(16, '5101', 'HPP', '400000.00', 0, '2022-07-02 03:40:42', '2022-07-31 11:14:22'),
-(17, '5201', 'Potongan Pembelian', '100000.00', 1, '2022-07-02 03:40:51', '2022-07-31 01:00:51'),
-(18, '5202', 'Retur Pembelian', '50000.00', 1, '2022-07-02 03:41:06', '2022-07-31 01:23:53'),
-(19, '5203', 'Beban Angkut Pembelian', '15000.00', 0, '2022-07-02 03:41:15', '2022-07-31 01:00:51');
+(1, '1101', 'Kas di Tangan', '195500.00', 0, '2022-07-02 03:35:56', '2022-07-24 14:50:40'),
+(2, '1102', 'Kas Bank', '42800.00', 0, '2022-07-02 03:36:09', '2022-07-20 02:53:29'),
+(3, '1103', 'Piutang Konsinyasi', '65000.00', 0, '2022-07-02 03:36:21', '2022-07-21 08:37:11'),
+(4, '2101', 'Uang Muka Pesanan', '0.00', 1, '2022-07-02 03:36:48', '2022-07-02 03:36:48'),
+(5, '4101', 'Penjualan', '286800.00', 1, '2022-07-02 03:40:10', '2022-07-24 14:50:40'),
+(6, '4201', 'Potongan Penjualan', '27000.00', 0, '2022-07-02 03:40:22', '2022-07-24 14:50:40'),
+(7, '4202', 'Beban Angkut Penjualan', '24000.00', 0, '2022-07-02 03:40:32', '2022-07-24 14:50:40'),
+(8, '5101', 'HPP', '0.00', 0, '2022-07-02 03:40:42', '2022-07-02 03:40:42'),
+(9, '5201', 'Potongan Pembelian', '0.00', 1, '2022-07-02 03:40:51', '2022-07-02 03:40:51'),
+(10, '5202', 'Retur Pembelian', '0.00', 1, '2022-07-02 03:41:06', '2022-07-02 03:41:06'),
+(11, '5203', 'Beban Angkut Pembelian', '0.00', 0, '2022-07-02 03:41:15', '2022-07-02 03:41:15');
 
 -- --------------------------------------------------------
 
@@ -715,7 +717,13 @@ CREATE TABLE `master_consignee` (
 --
 
 INSERT INTO `master_consignee` (`id`, `kode`, `nama`, `alamat`, `telepon`, `created_at`, `updated_at`) VALUES
-(1, 'CONS0001', 'Consignee 1', 'Semarang', '0847328445', '2022-05-26 00:22:56', '2022-05-26 00:22:56');
+(2, 'CONS0002', 'Hotel Dafam', 'Cilacap', '08563746', '2022-07-26 11:55:26', '2022-07-26 11:55:26'),
+(3, 'CONS0003', 'Whiz Hotel', 'Cilacap', '085647383', '2022-07-26 11:55:41', '2022-07-26 11:55:41'),
+(4, 'CONS0004', 'Toko Hendys Batik', 'Cilacap', '08553673', '2022-07-26 11:55:59', '2022-07-26 11:55:59'),
+(5, 'CONS0005', 'Galeri Bupati', 'Cilacap', '0846875', '2022-07-26 11:56:12', '2022-07-26 11:56:12'),
+(6, 'CONS0006', 'Rumah Zamira', 'Cilacap', '08564758', '2022-07-26 11:56:24', '2022-07-26 11:56:24'),
+(7, 'CONS0007', 'Batik Nusantara', 'Cilacap', '085637463', '2022-07-26 11:56:34', '2022-07-26 11:56:34'),
+(8, 'CONS0008', 'Galeri Camat Cilacap Tengah', 'Cilacap', '08564736', '2022-07-26 11:56:53', '2022-07-26 11:56:53');
 
 -- --------------------------------------------------------
 
@@ -738,8 +746,10 @@ CREATE TABLE `master_customer` (
 --
 
 INSERT INTO `master_customer` (`id`, `kode`, `nama`, `alamat`, `telepon`, `created_at`, `updated_at`) VALUES
-(1, 'CUS0001', 'Customer 1', 'Semarang', '1094802973048', '2022-06-21 02:29:20', '2022-06-21 02:29:20'),
-(2, 'CUS0002', 'Customer 2', 'Jakarta', '523984701831', '2022-06-21 02:29:29', '2022-06-21 02:29:29');
+(3, 'CUS0003', 'Dinas Sosial', 'Cilacap', '0856473892', '2022-07-26 11:54:18', '2022-07-26 11:54:18'),
+(4, 'CUS0004', 'Rumah Sakit Fatimah', 'Cilacap', '085647382', '2022-07-26 11:54:36', '2022-07-26 11:54:36'),
+(5, 'CUS0005', 'Pemda Cilacap', 'Cilacap', '08647362', '2022-07-26 11:54:51', '2022-07-26 11:54:51'),
+(6, 'CUS0006', 'Dinas Kepemudaan dan Olahraga', 'Cilacap', '08564783', '2022-07-26 11:55:09', '2022-07-26 11:55:09');
 
 -- --------------------------------------------------------
 
@@ -764,8 +774,24 @@ CREATE TABLE `master_inventory_alat` (
 --
 
 INSERT INTO `master_inventory_alat` (`id`, `kode`, `nama`, `jumlah`, `harga`, `total_kapasitas`, `bop`, `created_at`, `updated_at`) VALUES
-(1, 'ALAT0001', 'Sendok', 6, '1002000.00', 120, '167000.00', '2022-06-20 12:33:58', '2022-07-31 11:46:38'),
-(2, 'ALAT0002', 'Alat 2', 7, '5000.00', 100, '1000.00', '2022-07-26 05:06:22', '2022-07-31 11:46:38');
+(1, 'ALAT0001', 'Sarung Tangan', 60, '1800000.00', 6000, '300.00', '2022-07-26 11:41:40', '2022-07-26 11:41:40'),
+(2, 'ALAT0002', 'Sepatu Boot', 12, '960000.00', 518400, '1.85', '2022-07-26 11:43:18', '2022-07-26 11:43:18'),
+(3, 'ALAT0003', 'Dandang', 6, '1200000.00', 69120, '17.36', '2022-07-26 11:43:52', '2022-07-26 11:43:52'),
+(4, 'ALAT0004', 'Bak Celup', 2, '4000000.00', 288000, '13.89', '2022-07-26 11:44:11', '2022-07-26 11:44:11'),
+(5, 'ALAT0005', 'Ember', 7, '350000.00', 100800, '3.47', '2022-07-26 11:44:28', '2022-07-26 11:44:28'),
+(6, 'ALAT0006', 'Canting', 40, '320000.00', 46080, '6.94', '2022-07-26 11:44:48', '2022-07-26 11:44:48'),
+(7, 'ALAT0007', 'Gas', 10, '210000.00', 2500, '84.00', '2022-07-26 11:45:05', '2022-07-26 11:45:05'),
+(8, 'ALAT0008', 'Kompor', 10, '700000.00', 691200, '1.01', '2022-07-26 11:45:25', '2022-07-26 11:45:25'),
+(9, 'ALAT0009', 'Cap Lurik Wijayakusuma', 1, '1500000.00', 144000, '10.42', '2022-07-26 11:46:27', '2022-07-26 11:46:27'),
+(10, 'ALAT0010', 'Cap Kerapu Bakau', 1, '950000.00', 144000, '6.60', '2022-07-26 11:46:48', '2022-07-26 11:46:48'),
+(11, 'ALAT0011', 'Cap Mangrove Bakautancang', 1, '1200000.00', 144000, '8.33', '2022-07-26 11:47:18', '2022-07-26 11:47:18'),
+(12, 'ALAT0012', 'Cap Kawung Wijayakusuma', 1, '1100000.00', 144000, '7.64', '2022-07-31 12:38:56', '2022-07-31 12:38:56'),
+(13, 'ALAT0013', 'Cap Mangrove Api-api', 1, '1350000.00', 144000, '9.38', '2022-07-31 12:39:59', '2022-07-31 12:39:59'),
+(14, 'ALAT0014', 'Cap Sekar Wijayakusuma', 1, '1650000.00', 144000, '11.46', '2022-07-31 12:40:22', '2022-07-31 12:40:22'),
+(15, 'ALAT0015', 'Cap Truntum', 1, '850000.00', 144000, '5.90', '2022-07-31 12:40:46', '2022-07-31 12:40:46'),
+(16, 'ALAT0016', 'Cap Bumi Wijayakusuma', 1, '1250000.00', 144000, '8.68', '2022-07-31 12:41:08', '2022-07-31 12:41:08'),
+(17, 'ALAT0017', 'Cap Bogem Mentah', 1, '900000.00', 144000, '6.25', '2022-07-31 12:41:30', '2022-07-31 12:41:30'),
+(18, 'ALAT0018', 'Cap Lurik', 1, '650000.00', 144000, '4.51', '2022-07-31 12:41:49', '2022-07-31 12:41:49');
 
 -- --------------------------------------------------------
 
@@ -790,7 +816,29 @@ CREATE TABLE `master_inventory_bahanbaku` (
 --
 
 INSERT INTO `master_inventory_bahanbaku` (`id`, `kode`, `nama`, `satuan`, `stok_minimal`, `jumlah`, `harga`, `created_at`, `updated_at`) VALUES
-(1, 'BB0001', 'Botol', 'Buah', 100, 116, '7198.28', '2022-06-05 03:51:14', '2022-07-31 00:58:16');
+(2, 'BB0001', 'Kain Tari Kupu', 'Meter', 10, 100, '60000.00', '2022-07-26 11:25:09', '2022-07-26 11:59:20'),
+(3, 'BB0002', 'Kain Mori Sanforis', 'Meter', 10, 100, '40000.00', '2022-07-26 11:25:33', '2022-07-26 11:59:24'),
+(4, 'BB0003', 'Kain Sutra', 'Meter', 10, 100, '150000.00', '2022-07-26 11:32:40', '2022-07-26 11:59:30'),
+(5, 'BB0004', 'Malam Tulis', 'Kg', 10, 100, '40000.00', '2022-07-26 11:33:03', '2022-07-26 11:59:35'),
+(6, 'BB0005', 'Malam Semi', 'Kg', 10, 100, '25000.00', '2022-07-26 11:33:27', '2022-07-26 11:59:40'),
+(7, 'BB0006', 'Pewarna Mangrove', 'Kg', 0, 100, '6000.00', '2022-07-26 11:33:51', '2022-07-26 11:33:51'),
+(8, 'BB0007', 'Pewarna Kayu Tegeran', 'Kg', 0, 100, '60000.00', '2022-07-26 11:34:10', '2022-07-26 11:34:10'),
+(9, 'BB0008', 'Pewarna Kayu Jolawe', 'Kg', 0, 100, '60000.00', '2022-07-26 11:34:31', '2022-07-26 11:34:31'),
+(10, 'BB0009', 'Green IB', 'Kg', 0, 100, '290000.00', '2022-07-26 11:34:55', '2022-07-26 11:34:55'),
+(16, 'BB0015', 'Water Glass', 'Liter', 0, 100, '25000.00', '2022-07-26 11:37:28', '2022-07-26 11:37:28'),
+(17, 'BB0016', 'Rebusan Air Soda As', 'Liter', 0, 100, '15000.00', '2022-07-26 11:37:56', '2022-07-26 11:37:56'),
+(18, 'BB0017', 'Yellow IGK', 'Kg', 0, 100, '290000.00', '2022-07-31 12:28:28', '2022-07-31 12:28:28'),
+(19, 'BB0018', 'Yellow IRK', 'Kg', 0, 100, '290000.00', '2022-07-31 12:28:44', '2022-07-31 12:28:44'),
+(20, 'BB0019', 'Orange HR', 'Kg', 0, 100, '290000.00', '2022-07-31 12:29:00', '2022-07-31 12:29:00'),
+(21, 'BB0020', 'Rose IR', 'Kg', 0, 100, '290000.00', '2022-07-31 12:29:35', '2022-07-31 12:29:35'),
+(22, 'BB0021', 'Blue 04B', 'Kg', 0, 100, '290000.00', '2022-07-31 12:29:50', '2022-07-31 12:29:50'),
+(23, 'BB0022', 'Grey IRL', 'Kg', 0, 100, '290000.00', '2022-07-31 12:30:12', '2022-07-31 12:30:12'),
+(24, 'BB0023', 'Brown IRRD', 'Kg', 0, 100, '750000.00', '2022-07-31 12:30:36', '2022-07-31 12:30:36'),
+(25, 'BB0024', 'Violet 14R', 'Kg', 0, 100, '850000.00', '2022-07-31 12:31:05', '2022-07-31 12:31:05'),
+(26, 'BB0025', 'AS-G', 'Kg', 0, 100, '400000.00', '2022-07-31 12:31:32', '2022-07-31 12:31:32'),
+(27, 'BB0026', 'AS-LB', 'Kg', 0, 100, '1580000.00', '2022-07-31 12:31:49', '2022-07-31 12:31:49'),
+(28, 'BB0027', 'AS-D', 'Kg', 0, 100, '220000.00', '2022-07-31 12:32:06', '2022-07-31 12:32:06'),
+(29, 'BB0028', 'AS-BO', 'Kg', 0, 100, '210000.00', '2022-07-31 12:32:28', '2022-07-31 12:32:28');
 
 -- --------------------------------------------------------
 
@@ -815,7 +863,16 @@ CREATE TABLE `master_inventory_bahanpenolong` (
 --
 
 INSERT INTO `master_inventory_bahanpenolong` (`id`, `kode`, `nama`, `satuan`, `stok_minimal`, `jumlah`, `harga`, `created_at`, `updated_at`) VALUES
-(3, 'BP0001', 'Penolong 1', 'Lembar', 0, 10, '5000.00', '2022-07-26 03:20:10', '2022-07-26 03:20:10');
+(4, 'BP0001', 'Pensil', 'pcs', 10, 100, '2000.00', '2022-07-26 11:38:24', '2022-07-26 11:59:49'),
+(5, 'BP0002', 'Penghapus', 'pcs', 10, 100, '500.00', '2022-07-26 11:38:38', '2022-07-26 11:59:54'),
+(6, 'BP0003', 'Plastik', 'pcs', 10, 100, '200.00', '2022-07-26 11:39:31', '2022-07-26 11:59:59'),
+(7, 'BP0004', 'Box', 'pcs', 10, 100, '1500.00', '2022-07-26 11:39:53', '2022-07-26 12:00:03'),
+(8, 'BP0005', 'Nitrit', 'Kg', 0, 100, '25000.00', '2022-07-31 12:33:36', '2022-07-31 12:33:36'),
+(9, 'BP0006', 'Air Akizuur', 'Liter', 0, 100, '10000.00', '2022-07-31 12:34:09', '2022-07-31 12:34:09'),
+(10, 'BP0007', 'Tawas', 'Kg', 0, 100, '35000.00', '2022-07-31 12:34:58', '2022-07-31 12:34:58'),
+(11, 'BP0008', 'Tunjung', 'Kg', 0, 100, '50000.00', '2022-07-31 12:35:16', '2022-07-31 12:35:16'),
+(12, 'BP0009', 'Kancing Baju', 'pcs', 0, 5000, '174.00', '2022-07-31 12:36:03', '2022-07-31 12:36:03'),
+(13, 'BP0010', 'Benang', 'roll', 0, 500, '240.00', '2022-07-31 12:38:09', '2022-07-31 12:38:09');
 
 -- --------------------------------------------------------
 
@@ -842,7 +899,14 @@ CREATE TABLE `master_inventory_produk` (
 --
 
 INSERT INTO `master_inventory_produk` (`id`, `kode`, `nama`, `jenis`, `warna`, `jumlah`, `stok_minimal`, `hpp_per_produk`, `harga_jual`, `created_at`, `updated_at`) VALUES
-(1, 'PROD0001', 'Produk 1', 'Cair', 'Bening', 130, 10, '56345.90', '0.00', '2022-06-22 04:39:34', '2022-07-31 11:46:38');
+(4, 'PROD0001', 'Kain Batik Mangrove Api-api Sintetis 1 Warna', 'Cap', 'Sintetis', 30, 5, '0.00', '0.00', '2022-07-29 07:54:42', '2022-08-01 15:46:28'),
+(5, 'PROD0002', 'Batik Bumi Wijayakusuma Kombinasi 2 Warna Sintetis', 'Kombinasi', 'Sintetis', 20, 5, '0.00', '160000.00', '2022-07-29 08:26:51', '2022-07-29 08:26:51'),
+(6, 'PROD0003', 'Kain Batik Tulis Lasem Primissima 1 Warna Alami', 'Tulis', 'Alami', 20, 5, '0.00', '500000.00', '2022-07-30 20:19:20', '2022-07-30 20:19:20'),
+(7, 'PROD0004', 'Kemeja Sekar Wijayakusuma Size S', 'Cap', 'Sintetis', 30, 5, '0.00', '160000.00', '2022-07-30 20:22:50', '2022-07-30 20:22:50'),
+(8, 'PROD0005', 'Kemeja Sekar Wijayakusuma Size M', 'Cap', 'Sintetis', 20, 5, '0.00', '160000.00', '2022-07-30 20:23:38', '2022-07-30 20:23:38'),
+(9, 'PROD0006', 'Kemeja Sekar Wijayakusuma Size L', 'Cap', 'Sintetis', 20, 5, '0.00', '160000.00', '2022-07-30 20:24:05', '2022-07-30 20:24:05'),
+(10, 'PROD0007', 'Kemeja Sekar Wijayakusuma Size XL', 'Cap', 'Sintetis', 15, 5, '0.00', '165000.00', '2022-07-30 20:24:50', '2022-07-30 20:24:50'),
+(11, 'PROD0008', 'Kain Batik Tulis Garuda 1 Warna Alami', 'Tulis', 'Alami', 15, 5, '0.00', '505000.00', '2022-07-31 11:42:02', '2022-07-31 11:42:02');
 
 -- --------------------------------------------------------
 
@@ -866,7 +930,13 @@ CREATE TABLE `master_supplier` (
 --
 
 INSERT INTO `master_supplier` (`id`, `kode`, `nama`, `alamat`, `telepon`, `rekening`, `created_at`, `updated_at`) VALUES
-(1, 'SUP0001', 'Supplier 1', 'Semarang', '0810248102848', '455552342398237491279384791080', '2022-06-05 03:48:55', '2022-06-05 03:48:55');
+(1, 'SUP0001', 'Supplier 1', 'Semarang', '0810248102848', '455552342398237491279384791080', '2022-06-05 03:48:55', '2022-06-05 03:48:55'),
+(2, 'SUP0002', 'Toko Zaky', 'Yogyakarta', '086739402', '123778920', '2022-07-26 11:52:13', '2022-07-26 11:52:13'),
+(3, 'SUP0003', 'Toko Bima Kunting', 'Solo', '082736281', '99382763', '2022-07-26 11:52:35', '2022-07-26 11:52:35'),
+(4, 'SUP0004', 'Toko Bu Puput', 'Sukoharjo', '0852638374', '2230384', '2022-07-26 11:53:01', '2022-07-26 11:53:01'),
+(5, 'SUP0005', 'Toko Hendri', 'Sukoharjo', '0867584938', '77854732', '2022-07-26 11:53:18', '2022-07-26 11:53:18'),
+(6, 'SUP0006', 'Perbain Fuad', 'Banyumas', '0856473648', '223464', '2022-07-26 11:53:39', '2022-07-26 11:53:39'),
+(7, 'SUP0007', 'Sabari (Alat Cap)', 'Pekalongan', '085674839', '748857', '2022-07-26 11:53:59', '2022-07-26 11:53:59');
 
 -- --------------------------------------------------------
 
@@ -891,7 +961,13 @@ CREATE TABLE `master_tenagakerja` (
 
 INSERT INTO `master_tenagakerja` (`id`, `kode`, `nama`, `departemen`, `telepon`, `upah`, `created_at`, `updated_at`) VALUES
 (1, 'TK0001', 'Nama', 'Designer', '234234131', '100001.00', '2022-07-23 05:37:51', '2022-07-25 15:47:38'),
-(2, 'TK0002', 'Nama Cap', 'Cap/Canting', '123123', '1000.00', '2022-07-25 08:18:48', '2022-07-25 15:47:43');
+(2, 'TK0002', 'Nama Cap', 'Cap/Canting', '123123', '1000.00', '2022-07-25 08:18:48', '2022-07-25 15:47:43'),
+(3, 'TK0003', 'Ali', 'Designer', '0853674893', '30000.00', '2022-07-26 11:48:50', '2022-07-26 11:48:50'),
+(4, 'TK0004', 'Putri', 'Cap/Canting', '0856749830', '60000.00', '2022-07-26 11:49:22', '2022-07-26 11:49:22'),
+(5, 'TK0005', 'Sinta', 'Designer', '8983743', '3000.00', '2022-07-26 11:50:53', '2022-07-30 20:05:31'),
+(6, 'TK0006', 'Tono', 'Designer', '7382904', '3000.00', '2022-07-26 11:51:05', '2022-07-30 20:05:48'),
+(7, 'TK0007', 'Yani', 'Packing', '0853674889', '20000.00', '2022-07-26 11:51:40', '2022-07-26 11:51:40'),
+(8, 'TK0008', 'Putra', 'Cap/Canting', '07836483', '6000.00', '2022-07-30 20:06:17', '2022-07-30 20:06:17');
 
 -- --------------------------------------------------------
 
@@ -1022,8 +1098,8 @@ CREATE TABLE `penjualan_konsinyasi` (
 --
 
 INSERT INTO `penjualan_konsinyasi` (`id`, `kode`, `tanggal`, `kode_consignee`, `total_jual`, `total_hpp`, `diskon`, `piutang`, `terima_piutang`, `sisa`, `created_at`, `updated_at`) VALUES
-(1, 'JK0001', '2022-07-31', 'CONS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '2022-07-31 01:43:05', '2022-07-31 01:43:05'),
-(2, 'JK0002', '2022-07-31', 'CONS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '2022-07-31 10:12:56', '2022-07-31 10:12:56');
+(1, 'JK0001', '2022-07-31', 'CONS0003', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '2022-07-31 01:43:05', '2022-08-01 18:52:32'),
+(2, 'JK0002', '2022-07-31', 'CONS0003', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '2022-07-31 10:12:56', '2022-08-01 18:52:34');
 
 -- --------------------------------------------------------
 
@@ -1072,6 +1148,7 @@ CREATE TABLE `penjualan_tunai` (
   `ongkos_kirim` decimal(10,2) NOT NULL,
   `total_harga` decimal(10,2) NOT NULL,
   `total_bayar` decimal(10,2) NOT NULL,
+  `file` longtext NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -1080,13 +1157,15 @@ CREATE TABLE `penjualan_tunai` (
 -- Dumping data for table `penjualan_tunai`
 --
 
-INSERT INTO `penjualan_tunai` (`id`, `kode`, `tanggal`, `kode_customer`, `total_jual`, `total_hpp`, `diskon`, `ongkos_kirim`, `total_harga`, `total_bayar`, `created_at`, `updated_at`) VALUES
-(1, 'JT0001', '2022-07-31', 'CUS0001', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '2022-07-31 01:41:19', '2022-07-31 01:41:19'),
-(2, 'JT0002', '2022-07-31', 'CUS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '2022-07-31 01:42:54', '2022-07-31 01:42:54'),
-(3, 'JT0003', '2022-07-31', 'CUS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '2022-07-31 10:09:12', '2022-07-31 10:09:12'),
-(4, 'JT0004', '2022-07-31', 'CUS0002', '0.00', '100000.00', '0.00', '0.00', '0.00', '0.00', '2022-07-31 10:10:04', '2022-07-31 10:10:04'),
-(5, 'JT0005', '2022-07-31', 'CUS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '2022-07-31 10:10:48', '2022-07-31 10:10:48'),
-(6, 'JT0006', '2022-07-31', 'CUS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '2022-07-31 11:14:22', '2022-07-31 11:14:22');
+INSERT INTO `penjualan_tunai` (`id`, `kode`, `tanggal`, `kode_customer`, `total_jual`, `total_hpp`, `diskon`, `ongkos_kirim`, `total_harga`, `total_bayar`, `file`, `created_at`, `updated_at`) VALUES
+(1, 'JT0001', '2022-07-31', 'CUS0001', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '2022-07-31 01:41:19', '2022-07-31 01:41:19'),
+(2, 'JT0002', '2022-07-31', 'CUS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '', '2022-07-31 01:42:54', '2022-07-31 01:42:54'),
+(3, 'JT0003', '2022-07-31', 'CUS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '', '2022-07-31 10:09:12', '2022-07-31 10:09:12'),
+(4, 'JT0004', '2022-07-31', 'CUS0002', '0.00', '100000.00', '0.00', '0.00', '0.00', '0.00', '', '2022-07-31 10:10:04', '2022-07-31 10:10:04'),
+(5, 'JT0005', '2022-07-31', 'CUS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '', '2022-07-31 10:10:48', '2022-07-31 10:10:48'),
+(6, 'JT0006', '2022-07-31', 'CUS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '', '2022-07-31 11:14:22', '2022-07-31 11:14:22'),
+(7, 'JT0007', '2022-08-01', 'CUS0001', '0.00', '315807.35', '0.00', '0.00', '0.00', '0.00', '', '2022-08-01 13:50:55', '2022-08-01 13:50:55'),
+(8, 'JT0008', '2022-08-01', 'CUS0003', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '2022-08-01 15:46:28', '2022-08-01 15:46:28');
 
 -- --------------------------------------------------------
 
@@ -1193,7 +1272,7 @@ CREATE TABLE `produksi_stok` (
 --
 
 INSERT INTO `produksi_stok` (`id`, `kode`, `kode_permintaan`, `kode_produk`, `tanggal`, `jumlah`, `lama`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'PS0001', 'PPS0001', 'PROD0001', '2022-07-31', 6, 6, 1, '2022-07-31 10:15:04', '2022-07-31 12:04:56');
+(1, 'PS0001', 'PPS0001', 'PROD0001', '2022-07-31', 6, 6, 0, '2022-07-31 10:15:04', '2022-08-02 00:36:44');
 
 -- --------------------------------------------------------
 
@@ -1758,7 +1837,7 @@ ALTER TABLE `detail_pengeluaran_kas`
 -- AUTO_INCREMENT for table `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `detail_penjualan_konsinyasi`
@@ -1890,55 +1969,55 @@ ALTER TABLE `kartu_persediaan_produk`
 -- AUTO_INCREMENT for table `master_akun`
 --
 ALTER TABLE `master_akun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `master_consignee`
 --
 ALTER TABLE `master_consignee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `master_customer`
 --
 ALTER TABLE `master_customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `master_inventory_alat`
 --
 ALTER TABLE `master_inventory_alat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `master_inventory_bahanbaku`
 --
 ALTER TABLE `master_inventory_bahanbaku`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `master_inventory_bahanpenolong`
 --
 ALTER TABLE `master_inventory_bahanpenolong`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `master_inventory_produk`
 --
 ALTER TABLE `master_inventory_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `master_supplier`
 --
 ALTER TABLE `master_supplier`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `master_tenagakerja`
 --
 ALTER TABLE `master_tenagakerja`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `master_user`
@@ -1980,7 +2059,7 @@ ALTER TABLE `penjualan_pesanan`
 -- AUTO_INCREMENT for table `penjualan_tunai`
 --
 ALTER TABLE `penjualan_tunai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `permintaan_pesanan`
