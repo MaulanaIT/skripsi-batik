@@ -86,6 +86,10 @@ export default function Transaksi_pembelian() {
                             <td>{item.jenis_pembelian}</td>
                             <td>{item.kode_supplier}</td>
                             <td>{item.nama_supplier}</td>
+                            <td>{item.kode_item}</td>
+                            <td>{item.nama_item}</td>
+                            <td>{item.jumlah}</td>
+                            <td>{item.harga}</td>
                             <td>{item.total_harga}</td>
                             <td></td>
                         </tr>
@@ -171,6 +175,10 @@ export default function Transaksi_pembelian() {
                                         <th>Jenis Pembelian</th>
                                         <th>Kode Supplier</th>
                                         <th>Nama Supplier</th>
+                                        <th>Kode Barang</th>
+                                        <th>Nama Barang</th>
+                                        <th>Jumlah</th>
+                                        <th>Harga</th>
                                         <th>Total Pembelian</th>
                                         <th>Nota</th>
                                     </tr>

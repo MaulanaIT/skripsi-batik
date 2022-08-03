@@ -27,8 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($result) {
             $query = "UPDATE master_akun SET saldo=(saldo+" . $terima_piutang . ") WHERE kode='" . $kode_akun . "'";
-
             $result = $conn->query($query);
+
+            $query = "UPDATE master_akun SET saldo=(saldo-" . $terima_piutang . ") WHERE kode='1103'";
+            $result = $conn->query($query);
+
             if ($result) {
                 $response['data'] = $result;
             } else {
