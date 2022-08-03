@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     UNION
     SELECT tanggal, kode, 'Uang Muka Pesanan' AS keterangan, uang_muka AS nominal, created_at FROM uang_muka_pesanan
     UNION
-    SELECT tanggal, kode, 'Penjualan Pesanan' AS keterangan, total_harga AS nominal, created_at FROM penjualan_pesanan) a WHERE a.created_at >= '" . $tanggal_awal . "' AND a.created_at <= '" . $tanggal_akhir . "'";
+    SELECT tanggal, kode, 'Pelunasan Pesanan' AS keterangan, sisa AS nominal, created_at FROM penjualan_pesanan) a WHERE a.created_at >= '" . $tanggal_awal . "' AND a.created_at <= '" . $tanggal_akhir . "'";
 
     $result = $conn->query($query);
 

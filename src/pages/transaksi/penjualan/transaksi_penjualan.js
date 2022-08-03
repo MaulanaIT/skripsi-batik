@@ -1300,7 +1300,7 @@ export class transaksi_penjualan extends Component {
             this.setState({
                 valueKodeAlat: valueKode,
                 valueNamaAlat: valueNama,
-                valueHargaAlat: dataAlat.harga
+                valueHargaAlat: dataAlat.bop 
             });
         } else {
             this.setState({
