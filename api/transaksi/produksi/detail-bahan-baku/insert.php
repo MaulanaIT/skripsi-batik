@@ -26,8 +26,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result) {
         $response['status'] = 200;
         $response['data'] = [];
+        
+        $query = 'SELECT * FROM hpp_detail_bahan_baku WHERE kode_hpp = (SELECT kode FROM hpp)';
+    
+        $result = $conn->query($query);
 
-        $response['data'] = $result;
+        if ($result) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $query = "UPDATE master_inventory_bahanbaku SET jumlah=(jumlah-".$row['jumlah'].") WHERE kode='".$row['kode_bahan_baku']."'";
+
+                $conn->query($query);
+            }
+
+            $response['data'] = $result;
+        }
     } else {
         $response = mysqli_error($conn);
     }
