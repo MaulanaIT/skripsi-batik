@@ -134,6 +134,13 @@ export default function Kartu_alat() {
 
             let htmlTableDaftarAlat = [];
 
+            if (data && data.length > 0) {
+                data.forEach(item => {
+                    master.unit_saldo = +master.unit_saldo + +item.unit_keluar - +item.unit_masuk
+                    master.kapasitas_saldo = +master.kapasitas_saldo + +item.kapasitas_keluar - +item.kapasitas_masuk
+                });
+            }
+
             if (master) {
                 htmlTableDaftarAlat.push(
                     <tr key={'-1'}>
@@ -149,8 +156,14 @@ export default function Kartu_alat() {
                 );
             }
 
+            let currentUnitSaldo = master.unit_saldo;
+            let currentKapasitasSaldo = master.kapasitas_saldo;
+
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
+                    currentUnitSaldo = +currentUnitSaldo + +item.unit_masuk - +item.unit_keluar; 
+                    currentKapasitasSaldo = +currentKapasitasSaldo + +item.kapasitas_masuk - +item.kapasitas_keluar; 
+
                     htmlTableDaftarAlat.push(
                         <tr key={index}>
                             <td>{item.tanggal}</td>
@@ -159,8 +172,8 @@ export default function Kartu_alat() {
                             <td>{item.kapasitas_masuk}</td>
                             <td>{item.unit_keluar}</td>
                             <td>{item.kapasitas_keluar}</td>
-                            <td>{item.unit_saldo}</td>
-                            <td>{item.kapasitas_saldo}</td>
+                            <td>{currentUnitSaldo}</td>
+                            <td>{currentKapasitasSaldo}</td>
                         </tr>
                     );
                 });
