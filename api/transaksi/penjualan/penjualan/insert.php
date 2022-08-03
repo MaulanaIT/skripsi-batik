@@ -110,16 +110,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
             if ($jenis_penjualan == 'pesanan') {
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $total_bayar . ") WHERE kode='4101'";
+                $query = "UPDATE master_akun SET saldo=(saldo+" . $total_jual . ") WHERE kode='4101'";
                 $result = $conn->query($query);
 
                 $query = "UPDATE master_akun SET saldo=(saldo+" . $ongkos_kirim . ") WHERE kode='4202'";
                 $result = $conn->query($query);
     
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $diskon . ") WHERE kode='4201'";
+                $query = "UPDATE master_akun SET saldo=(saldo+" . $diskon . ") WHERE kode='2101'";
                 $result = $conn->query($query);
 
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $total_bayar . ") WHERE kode='" . $kode_akun . "'";
+                $query = "UPDATE master_akun SET saldo=(saldo+" . $total_bayar . ") WHERE kode='4201'";
+                $result = $conn->query($query);
+
+                $query = "UPDATE master_akun SET saldo=(saldo+" . $sisa . ") WHERE kode='" . $kode_akun . "'";
                 $result = $conn->query($query);
             }
 
