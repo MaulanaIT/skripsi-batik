@@ -18,7 +18,9 @@ export default function Profitabilitas() {
 
     const [getHTMLTableDaftarLaporan, setHTMLTableDaftarLaporan] = useStateWithCallbackLazy([]);
 
-    const [getValueTanggal, setValueTanggal] = useState(moment().format('YYYY-MM-DD'));
+    const [getValueTotalDebit, setValueTotalDebit] = useState(0);
+    const [getValueTotalKredit, setValueTotalKredit] = useState(0);
+    const [getValueTanggalAwal, setValueTanggalAwal] = useState(moment().format('YYYY-MM-DD'));
     const [getValueTanggalAkhir, setValueTanggalAkhir] = useState(moment().format('YYYY-MM-DD'));
 
     useEffect(() => {
@@ -30,12 +32,16 @@ export default function Profitabilitas() {
 
         const formData = new FormData();
 
-        formData.append('tanggal', getValueTanggal);
+        formData.append('tanggal_awal', getValueTanggalAwal);
+        formData.append('tanggal_akhir', getValueTanggalAkhir);
         
         axios.post(`${baseURL}/api/laporan/profitabilitas/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
             let htmlTableDaftarLaporan = [];
+
+            let totalDebit = 0;
+            let totalKredit = 0;
             
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
@@ -48,11 +54,16 @@ export default function Profitabilitas() {
                             <td>{item.kredit}</td>
                         </tr>
                     );
+
+                    totalDebit += +item.debit;
+                    totalKredit += +item.kredit;
                 });
             }
 
             $('#table-data').DataTable().destroy();
 
+            setValueTotalDebit(totalDebit);
+            setValueTotalKredit(totalKredit);
             setHTMLTableDaftarLaporan(htmlTableDaftarLaporan, () => {
                 $('#table-data').DataTable();
             });
@@ -78,8 +89,12 @@ export default function Profitabilitas() {
                     <p className={global.title}>Laporan Profitabilitas</p>
                     <div className={`d-flex`}>
                         <div className={`${global.input_group_row} col-6`}>
-                            <p className={`${global.title} col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Per Tanggal</p>
-                            <input type="date" id='input-tanggal-awal' name='input-tanggal-awal' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
+                            <p className={`${global.title} col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Tanggal Awal</p>
+                            <input type="date" id='input-tanggal-awal' name='input-tanggal-awal' value={getValueTanggalAwal} onChange={e => setValueTanggalAwal(e.target.value)} />
+                        </div>
+                        <div className={`${global.input_group_row} col-6`}>
+                            <p className={`${global.title} col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Tanggal Akhir</p>
+                            <input type="date" id='input-tanggal-khir' name='input-tanggal-akhir' value={getValueTanggalAkhir} onChange={e => setValueTanggalAkhir(e.target.value)} />
                         </div>
                     </div>
                     <div className='d-flex flex-column gap-2 pt-2'>
@@ -120,6 +135,13 @@ export default function Profitabilitas() {
                                 <tbody>
                                     {getHTMLTableDaftarLaporan}
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colSpan={3}></td>
+                                        <td>{getValueTotalDebit}</td>
+                                        <td>{getValueTotalKredit}</td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
