@@ -153,7 +153,7 @@ export class order_pembelian extends Component {
 
             let dataBahan = this.state.dataBahan;
 
-            let check = dataBahan.findIndex(item => item.kode_item === valueKodeAlat.value && item.harga === valueHarga);
+            let check = dataBahan.findIndex(item => item.kode_item === valueKodeBahan.value && item.harga === valueHarga);
 
             if (check < 0) {
                 dataBahan.push({
@@ -683,7 +683,7 @@ export class order_pembelian extends Component {
                                             <button type='button' className={`${global.button} w-100`} onClick={this.InsertOrder}>Simpan</button>
                                         </div>
                                         <div className='col-6 ps-2'>
-                                            <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>
+                                            <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }} onClick={() => this.SelectPembelian(null)}>Batal</button>
                                         </div>
                                     </div>
                                 </div>
