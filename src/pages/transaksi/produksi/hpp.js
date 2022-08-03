@@ -372,7 +372,6 @@ export default function Hpp() {
                 <div className={`${global.card} col-12`}>
                     <div className={`${global.header}`}>
                         <p className={global.title}>Perhitungan Harga Pokok Produksi</p>
-                        <Link to={'/transaksi/produksi/produksi'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}>Cetak</Link>
                     </div>
                     <div className={`${bootstrap['d-flex']}`}>
                         <div className={`${global.input_group} col-5 pe-2`}>
