@@ -214,8 +214,6 @@ export default function Permintaanprod() {
         formData.append('jumlah', getValueJumlah);
 
         axios.post(`${baseURL}/api/transaksi/produksi/permintaan-stok/insert.php`, formData, config).then(response => {
-            HideLoading();
-
             setValueKodeProduk([]);
             setValueNamaProduk([]);
             setValueJumlah(0);
