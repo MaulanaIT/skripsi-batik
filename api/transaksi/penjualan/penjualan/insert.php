@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $query = "UPDATE master_akun SET saldo=(saldo+" . $diskon . ") WHERE kode='2101'";
                 $result = $conn->query($query);
 
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $total_bayar . ") WHERE kode='4201'";
+                $query = "UPDATE master_akun SET saldo=(saldo-" . $total_bayar . ") WHERE kode='4201'";
                 $result = $conn->query($query);
 
                 $query = "UPDATE master_akun SET saldo=(saldo+" . $sisa . ") WHERE kode='" . $kode_akun . "'";
