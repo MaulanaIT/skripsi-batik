@@ -70,7 +70,7 @@ export default function Daftar_hpp() {
                             <td>{item.biaya_bahan_baku}</td>
                             <td>{item.biaya_tenaga_kerja}</td>
                             <td>{item.biaya_overhead_pabrik}</td>
-                            <td>{item.hpp}</td>
+                            <td>{item.hpp_per_produk}</td>
                             <td>{item.jumlah}</td>
                             <td>
                                 <div id={`data-harga-jual-${item.kode}`} className={`data-${item.kode}`}>{item.harga_jual}</div>

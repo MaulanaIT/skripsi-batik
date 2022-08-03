@@ -527,6 +527,7 @@ export default function Sidebar(props) {
                                     </div>
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/produksi/permintaanprod'}><span>Input Permintaan Produksi Stok</span></Link></li>
+                                        <li><Link to={'/transaksi/produksi/daftar-produksi'}><span>Daftar Perencanaan Produksi</span></Link></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -573,7 +574,6 @@ export default function Sidebar(props) {
                                         <MdExpandMore className={style.toggle} />
                                     </div>
                                     <ul className={style.dropdown_menu}>
-                                        <li><Link to={'/transaksi/produksi/daftar-produksi'}><span>Daftar Perencanaan Produksi</span></Link></li>
                                         <li><Link to={'/transaksi/produksi/daftar-hpp'}><span>Daftar Proses Produksi</span></Link></li>
                                     </ul>
                                 </li>
