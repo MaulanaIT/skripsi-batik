@@ -331,7 +331,7 @@ const Add_hpp = (props, ref) => {
                 tanggal: getValueTanggal,
                 kode_tenaga_kerja: getValueKodeTenagaKerja.value,
                 nama_tenaga_kerja: getValueNamaTenagaKerja.label,
-                departemen: getValueDepartemen.value,
+                departemen: getValueDepartemen,
                 jumlah: getValueJumlah,
                 harga: getValueHarga,
                 total_harga: getValueTotalHarga
@@ -851,6 +851,8 @@ const Add_hpp = (props, ref) => {
         const formData = new FormData();
 
         formData.append('kode', getValueKodeBiayaTenagaKerja);
+
+        console.log(getDataDetailTenagaKerja)
 
         if (props.isUpdate) {
             formData.append('kode_hpp', props.dataSelected.kode);
