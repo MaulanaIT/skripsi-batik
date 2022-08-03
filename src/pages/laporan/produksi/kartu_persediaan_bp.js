@@ -134,6 +134,14 @@ export default function Kartu_persediaan_bp() {
 
             let htmlTableDaftarBahanPenolong = [];
 
+            if (data && data.length > 0) {
+                data.forEach(item => {
+                    master.unit_saldo = +master.unit_saldo + +item.unit_keluar - +item.unit_masuk;
+                    master.jumlah_saldo = +master.jumlah_saldo + +item.jumlah_keluar - +item.jumlah_masuk;
+                    master.harga_saldo = Math.ceil(+master.jumlah_saldo / +master.unit_saldo);
+                });
+            }
+
             if (master) {
                 htmlTableDaftarBahanPenolong.push(
                     <tr key={'-1'}>
@@ -152,8 +160,16 @@ export default function Kartu_persediaan_bp() {
                 );
             }
 
+            let currentUnitSaldo = master.unit_saldo;
+            let currentJumlahSaldo = master.jumlah_saldo;
+            let currentHargaSaldo = master.harga_saldo;
+
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
+                    currentUnitSaldo = +currentUnitSaldo + +item.unit_masuk - +item.unit_keluar;
+                    currentJumlahSaldo = +currentJumlahSaldo + +item.jumlah_masuk - +item.jumlah_keluar;
+                    currentHargaSaldo = Math.ceil(+currentJumlahSaldo / +currentUnitSaldo);
+
                     htmlTableDaftarBahanPenolong.push(
                         <tr key={index}>
                             <td>{item.tanggal}</td>
@@ -164,9 +180,9 @@ export default function Kartu_persediaan_bp() {
                             <td>{item.unit_keluar}</td>
                             <td>{item.harga_keluar}</td>
                             <td>{item.jumlah_keluar}</td>
-                            <td>{item.unit_saldo}</td>
-                            <td>{item.harga_saldo ?? 0}</td>
-                            <td>{item.jumlah_saldo}</td>
+                            <td>{currentUnitSaldo}</td>
+                            <td>{currentHargaSaldo}</td>
+                            <td>{currentJumlahSaldo}</td>
                         </tr>
                     );
                 });

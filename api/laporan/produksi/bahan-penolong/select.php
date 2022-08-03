@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         UNION ALL
         SELECT updated_at AS tanggal, 0 AS unit_masuk, 0 AS harga_masuk, jumlah AS unit_keluar, harga AS harga_keluar, 0 AS unit_saldo, 0 AS harga_saldo from detail_retur WHERE kode_item = '".$kode_item."'
         UNION ALL
-        SELECT updated_at AS tanggal, 0 AS unit_masuk, 0 AS harga_masuk, jumlah AS unit_keluar, harga AS harga_keluar, 0 AS unit_saldo, 0 AS harga_saldo from hpp_detail_penolong WHERE kode_penolong = '".$kode_item."') a";
+        SELECT updated_at AS tanggal, 0 AS unit_masuk, 0 AS harga_masuk, jumlah AS unit_keluar, harga AS harga_keluar, 0 AS unit_saldo, 0 AS harga_saldo from hpp_detail_penolong WHERE kode_penolong = '".$kode_item."') a GROUP BY tanggal";
     // }
 
     $result = $conn->query($query);
