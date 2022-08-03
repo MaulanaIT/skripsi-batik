@@ -98,40 +98,59 @@ export default function Kartu_persediaan_bp() {
     }
 
     const GetLaporan = () => {
-        if (!getValueJenis || getValueJenis.length <= 0) {
+        if (!getValueKodeBahanPenolong || getValueKodeBahanPenolong.length <= 0) {
             alert('Isi data dengan benar');
             return;
         }
 
-        if (getValueJenis.value === 'Tanggal' && (getValueTanggalAwal === '' || getValueTanggalAkhir === '')) {
-            alert('Isi data dengan benar');
-            return;
-        }
+        // if (getValueJenis.value === 'Tanggal' && (getValueTanggalAwal === '' || getValueTanggalAkhir === '')) {
+        //     alert('Isi data dengan benar');
+        //     return;
+        // }
 
-        if (getValueJenis.value === 'BahanPenolong' && (!getValueKodeBahanPenolong || getValueKodeBahanPenolong.length <= 0)) {
-            alert('Isi data dengan benar');
-            return;
-        }
+        // if (getValueJenis.value === 'BahanPenolong' && (!getValueKodeBahanPenolong || getValueKodeBahanPenolong.length <= 0)) {
+        //     alert('Isi data dengan benar');
+        //     return;
+        // }
 
         ShowLoading();
 
         const formData = new FormData();
 
-        formData.append('jenis_laporan', getValueJenis.value.toLowerCase());
+        // formData.append('jenis_laporan', getValueJenis.value.toLowerCase());
 
-        if (getValueJenis.value === 'Tanggal') {
-            formData.append('tanggal_awal', getValueTanggalAwal);
-            formData.append('tanggal_akhir', getValueTanggalAkhir);
-        } else if (getValueJenis.value === 'Bahan Penolong') {
+        // if (getValueJenis.value === 'Tanggal') {
+        //     formData.append('tanggal_awal', getValueTanggalAwal);
+        //     formData.append('tanggal_akhir', getValueTanggalAkhir);
+        // } else if (getValueJenis.value === 'Bahan Penolong') {
             formData.append('kode_item', getValueKodeBahanPenolong.value);
 
             setValueNamaBahanPenolong(getValueKodeBahanPenolong.label);
-        }
+        // }
 
         axios.post(`${baseURL}/api/laporan/produksi/bahan-penolong/select.php`, formData, config).then(response => {
             let data = response.data.data;
+            let master = response.data.master;
 
             let htmlTableDaftarBahanPenolong = [];
+
+            if (master) {
+                htmlTableDaftarBahanPenolong.push(
+                    <tr key={'-1'}>
+                        <td>{master.tanggal}</td>
+                        <td>Master {master.nama}</td>
+                        <td>{master.unit_masuk}</td>
+                        <td>{master.harga_masuk}</td>
+                        <td>{master.jumlah_masuk}</td>
+                        <td>{master.unit_keluar}</td>
+                        <td>{master.harga_keluar}</td>
+                        <td>{master.jumlah_keluar}</td>
+                        <td>{master.unit_saldo}</td>
+                        <td>{master.harga_saldo ?? 0}</td>
+                        <td>{master.jumlah_saldo}</td>
+                    </tr>
+                );
+            }
 
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
@@ -177,7 +196,7 @@ export default function Kartu_persediaan_bp() {
             </div>
             <div className={style.content}>
                 <div className={global.card}>
-                    <div className={`d-flex`}>
+                    {/* <div className={`d-flex`}>
                         <div className={`${global.input_group_row} col-8 `}>
                             <p className={`${global.title} col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Berdasarkan</p>
                             <Select isClearable={true} isSearchable={true} options={[
@@ -185,8 +204,8 @@ export default function Kartu_persediaan_bp() {
                                 { value: 'Bahan Penolong', label: 'Bahan Penolong' }
                             ]} placeholder={'Pilih Kartu...'} styles={CustomSelect} onChange={e => setValueJenis(e)} className='col-7' />
                         </div>
-                    </div>
-                    {getValueJenis && getValueJenis.value === 'Tanggal' ?
+                    </div> */}
+                    {/* {getValueJenis && getValueJenis.value === 'Tanggal' ?
                         <div className={`${global.input_group_row} col-4`}>
                             <p className={`${global.title} col-6`}>Tanggal</p>
                             <div>
@@ -200,14 +219,14 @@ export default function Kartu_persediaan_bp() {
                             </div>
                         </div>
                         :
-                        getValueJenis && getValueJenis.value === 'Bahan Penolong' ?
+                        getValueJenis && getValueJenis.value === 'Bahan Penolong' ? */}
                             <div className={`${global.input_group_row} col-4`}>
                                 <p className={`${global.title} col-6`}>Nama Bahan Penolong</p>
                                 <Select isClearable={true} isSearchable={true} options={getDataSelectBahanPenolong} placeholder={'Pilih Bahan Penolong...'} styles={CustomSelect} value={getValueKodeBahanPenolong} onChange={e => setValueKodeBahanPenolong(e)} className='col-7' />
                             </div>
-                            :
+                            {/* :
                             null
-                    }
+                    } */}
                     <div className='d-flex flex-column gap-2 pt-2'>
                         <div className='d-flex'>
                             <div className='col-6 pe-2'>
