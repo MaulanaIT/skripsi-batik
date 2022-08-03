@@ -70,7 +70,7 @@ render() {
                             <p className={`${global.title} col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Berdasarkan</p>
                                 <Select isClearable={true} isSearchable={true} options={[
                                 { value: 'Tanggal', label: 'Tanggal' },
-                                { value: 'Bahan Baku', label: 'Bahan Baku' }
+                                { value: 'Bahan Penolong', label: 'Bahan Penolong' }
                                 ]} placeholder={'Pilih Kartu...'} styles={CustomSelect} onChange={(value) => this.SelectKartu(value)} className='col-7' />
                         </div>
                         </div>
@@ -90,7 +90,7 @@ render() {
                     </div>
                     </>
                      : 
-                    this.state.pilihLaporan === 'Bahan Baku' ?
+                    this.state.pilihLaporan === 'Bahan Penolong' ?
                     <>
                     <div className={`${global.input_group_row} col-4`}>
                         <p className={`${global.title} col-6`}>Nama Bahan Penolong</p>
