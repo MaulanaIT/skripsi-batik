@@ -5,6 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
+import { CSVLink } from 'react-csv';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { baseURL, config, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
@@ -15,6 +16,8 @@ import global from '../../../css/global.module.css';
 import style from '../../../css/laporan/penjualan/piutang_konsinyasi.module.css';
 
 export default function Piutang_konsinyasi() {
+
+    const [getDataExport, setDataExport] = useState([]);
 
     const [getHTMLTableDaftarLaporan, setHTMLTableDaftarLaporan] = useStateWithCallbackLazy([]);
 
@@ -36,9 +39,17 @@ export default function Piutang_konsinyasi() {
         axios.post(`${baseURL}/api/laporan/penjualan/piutang/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
-            console.log(response);
-
             let htmlTableDaftarLaporan = [];
+            let dataExport = [];
+
+            dataExport.push([
+                'Kode',
+                'Tanggal',
+                'Kode Consignee',
+                'Nama Consignee',
+                'Piutang',
+                'Sisa'
+            ]);
             
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
@@ -53,11 +64,21 @@ export default function Piutang_konsinyasi() {
                             <td>{SetPriceFormat(item.sisa)}</td>
                         </tr>
                     );
+
+                    dataExport.push([
+                        item.kode,
+                        item.tanggal,
+                        item.kode_consignee,
+                        item.nama_consignee,
+                        SetPriceFormat(item.piutang),
+                        SetPriceFormat(item.sisa)
+                    ]);
                 });
             }
 
             $('#table-data').DataTable().destroy();
 
+            setDataExport(dataExport);
             setHTMLTableDaftarLaporan(htmlTableDaftarLaporan, () => {
                 $('#table-data').DataTable();
             });
@@ -107,11 +128,10 @@ export default function Piutang_konsinyasi() {
                         <div className='col-10'>
                             <p className={global.title}>Daftar Piutang Konsinyasi</p>
                         </div>
-                        <div className='col-1 ps-5'>
-                            <TiExport className='fs-4' />
-                        </div>
-                        <div className='col-1 pe-5'>
-                            <AiFillPrinter className='fs-4' />
+                        <div className={`${global.cursor_pointer} ms-auto pe-5`}>
+                            <CSVLink data={getDataExport} filename={`Laporan Piutang Konsinyasi ${getValueTanggalAwal} - ${getValueTanggalAkhir}`}>
+                                <TiExport className='fs-4' />
+                            </CSVLink>
                         </div>
                     </div>
                     <div className={global.card}>

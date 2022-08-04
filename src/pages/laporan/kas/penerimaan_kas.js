@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 // Import Library
 import $ from 'jquery';
 import axios from 'axios';
+import { CSVLink } from 'react-csv';
 // import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
@@ -52,6 +53,8 @@ const CustomSelect = {
 
 export default function Penerimaan_kas() {
 
+    const [getDataExport, setDataExport] = useState([]);
+
     const [getHTMLTableDaftarLaporan, setHTMLTableDaftarLaporan] = useStateWithCallbackLazy([]);
 
     // const [getValueJenis, setValueJenis] = useState([]);
@@ -75,6 +78,14 @@ export default function Penerimaan_kas() {
             let data = response.data.data;
 
             let htmlTableDaftarLaporan = [];
+            let dataExport = [];
+
+            dataExport.push([
+                'Tanggal',
+                'Kode',
+                'Keterangan',
+                'Nominal'
+            ]);
             
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
@@ -87,11 +98,19 @@ export default function Penerimaan_kas() {
                             <td>{SetPriceFormat(item.nominal)}</td>
                         </tr>
                     );
+
+                    dataExport.push([
+                        item.tanggal,
+                        item.kode,
+                        item.keterangan,
+                        SetPriceFormat(item.nominal)
+                    ]);
                 });
             }
 
             $('#table-data').DataTable().destroy();
 
+            setDataExport(dataExport);
             setHTMLTableDaftarLaporan(htmlTableDaftarLaporan, () => {
                 $('#table-data').DataTable();
             });
@@ -148,11 +167,10 @@ export default function Penerimaan_kas() {
                         <div className='col-10'>
                             <p className={global.title}>Daftar Penerimaan Kas</p>
                         </div>
-                        <div className='col-1 ps-5'>
-                            <TiExport className='fs-4' />
-                        </div>
-                        <div className='col-1 pe-5'>
-                            <AiFillPrinter className='fs-4' />
+                        <div className={`${global.cursor_pointer} ms-auto pe-5`}>
+                            <CSVLink data={getDataExport} filename={`Laporan Penerimaan Kas ${getValueTanggalAwal} - ${getValueTanggalAkhir}`}>
+                                <TiExport className='fs-4' />
+                            </CSVLink>
                         </div>
                     </div>
                     <div className={global.card}>

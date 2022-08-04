@@ -5,6 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
+import { CSVLink } from 'react-csv';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
@@ -52,6 +53,8 @@ const CustomSelect = {
 }
 
 export default function Kartu_persediaan_bp() {
+
+    const [getDataExport, setDataExport] = useState([]);
 
     const [getDataSelectBahanPenolong, setDataSelectBahanPenolong] = useState([]);
 
@@ -133,6 +136,21 @@ export default function Kartu_persediaan_bp() {
             let master = response.data.master;
 
             let htmlTableDaftarBahanPenolong = [];
+            let dataExport = [];
+
+            dataExport.push([
+                'Tanggal',
+                'Nama',
+                'Unit Masuk',
+                'Harga Masuk',
+                'Jumlah Masuk',
+                'Unit Keluar',
+                'Harga Keluar',
+                'Jumlah Keluar',
+                'Unit Saldo',
+                'Harga Saldo',
+                'Jumlah Saldo'
+            ]);
 
             if (data && data.length > 0) {
                 data.forEach(item => {
@@ -158,6 +176,20 @@ export default function Kartu_persediaan_bp() {
                         <td>{SetPriceFormat(master.jumlah_saldo)}</td>
                     </tr>
                 );
+
+                dataExport.push([
+                    master.tanggal,
+                    master.nama,
+                    SetNumberFormat(master.unit_masuk),
+                    SetPriceFormat(master.harga_masuk),
+                    SetPriceFormat(master.jumlah_masuk),
+                    SetNumberFormat(master.unit_keluar),
+                    SetPriceFormat(master.harga_keluar),
+                    SetPriceFormat(master.jumlah_keluar),
+                    SetNumberFormat(master.unit_saldo),
+                    SetPriceFormat(master.harga_saldo),
+                    SetPriceFormat(master.jumlah_saldo)
+                ]);
             }
 
             let currentUnitSaldo = master.unit_saldo;
@@ -185,11 +217,26 @@ export default function Kartu_persediaan_bp() {
                             <td>{SetPriceFormat(currentJumlahSaldo)}</td>
                         </tr>
                     );
+
+                    dataExport.push([
+                        item.tanggal,
+                        item.nama,
+                        SetNumberFormat(item.unit_masuk),
+                        SetPriceFormat(item.harga_masuk),
+                        SetPriceFormat(item.jumlah_masuk),
+                        SetNumberFormat(item.unit_keluar),
+                        SetPriceFormat(item.harga_keluar),
+                        SetPriceFormat(item.jumlah_keluar),
+                        SetNumberFormat(item.currentUnitSaldo),
+                        SetPriceFormat(item.currentHargaSaldo),
+                        SetPriceFormat(item.currentJumlahSaldo)
+                    ]);
                 });
             }
 
             $(`#table-data`).DataTable().destroy();
 
+            setDataExport(dataExport);
             setHTMLTableDaftarBahanPenolong(htmlTableDaftarBahanPenolong, () => {
                 $(`#table-data`).DataTable();
             });
@@ -260,11 +307,10 @@ export default function Kartu_persediaan_bp() {
                         <div className='col-10'>
                             <p className={global.title}></p>
                         </div>
-                        <div className='col-1 ps-5'>
-                            <TiExport className='fs-4' />
-                        </div>
-                        <div className='col-1 pe-5'>
-                            <AiFillPrinter className='fs-4' />
+                        <div className={`${global.cursor_pointer} ms-auto pe-5`}>
+                            <CSVLink data={getDataExport} filename={`Laporan Kartu Bahan Penolong ${getValueTanggalAwal} - ${getValueTanggalAkhir}`}>
+                                <TiExport className='fs-4' />
+                            </CSVLink>
                         </div>
                     </div>
                     <div className={global.card}>

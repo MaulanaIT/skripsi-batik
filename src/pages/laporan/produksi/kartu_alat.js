@@ -5,8 +5,9 @@ import $ from 'jquery';
 import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
+import { CSVLink } from 'react-csv';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, SetNumberFormat, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -52,6 +53,8 @@ const CustomSelect = {
 }
 
 export default function Kartu_alat() {
+
+    const [getDataExport, setDataExport] = useState([]);
 
     const [getDataSelectAlat, setDataSelectAlat] = useState([]);
 
@@ -133,6 +136,18 @@ export default function Kartu_alat() {
             let master = response.data.master;
 
             let htmlTableDaftarAlat = [];
+            let dataExport = [];
+
+            dataExport.push([
+                'Tanggal',
+                'Nama',
+                'Unit Masuk',
+                'Kapasitas Masuk',
+                'Unit Keluar',
+                'Kapasitas Keluar',
+                'Unit Saldo',
+                'Kapasitas Saldo'
+            ]);
 
             if (data && data.length > 0) {
                 data.forEach(item => {
@@ -154,6 +169,17 @@ export default function Kartu_alat() {
                         <td>{SetNumberFormat(master.kapasitas_saldo)}</td>
                     </tr>
                 );
+
+                dataExport.push([
+                    master.tanggal,
+                    master.nama,
+                    SetNumberFormat(master.unit_masuk),
+                    SetNumberFormat(master.kapasitas_masuk),
+                    SetNumberFormat(master.unit_keluar),
+                    SetNumberFormat(master.kapasitas_keluar),
+                    SetNumberFormat(master.unit_saldo),
+                    SetNumberFormat(master.kapasitas_saldo)
+                ]);
             }
 
             let currentUnitSaldo = master.unit_saldo;
@@ -176,11 +202,23 @@ export default function Kartu_alat() {
                             <td>{SetNumberFormat(currentKapasitasSaldo)}</td>
                         </tr>
                     );
+
+                    dataExport.push([
+                        item.tanggal,
+                        item.nama,
+                        SetNumberFormat(item.unit_masuk),
+                        SetNumberFormat(item.kapasitas_masuk),
+                        SetNumberFormat(item.unit_keluar),
+                        SetNumberFormat(item.kapasitas_keluar),
+                        SetNumberFormat(currentUnitSaldo),
+                        SetNumberFormat(currentKapasitasSaldo)
+                    ]);
                 });
             }
 
             $(`#table-data`).DataTable().destroy();
 
+            setDataExport(dataExport);
             setHTMLTableDaftarAlat(htmlTableDaftarAlat, () => {
                 $(`#table-data`).DataTable();
             });
@@ -251,11 +289,10 @@ export default function Kartu_alat() {
                         <div className='col-10'>
                             <p className={global.title}></p>
                         </div>
-                        <div className='col-1 ps-5'>
-                            <TiExport className='fs-4' />
-                        </div>
-                        <div className='col-1 pe-5'>
-                            <AiFillPrinter className='fs-4' />
+                        <div className={`${global.cursor_pointer} ms-auto pe-5`}>
+                            <CSVLink data={getDataExport} filename={`Laporan Kartu Alat ${getValueTanggalAwal} - ${getValueTanggalAkhir}`}>
+                                <TiExport className='fs-4' />
+                            </CSVLink>
                         </div>
                     </div>
                     <div className={global.card}>

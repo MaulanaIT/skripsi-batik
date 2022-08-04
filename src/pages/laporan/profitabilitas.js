@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 // Import Library
 import $ from 'jquery';
 import axios from 'axios';
+import { CSVLink } from 'react-csv';
 // import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
@@ -15,6 +16,8 @@ import global from '../../css/global.module.css';
 import style from '../../css/laporan/profitabilitas.module.css';
 
 export default function Profitabilitas() {
+
+    const [getDataExport, setDataExport] = useState([]);
 
     const [getHTMLTableDaftarLaporan, setHTMLTableDaftarLaporan] = useStateWithCallbackLazy([]);
 
@@ -34,20 +37,28 @@ export default function Profitabilitas() {
 
         formData.append('tanggal_awal', getValueTanggalAwal);
         formData.append('tanggal_akhir', getValueTanggalAkhir);
-        
+
         axios.post(`${baseURL}/api/laporan/profitabilitas/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
             let htmlTableDaftarLaporan = [];
+            let dataExport = [];
 
             let totalDebit = 0;
             let totalKredit = 0;
-            
+
+            dataExport.push([
+                'Kode',
+                'Nama',
+                'Debit',
+                'Kredit'
+            ]);
+
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
                     htmlTableDaftarLaporan.push(
                         <tr key={index} className={'align-middle'}>
-                            <td className='text-center'>{index+1}.</td>
+                            <td className='text-center'>{index + 1}.</td>
                             <td>{item.kode}</td>
                             <td>{item.nama}</td>
                             <td>{SetPriceFormat(item.debit ?? 0)}</td>
@@ -56,6 +67,13 @@ export default function Profitabilitas() {
                         </tr>
                     );
 
+                    dataExport.push([
+                        item.kode,
+                        item.nama,
+                        SetPriceFormat(item.debit ?? 0),
+                        SetPriceFormat(item.kredit ?? 0)
+                    ]);
+
                     totalDebit += +item.debit;
                     totalKredit += +item.kredit;
                 });
@@ -63,6 +81,7 @@ export default function Profitabilitas() {
 
             $('#table-data').DataTable().destroy();
 
+            setDataExport(dataExport);
             setValueTotalDebit(totalDebit);
             setValueTotalKredit(totalKredit);
             setHTMLTableDaftarLaporan(htmlTableDaftarLaporan, () => {
@@ -114,14 +133,13 @@ export default function Profitabilitas() {
                         <div className='col-10'>
                             <p className={global.title}>Laporan Profitabilitas</p>
                         </div>
-                        <div className='col-1 ps-5'>
-                            <TiExport className='fs-4' />
-                        </div>
-                        <div className='col-1 pe-5'>
-                            <AiFillPrinter className='fs-4' />
+                        <div className={`${global.cursor_pointer} ms-auto pe-5`}>
+                            <CSVLink data={getDataExport} filename={`Laporan Profitabilitas ${getValueTanggalAwal} - ${getValueTanggalAkhir}`}>
+                                <TiExport className='fs-4' />
+                            </CSVLink>
                         </div>
                     </div>
-                    <div className={global.card}>
+                    <div id='content' className={global.card}>
                         <div className={`table-responsive`}>
                             <table id='table-data' className={`table w-100`}>
                                 <thead className="align-middle text-center text-nowrap">
