@@ -167,8 +167,6 @@ export default function Pengembalian_dana() {
         ShowLoading();
 
         const formData = new FormData();
-
-        let file = document.getElementById('input-file-transfer').files[0];
         
         if (getValueSelectedAkun?.value === '1102') {
             let file = document.getElementById('input-file-transfer').files[0];

@@ -150,8 +150,6 @@ export default function Uang_muka_pesanan() {
 
         const formData = new FormData();
 
-        let file = document.getElementById('input-file-transfer').files[0];
-
         if (getValueKodeAkun?.value === '1102') {
             let file = document.getElementById('input-file-transfer').files[0];
 
