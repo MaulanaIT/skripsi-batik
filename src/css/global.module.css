@@ -90,6 +90,10 @@
     margin-bottom: 6px;
 }
 
+.cursor_pointer {
+    cursor: pointer;
+}
+
 .input_group {
     display: flex;
     flex-direction: column;

@@ -5,6 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
+import { CSVLink } from 'react-csv';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
@@ -52,6 +53,8 @@ const CustomSelect = {
 }
 
 export default function Lap_hpp() {
+
+    const [getDataExport, setDataExport] = useState([]);
 
     const [getDataSelectProduksi, setDataSelectProduksi] = useState([]);
 
@@ -191,11 +194,10 @@ export default function Lap_hpp() {
                         <div className='col-10'>
                             <p className={global.title}></p>
                         </div>
-                        <div className='col-1 ps-5'>
-                            <TiExport className='fs-4' />
-                        </div>
-                        <div className='col-1 pe-5'>
-                            <AiFillPrinter className='fs-4' />
+                        <div className={`${global.cursor_pointer} ms-auto pe-5`}>
+                            <CSVLink data={getDataExport} filename={`Laporan Profitabilitas ${getValueTanggalPesan}`}>
+                                <TiExport className='fs-4' />
+                            </CSVLink>
                         </div>
                     </div>
                     <div className={global.card}>

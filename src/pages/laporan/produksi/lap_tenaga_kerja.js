@@ -5,6 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
+import { CSVLink } from 'react-csv';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
@@ -16,6 +17,9 @@ import global from '../../../css/global.module.css';
 import style from '../../../css/laporan/kas/penerimaan_kas.module.css';
 
 export default function Lap_tenaga_kerja() {
+
+    const [getDataExport, setDataExport] = useState([]);
+
     const [getHTMLTableDaftarTenagaKerja, setHTMLTableDaftarTenagaKerja] = useStateWithCallbackLazy([]);
 
     const [getValueTanggalAwal, setValueTanggalAwal] = useState(moment().format('YYYY-MM-DD'));
@@ -47,6 +51,16 @@ export default function Lap_tenaga_kerja() {
             let data = response.data.data;
 
             let htmlTableDaftarTenagaKerja = [];
+            let dataExport = [];
+
+            dataExport.push([
+                'Nama',
+                'Departemen',
+                'Kuantitas',
+                'Nama Produk',
+                'Upah',
+                'Total Biaya'
+            ]);
 
             let totalBiaya = 0;
 
@@ -63,12 +77,22 @@ export default function Lap_tenaga_kerja() {
                         </tr>
                     );
 
+                    dataExport.push([
+                        item.nama,
+                        item.departemen,
+                        SetNumberFormat(item.kuantitas),
+                        item.nama_produk,
+                        SetPriceFormat(item.upah),
+                        SetPriceFormat(item.total_biaya)
+                    ]);
+
                     totalBiaya += +item.total_biaya;
                 });
             }
 
             $(`#table-data`).DataTable().destroy();
 
+            setDataExport(dataExport);
             setValueDetailTanggalAkhir(getValueTanggalAkhir);
             setValueDetailTanggalAwal(getValueTanggalAwal);
             setValueTotalBiaya(totalBiaya);
@@ -124,11 +148,10 @@ export default function Lap_tenaga_kerja() {
                         <div className='col-10'>
                             <p className={global.title}></p>
                         </div>
-                        <div className='col-1 ps-5'>
-                            <TiExport className='fs-4' />
-                        </div>
-                        <div className='col-1 pe-5'>
-                            <AiFillPrinter className='fs-4' />
+                        <div className={`${global.cursor_pointer} ms-auto pe-5`}>
+                            <CSVLink data={getDataExport} filename={`Laporan Tenaga Kerja ${getValueTanggalAwal} - ${getValueTanggalAkhir}`}>
+                                <TiExport className='fs-4' />
+                            </CSVLink>
                         </div>
                     </div>
                     <div className={global.card}>

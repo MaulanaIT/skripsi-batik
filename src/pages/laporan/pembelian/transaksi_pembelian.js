@@ -5,6 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
+import { CSVLink } from 'react-csv';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
@@ -52,6 +53,8 @@ const CustomSelect = {
 
 export default function Transaksi_pembelian() {
 
+    const [getDataExport, setDataExport] = useState([]);
+
     const [getHTMLTableDaftarLaporan, setHTMLTableDaftarLaporan] = useStateWithCallbackLazy([]);
 
     const [getValueJenis, setValueJenis] = useState([]);
@@ -75,6 +78,21 @@ export default function Transaksi_pembelian() {
             let data = response.data.data;
 
             let htmlTableDaftarLaporan = [];
+            let dataExport = [];
+
+            dataExport.push([
+                'Kode Kas Keluar',
+                'Kode Order',
+                'Tanggal',
+                'Jenis Pembelian',
+                'Kode Supplier',
+                'Nama Supplier',
+                'Kode Item',
+                'Nama Item',
+                'Jumlah',
+                'Harga',
+                'Total Harga'
+            ]);
 
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
@@ -95,11 +113,26 @@ export default function Transaksi_pembelian() {
                             {/* <td></td> */}
                         </tr>
                     );
+
+                    dataExport.push([
+                        item.kode_kas_keluar,
+                        item.kode_order,
+                        item.tanggal,
+                        item.jenis_pembelian,
+                        item.kode_supplier,
+                        item.nama_supplier,
+                        item.kode_item,
+                        item.nama_item,
+                        SetNumberFormat(item.jumlah),
+                        SetPriceFormat(item.harga),
+                        SetPriceFormat(item.total_harga)
+                    ]);
                 });
             }
 
             $('#table-data').DataTable().destroy();
 
+            setDataExport(dataExport);
             setHTMLTableDaftarLaporan(htmlTableDaftarLaporan, () => {
                 $('#table-data').DataTable();
             });
@@ -157,11 +190,10 @@ export default function Transaksi_pembelian() {
                         <div className='col-10'>
                             <p className={global.title}>Daftar Pembelian</p>
                         </div>
-                        <div className='col-1 ps-5'>
-                            <TiExport className='fs-4' />
-                        </div>
-                        <div className='col-1 pe-5'>
-                            <AiFillPrinter className='fs-4' />
+                        <div className={`${global.cursor_pointer} ms-auto pe-5`}>
+                            <CSVLink data={getDataExport} filename={`Laporan Transaksi Pembelian ${getValueTanggalAwal} - ${getValueTanggalAkhir}`}>
+                                <TiExport className='fs-4' />
+                            </CSVLink>
                         </div>
                     </div>
                     <div className={global.card}>
