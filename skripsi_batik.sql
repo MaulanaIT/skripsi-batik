@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2022 at 03:07 AM
+-- Generation Time: Aug 04, 2022 at 03:11 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -45,8 +45,8 @@ CREATE TABLE `detail_order_pembelian` (
 --
 
 INSERT INTO `detail_order_pembelian` (`id`, `kode`, `kode_item`, `nama_item`, `jumlah`, `harga`, `total_harga`, `total_kapasitas`, `created_at`, `updated_at`) VALUES
-(1, 'O0001', 'BB0001', 'Botol', 5, '5000.00', '25000.00', 0, '2022-07-31 00:57:01', '2022-07-31 00:57:01'),
-(2, 'O0002', 'ALAT0001', 'Sendok', 5, '10000.00', '50000.00', 6, '2022-07-31 00:57:12', '2022-07-31 01:00:09');
+(1, 'O0001', 'BB0001', 'Kain Tari Kupu', 5, '5000.00', '25000.00', 0, '2022-08-03 10:31:24', '2022-08-03 10:31:24'),
+(2, 'O0002', 'BP0007', 'Tawas', 5, '5000.00', '25000.00', 0, '2022-08-04 11:39:12', '2022-08-04 11:39:12');
 
 -- --------------------------------------------------------
 
@@ -184,8 +184,7 @@ CREATE TABLE `detail_pengeluaran_kas` (
 --
 
 INSERT INTO `detail_pengeluaran_kas` (`id`, `kode`, `kode_item`, `nama_item`, `jumlah`, `harga`, `total_harga`, `created_at`, `updated_at`) VALUES
-(1, 'KK0001', 'BB0001', 'Botol', 5, 5000, 25000, '2022-07-31 00:59:19', '2022-07-31 00:59:19'),
-(2, 'KK0002', 'ALAT0001', 'Sendok', 5, 10000, 50000, '2022-07-31 01:00:51', '2022-07-31 01:00:51');
+(1, 'KK0001', 'BB0001', 'Kain Tari Kupu', 5, 5000, 25000, '2022-08-03 10:32:20', '2022-08-03 10:32:20');
 
 -- --------------------------------------------------------
 
@@ -212,16 +211,9 @@ CREATE TABLE `detail_penjualan` (
 --
 
 INSERT INTO `detail_penjualan` (`id`, `kode`, `kode_item`, `nama_item`, `jumlah`, `harga`, `total_harga`, `hpp`, `total_hpp`, `created_at`, `updated_at`) VALUES
-(1, 'JT0001', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '10000.00', '50000.00', '2022-07-31 01:41:19', '2022-07-31 01:41:19'),
-(2, 'JT0002', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '10000.00', '50000.00', '2022-07-31 01:42:54', '2022-07-31 01:42:54'),
-(3, 'JK0001', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '10000.00', '50000.00', '2022-07-31 01:43:05', '2022-07-31 01:43:05'),
-(4, 'JT0003', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '10000.00', '50000.00', '2022-07-31 10:09:12', '2022-07-31 10:09:12'),
-(5, 'JT0004', 'PROD0001', 'Produk 1', 10, '0.00', '0.00', '10000.00', '100000.00', '2022-07-31 10:10:04', '2022-07-31 10:10:04'),
-(6, 'JT0005', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '10000.00', '50000.00', '2022-07-31 10:10:48', '2022-07-31 10:10:48'),
-(7, 'JK0002', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '10000.00', '50000.00', '2022-07-31 10:12:56', '2022-07-31 10:12:56'),
-(8, 'JT0006', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '10000.00', '50000.00', '2022-07-31 11:14:22', '2022-07-31 11:14:22'),
-(9, 'JT0007', 'PROD0001', 'Produk 1', 5, '0.00', '0.00', '63161.47', '315807.35', '2022-08-01 13:50:55', '2022-08-01 13:50:55'),
-(10, 'JT0008', 'PROD0001', 'Kain Batik Mangrove Api-api Sintetis 1 Warna', 5, '0.00', '0.00', '0.00', '0.00', '2022-08-01 15:46:28', '2022-08-01 15:46:28');
+(1, 'JT0001', 'PROD0001', 'Kain Batik Mangrove Api-api Sintetis 1 Warna', 5, '0.00', '0.00', '0.00', '0.00', '2022-08-04 11:41:08', '2022-08-04 11:41:08'),
+(2, 'JT0002', 'PROD0001', 'Kain Batik Mangrove Api-api Sintetis 1 Warna', 5, '0.00', '0.00', '0.00', '0.00', '2022-08-04 11:59:11', '2022-08-04 11:59:11'),
+(3, 'JK0001', 'PROD0002', 'Batik Bumi Wijayakusuma Kombinasi 2 Warna Sintetis', 5, '160000.00', '800000.00', '0.00', '0.00', '2022-08-04 12:00:55', '2022-08-04 12:00:55');
 
 -- --------------------------------------------------------
 
@@ -289,13 +281,6 @@ CREATE TABLE `detail_retur` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `detail_retur`
---
-
-INSERT INTO `detail_retur` (`id`, `kode`, `kode_item`, `nama_item`, `jumlah`, `harga`, `total_harga`, `total_kapasitas`, `created_at`, `updated_at`) VALUES
-(1, 'RET0001', 'ALAT0001', 'Sendok', 5, '10000.00', '50000.00', 5, '2022-07-31 01:21:23', '2022-07-31 01:21:23');
 
 -- --------------------------------------------------------
 
@@ -439,8 +424,8 @@ CREATE TABLE `estimasi_pesanan` (
 --
 
 INSERT INTO `estimasi_pesanan` (`id`, `kode`, `nama`, `tanggal`, `kode_customer`, `jenis_produk`, `jumlah`, `deskripsi`, `hpp`, `profit`, `harga_jual`, `status`, `notifikasi`, `created_at`, `updated_at`) VALUES
-(1, 'PESAN0001', 'Pesanan 1', '2022-07-31', 'CUS0001', 'Kain', 10, '', '25000.00', '10.00', '275000.00', 1, 0, '2022-07-31 01:54:08', '2022-07-31 02:02:54'),
-(2, 'PESAN0002', 'Pesanan 1', '2022-07-31', 'CUS0001', 'Kain', 5, '', '143965.60', '20.00', '172758.72', 0, 0, '2022-07-31 02:19:23', '2022-07-31 02:19:23');
+(1, 'PESAN0001', 'Pesanan 1', '2022-08-04', 'CUS0003', 'Kain', 5, 'Deskripsi', '92069.45', '20.00', '110483.34', 0, 0, '2022-08-04 11:44:44', '2022-08-04 11:44:44'),
+(2, 'PESAN0002', 'Pesanan 1', '2022-08-04', 'CUS0003', 'Kain', 4, '', '0.00', '0.00', '0.00', 0, 0, '2022-08-04 12:53:46', '2022-08-04 12:53:46');
 
 -- --------------------------------------------------------
 
@@ -473,7 +458,8 @@ CREATE TABLE `hpp` (
 --
 
 INSERT INTO `hpp` (`id`, `kode`, `kode_produk`, `kode_pesanan`, `kode_customer`, `kode_produksi`, `kode_permintaan`, `tanggal_mulai`, `tanggal_selesai`, `biaya_bahan_baku`, `biaya_tenaga_kerja`, `biaya_overhead_pabrik`, `hpp`, `jumlah`, `harga_jual`, `created_at`, `updated_at`) VALUES
-(1, 'HPP0001', 'PROD0001', '', '', 'PS0001', 'PPS0001', '2022-07-31', '2022-08-06', '35991.40', '200002.00', '1029000.00', '1264993.40', 6, '0.00', '2022-07-31 10:32:29', '2022-07-31 10:53:45');
+(1, 'HPP0001', 'PROD0001', '', '', 'PS0001', 'PPS0001', '2022-08-03', '2022-08-08', '0.00', '15000.00', '0.00', '15000.00', 5, '0.00', '2022-08-03 11:06:36', '2022-08-03 11:06:36'),
+(2, 'HPP0002', 'PROD0001', '', '', 'PS0002', 'PPS0001', '2022-08-03', '2022-08-09', '0.00', '150000.00', '0.00', '150000.00', 5, '0.00', '2022-08-03 11:11:33', '2022-08-03 11:11:50');
 
 -- --------------------------------------------------------
 
@@ -496,14 +482,6 @@ CREATE TABLE `hpp_detail_alat` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `hpp_detail_alat`
---
-
-INSERT INTO `hpp_detail_alat` (`id`, `kode`, `kode_hpp`, `kode_produksi`, `kode_permintaan`, `kode_alat`, `tanggal`, `harga`, `jumlah`, `total_harga`, `created_at`, `updated_at`) VALUES
-(1, 'BOPAlat0001', 'HPP0001', 'PS0001', 'PPS0001', 'ALAT0002', '2022-07-31', '1000.00', 7, '7000.00', '2022-07-31 10:32:29', '2022-07-31 10:32:29'),
-(3, 'BOPAlat0001', 'HPP0001', 'PS0001', 'PPS0001', 'ALAT0001', '2022-07-31', '167000.00', 6, '1002000.00', '2022-07-31 10:53:45', '2022-07-31 10:53:45');
-
 -- --------------------------------------------------------
 
 --
@@ -525,13 +503,6 @@ CREATE TABLE `hpp_detail_bahan_baku` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `hpp_detail_bahan_baku`
---
-
-INSERT INTO `hpp_detail_bahan_baku` (`id`, `kode`, `kode_hpp`, `kode_produksi`, `kode_permintaan`, `kode_bahan_baku`, `tanggal`, `harga`, `jumlah`, `total_harga`, `created_at`, `updated_at`) VALUES
-(1, 'BBB0001', 'HPP0001', 'PS0001', 'PPS0001', 'BB0001', '2022-07-31', '7198.28', 5, '35991.40', '2022-07-31 10:32:29', '2022-07-31 10:32:29');
-
 -- --------------------------------------------------------
 
 --
@@ -552,13 +523,6 @@ CREATE TABLE `hpp_detail_penolong` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `hpp_detail_penolong`
---
-
-INSERT INTO `hpp_detail_penolong` (`id`, `kode`, `kode_hpp`, `kode_produksi`, `kode_permintaan`, `kode_penolong`, `tanggal`, `harga`, `jumlah`, `total_harga`, `created_at`, `updated_at`) VALUES
-(1, 'BBP0001', 'HPP0001', 'PS0001', 'PPS0001', 'BP0001', '2022-07-31', '5000.00', 4, '20000.00', '2022-07-31 10:32:29', '2022-07-31 10:32:29');
 
 -- --------------------------------------------------------
 
@@ -586,7 +550,8 @@ CREATE TABLE `hpp_detail_tenaga_kerja` (
 --
 
 INSERT INTO `hpp_detail_tenaga_kerja` (`id`, `kode`, `kode_hpp`, `kode_produksi`, `kode_tenaga_kerja`, `departemen`, `tanggal`, `harga`, `jumlah`, `total_harga`, `created_at`, `updated_at`) VALUES
-(1, 'BTKL0001', 'HPP0001', 'PS0001', 'TK0001', '', '2022-07-31', '100001.00', 2, '200002.00', '2022-07-31 10:32:29', '2022-07-31 10:32:29');
+(1, 'BTKL0001', 'HPP0001', 'PS0001', 'TK0005', '', '2022-08-03', '3000.00', 5, '15000.00', '2022-08-03 11:06:36', '2022-08-03 11:06:36'),
+(2, 'BTKL0002', 'HPP0002', 'PS0002', 'TK0003', 'Super Admin', '2022-08-03', '30000.00', 5, '150000.00', '2022-08-03 11:11:50', '2022-08-03 11:11:50');
 
 -- --------------------------------------------------------
 
@@ -684,17 +649,17 @@ CREATE TABLE `master_akun` (
 --
 
 INSERT INTO `master_akun` (`id`, `kode`, `nama`, `saldo`, `jenis`, `created_at`, `updated_at`) VALUES
-(1, '1101', 'Kas di Tangan', '195500.00', 0, '2022-07-02 03:35:56', '2022-07-24 14:50:40'),
+(1, '1101', 'Kas di Tangan', '1137500.00', 0, '2022-07-02 03:35:56', '2022-08-03 10:32:20'),
 (2, '1102', 'Kas Bank', '42800.00', 0, '2022-07-02 03:36:09', '2022-07-20 02:53:29'),
-(3, '1103', 'Piutang Konsinyasi', '65000.00', 0, '2022-07-02 03:36:21', '2022-07-21 08:37:11'),
-(4, '2101', 'Uang Muka Pesanan', '0.00', 1, '2022-07-02 03:36:48', '2022-07-02 03:36:48'),
-(5, '4101', 'Penjualan', '286800.00', 1, '2022-07-02 03:40:10', '2022-07-24 14:50:40'),
-(6, '4201', 'Potongan Penjualan', '27000.00', 0, '2022-07-02 03:40:22', '2022-07-24 14:50:40'),
-(7, '4202', 'Beban Angkut Penjualan', '24000.00', 0, '2022-07-02 03:40:32', '2022-07-24 14:50:40'),
+(3, '1103', 'Piutang Konsinyasi', '845000.00', 0, '2022-07-02 03:36:21', '2022-08-04 12:00:55'),
+(4, '2101', 'Uang Muka Pesanan', '1000000.00', 1, '2022-07-02 03:36:48', '2022-08-02 23:25:28'),
+(5, '4101', 'Penjualan', '2086800.00', 1, '2022-07-02 03:40:10', '2022-08-04 12:00:55'),
+(6, '4201', 'Potongan Penjualan', '547000.00', 0, '2022-07-02 03:40:22', '2022-08-04 12:00:55'),
+(7, '4202', 'Beban Angkut Penjualan', '124000.00', 0, '2022-07-02 03:40:32', '2022-08-02 23:25:28'),
 (8, '5101', 'HPP', '0.00', 0, '2022-07-02 03:40:42', '2022-07-02 03:40:42'),
-(9, '5201', 'Potongan Pembelian', '0.00', 1, '2022-07-02 03:40:51', '2022-07-02 03:40:51'),
+(9, '5201', 'Potongan Pembelian', '10000.00', 1, '2022-07-02 03:40:51', '2022-08-03 10:32:20'),
 (10, '5202', 'Retur Pembelian', '0.00', 1, '2022-07-02 03:41:06', '2022-07-02 03:41:06'),
-(11, '5203', 'Beban Angkut Pembelian', '0.00', 0, '2022-07-02 03:41:15', '2022-07-02 03:41:15');
+(11, '5203', 'Beban Angkut Pembelian', '18000.00', 0, '2022-07-02 03:41:15', '2022-08-03 10:32:20');
 
 -- --------------------------------------------------------
 
@@ -816,7 +781,7 @@ CREATE TABLE `master_inventory_bahanbaku` (
 --
 
 INSERT INTO `master_inventory_bahanbaku` (`id`, `kode`, `nama`, `satuan`, `stok_minimal`, `jumlah`, `harga`, `created_at`, `updated_at`) VALUES
-(2, 'BB0001', 'Kain Tari Kupu', 'Meter', 10, 100, '60000.00', '2022-07-26 11:25:09', '2022-07-26 11:59:20'),
+(2, 'BB0001', 'Kain Tari Kupu', 'Meter', 10, 105, '57380.95', '2022-07-26 11:25:09', '2022-08-03 10:31:49'),
 (3, 'BB0002', 'Kain Mori Sanforis', 'Meter', 10, 100, '40000.00', '2022-07-26 11:25:33', '2022-07-26 11:59:24'),
 (4, 'BB0003', 'Kain Sutra', 'Meter', 10, 100, '150000.00', '2022-07-26 11:32:40', '2022-07-26 11:59:30'),
 (5, 'BB0004', 'Malam Tulis', 'Kg', 10, 100, '40000.00', '2022-07-26 11:33:03', '2022-07-26 11:59:35'),
@@ -899,8 +864,8 @@ CREATE TABLE `master_inventory_produk` (
 --
 
 INSERT INTO `master_inventory_produk` (`id`, `kode`, `nama`, `jenis`, `warna`, `jumlah`, `stok_minimal`, `hpp_per_produk`, `harga_jual`, `created_at`, `updated_at`) VALUES
-(4, 'PROD0001', 'Kain Batik Mangrove Api-api Sintetis 1 Warna', 'Cap', 'Sintetis', 30, 5, '0.00', '0.00', '2022-07-29 07:54:42', '2022-08-01 15:46:28'),
-(5, 'PROD0002', 'Batik Bumi Wijayakusuma Kombinasi 2 Warna Sintetis', 'Kombinasi', 'Sintetis', 20, 5, '0.00', '160000.00', '2022-07-29 08:26:51', '2022-07-29 08:26:51'),
+(4, 'PROD0001', 'Kain Batik Mangrove Api-api Sintetis 1 Warna', 'Cap', 'Sintetis', 35, 5, '0.00', '0.00', '2022-07-29 07:54:42', '2022-08-04 11:59:11'),
+(5, 'PROD0002', 'Batik Bumi Wijayakusuma Kombinasi 2 Warna Sintetis', 'Kombinasi', 'Sintetis', 15, 5, '0.00', '160000.00', '2022-07-29 08:26:51', '2022-08-04 12:00:55'),
 (6, 'PROD0003', 'Kain Batik Tulis Lasem Primissima 1 Warna Alami', 'Tulis', 'Alami', 20, 5, '0.00', '500000.00', '2022-07-30 20:19:20', '2022-07-30 20:19:20'),
 (7, 'PROD0004', 'Kemeja Sekar Wijayakusuma Size S', 'Cap', 'Sintetis', 30, 5, '0.00', '160000.00', '2022-07-30 20:22:50', '2022-07-30 20:22:50'),
 (8, 'PROD0005', 'Kemeja Sekar Wijayakusuma Size M', 'Cap', 'Sintetis', 20, 5, '0.00', '160000.00', '2022-07-30 20:23:38', '2022-07-30 20:23:38'),
@@ -960,8 +925,6 @@ CREATE TABLE `master_tenagakerja` (
 --
 
 INSERT INTO `master_tenagakerja` (`id`, `kode`, `nama`, `departemen`, `telepon`, `upah`, `created_at`, `updated_at`) VALUES
-(1, 'TK0001', 'Nama', 'Designer', '234234131', '100001.00', '2022-07-23 05:37:51', '2022-07-25 15:47:38'),
-(2, 'TK0002', 'Nama Cap', 'Cap/Canting', '123123', '1000.00', '2022-07-25 08:18:48', '2022-07-25 15:47:43'),
 (3, 'TK0003', 'Ali', 'Designer', '0853674893', '30000.00', '2022-07-26 11:48:50', '2022-07-26 11:48:50'),
 (4, 'TK0004', 'Putri', 'Cap/Canting', '0856749830', '60000.00', '2022-07-26 11:49:22', '2022-07-26 11:49:22'),
 (5, 'TK0005', 'Sinta', 'Designer', '8983743', '3000.00', '2022-07-26 11:50:53', '2022-07-30 20:05:31'),
@@ -1022,8 +985,8 @@ CREATE TABLE `order_pembelian` (
 --
 
 INSERT INTO `order_pembelian` (`id`, `kode`, `jenis_pembelian`, `tanggal`, `kode_supplier`, `total_harga`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'O0001', 'bahan', '2022-07-31', 'SUP0001', '25000.00', 3, '2022-07-31 00:57:01', '2022-07-31 00:58:16'),
-(2, 'O0002', 'alat', '2022-07-31', 'SUP0001', '50000.00', 3, '2022-07-31 00:57:12', '2022-07-31 01:00:28');
+(1, 'O0001', 'bahan', '2022-08-03', 'SUP0001', '25000.00', 3, '2022-08-03 10:31:24', '2022-08-03 10:31:49'),
+(2, 'O0002', 'bahan', '2022-08-04', 'SUP0001', '25000.00', 0, '2022-08-04 11:39:12', '2022-08-04 11:39:12');
 
 -- --------------------------------------------------------
 
@@ -1069,8 +1032,7 @@ CREATE TABLE `pengeluaran_kas` (
 --
 
 INSERT INTO `pengeluaran_kas` (`id`, `kode`, `tanggal`, `kode_order`, `kode_supplier`, `diskon`, `ongkos_kirim`, `total_bayar`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'KK0001', '2022-07-31', 'O0001', 'SUP0001', '20000.00', '5000.00', '10000.00', '', '2022-07-31 00:59:19', '2022-07-31 00:59:19'),
-(2, 'KK0002', '2022-07-31', 'O0002', 'SUP0001', '40000.00', '10000.00', '20000.00', '', '2022-07-31 01:00:51', '2022-07-31 01:00:51');
+(1, 'KK0001', '2022-08-03', 'O0001', 'SUP0001', '5000.00', '8000.00', '28000.00', 'File Transfer - KK0001 - 2022-08-03.pdf', '2022-08-03 10:32:20', '2022-08-03 10:32:20');
 
 -- --------------------------------------------------------
 
@@ -1098,8 +1060,7 @@ CREATE TABLE `penjualan_konsinyasi` (
 --
 
 INSERT INTO `penjualan_konsinyasi` (`id`, `kode`, `tanggal`, `kode_consignee`, `total_jual`, `total_hpp`, `diskon`, `piutang`, `terima_piutang`, `sisa`, `created_at`, `updated_at`) VALUES
-(1, 'JK0001', '2022-07-31', 'CONS0003', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '2022-07-31 01:43:05', '2022-08-01 18:52:32'),
-(2, 'JK0002', '2022-07-31', 'CONS0003', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '2022-07-31 10:12:56', '2022-08-01 18:52:34');
+(1, 'JK0001', '2022-08-04', 'CONS0002', '800000.00', '0.00', '20000.00', '780000.00', '0.00', '780000.00', '2022-08-04 12:00:55', '2022-08-04 12:00:55');
 
 -- --------------------------------------------------------
 
@@ -1114,6 +1075,7 @@ CREATE TABLE `penjualan_pesanan` (
   `tanggal` date NOT NULL,
   `kode_customer` varchar(10) NOT NULL,
   `total_jual` decimal(10,2) NOT NULL,
+  `total_hpp` decimal(10,2) NOT NULL,
   `diskon` decimal(10,2) NOT NULL,
   `ongkos_kirim` decimal(10,2) NOT NULL,
   `total_harga` decimal(10,2) NOT NULL,
@@ -1122,14 +1084,6 @@ CREATE TABLE `penjualan_pesanan` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `penjualan_pesanan`
---
-
-INSERT INTO `penjualan_pesanan` (`id`, `kode`, `kode_pesanan`, `tanggal`, `kode_customer`, `total_jual`, `diskon`, `ongkos_kirim`, `total_harga`, `total_bayar`, `sisa`, `created_at`, `updated_at`) VALUES
-(1, 'JP0001', 'PESAN0001', '2022-07-31', 'CUS0001', '2750000.00', '200000.00', '10000.00', '2560000.00', '2000000.00', '560000.00', '2022-07-31 02:00:24', '2022-07-31 02:00:24'),
-(2, 'JP0002', 'PESAN0001', '2022-07-31', 'CUS0001', '2750000.00', '500000.00', '10000.00', '2260000.00', '2000000.00', '260000.00', '2022-07-31 02:02:01', '2022-07-31 02:02:01');
 
 -- --------------------------------------------------------
 
@@ -1158,14 +1112,8 @@ CREATE TABLE `penjualan_tunai` (
 --
 
 INSERT INTO `penjualan_tunai` (`id`, `kode`, `tanggal`, `kode_customer`, `total_jual`, `total_hpp`, `diskon`, `ongkos_kirim`, `total_harga`, `total_bayar`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'JT0001', '2022-07-31', 'CUS0001', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '2022-07-31 01:41:19', '2022-07-31 01:41:19'),
-(2, 'JT0002', '2022-07-31', 'CUS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '', '2022-07-31 01:42:54', '2022-07-31 01:42:54'),
-(3, 'JT0003', '2022-07-31', 'CUS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '', '2022-07-31 10:09:12', '2022-07-31 10:09:12'),
-(4, 'JT0004', '2022-07-31', 'CUS0002', '0.00', '100000.00', '0.00', '0.00', '0.00', '0.00', '', '2022-07-31 10:10:04', '2022-07-31 10:10:04'),
-(5, 'JT0005', '2022-07-31', 'CUS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '', '2022-07-31 10:10:48', '2022-07-31 10:10:48'),
-(6, 'JT0006', '2022-07-31', 'CUS0001', '0.00', '50000.00', '0.00', '0.00', '0.00', '0.00', '', '2022-07-31 11:14:22', '2022-07-31 11:14:22'),
-(7, 'JT0007', '2022-08-01', 'CUS0001', '0.00', '315807.35', '0.00', '0.00', '0.00', '0.00', '', '2022-08-01 13:50:55', '2022-08-01 13:50:55'),
-(8, 'JT0008', '2022-08-01', 'CUS0003', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '2022-08-01 15:46:28', '2022-08-01 15:46:28');
+(1, 'JT0001', '2022-08-04', 'CUS0003', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '2022-08-04 11:41:08', '2022-08-04 11:41:08'),
+(2, 'JT0002', '2022-08-04', 'CUS0003', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '2022-08-04 11:59:11', '2022-08-04 11:59:11');
 
 -- --------------------------------------------------------
 
@@ -1204,7 +1152,25 @@ CREATE TABLE `permintaan_stok` (
 --
 
 INSERT INTO `permintaan_stok` (`id`, `kode`, `kode_produk`, `jumlah`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'PPS0001', 'PROD0001', 6, 1, '2022-07-31 10:14:47', '2022-07-31 10:14:48');
+(1, 'PPS0001', 'PROD0001', 5, 1, '2022-08-03 10:55:20', '2022-08-03 10:59:03'),
+(2, 'PPS0002', 'PROD0002', 10, 1, '2022-08-03 10:56:06', '2022-08-03 10:56:07'),
+(3, 'PPS0003', 'PROD0001', 10, 1, '2022-08-03 10:59:02', '2022-08-03 10:59:05'),
+(4, 'PPS0003', 'PROD0001', 4, 1, '2022-08-03 11:02:45', '2022-08-03 11:02:52'),
+(5, 'PPS0003', 'PROD0001', 8, 1, '2022-08-03 11:02:48', '2022-08-03 11:02:52'),
+(6, 'PPS0003', 'PROD0001', 10, 1, '2022-08-03 11:02:51', '2022-08-03 11:02:52'),
+(7, 'PPS0003', 'PROD0001', 5, 1, '2022-08-03 11:03:35', '2022-08-03 11:04:13'),
+(8, 'PPS0003', 'PROD0001', 8, 1, '2022-08-03 11:03:38', '2022-08-03 11:04:13'),
+(9, 'PPS0003', 'PROD0001', 0, 1, '2022-08-03 11:03:54', '2022-08-03 11:04:13'),
+(10, 'PPS0004', 'PROD0001', 4, 1, '2022-08-03 11:04:02', '2022-08-03 11:04:14'),
+(11, 'PPS0005', 'PROD0001', 7, 0, '2022-08-03 11:04:06', '2022-08-03 11:04:06'),
+(12, 'PPS0006', 'PROD0001', 8, 0, '2022-08-03 11:04:08', '2022-08-03 11:04:08'),
+(13, 'PPS0007', 'PROD0001', 5, 0, '2022-08-03 11:04:10', '2022-08-03 11:04:10'),
+(14, 'PPS0008', 'PROD0001', 2, 0, '2022-08-03 11:04:39', '2022-08-03 11:04:39'),
+(15, 'PPS0009', 'PROD0001', 7, 0, '2022-08-03 11:04:42', '2022-08-03 11:04:42'),
+(16, 'PPS0010', 'PROD0001', 0, 0, '2022-08-03 11:04:45', '2022-08-03 11:04:45'),
+(17, 'PPS0011', 'PROD0001', 5, 0, '2022-08-03 11:17:32', '2022-08-03 11:17:32'),
+(18, 'PPS0012', 'PROD0001', 3, 0, '2022-08-03 11:17:35', '2022-08-03 11:17:35'),
+(19, 'PPS0013', 'PROD0001', 5, 0, '2022-08-03 11:18:21', '2022-08-03 11:18:21');
 
 -- --------------------------------------------------------
 
@@ -1272,7 +1238,9 @@ CREATE TABLE `produksi_stok` (
 --
 
 INSERT INTO `produksi_stok` (`id`, `kode`, `kode_permintaan`, `kode_produk`, `tanggal`, `jumlah`, `lama`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'PS0001', 'PPS0001', 'PROD0001', '2022-07-31', 6, 6, 0, '2022-07-31 10:15:04', '2022-08-02 00:36:44');
+(1, 'PS0001', 'PPS0001', 'PROD0001', '2022-08-03', 5, 5, 1, '2022-08-03 11:06:11', '2022-08-03 11:06:38'),
+(2, 'PS0002', 'PPS0001', 'PROD0001', '2022-08-03', 5, 6, 0, '2022-08-03 11:08:53', '2022-08-03 11:11:33'),
+(3, 'PS0003', 'PPS0001', 'PROD0001', '2022-08-03', 5, 6, 1, '2022-08-03 11:11:07', '2022-08-03 11:12:00');
 
 -- --------------------------------------------------------
 
@@ -1290,13 +1258,6 @@ CREATE TABLE `refund` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `refund`
---
-
-INSERT INTO `refund` (`id`, `kode`, `kode_retur`, `tanggal`, `jumlah_terima`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'REF0001', 'RET0001', '2022-07-31', '50000.00', '', '2022-07-31 01:23:53', '2022-07-31 01:23:53');
 
 -- --------------------------------------------------------
 
@@ -1316,13 +1277,6 @@ CREATE TABLE `retur_pembelian` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `retur_pembelian`
---
-
-INSERT INTO `retur_pembelian` (`id`, `kode`, `kode_kas_keluar`, `tanggal`, `kode_supplier`, `total_harga`, `status`, `nota`, `created_at`, `updated_at`) VALUES
-(1, 'RET0001', 'KK0002', '2022-07-31', 'SUP0001', '50000.00', 3, '', '2022-07-31 01:21:23', '2022-07-31 01:23:53');
 
 -- --------------------------------------------------------
 
@@ -1350,8 +1304,7 @@ CREATE TABLE `terima_barang` (
 --
 
 INSERT INTO `terima_barang` (`id`, `kode`, `kode_order`, `jenis_pembelian`, `tanggal`, `kode_supplier`, `total_barang`, `total_kapasitas`, `status`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'TB0001', 'O0001', 'bahan', '2022-07-31', 'SUP0001', 5, 0, 1, '', '2022-07-31 00:58:16', '2022-07-31 00:59:19'),
-(2, 'TB0002', 'O0002', 'alat', '2022-07-31', 'SUP0001', 5, 0, 1, '', '2022-07-31 01:00:28', '2022-07-31 01:00:51');
+(1, 'TB0001', 'O0001', 'bahan', '2022-08-03', 'SUP0001', 5, 0, 1, 'File Nota Pembelian - TB0001 - 2022-08-03.pdf', '2022-08-03 10:31:49', '2022-08-03 10:32:20');
 
 -- --------------------------------------------------------
 
@@ -1410,13 +1363,6 @@ CREATE TABLE `uang_muka_pesanan` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `uang_muka_pesanan`
---
-
-INSERT INTO `uang_muka_pesanan` (`id`, `kode`, `tanggal`, `kode_customer`, `total_hpp`, `total_jual`, `uang_muka`, `sisa`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'PESAN0001', '2022-07-31', 'CUS0001', '250000.00', '2260000.00', '2000000.00', '260000.00', '', '2022-07-31 02:02:01', '2022-07-31 02:02:01');
 
 --
 -- Indexes for dumped tables
@@ -1831,13 +1777,13 @@ ALTER TABLE `detail_pembelian_bahanpenolong`
 -- AUTO_INCREMENT for table `detail_pengeluaran_kas`
 --
 ALTER TABLE `detail_pengeluaran_kas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `detail_penjualan_konsinyasi`
@@ -1861,7 +1807,7 @@ ALTER TABLE `detail_penjualan_tunai`
 -- AUTO_INCREMENT for table `detail_retur`
 --
 ALTER TABLE `detail_retur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `detail_retur_alat`
@@ -1915,25 +1861,25 @@ ALTER TABLE `estimasi_pesanan`
 -- AUTO_INCREMENT for table `hpp`
 --
 ALTER TABLE `hpp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `hpp_detail_alat`
 --
 ALTER TABLE `hpp_detail_alat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `hpp_detail_bahan_baku`
 --
 ALTER TABLE `hpp_detail_bahan_baku`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `hpp_detail_penolong`
 --
 ALTER TABLE `hpp_detail_penolong`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `hpp_detail_tenaga_kerja`
@@ -2041,25 +1987,25 @@ ALTER TABLE `pembelian`
 -- AUTO_INCREMENT for table `pengeluaran_kas`
 --
 ALTER TABLE `pengeluaran_kas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `penjualan_konsinyasi`
 --
 ALTER TABLE `penjualan_konsinyasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `penjualan_pesanan`
 --
 ALTER TABLE `penjualan_pesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `penjualan_tunai`
 --
 ALTER TABLE `penjualan_tunai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `permintaan_pesanan`
@@ -2071,7 +2017,7 @@ ALTER TABLE `permintaan_pesanan`
 -- AUTO_INCREMENT for table `permintaan_stok`
 --
 ALTER TABLE `permintaan_stok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `produksi`
@@ -2089,25 +2035,25 @@ ALTER TABLE `produksi_pesanan`
 -- AUTO_INCREMENT for table `produksi_stok`
 --
 ALTER TABLE `produksi_stok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `refund`
 --
 ALTER TABLE `refund`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `retur_pembelian`
 --
 ALTER TABLE `retur_pembelian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `terima_barang`
 --
 ALTER TABLE `terima_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `terima_piutang`
@@ -2125,7 +2071,7 @@ ALTER TABLE `token`
 -- AUTO_INCREMENT for table `uang_muka_pesanan`
 --
 ALTER TABLE `uang_muka_pesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
