@@ -164,6 +164,7 @@ export default function Jual_pesan() {
         formData.append('ongkos_kirim', getValueOngkosKirim);
         formData.append('diskon', getValueDiskon);
         formData.append('total_hpp', getValueTotalHpp);
+        formData.append('total_jual', getValueTotalJual);
         formData.append('sisa', getValueSisa);
         formData.append('jenis_penjualan', 'pesanan');
 
