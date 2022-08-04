@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaClipboardList, FaTrash } from 'react-icons/fa';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetNumberFormat, ShowLoading } from '../../../component/helper';
 
 import DetailRetur from './detail_retur';
 
@@ -70,7 +70,7 @@ export class daftar_retur extends Component {
                                 <div id={`data-nama-supplier-${item.id}`} className={`data-${item.id}`}>{item.nama_supplier}</div>
                             </td>
                             <td>
-                                <div id={`data-jumlah-retur-${item.id}`} className={`data-${item.id} text-center`}>{item.jumlah_retur}</div>
+                                <div id={`data-jumlah-retur-${item.id}`} className={`data-${item.id} text-center`}>{SetNumberFormat(item.jumlah_retur)}</div>
                             </td>
                             <td>
                                 <div id={`data-status-${item.id}`} className={`data-${item.id} text-center`}>{item.status === '0' ? 'Menunggu' :

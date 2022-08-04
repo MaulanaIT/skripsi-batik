@@ -7,7 +7,7 @@ import moment from 'moment';
 import Select from 'react-select';
 import { MdAdd } from 'react-icons/md'
 import { FaTrash } from 'react-icons/fa';
-import { baseURL, Calculate, CheckInputValidity, config, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { baseURL, Calculate, CheckInputValidity, config, GenerateCode, HideLoading, InputFormatNumber, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
@@ -1571,21 +1571,21 @@ export class transaksi_penjualan extends Component {
                                                 </div>
                                                 <div className={`${global.input_group} col-4 px-2`}>
                                                     <p className={global.title}>Harga <span className={global.important}>*</span></p>
-                                                    <input type="text" id='valueHarga' className='text-end' value={valueHarga} required={true} readOnly={true} />
+                                                    <input type="text" id='valueHarga' className='text-end' value={SetPriceFormat(valueHarga)} required={true} readOnly={true} />
                                                 </div>
                                                 <div className={`${global.input_group} col-4 ps-2`}>
                                                     <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
-                                                    <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga)} required={true} readOnly={true} />
+                                                    <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga))} required={true} readOnly={true} />
                                                 </div>
                                             </div>
                                             <div className={`${bootstrap['d-flex']}`}>
                                                 <div className={`${global.input_group} col-4 pe-2`}>
                                                     <p className={global.title}>Harga Pokok Penjualan</p>
-                                                    <input type="text" id='valueHarga' className='text-end' value={valueHpp} readOnly={true} />
+                                                    <input type="text" id='valueHarga' className='text-end' value={SetPriceFormat(valueHpp)} readOnly={true} />
                                                 </div>
                                                 <div className={`${global.input_group} col-4 px-2`}>
                                                     <p className={global.title}>Total HPP</p>
-                                                    <input type="text" id='valueTotalHarga' className='text-end' value={valueTotalHpp} readOnly={true} />
+                                                    <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(valueTotalHpp)} readOnly={true} />
                                                 </div>
                                             </div>
                                             <button type='button' className={global.button} onClick={this.AddDetail}><MdAdd /> Tambah</button>
@@ -1638,7 +1638,7 @@ export class transaksi_penjualan extends Component {
                                                     </div>
                                                     <div className={`${global.input_group} col-4 px-2`}>
                                                         <p className={global.title}>HPP <span className={global.important}>*</span></p>
-                                                        <input type="text" id='valueHpp' value={valueHpp} required={true} readOnly={true} />
+                                                        <input type="text" id='valueHpp' value={SetPriceFormat(valueHpp)} required={true} readOnly={true} />
                                                     </div>
                                                     <div className={`${global.input_group} col-4 ps-2`}>
                                                         <p className={global.title}>Profit (%) <span className={global.important}>*</span></p>
@@ -1650,7 +1650,7 @@ export class transaksi_penjualan extends Component {
                                                 </div>
                                                 <div className={`${global.input_group}`}>
                                                     <p className={global.title}>Harga Jual <span className={global.important}>*</span></p>
-                                                    <input type="text" id='valueHargaJual' value={valueHargaJual} required={true} readOnly={true} />
+                                                    <input type="text" id='valueHargaJual' value={SetPriceFormat(valueHargaJual)} required={true} readOnly={true} />
                                                 </div>
                                                 <div className='d-flex'>
                                                     <div className='col-6 pe-2'>
@@ -1703,21 +1703,21 @@ export class transaksi_penjualan extends Component {
                                                     </div>
                                                     <div className={`${global.input_group} col-4 px-2`}>
                                                         <p className={global.title}>Harga <span className={global.important}>*</span></p>
-                                                        <input type="text" id='valueHarga' className='text-end' value={valueHarga} required={true} readOnly={true} />
+                                                        <input type="text" id='valueHarga' className='text-end' value={SetPriceFormat(valueHarga)} required={true} readOnly={true} />
                                                     </div>
                                                     <div className={`${global.input_group} col-4 ps-2`}>
                                                         <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
-                                                        <input type="text" id='valueTotalHarga' className='text-end' value={parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga)} required={true} readOnly={true} />
+                                                        <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga))} required={true} readOnly={true} />
                                                     </div>
                                                 </div>
                                                 <div className={`${bootstrap['d-flex']}`}>
                                                     <div className={`${global.input_group} col-4 pe-2`}>
                                                         <p className={global.title}>Harga Pokok Penjualan</p>
-                                                        <input type="text" id='valueHarga' className='text-end' value={valueHpp} readOnly={true} />
+                                                        <input type="text" id='valueHarga' className='text-end' value={SetPriceFormat(valueHpp)} readOnly={true} />
                                                     </div>
                                                     <div className={`${global.input_group} col-4 px-2`}>
                                                         <p className={global.title}>Total HPP</p>
-                                                        <input type="text" id='valueTotalHarga' className='text-end' value={valueTotalHpp} readOnly={true} />
+                                                        <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(valueTotalHpp)} readOnly={true} />
                                                     </div>
                                                 </div>
                                                 <button type='button' className={global.button} onClick={this.AddDetail}><MdAdd /> Tambah</button>
@@ -1761,7 +1761,7 @@ export class transaksi_penjualan extends Component {
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Harga</p>
-                                            <input type="text" id='valueHargaBahan' value={valueHargaBahan} readOnly={true} />
+                                            <input type="text" id='valueHargaBahan' value={SetPriceFormat(valueHargaBahan)} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Jumlah</p>
@@ -1794,7 +1794,7 @@ export class transaksi_penjualan extends Component {
                                     <div className={`d-flex flex-column gap-2 pb-2`}>
                                         <div className={`align-items-center ${global.input_group_row}`}>
                                             <p className={`${global.title} col-3`}>Total Bahan Baku</p>
-                                            <input type="text" id='valueTotalBahan' value={valueTotalBahan} readOnly={true} />
+                                            <input type="text" id='valueTotalBahan' value={SetPriceFormat(valueTotalBahan)} readOnly={true} />
                                         </div>
                                     </div>
                                 </div>
@@ -1812,7 +1812,7 @@ export class transaksi_penjualan extends Component {
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Harga</p>
-                                            <input type="text" id='valueHargaPenolong' value={valueHargaPenolong} readOnly={true} />
+                                            <input type="text" id='valueHargaPenolong' value={SetPriceFormat(valueHargaPenolong)} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Jumlah</p>
@@ -1845,7 +1845,7 @@ export class transaksi_penjualan extends Component {
                                     <div className={`d-flex flex-column gap-2 pb-2`}>
                                         <div className={`align-items-center ${global.input_group_row}`}>
                                             <p className={`${global.title} col-3`}>Total BOP Penolong</p>
-                                            <input type="text" id='valueTotalPenolong' value={valueTotalPenolong} readOnly={true} />
+                                            <input type="text" id='valueTotalPenolong' value={SetPriceFormat(valueTotalPenolong)} readOnly={true} />
                                         </div>
                                     </div>
                                 </div>
@@ -1863,7 +1863,7 @@ export class transaksi_penjualan extends Component {
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Tarif BOP</p>
-                                            <input type="text" id='valueHargaAlat' value={valueHargaAlat} readOnly={true} />
+                                            <input type="text" id='valueHargaAlat' value={SetPriceFormat(valueHargaAlat)} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Jumlah</p>
@@ -1896,7 +1896,7 @@ export class transaksi_penjualan extends Component {
                                     <div className={`d-flex flex-column gap-2 pb-2`}>
                                         <div className={`align-items-center ${global.input_group_row}`}>
                                             <p className={`${global.title} col-3`}>Total BOP Alat</p>
-                                            <input type="text" id='valueTotalAlat' value={valueTotalAlat} readOnly={true} />
+                                            <input type="text" id='valueTotalAlat' value={SetPriceFormat(valueTotalAlat)} readOnly={true} />
                                         </div>
                                     </div>
                                 </div>
@@ -1918,7 +1918,7 @@ export class transaksi_penjualan extends Component {
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Upah</p>
-                                            <input type="text" id='valueHargaBTKL' value={valueUpah} readOnly={true} />
+                                            <input type="text" id='valueHargaBTKL' value={SetPriceFormat(valueUpah)} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Jumlah</p>
@@ -1952,7 +1952,7 @@ export class transaksi_penjualan extends Component {
                                     <div className={`d-flex flex-column gap-2 pb-2`}>
                                         <div className={`align-items-center ${global.input_group_row}`}>
                                             <p className={`${global.title} col-3`}>Total BTKL</p>
-                                            <input type="text" id='valueTotalBTKL' value={valueTotalBTKL} readOnly={true} />
+                                            <input type="text" id='valueTotalBTKL' value={SetPriceFormat(valueTotalBTKL)} readOnly={true} />
                                         </div>
                                     </div>
                                 </div>
@@ -1995,11 +1995,11 @@ export class transaksi_penjualan extends Component {
                                             <div className={`d-flex flex-column gap-2 pb-2`}>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Total Jual</p>
-                                                    <input type="text" id='valueTotalJual' className={'col-4'} value={valueTotalJual} readOnly={true} />
+                                                    <input type="text" id='valueTotalJual' className={'col-4'} value={SetPriceFormat(valueTotalJual)} readOnly={true} />
                                                 </div>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Total Harga Pokok Penjualan</p>
-                                                    <input type="text" id='valueTotalJual' className={'col-4'} value={valueKalkulasiTotalHpp} readOnly={true} />
+                                                    <input type="text" id='valueTotalJual' className={'col-4'} value={SetPriceFormat(valueKalkulasiTotalHpp)} readOnly={true} />
                                                 </div>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Diskon</p>
@@ -2012,7 +2012,7 @@ export class transaksi_penjualan extends Component {
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Total Harga</p>
-                                                <input type="text" id='valueTotalHarga' className={`col-4`} value={Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim])} readOnly={true} />
+                                                <input type="text" id='valueTotalHarga' className={`col-4`} value={SetPriceFormat(Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim]))} readOnly={true} />
                                                 <div className='col-5 ps-2'>
                                                     <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={dataSelectAkun} placeholder={'Select Akun...'} value={valueKodeAkun} styles={CustomSelect} onChange={e => this.setState({ valueKodeAkun: e })} />
                                                 </div>
@@ -2023,7 +2023,7 @@ export class transaksi_penjualan extends Component {
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Kembalian</p>
-                                                <input type="text" id='valueTotalKembalian' className={`col-4`} value={Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim])} readOnly={true} />
+                                                <input type="text" id='valueTotalKembalian' className={`col-4`} value={SetPriceFormat(Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim]))} readOnly={true} />
                                             </div>
                                             {valueKodeAkun.value === '1102' &&
                                                 <div className='align-items-center d-flex justify-content-between'>
@@ -2059,11 +2059,11 @@ export class transaksi_penjualan extends Component {
                                             <div className={`d-flex flex-column gap-2 pb-2`}>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Total Jual</p>
-                                                    <input type="text" id='valueTotalJual' className={'col-6'} value={valueTotalJual} readOnly={true} />
+                                                    <input type="text" id='valueTotalJual' className={'col-6'} value={SetPriceFormat(valueTotalJual)} readOnly={true} />
                                                 </div>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Total Harga Pokok Penjualan</p>
-                                                    <input type="text" id='valueTotalJual' className={'col-6'} value={valueKalkulasiTotalHpp} readOnly={true} />
+                                                    <input type="text" id='valueTotalJual' className={'col-6'} value={SetPriceFormat(valueKalkulasiTotalHpp)} readOnly={true} />
                                                 </div>
                                                 <div className={`align-items-center ${global.input_group_row}`}>
                                                     <p className={`${global.title} col-3`}>Diskon</p>
@@ -2072,7 +2072,7 @@ export class transaksi_penjualan extends Component {
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Piutang</p>
-                                                <input type="text" id='valuePiutang' className={'col-6'} value={Calculate([valueTotalJual, -valueDiskon])} readOnly={true} />
+                                                <input type="text" id='valuePiutang' className={'col-6'} value={SetPriceFormat(Calculate([valueTotalJual, -valueDiskon]))} readOnly={true} />
                                             </div>
                                         </React.Fragment>
                                     }

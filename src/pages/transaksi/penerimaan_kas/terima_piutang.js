@@ -5,7 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import moment from 'moment';
 import Select from 'react-select';
-import { baseURL, config, cx, GenerateCode, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, cx, GenerateCode, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 // Import CSS
@@ -137,9 +137,9 @@ export default function Terima_piutang() {
                             <td>{item.tanggal}</td>
                             <td>{item.kode_consignee}</td>
                             <td>{item.nama_consignee}</td>
-                            <td>{item.piutang}</td>
-                            <td>{item.terima_piutang}</td>
-                            <td>{item.sisa}</td>
+                            <td>{SetPriceFormat(item.piutang)}</td>
+                            <td>{SetPriceFormat(item.terima_piutang)}</td>
+                            <td>{SetPriceFormat(item.sisa)}</td>
                             <td className={cx([global.table_action, 'text-nowrap'])}>
                                 <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => SelectKonsinyasi(item)}>Terima Piutang</button>
                             </td>
@@ -157,7 +157,7 @@ export default function Terima_piutang() {
                             <td>{item.tanggal}</td>
                             <td>{item.kode_consignee}</td>
                             <td>{item.nama_consignee}</td>
-                            <td>{item.jumlah_piutang}</td>
+                            <td>{SetPriceFormat(item.jumlah_piutang)}</td>
                             <td className={cx([global.table_action, 'text-nowrap'])}>
                                 <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Print</button>
                             </td>
@@ -333,7 +333,7 @@ export default function Terima_piutang() {
                             </div>
                             <div className={`${global.input_group} col-6 ps-2`}>
                                 <p className={global.title}>Sisa Piutang <span className={global.important}>*</span></p>
-                                <input type="text" id='input-sisa-piutang' name='input-sisa-piutang' value={getValueSisaPiutang} required={true} readOnly={true} />
+                                <input type="text" id='input-sisa-piutang' name='input-sisa-piutang' value={SetPriceFormat(getValueSisaPiutang)} required={true} readOnly={true} />
                             </div>
                         </div>
                         <div>

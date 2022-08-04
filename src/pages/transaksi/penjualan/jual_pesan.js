@@ -7,7 +7,7 @@ import moment from 'moment';
 import Select from 'react-select';
 import { Link, useLocation } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
@@ -228,31 +228,31 @@ export default function Jual_pesan() {
                             </div> */}
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Total Jual</p>
-                            <input type="text" id='input-detail-total-jual' value={getValueTotalJual} className={`col-4`} readOnly={true} />
+                            <input type="text" id='input-detail-total-jual' value={SetPriceFormat(getValueTotalJual)} className={`col-4`} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Harga Pokok Penjualan</p>
-                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={getValueTotalJual} readOnly={true} />
+                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={SetPriceFormat(getValueTotalJual)} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Diskon</p>
-                            <input type="text" id='input-detail-diskon' value={getValueDiskon} className={'col-4'} readOnly={true} />
+                            <input type="text" id='input-detail-diskon' value={SetPriceFormat(getValueDiskon)} className={'col-4'} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Ongkos Kirim</p>
-                            <input type="text" id='input-detail-ongkos-kirim' value={getValueOngkosKirim} className={`col-4`} readOnly={true} />
+                            <input type="text" id='input-detail-ongkos-kirim' value={SetPriceFormat(getValueOngkosKirim)} className={`col-4`} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Total Harga</p>
-                            <input type="text" id='input-detail-total-harga' value={getValueTotalHarga} className={`col-4`} readOnly={true} />
+                            <input type="text" id='input-detail-total-harga' value={SetPriceFormat(getValueTotalHarga)} className={`col-4`} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Uang Muka</p>
-                            <input type="text" id='input-detail-uang-muka' value={getValueUangMuka} className={`col-4`} readOnly={true} />
+                            <input type="text" id='input-detail-uang-muka' value={SetPriceFormat(getValueUangMuka)} className={`col-4`} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Sisa</p>
-                            <input type="text" id='input-detail-piutang' value={getValueSisa} className={`col-4`} readOnly={true} />
+                            <input type="text" id='input-detail-piutang' value={SetPriceFormat(getValueSisa)} className={`col-4`} readOnly={true} />
                             <div className='col-5 ps-2'>
                                 <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Akun...'} value={getValueKodeAkun} styles={CustomSelect} onChange={e => setValueKodeAkun(e)} />
                             </div>

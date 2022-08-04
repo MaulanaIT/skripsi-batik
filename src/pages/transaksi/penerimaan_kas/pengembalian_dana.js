@@ -5,7 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import moment from 'moment';
 import Select from 'react-select';
-import { baseURL, config, GenerateCode, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, GenerateCode, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { Link, useLocation } from 'react-router-dom';
 
 // Import CSS
@@ -238,7 +238,7 @@ export default function Pengembalian_dana() {
                     </div>
                     <div className={`${global.input_group_row}`}>
                         <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jumlah Uang yang Diterima</p>
-                        <input type="text" className="col col-lg-2 col-md-3" id='input-detail-jumlah-uang' name='input-detail-jumlah-uang' value={getValueJumlahUangDiterima} readOnly={true} />
+                        <input type="text" className="col col-lg-2 col-md-3" id='input-detail-jumlah-uang' name='input-detail-jumlah-uang' value={SetPriceFormat(getValueJumlahUangDiterima)} readOnly={true} />
                         <div className='col-3 ps-2'>
                             <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={getDataSelectAkun} value={getValueSelectedAkun} placeholder={'Select Akun...'} styles={CustomSelect} onChange={e => setValueSelectedAkun(e)} />
                         </div>

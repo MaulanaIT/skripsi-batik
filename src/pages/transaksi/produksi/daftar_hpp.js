@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import { FaCheck, FaPen, FaPlus } from 'react-icons/fa';
-import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, InputFormatNumber, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 // Import CSS
@@ -67,11 +67,11 @@ export default function Daftar_hpp() {
                             <td>{item.kode_produksi}</td>
                             <td>{item.tanggal_mulai}</td>
                             <td>{item.tanggal_selesai}</td>
-                            <td>{item.biaya_bahan_baku}</td>
-                            <td>{item.biaya_tenaga_kerja}</td>
-                            <td>{item.biaya_overhead_pabrik}</td>
-                            <td>{item.hpp_per_produk}</td>
-                            <td>{item.jumlah}</td>
+                            <td>{SetPriceFormat(item.biaya_bahan_baku)}</td>
+                            <td>{SetPriceFormat(item.biaya_tenaga_kerja)}</td>
+                            <td>{SetPriceFormat(item.biaya_overhead_pabrik)}</td>
+                            <td>{SetPriceFormat(item.hpp_per_produk)}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
                             <td>
                                 <div id={`data-harga-jual-${item.kode}`} className={`data-${item.kode}`}>{item.harga_jual}</div>
                                 <div className={global.input_group_row}>

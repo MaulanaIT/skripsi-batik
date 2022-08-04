@@ -85,11 +85,39 @@ const HideLoading = () => {
 }
 
 const InputFormatNumber = (event) => {
-    event.target.value = event.target.value.replace(/[^.0-9]/g, '').replace(/(\..*?)\..*/g, '0.');
+    event.target.value = event.target.value.replace(/[^.0-9]/g, '');
 }
 
 const ResetForm = (id) => {
     document.getElementById(id).reset();
+}
+
+const SetNumberFormat = (price = 0) => {
+    if (price == '0' || price == null || price == '' || price == undefined) return `0`;
+
+    let reverse = parseInt(price).toString().split('').reverse().join('');
+    let ribuan = reverse.match(/\d{1,3}/g);
+    ribuan = ribuan.join(',').split('').reverse().join('');
+
+    if (parseInt(price) < 0) return ribuan;
+    return ribuan;
+}
+
+const SetPriceFormat = (harga = 0) => {
+    if (harga == '0' || harga == '' || harga == null || harga == undefined) return `Rp. 0,-`;
+
+    let price = harga.toString().split('.');
+    let reverse = price[0].toString().split('').reverse().join('');
+    let ribuan = reverse.match(/\d{1,3}/g);
+    ribuan = ribuan.join(',').split('').reverse().join('');
+
+    if (harga < 0) {
+        if (price.length > 1) return `-Rp. ${ribuan}.${price[1]},-`;
+        else return `-Rp. ${ribuan},-`;
+    } else {
+        if (price.length > 1) return `Rp. ${ribuan}.${price[1]},-`;
+        else return 'Rp. ' + ribuan + ',-';
+    }
 }
 
 const SetValue = (id, value) => {
@@ -104,4 +132,4 @@ const ShowPopupResonse = () => {
     document.getElementById('popup-response').classList.remove('d-none');
 }
 
-export { baseURL, Calculate, ClosePopupResonse, CheckInputValidity, config, cx, GenerateCode, GetValue, HideLoading, InputFormatNumber, ResetForm, SetValue, ShowLoading, ShowPopupResonse };
+export { baseURL, Calculate, ClosePopupResonse, CheckInputValidity, config, cx, GenerateCode, GetValue, HideLoading, InputFormatNumber, ResetForm, SetNumberFormat, SetPriceFormat, SetValue, ShowLoading, ShowPopupResonse };

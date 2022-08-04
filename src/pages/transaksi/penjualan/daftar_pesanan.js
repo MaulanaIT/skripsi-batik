@@ -5,7 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaPrint, FaTrash } from 'react-icons/fa';
-import { baseURL, config, cx, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, cx, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -72,13 +72,13 @@ export class daftar_pesanan extends Component {
                                 <div id={`data-jenis-produk-${item.id}`} className={`data-${item.id}`}>{item.jenis_produk}</div>
                             </td>
                             <td>
-                                <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{item.jumlah}</div>
+                                <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{SetNumberFormat(item.jumlah)}</div>
                             </td>
                             <td>
-                                <div id={`data-hpp-${item.id}`} className={`data-${item.id}`}>{item.hpp}</div>
+                                <div id={`data-hpp-${item.id}`} className={`data-${item.id}`}>{SetPriceFormat(item.hpp)}</div>
                             </td>
                             <td>
-                                <div id={`data-harga-jual-${item.id}`} className={`data-${item.id}`}>{item.harga_jual}</div>
+                                <div id={`data-harga-jual-${item.id}`} className={`data-${item.id}`}>{SetPriceFormat(item.harga_jual)}</div>
                             </td>
                             <td>
                                 <div id={`data-status-${item.id}`} className={`data-${item.id}`}>{+item.status === 0 ? 'Menunggu' : +item.status === 1 ? 'Uang Muka Diterima' : 'Selesai'}</div>

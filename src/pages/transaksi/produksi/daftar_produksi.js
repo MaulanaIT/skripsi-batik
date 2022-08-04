@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import { FaCheck } from 'react-icons/fa';
-import { baseURL, config, cx, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, cx, HideLoading, SetNumberFormat, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 // Import CSS
@@ -49,8 +49,8 @@ export default function Daftar_produksi() {
                                     <td>{item.tanggal}</td>
                                     <td>{item.kode}</td>
                                     <td>{item.nama_produk}</td>
-                                    <td>{item.jumlah}</td>
-                                    <td>{item.lama}</td>
+                                    <td>{SetNumberFormat(item.jumlah)}</td>
+                                    <td>{SetNumberFormat(item.lama)}</td>
                                     <td>{+item.status === 0 ? 'Proses' : 'Selesai'}</td>
                                     {(jabatan === 'packing' || jabatan === 'super admin') ?
                                         +item.status === 0 ?
@@ -89,8 +89,8 @@ export default function Daftar_produksi() {
                                     <td>{item.kode}</td>
                                     <td>{item.nama_pesanan}</td>
                                     <td>{item.nama_customer}</td>
-                                    <td>{item.jumlah}</td>
-                                    <td>{item.lama}</td>
+                                    <td>{SetNumberFormat(item.jumlah)}</td>
+                                    <td>{SetNumberFormat(item.lama)}</td>
                                     <td>{+item.status === 0 ? 'Proses' : 'Selesai'}</td>
                                     {(jabatan === 'packing' || jabatan === 'super admin') ?
                                         +item.status === 0 ?

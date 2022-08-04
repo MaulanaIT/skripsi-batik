@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import $ from 'jquery';
 import axios from 'axios';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetNumberFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
@@ -38,7 +38,7 @@ export default function Permintaan_prod_pesanan() {
                             <td>{item.nama_pesanan}</td>
                             <td>{item.kode_customer}</td>
                             <td>{item.nama_customer}</td>
-                            <td>{item.jumlah}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
                         </tr>
                     );
                 });

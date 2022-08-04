@@ -6,7 +6,7 @@ import axios from 'axios';
 import moment from 'moment';
 import Select from 'react-select';
 import { Link, useLocation } from 'react-router-dom';
-import { baseURL, Calculate, config, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { baseURL, Calculate, config, GenerateCode, HideLoading, InputFormatNumber, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -134,9 +134,9 @@ export default function Pengeluaran_kas() {
                             <td>{index + 1}.</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td>{item.jumlah}</td>
-                            <td>{item.harga}</td>
-                            <td>{item.total_harga}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
+                            <td>{SetPriceFormat(item.harga)}</td>
+                            <td>{SetPriceFormat(item.total_harga)}</td>
                         </tr>
                     );
 
@@ -354,7 +354,7 @@ export default function Pengeluaran_kas() {
                             <div className={`d-flex flex-column gap-2 pb-2`}>
                                 <div className={`align-items-center ${global.input_group_row}`}>
                                     <p className={`${global.title} col-3`}>Total Pembelian</p>
-                                    <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-3`} value={getValueTotalPembelian} readOnly={true} />
+                                    <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-3`} value={SetPriceFormat(getValueTotalPembelian)} readOnly={true} />
                                 </div>
                                 <div className={`align-items-center ${global.input_group_row}`}>
                                     <p className={`${global.title} col-3`}>Diskon</p>
@@ -366,7 +366,7 @@ export default function Pengeluaran_kas() {
                                 </div>
                                 <div className={`align-items-center ${global.input_group_row}`}>
                                     <p className={`${global.title} col-3`}>Total Bayar</p>
-                                    <input type="text" id='input-detail-total-harga' name='input-detail-total-harga' className={`col-3`} value={getValueTotalBayar} readOnly={true} />
+                                    <input type="text" id='input-detail-total-harga' name='input-detail-total-harga' className={`col-3`} value={SetPriceFormat(getValueTotalBayar)} readOnly={true} />
                                     <div className='col-6 ps-2'>
                                         <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Akun...'} styles={CustomSelect} value={getValueSelectedAkun} onChange={e => setValueSelectedAkun(e)} />
                                     </div>

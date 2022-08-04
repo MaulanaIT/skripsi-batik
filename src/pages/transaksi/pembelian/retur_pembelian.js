@@ -7,7 +7,7 @@ import moment from 'moment';
 import Select from 'react-select';
 import { MdAdd } from 'react-icons/md'
 import { FaTrash } from 'react-icons/fa';
-import { baseURL, Calculate, CheckInputValidity, config, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { baseURL, Calculate, CheckInputValidity, config, GenerateCode, HideLoading, InputFormatNumber, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -225,10 +225,10 @@ export default function Retur_pembelian() {
                         <td>{item.kode}</td>
                         <td>{item.kode_alat}</td>
                         <td>{item.nama_alat}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
-                        <td>{item.total_kapasitas}</td>
+                        <td>{SetNumberFormat(item.jumlah)}</td>
+                        <td>{SetPriceFormat(item.harga)}</td>
+                        <td>{SetPriceFormat(item.total_harga)}</td>
+                        <td>{SetNumberFormat(item.total_kapasitas)}</td>
                         <td className={global.table_action}>
                             <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteAlat(index)}><FaTrash />Delete</button>
                         </td>
@@ -255,9 +255,9 @@ export default function Retur_pembelian() {
                         <td>{item.kode}</td>
                         <td>{item.kode_bahan}</td>
                         <td>{item.nama_bahan}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
+                        <td>{SetNumberFormat(item.jumlah)}</td>
+                        <td>{SetPriceFormat(item.harga)}</td>
+                        <td>{SetPriceFormat(item.total_harga)}</td>
                         <td className={global.table_action}>
                             <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteBahan(index)}><FaTrash />Delete</button>
                         </td>
@@ -520,7 +520,7 @@ export default function Retur_pembelian() {
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-3 pe-2`}>
                                                 <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                                <input type="text" id='valueJumlah' className='text-end' value={getValueJumlah} required={true} readOnly={true} />
+                                                <input type="text" id='valueJumlah' className='text-end' value={SetNumberFormat(getValueJumlah)} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-3 px-2`}>
                                                 <p className={global.title}>Jumlah Retur <span className={global.important}>*</span></p>
@@ -528,11 +528,11 @@ export default function Retur_pembelian() {
                                             </div>
                                             <div className={`${global.input_group} col-3 px-2`}>
                                                 <p className={global.title}>Harga <span className={global.important}>*</span></p>
-                                                <input type="text" id='valueHarga' className='text-end' value={getValueHarga} required={true} readOnly={true} />
+                                                <input type="text" id='valueHarga' className='text-end' value={SetPriceFormat(getValueHarga)} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-3 ps-2`}>
                                                 <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
-                                                <input type="text" id='valueTotalHarga' className='text-end' value={getValueTotalHarga} required={true} readOnly={true} />
+                                                <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(getValueTotalHarga)} required={true} readOnly={true} />
                                             </div>
                                         </div>
                                     </>
@@ -551,7 +551,7 @@ export default function Retur_pembelian() {
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-4 pe-2`}>
                                                 <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                                <input type="text" id='valueJumlah' className='text-end' value={getValueJumlah} required={true} readOnly={true} />
+                                                <input type="text" id='valueJumlah' className='text-end' value={SetNumberFormat(getValueJumlah)} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-4 px-2`}>
                                                 <p className={global.title}>Jumlah Retur <span className={global.important}>*</span></p>
@@ -565,11 +565,11 @@ export default function Retur_pembelian() {
                                         <div className={`d-flex`}>
                                             <div className={`${global.input_group} col-6 pe-2`}>
                                                 <p className={global.title}>Harga <span className={global.important}>*</span></p>
-                                                <input type="text" id='valueHarga' className='text-end' value={getValueHarga} required={true} readOnly={true} />
+                                                <input type="text" id='valueHarga' className='text-end' value={SetPriceFormat(getValueHarga)} required={true} readOnly={true} />
                                             </div>
                                             <div className={`${global.input_group} col-6 ps-2`}>
                                                 <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
-                                                <input type="text" id='valueTotalHarga' className='text-end' value={getValueTotalHarga} required={true} readOnly={true} />
+                                                <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(getValueTotalHarga)} required={true} readOnly={true} />
                                             </div>
                                         </div>
                                     </>
@@ -635,7 +635,7 @@ export default function Retur_pembelian() {
                             <div className={`d-flex flex-column gap-2 pb-2`}>
                                 <div className={`align-items-center ${global.input_group_row}`}>
                                     <p className={`${global.title} col-3`}>Total Harga</p>
-                                    <input type="text" id='valueKalkulasiTotalHarga' value={getValueKalkulasiTotalHarga} readOnly={true} />
+                                    <input type="text" id='valueKalkulasiTotalHarga' value={SetPriceFormat(getValueKalkulasiTotalHarga)} readOnly={true} />
                                 </div>
                                 <div className='align-items-center d-flex justify-content-between'>
                                     <p>Upload Nota Pembelian</p>

@@ -6,7 +6,7 @@ import axios from 'axios';
 import { FaClipboardList, FaPrint, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 import DetailOrder from './detail_order';
 
@@ -71,7 +71,7 @@ export class daftar_order extends Component {
                                     <div id={`data-nama-supplier-${item.id}`} className={`data-${item.id}`}>{item.nama_supplier}</div>
                                 </td>
                                 <td>
-                                    <div id={`data-total-harga-${item.id}`} className={`data-${item.id} text-end`}>{item.total_harga}</div>
+                                    <div id={`data-total-harga-${item.id}`} className={`data-${item.id} text-end`}>{SetPriceFormat(item.total_harga)}</div>
                                 </td>
                                 <td>
                                     <div id={`data-status-${item.id}`} className={`data-${item.id} text-center`}>{item.status === '0' ? 'Menunggu' :

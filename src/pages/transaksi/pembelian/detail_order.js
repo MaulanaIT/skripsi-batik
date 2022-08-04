@@ -8,7 +8,7 @@ import { FiXCircle } from 'react-icons/fi';
 import { FaCheck, FaPen } from 'react-icons/fa';
 
 // Import Component
-import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -102,20 +102,20 @@ export default function Detail_order(props) {
                                 <td>{item.kode_item}</td>
                                 <td>{item.nama_item}</td>
                                 <td>
-                                    <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{item.jumlah}</div>
+                                    <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{SetNumberFormat(item.jumlah)}</div>
                                     <div className={global.input_group_row}>
                                         <input type="text" id={`edit-jumlah-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.jumlah} required={true} />
                                     </div>
                                 </td>
                                 <td>
-                                    <div id={`data-harga-${item.id}`} className={`data-${item.id}`}>{item.harga}</div>
+                                    <div id={`data-harga-${item.id}`} className={`data-${item.id}`}>{SetPriceFormat(item.harga)}</div>
                                     <div className={global.input_group_row}>
                                         <input type="text" id={`edit-harga-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.harga} required={true} />
                                     </div>
                                 </td>
-                                <td>{item.total_harga}</td>
+                                <td>{SetPriceFormat(item.total_harga)}</td>
                                 <td>
-                                    <div id={`data-total-kapasitas-${item.id}`} className={`data-${item.id}`}>{item.total_kapasitas}</div>
+                                    <div id={`data-total-kapasitas-${item.id}`} className={`data-${item.id}`}>{SetNumberFormat(item.total_kapasitas)}</div>
                                     <div className={global.input_group_row}>
                                         <input type="text" id={`edit-total-kapasitas-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.total_kapasitas} required={true} />
                                     </div>

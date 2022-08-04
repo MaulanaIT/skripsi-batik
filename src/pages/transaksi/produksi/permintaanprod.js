@@ -6,7 +6,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import { MdAdd } from 'react-icons/md';
 import { FaCheck, FaTrash } from 'react-icons/fa';
-import { baseURL, CheckInputValidity, config, cx, GenerateCode, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GenerateCode, HideLoading, SetNumberFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
@@ -165,7 +165,7 @@ export default function Permintaanprod() {
                             <td>{item.kode}</td>
                             <td>{item.kode_produk}</td>
                             <td>{item.nama_produk}</td>
-                            <td>{item.jumlah}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
                             <td className={+item.status === 0 ? global.table_action : 'text-center'}>
                                 {+item.status === 0 ?
                                     <React.Fragment>

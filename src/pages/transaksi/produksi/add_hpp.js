@@ -8,7 +8,7 @@ import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import { FiXCircle } from 'react-icons/fi';
-import { baseURL, CheckInputValidity, config, cx, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GenerateCode, HideLoading, InputFormatNumber, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 // Import CSS
@@ -190,9 +190,9 @@ const Add_hpp = (props, ref) => {
                         <td>{index + 1}.</td>
                         <td>{item.kode_alat}</td>
                         <td>{item.nama_alat}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
+                        <td>{SetNumberFormat(item.jumlah)}</td>
+                        <td>{SetPriceFormat(item.harga)}</td>
+                        <td>{SetPriceFormat(item.total_harga)}</td>
                     </tr>
                 );
             });
@@ -242,9 +242,9 @@ const Add_hpp = (props, ref) => {
                         <td>{index + 1}.</td>
                         <td>{item.kode_bahan}</td>
                         <td>{item.nama_bahan}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
+                        <td>{SetNumberFormat(item.jumlah)}</td>
+                        <td>{SetPriceFormat(item.harga)}</td>
+                        <td>{SetPriceFormat(item.total_harga)}</td>
                     </tr>
                 );
             });
@@ -295,9 +295,9 @@ const Add_hpp = (props, ref) => {
                         <td>{index + 1}.</td>
                         <td>{item.kode_penolong}</td>
                         <td>{item.nama_penolong}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
+                        <td>{SetNumberFormat(item.jumlah)}</td>
+                        <td>{SetPriceFormat(item.harga)}</td>
+                        <td>{SetPriceFormat(item.total_harga)}</td>
                     </tr>
                 );
             });
@@ -348,9 +348,9 @@ const Add_hpp = (props, ref) => {
                         <td>{index + 1}.</td>
                         <td>{item.kode_tenaga_kerja}</td>
                         <td>{item.nama_tenaga_kerja}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
+                        <td>{SetNumberFormat(item.jumlah)}</td>
+                        <td>{SetPriceFormat(item.harga)}</td>
+                        <td>{SetPriceFormat(item.total_harga)}</td>
                     </tr>
                 );
             });
@@ -977,7 +977,7 @@ const Add_hpp = (props, ref) => {
                                         </div>
                                         <div className={`${global.input_group} col-4 ps-2`}>
                                             <p className={global.title}>Harga <span className={global.important}>*</span></p>
-                                            <input type="text" id='input-harga-bahan-baku' name='input-harga-bahan-baku' value={getValueHarga} required={true} readOnly={true} />
+                                            <input type="text" id='input-harga-bahan-baku' name='input-harga-bahan-baku' value={SetPriceFormat(getValueHarga)} required={true} readOnly={true} />
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
@@ -987,7 +987,7 @@ const Add_hpp = (props, ref) => {
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Biaya <span className={global.important}>*</span></p>
-                                            <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueTotalHarga} required={true} readOnly={true} />
+                                            <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={SetPriceFormat(getValueTotalHarga)} required={true} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                             <p className={global.title}>Aksi</p>
@@ -1025,7 +1025,7 @@ const Add_hpp = (props, ref) => {
                                         </div>
                                         <div className={`${global.input_group} col-4 ps-2`}>
                                             <p className={global.title}>Harga <span className={global.important}>*</span></p>
-                                            <input type="text" id='input-harga-bahan-penolong' name='input-harga-bahan-penolong' value={getValueHarga} required={true} readOnly={true} />
+                                            <input type="text" id='input-harga-bahan-penolong' name='input-harga-bahan-penolong' value={SetPriceFormat(getValueHarga)} required={true} readOnly={true} />
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
@@ -1035,7 +1035,7 @@ const Add_hpp = (props, ref) => {
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Biaya <span className={global.important}>*</span></p>
-                                            <input type="text" id='input-biaya-bahan-penolong' name='input-biaya-bahan-penolong' value={getValueTotalHarga} required={true} readOnly={true} />
+                                            <input type="text" id='input-biaya-bahan-penolong' name='input-biaya-bahan-penolong' value={SetPriceFormat(getValueTotalHarga)} required={true} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                             <p className={global.title}>Aksi</p>
@@ -1073,7 +1073,7 @@ const Add_hpp = (props, ref) => {
                                     <div className={`d-flex`}>
                                         <div className={`${global.input_group} col-12`}>
                                             <p className={global.title}>Tarif <span className={global.important}>*</span></p>
-                                            <input type="text" id='input-tarif-bop-alat' name='input-tarif-bop-alat' value={getValueHarga} required={true} readOnly={true} />
+                                            <input type="text" id='input-tarif-bop-alat' name='input-tarif-bop-alat' value={SetPriceFormat(getValueHarga)} required={true} readOnly={true} />
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
@@ -1083,7 +1083,7 @@ const Add_hpp = (props, ref) => {
                                         </div>
                                         <div className={`${global.input_group} col-4 ps-2`}>
                                             <p className={global.title}>Biaya <span className={global.important}>*</span></p>
-                                            <input type="text" id='input-biaya-bop-alat' name='input-biaya-bop-alat' value={getValueTotalHarga} required={true} readOnly={true} />
+                                            <input type="text" id='input-biaya-bop-alat' name='input-biaya-bop-alat' value={SetPriceFormat(getValueTotalHarga)} required={true} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                             <p className={global.title}>Aksi</p>
@@ -1125,7 +1125,7 @@ const Add_hpp = (props, ref) => {
                                         </div>
                                         <div className={`${global.input_group} col-4 ps-2`}>
                                             <p className={global.title}>Upah <span className={global.important}>*</span></p>
-                                            <input type="text" id='input-upah-tenaga-kerja' name='input-upah-tenaga-kerja' value={getValueHarga} required={true} readOnly={true} />
+                                            <input type="text" id='input-upah-tenaga-kerja' name='input-upah-tenaga-kerja' value={SetPriceFormat(getValueHarga)} required={true} readOnly={true} />
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
@@ -1135,7 +1135,7 @@ const Add_hpp = (props, ref) => {
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Biaya <span className={global.important}>*</span></p>
-                                            <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueTotalHarga} required={true} readOnly={true} />
+                                            <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={SetPriceFormat(getValueTotalHarga)} required={true} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                             <p className={global.title}>Aksi</p>

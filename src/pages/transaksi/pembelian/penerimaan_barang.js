@@ -5,7 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import moment from 'moment';
 import { Link, useLocation } from 'react-router-dom';
-import { baseURL, config, GenerateCode, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, GenerateCode, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -67,10 +67,10 @@ export default function Penerimaan_barang() {
                                 <td>{index + 1}.</td>
                                 <td>{item.kode_item}</td>
                                 <td>{item.nama_item}</td>
-                                <td>{item.jumlah}</td>
-                                <td>{item.harga}</td>
-                                <td>{parseInt(item.jumlah) * parseInt(item.harga)}</td>
-                                <td>{item.total_kapasitas}</td>
+                                <td>{SetNumberFormat(item.jumlah)}</td>
+                                <td>{SetPriceFormat(item.harga)}</td>
+                                <td>{SetPriceFormat(parseInt(item.jumlah) * parseInt(item.harga))}</td>
+                                <td>{SetNumberFormat(item.total_kapasitas)}</td>
                             </tr>
                         );
                     }
@@ -81,9 +81,9 @@ export default function Penerimaan_barang() {
                                 <td>{index + 1}.</td>
                                 <td>{item.kode_item}</td>
                                 <td>{item.nama_item}</td>
-                                <td>{item.jumlah}</td>
-                                <td>{item.harga}</td>
-                                <td>{parseInt(item.jumlah) * parseInt(item.harga)}</td>
+                                <td>{SetNumberFormat(item.jumlah)}</td>
+                                <td>{SetPriceFormat(item.harga)}</td>
+                                <td>{SetPriceFormat(parseInt(item.jumlah) * parseInt(item.harga))}</td>
                             </tr>
                         );
                     }
@@ -270,7 +270,7 @@ export default function Penerimaan_barang() {
                         <div className={`d-flex flex-column gap-2 pb-2`}>
                             <div className={`align-items-center ${global.input_group_row}`}>
                                 <p className={`${global.title} col-3`}>Total Barang</p>
-                                <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-3`} value={getValueTotalBarang} readOnly={true} />
+                                <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-3`} value={SetNumberFormat(getValueTotalBarang)} readOnly={true} />
                             </div>
                         </div>
                         <div className='d-flex flex-column gap-2 pt-2'>

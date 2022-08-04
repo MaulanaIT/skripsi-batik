@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import $ from 'jquery';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetNumberFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -50,7 +50,7 @@ export class daftar_terimabarang extends Component {
                                 <div id={`data-nama-supplier-${item.id}`} className={`data-${item.id}`}>{item.nama_supplier}</div>
                             </td>
                             <td>
-                                <div id={`data-total-barang-${item.id}`} className={`data-${item.id}`}>{item.total_barang}</div>
+                                <div id={`data-total-barang-${item.id}`} className={`data-${item.id}`}>{SetNumberFormat(item.total_barang)}</div>
                             </td>
                             {(jabatan === 'admin, keuangan' || jabatan === 'super admin') &&
                                 <td className={global.table_action}>

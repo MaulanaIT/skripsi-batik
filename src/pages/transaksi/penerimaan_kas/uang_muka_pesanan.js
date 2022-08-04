@@ -7,7 +7,7 @@ import moment from 'moment';
 import Select from 'react-select';
 import { Link, useLocation } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md'
-import { baseURL, CheckInputValidity, config, GenerateCode, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, GenerateCode, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -248,19 +248,19 @@ export default function Uang_muka_pesanan() {
                         <div className={`d-flex`}>
                             <div className={`${global.input_group} col-3 pe-2`}>
                                 <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                <input type="text" id='input-jumlah-beli' value={getValueJumlah} required={true} readOnly={true} />
+                                <input type="text" id='input-jumlah-beli' value={SetNumberFormat(getValueJumlah)} required={true} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-3 px-2`}>
                                 <p className={global.title}>Harga <span className={global.important}>*</span></p>
-                                <input type="text" id='input-harga-beli' value={getValueHarga} required={true} readOnly={true} />
+                                <input type="text" id='input-harga-beli' value={SetPriceFormat(getValueHarga)} required={true} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-3 ps-2`}>
                                 <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
-                                <input type="text" id='input-total-harga-beli' value={getValueTotalHarga} required={true} readOnly={true} />
+                                <input type="text" id='input-total-harga-beli' value={SetPriceFormat(getValueTotalHarga)} required={true} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-3 ps-2`}>
                                 <p className={global.title}>HPP</p>
-                                <input type="text" id='input-total-harga-beli' value={getValueHpp} readOnly={true} />
+                                <input type="text" id='input-total-harga-beli' value={SetPriceFormat(getValueHpp)} readOnly={true} />
                             </div>
                         </div>
                     </div>
@@ -290,11 +290,11 @@ export default function Uang_muka_pesanan() {
                         </div> */}
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Total Jual <span className={global.important}>*</span></p>
-                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={getValueTotalJual} required={true} readOnly={true} />
+                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={SetPriceFormat(getValueTotalJual)} required={true} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Total Harga Pokok Penjualan</p>
-                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={getValueTotalHpp} readOnly={true} />
+                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={SetPriceFormat(getValueTotalHpp)} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Diskon</p>
@@ -306,7 +306,7 @@ export default function Uang_muka_pesanan() {
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Total Harga <span className={global.important}>*</span></p>
-                            <input type="text" id='input-detail-total-harga' value={getValueKalkulasiTotalHarga} className={`col-4`} required={true} readOnly={true} />
+                            <input type="text" id='input-detail-total-harga' value={SetPriceFormat(getValueKalkulasiTotalHarga)} className={`col-4`} required={true} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Uang Muka <span className={global.important}>*</span></p>
@@ -317,7 +317,7 @@ export default function Uang_muka_pesanan() {
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Sisa <span className={global.important}>*</span></p>
-                            <input type="text" id='input-sisa' className={`col-4`} value={getValueSisa} required={true} readOnly={true} />
+                            <input type="text" id='input-sisa' className={`col-4`} value={SetPriceFormat(getValueSisa)} required={true} readOnly={true} />
                         </div>
                         <div className='d-flex flex-column gap-3 pt-2'>
                             <div className='align-items-center d-flex justify-content-between'>

@@ -8,7 +8,7 @@ import { FiXCircle } from 'react-icons/fi';
 import { FaCheck, FaPen } from 'react-icons/fa';
 
 // Import Component
-import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -81,10 +81,10 @@ export default function Detail_retur(props) {
                             <td>{index + 1}.</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td>{item.jumlah}</td>
-                            <td>{item.harga}</td>
-                            <td>{item.total_harga}</td>
-                            <td>{item.total_kapasitas}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
+                            <td>{SetPriceFormat(item.harga)}</td>
+                            <td>{SetPriceFormat(item.total_harga)}</td>
+                            <td>{SetNumberFormat(item.total_kapasitas)}</td>
                         </tr>
                     );
                 });

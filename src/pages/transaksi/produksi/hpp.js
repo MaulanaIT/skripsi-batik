@@ -7,7 +7,7 @@ import moment from 'moment';
 import Select from 'react-select';
 import { Link, useLocation } from 'react-router-dom';
 import { MdAdd, MdEdit } from 'react-icons/md';
-import { baseURL, CheckInputValidity, config, cx, GenerateCode, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GenerateCode, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 import AddHPP from './add_hpp';
@@ -296,9 +296,9 @@ export default function Hpp() {
                 htmlTableDaftarDetailBahanBaku.push(
                     <tr key={index} className={'align-middle'}>
                         <td>{item.tanggal}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.total_harga}</td>
+                        <td>{SetPriceFormat(item.harga)}</td>
+                        <td>{SetNumberFormat(item.jumlah)}</td>
+                        <td>{SetPriceFormat(item.total_harga)}</td>
                     </tr>
                 );
             });
@@ -309,9 +309,9 @@ export default function Hpp() {
                 htmlTableDaftarDetailTenagaKerja.push(
                     <tr key={index} className={'align-middle'}>
                         <td>{item.tanggal}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.total_harga}</td>
+                        <td>{SetPriceFormat(item.harga)}</td>
+                        <td>{SetNumberFormat(item.jumlah)}</td>
+                        <td>{SetPriceFormat(item.total_harga)}</td>
                     </tr>
                 );
             });
@@ -322,9 +322,9 @@ export default function Hpp() {
                 htmlTableDaftarDetailOverhead.push(
                     <tr key={index} className={'align-middle'}>
                         <td>{item.tanggal}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.total_harga}</td>
+                        <td>{SetPriceFormat(item.harga)}</td>
+                        <td>{SetNumberFormat(item.jumlah)}</td>
+                        <td>{SetPriceFormat(item.total_harga)}</td>
                     </tr>
                 );
             });
@@ -335,9 +335,9 @@ export default function Hpp() {
                 htmlTableDaftarDetailOverhead.push(
                     <tr key={index} className={'align-middle'}>
                         <td>{item.tanggal}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.total_harga}</td>
+                        <td>{SetPriceFormat(item.harga)}</td>
+                        <td>{SetNumberFormat(item.jumlah)}</td>
+                        <td>{SetPriceFormat(item.total_harga)}</td>
                     </tr>
                 );
             });
@@ -430,7 +430,7 @@ export default function Hpp() {
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                        <input type="text" id='input-jumlah' name='input-jumlah' value={getIsUpdateData ? getDataSelected.jumlah : getValueJumlah} required={true} readOnly={true} />
+                                        <input type="text" id='input-jumlah' name='input-jumlah' value={SetNumberFormat(getIsUpdateData ? getDataSelected.jumlah : getValueJumlah)} required={true} readOnly={true} />
                                     </div>
                                 </div>
                             </React.Fragment>
@@ -476,7 +476,7 @@ export default function Hpp() {
                                 <div className={`${bootstrap['d-flex']}`}>
                                     <div className={`${global.input_group} col-3 pe-2`}>
                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                        <input type="text" id='input-jumlah' name='input-jumlah' value={getValueJumlah} required={true} readOnly={true} />
+                                        <input type="text" id='input-jumlah' name='input-jumlah' value={SetNumberFormat(getValueJumlah)} required={true} readOnly={true} />
                                     </div>
                                 </div>
                             </React.Fragment>
@@ -548,21 +548,21 @@ export default function Hpp() {
                         <div className={`${bootstrap['d-flex']}`}>
                             <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Biaya Bahan Baku <span className={global.important}>*</span></p>
-                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueBiayaBahanBaku} required={true} readOnly={true} />
+                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={SetPriceFormat(getValueBiayaBahanBaku)} required={true} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-4 px-2`}>
                                 <p className={global.title}>Biaya Tenaga Kerja <span className={global.important}>*</span></p>
-                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueBiayaTenagaKerja} required={true} readOnly={true} />
+                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={SetPriceFormat(getValueBiayaTenagaKerja)} required={true} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-4 ps-2`}>
                                 <p className={global.title}>Biaya Overhead <span className={global.important}>*</span></p>
-                                <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' value={getValueBiayaOverheadPabrik} required={true} readOnly={true} />
+                                <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' value={SetPriceFormat(getValueBiayaOverheadPabrik)} required={true} readOnly={true} />
                             </div>
                         </div>
                         <div className={`${bootstrap['d-flex']}`}>
                             <div className={`${global.input_group} col-4`}>
                                 <p className={`${global.title} fw-bold`} style={{ fontSize: 18 }}>Harga Pokok Produksi <span className={global.important}>*</span></p>
-                                <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' value={getValueHPP} required={true} readOnly={true} />
+                                <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' value={SetPriceFormat(getValueHPP)} required={true} readOnly={true} />
                             </div>
                         </div>
                         {getIsUpdateData ?

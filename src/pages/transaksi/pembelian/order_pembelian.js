@@ -7,7 +7,7 @@ import moment from 'moment';
 import Select from 'react-select';
 import { MdAdd } from 'react-icons/md'
 import { FaTrash } from 'react-icons/fa';
-import { baseURL, CheckInputValidity, config, GenerateCode, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, GenerateCode, HideLoading, InputFormatNumber, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -298,9 +298,9 @@ export class order_pembelian extends Component {
                         <td>{item.kode_alat}</td>
                         <td>{item.nama_alat}</td>
                         <td>{item.satuan}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
+                        <td>{SetNumberFormat(item.jumlah)}</td>
+                        <td>{SetPriceFormat(item.harga)}</td>
+                        <td>{SetPriceFormat(item.total_harga)}</td>
                         <td className={global.table_action}>
                             <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteAlat(item.id)}><FaTrash />Delete</button>
                         </td>
@@ -334,9 +334,9 @@ export class order_pembelian extends Component {
                         <td>{item.kode_bahan}</td>
                         <td>{item.nama_bahan}</td>
                         <td>{item.satuan}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
+                        <td>{SetNumberFormat(item.jumlah)}</td>
+                        <td>{SetPriceFormat(item.harga)}</td>
+                        <td>{SetPriceFormat(item.total_harga)}</td>
                         <td className={global.table_action}>
                             <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteBahan(item.id)}><FaTrash />Delete</button>
                         </td>
@@ -633,7 +633,7 @@ export class order_pembelian extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-4 ps-2`}>
                                             <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
-                                            <input type="text" id='valueTotalHarga' className='text-end' value={valueTotalHarga} required={true} readOnly={true} />
+                                            <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(valueTotalHarga)} required={true} readOnly={true} />
                                         </div>
                                     </div>
                                     <button type='button' className={global.button} onClick={this.AddDetail}><MdAdd /> Tambah</button>
@@ -697,7 +697,7 @@ export class order_pembelian extends Component {
                                 <div className={`d-flex flex-column gap-2 pb-2`}>
                                     <div className={`align-items-center ${global.input_group_row}`}>
                                         <p className={`${global.title} col-3`}>Total Harga</p>
-                                        <input type="text" id='valueKalkulasiTotalHarga' value={valueKalkulasiTotalHarga} readOnly={true} />
+                                        <input type="text" id='valueKalkulasiTotalHarga' value={SetPriceFormat(valueKalkulasiTotalHarga)} readOnly={true} />
                                     </div>
                                 </div>
                                 <div className='d-flex flex-column gap-2 pt-2'>

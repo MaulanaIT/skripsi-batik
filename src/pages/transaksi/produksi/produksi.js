@@ -6,7 +6,7 @@ import axios from 'axios';
 import moment from 'moment';
 import Select from 'react-select';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, CheckInputValidity, config, GenerateCode, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, GenerateCode, HideLoading, SetNumberFormat, ShowLoading } from '../../../component/helper';
 
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
@@ -323,7 +323,7 @@ export default function Produksi() {
                                         }
                                         <div className={`${global.input_group} col-6 mb-2 pe-2`}>
                                             <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                            <input type="text" id='input-jumlah' name='input-jumlah' required={true} value={getValueJumlah} readOnly={true} />
+                                            <input type="text" id='input-jumlah' name='input-jumlah' required={true} value={SetNumberFormat(getValueJumlah)} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-6 mb-2 ps-2`}>
                                             <p className={global.title}>Lama Produksi <span className={global.important}>*</span></p>
