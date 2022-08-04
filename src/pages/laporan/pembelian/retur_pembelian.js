@@ -81,6 +81,15 @@ export default function Retur_pembelian() {
             let dataExport = [];
 
             dataExport.push([
+                'Laporan Retur Pembelian',
+                '',
+                '',
+                '',
+                '',
+                ''
+            ]);
+
+            dataExport.push([
                 'Kode Retur',
                 'Tanggal',
                 'Jenis Pembelian',

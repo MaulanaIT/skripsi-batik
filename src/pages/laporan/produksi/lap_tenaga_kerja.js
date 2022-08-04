@@ -54,6 +54,16 @@ export default function Lap_tenaga_kerja() {
             let dataExport = [];
 
             dataExport.push([
+                'Laporan Tenaga Kerja',
+                '',
+                '',
+                '',
+                '',
+                '',
+                ''
+            ]);
+
+            dataExport.push([
                 'Nama',
                 'Departemen',
                 'Kuantitas',

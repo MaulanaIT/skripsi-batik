@@ -48,10 +48,19 @@ export default function Profitabilitas() {
             let totalKredit = 0;
 
             dataExport.push([
+                'Laporan Profitabilitas',
+                '',
+                '',
+                '',
+                ''
+            ]);
+
+            dataExport.push([
                 'Kode',
                 'Nama',
                 'Debit',
-                'Kredit'
+                'Kredit',
+                ''
             ]);
 
             if (data && data.length > 0) {
@@ -71,13 +80,22 @@ export default function Profitabilitas() {
                         item.kode,
                         item.nama,
                         SetPriceFormat(item.debit ?? 0),
-                        SetPriceFormat(item.kredit ?? 0)
+                        SetPriceFormat(item.kredit ?? 0),
+                        ''
                     ]);
 
                     totalDebit += +item.debit;
                     totalKredit += +item.kredit;
                 });
             }
+
+            dataExport.push([
+                '',
+                '',
+                SetPriceFormat(totalDebit),
+                SetPriceFormat(totalKredit),
+                `Profit: ${SetPriceFormat(+totalKredit - +totalDebit)}`
+            ]);
 
             $('#table-data').DataTable().destroy();
 

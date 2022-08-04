@@ -80,6 +80,19 @@ export default function Transaksi_penjualan() {
             let dataExport = [];
 
             dataExport.push([
+                'Laporan Transaksi Penjualan',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                ''
+            ]);
+
+            dataExport.push([
                 'Kode',
                 'Jenis Penjualan',
                 'Tanggal',

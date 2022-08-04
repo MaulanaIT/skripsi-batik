@@ -81,6 +81,13 @@ export default function Penerimaan_kas() {
             let dataExport = [];
 
             dataExport.push([
+                'Laporan Pnerimaan Kas',
+                '',
+                '',
+                ''
+            ]);
+
+            dataExport.push([
                 'Tanggal',
                 'Kode',
                 'Keterangan',

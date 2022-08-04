@@ -139,6 +139,20 @@ export default function Kartu_persediaan_bb() {
             let dataExport = [];
 
             dataExport.push([
+                'Laporan Kartu Bahan Baku',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                ''
+            ]);
+
+            dataExport.push([
                 'Tanggal',
                 'Nama',
                 'Unit Masuk',
