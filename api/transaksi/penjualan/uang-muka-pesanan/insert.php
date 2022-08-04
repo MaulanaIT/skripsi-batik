@@ -4,6 +4,7 @@ require_once '../../../config/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
+    $kode_akun = $_POST['kode_akun'];
     $tanggal = $_POST['tanggal'];
     $kode_customer = $_POST['kode_customer'];
     $total_hpp = $_POST['total_hpp'];

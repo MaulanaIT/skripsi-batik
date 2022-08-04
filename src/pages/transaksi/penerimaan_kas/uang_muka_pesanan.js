@@ -164,6 +164,7 @@ export default function Uang_muka_pesanan() {
         }
 
         formData.append('kode', getValueKodePesanan);
+        formData.append('kode_akun', getValueKodeAkun.value);
         formData.append('tanggal', getValueTanggal);
         formData.append('kode_customer', getValueKodeCustomer);
         formData.append('total_jual', getValueKalkulasiTotalHarga);
@@ -175,13 +176,14 @@ export default function Uang_muka_pesanan() {
             const formData = new FormData();
 
             formData.append('kode', getValueKodeJual);
+            formData.append('kode_akun', getValueKodeAkun.value);
             formData.append('kode_pesanan', getValueKodePesanan);
             formData.append('tanggal', getValueTanggal);
-            formData.append('kode_akun', getValueKodeAkun.value);
             formData.append('kode_customer', getValueKodeCustomer);
             formData.append('total_jual', getValueTotalJual);
             formData.append('diskon', getValueDiskon);
             formData.append('ongkos_kirim', getValueOngkosKirim);
+            formData.append('total_hpp', getValueTotalHpp);
             formData.append('total_harga', getValueKalkulasiTotalHarga);
             formData.append('total_bayar', getValueUangMuka);
             formData.append('sisa', getValueSisa);

@@ -66,6 +66,7 @@ export default function Jual_pesan() {
     const [getValueUangMuka, setValueUangMuka] = useState(0);
     const [getValueSisa, setValueSisa] = useState(0);
     const [getValueTotalBayar, setValueTotalBayar] = useState(0);
+    const [getValueTotalHpp, setValueTotalHpp] = useState(0);
     const [getValueKembalian, setValueKembalian] = useState(0);
 
     const location = useLocation();
@@ -120,9 +121,12 @@ export default function Jual_pesan() {
         axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/select.php`, formData, config).then(response => {
             ShowLoading();
             let data = response.data.data.find(item => item.kode_pesanan === location.state.data.kode);
+
+            console.log(data);
             
             setValueKodeJual(data.kode);
             setValueTotalJual(data.total_jual);
+            setValueTotalHpp(data.total_hpp);
             setValueDiskon(data.diskon);
             setValueOngkosKirim(data.ongkos_kirim);
             setValueTotalHarga(data.total_harga);
@@ -158,6 +162,10 @@ export default function Jual_pesan() {
 
         formData.append('kode', getValueKodeJual);
         formData.append('kode_akun', getValueKodeAkun.value);
+        formData.append('uang_muka', getValueUangMuka);
+        formData.append('ongkos_kirim', getValueOngkosKirim);
+        formData.append('diskon', getValueDiskon);
+        formData.append('total_hpp', getValueTotalHpp);
         formData.append('sisa', getValueSisa);
         formData.append('jenis_penjualan', 'pesanan');
 
@@ -232,7 +240,7 @@ export default function Jual_pesan() {
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Harga Pokok Penjualan</p>
-                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={SetPriceFormat(getValueTotalJual)} readOnly={true} />
+                            <input type="text" id='input-detail-total-jual' className={`col-4`} value={SetPriceFormat(getValueTotalHpp)} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Diskon</p>
@@ -263,7 +271,7 @@ export default function Jual_pesan() {
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Kembalian</p>
-                            <input type="text" id='input-detail-kembalian' value={getValueKembalian} className={`col-4`} readOnly={true} />
+                            <input type="text" id='input-detail-kembalian' value={SetPriceFormat(getValueKembalian)} className={`col-4`} readOnly={true} />
                         </div>
                         <div className='d-flex flex-column gap-5 pt-2'>
                             <div>

@@ -5,6 +5,10 @@ require_once '../../../config/connection.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode = $_POST['kode'];
     $kode_akun = $_POST['kode_akun'];
+    $uang_muka = $_POST['uang_muka'];
+    $ongkos_kirim = $_POST['ongkos_kirim'];
+    $diskon = $_POST['diskon'];
+    $total_hpp = $_POST['total_hpp'];
     $sisa = $_POST['sisa'];
     $jenis_penjualan = $_POST['jenis_penjualan'];
     $file_transfer = $_FILES['file_transfer']['tmp_name'];
@@ -47,8 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $query = "UPDATE master_akun SET saldo=(saldo+" . $sisa . ") WHERE kode='" . $kode_akun . "'";
             $result = $conn->query($query);
 
+            $query = "UPDATE master_akun SET saldo=(saldo-" . $sisa . ") WHERE kode='2101'";
+            $result = $conn->query($query);
+
             $query = "UPDATE master_akun SET saldo=(saldo+" . $total_hpp . ") WHERE kode='5101'";
             $result = $conn->query($query);
+
             if ($result) {
                 $response['data'] = $result;
             } else {
