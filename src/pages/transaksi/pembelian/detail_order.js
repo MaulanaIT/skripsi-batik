@@ -120,9 +120,11 @@ export default function Detail_order(props) {
                                         <input type="text" id={`edit-total-kapasitas-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.total_kapasitas} required={true} />
                                     </div>
                                 </td>
-                                <td className={global.table_action}>
-                                    <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
-                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)} disabled={props.status < 3 ? false : true}><FaPen /> Edit</button>
+                                <td>
+                                    <div className={global.table_action}>
+                                        <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
+                                        <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)} disabled={props.status < 3 ? false : true}><FaPen /> Edit</button>
+                                    </div>
                                 </td>
                             </tr>
                         );
@@ -147,9 +149,10 @@ export default function Detail_order(props) {
                                     </div>
                                 </td>
                                 <td>{item.total_harga}</td>
-                                <td className={global.table_action}>
-                                    <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
-                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)} disabled={props.status < 3 ? false : true}><FaPen /> Edit</button>
+                                <td>
+                                    <div className={global.table_action}>
+                                        <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
+                                        <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)} disabled={props.status < 3 ? false : true}><FaPen /> Edit</button>
                                 </td>
                             </tr>
                         );

@@ -301,8 +301,10 @@ export class order_pembelian extends Component {
                         <td>{SetNumberFormat(item.jumlah)}</td>
                         <td>{SetPriceFormat(item.harga)}</td>
                         <td>{SetPriceFormat(item.total_harga)}</td>
-                        <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteAlat(item.id)}><FaTrash />Delete</button>
+                        <td>
+                            <div className={global.table_action}>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteAlat(item.id)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );
@@ -337,8 +339,10 @@ export class order_pembelian extends Component {
                         <td>{SetNumberFormat(item.jumlah)}</td>
                         <td>{SetPriceFormat(item.harga)}</td>
                         <td>{SetPriceFormat(item.total_harga)}</td>
-                        <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteBahan(item.id)}><FaTrash />Delete</button>
+                        <td>
+                            <div className={global.table_action}>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteBahan(item.id)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );

@@ -143,10 +143,12 @@ export default function Daftar_produk() {
                                     <input type="text" id={`edit-harga-jual-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.harga_jual} required={true} />
                                 </div>
                             </td>
-                            <td className={global.table_action}>
-                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyProduk(item.id)}><FaCheck /> Apply</button>
-                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditProduk(item.id)}><FaPen /> Edit</button>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteProduk(item.id)}><FaTrash />Delete</button>
+                            <td>
+                                <div className={global.table_action}>
+                                    <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyProduk(item.id)}><FaCheck /> Apply</button>
+                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditProduk(item.id)}><FaPen /> Edit</button>
+                                    <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteProduk(item.id)}><FaTrash />Delete</button>
+                                </div>
                             </td>
                         </tr>
                     );

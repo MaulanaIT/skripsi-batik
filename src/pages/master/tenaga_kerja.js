@@ -156,11 +156,12 @@ export default function Tenaga_kerja() {
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-upah-${item.kode}`} className={`edit-${item.kode} d-none`} defaultValue={item.upah} onInput={InputFormatNumber} required={true} />
                                 </div>
-                            </td>
-                            <td className={global.table_action}>
-                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.kode}`])} onClick={() => ApplyTenagaKerja(item.kode)}><FaCheck /> Apply</button>
-                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.kode}`])} onClick={() => EditTenagaKerja(item.kode)}><FaPen /> Edit</button>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteTenagaKerja(item.kode)}><FaTrash />Delete</button>
+                            </td>                            <td>
+                                <div className={global.table_action}>
+                                    <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.kode}`])} onClick={() => ApplyTenagaKerja(item.kode)}><FaCheck /> Apply</button>
+                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.kode}`])} onClick={() => EditTenagaKerja(item.kode)}><FaPen /> Edit</button>
+                                    <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteTenagaKerja(item.kode)}><FaTrash />Delete</button>
+                                </div>
                             </td>
                         </tr>
                     );

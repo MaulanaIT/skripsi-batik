@@ -95,7 +95,7 @@ export class daftar_akun extends Component {
                             <td>
                                 <div id={`data-debit-${item.id}`} className={`data-${item.id} text-end`}>{parseInt(item.jenis) === 0 ? item.saldo : 0}</div>
                                 <div className={global.input_group_row}>
-                                    <input type="text" id={`edit-debit-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={parseInt(item.jenis) === 0 ? item.saldo : 0} required={true} readOnly={parseInt(item.jenis) === 1 && true } />
+                                    <input type="text" id={`edit-debit-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={parseInt(item.jenis) === 0 ? item.saldo : 0} required={true} readOnly={parseInt(item.jenis) === 1 && true} />
                                 </div>
                             </td>
                             <td>
@@ -103,11 +103,12 @@ export class daftar_akun extends Component {
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-kredit-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={parseInt(item.jenis) === 1 ? item.saldo : 0} required={true} readOnly={parseInt(item.jenis) === 0 && true} />
                                 </div>
-                            </td>
-                            <td className={global.table_action}>
-                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyAkun(item.id, parseInt(item.jenis))}><FaCheck /> Apply</button>
-                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditAkun(item.id)}><FaPen /> Edit</button>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteAkun(item.id)}><FaTrash />Delete</button>
+                            </td>                            <td>
+                                <div className={global.table_action}>
+                                    <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyAkun(item.id, parseInt(item.jenis))}><FaCheck /> Apply</button>
+                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditAkun(item.id)}><FaPen /> Edit</button>
+                                    <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteAkun(item.id)}><FaTrash />Delete</button>
+                                </div>
                             </td>
                         </tr>
                     );

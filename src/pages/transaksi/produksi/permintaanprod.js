@@ -166,17 +166,19 @@ export default function Permintaanprod() {
                             <td>{item.kode_produk}</td>
                             <td>{item.nama_produk}</td>
                             <td>{SetNumberFormat(item.jumlah)}</td>
-                            <td className={+item.status === 0 ? global.table_action : 'text-center'}>
-                                {+item.status === 0 ?
-                                    <React.Fragment>
-                                        {(jabatan === 'owner' || jabatan === 'super admin') &&
-                                            <button type='button' id='button-accept' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => AcceptPermintaan(item.kode)}><FaCheck />Accept</button>
-                                        }
-                                        <button type='button' id='button-delete' className={global.delete} onClick={() => DeletePermintaan(item.kode)}><FaTrash />Delete</button>
-                                    </React.Fragment>
-                                    :
-                                    <FaCheck />
-                                }
+                            <td>
+                                <div className={+item.status === 0 ? global.table_action : 'text-center'}>
+                                    {+item.status === 0 ?
+                                        <React.Fragment>
+                                            {(jabatan === 'owner' || jabatan === 'super admin') &&
+                                                <button type='button' id='button-accept' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => AcceptPermintaan(item.kode)}><FaCheck />Accept</button>
+                                            }
+                                            <button type='button' id='button-delete' className={global.delete} onClick={() => DeletePermintaan(item.kode)}><FaTrash />Delete</button>
+                                        </React.Fragment>
+                                        :
+                                        <FaCheck />
+                                    }
+                                </div>
                             </td>
                         </tr>
                     );
