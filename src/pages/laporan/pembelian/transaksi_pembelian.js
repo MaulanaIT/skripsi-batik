@@ -91,7 +91,7 @@ export default function Transaksi_pembelian() {
                             <td>{item.jumlah}</td>
                             <td>{item.harga}</td>
                             <td>{item.total_harga}</td>
-                            <td></td>
+                            {/* <td></td> */}
                         </tr>
                     );
                 });
@@ -180,7 +180,7 @@ export default function Transaksi_pembelian() {
                                         <th>Jumlah</th>
                                         <th>Harga</th>
                                         <th>Total Pembelian</th>
-                                        <th>Nota</th>
+                                        {/* <th>Nota</th> */}
                                     </tr>
                                 </thead>
                                 <tbody>

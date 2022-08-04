@@ -35,7 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         } else if ($jenis_pembelian == 'bahan') {
             foreach ($data as $key) {
-                $query = "UPDATE master_inventory_bahanbaku SET harga=(((jumlah*harga)+".$key->total_harga.")/(jumlah+".$key->jumlah.")), jumlah=(jumlah+".$key->jumlah.") WHERE kode='".$key->kode_item."'";
+                if (str_contains($key->kode_item, 'BB')) {
+                    $query = "UPDATE master_inventory_bahanbaku SET harga=(((jumlah*harga)+".$key->total_harga.")/(jumlah+".$key->jumlah.")), jumlah=(jumlah+".$key->jumlah.") WHERE kode='".$key->kode_item."'";
+                } else if (str_contains($key->kode_item, 'BP')) {
+                    $query = "UPDATE master_inventory_bahanpenolong SET harga=(((jumlah*harga)+".$key->total_harga.")/(jumlah+".$key->jumlah.")), jumlah=(jumlah+".$key->jumlah.") WHERE kode='".$key->kode_item."'";
+                }
     
                 $result = $conn->query($query);
     

@@ -32,10 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $kode_customer = $_POST['kode_customer'];
         $ongkos_kirim = $_POST['ongkos_kirim'];
         $sisa = $_POST['sisa'];
+        $total_hpp = $_POST['total_hpp'];
         $total_harga = $_POST['total_harga'];
         $total_bayar = $_POST['total_bayar'];
 
-        $query = "INSERT INTO penjualan_pesanan(kode, kode_pesanan, tanggal, kode_customer, total_jual, diskon, ongkos_kirim, total_harga, total_bayar, sisa) VALUES('" . $kode . "', '" . $kode_pesanan . "', '" . $tanggal . "', '" . $kode_customer . "', '" . $total_jual . "', '" . $diskon . "', '" . $ongkos_kirim . "', '" . $total_harga . "', '" . $total_bayar . "', '" . $sisa . "')";
+        $query = "INSERT INTO penjualan_pesanan(kode, kode_pesanan, tanggal, kode_customer, total_jual, total_hpp, diskon, ongkos_kirim, total_harga, total_bayar, sisa) VALUES('" . $kode . "', '" . $kode_pesanan . "', '" . $tanggal . "', '" . $kode_customer . "', '" . $total_jual . "', '" . $total_hpp . "', '" . $diskon . "', '" . $ongkos_kirim . "', '" . $total_harga . "', '" . $total_bayar . "', '" . $sisa . "')";
     }
 
     $result = $conn->query($query);
@@ -111,18 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if ($jenis_penjualan == 'pesanan') {
                 $query = "UPDATE master_akun SET saldo=(saldo+" . $total_jual . ") WHERE kode='4101'";
-                $result = $conn->query($query);
-
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $ongkos_kirim . ") WHERE kode='4202'";
-                $result = $conn->query($query);
-    
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $diskon . ") WHERE kode='2101'";
-                $result = $conn->query($query);
-
-                $query = "UPDATE master_akun SET saldo=(saldo-" . $total_bayar . ") WHERE kode='4201'";
-                $result = $conn->query($query);
-
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $sisa . ") WHERE kode='" . $kode_akun . "'";
                 $result = $conn->query($query);
             }
 

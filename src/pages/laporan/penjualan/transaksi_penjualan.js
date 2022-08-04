@@ -83,8 +83,8 @@ export default function Transaksi_penjualan() {
                             <td>{item.kode}</td>
                             <td>{item.jenis_jual}</td>
                             <td>{item.tanggal}</td>
-                            <td>{item.kode_customer}</td>
-                            <td>{item.nama_customer}</td>
+                            <td>{item.kode_customer ?? item.kode_consignee}</td>
+                            <td>{item.nama_customer ?? item.nama_consignee}</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
                             <td>{item.jumlah}</td>

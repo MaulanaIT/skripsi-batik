@@ -1163,17 +1163,19 @@ export class transaksi_penjualan extends Component {
         formData.append('jenis_penjualan', jenisPenjualan.toLowerCase());
 
         if (jenisPenjualan.toLowerCase() === 'tunai') {
-            let file = document.getElementById('input-file-transfer').files[0];
-
-            if (file) {
-                let arg = file.name.split('.');
-                let extension = arg[arg.length - 1];
-                formData.append('file_transfer', file);
-                formData.append('nama_file', `File Transfer - ${valueKodeJual} - ${valueTanggal}.${extension}`);
-            } else {
-                alert('Isi data dengan benar');
-                HideLoading();
-                return;
+            if (valueKodeAkun?.value === '1102') {
+                let file = document.getElementById('input-file-transfer').files[0];
+    
+                if (file) {
+                    let arg = file.name.split('.');
+                    let extension = arg[arg.length - 1];
+                    formData.append('file_transfer', file);
+                    formData.append('nama_file', `File Transfer - ${valueKodeJual} - ${valueTanggal}.${extension}`);
+                } else {
+                    alert('Isi data dengan benar');
+                    HideLoading();
+                    return;
+                }
             }
 
             formData.append('data', JSON.stringify(dataTunai));

@@ -40,6 +40,8 @@ export default function Profitabilitas() {
 
             let htmlTableDaftarLaporan = [];
 
+            console.log(data);
+
             let totalDebit = 0;
             let totalKredit = 0;
             
@@ -50,8 +52,9 @@ export default function Profitabilitas() {
                             <td className='text-center'>{index+1}.</td>
                             <td>{item.kode}</td>
                             <td>{item.nama}</td>
-                            <td>{item.debit}</td>
-                            <td>{item.kredit}</td>
+                            <td>{item.debit ?? '0.00'}</td>
+                            <td>{item.kredit ?? '0.00'}</td>
+                            <td></td>
                         </tr>
                     );
 
@@ -130,6 +133,7 @@ export default function Profitabilitas() {
                                         <th>Nama Akun</th>
                                         <th>Debit</th>
                                         <th>Kredit</th>
+                                        <td></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -140,6 +144,7 @@ export default function Profitabilitas() {
                                         <td colSpan={3}></td>
                                         <td>{getValueTotalDebit}</td>
                                         <td>{getValueTotalKredit}</td>
+                                        <td>Profit : {+getValueTotalKredit - +getValueTotalDebit}</td>
                                     </tr>
                                 </tfoot>
                             </table>

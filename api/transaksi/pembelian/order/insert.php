@@ -21,24 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response['status'] = 200;
         $response['data'] = [];
 
-        /* if ($jenis_pembelian == 'alat') {
-            foreach ($data as $key) {
-                $query = "INSERT INTO detail_order_pembelian_alat(kode, kode_alat, kuantitas, harga) VALUES('" . $key->kode . "', '" . $key->kode_alat . "', '" . $key->jumlah . "', '" . $key->harga . "')";
-            
-                $result = $conn->query($query);
-
-                if (!$result) break;
-            }
-        } else if ($jenis_pembelian == 'bahan') {
-            foreach ($data as $key) {
-                $query = "INSERT INTO detail_order_pembelian_bahanbaku(kode, kode_bahanbaku, kuantitas, harga) VALUES('" . $key->kode . "', '" . $key->kode_bahan . "', '" . $key->jumlah . "', '" . $key->harga . "')";
-            
-                $result = $conn->query($query);
-
-                if (!$result) break;
-            }
-        } */
-
         foreach ($data as $key) {
             $query = "INSERT INTO detail_order_pembelian (kode, kode_item, nama_item, jumlah, harga, total_harga) VALUES('" . $key->kode . "', '" . $key->kode_item . "', '" . $key->nama_item . "', '" . $key->jumlah . "', '" . $key->harga . "', '" . $key->jumlah * $key->harga . "')";
 

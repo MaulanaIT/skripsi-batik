@@ -235,11 +235,11 @@ export class order_pembelian extends Component {
     }
 
     GetBahan = async () => {
+        let dataSelectKodeBahan = [];
+        let dataSelectNamaBahan = [];
+
         axios.get(`${baseURL}/api/master/inventory/bahan-baku/select.php`, config).then(response => {
             let dataBahan = response.data.data;
-
-            let dataSelectKodeBahan = [];
-            let dataSelectNamaBahan = [];
 
             if (dataBahan.length > 0) {
                 dataBahan.forEach(item => {
@@ -255,7 +255,30 @@ export class order_pembelian extends Component {
                 });
             }
 
-            this.setState({ dataSelectKodeBahan: dataSelectKodeBahan, dataSelectNamaBahan: dataSelectNamaBahan });
+            this.setState({ dataSelectKodeBahan: dataSelectKodeBahan, dataSelectNamaBahan: dataSelectNamaBahan }, () => {
+
+                axios.get(`${baseURL}/api/master/inventory/bahan-penolong/select.php`, config).then(response => {
+                    let dataBahan = response.data.data;
+
+                    if (dataBahan.length > 0) {
+                        dataBahan.forEach(item => {
+                            dataSelectKodeBahan.push({
+                                value: item.kode,
+                                label: item.kode
+                            });
+
+                            dataSelectNamaBahan.push({
+                                value: item.kode,
+                                label: item.nama
+                            });
+                        });
+                    }
+
+                    this.setState({ dataSelectKodeBahan: dataSelectKodeBahan, dataSelectNamaBahan: dataSelectNamaBahan });
+                }).catch(error => {
+                    console.log(error);
+                });
+            });
         }).catch(error => {
             console.log(error);
         });
