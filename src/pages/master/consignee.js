@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 // Import Library
 import $ from 'jquery';
 import axios from 'axios';
+import { FaCheck, FaPen, FaTrash } from 'react-icons/fa';
 import { MdAdd } from 'react-icons/md'
-import { baseURL, CheckInputValidity, config, GenerateCode, GetValue, HideLoading, InputFormatNumber, ResetForm, ShowLoading } from '../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GenerateCode, GetValue, HideLoading, InputFormatNumber, ResetForm, ShowLoading } from '../../component/helper';
 
 // Import CSS
 import global from '../../css/global.module.css';
@@ -22,6 +23,55 @@ export class consignee extends Component {
         this.GetConsignee();
     }
 
+    ApplyConsignee = (id) => {
+        if (!CheckInputValidity('form-table')) return;
+
+        ShowLoading();
+
+        let nama = GetValue(`edit-nama-${id}`);
+        let alamat = GetValue(`edit-alamat-${id}`);
+        let telepon = GetValue(`edit-telepon-${id}`);
+
+        const formData = new FormData();
+
+        formData.append('id', id);
+        formData.append('nama', nama);
+        formData.append('alamat', alamat);
+        formData.append('telepon', telepon);
+
+        axios.post(`${baseURL}/api/master/consignee/update.php`, formData, config).then(() => {
+            document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.remove('d-none'));
+            document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.add('d-none'));
+
+            this.GetConsignee();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
+    DeleteConsignee = (id) => {
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('id', id);
+
+        axios.post(`${baseURL}/api/master/consignee/delete.php`, formData, config).then(() => {
+            this.GetConsignee();
+        }).catch(error => {
+            HideLoading();
+
+            console.log(error);
+        });
+    }
+
+    EditConsignee = (id) => {
+        document.querySelectorAll(`.data-${id}`).forEach(item => item.classList.add('d-none'));
+        document.querySelectorAll(`.edit-${id}`).forEach(item => item.classList.remove('d-none'));
+    }
+
     GetConsignee = () => {
         axios.get(`${baseURL}/api/master/consignee/select.php`, config).then(response => {
             ShowLoading();
@@ -33,14 +83,33 @@ export class consignee extends Component {
             if (dataConsignee.length > 0) {
                 dataConsignee.forEach((item, index) => {
                     htmlTableDaftarConsignee.push(
-                        <tr key={index} className={`align-middle`}>
-                            <td className={`text-center`}>{index + 1}.</td>
-                            <td>{item.kode}</td>
-                            <td>{item.nama}</td>
-                            <td>{item.alamat}</td>
-                            <td>{item.telepon}</td>
-                            <td></td>
-                        </tr>
+                    <tr key={index} className={`align-middle`}>
+                        <td className={`text-center`}>{index + 1}.</td>
+                        <td>{item.kode}</td>
+                        <td>
+                            <div id={`data-nama-${item.id}`} className={`data-${item.id}`}>{item.nama}</div>
+                            <div className={global.input_group_row}>
+                                <input type="text" id={`edit-nama-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.nama} required={true} />
+                            </div>
+                        </td>
+                        <td>
+                            <div id={`data-alamat-${item.id}`} className={`data-${item.id}`}>{item.alamat}</div>
+                            <div className={global.input_group_row}>
+                                <input type="text" id={`edit-alamat-${item.id}`} className={`edit-${item.id} d-none`} maxLength={100} defaultValue={item.alamat} required={true} />
+                            </div>
+                        </td>
+                        <td>
+                            <div id={`data-telepon-${item.id}`} className={`data-${item.id}`}>{item.telepon}</div>
+                            <div className={global.input_group_row}>
+                                <input type="text" id={`edit-telepon-${item.id}`} className={`edit-${item.id} d-none`} maxLength={13} onInput={InputFormatNumber} defaultValue={item.telepon} required={true} />
+                            </div>
+                        </td>
+                        <td className={global.table_action}>
+                            <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyConsignee(item.id)}><FaCheck /> Apply</button>
+                            <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditConsignee(item.id)}><FaPen /> Edit</button>
+                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteConsignee(item.id)}><FaTrash />Delete</button>
+                        </td>
+                    </tr>
                     );
                 });
             }
