@@ -73,8 +73,6 @@ export default function Retur_pembelian() {
         
         axios.post(`${baseURL}/api/laporan/pembelian/retur/select.php`, formData, config).then(response => {
             let data = response.data.data;
-            
-            console.log(data)
 
             let htmlTableDaftarLaporan = [];
             
