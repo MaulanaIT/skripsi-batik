@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaCheck, FaPen, FaTrash } from 'react-icons/fa';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, InputFormatNumber, ShowLoading } from '../../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, InputFormatNumber, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 
 // Import CSS
@@ -102,19 +102,19 @@ export class daftar_bb extends Component {
                                 </div>
                             </td>
                             <td>
-                                <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{item.jumlah}</div>
+                                <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{SetNumberFormat(item.jumlah)}</div>
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-jumlah-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.jumlah} required={true} />
                                 </div>
                             </td>
                             <td>
-                                <div id={`data-stok-minimal-${item.id}`} className={`data-${item.id}`}>{item.stok_minimal}</div>
+                                <div id={`data-stok-minimal-${item.id}`} className={`data-${item.id}`}>{SetNumberFormat(item.stok_minimal)}</div>
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-stok-minimal-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.stok_minimal} onInput={InputFormatNumber} required={true} />
                                 </div>
                             </td>
                             <td>
-                                <div id={`data-harga-${item.id}`} className={`data-${item.id}`}>{item.harga}</div>
+                                <div id={`data-harga-${item.id}`} className={`data-${item.id}`}>{SetPriceFormat(item.harga)}</div>
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-harga-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.harga} onInput={InputFormatNumber} required={true} />
                                 </div>

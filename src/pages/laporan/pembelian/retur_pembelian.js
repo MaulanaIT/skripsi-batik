@@ -6,7 +6,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -86,7 +86,7 @@ export default function Retur_pembelian() {
                             <td>{item.jenis_pembelian}</td>
                             <td>{item.kode_supplier}</td>
                             <td>{item.nama_supplier}</td>
-                            <td>{item.total_harga}</td>
+                            <td>{SetPriceFormat(item.total_harga)}</td>
                         </tr>
                     );
                 });

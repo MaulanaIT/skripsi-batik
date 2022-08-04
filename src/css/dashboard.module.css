@@ -1,3 +1,47 @@
 .container {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 4fr 2fr;
     position: relative;
+}
+
+.container>.notification {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.container .chart {
+    height: 100%;
+    padding: 24px;
+    position: relative;
+}
+
+.container .chart>* {
+    height: 100%;
+    max-width: 100%;
+    position: relative;
+}
+
+.container .item {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 12px;
+}
+
+.container .item.pesanan>.description {
+    margin-bottom: 12px !important;
+}
+
+.container .item.empty {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 767px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
 }

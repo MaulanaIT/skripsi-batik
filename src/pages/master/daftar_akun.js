@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaCheck, FaPen, FaTrash } from 'react-icons/fa';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, ShowLoading } from '../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GetValue, HideLoading, SetPriceFormat, ShowLoading } from '../../component/helper';
 
 // Import CSS
 import global from '../../css/global.module.css';
@@ -93,17 +93,18 @@ export class daftar_akun extends Component {
                                 </div>
                             </td>
                             <td>
-                                <div id={`data-debit-${item.id}`} className={`data-${item.id} text-end`}>{parseInt(item.jenis) === 0 ? item.saldo : 0}</div>
+                                <div id={`data-debit-${item.id}`} className={`data-${item.id} text-end`}>{SetPriceFormat(parseInt(item.jenis) === 0 ? item.saldo : 0)}</div>
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-debit-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={parseInt(item.jenis) === 0 ? item.saldo : 0} required={true} readOnly={parseInt(item.jenis) === 1 && true} />
                                 </div>
                             </td>
                             <td>
-                                <div id={`data-kredit-${item.id}`} className={`data-${item.id} text-end`}>{parseInt(item.jenis) === 1 ? item.saldo : 0}</div>
+                                <div id={`data-kredit-${item.id}`} className={`data-${item.id} text-end`}>{SetPriceFormat(parseInt(item.jenis) === 1 ? item.saldo : 0)}</div>
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-kredit-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={parseInt(item.jenis) === 1 ? item.saldo : 0} required={true} readOnly={parseInt(item.jenis) === 0 && true} />
                                 </div>
-                            </td>                            <td>
+                            </td>
+                            <td>
                                 <div className={global.table_action}>
                                     <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyAkun(item.id, parseInt(item.jenis))}><FaCheck /> Apply</button>
                                     <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditAkun(item.id)}><FaPen /> Edit</button>
@@ -147,15 +148,15 @@ export class daftar_akun extends Component {
                                 <table id='table-data' className={`table w-100`}>
                                     <thead className="align-middle text-center text-nowrap">
                                         <tr>
-                                            <th rowSpan={2}>No.</th>
+                                            <th rowSpan={2} className='text-center'>No.</th>
                                             <th rowSpan={2}>Kode Akun</th>
                                             <th rowSpan={2}>Nama Akun</th>
-                                            <th colSpan={2}>Saldo Normal</th>
-                                            <th rowSpan={2}>Aksi</th>
+                                            <th colSpan={2} className='text-center'>Saldo Normal</th>
+                                            <th rowSpan={2} className='text-center'>Aksi</th>
                                         </tr>
                                         <tr>
-                                            <th>Debit</th>
-                                            <th>Kredit</th>
+                                            <th className='text-center'>Debit</th>
+                                            <th className='text-center'>Kredit</th>
                                         </tr>
                                     </thead>
                                     <tbody>

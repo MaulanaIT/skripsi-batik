@@ -6,7 +6,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -87,9 +87,9 @@ export default function Transaksi_penjualan() {
                             <td>{item.nama_customer ?? item.nama_consignee}</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td>{item.jumlah}</td>
-                            <td>{item.harga}</td>
-                            <td>{item.total_harga}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
+                            <td>{SetPriceFormat(item.harga)}</td>
+                            <td>{SetPriceFormat(item.total_harga)}</td>
                             <td></td>
                         </tr>
                     );

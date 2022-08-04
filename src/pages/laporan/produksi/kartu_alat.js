@@ -6,7 +6,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetNumberFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -146,12 +146,12 @@ export default function Kartu_alat() {
                     <tr key={'-1'}>
                         <td>{master.tanggal}</td>
                         <td>Master {master.nama}</td>
-                        <td>{master.unit_masuk}</td>
-                        <td>{master.kapasitas_masuk}</td>
-                        <td>{master.unit_keluar}</td>
-                        <td>{master.kapasitas_keluar}</td>
-                        <td>{master.unit_saldo}</td>
-                        <td>{master.kapasitas_saldo}</td>
+                        <td>{SetNumberFormat(master.unit_masuk)}</td>
+                        <td>{SetNumberFormat(master.kapasitas_masuk)}</td>
+                        <td>{SetNumberFormat(master.unit_keluar)}</td>
+                        <td>{SetNumberFormat(master.kapasitas_keluar)}</td>
+                        <td>{SetNumberFormat(master.unit_saldo)}</td>
+                        <td>{SetNumberFormat(master.kapasitas_saldo)}</td>
                     </tr>
                 );
             }
@@ -168,12 +168,12 @@ export default function Kartu_alat() {
                         <tr key={index}>
                             <td>{item.tanggal}</td>
                             <td>{item.keterangan}</td>
-                            <td>{item.unit_masuk}</td>
-                            <td>{item.kapasitas_masuk}</td>
-                            <td>{item.unit_keluar}</td>
-                            <td>{item.kapasitas_keluar}</td>
-                            <td>{currentUnitSaldo}</td>
-                            <td>{currentKapasitasSaldo}</td>
+                            <td>{SetNumberFormat(item.unit_masuk)}</td>
+                            <td>{SetNumberFormat(item.kapasitas_masuk)}</td>
+                            <td>{SetNumberFormat(item.unit_keluar)}</td>
+                            <td>{SetNumberFormat(item.kapasitas_keluar)}</td>
+                            <td>{SetNumberFormat(currentUnitSaldo)}</td>
+                            <td>{SetNumberFormat(currentKapasitasSaldo)}</td>
                         </tr>
                     );
                 });

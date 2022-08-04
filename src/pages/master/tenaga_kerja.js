@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import $, { data } from 'jquery';
 import axios from 'axios';
 import Select from 'react-select';
-import { baseURL, CheckInputValidity, config, cx, GenerateCode, GetValue, HideLoading, InputFormatNumber, ShowLoading } from '../../component/helper';
+import { baseURL, CheckInputValidity, config, cx, GenerateCode, GetValue, HideLoading, InputFormatNumber, SetPriceFormat, ShowLoading } from '../../component/helper';
 import { MdAdd } from 'react-icons/md'
 import { FaCheck, FaPen, FaTrash } from 'react-icons/fa';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
@@ -152,7 +152,7 @@ export default function Tenaga_kerja() {
                                 </div>
                             </td>
                             <td>
-                                <div id={`data-upah-${item.kode}`} className={`data-${item.kode}`}>{item.upah}</div>
+                                <div id={`data-upah-${item.kode}`} className={`data-${item.kode}`}>{SetPriceFormat(item.upah)}</div>
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-upah-${item.kode}`} className={`edit-${item.kode} d-none`} defaultValue={item.upah} onInput={InputFormatNumber} required={true} />
                                 </div>

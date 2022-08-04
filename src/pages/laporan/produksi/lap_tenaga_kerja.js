@@ -6,7 +6,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -56,10 +56,10 @@ export default function Lap_tenaga_kerja() {
                         <tr key={index}>
                             <td>{item.nama}</td>
                             <td>{item.departemen}</td>
-                            <td>{item.kuantitas}</td>
+                            <td>{SetNumberFormat(item.kuantitas)}</td>
                             <td>{item.nama_produk}</td>
-                            <td>{item.upah}</td>
-                            <td>{item.total_biaya}</td>
+                            <td>{SetPriceFormat(item.upah)}</td>
+                            <td>{SetPriceFormat(item.total_biaya)}</td>
                         </tr>
                     );
 
@@ -162,7 +162,7 @@ export default function Lap_tenaga_kerja() {
                             <div className={'d-flex align-items-center pe-2'}>
                                 <p className={`${global.input_group_row} col-4`}>TOTAL BIAYA TENAGA KERJA</p>
                                 <div className={'col-3'}>
-                                    <input type="text" id='input-total-biaya-tenaga-kerja' name='input-total-biaya-tenaga-kerja' value={getValueTotalBiaya} readOnly={true} />
+                                    <input type="text" id='input-total-biaya-tenaga-kerja' name='input-total-biaya-tenaga-kerja' value={SetPriceFormat(getValueTotalBiaya)} readOnly={true} />
                                 </div>
                             </div>
                         </div>

@@ -6,7 +6,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -49,8 +49,8 @@ export default function Piutang_konsinyasi() {
                             <td>{item.tanggal}</td>
                             <td>{item.kode_consignee}</td>
                             <td>{item.nama_consignee}</td>
-                            <td>{item.piutang}</td>
-                            <td>{item.sisa}</td>
+                            <td>{SetPriceFormat(item.piutang)}</td>
+                            <td>{SetPriceFormat(item.sisa)}</td>
                         </tr>
                     );
                 });

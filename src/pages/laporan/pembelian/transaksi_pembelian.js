@@ -6,13 +6,14 @@ import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
 // Import CSS
 import global from '../../../css/global.module.css';
 import style from '../../../css/laporan/pembelian/transaksi_pembelian.module.css';
+import { useRef } from 'react';
 
 const CustomSelect = {
     control: (provided, state) => ({
@@ -69,17 +70,17 @@ export default function Transaksi_pembelian() {
         formData.append('jenis_pembelian', getValueJenis.value.toLowerCase());
         formData.append('tanggal_awal', getValueTanggalAwal);
         formData.append('tanggal_akhir', getValueTanggalAkhir);
-        
+
         axios.post(`${baseURL}/api/laporan/pembelian/transaksi/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
             let htmlTableDaftarLaporan = [];
-            
+
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
                     htmlTableDaftarLaporan.push(
                         <tr key={index} className={'align-middle'}>
-                            <td className='text-center'>{index+1}.</td>
+                            <td className='text-center'>{index + 1}.</td>
                             <td>{item.kode_kas_keluar}</td>
                             <td>{item.kode_order}</td>
                             <td>{item.tanggal}</td>
@@ -88,9 +89,9 @@ export default function Transaksi_pembelian() {
                             <td>{item.nama_supplier}</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td>{item.jumlah}</td>
-                            <td>{item.harga}</td>
-                            <td>{item.total_harga}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
+                            <td>{SetPriceFormat(item.harga)}</td>
+                            <td>{SetPriceFormat(item.total_harga)}</td>
                             {/* <td></td> */}
                         </tr>
                     );

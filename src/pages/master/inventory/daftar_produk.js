@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaCheck, FaPen, FaTrash } from 'react-icons/fa';
 import { MdAdd } from 'react-icons/md';
-import { baseURL, config, cx, ShowLoading, HideLoading, GetValue, CheckInputValidity } from '../../../component/helper';
+import { baseURL, config, cx, ShowLoading, HideLoading, GetValue, CheckInputValidity, SetNumberFormat, SetPriceFormat } from '../../../component/helper';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -120,25 +120,25 @@ export default function Daftar_produk() {
                                 </div>
                             </td>
                             <td>
-                                <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{item.jumlah}</div>
+                                <div id={`data-jumlah-${item.id}`} className={`data-${item.id}`}>{SetNumberFormat(item.jumlah)}</div>
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-jumlah-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.jumlah} required={true} />
                                 </div>
                             </td>
                             <td>
-                                <div id={`data-stok-minimal-${item.id}`} className={`data-${item.id}`}>{item.stok_minimal}</div>
+                                <div id={`data-stok-minimal-${item.id}`} className={`data-${item.id}`}>{SetNumberFormat(item.stok_minimal)}</div>
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-stok-minimal-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.stok_minimal} required={true} />
                                 </div>
                             </td>
                             <td>
-                                <div id={`data-hpp-per-produk-${item.id}`} className={`data-${item.id} text-end`}>{item.hpp_per_produk}</div>
+                                <div id={`data-hpp-per-produk-${item.id}`} className={`data-${item.id} text-end`}>{SetPriceFormat(item.hpp_per_produk)}</div>
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-hpp-per-produk-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.hpp_per_produk} required={true} />
                                 </div>
                             </td>
                             <td>
-                                <div id={`data-harga-jual-${item.id}`} className={`data-${item.id} text-end`}>{item.harga_jual}</div>
+                                <div id={`data-harga-jual-${item.id}`} className={`data-${item.id} text-end`}>{SetPriceFormat(item.harga_jual)}</div>
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-harga-jual-${item.id}`} className={`edit-${item.id} text-end d-none`} defaultValue={item.harga_jual} required={true} />
                                 </div>

@@ -6,7 +6,7 @@ import axios from 'axios';
 // import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, ShowLoading } from '../../component/helper';
+import { baseURL, config, HideLoading, SetPriceFormat, ShowLoading } from '../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -50,8 +50,8 @@ export default function Profitabilitas() {
                             <td className='text-center'>{index+1}.</td>
                             <td>{item.kode}</td>
                             <td>{item.nama}</td>
-                            <td>{item.debit ?? '0.00'}</td>
-                            <td>{item.kredit ?? '0.00'}</td>
+                            <td>{SetPriceFormat(item.debit ?? 0)}</td>
+                            <td>{SetPriceFormat(item.kredit ?? 0)}</td>
                             <td></td>
                         </tr>
                     );
@@ -140,9 +140,9 @@ export default function Profitabilitas() {
                                 <tfoot>
                                     <tr>
                                         <td colSpan={3}></td>
-                                        <td>{getValueTotalDebit}</td>
-                                        <td>{getValueTotalKredit}</td>
-                                        <td>Profit : {+getValueTotalKredit - +getValueTotalDebit}</td>
+                                        <td>{SetPriceFormat(getValueTotalDebit)}</td>
+                                        <td>{SetPriceFormat(getValueTotalKredit)}</td>
+                                        <td>Profit : {SetPriceFormat(+getValueTotalKredit - +getValueTotalDebit)}</td>
                                     </tr>
                                 </tfoot>
                             </table>

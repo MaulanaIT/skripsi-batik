@@ -6,7 +6,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetNumberFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -84,8 +84,8 @@ export default function Lap_produksi() {
                             <td className='text-center'>{index+1}.</td>
                             <td>{item.tanggal}</td>
                             <td>{item.kode}</td>
-                            <td>{item.jumlah}</td>
-                            <td>{item.lama}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
+                            <td>{SetNumberFormat(item.lama)}</td>
                             <td>{item.status}</td>
                         </tr>
                     );

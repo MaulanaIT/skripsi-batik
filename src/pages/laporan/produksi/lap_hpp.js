@@ -6,7 +6,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -234,7 +234,7 @@ export default function Lap_hpp() {
                         <div className={`${bootstrap[`d-flex`]}`}>
                             <div className={`${global.input_group_row} col-6`}>
                                 <p className={`${global.title} col-6 col-lg-3 col-md-3 pb-2 pb-md-0`}>Jumlah Produksi</p>
-                                <input type="text" id='input-jumlah-produksi' name='input-jumlah-produksi' readOnly={true} className='col-lg-6' value={getValueJumlahProduksi} />
+                                <input type="text" id='input-jumlah-produksi' name='input-jumlah-produksi' readOnly={true} className='col-lg-6' value={SetNumberFormat(getValueJumlahProduksi)} />
                             </div>
                         </div>
                         <br></br>
@@ -242,33 +242,33 @@ export default function Lap_hpp() {
                         <div className={`${bootstrap['d-flex']}`}>
                             <div className={`${global.input_group} col-3 pe-2`}>
                                 <p className={global.title}>Biaya Bahan Baku</p>
-                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueBiayaBahanBaku} readOnly={true} />
+                                <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={SetPriceFormat(getValueBiayaBahanBaku)} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-3 pe-2`}>
                                 <p className={global.title}>Biaya Tenaga Kerja</p>
-                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueBiayaTenagaKerja} readOnly={true} />
+                                <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={SetPriceFormat(getValueBiayaTenagaKerja)} readOnly={true} />
                             </div>
                             <div className={`${global.input_group} col-3 pe-2`}>
                                 <p className={global.title}>Biaya Overhead</p>
-                                <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' value={getValueBiayaOverheadPabrik} readOnly={true} />
+                                <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' value={SetPriceFormat(getValueBiayaOverheadPabrik)} readOnly={true} />
                             </div>
                         </div>
                         <div className={`${global.input_group} col-8 pe-2`}>
                             <div className={`d-flex`}>
                                 <p className={`${global.title} col-3 style.title fw-bold`}>Harga Pokok Produksi</p>
-                                <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' className='col-6' value={getValueHpp} readOnly={true} />
+                                <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' className='col-6' value={SetPriceFormat(getValueHpp)} readOnly={true} />
                             </div>
                         </div>
                         <div className={`${global.input_group} col-8 pe-2`}>
                             <div className='d-flex'>
                                 <p className={`${global.title} col-3 style.title fw-bold`}>Jumlah Produksi</p>
-                                <input type="text" id='input-jumlah-produksi' name='input-jumlah-produksi' className='col-6' value={getValueJumlahProduksi} readOnly={true} />
+                                <input type="text" id='input-jumlah-produksi' name='input-jumlah-produksi' className='col-6' value={SetNumberFormat(getValueJumlahProduksi)} readOnly={true} />
                             </div>
                         </div>
                         <div className={`${global.input_group} col-8 pe-2`}>
                             <div className='d-flex'>
                                 <p className={`${global.title} col-3 style.title fw-bold`}>Harga Pokok Produk</p>
-                                <input type="text" id='input-harga-pokok-produksi-unit' name='input-harga-pokok-produksi-unit' className='col-6' value={getValueHppPerProduk} readOnly={true} />
+                                <input type="text" id='input-harga-pokok-produksi-unit' name='input-harga-pokok-produksi-unit' className='col-6' value={SetPriceFormat(getValueHppPerProduk)} readOnly={true} />
                             </div>
                         </div>
                     </div>

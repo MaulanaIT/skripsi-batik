@@ -6,7 +6,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -147,15 +147,15 @@ export default function Kartu_persediaan_bp() {
                     <tr key={'-1'}>
                         <td>{master.tanggal}</td>
                         <td>Master {master.nama}</td>
-                        <td>{master.unit_masuk}</td>
-                        <td>{master.harga_masuk}</td>
-                        <td>{master.jumlah_masuk}</td>
-                        <td>{master.unit_keluar}</td>
-                        <td>{master.harga_keluar}</td>
-                        <td>{master.jumlah_keluar}</td>
-                        <td>{master.unit_saldo}</td>
-                        <td>{master.harga_saldo ?? 0}</td>
-                        <td>{master.jumlah_saldo}</td>
+                        <td>{SetNumberFormat(master.unit_masuk)}</td>
+                        <td>{SetPriceFormat(master.harga_masuk)}</td>
+                        <td>{SetPriceFormat(master.jumlah_masuk)}</td>
+                        <td>{SetNumberFormat(master.unit_keluar)}</td>
+                        <td>{SetPriceFormat(master.harga_keluar)}</td>
+                        <td>{SetPriceFormat(master.jumlah_keluar)}</td>
+                        <td>{SetNumberFormat(master.unit_saldo)}</td>
+                        <td>{SetPriceFormat(master.harga_saldo ?? 0)}</td>
+                        <td>{SetPriceFormat(master.jumlah_saldo)}</td>
                     </tr>
                 );
             }
@@ -174,15 +174,15 @@ export default function Kartu_persediaan_bp() {
                         <tr key={index}>
                             <td>{item.tanggal}</td>
                             <td>{item.keterangan}</td>
-                            <td>{item.unit_masuk}</td>
-                            <td>{item.harga_masuk}</td>
-                            <td>{item.jumlah_masuk}</td>
-                            <td>{item.unit_keluar}</td>
-                            <td>{item.harga_keluar}</td>
-                            <td>{item.jumlah_keluar}</td>
-                            <td>{currentUnitSaldo}</td>
-                            <td>{currentHargaSaldo}</td>
-                            <td>{currentJumlahSaldo}</td>
+                            <td>{SetNumberFormat(item.unit_masuk)}</td>
+                            <td>{SetPriceFormat(item.harga_masuk)}</td>
+                            <td>{SetPriceFormat(item.jumlah_masuk)}</td>
+                            <td>{SetNumberFormat(item.unit_keluar)}</td>
+                            <td>{SetPriceFormat(item.harga_keluar)}</td>
+                            <td>{SetPriceFormat(item.jumlah_keluar)}</td>
+                            <td>{SetNumberFormat(currentUnitSaldo)}</td>
+                            <td>{SetPriceFormat(currentHargaSaldo)}</td>
+                            <td>{SetPriceFormat(currentJumlahSaldo)}</td>
                         </tr>
                     );
                 });

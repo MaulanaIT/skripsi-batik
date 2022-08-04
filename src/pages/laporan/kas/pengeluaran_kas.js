@@ -6,7 +6,7 @@ import axios from 'axios';
 // import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -85,7 +85,7 @@ export default function Pengeluaran_kas() {
                             <td>{item.tanggal}</td>
                             <td>{item.kode}</td>
                             <td>{item.keterangan}</td>
-                            <td>{item.nominal}</td>
+                            <td>{SetPriceFormat(item.nominal)}</td>
                         </tr>
                     );
                 });
