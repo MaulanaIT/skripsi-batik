@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ongkos_kirim = $_POST['ongkos_kirim'];
     $diskon = $_POST['diskon'];
     $total_hpp = $_POST['total_hpp'];
+    $total_jual = $_POST['total_jual'];
     $sisa = $_POST['sisa'];
     $jenis_penjualan = $_POST['jenis_penjualan'];
     $file_transfer = $_FILES['file_transfer']['tmp_name'];

@@ -676,8 +676,10 @@ export class transaksi_penjualan extends Component {
                         <td>{item.jumlah}</td>
                         <td>{item.harga}</td>
                         <td>{item.total_harga}</td>
-                        <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailAlat(index)}><FaTrash />Delete</button>
+                        <td>
+                            <div className={global.table_action}>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailAlat(index)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );
@@ -715,8 +717,10 @@ export class transaksi_penjualan extends Component {
                         <td>{item.jumlah}</td>
                         <td>{item.harga}</td>
                         <td>{item.total_harga}</td>
-                        <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailBahan(index)}><FaTrash />Delete</button>
+                        <td>
+                            <div className={global.table_action}>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailBahan(index)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );
@@ -755,8 +759,10 @@ export class transaksi_penjualan extends Component {
                         <td>{item.jumlah}</td>
                         <td>{item.harga}</td>
                         <td>{item.total_harga}</td>
-                        <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailBTKL(index)}><FaTrash />Delete</button>
+                        <td>
+                            <div className={global.table_action}>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailBTKL(index)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );
@@ -794,8 +800,10 @@ export class transaksi_penjualan extends Component {
                         <td>{item.jumlah}</td>
                         <td>{item.harga}</td>
                         <td>{item.total_harga}</td>
-                        <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailPenolong(index)}><FaTrash />Delete</button>
+                        <td>
+                            <div className={global.table_action}>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailPenolong(index)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );
@@ -912,8 +920,10 @@ export class transaksi_penjualan extends Component {
                         <td>{item.total_harga}</td>
                         <td>{item.hpp}</td>
                         <td>{item.total_hpp}</td>
-                        <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteKonsinyasi(item.id)}><FaTrash />Delete</button>
+                        <td>
+                            <div className={global.table_action}>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteKonsinyasi(item.id)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );
@@ -947,8 +957,10 @@ export class transaksi_penjualan extends Component {
                         <td>{item.jumlah}</td>
                         <td>{item.harga}</td>
                         <td>{item.total_harga}</td>
-                        <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeletePesanan(item.id)}><FaTrash />Delete</button>
+                        <td>
+                            <div className={global.table_action}>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeletePesanan(item.id)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );
@@ -986,8 +998,10 @@ export class transaksi_penjualan extends Component {
                         <td>{item.total_harga}</td>
                         <td>{item.hpp}</td>
                         <td>{item.total_hpp}</td>
-                        <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteTunai(item.id)}><FaTrash />Delete</button>
+                        <td>
+                            <div className={global.table_action}>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteTunai(item.id)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );
@@ -1165,7 +1179,7 @@ export class transaksi_penjualan extends Component {
         if (jenisPenjualan.toLowerCase() === 'tunai') {
             if (valueKodeAkun?.value === '1102') {
                 let file = document.getElementById('input-file-transfer').files[0];
-    
+
                 if (file) {
                     let arg = file.name.split('.');
                     let extension = arg[arg.length - 1];
@@ -1302,7 +1316,7 @@ export class transaksi_penjualan extends Component {
             this.setState({
                 valueKodeAlat: valueKode,
                 valueNamaAlat: valueNama,
-                valueHargaAlat: dataAlat.bop 
+                valueHargaAlat: dataAlat.bop
             });
         } else {
             this.setState({

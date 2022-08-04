@@ -111,11 +111,12 @@ export class supplier extends Component {
                                 <div className={global.input_group_row}>
                                     <input type="text" id={`edit-rekening-${item.id}`} className={`edit-${item.id} d-none`} maxLength={30} defaultValue={item.rekening} required={true} />
                                 </div>
-                            </td>
-                            <td className={global.table_action}>
-                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplySupplier(item.id)}><FaCheck /> Apply</button>
-                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditSupplier(item.id)}><FaPen /> Edit</button>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteSupplier(item.id)}><FaTrash />Delete</button>
+                            </td>                            <td>
+                                <div className={global.table_action}>
+                                    <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplySupplier(item.id)}><FaCheck /> Apply</button>
+                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditSupplier(item.id)}><FaPen /> Edit</button>
+                                    <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteSupplier(item.id)}><FaTrash />Delete</button>
+                                </div>
                             </td>
                         </tr>
                     );

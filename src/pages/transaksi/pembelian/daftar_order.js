@@ -79,15 +79,17 @@ export class daftar_order extends Component {
                                             item.status === '2' ? 'Proses Order' :
                                                 item.status === '3' && 'Dibayar'}</div>
                                 </td>
-                                <td className={global.table_action}>
-                                    {jabatan !== 'owner' &&
-                                        <button type='button' id='button-detail' className={global.edit} style={{ gridColumn: '2 span' }}
-                                            onClick={() => this.SelectDetail(item.kode, parseInt(item.status), item.jenis_pembelian)}><FaClipboardList /> Detail</button>
-                                    }
-                                    <button type='button' id='button-print' className={global.apply}><FaPrint /> Print</button>
-                                    {+item.status <= 1 &&
-                                        <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
-                                    }
+                                <td>
+                                    <div className={global.table_action}>
+                                        {jabatan !== 'owner' &&
+                                            <button type='button' id='button-detail' className={global.edit} style={{ gridColumn: '2 span' }}
+                                                onClick={() => this.SelectDetail(item.kode, parseInt(item.status), item.jenis_pembelian)}><FaClipboardList /> Detail</button>
+                                        }
+                                        <button type='button' id='button-print' className={global.apply}><FaPrint /> Print</button>
+                                        {+item.status <= 1 &&
+                                            <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
+                                        }
+                                    </div>
                                 </td>
                             </tr>
                         );

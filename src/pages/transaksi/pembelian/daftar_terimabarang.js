@@ -53,12 +53,14 @@ export class daftar_terimabarang extends Component {
                                 <div id={`data-total-barang-${item.id}`} className={`data-${item.id}`}>{SetNumberFormat(item.total_barang)}</div>
                             </td>
                             {(jabatan === 'admin, keuangan' || jabatan === 'super admin') &&
-                                <td className={global.table_action}>
-                                    {item.status === '0' ?
-                                        <Link to={'/transaksi/pembelian/pengeluaran-kas'} state={{ kode: item.kode_order }} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}>Bayar</Link>
-                                        :
-                                        'Dibayar'
-                                    }
+                                <td>
+                                    <div className={global.table_action}>
+                                        {item.status === '0' ?
+                                            <Link to={'/transaksi/pembelian/pengeluaran-kas'} state={{ kode: item.kode_order }} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}>Bayar</Link>
+                                            :
+                                            'Dibayar'
+                                        }
+                                    </div>
                                 </td>
                             }
                         </tr>

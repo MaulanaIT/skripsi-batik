@@ -116,7 +116,7 @@ export default function Header(props) {
             <div className={style.menu}>
                 <div className={style.notification}>
                     <div className={style.toggle} onClick={() => setActiveNotification((prevState) => !prevState)} notifikasi={getDataNotification.length}>
-                        <FaBell  />
+                        <FaBell />
                     </div>
                     <div className={cx([style.dropdown_menu, getActiveNotification && style.active])}>
                         {getDataNotification && getDataNotification.length > 0 ?
@@ -127,9 +127,14 @@ export default function Header(props) {
                                         <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => InsertPermintaanPesanan(item)}>Terima</button>
                                     </div>
                                     :
-                                    <div key={index} className={style.item}>
-                                        <p className={style.description}>Stok barang <span className={style.green}>{item.kode} - {item.nama}</span> menipis.</p>
-                                    </div>
+                                    item.kode.includes('PPS') ?
+                                        <div key={index} className={style.item}>
+                                            <p className={style.description}>Permintaan Stok dengan kode <span className={style.green}>{item.kode}</span> untuk produk dengan kode <span className={style.green}>{item.nama}</span> telah di setujui oleh Owner.</p>
+                                        </div>
+                                        :
+                                        <div key={index} className={style.item}>
+                                            <p className={style.description}>Stok barang <span className={style.green}>{item.kode} - {item.nama}</span> menipis.</p>
+                                        </div>
                             )
                             :
                             <div className={cx([style.item, style.empty])}>

@@ -121,8 +121,6 @@ export default function Jual_pesan() {
         axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/select.php`, formData, config).then(response => {
             ShowLoading();
             let data = response.data.data.find(item => item.kode_pesanan === location.state.data.kode);
-
-            console.log(data);
             
             setValueKodeJual(data.kode);
             setValueTotalJual(data.total_jual);
@@ -166,6 +164,7 @@ export default function Jual_pesan() {
         formData.append('ongkos_kirim', getValueOngkosKirim);
         formData.append('diskon', getValueDiskon);
         formData.append('total_hpp', getValueTotalHpp);
+        formData.append('total_jual', getValueTotalJual);
         formData.append('sisa', getValueSisa);
         formData.append('jenis_penjualan', 'pesanan');
 

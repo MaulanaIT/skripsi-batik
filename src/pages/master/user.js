@@ -138,9 +138,9 @@ export class user extends Component {
                                 <div id={`data-jabatan-${item.id}`} className={`data-${item.id} text-end`}>{item.jabatan}</div>
                                 <div className={global.input_group_row}>
                                     <select name={`edit-jabatan-${item.id}`} id={`edit-jabatan-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={
-                                        item.jabatan === 'Owner' ? 'Owner' : 
-                                        item.jabatan === 'Admin, Keuangan' ? 'Admin, Keuangan' :
-                                        item.jabatan === 'Gudang, Pembelian' && 'Gudang, Pembelian'
+                                        item.jabatan === 'Owner' ? 'Owner' :
+                                            item.jabatan === 'Admin, Keuangan' ? 'Admin, Keuangan' :
+                                                item.jabatan === 'Gudang, Pembelian' && 'Gudang, Pembelian'
                                     } required={true}>
                                         <option value="Owner">Owner</option>
                                         <option value="Admin, Keuangan">Admin, Keuangan</option>
@@ -148,12 +148,14 @@ export class user extends Component {
                                     </select>
                                 </div>
                             </td>
-                            <td className={global.table_action}>
-                                <button type='button' id={`button-apply-${item.id}`} className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyUser(item.id)}><FaCheck /> Apply</button>
-                                <button type='button' id={`button-edit-${item.id}`} className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditUser(item.id)}><FaPen /> Edit</button>
-                                {item.username !== localStorage.getItem('leksana_username') && item.password !== localStorage.getItem('leksana_token') &&
-                                    <button type='button' id={`button-delete-${item.id}`} className={global.delete} onClick={() => this.DeleteUser(item.id)}><FaTrash />Delete</button>
-                                }
+                            <td>
+                                <div className={global.table_action}>
+                                    <button type='button' id={`button-apply-${item.id}`} className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyUser(item.id)}><FaCheck /> Apply</button>
+                                    <button type='button' id={`button-edit-${item.id}`} className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditUser(item.id)}><FaPen /> Edit</button>
+                                    {item.username !== localStorage.getItem('leksana_username') && item.password !== localStorage.getItem('leksana_token') &&
+                                        <button type='button' id={`button-delete-${item.id}`} className={global.delete} onClick={() => this.DeleteUser(item.id)}><FaTrash />Delete</button>
+                                    }
+                                </div>
                             </td>
                         </tr>
                     );

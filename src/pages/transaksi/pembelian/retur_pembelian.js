@@ -119,7 +119,7 @@ export default function Retur_pembelian() {
             alert('Isi data dengan benar');
             return;
         }
-        
+
         if (getJenisRetur.toLowerCase() === 'alat') {
             let dataAlat = [...getDataAlat];
 
@@ -229,8 +229,10 @@ export default function Retur_pembelian() {
                         <td>{SetPriceFormat(item.harga)}</td>
                         <td>{SetPriceFormat(item.total_harga)}</td>
                         <td>{SetNumberFormat(item.total_kapasitas)}</td>
-                        <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteAlat(index)}><FaTrash />Delete</button>
+                        <td>
+                            <div className={global.table_action}>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteAlat(index)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );
@@ -258,8 +260,10 @@ export default function Retur_pembelian() {
                         <td>{SetNumberFormat(item.jumlah)}</td>
                         <td>{SetPriceFormat(item.harga)}</td>
                         <td>{SetPriceFormat(item.total_harga)}</td>
-                        <td className={global.table_action}>
-                            <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteBahan(index)}><FaTrash />Delete</button>
+                        <td>
+                            <div className={global.table_action}>
+                                <button type='button' id='button-delete' className={global.delete} onClick={() => DeleteBahan(index)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );
@@ -366,7 +370,7 @@ export default function Retur_pembelian() {
         if (file) {
             let arg = file.name.split('.');
             let extension = arg[arg.length - 1];
-            
+
             formData.append('file_nota', file);
             formData.append('nama_file', `File Nota Pembelian - ${getValueKodeRetur} - ${getValueTanggal}.${extension}`);
         } else {
@@ -374,7 +378,7 @@ export default function Retur_pembelian() {
             HideLoading();
             return;
         }
-        
+
         formData.append('jenis_retur', jenisRetur.toLowerCase());
 
         if (jenisRetur.toLowerCase() === 'alat')
@@ -574,7 +578,7 @@ export default function Retur_pembelian() {
                                         </div>
                                     </>
                                 }
-                                
+
                                 <button type='button' className={global.button} onClick={AddDetail}><MdAdd /> Tambah</button>
                             </>
                             : null}

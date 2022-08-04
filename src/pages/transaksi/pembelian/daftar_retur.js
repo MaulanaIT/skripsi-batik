@@ -78,12 +78,14 @@ export class daftar_retur extends Component {
                                         item.status === '2' ? 'Proses Retur' :
                                             item.status === '3' && 'Selesai'}</div>
                             </td>
-                            <td className={global.table_action}>
-                                {jabatan !== 'owner' &&
-                                    <button type='button' id='button-detail' className={global.edit} style={{ gridColumn: '2 span' }}
-                                        onClick={() => this.SelectDetail(item.kode, parseInt(item.status))}><FaClipboardList /> Detail</button>
-                                }
-                                <button type='button' id='button-delete' className={global.delete} disabled={+item.status > 1 && true} onClick={() => this.DeleteRetur(item.kode)}><FaTrash /> Delete</button>
+                            <td>
+                                <div className={global.table_action}>
+                                    {jabatan !== 'owner' &&
+                                        <button type='button' id='button-detail' className={global.edit} style={{ gridColumn: '2 span' }}
+                                            onClick={() => this.SelectDetail(item.kode, parseInt(item.status))}><FaClipboardList /> Detail</button>
+                                    }
+                                    <button type='button' id='button-delete' className={global.delete} disabled={+item.status > 1 && true} onClick={() => this.DeleteRetur(item.kode)}><FaTrash /> Delete</button>
+                                </div>
                             </td>
                         </tr>
                     );

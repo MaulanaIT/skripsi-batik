@@ -40,8 +40,6 @@ export default function Profitabilitas() {
 
             let htmlTableDaftarLaporan = [];
 
-            console.log(data);
-
             let totalDebit = 0;
             let totalKredit = 0;
             

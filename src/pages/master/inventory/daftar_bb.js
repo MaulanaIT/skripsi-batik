@@ -119,10 +119,12 @@ export class daftar_bb extends Component {
                                     <input type="text" id={`edit-harga-${item.id}`} className={`edit-${item.id} d-none`} defaultValue={item.harga} onInput={InputFormatNumber} required={true} />
                                 </div>
                             </td>
-                            <td className={global.table_action}>
-                                <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyBahanBaku(item.id)}><FaCheck /> Apply</button>
-                                <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditBahanBaku(item.id)}><FaPen /> Edit</button>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteBahanBaku(item.id)}><FaTrash />Delete</button>
+                            <td>
+                                <div className={global.table_action}>
+                                    <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => this.ApplyBahanBaku(item.id)}><FaCheck /> Apply</button>
+                                    <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => this.EditBahanBaku(item.id)}><FaPen /> Edit</button>
+                                    <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteBahanBaku(item.id)}><FaTrash />Delete</button>
+                                </div>
                             </td>
                         </tr>
                     );

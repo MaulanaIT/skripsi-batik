@@ -48,8 +48,6 @@ export default function Lap_tenaga_kerja() {
 
             let htmlTableDaftarTenagaKerja = [];
 
-            console.log(data);
-
             let totalBiaya = 0;
 
             if (data && data.length > 0) {
