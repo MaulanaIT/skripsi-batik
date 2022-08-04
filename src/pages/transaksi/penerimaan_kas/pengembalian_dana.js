@@ -169,18 +169,22 @@ export default function Pengembalian_dana() {
         const formData = new FormData();
 
         let file = document.getElementById('input-file-transfer').files[0];
-
-        if (file) {
-            let arg = file.name.split('.');
-            let extension = arg[arg.length - 1];
-            formData.append('file_transfer', file);
-            formData.append('nama_file', `File Transfer - ${getValueKodeKasMasuk} - ${getValueTanggal}.${extension}`);
-        } else {
-            alert('Isi data dengan benar');
-            HideLoading();
-            return;
-        }
         
+        if (getValueSelectedAkun?.value === '1102') {
+            let file = document.getElementById('input-file-transfer').files[0];
+
+            if (file) {
+                let arg = file.name.split('.');
+                let extension = arg[arg.length - 1];
+                formData.append('file_transfer', file);
+                formData.append('nama_file', `File Transfer - ${getValueKodeKasMasuk} - ${getValueTanggal}.${extension}`);
+            } else {
+                alert('Isi data dengan benar');
+                HideLoading();
+                return;
+            }
+        }
+
         formData.append('kode', getValueKodeKasMasuk);
         formData.append('kode_retur', getValueKodeRetur);
         formData.append('tanggal', getValueTanggal);
@@ -244,10 +248,12 @@ export default function Pengembalian_dana() {
                         </div>
                     </div>
                     <div className='d-flex flex-column gap-5 pt-2'>
+                        {getValueSelectedAkun.value === '1102' &&
                         <div>
                             <p>Upload File Transfer</p>
                             <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' />
                         </div>
+                        }
                         <div className='d-flex'>
                             <div className='col-6 pe-2'>
                                 <button type='button' className={`${global.button} w-100`} onClick={Insert}>Simpan</button>

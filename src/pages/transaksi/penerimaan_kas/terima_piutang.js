@@ -119,6 +119,21 @@ export default function Terima_piutang() {
 
         formData.append('jenis_penjualan', 'konsinyasi');
 
+        if (getValueKodeAkun?.value === '1102') {
+            let file = document.getElementById('input-file-transfer').files[0];
+
+            if (file) {
+                let arg = file.name.split('.');
+                let extension = arg[arg.length - 1];
+                formData.append('file_transfer', file);
+                formData.append('nama_file', `File Transfer - ${getValueKodeTerimaPiutang} - ${getValueTanggal}.${extension}`);
+            } else {
+                alert('Isi data dengan benar');
+                HideLoading();
+                return;
+            }
+        }
+
         axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
@@ -339,14 +354,22 @@ export default function Terima_piutang() {
                         <div>
                             <p className={global.title}>Pelunasan</p>
                         </div>
-                        <div className='d-flex'>
-                            <div className={`${global.input_group} col-6 pe-2`}>
+                        <div className='d-flex flex-column gap-2 pb-2'>
+                            <div className={`${global.input_group} col-6`}>
                                 <p className={global.title}>Pilih Akun <span className={global.important}>*</span></p>
                                 <Select id='select-jenis-akun' name='select-jenis-akun' isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Jenis Akun...'} value={getValueKodeAkun} styles={CustomSelect} onChange={e => setValueKodeAkun(e)} />
                             </div>
-                            <div className={`${global.input_group} col-6 ps-2`}>
+                            <div className={`${global.input_group} col-6`}>
                                 <p className={global.title}>Terima Piutang <span className={global.important}>*</span></p>
                                 <input type="text" id='input-terima-piutang' name='input-terima-piutang' value={getValueTerimaPiutang} onChange={e => setValueTerimaPiutang(e.target.value)} required={true} />
+                            </div>
+                            <div>
+                            {getValueKodeAkun.value === '1102' &&
+                                <div className='align-items-center d-flex justify-content-between'>
+                                    <p>Upload File Transfer</p>
+                                    <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
+                                </div>
+                            }
                             </div>
                         </div>
                         <div className='d-flex'>
