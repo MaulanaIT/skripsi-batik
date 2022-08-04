@@ -923,6 +923,7 @@ export class transaksi_penjualan extends Component {
                         <td>
                             <div className={global.table_action}>
                                 <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteKonsinyasi(item.id)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );
@@ -959,6 +960,7 @@ export class transaksi_penjualan extends Component {
                         <td>
                             <div className={global.table_action}>
                                 <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeletePesanan(item.id)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );
@@ -999,6 +1001,7 @@ export class transaksi_penjualan extends Component {
                         <td>
                             <div className={global.table_action}>
                                 <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteTunai(item.id)}><FaTrash />Delete</button>
+                            </div>
                         </td>
                     </tr>
                 );

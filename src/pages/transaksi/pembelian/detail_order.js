@@ -153,6 +153,7 @@ export default function Detail_order(props) {
                                     <div className={global.table_action}>
                                         <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
                                         <button type='button' id='button-edit' className={cx([global.edit, `data-${item.id}`])} onClick={() => EditItem(item.id)} disabled={props.status < 3 ? false : true}><FaPen /> Edit</button>
+                                    </div>
                                 </td>
                             </tr>
                         );
