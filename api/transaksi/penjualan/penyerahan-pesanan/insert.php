@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = $conn->query($query);
 
         if ($result) {
-            $query = "UPDATE master_akun SET saldo=(saldo+" . $uang_muka . ") WHERE kode='4101'";
+            $query = "UPDATE master_akun SET saldo=(saldo+" . $total_jual . ") WHERE kode='4101'";
             $result = $conn->query($query);
 
             $query = "UPDATE master_akun SET saldo=(saldo+" . $ongkos_kirim . ") WHERE kode='4202'";
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $query = "UPDATE master_akun SET saldo=(saldo+" . $sisa . ") WHERE kode='" . $kode_akun . "'";
             $result = $conn->query($query);
 
-            $query = "UPDATE master_akun SET saldo=(saldo-" . $sisa . ") WHERE kode='2101'";
+            $query = "UPDATE master_akun SET saldo=(saldo-" . $uang_muka . ") WHERE kode='2101'";
             $result = $conn->query($query);
 
             $query = "UPDATE master_akun SET saldo=(saldo+" . $total_hpp . ") WHERE kode='5101'";

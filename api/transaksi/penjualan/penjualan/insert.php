@@ -110,11 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $result = $conn->query($query);
             }
 
-            if ($jenis_penjualan == 'pesanan') {
-                $query = "UPDATE master_akun SET saldo=(saldo+" . $total_jual . ") WHERE kode='4101'";
-                $result = $conn->query($query);
-            }
-
             if ($result) {
                 $response['data'] = $result;
             } else {
