@@ -186,7 +186,7 @@ export class consignee extends Component {
                         <div className={`${global.header}`}>
                             <p className={global.title}>Daftar Consignee</p>
                         </div>
-                        <div className={global.card}>
+                        <form id='form-table' className={global.card}>
                             <div className={`table-responsive`}>
                                 <table id='table-data' className={`table w-100`}>
                                     <thead className="align-middle text-center text-nowrap">
@@ -204,7 +204,7 @@ export class consignee extends Component {
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </>
