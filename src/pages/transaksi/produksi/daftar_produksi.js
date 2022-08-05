@@ -52,7 +52,7 @@ export default function Daftar_produksi() {
                                     <td>{SetNumberFormat(item.jumlah)}</td>
                                     <td>{SetNumberFormat(item.lama)}</td>
                                     <td>{+item.status === 0 ? 'Proses' : 'Selesai'}</td>
-                                    {(jabatan === 'packing' || jabatan === 'super admin') ?
+                                    {(jabatan === 'packing' || jabatan === 'super admin' || jabatan === 'owner') ?
                                         +item.status === 0 ?
                                             <td className={cx([global.table_action, 'text-nowrap'])}>
                                                 <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateStatus(jenis, item)}>Selesai</button>
@@ -92,7 +92,7 @@ export default function Daftar_produksi() {
                                     <td>{SetNumberFormat(item.jumlah)}</td>
                                     <td>{SetNumberFormat(item.lama)}</td>
                                     <td>{+item.status === 0 ? 'Proses' : 'Selesai'}</td>
-                                    {(jabatan === 'packing' || jabatan === 'super admin') ?
+                                    {(jabatan === 'packing' || jabatan === 'super admin' || jabatan === 'owner') ?
                                         +item.status === 0 ?
                                             <td className={cx([global.table_action, 'text-nowrap'])}>
                                                 <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => UpdateStatus(jenis, item)}>Selesai</button>
@@ -202,7 +202,7 @@ export default function Daftar_produksi() {
                                     <td>Jumlah</td>
                                     <td>Lama Produksi</td>
                                     <td>Status</td>
-                                    {(localStorage.getItem('leksana_jabatan').toLowerCase() === 'packing' || localStorage.getItem('leksana_jabatan').toLowerCase() === 'super admin') &&
+                                    {(localStorage.getItem('leksana_jabatan').toLowerCase() === 'packing' || localStorage.getItem('leksana_jabatan').toLowerCase() === 'super admin' || localStorage.getItem('leksana_jabatan').toLowerCase() === 'owner') &&
                                         <td>Aksi</td>
                                     }
                                 </tr>
@@ -226,7 +226,8 @@ export default function Daftar_produksi() {
                                     <td>Lama Produksi</td>
                                     <td>Status</td>
                                     {(localStorage.getItem('leksana_jabatan').toLowerCase() === 'packing' || localStorage.getItem('leksana_jabatan').toLowerCase()
-                                        === 'super admin') &&
+                                        === 'super admin' || localStorage.getItem('leksana_jabatan').toLowerCase()
+                                        === 'owner') &&
                                         <td>Aksi</td>
                                     }
                                 </tr>

@@ -104,19 +104,19 @@ const SetNumberFormat = (price = 0) => {
 }
 
 const SetPriceFormat = (harga = 0) => {
-    if (harga == '0' || harga == '' || harga == null || harga == undefined) return `Rp. 0,-`;
+    if (harga == '0' || harga == '' || harga == null || harga == undefined) return `Rp. 0.00`;
 
-    let price = parseInt(harga).toString().split('.');
+    let price = parseFloat(harga).toFixed(2).toString().split('.');
     let reverse = price[0].toString().split('').reverse().join('');
     let ribuan = reverse.match(/\d{1,3}/g);
     ribuan = ribuan.join(',').split('').reverse().join('');
 
     if (harga < 0) {
-        if (price.length > 1) return `-Rp. ${ribuan}.${price[1]},-`;
-        else return `-Rp. ${ribuan},-`;
+        if (price.length > 1) return `-Rp. ${ribuan}.${price[1]}`;
+        else return `-Rp. ${ribuan}`;
     } else {
-        if (price.length > 1) return `Rp. ${ribuan}.${price[1]},-`;
-        else return 'Rp. ' + ribuan + ',-';
+        if (price.length > 1) return `Rp. ${ribuan}.${price[1]}`;
+        else return 'Rp. ' + ribuan;
     }
 }
 

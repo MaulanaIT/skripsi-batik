@@ -7,8 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kode_order = $_POST['kode_order'];
     $jenis_pembelian = $_POST['jenis_pembelian'];
     $kode_supplier = $_POST['kode_supplier'];
-        
-    $total_kapasitas = $_POST['total_kapasitas'];
     $total_barang = $_POST['total_barang'];
     $file_nota = $_FILES['file_nota']['tmp_name'];
     $nama_file = $_POST['nama_file'];

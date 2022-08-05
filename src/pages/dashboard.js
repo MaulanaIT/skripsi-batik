@@ -299,41 +299,45 @@ export default function Dashboard() {
                     <div className={global.header}>
                         <p className={global.title}>Notifikasi Stok Minimum</p>
                     </div>
-                    {getDataNotification && getDataNotification.filter(item => !item.kode.includes('PESAN') && !item.kode.includes('PPS')).length > 0 ?
-                        getDataNotification.map((item, index) =>
-                            item.kode.includes('PESAN') ?
-                                null
-                                :
-                                item.kode.includes('PPS') ?
+                    <div className='overflow-auto' style={{ maxHeight: 326 }}>
+                        {getDataNotification && getDataNotification.filter(item => !item.kode.includes('PESAN') && !item.kode.includes('PPS')).length > 0 ?
+                            getDataNotification.map((item, index) =>
+                                item.kode.includes('PESAN') ?
                                     null
                                     :
-                                    <div key={index} className={style.item}>
-                                        <p className={style.description}>Stok barang <span className={style.green}>{item.kode} - {item.nama}</span> menipis.</p>
-                                    </div>
-                        )
-                        :
-                        <div className={cx([style.item, style.empty])}>
-                            <p className={style.description}>Tidak ada notifikasi</p>
-                        </div>
-                    }
+                                    item.kode.includes('PPS') ?
+                                        null
+                                        :
+                                        <div key={index} className={style.item}>
+                                            <p className={style.description}>Stok barang <span className={style.green}>{item.kode} - {item.nama}</span> menipis.</p>
+                                        </div>
+                            )
+                            :
+                            <div className={cx([style.item, style.empty])}>
+                                <p className={style.description}>Tidak ada notifikasi</p>
+                            </div>
+                        }
+                    </div>
                 </div>
                 <div className={global.card}>
                     <div className={global.header}>
                         <p className={global.title}>Notifikasi Pesanan</p>
                     </div>
-                    {getDataNotification && getDataNotification.filter(item => item.kode.includes('PESAN')).length > 0 ?
-                        getDataNotification.map((item, index) =>
-                            item.kode.includes('PESAN') &&
-                            <div key={index} className={cx([style.item, style.pesanan])}>
-                                <p className={style.description}>Transaksi pesanan produk telah masuk dengan nomor kode <span className={style.green}>{item.kode}</span></p>
-                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => InsertPermintaanPesanan(item)}>Terima</button>
+                    <div className='overflow-auto' style={{ maxHeight: 326 }}>
+                        {getDataNotification && getDataNotification.filter(item => item.kode.includes('PESAN')).length > 0 ?
+                            getDataNotification.map((item, index) =>
+                                item.kode.includes('PESAN') &&
+                                <div key={index} className={cx([style.item, style.pesanan])}>
+                                    <p className={style.description}>Transaksi pesanan produk telah masuk dengan nomor kode <span className={style.green}>{item.kode}</span></p>
+                                    <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => InsertPermintaanPesanan(item)}>Terima</button>
+                                </div>
+                            )
+                            :
+                            <div className={cx([style.item, style.empty])}>
+                                <p className={style.description}>Tidak ada notifikasi</p>
                             </div>
-                        )
-                        :
-                        <div className={cx([style.item, style.empty])}>
-                            <p className={style.description}>Tidak ada notifikasi</p>
-                        </div>
-                    }
+                        }
+                    </div>
                 </div>
             </div>
         </div>
