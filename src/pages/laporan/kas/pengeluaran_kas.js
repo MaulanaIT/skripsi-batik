@@ -82,6 +82,13 @@ export default function Pengeluaran_kas() {
             let dataExport = [];
 
             dataExport.push([
+                'Laporan Pengeluaran Kas',
+                '',
+                '',
+                ''
+            ]);
+
+            dataExport.push([
                 'Tanggal',
                 'Kode',
                 'Keterangan',

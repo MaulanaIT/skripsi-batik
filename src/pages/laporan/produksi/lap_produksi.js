@@ -82,6 +82,15 @@ export default function Lap_produksi() {
             let dataExport = [];
 
             dataExport.push([
+                'Laporan Produksi',
+                '',
+                '',
+                '',
+                '',
+                ''
+            ]);
+
+            dataExport.push([
                 'Tanggal',
                 'Kode',
                 'Jumlah',

@@ -43,6 +43,15 @@ export default function Piutang_konsinyasi() {
             let dataExport = [];
 
             dataExport.push([
+                'Laporan Piutang Konsinyasi',
+                '',
+                '',
+                '',
+                '',
+                ''
+            ]);
+
+            dataExport.push([
                 'Kode',
                 'Tanggal',
                 'Kode Consignee',

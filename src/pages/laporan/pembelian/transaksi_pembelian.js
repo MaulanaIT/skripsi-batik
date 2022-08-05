@@ -81,6 +81,20 @@ export default function Transaksi_pembelian() {
             let dataExport = [];
 
             dataExport.push([
+                'Laporan Transaksi Pembelian',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                ''
+            ]);
+
+            dataExport.push([
                 'Kode Kas Keluar',
                 'Kode Order',
                 'Tanggal',

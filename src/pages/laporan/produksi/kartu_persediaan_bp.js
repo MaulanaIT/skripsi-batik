@@ -139,6 +139,20 @@ export default function Kartu_persediaan_bp() {
             let dataExport = [];
 
             dataExport.push([
+                'Laporan Kartu Bahan Penolong',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                ''
+            ]);
+
+            dataExport.push([
                 'Tanggal',
                 'Nama',
                 'Unit Masuk',

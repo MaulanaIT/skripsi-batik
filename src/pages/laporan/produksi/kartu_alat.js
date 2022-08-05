@@ -139,6 +139,17 @@ export default function Kartu_alat() {
             let dataExport = [];
 
             dataExport.push([
+                'Laporan Kartu Alat',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                ''
+            ]);
+
+            dataExport.push([
                 'Tanggal',
                 'Nama',
                 'Unit Masuk',
