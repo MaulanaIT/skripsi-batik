@@ -146,16 +146,21 @@ export default function Jual_pesan() {
 
         let file = document.getElementById('input-file-transfer').files[0];
 
-        if (file) {
-            let arg = file.name.split('.');
-            let extension = arg[arg.length - 1];
-            formData.append('file_transfer', file);
-            formData.append('nama_file', `File Uang Muka - ${getValueKodeJual} - ${getValueTanggal}.${extension}`);
-        } else {
-            alert('Isi data dengan benar');
-            HideLoading();
-            return;
-        }
+
+            if (getValueKodeAkun?.value === '1102') {
+                let file = document.getElementById('input-file-transfer').files[0];
+
+                if (file) {
+                    let arg = file.name.split('.');
+                    let extension = arg[arg.length - 1];
+                    formData.append('file_transfer', file);
+                    formData.append('nama_file', `File Transfer - ${getValueKodeJual} - ${getValueTanggal}.${extension}`);
+                } else {
+                    alert('Isi data dengan benar');
+                    HideLoading();
+                    return;
+                }
+            }
 
 
         formData.append('kode', getValueKodeJual);
@@ -272,12 +277,12 @@ export default function Jual_pesan() {
                             <p className={`${global.title} col-3`}>Kembalian</p>
                             <input type="text" id='input-detail-kembalian' value={SetPriceFormat(getValueKembalian)} className={`col-4`} readOnly={true} />
                         </div>
-                        <div className='d-flex flex-column gap-5 pt-2'>
-                            <div>
+                        {getValueKodeAkun.value === '1102' &&
+                            <div className='align-items-center d-flex justify-content-between'>
                                 <p>Upload File Transfer</p>
-                                <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' />
+                                <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
                             </div>
-                        </div>
+                        }
                         <div className='d-flex flex-column gap-2 pt-2'>
                             <div className='d-flex'>
                                 <div className='col-6 pe-2'>

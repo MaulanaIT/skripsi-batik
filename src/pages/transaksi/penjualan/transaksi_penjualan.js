@@ -1922,7 +1922,7 @@ export class transaksi_penjualan extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Nama Tenaga Kerja</p>
-                                            <Select id='select-kode-btkl' name='select-kode-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeBTKL} placeholder={'Select Kode...'} value={valueNamaBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
+                                            <Select id='select-nama-btkl' name='select-nama-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaBTKL} placeholder={'Select Nama...'} value={valueNamaBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Departemen</p>
