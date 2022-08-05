@@ -8,6 +8,9 @@ import Select from 'react-select';
 import { baseURL, config, GenerateCode, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { Link, useLocation } from 'react-router-dom';
 
+// Import Component
+import PrintoutRefund from './printout_refund';
+
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
@@ -52,6 +55,7 @@ const CustomSelect = {
 export default function Pengembalian_dana() {
 
     const [getDataAkun, setDataAkun] = useState([]);
+    const [getDataRetur, setDataRetur] = useState([]);
     const [getDataDetailRetur, setDataDetailRetur] = useState([]);
     const [getDataSelectAkun, setDataSelectAkun] = useState([]);
     const [getValueJumlahUangDiterima, setValueJumlahUangDiterima] = useState(0);
@@ -108,7 +112,7 @@ export default function Pengembalian_dana() {
 
         axios.post(`${baseURL}/api/transaksi/pembelian/detail-retur/select.php`, formData, config).then(response => {
             let data = response.data.data;
-            
+
             setDataDetailRetur(data);
 
             HideLoading();
@@ -126,7 +130,7 @@ export default function Pengembalian_dana() {
 
         axios.get(`${baseURL}/api/transaksi/pembelian/refund/select.php`, config).then(response => {
             let data = response.data.data;
-            
+
             setValueKodeKasMasuk(GenerateCode('REF', data));
 
             HideLoading();
@@ -153,6 +157,8 @@ export default function Pengembalian_dana() {
             setValueKodeSupplier(data.kode_supplier);
             setValueNamaSupplier(data.nama_supplier);
 
+            setDataRetur(data);
+
             HideLoading();
         }).catch(error => {
             console.log(error);
@@ -167,7 +173,7 @@ export default function Pengembalian_dana() {
         ShowLoading();
 
         const formData = new FormData();
-        
+
         if (getValueSelectedAkun?.value === '1102') {
             let file = document.getElementById('input-file-transfer').files[0];
 
@@ -191,7 +197,12 @@ export default function Pengembalian_dana() {
         formData.append('data', JSON.stringify(getDataDetailRetur));
 
         axios.post(`${baseURL}/api/transaksi/pembelian/refund/insert.php`, formData, config).then(() => {
-            window.location.href = '/#/transaksi/pembelian/daftar-retur';
+            if (window.confirm("Apakah ingin mencetak nota?")) {
+                window.print();
+                window.location.href = '/#/transaksi/pembelian/daftar-retur';
+            } else {
+                window.location.href = '/#/transaksi/pembelian/daftar-retur';
+            }
         }).catch(error => {
             console.log(error);
 
@@ -203,6 +214,7 @@ export default function Pengembalian_dana() {
 
     return (
         <React.Fragment>
+            <PrintoutRefund data={getDataRetur} />
             <div className={style.header}>
                 <p className={style.title}>Pengembalian Dana</p>
                 <p className={style.pathname}>Penerimaan Kas / Pengembalian Dana </p>
@@ -247,10 +259,10 @@ export default function Pengembalian_dana() {
                     </div>
                     <div className='d-flex flex-column gap-5 pt-2'>
                         {getValueSelectedAkun.value === '1102' &&
-                        <div>
-                            <p>Upload File Transfer</p>
-                            <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' />
-                        </div>
+                            <div>
+                                <p>Upload File Transfer</p>
+                                <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' />
+                            </div>
                         }
                         <div className='d-flex'>
                             <div className='col-6 pe-2'>

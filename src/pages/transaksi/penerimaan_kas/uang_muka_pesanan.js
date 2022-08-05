@@ -9,6 +9,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md'
 import { baseURL, CheckInputValidity, config, GenerateCode, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
+// Import Component
+import PrintoutUangMuka from './printout_uang_muka';
+
 // Import CSS
 import global from '../../../css/global.module.css';
 import style from '../../../css/transaksi/penerimaan_kas/uang_muka_pesanan.module.css';
@@ -192,7 +195,12 @@ export default function Uang_muka_pesanan() {
             formData.append('jenis_penjualan', 'pesanan');
 
             axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/insert.php`, formData, config).then((response) => {
-                window.location.href = '/#/transaksi/penjualan/daftar-pesanan';
+                if (window.confirm("Apakah ingin mencetak nota?")) {
+                    window.print();
+                    window.location.href = '/#/transaksi/penjualan/daftar-pesanan';
+                } else {
+                    window.location.href = '/#/transaksi/penjualan/daftar-pesanan';
+                }
             }).catch(error => {
                 console.log(error);
 
@@ -211,6 +219,12 @@ export default function Uang_muka_pesanan() {
 
     return (
         <React.Fragment>
+            <PrintoutUangMuka
+                customer={getValueNamaCustomer}
+                kode={getValueKodePesanan}
+                tanggal={getValueTanggal}
+                uangMuka={getValueUangMuka}
+            />
             <div className={style.header}>
                 <p className={style.title}>Uang Muka Pesanan</p>
                 <p className={style.pathname}>Transaksi / Penerimaan Kas / Uang Muka Pesanan</p>
@@ -324,12 +338,12 @@ export default function Uang_muka_pesanan() {
                             <input type="text" id='input-sisa' className={`col-4`} value={SetPriceFormat(getValueSisa)} required={true} readOnly={true} />
                         </div>
                         <div className='d-flex flex-column gap-3 pt-2'>
-                        {getValueKodeAkun.value === '1102' &&
-                            <div className='align-items-center d-flex justify-content-between'>
-                                <p>Upload File Transfer</p>
-                                <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' />
-                            </div>
-                        }
+                            {getValueKodeAkun.value === '1102' &&
+                                <div className='align-items-center d-flex justify-content-between'>
+                                    <p>Upload File Transfer</p>
+                                    <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' />
+                                </div>
+                            }
                             <div className='d-flex'>
                                 <div className='col-6 pe-2'>
                                     <button type='button' className={`${global.button} w-100`} onClick={InsertUangMuka}>Simpan</button>

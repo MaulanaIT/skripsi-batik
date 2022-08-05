@@ -8,6 +8,9 @@ import Select from 'react-select';
 import { baseURL, config, cx, GenerateCode, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
+// Import Component
+import PrintoutPiutang from './printout_piutang';
+
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
@@ -237,7 +240,12 @@ export default function Terima_piutang() {
         formData.append('terima_piutang', getValueTerimaPiutang);
 
         axios.post(`${baseURL}/api/transaksi/penerimaan-kas/terima-piutang/insert.php`, formData, config).then(() => {
-            window.location.reload();
+            if (window.confirm("Apakah ingin mencetak nota?")) {
+                window.print();
+                window.location.reload();
+            } else {
+                window.location.reload();
+            }
         }).catch(error => {
             console.log(error);
 
@@ -261,6 +269,13 @@ export default function Terima_piutang() {
 
     return (
         <React.Fragment>
+            <PrintoutPiutang
+                consignee={getValueNamaConsignee}
+                kode={getValueKodeTerimaPiutang}
+                sisa={getValueSisaPiutang}
+                tanggal={getValueTanggal}
+                terimaPiutang={getValueTerimaPiutang}
+            />
             <div className={style.header}>
                 <p className={style.title}>Terima Piutang</p>
                 <p className={style.pathname}>Transaksi / Penerimaan Kas / Terima Piutang</p>
@@ -276,44 +291,44 @@ export default function Terima_piutang() {
                         </div>
                     </div>
                     <div className={global.card}>
-                            <div className={`table-responsive ${getSelectedTab !== 0 && 'd-none'}`}>
-                                <table id='table-data-belum-lunas' className={`table w-100`}>
-                                    <thead className='text-nowrap'>
-                                        <tr>
-                                            <td>No.</td>
-                                            <td>Kode Jual</td>
-                                            <td>Tanggal</td>
-                                            <td>Kode Consignee</td>
-                                            <td>Nama Consignee</td>
-                                            <td>Jumlah Piutang</td>
-                                            <td>Terima Piutang</td>
-                                            <td>Sisa Piutang</td>
-                                            <td>Aksi</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {getHTMLTableDaftarBelumLunas}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div className={`table-responsive ${getSelectedTab !== 1 && 'd-none'}`}>
-                                <table id='table-data-lunas' className={`table w-100`}>
-                                    <thead className='text-nowrap'>
-                                        <tr>
-                                            <td>No.</td>
-                                            <td>Kode Jual</td>
-                                            <td>Tanggal</td>
-                                            <td>Kode Consignee</td>
-                                            <td>Nama Consignee</td>
-                                            <td>Jumlah Piutang</td>
-                                            <td>Aksi</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {getHTMLTableDaftarLunas}
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div className={`table-responsive ${getSelectedTab !== 0 && 'd-none'}`}>
+                            <table id='table-data-belum-lunas' className={`table w-100`}>
+                                <thead className='text-nowrap'>
+                                    <tr>
+                                        <td>No.</td>
+                                        <td>Kode Jual</td>
+                                        <td>Tanggal</td>
+                                        <td>Kode Consignee</td>
+                                        <td>Nama Consignee</td>
+                                        <td>Jumlah Piutang</td>
+                                        <td>Terima Piutang</td>
+                                        <td>Sisa Piutang</td>
+                                        <td>Aksi</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {getHTMLTableDaftarBelumLunas}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className={`table-responsive ${getSelectedTab !== 1 && 'd-none'}`}>
+                            <table id='table-data-lunas' className={`table w-100`}>
+                                <thead className='text-nowrap'>
+                                    <tr>
+                                        <td>No.</td>
+                                        <td>Kode Jual</td>
+                                        <td>Tanggal</td>
+                                        <td>Kode Consignee</td>
+                                        <td>Nama Consignee</td>
+                                        <td>Jumlah Piutang</td>
+                                        <td>Aksi</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {getHTMLTableDaftarLunas}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div className={`col-12 col-md-5 ps-md-2 pt-2 pt-md-0`}>
@@ -364,12 +379,12 @@ export default function Terima_piutang() {
                                 <input type="text" id='input-terima-piutang' name='input-terima-piutang' value={getValueTerimaPiutang} onChange={e => setValueTerimaPiutang(e.target.value)} required={true} />
                             </div>
                             <div>
-                            {getValueKodeAkun.value === '1102' &&
-                                <div className='align-items-center d-flex justify-content-between'>
-                                    <p>Upload File Transfer</p>
-                                    <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
-                                </div>
-                            }
+                                {getValueKodeAkun.value === '1102' &&
+                                    <div className='align-items-center d-flex justify-content-between'>
+                                        <p>Upload File Transfer</p>
+                                        <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
+                                    </div>
+                                }
                             </div>
                         </div>
                         <div className='d-flex'>

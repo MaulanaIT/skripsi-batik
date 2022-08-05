@@ -1,7 +1,7 @@
 <?php
 require_once '../../../config/connection.php';
 
-$query = "SELECT retur_pembelian.*, SUM(detail_retur.jumlah) AS jumlah_retur, master_supplier.nama AS nama_supplier 
+$query = "SELECT retur_pembelian.*, SUM(detail_retur.jumlah) AS jumlah_retur, master_supplier.nama AS nama_supplier, master_supplier.alamat AS alamat_supplier
             FROM retur_pembelian 
             INNER JOIN master_supplier 
             ON retur_pembelian.kode_supplier = master_supplier.kode

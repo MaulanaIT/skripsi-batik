@@ -8,6 +8,9 @@ import Select from 'react-select';
 import { Link, useLocation } from 'react-router-dom';
 import { baseURL, Calculate, config, GenerateCode, HideLoading, InputFormatNumber, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
+// Import Component
+import PrintoutKasKeluar from './printout_kas_keluar';
+
 // Import CSS
 import global from '../../../css/global.module.css';
 import style from '../../../css/transaksi/pembelian/pengeluaran_kas.module.css';
@@ -48,9 +51,9 @@ const CustomSelect = {
 }
 
 export default function Pengeluaran_kas() {
-
     const [getDataAkun, setDataAkun] = useState([]);
     const [getDataDetailPembelian, setDataDetailPembelian] = useState([]);
+    const [getDataPembelian, setDataPembelian] = useState([]);
     const [getDataSelectAkun, setDataSelectAkun] = useState([]);
     const [getHTMLDetailOrder, setHTMLDetailOrder] = useState([]);
     const [getValueDiskon, setValueDiskon] = useState(0);
@@ -193,6 +196,7 @@ export default function Pengeluaran_kas() {
             setValueNamaSupplier(data.nama_supplier);
             setValueTanggalBayar(moment().format('YYYY-MM-DD'));
             setValueTanggalOrder(data.tanggal);
+            setDataPembelian(data);
 
             HideLoading();
         }).catch(error => {
@@ -237,13 +241,18 @@ export default function Pengeluaran_kas() {
         formData.append('total_bayar', getValueTotalBayar)
         formData.append('kode_akun', getValueSelectedAkun.value);
 
-        axios.post(`${baseURL}/api/transaksi/pembelian/pengeluaran-kas/insert.php`, formData, config).then(response => {
+        axios.post(`${baseURL}/api/transaksi/pembelian/pengeluaran-kas/insert.php`, formData, config).then(() => {
             const formDetailData = new FormData();
 
             formDetailData.append('data', JSON.stringify(getDataDetailPembelian));
 
             axios.post(`${baseURL}/api/transaksi/pembelian/detail-pengeluaran-kas/insert.php`, formDetailData, config).then(() => {
-                window.location.href = '/#/transaksi/pembelian/daftar-terima-barang';
+                if (window.confirm("Apakah ingin mencetak nota?")) {
+                    window.print();
+                    window.location.href = '/#/transaksi/pembelian/daftar-terima-barang';
+                } else {
+                    window.location.href = '/#/transaksi/pembelian/daftar-terima-barang';
+                }
             }).catch(error => {
                 console.log(error);
 
@@ -262,6 +271,7 @@ export default function Pengeluaran_kas() {
 
     return (
         <React.Fragment>
+            <PrintoutKasKeluar data={getDataPembelian} dataDetail={getDataDetailPembelian} diskon={getValueDiskon} ongkosKirim={getValueOngkosKirim} total={getValueTotalPembelian} totalJual={getValueTotalBayar} />
             <div className={style.header}>
                 <p className={style.title}>Pengeluaran Kas</p>
                 <p className={style.pathname}>Transaksi / Pembelian / Pengeluaran Kas</p>
@@ -376,10 +386,10 @@ export default function Pengeluaran_kas() {
                             </div>
                             <div className='d-flex flex-column gap-2 pt-2'>
                                 {getValueSelectedAkun.value === '1102' &&
-                                <div className='align-items-center d-flex justify-content-between'>
-                                    <p>Upload File Transfer</p>
-                                    <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' />
-                                </div>
+                                    <div className='align-items-center d-flex justify-content-between'>
+                                        <p>Upload File Transfer</p>
+                                        <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' />
+                                    </div>
                                 }
                                 <div className='d-flex'>
                                     <div className='col-6 pe-2'>

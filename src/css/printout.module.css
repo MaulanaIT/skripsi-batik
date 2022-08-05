@@ -1,0 +1,90 @@
+.container {
+    background-color: white;
+    height: 100%;
+    left: 0;
+    padding: 24px;
+    position: fixed;
+    top: 0;
+    visibility: hidden;   
+    width: 100%;
+    z-index: 100;
+}
+
+.container * {
+    color: black;
+}
+
+.container>.box {
+    border: 2px solid black;
+    padding: 12px;
+    width: 100%;
+}
+
+.container>.box>.date {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+    margin-bottom: 12px;
+}
+
+.container>.box>.date * {
+    font-size: 16px;
+    padding-top: 8px;
+}
+
+.container>.box>.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container>.box>.header>.code {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.container>.box>.header>.company {
+    display: flex;
+    gap: 6px;
+}
+
+.container>.box>.header>.company>.description {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.container>.box>.header>.company>.description>.title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.container>.box>.header>.company>.description>.detail {
+    font-size: 14px;
+}
+
+.container>.box>.signature {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    width: 100%;
+}
+
+.container>.box>.signature>.sign {
+    margin-left: auto;
+    width: 240px;
+}
+
+.container>.box>.table,
+.container>.box>.table>tr,
+.container>.box>.table>tr>th,
+.container>.box>.table>tr>td {
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    margin-bottom: 24px;
+}
+
+.container>.box>.title {
+    font-size: 32px;
+    font-weight: bold;
+    padding-top: 24px;
+    padding-bottom: 16px;
+    text-align: center;
+}

@@ -9,6 +9,7 @@ import { MdAdd } from 'react-icons/md';
 import { baseURL, config, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
 import DetailOrder from './detail_order';
+import PrintoutOrder from './printout_order';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -17,6 +18,9 @@ import style from '../../../css/transaksi/pembelian/order_pembelian.module.css';
 export class daftar_order extends Component {
 
     state = {
+        dataSelectedItem: [],
+        dataDetailSelectedItem: [],
+
         htmlTableDaftarOrder: [],
         selectedJenisPembelian: '',
         selectedKodeOrder: '',
@@ -39,6 +43,22 @@ export class daftar_order extends Component {
         }).catch(error => {
             HideLoading();
 
+            console.log(error);
+        });
+    }
+    
+    GetDetail = () => {
+        const formData = new FormData();
+
+        formData.append('kode', this.state.dataSelectedItem.kode);
+
+        axios.post(`${baseURL}/api/transaksi/pembelian/detail-order/select.php`, formData, config).then(response => {
+            let data = response.data.data;
+            
+            this.setState({dataDetailSelectedItem: data}, () => {
+                window.print();
+            });
+        }).catch(error => {
             console.log(error);
         });
     }
@@ -85,7 +105,7 @@ export class daftar_order extends Component {
                                             <button type='button' id='button-detail' className={global.edit} style={{ gridColumn: '2 span' }}
                                                 onClick={() => this.SelectDetail(item.kode, parseInt(item.status), item.jenis_pembelian)}><FaClipboardList /> Detail</button>
                                         }
-                                        <button type='button' id='button-print' className={global.apply}><FaPrint /> Print</button>
+                                        <button type='button' id='button-print' className={global.apply} onClick={() => this.PrintNota(item)}><FaPrint /> Print</button>
                                         {+item.status <= 1 &&
                                             <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteOrder(item.kode)}><FaTrash /> Delete</button>
                                         }
@@ -111,6 +131,12 @@ export class daftar_order extends Component {
         });
     }
 
+    PrintNota = (data) => {
+        this.setState({ dataSelectedItem: data }, () => {
+            this.GetDetail();
+        });
+    }
+
     SelectDetail = (data, status, jenis) => {
         this.setState({ selectedKodeOrder: data, selectedStatusOrder: status, selectedJenisPembelian: jenis }, () => {
             document.getElementById('detail-order').classList.remove('d-none');
@@ -121,6 +147,8 @@ export class daftar_order extends Component {
         return (
             <>
                 <DetailOrder jenis={this.state.selectedJenisPembelian} kode={this.state.selectedKodeOrder} status={this.state.selectedStatusOrder} />
+                <PrintoutOrder data={this.state.dataSelectedItem} dataDetail={this.state.dataDetailSelectedItem} />
+
                 <div className={style.header}>
                     <p className={style.title}>Order Pembelian</p>
                     <p className={style.pathname}>Transaksi / Pembelian / Order Pembelian</p>

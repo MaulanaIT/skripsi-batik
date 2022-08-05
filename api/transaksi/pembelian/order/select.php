@@ -1,7 +1,7 @@
 <?php
 require_once '../../../config/connection.php';
 
-$query = "SELECT order_pembelian.*, master_supplier.nama AS nama_supplier 
+$query = "SELECT order_pembelian.*, master_supplier.nama AS nama_supplier, master_supplier.alamat AS alamat_supplier 
             FROM order_pembelian 
             INNER JOIN master_supplier 
             ON order_pembelian.kode_supplier = master_supplier.kode";
