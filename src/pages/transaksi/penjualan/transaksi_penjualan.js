@@ -107,6 +107,7 @@ export class transaksi_penjualan extends Component {
         valueHargaJual: 0,
         valueHpp: 0,
         valueJumlah: 0,
+        valueJumlahMax: 0,
         valueJumlahAlat: 0,
         valueJumlahBahan: 0,
         valueJumlahBTKL: 0,
@@ -174,6 +175,11 @@ export class transaksi_penjualan extends Component {
             valueHpp,
             valueTotalHpp
         } = this.state;
+
+        if (+valueJumlah < 0) {
+            alert('Jumlah tidak boleh minus');
+            return;
+        }
 
         if (this.state.jenisPenjualan.toLowerCase() === 'tunai') {
             if (!CheckInputValidity('form-data') || this.state.valueKodeCustomer.length <= 0 || valueKodeProduk.length <= 0) {
@@ -1405,10 +1411,13 @@ export class transaksi_penjualan extends Component {
             let valueNama = this.state.dataSelectNamaProduk.find(item => item.value === data?.value);
             let harga = this.state.dataProduk.find(item => item.kode === valueKode.value).harga_jual;
             let hpp = this.state.dataProduk.find(item => item.kode === valueKode.value).hpp_per_produk;
+            let jumlahMax = this.state.dataProduk.find(item => item.kode === valueKode.value).jumlah;
 
-            this.setState({ valueHarga: harga, valueHpp: hpp, valueKodeProduk: valueKode, valueNamaProduk: valueNama });
+            console.log(this.state.dataProduk.find(item => item.kode === valueKode.value))
+
+            this.setState({ valueJumlahMax: jumlahMax, valueHarga: harga, valueHpp: hpp, valueKodeProduk: valueKode, valueNamaProduk: valueNama });
         } else {
-            this.setState({ valueHarga: 0, valueHpp: 0, valueKodeProduk: '', valueNamaProduk: '' });
+            this.setState({ valueJumlahMax: 0, valueHarga: 0, valueHpp: 0, valueKodeProduk: '', valueNamaProduk: '' });
         }
     }
 
@@ -1588,8 +1597,8 @@ export class transaksi_penjualan extends Component {
                                             <div className={`${bootstrap['d-flex']}`}>
                                                 <div className={`${global.input_group} col-4 pe-2`}>
                                                     <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                                    <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={e => this.setState({
-                                                        valueJumlah: e.target.value,
+                                                    <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} min={0} onInput={InputFormatNumber} onChange={e => this.setState({
+                                                            valueJumlah: +e.target.value > +this.state.valueJumlahMax ? this.state.valueJumlahMax : e.target.value,
                                                         valueTotalHpp: +e.target.value * +valueHpp
                                                     })} required={true} />
                                                 </div>
@@ -1651,7 +1660,7 @@ export class transaksi_penjualan extends Component {
                                                 <div className='d-flex'>
                                                     <div className={`${global.input_group} col-4 pe-2`}>
                                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                                        <input type="text" id='valueJumlah' value={valueJumlah} onChange={async e => {
+                                                        <input type="text" id='valueJumlah' value={valueJumlah} min={0} onChange={async e => {
                                                             await this.InputChange(e);
                                                             this.KalkulasiHargaJual();
                                                             this.setState({
@@ -1720,8 +1729,8 @@ export class transaksi_penjualan extends Component {
                                                 <div className={`${bootstrap['d-flex']}`}>
                                                     <div className={`${global.input_group} col-4 pe-2`}>
                                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                                        <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={e => this.setState({
-                                                            valueJumlah: e.target.value,
+                                                        <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} min={0} onInput={InputFormatNumber} onChange={e => this.setState({
+                                                            valueJumlah: +e.target.value > +this.state.valueJumlahMax ? this.state.valueJumlahMax : e.target.value,
                                                             valueTotalHpp: +e.target.value * +valueHpp
                                                         })} required={true} />
                                                     </div>
