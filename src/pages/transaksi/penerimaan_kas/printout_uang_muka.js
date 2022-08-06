@@ -8,7 +8,7 @@ import Logo from '../../../assets/images/logo.jpg';
 // Import CSS
 import style from '../../../css/printout.module.css';
 
-export default function Printout_uang_muka({ customer, kode, tanggal, uangMuka }) {
+export default function Printout_uang_muka({ customer, kode, tanggal, uangMuka, totalHarga }) {
     return (
         <div className={cx([style.container, 'print'])}>
             <div className={style.box}>
@@ -45,6 +45,11 @@ export default function Printout_uang_muka({ customer, kode, tanggal, uangMuka }
                                 <td>{SetPriceFormat(uangMuka)}</td>
                             </tr>
                             <tr>
+                                <td>Nilai Pesanan</td>
+                                <td>:</td>
+                                <td>{SetPriceFormat(totalHarga)}</td>
+                            </tr>
+                            <tr>
                                 <td>Pembayaran</td>
                                 <td>:</td>
                                 <td>Konsinyasi Penjualan Batik</td>
@@ -52,7 +57,6 @@ export default function Printout_uang_muka({ customer, kode, tanggal, uangMuka }
                         </tbody>
                     </table>
                 </div>
-                <p>Kami ucapkan terima kasih telah bermitra kerja sama dengan Kami.</p>
                 <div className={style.signature}>
                     <div className={style.sign}>
                         <p>Hormat Kami,</p>
