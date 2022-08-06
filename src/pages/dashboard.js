@@ -190,7 +190,7 @@ export default function Dashboard() {
 
             if (data && data.length > 0) {
                 for (const item of data) {
-                    labelGrafik.push(item.tanggal);
+                    labelGrafik.some(data => data === item.tanggal) === false && labelGrafik.push(item.tanggal);
                     dataGrafik.push({
                         label: 'Penjualan Pesanan',
                         data: item.total_harga,
