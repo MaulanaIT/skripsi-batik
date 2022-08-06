@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else if ($jenis_penjualan == 'konsinyasi') {
         $query = "SELECT a.tanggal, SUM(c.total_harga) AS total_harga FROM penjualan_konsinyasi a INNER JOIN detail_penjualan c ON a.kode = c.kode WHERE a.kode LIKE 'JK%' AND a.tanggal >= '".$tanggal_awal."' AND a.tanggal <= '".$tanggal_akhir."' GROUP BY a.tanggal";
     } else if ($jenis_penjualan == 'pesanan') {
-        $query = "SELECT a.tanggal, SUM(c.total_harga) AS total_harga FROM penjualan_pesanan a INNER JOIN detail_penjualan c ON a.kode = c.kode WHERE a.kode LIKE 'JP%' AND a.tanggal >= '".$tanggal_awal."' AND a.tanggal <= '".$tanggal_akhir."' GROUP BY a.tanggal";
+        $query = "SELECT tanggal, SUM(total_harga) AS total_harga FROM penjualan_pesanan WHERE kode LIKE 'JP%' AND tanggal >= '".$tanggal_awal."' AND tanggal <= '".$tanggal_akhir."' GROUP BY tanggal";
     }
 
     $result = $conn->query($query);
