@@ -287,14 +287,10 @@ export default function Hpp() {
         let htmlTableDaftarDetailOverhead = [];
         let htmlTableDaftarDetailTenagaKerja = [];
 
-        $(`#table-data-bahan-baku`).DataTable().destroy();
-        $(`#table-data-tenaga-kerja`).DataTable().destroy();
-        $(`#table-data-overhead`).DataTable().destroy();
-
         if (BahanBaku && BahanBaku.length > 0) {
             BahanBaku.forEach((item, index) => {
                 htmlTableDaftarDetailBahanBaku.push(
-                    <tr key={index} className={'align-middle'}>
+                    <tr key={`bahan-${index}`} className={'align-middle'}>
                         <td>{item.tanggal}</td>
                         <td>{SetPriceFormat(item.harga)}</td>
                         <td>{SetNumberFormat(item.jumlah)}</td>
@@ -307,7 +303,7 @@ export default function Hpp() {
         if (TenagaKerja && TenagaKerja.length > 0) {
             TenagaKerja.forEach((item, index) => {
                 htmlTableDaftarDetailTenagaKerja.push(
-                    <tr key={index} className={'align-middle'}>
+                    <tr key={`tenaga-kerja-${index}`} className={'align-middle'}>
                         <td>{item.tanggal}</td>
                         <td>{SetPriceFormat(item.harga)}</td>
                         <td>{SetNumberFormat(item.jumlah)}</td>
@@ -320,7 +316,7 @@ export default function Hpp() {
         if (Alat && Alat.length > 0) {
             Alat.forEach((item, index) => {
                 htmlTableDaftarDetailOverhead.push(
-                    <tr key={index} className={'align-middle'}>
+                    <tr key={`overhead-${index}`} className={'align-middle'}>
                         <td>{item.tanggal}</td>
                         <td>{SetPriceFormat(item.harga)}</td>
                         <td>{SetNumberFormat(item.jumlah)}</td>
