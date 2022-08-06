@@ -52,7 +52,7 @@ export default function Printout_uang_muka({ customer, kode, tanggal, uangMuka, 
                             <tr>
                                 <td>Pembayaran</td>
                                 <td>:</td>
-                                <td>Konsinyasi Penjualan Batik</td>
+                                <td>Uang Muka Pesanan</td>
                             </tr>
                         </tbody>
                     </table>
