@@ -166,7 +166,8 @@ export default function Jual_pesan() {
         }
 
         if (+getValueTotalBayar < +getValueSisa) {
-            alert('Pembayaran harus melebihi sisa');
+            alert('Pembayaran harus melebihi total harga');
+            HideLoading();
             return;
         }
 
