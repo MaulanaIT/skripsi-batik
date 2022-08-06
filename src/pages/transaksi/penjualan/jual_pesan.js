@@ -165,6 +165,10 @@ export default function Jual_pesan() {
             }
         }
 
+        if (+getValueTotalBayar < +getValueSisa) {
+            alert('Pembayaran harus melebihi sisa');
+            return;
+        }
 
         formData.append('kode', getValueKodeJual);
         formData.append('kode_akun', getValueKodeAkun.value);
