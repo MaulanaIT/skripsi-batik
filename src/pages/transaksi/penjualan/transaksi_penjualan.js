@@ -9,6 +9,9 @@ import { MdAdd } from 'react-icons/md'
 import { FaTrash } from 'react-icons/fa';
 import { baseURL, Calculate, CheckInputValidity, config, GenerateCode, HideLoading, InputFormatNumber, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
+// Import Component
+import PrintoutPenjualan from './printout_penjualan';
+
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
@@ -1198,7 +1201,16 @@ export class transaksi_penjualan extends Component {
         }
 
         axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/insert.php`, formData, config).then(() => {
-            window.location.reload();
+            if (jenisPenjualan.toLowerCase() === 'tunai') {
+                if (window.confirm("Apakah ingin mencetak nota?")) {
+                    window.print();
+                    window.location.reload();
+                } else {
+                    window.location.reload();
+                }
+            } else {
+                window.location.reload();
+            }
         }).catch(error => {
             console.log(error);
 
@@ -1522,7 +1534,9 @@ export class transaksi_penjualan extends Component {
         } = this.state;
 
         return (
-            <>
+            <React.Fragment>
+                <PrintoutPenjualan bayar={valueTotalBayar} data={this.state.dataTunai} diskon={valueDiskon} ongkosKirim={valueOngkosKirim} kembalian={Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim])} tanggal={valueTanggal} totalJual={valueTotalJual} />
+
                 <div className={style.header}>
                     <p className={style.title}>Transaksi Penjualan</p>
                     <p className={style.pathname}>Transaksi / Penjualan / Transaksi Penjualan</p>
@@ -2104,7 +2118,7 @@ export class transaksi_penjualan extends Component {
                             </div>
                         : null}
                 </div>
-            </>
+            </React.Fragment>
         )
     }
 }

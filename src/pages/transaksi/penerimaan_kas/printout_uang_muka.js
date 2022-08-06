@@ -28,26 +28,28 @@ export default function Printout_uang_muka({ customer, kode, tanggal, uangMuka }
                 </p>
                 <div className={style.date}>
                     <table className='table w-50'>
-                        <tr>
-                            <td>Tanggal</td>
-                            <td>:</td>
-                            <td>{tanggal}</td>
-                        </tr>
-                        <tr>
-                            <td>Sudah Diterima Dari</td>
-                            <td>:</td>
-                            <td>{customer}</td>
-                        </tr>
-                        <tr>
-                            <td>Sebesar</td>
-                            <td>:</td>
-                            <td>{SetPriceFormat(uangMuka)}</td>
-                        </tr>
-                        <tr>
-                            <td>Pembayaran</td>
-                            <td>:</td>
-                            <td>Konsinyasi Penjualan Batik</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td>Tanggal</td>
+                                <td>:</td>
+                                <td>{tanggal}</td>
+                            </tr>
+                            <tr>
+                                <td>Sudah Diterima Dari</td>
+                                <td>:</td>
+                                <td>{customer}</td>
+                            </tr>
+                            <tr>
+                                <td>Sebesar</td>
+                                <td>:</td>
+                                <td>{SetPriceFormat(uangMuka)}</td>
+                            </tr>
+                            <tr>
+                                <td>Pembayaran</td>
+                                <td>:</td>
+                                <td>Konsinyasi Penjualan Batik</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <p>Kami ucapkan terima kasih telah bermitra kerja sama dengan Kami.</p>
