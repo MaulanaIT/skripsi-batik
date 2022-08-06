@@ -38,8 +38,12 @@ ChartJS.register(
 
 export default function Dashboard() {
 
-    const [getLabelGrafik, setLabelGrafik] = useState([]);
-    const [getDataGrafik, setDataGrafik] = useState([]);
+    const [getLabelGrafikTunai, setLabelGrafikTunai] = useState([]);
+    const [getDataGrafikTunai, setDataGrafikTunai] = useState([]);
+    const [getLabelGrafikKonsinyasi, setLabelGrafikKonsinyasi] = useState([]);
+    const [getDataGrafikKonsinyasi, setDataGrafikKonsinyasi] = useState([]);
+    const [getLabelGrafikPesanan, setLabelGrafikPesanan] = useState([]);
+    const [getDataGrafikPesanan, setDataGrafikPesanan] = useState([]);
     const [getDataNotification, setDataNotification] = useState([]);
 
     const [getValueKodePesanan, setValueKodePesanan] = useState([]);
@@ -92,12 +96,8 @@ export default function Dashboard() {
         });
     }
 
-    const GetPenjualan = async () => {
+    const GetPenjualan = () => {
         ShowLoading();
-
-        let labelGrafik = [];
-
-        let dataGrafik = [];
 
         const formDataTunai = new FormData();
 
@@ -105,30 +105,21 @@ export default function Dashboard() {
         formDataTunai.append('tanggal_awal', getValueTanggalAwal);
         formDataTunai.append('tanggal_akhir', getValueTanggalAkhir);
 
-        await axios.post(`${baseURL}/api/laporan/penjualan/transaksi/select.php`, formDataTunai, config).then(response => {
+        axios.post(`${baseURL}/api/laporan/penjualan/transaksi/select-grafik.php`, formDataTunai, config).then(response => {
             let data = response.data.data;
 
-            console.log(data);
+            let labelGrafik = [];
+            let dataGrafik = [];
 
             if (data && data.length > 0) {
                 for (const item of data) {
                     labelGrafik.push(item.tanggal);
-                    dataGrafik.push({
-                        label: 'Penjualan Tunai',
-                        data: item.total_harga,
-                        backgroundColor: [
-                            "#ffbb11",
-                            "#ecf0f1",
-                            "#50AF95",
-                            "#f3ba2f",
-                            "#2a71d0"
-                        ],
-                        borderColor: '#f3ba2f',
-                        borderWidth: 2,
-                        tension: 0.3
-                    });
+                    dataGrafik.push(item.total_harga);
                 }
             }
+
+            setLabelGrafikTunai(labelGrafik);
+            setDataGrafikTunai(dataGrafik);
 
             HideLoading();
         }).catch(error => {
@@ -145,30 +136,21 @@ export default function Dashboard() {
         formDataKonsinyasi.append('tanggal_awal', getValueTanggalAwal);
         formDataKonsinyasi.append('tanggal_akhir', getValueTanggalAkhir);
 
-        await axios.post(`${baseURL}/api/laporan/penjualan/transaksi/select.php`, formDataKonsinyasi, config).then(response => {
+        axios.post(`${baseURL}/api/laporan/penjualan/transaksi/select-grafik.php`, formDataKonsinyasi, config).then(response => {
             let data = response.data.data;
 
-            console.log(data);
+            let labelGrafik = [];
+            let dataGrafik = [];
 
             if (data && data.length > 0) {
                 for (const item of data) {
                     labelGrafik.push(item.tanggal);
-                    dataGrafik.push({
-                        label: 'Penjualan Konsinyasi',
-                        data: item.total_harga,
-                        backgroundColor: [
-                            "#ffbb11",
-                            "#ecf0f1",
-                            "#50AF95",
-                            "#f3ba2f",
-                            "#2a71d0"
-                        ],
-                        borderColor: '#ffbb11',
-                        borderWidth: 2,
-                        tension: 0.3
-                    });
+                    dataGrafik.push(item.total_harga);
                 }
             }
+
+            setLabelGrafikKonsinyasi(labelGrafik);
+            setDataGrafikKonsinyasi(dataGrafik);
 
             HideLoading();
         }).catch(error => {
@@ -185,28 +167,21 @@ export default function Dashboard() {
         formDataPesanan.append('tanggal_awal', getValueTanggalAwal);
         formDataPesanan.append('tanggal_akhir', getValueTanggalAkhir);
 
-        await axios.post(`${baseURL}/api/laporan/penjualan/transaksi/select.php`, formDataPesanan, config).then(response => {
+        axios.post(`${baseURL}/api/laporan/penjualan/transaksi/select-grafik.php`, formDataPesanan, config).then(response => {
             let data = response.data.data;
+
+            let labelGrafik = [];
+            let dataGrafik = [];
 
             if (data && data.length > 0) {
                 for (const item of data) {
-                    labelGrafik.some(data => data === item.tanggal) === false && labelGrafik.push(item.tanggal);
-                    dataGrafik.push({
-                        label: 'Penjualan Pesanan',
-                        data: item.total_harga,
-                        backgroundColor: [
-                            "#ffbb11",
-                            "#ecf0f1",
-                            "#50AF95",
-                            "#f3ba2f",
-                            "#2a71d0"
-                        ],
-                        borderColor: '#2a71d0',
-                        borderWidth: 2,
-                        tension: 0.3
-                    });
+                    labelGrafik.push(item.tanggal);
+                    dataGrafik.push(item.total_harga);
                 }
             }
+
+            setLabelGrafikPesanan(labelGrafik);
+            setDataGrafikPesanan(dataGrafik);
 
             HideLoading();
         }).catch(error => {
@@ -216,12 +191,6 @@ export default function Dashboard() {
 
             HideLoading();
         });
-
-        console.log(labelGrafik);
-        console.log(dataGrafik);
-
-        setLabelGrafik(labelGrafik);
-        setDataGrafik(dataGrafik);
     }
 
     const InsertPermintaanPesanan = (data) => {
@@ -257,19 +226,25 @@ export default function Dashboard() {
                     <input type="date" value={getValueTanggalAkhir} readOnly={true} />
                 </div>
                 <div className={global.header}>
-                    <p className={global.title}>Grafik Penjualan</p>
+                    <p className={global.title}>Grafik Penjualan Tunai</p>
                 </div>
                 <div className={style.chart}>
                     <Line
                         data={{
-                            labels: getLabelGrafik,
-                            datasets: getDataGrafik
+                            labels: getLabelGrafikTunai,
+                            datasets: [{
+                                label: 'Penjualan Tunai',
+                                data: getDataGrafikTunai,
+                                borderColor: 'white',
+                                borderWidth: 2,
+                                tension: 0.3
+                            }]
                         }}
                         options={{
                             maintainAspectRatio: false,
                             plugins: {
                                 title: {
-                                    display: false
+                                    display: true
                                 },
                                 legend: {
                                     display: false
@@ -278,16 +253,120 @@ export default function Dashboard() {
                             responsive: true,
                             scales: {
                                 x: {
+                                    display: true,
                                     ticks: {
-                                        color: '#eaeeff'
+                                        color: 'white'
                                     },
-                                    grid: {
-                                        borderColor: 'rgba(0, 0, 0, 0)',
-                                        display: false
+                                    title: {
+                                        color: '#ffffff'
                                     }
                                 },
                                 y: {
+                                    display: true,
+                                    ticks: {
+                                        color: 'white'
+                                    },
+                                    title: {
+                                        color: '#ffffff'
+                                    }
+                                }
+                            }
+                        }}
+                    />
+                </div>
+                <div className={global.header}>
+                    <p className={global.title}>Grafik Penjualan Konsinyasi</p>
+                </div>
+                <div className={style.chart}>
+                    <Line
+                        data={{
+                            labels: getLabelGrafikKonsinyasi,
+                            datasets: [{
+                                label: 'Penjualan Konsinyasi',
+                                data: getDataGrafikKonsinyasi,
+                                borderColor: 'white',
+                                borderWidth: 2,
+                                tension: 0.3
+                            }]
+                        }}
+                        options={{
+                            maintainAspectRatio: false,
+                            plugins: {
+                                title: {
+                                    display: true
+                                },
+                                legend: {
                                     display: false
+                                }
+                            },
+                            responsive: true,
+                            scales: {
+                                x: {
+                                    display: true,
+                                    ticks: {
+                                        color: 'white'
+                                    },
+                                    title: {
+                                        color: '#ffffff'
+                                    }
+                                },
+                                y: {
+                                    display: true,
+                                    ticks: {
+                                        color: 'white'
+                                    },
+                                    title: {
+                                        color: '#ffffff'
+                                    }
+                                }
+                            }
+                        }}
+                    />
+                </div>
+                <div className={global.header}>
+                    <p className={global.title}>Grafik Penjualan Pesanan</p>
+                </div>
+                <div className={style.chart}>
+                    <Line
+                        data={{
+                            labels: getLabelGrafikPesanan,
+                            datasets: [{
+                                label: 'Penjualan Pesanan',
+                                data: getDataGrafikPesanan,
+                                borderColor: 'white',
+                                borderWidth: 2,
+                                tension: 0.3
+                            }]
+                        }}
+                        options={{
+                            maintainAspectRatio: false,
+                            plugins: {
+                                title: {
+                                    display: true
+                                },
+                                legend: {
+                                    display: false
+                                }
+                            },
+                            responsive: true,
+                            scales: {
+                                x: {
+                                    display: true,
+                                    ticks: {
+                                        color: 'white'
+                                    },
+                                    title: {
+                                        color: '#ffffff'
+                                    }
+                                },
+                                y: {
+                                    display: true,
+                                    ticks: {
+                                        color: 'white'
+                                    },
+                                    title: {
+                                        color: '#ffffff'
+                                    }
                                 }
                             }
                         }}

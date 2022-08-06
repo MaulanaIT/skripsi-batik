@@ -2053,7 +2053,7 @@ export class transaksi_penjualan extends Component {
                                                 <p className={`${global.title} col-3`}>Kembalian</p>
                                                 <input type="text" id='valueTotalKembalian' className={`col-4`} value={SetPriceFormat(Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim]))} readOnly={true} />
                                             </div>
-                                            {valueKodeAkun.value === '1102' &&
+                                            {valueKodeAkun?.value === '1102' &&
                                                 <div className='align-items-center d-flex justify-content-between'>
                                                     <p>Upload File Transfer</p>
                                                     <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />

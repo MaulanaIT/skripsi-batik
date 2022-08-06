@@ -13,12 +13,12 @@
 
 .container .chart {
     height: 100%;
-    padding: 24px;
+    padding-bottom: 24px;
     position: relative;
 }
 
 .container .chart>* {
-    height: 100%;
+    height: 240px !important;
     max-width: 100%;
     position: relative;
 }
@@ -29,6 +29,7 @@
 
 .container .item {
     background-color: rgba(0, 0, 0, 0.2);
+    font-size: 12px;
     padding: 12px;
 }
 
