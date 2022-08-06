@@ -852,8 +852,6 @@ const Add_hpp = (props, ref) => {
 
         formData.append('kode', getValueKodeBiayaTenagaKerja);
 
-        console.log(getDataDetailTenagaKerja)
-
         if (props.isUpdate) {
             formData.append('kode_hpp', props.dataSelected.kode);
             formData.append('kode_produksi', props.dataSelected.kode_produksi);
@@ -867,7 +865,7 @@ const Add_hpp = (props, ref) => {
         formData.append('tanggal', getValueTanggal);
         formData.append('data', JSON.stringify(getDataDetailTenagaKerja));
 
-        axios.post(`${baseURL}/api/transaksi/produksi/detail-tenaga-kerja/insert.php`, formData, config).then(response => {
+        axios.post(`${baseURL}/api/transaksi/produksi/detail-tenaga-kerja/insert.php`, formData, config).then(() => {
             HideLoading();
         }).catch(error => {
             console.log(error);

@@ -67,6 +67,11 @@ export default function Transaksi_penjualan() {
     const GetLaporan = () => {
         ShowLoading();
 
+        if (getValueJenis.length <= 0) {
+            alert('Pilih jenis penjualan');
+            return;
+        }
+
         const formData = new FormData();
 
         formData.append('jenis_penjualan', getValueJenis.value.toLowerCase());
@@ -120,7 +125,7 @@ export default function Transaksi_penjualan() {
                             <td>{SetNumberFormat(item.jumlah)}</td>
                             <td>{SetPriceFormat(item.harga)}</td>
                             <td>{SetPriceFormat(item.total_harga)}</td>
-                            <td></td>
+                            {/* <td></td> */}
                         </tr>
                     );
 
