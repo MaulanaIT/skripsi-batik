@@ -15,6 +15,8 @@ import global from '../../../css/global.module.css';
 
 export default function Detail_retur(props) {
 
+    const [getDataDetailRetur, setDataDetailRetur] = useState([]);
+    
     const [getHTMLTable, setHTMLTable] = useState([]);
 
     useEffect(() => {
@@ -93,6 +95,7 @@ export default function Detail_retur(props) {
             $(`#table-detail-data`).DataTable().destroy();
 
             setHTMLTable(htmlTable);
+            setDataDetailRetur(data);
             HideLoading();
         }).catch(error => {
             HideLoading();
@@ -108,6 +111,7 @@ export default function Detail_retur(props) {
 
         formData.append('kode', props.kode);
         formData.append('status', status);
+        formData.append('data', JSON.stringify(getDataDetailRetur));
 
         axios.post(`${baseURL}/api/transaksi/pembelian/retur/update-status.php`, formData, config).then(() => {
             window.location.reload();

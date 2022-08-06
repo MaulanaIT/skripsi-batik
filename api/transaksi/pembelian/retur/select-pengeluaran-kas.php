@@ -5,15 +5,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jenis_retur = $_POST['jenis_retur'];
 
     if ($jenis_retur == 'alat') {
-        $kode = 'ALAT%';
+        $kode = "ALAT%";
     } else if ($jenis_retur == 'bahan') {
-        $kode = 'BB%';
+        $kode = "'BB%' OR detail_pengeluaran_kas.kode_item LIKE 'BP%'";
     }
 
     $query = "SELECT pengeluaran_kas.*, master_supplier.nama AS nama_supplier FROM pengeluaran_kas 
                 INNER JOIN detail_pengeluaran_kas ON pengeluaran_kas.kode = detail_pengeluaran_kas.kode 
                 INNER JOIN master_supplier ON pengeluaran_kas.kode_supplier = master_supplier.kode
-                WHERE detail_pengeluaran_kas.kode_item LIKE '".$kode."' 
+                WHERE (detail_pengeluaran_kas.kode_item LIKE ".$kode.") 
                 AND pengeluaran_kas.kode NOT IN 
                 (SELECT kode_kas_keluar FROM retur_pembelian)";
 

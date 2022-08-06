@@ -194,7 +194,6 @@ export default function Pengembalian_dana() {
         formData.append('tanggal', getValueTanggal);
         formData.append('jumlah_terima', getValueJumlahUangDiterima);
         formData.append('kode_akun', getValueSelectedAkun.value);
-        formData.append('data', JSON.stringify(getDataDetailRetur));
 
         axios.post(`${baseURL}/api/transaksi/pembelian/refund/insert.php`, formData, config).then(() => {
             if (window.confirm("Apakah ingin mencetak nota?")) {

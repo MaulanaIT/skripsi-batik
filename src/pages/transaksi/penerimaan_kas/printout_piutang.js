@@ -51,7 +51,7 @@ export default function Printout_piutang({ consignee, kode, sisa, tanggal, terim
                         <tr>
                             <td>Sisa</td>
                             <td>:</td>
-                            <td>{SetPriceFormat(sisa)}</td>
+                            <td>{SetPriceFormat(+sisa - +terimaPiutang)}</td>
                         </tr>
                     </table>
                 </div>
