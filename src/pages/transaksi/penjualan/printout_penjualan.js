@@ -34,14 +34,23 @@ export default function Printout_penjualan({ bayar, data, diskon, jenis, ongkosK
                         </tr>
                     </thead>
                     <tbody>
-                        {(data && data.length > 0) && data.map((item, index) =>
-                            <tr key={index}>
-                                <td>{item.nama_item}</td>
-                                <td>{SetNumberFormat(item.jumlah)}</td>
-                                <td>{SetPriceFormat(item.harga)}</td>
-                                <td>{SetPriceFormat(item.total_harga)}</td>
+                        {(jenis === 'pesanan' && data.kode) ?
+                            <tr key={0}>
+                                <td>{data.nama}</td>
+                                <td>{SetNumberFormat(data.jumlah)}</td>
+                                <td>{SetPriceFormat(+data.total_harga / +data.jumlah)}</td>
+                                <td>{SetPriceFormat(data.total_harga)}</td>
                             </tr>
-                        )}
+                            :
+                            (data && data.length > 0) && data.map((item, index) =>
+                                <tr key={index}>
+                                    <td>{item.nama_item}</td>
+                                    <td>{SetNumberFormat(item.jumlah)}</td>
+                                    <td>{SetPriceFormat(item.harga)}</td>
+                                    <td>{SetPriceFormat(item.total_harga)}</td>
+                                </tr>
+                            )
+                        }
                     </tbody>
                 </table>
                 <div style={{ borderTop: '1px dashed black', marginBottom: 24, marginTop: 24, width: '100%' }}></div>
@@ -70,10 +79,20 @@ export default function Printout_penjualan({ bayar, data, diskon, jenis, ongkosK
                     </React.Fragment>
                 }
                 {jenis === 'pesanan' &&
-                    <div className='d-flex justify-content-between py-2'>
-                        <p>Uang Muka</p>
-                        <p>{SetPriceFormat(uangMuka)}</p>
-                    </div>
+                    <React.Fragment>
+                        <div className='d-flex justify-content-between py-2'>
+                            <p>Uang Muka</p>
+                            <p>{SetPriceFormat(uangMuka)}</p>
+                        </div>
+                        <div className='d-flex justify-content-between py-2'>
+                            <p>Pembayaran</p>
+                            <p>{SetPriceFormat(bayar)}</p>
+                        </div>
+                        <div className='d-flex justify-content-between py-2'>
+                            <p>Kembalian</p>
+                            <p>{SetPriceFormat(kembalian)}</p>
+                        </div>
+                    </React.Fragment>
                 }
                 <div className='align-items-center d-flex gap-2'>
                     <div style={{ borderTop: '1px dashed black', borderBottom: '1px dashed black', height: 8, marginBottom: 24, marginTop: 24, width: '100%' }}></div>

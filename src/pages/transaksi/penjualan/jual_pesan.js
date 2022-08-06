@@ -146,13 +146,8 @@ export default function Jual_pesan() {
     }
 
     const InsertJual = () => {
-
-        if (+getValueTotalBayar < +getValueSisa) {
-            alert('Pembayaran harus melebihi sisa');
-            return;
-        }
         ShowLoading();
-        
+
         const formData = new FormData();
 
         if (getValueKodeAkun?.value === '1102') {
@@ -168,6 +163,12 @@ export default function Jual_pesan() {
                 HideLoading();
                 return;
             }
+        }
+
+        if (+getValueTotalBayar < +getValueSisa) {
+            alert('Pembayaran harus melebihi total harga');
+            HideLoading();
+            return;
         }
 
         formData.append('kode', getValueKodeJual);

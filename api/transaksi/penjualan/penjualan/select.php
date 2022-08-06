@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else if ($jenis_penjualan == 'konsinyasi') {
         $query = "SELECT penjualan_konsinyasi.*, master_consignee.nama AS nama_consignee FROM penjualan_konsinyasi INNER JOIN master_consignee ON penjualan_konsinyasi.kode_consignee = master_consignee.kode";
     } else if ($jenis_penjualan == 'pesanan') {
-        $query = "SELECT * FROM penjualan_pesanan";
+        $query = "SELECT a.*, b.jumlah, b.nama FROM penjualan_pesanan a INNER JOIN estimasi_pesanan b ON a.kode_pesanan = b.kode";
     }
 
     $result = $conn->query($query);
