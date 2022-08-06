@@ -1166,7 +1166,7 @@ export class transaksi_penjualan extends Component {
         const valueTotalHarga = Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim]);
         const valuePiutang = Calculate([valueTotalJual, -valueDiskon]);
 
-        if (+valueTotalBayar < +valueTotalHarga) {
+        if (jenisPenjualan.toLowerCase() === 'tunai' && +valueTotalBayar < +valueTotalHarga) {
             alert('Pembayaran harus melebihi total harga');
             return;
         }
