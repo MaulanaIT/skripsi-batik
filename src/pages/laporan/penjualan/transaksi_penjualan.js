@@ -222,7 +222,7 @@ export default function Transaksi_penjualan() {
                                         <th>Jumlah</th>
                                         <th>Harga</th>
                                         <th>Total Jual</th>
-                                        <th>Nota</th>
+                                        {/* <th>Nota</th> */}
                                     </tr>
                                 </thead>
                                 <tbody>
