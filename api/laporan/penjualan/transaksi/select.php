@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else if ($jenis_penjualan == 'konsinyasi') {
         $query = "SELECT a.kode, 'Konsinyasi' AS jenis_jual, a.tanggal, a.kode_consignee, b.nama AS nama_consignee, c.kode_item, c.nama_item, c.jumlah, c.harga, c.total_harga FROM penjualan_konsinyasi a INNER JOIN master_consignee b ON a.kode_consignee = b.kode INNER JOIN detail_penjualan c ON a.kode = c.kode WHERE a.kode LIKE 'JK%' AND a.created_at >= '".$tanggal_awal."' AND a.created_at <= '".$tanggal_akhir."'";
     } else if ($jenis_penjualan == 'pesanan') {
-        $query = "SELECT a.kode, 'Pesanan' AS jenis_jual, a.tanggal, a.kode_customer, b.nama AS nama_customer, c.kode_item, c.nama_item, c.jumlah, c.harga, c.total_harga FROM penjualan_pesanan a INNER JOIN master_customer b ON a.kode_customer = b.kode INNER JOIN detail_penjualan c ON a.kode = c.kode WHERE a.kode LIKE 'JP%' AND a.created_at >= '".$tanggal_awal."' AND a.created_at <= '".$tanggal_akhir."'";
+        $query = "SELECT a.kode, 'Pesanan' AS jenis_jual, a.tanggal, a.kode_customer, b.nama AS nama_customer, c.kode, c.nama, c.jumlah, a.total_harga/c.jumlah as harga, a.total_harga FROM penjualan_pesanan a INNER JOIN master_customer b ON a.kode_customer = b.kode INNER JOIN estimasi_pesanan c ON a.kode_pesanan = c.kode WHERE a.kode LIKE 'JP%' AND a.created_at >= '".$tanggal_awal."' AND a.created_at <= '".$tanggal_akhir."'";
     }
 
     $result = $conn->query($query);
