@@ -9,6 +9,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import { baseURL, config, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 
+// Import Component
+import PrintoutPenjualan from './printout_penjualan';
+
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
@@ -52,6 +55,7 @@ const CustomSelect = {
 
 export default function Jual_pesan() {
 
+    const [getDataPesanan, setDataPesanan] = useState([]);
     const [getDataSelectAkun, setDataSelectAkun] = useState([]);
 
     const [getValueKodeAkun, setValueKodeAkun] = useState([]);
@@ -117,11 +121,11 @@ export default function Jual_pesan() {
         const formData = new FormData();
 
         formData.append('jenis_penjualan', 'pesanan');
-        
+
         axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/select.php`, formData, config).then(response => {
             ShowLoading();
             let data = response.data.data.find(item => item.kode_pesanan === location.state.data.kode);
-            
+
             setValueKodeJual(data.kode);
             setValueTotalJual(data.total_jual);
             setValueTotalHpp(data.total_hpp);
@@ -130,6 +134,8 @@ export default function Jual_pesan() {
             setValueTotalHarga(data.total_harga);
             setValueUangMuka(data.total_bayar);
             setValueSisa(data.sisa);
+
+            setDataPesanan(data);
 
             HideLoading();
         }).catch(error => {
@@ -144,23 +150,20 @@ export default function Jual_pesan() {
 
         const formData = new FormData();
 
-        let file = document.getElementById('input-file-transfer').files[0];
+        if (getValueKodeAkun?.value === '1102') {
+            let file = document.getElementById('input-file-transfer').files[0];
 
-
-            if (getValueKodeAkun?.value === '1102') {
-                let file = document.getElementById('input-file-transfer').files[0];
-
-                if (file) {
-                    let arg = file.name.split('.');
-                    let extension = arg[arg.length - 1];
-                    formData.append('file_transfer', file);
-                    formData.append('nama_file', `File Transfer - ${getValueKodeJual} - ${getValueTanggal}.${extension}`);
-                } else {
-                    alert('Isi data dengan benar');
-                    HideLoading();
-                    return;
-                }
+            if (file) {
+                let arg = file.name.split('.');
+                let extension = arg[arg.length - 1];
+                formData.append('file_transfer', file);
+                formData.append('nama_file', `File Transfer - ${getValueKodeJual} - ${getValueTanggal}.${extension}`);
+            } else {
+                alert('Isi data dengan benar');
+                HideLoading();
+                return;
             }
+        }
 
 
         formData.append('kode', getValueKodeJual);
@@ -174,7 +177,12 @@ export default function Jual_pesan() {
         formData.append('jenis_penjualan', 'pesanan');
 
         axios.post(`${baseURL}/api/transaksi/penjualan/penyerahan-pesanan/insert.php`, formData, config).then(() => {
-            window.location.href = '/#/transaksi/penjualan/daftar-pesanan';
+            if (window.confirm("Apakah ingin mencetak nota?")) {
+                window.print();
+                window.location.href = '/#/transaksi/penjualan/daftar-pesanan';
+            } else {
+                window.location.href = '/#/transaksi/penjualan/daftar-pesanan';
+            }
         }).catch(error => {
             console.log(error);
 
@@ -186,6 +194,7 @@ export default function Jual_pesan() {
 
     return (
         <React.Fragment>
+            <PrintoutPenjualan bayar={getValueTotalBayar} data={getDataPesanan} diskon={getValueDiskon} ongkosKirim={getValueOngkosKirim} jenis={'pesanan'} kembalian={getValueKembalian} tanggal={getValueTanggal} totalJual={getValueTotalJual} uangMuka={getValueUangMuka} />
             <div className={style.header}>
                 <p className={style.title}>Transaksi Penjualan</p>
                 <p className={style.pathname}>Transaksi / Penjualan / Transaksi Penjualan Pesanan</p>

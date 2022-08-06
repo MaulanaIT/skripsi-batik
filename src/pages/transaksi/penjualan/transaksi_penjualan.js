@@ -1201,13 +1201,9 @@ export class transaksi_penjualan extends Component {
         }
 
         axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/insert.php`, formData, config).then(() => {
-            if (jenisPenjualan.toLowerCase() === 'tunai') {
-                if (window.confirm("Apakah ingin mencetak nota?")) {
-                    window.print();
-                    window.location.reload();
-                } else {
-                    window.location.reload();
-                }
+            if (window.confirm("Apakah ingin mencetak nota?")) {
+                window.print();
+                window.location.reload();
             } else {
                 window.location.reload();
             }
@@ -1535,7 +1531,7 @@ export class transaksi_penjualan extends Component {
 
         return (
             <React.Fragment>
-                <PrintoutPenjualan bayar={valueTotalBayar} data={this.state.dataTunai} diskon={valueDiskon} ongkosKirim={valueOngkosKirim} kembalian={Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim])} tanggal={valueTanggal} totalJual={valueTotalJual} />
+                <PrintoutPenjualan bayar={valueTotalBayar} data={valueJenisPenjualan?.value?.toLowerCase() === 'tunai' ? this.state.dataTunai : valueJenisPenjualan?.value?.toLowerCase() === 'konsinyasi' && this.state.dataKonsinyasi} diskon={valueDiskon} ongkosKirim={valueOngkosKirim} jenis={valueJenisPenjualan?.value?.toLowerCase()} kembalian={Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim])} tanggal={valueTanggal} totalJual={valueTotalJual} />
 
                 <div className={style.header}>
                     <p className={style.title}>Transaksi Penjualan</p>

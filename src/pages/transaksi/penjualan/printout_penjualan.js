@@ -8,7 +8,7 @@ import Logo from '../../../assets/images/logo.jpg';
 // Import CSS
 import style from '../../../css/printout.module.css';
 
-export default function Printout_penjualan({ bayar, data, diskon, ongkosKirim, kembalian, tanggal, totalJual }) {
+export default function Printout_penjualan({ bayar, data, diskon, jenis, ongkosKirim, kembalian, tanggal, totalJual, uangMuka = 0 }) {
     return (
         <div className={cx([style.container, 'print'])} style={{ maxWidth: 600 }}>
             <div className={style.box}>
@@ -53,18 +53,28 @@ export default function Printout_penjualan({ bayar, data, diskon, ongkosKirim, k
                     <p>Diskon</p>
                     <p>{SetPriceFormat(diskon)}</p>
                 </div>
-                <div className='d-flex justify-content-between py-2'>
-                    <p>Ongkos Kirim</p>
-                    <p>{SetPriceFormat(ongkosKirim)}</p>
-                </div>
-                <div className='d-flex justify-content-between py-2'>
-                    <p>Pembayaran</p>
-                    <p>{SetPriceFormat(bayar)}</p>
-                </div>
-                <div className='d-flex justify-content-between py-2'>
-                    <p>Kembalian</p>
-                    <p>{SetPriceFormat(kembalian)}</p>
-                </div>
+                {jenis === 'tunai' &&
+                    <React.Fragment>
+                        <div className='d-flex justify-content-between py-2'>
+                            <p>Ongkos Kirim</p>
+                            <p>{SetPriceFormat(ongkosKirim)}</p>
+                        </div>
+                        <div className='d-flex justify-content-between py-2'>
+                            <p>Pembayaran</p>
+                            <p>{SetPriceFormat(bayar)}</p>
+                        </div>
+                        <div className='d-flex justify-content-between py-2'>
+                            <p>Kembalian</p>
+                            <p>{SetPriceFormat(kembalian)}</p>
+                        </div>
+                    </React.Fragment>
+                }
+                {jenis === 'pesanan' &&
+                    <div className='d-flex justify-content-between py-2'>
+                        <p>Uang Muka</p>
+                        <p>{SetPriceFormat(uangMuka)}</p>
+                    </div>
+                }
                 <div className='align-items-center d-flex gap-2'>
                     <div style={{ borderTop: '1px dashed black', borderBottom: '1px dashed black', height: 8, marginBottom: 24, marginTop: 24, width: '100%' }}></div>
                     <div className='text-nowrap'>{tanggal}</div>
