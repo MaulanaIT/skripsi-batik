@@ -454,7 +454,7 @@ export default function Hpp() {
                                 <div className={`${bootstrap['d-flex']}`}>
                                     <div className={`${global.input_group} col-3 pe-2`}>
                                         <p className={global.title}>Kode Customer <span className={global.important}>*</span></p>
-                                        <input type="text" id='input-nama-customer' name='input-nama-customer' value={getIsUpdateData ? getDataSelected.kode_customer : getValueKodeCustomer} required={true} readOnly={true} />
+                                        <input type="text" id='input-kode-customer' name='input-kode-customer' value={getIsUpdateData ? getDataSelected.kode_customer : getValueKodeCustomer} required={true} readOnly={true} />
                                     </div>
                                     <div className={`${global.input_group} col-3 ps-4`}>
                                         <p className={global.title}>Nama Customer <span className={global.important}>*</span></p>
