@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     UNION ALL
     SELECT SUM(total_hpp) AS total_hpp, updated_at FROM penjualan_konsinyasi
     UNION ALL
-    SELECT SUM(hpp) AS total_hpp, updated_at FROM estimasi_pesanan) a WHERE a.updated_at >= '" . $tanggal_awal . "' AND a.updated_at <= '" . $tanggal_akhir . "'";
+    SELECT SUM(hpp) AS total_hpp, updated_at FROM penjualan_pesanan) a WHERE a.updated_at >= '" . $tanggal_awal . "' AND a.updated_at <= '" . $tanggal_akhir . "'";
 
     $potongan_pembelian = "SELECT '5201' AS kode, 'Potongan Pembelian' AS nama, 0 AS debit, SUM(diskon) AS kredit FROM pengeluaran_kas WHERE updated_at >= '" . $tanggal_awal . "' AND updated_at <= '" . $tanggal_akhir . "'";
 
