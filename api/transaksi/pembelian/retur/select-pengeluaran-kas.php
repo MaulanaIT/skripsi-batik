@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jenis_retur = $_POST['jenis_retur'];
 
     if ($jenis_retur == 'alat') {
-        $kode = "ALAT%";
+        $kode = "'ALAT%'";
     } else if ($jenis_retur == 'bahan') {
         $kode = "'BB%' OR detail_pengeluaran_kas.kode_item LIKE 'BP%'";
     }
