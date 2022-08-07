@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $query = "SELECT a.*, b.nama AS nama_produk, c.tanggal, null AS nama_pesanan FROM hpp a INNER JOIN master_inventory_produk b ON a.kode_produk = b.kode INNER JOIN produksi_stok c ON a.kode_produksi = c.kode WHERE a.kode_produksi = '".$kode_produksi."'
         UNION
-        SELECT a.*, b.nama AS nama_produk, c.tanggal, d.nama AS nama_pesanan FROM hpp a INNER JOIN master_inventory_produk b ON a.kode_produk = b.kode INNER JOIN produksi_pesanan c ON a.kode_produksi = c.kode INNER JOIN estimasi_pesanan d ON a.kode_pesanan = d.kode WHERE a.kode_produksi = '".$kode_produksi."'";
+        SELECT a.*, null AS nama_produk, c.tanggal, d.nama AS nama_pesanan FROM hpp a INNER JOIN produksi_pesanan c ON a.kode_produksi = c.kode INNER JOIN estimasi_pesanan d ON a.kode_pesanan = d.kode WHERE a.kode_produksi = '".$kode_produksi."'";
 
     $result = $conn->query($query);
 

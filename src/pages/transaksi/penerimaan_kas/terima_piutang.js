@@ -5,7 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import moment from 'moment';
 import Select from 'react-select';
-import { baseURL, config, cx, GenerateCode, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
+import { baseURL, config, cx, GenerateCode, HideLoading, InputFormatNumber, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 // Import Component
@@ -176,9 +176,9 @@ export default function Terima_piutang() {
                             <td>{item.kode_consignee}</td>
                             <td>{item.nama_consignee}</td>
                             <td>{SetPriceFormat(item.jumlah_piutang)}</td>
-                            <td className={cx([global.table_action, 'text-nowrap'])}>
-                                {/* <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Print</button> */}
-                            </td>
+                            {/* <td className={cx([global.table_action, 'text-nowrap'])}>
+                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Print</button>
+                            </td> */}
                         </tr>
                     );
                 });
@@ -376,7 +376,7 @@ export default function Terima_piutang() {
                             </div>
                             <div className={`${global.input_group} col-6`}>
                                 <p className={global.title}>Terima Piutang <span className={global.important}>*</span></p>
-                                <input type="text" id='input-terima-piutang' name='input-terima-piutang' value={getValueTerimaPiutang} onChange={e => setValueTerimaPiutang(e.target.value)} required={true} />
+                                <input type="text" id='input-terima-piutang' name='input-terima-piutang' value={getValueTerimaPiutang} onInput={InputFormatNumber} onChange={e => setValueTerimaPiutang(e.target.value)} required={true} />
                             </div>
                             <div>
                                 {getValueKodeAkun.value === '1102' &&

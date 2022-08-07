@@ -7,7 +7,7 @@ import { CSVLink } from 'react-csv';
 import Select from 'react-select';
 import moment from 'moment';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
+import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -95,6 +95,10 @@ export default function Retur_pembelian() {
                 'Jenis Pembelian',
                 'Kode Supplier',
                 'Nama Supplier',
+                'Kode Item',
+                'Nama Item',
+                'Jumlah',
+                'Harga',
                 'Total Harga'
             ]);
             
@@ -108,6 +112,10 @@ export default function Retur_pembelian() {
                             <td>{item.jenis_pembelian}</td>
                             <td>{item.kode_supplier}</td>
                             <td>{item.nama_supplier}</td>
+                            <td>{item.kode_item}</td>
+                            <td>{item.nama_item}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
+                            <td>{SetPriceFormat(item.harga)}</td>
                             <td>{SetPriceFormat(item.total_harga)}</td>
                         </tr>
                     );
@@ -118,6 +126,10 @@ export default function Retur_pembelian() {
                         item.jenis_pembelian,
                         item.kode_supplier,
                         item.nama_supplier,
+                        item.kode_item,
+                        item.nama_item,
+                        SetNumberFormat(item.jumlah),
+                        SetPriceFormat(item.harga),
                         SetPriceFormat(item.total_harga)
                     ]);
                 });
@@ -200,6 +212,10 @@ export default function Retur_pembelian() {
                                         <th>Jenis Retur</th>
                                         <th>Kode Supplier</th>
                                         <th>Nama Supplier</th>
+                                        <th>Kode Barang</th>
+                                        <th>Nama Barang</th>
+                                        <th>Jumlah</th>
+                                        <th>Harga</th>
                                         <th>Total Retur</th>
                                     </tr>
                                 </thead>
