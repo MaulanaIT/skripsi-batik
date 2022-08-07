@@ -1665,7 +1665,7 @@ export class transaksi_penjualan extends Component {
                                                 <div className='d-flex'>
                                                     <div className={`${global.input_group} col-4 pe-2`}>
                                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                                        <input type="text" id='valueJumlah' value={valueJumlah} min={0} onChange={async e => {
+                                                        <input type="text" id='valueJumlah' value={valueJumlah} onInput={InputFormatNumber} min={0} onChange={async e => {
                                                             await this.InputChange(e);
                                                             this.KalkulasiHargaJual();
                                                             this.setState({
@@ -1680,7 +1680,7 @@ export class transaksi_penjualan extends Component {
                                                     </div>
                                                     <div className={`${global.input_group} col-4 ps-2`}>
                                                         <p className={global.title}>Profit (%) <span className={global.important}>*</span></p>
-                                                        <input type="text" id='valueProfit' value={valueProfit} onChange={async e => {
+                                                        <input type="text" id='valueProfit' value={valueProfit} onInput={InputFormatNumber} onChange={async e => {
                                                             await this.InputChange(e);
                                                             this.KalkulasiHargaJual();
                                                         }} required={true} />

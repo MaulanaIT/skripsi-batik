@@ -98,6 +98,8 @@ export default function Lap_hpp() {
         axios.post(`${baseURL}/api/laporan/produksi/hpp/select.php`, formData, config).then(response => {
             let data = response.data.data[0];
 
+            console.log(data);
+
             setValueKodeProduksi(data.kode_produksi);
             setValueKodeProduk(!data.kode_produk || data.kode_produk === '' ? '-' : data.kode_produk);
             setValueNamaProduk(!data.nama_produk || data.nama_produk === '' ? '-' : data.nama_produk);
