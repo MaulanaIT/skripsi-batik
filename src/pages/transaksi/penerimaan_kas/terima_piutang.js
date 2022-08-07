@@ -177,7 +177,7 @@ export default function Terima_piutang() {
                             <td>{item.nama_consignee}</td>
                             <td>{SetPriceFormat(item.jumlah_piutang)}</td>
                             <td className={cx([global.table_action, 'text-nowrap'])}>
-                                {/* <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Print</button> */}
+                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Print</button>
                             </td>
                         </tr>
                     );
@@ -321,7 +321,7 @@ export default function Terima_piutang() {
                                         <td>Kode Consignee</td>
                                         <td>Nama Consignee</td>
                                         <td>Jumlah Piutang</td>
-                                        {/* <td>Aksi</td> */}
+                                        <td>Aksi</td>
                                     </tr>
                                 </thead>
                                 <tbody>
