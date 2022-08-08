@@ -27,19 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response['status'] = 200;
         $response['data'] = [];
 
-        $query = 'SELECT * FROM hpp_detail_alat WHERE kode_hpp = (SELECT kode FROM hpp)';
-
-        $result = $conn->query($query);
-
-        if ($result) {
-            while($row = mysqli_fetch_assoc($result)) {
-                $query = "UPDATE master_inventory_alat SET total_kapasitas=(total_kapasitas-".$row['jumlah'].") WHERE kode='".$row['kode_alat']."'";
-
-                $conn->query($query);
-            }
-
-            $response['data'] = $result;
-        }
+        $response['data'] = $result;
     } else {
         $response = mysqli_error($conn);
     }

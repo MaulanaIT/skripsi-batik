@@ -162,46 +162,56 @@ const Add_hpp = (props, ref) => {
 
         ShowLoading();
 
-        $('#table-data-bop-alat').DataTable().destroy();
+        const formData = new FormData();
 
-        let dataDetailAlat = getDataDetailAlat;
-        let htmlTableDaftarAlat = [];
+        formData.append('kode_alat', getValueKodeAlat?.value);
+        formData.append('jumlah', getValueJumlah);
 
-        let checkIndex = dataDetailAlat.findIndex(item => item.kode_alat === getValueKodeAlat.value && item.tanggal === getValueTanggal);
+        axios.post(`${baseURL}/api/transaksi/produksi/detail-alat/update.php`, formData, config).then(() => {
+            $('#table-data-bop-alat').DataTable().destroy();
 
-        if (checkIndex < 0) {
-            dataDetailAlat.push({
-                tanggal: getValueTanggal,
-                kode_alat: getValueKodeAlat.value,
-                nama_alat: getValueNamaAlat.label,
-                jumlah: getValueJumlah,
-                harga: getValueHarga,
-                total_harga: getValueTotalHarga
+            let dataDetailAlat = getDataDetailAlat;
+            let htmlTableDaftarAlat = [];
+
+            let checkIndex = dataDetailAlat.findIndex(item => item.kode_alat === getValueKodeAlat.value && item.tanggal === getValueTanggal);
+
+            if (checkIndex < 0) {
+                dataDetailAlat.push({
+                    tanggal: getValueTanggal,
+                    kode_alat: getValueKodeAlat.value,
+                    nama_alat: getValueNamaAlat.label,
+                    jumlah: getValueJumlah,
+                    harga: getValueHarga,
+                    total_harga: getValueTotalHarga
+                });
+            } else {
+                dataDetailAlat[checkIndex].jumlah = +dataDetailAlat[checkIndex].jumlah + +getValueJumlah;
+                dataDetailAlat[checkIndex].total_harga = +dataDetailAlat[checkIndex].total_harga + +getValueTotalHarga;
+            }
+
+            if (dataDetailAlat && dataDetailAlat.length > 0) {
+                dataDetailAlat.forEach((item, index) => {
+                    htmlTableDaftarAlat.push(
+                        <tr key={index} className={'align-middle'}>
+                            <td>{index + 1}.</td>
+                            <td>{item.kode_alat}</td>
+                            <td>{item.nama_alat}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
+                            <td>{SetPriceFormat(item.harga)}</td>
+                            <td>{SetPriceFormat(item.total_harga)}</td>
+                        </tr>
+                    );
+                });
+            }
+
+            setDataDetailAlat(dataDetailAlat);
+            setHTMLTableDaftarAlat(htmlTableDaftarAlat, () => {
+                $('#table-data-bop-alat').DataTable();
+
+                HideLoading();
             });
-        } else {
-            dataDetailAlat[checkIndex].jumlah = +dataDetailAlat[checkIndex].jumlah + +getValueJumlah;
-            dataDetailAlat[checkIndex].total_harga = +dataDetailAlat[checkIndex].total_harga + +getValueTotalHarga;
-        }
-
-        if (dataDetailAlat && dataDetailAlat.length > 0) {
-            dataDetailAlat.forEach((item, index) => {
-                htmlTableDaftarAlat.push(
-                    <tr key={index} className={'align-middle'}>
-                        <td>{index + 1}.</td>
-                        <td>{item.kode_alat}</td>
-                        <td>{item.nama_alat}</td>
-                        <td>{SetNumberFormat(item.jumlah)}</td>
-                        <td>{SetPriceFormat(item.harga)}</td>
-                        <td>{SetPriceFormat(item.total_harga)}</td>
-                    </tr>
-                );
-            });
-        }
-
-        setDataDetailAlat(dataDetailAlat);
-        setHTMLTableDaftarAlat(htmlTableDaftarAlat, () => {
-            $('#table-data-bop-alat').DataTable();
-
+        }).catch(error => {
+            console.log(error)
             HideLoading();
         });
     }
@@ -214,46 +224,57 @@ const Add_hpp = (props, ref) => {
 
         ShowLoading();
 
-        $('#table-data-biaya-bahan-baku').DataTable().destroy();
+        const formData = new FormData();
 
-        let dataDetailBahanBaku = getDataDetailBahanBaku;
-        let htmlTableDaftarBahanBaku = [];
+        formData.append('kode_bahan_baku', getValueBahanBaku?.value);
+        formData.append('jumlah', getValueJumlah);
 
-        let checkIndex = dataDetailBahanBaku.findIndex(item => item.kode_bahan === getValueBahanBaku.value && item.tanggal === getValueTanggal);
+        axios.post(`${baseURL}/api/transaksi/produksi/detail-bahan-baku/update.php`, formData, config).then(() => {
+            $('#table-data-biaya-bahan-baku').DataTable().destroy();
 
-        if (checkIndex < 0) {
-            dataDetailBahanBaku.push({
-                tanggal: getValueTanggal,
-                kode_bahan: getValueBahanBaku.value,
-                nama_bahan: getValueBahanBaku.label,
-                jumlah: getValueJumlah,
-                harga: getValueHarga,
-                total_harga: getValueTotalHarga
+            let dataDetailBahanBaku = getDataDetailBahanBaku;
+            let htmlTableDaftarBahanBaku = [];
+
+            let checkIndex = dataDetailBahanBaku.findIndex(item => item.kode_bahan === getValueBahanBaku.value && item.tanggal === getValueTanggal);
+
+            if (checkIndex < 0) {
+                dataDetailBahanBaku.push({
+                    tanggal: getValueTanggal,
+                    kode_bahan: getValueBahanBaku.value,
+                    nama_bahan: getValueBahanBaku.label,
+                    jumlah: getValueJumlah,
+                    harga: getValueHarga,
+                    total_harga: getValueTotalHarga
+                });
+            } else {
+                dataDetailBahanBaku[checkIndex].jumlah = +dataDetailBahanBaku[checkIndex].jumlah + +getValueJumlah;
+                dataDetailBahanBaku[checkIndex].total_harga = +dataDetailBahanBaku[checkIndex].total_harga + +getValueTotalHarga;
+            }
+
+            if (dataDetailBahanBaku && dataDetailBahanBaku.length > 0) {
+                dataDetailBahanBaku.forEach((item, index) => {
+                    htmlTableDaftarBahanBaku.push(
+                        <tr key={index} className={'align-middle'}>
+                            <td>{index + 1}.</td>
+                            <td>{item.kode_bahan}</td>
+                            <td>{item.nama_bahan}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
+                            <td>{SetPriceFormat(item.harga)}</td>
+                            <td>{SetPriceFormat(item.total_harga)}</td>
+                        </tr>
+                    );
+                });
+            }
+
+            setDataDetailBahanBaku(dataDetailBahanBaku);
+
+            setHTMLTableDaftarBahanBaku(htmlTableDaftarBahanBaku, () => {
+                $('#table-data-biaya-bahan-baku').DataTable();
+
+                HideLoading();
             });
-        } else {
-            dataDetailBahanBaku[checkIndex].jumlah = +dataDetailBahanBaku[checkIndex].jumlah + +getValueJumlah;
-            dataDetailBahanBaku[checkIndex].total_harga = +dataDetailBahanBaku[checkIndex].total_harga + +getValueTotalHarga;
-        }
-
-        if (dataDetailBahanBaku && dataDetailBahanBaku.length > 0) {
-            dataDetailBahanBaku.forEach((item, index) => {
-                htmlTableDaftarBahanBaku.push(
-                    <tr key={index} className={'align-middle'}>
-                        <td>{index + 1}.</td>
-                        <td>{item.kode_bahan}</td>
-                        <td>{item.nama_bahan}</td>
-                        <td>{SetNumberFormat(item.jumlah)}</td>
-                        <td>{SetPriceFormat(item.harga)}</td>
-                        <td>{SetPriceFormat(item.total_harga)}</td>
-                    </tr>
-                );
-            });
-        }
-
-        setDataDetailBahanBaku(dataDetailBahanBaku);
-
-        setHTMLTableDaftarBahanBaku(htmlTableDaftarBahanBaku, () => {
-            $('#table-data-biaya-bahan-baku').DataTable();
+        }).catch(error => {
+            console.log(error);
 
             HideLoading();
         });
@@ -267,45 +288,56 @@ const Add_hpp = (props, ref) => {
 
         ShowLoading();
 
-        $('#table-data-bop-penolong').DataTable().destroy();
+        const formData = new FormData();
 
-        let dataDetailPenolong = getDataDetailPenolong;
-        let htmlTableDaftarPenolong = [];
+        formData.append('kode_bahan_baku', getValueBahanBaku?.value);
+        formData.append('jumlah', getValueJumlah);
 
-        let checkIndex = dataDetailPenolong.findIndex(item => item.kode_penolong === getValuePenolong.value && item.tanggal === getValueTanggal);
+        axios.post(`${baseURL}/api/transaksi/produksi/detail-penolong/update.php`, formData, config).then(() => {
+            $('#table-data-bop-penolong').DataTable().destroy();
 
-        if (checkIndex < 0) {
-            dataDetailPenolong.push({
-                tanggal: getValueTanggal,
-                kode_penolong: getValuePenolong.value,
-                nama_penolong: getValuePenolong.label,
-                jumlah: getValueJumlah,
-                harga: getValueHarga,
-                total_harga: getValueTotalHarga
+            let dataDetailPenolong = getDataDetailPenolong;
+            let htmlTableDaftarPenolong = [];
+
+            let checkIndex = dataDetailPenolong.findIndex(item => item.kode_penolong === getValuePenolong.value && item.tanggal === getValueTanggal);
+
+            if (checkIndex < 0) {
+                dataDetailPenolong.push({
+                    tanggal: getValueTanggal,
+                    kode_penolong: getValuePenolong.value,
+                    nama_penolong: getValuePenolong.label,
+                    jumlah: getValueJumlah,
+                    harga: getValueHarga,
+                    total_harga: getValueTotalHarga
+                });
+            } else {
+                dataDetailPenolong[checkIndex].jumlah = +dataDetailPenolong[checkIndex].jumlah + +getValueJumlah;
+                dataDetailPenolong[checkIndex].total_harga = +dataDetailPenolong[checkIndex].total_harga + +getValueTotalHarga;
+            }
+
+            if (dataDetailPenolong && dataDetailPenolong.length > 0) {
+                dataDetailPenolong.forEach((item, index) => {
+                    htmlTableDaftarPenolong.push(
+                        <tr key={index} className={'align-middle'}>
+                            <td>{index + 1}.</td>
+                            <td>{item.kode_penolong}</td>
+                            <td>{item.nama_penolong}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
+                            <td>{SetPriceFormat(item.harga)}</td>
+                            <td>{SetPriceFormat(item.total_harga)}</td>
+                        </tr>
+                    );
+                });
+            }
+
+            setDataDetailPenolong(dataDetailPenolong);
+            setHTMLTableDaftarPenolong(htmlTableDaftarPenolong, () => {
+                $('#table-data-bop-penolong').DataTable();
+
+                HideLoading();
             });
-        } else {
-            dataDetailPenolong[checkIndex].jumlah = +dataDetailPenolong[checkIndex].jumlah + +getValueJumlah;
-            dataDetailPenolong[checkIndex].total_harga = +dataDetailPenolong[checkIndex].total_harga + +getValueTotalHarga;
-        }
-
-        if (dataDetailPenolong && dataDetailPenolong.length > 0) {
-            dataDetailPenolong.forEach((item, index) => {
-                htmlTableDaftarPenolong.push(
-                    <tr key={index} className={'align-middle'}>
-                        <td>{index + 1}.</td>
-                        <td>{item.kode_penolong}</td>
-                        <td>{item.nama_penolong}</td>
-                        <td>{SetNumberFormat(item.jumlah)}</td>
-                        <td>{SetPriceFormat(item.harga)}</td>
-                        <td>{SetPriceFormat(item.total_harga)}</td>
-                    </tr>
-                );
-            });
-        }
-
-        setDataDetailPenolong(dataDetailPenolong);
-        setHTMLTableDaftarPenolong(htmlTableDaftarPenolong, () => {
-            $('#table-data-bop-penolong').DataTable();
+        }).catch(error => {
+            console.log(error);
 
             HideLoading();
         });
@@ -776,7 +808,8 @@ const Add_hpp = (props, ref) => {
         formData.append('tanggal', getValueTanggal);
         formData.append('data', JSON.stringify(getDataDetailAlat));
 
-        axios.post(`${baseURL}/api/transaksi/produksi/detail-alat/insert.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/transaksi/produksi/detail-alat/insert.php`, formData, config).then(response => {
+            console.log(response)
             HideLoading();
         }).catch(error => {
             console.log(error);
@@ -806,6 +839,7 @@ const Add_hpp = (props, ref) => {
         formData.append('data', JSON.stringify(getDataDetailBahanBaku));
 
         axios.post(`${baseURL}/api/transaksi/produksi/detail-bahan-baku/insert.php`, formData, config).then(response => {
+            console.log(response)
             HideLoading();
         }).catch(error => {
             console.log(error);

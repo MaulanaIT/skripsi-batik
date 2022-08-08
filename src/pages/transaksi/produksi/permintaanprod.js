@@ -154,6 +154,8 @@ export default function Permintaanprod() {
         axios.get(`${baseURL}/api/transaksi/produksi/permintaan-stok/select.php`, config).then(response => {
             let data = response.data.data;
 
+            console.log(data);
+
             let htmlTableDaftarPermintaan = [];
             let jabatan = localStorage.getItem('leksana_jabatan').toLowerCase();
 

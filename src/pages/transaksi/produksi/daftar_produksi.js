@@ -154,11 +154,22 @@ export default function Daftar_produksi() {
                 HideLoading();
             });
         } else if (jenis === 'pesanan') {
-            formData.append('kode', data.kode_pesanan);
+            formData.append('kode', data.kode);
+            formData.append('kode_pesanan', data.kode_pesanan);
             formData.append('hpp', data.hpp);
+            formData.append('status', 1);
 
-            axios.post(`${baseURL}/api/transaksi/penjualan/estimasi-pesanan/update.php`, formData, config).then(() => {
-                window.location.reload();
+            axios.post(`${baseURL}/api/transaksi/produksi/perencanaan-produksi/update.php`, formData, config).then(response => {
+                console.log(response);
+                axios.post(`${baseURL}/api/transaksi/penjualan/estimasi-pesanan/update.php`, formData, config).then(() => {
+                    window.location.reload();
+                }).catch(error => {
+                    console.log(error);
+    
+                    alert(error);
+    
+                    HideLoading();
+                });
             }).catch(error => {
                 console.log(error);
 
