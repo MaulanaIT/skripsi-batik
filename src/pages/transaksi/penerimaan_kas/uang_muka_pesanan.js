@@ -231,35 +231,33 @@ export default function Uang_muka_pesanan() {
                 <p className={style.pathname}>Transaksi / Penerimaan Kas / Uang Muka Pesanan</p>
             </div>
             <form id='form-data' className={style.content}>
-                <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
+                <div className={`col-12`}>
                     <div className={`${global.card}`}>
                         <p className={global.title}>Input Penerimaan Uang Muka Pesanan</p>
                         <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-6 pe-2`}>
+                            <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Kode Jual <span className={global.important}>*</span></p>
                                 <input type="text" id='input-kode-jual' value={getValueKodeJual} required={true} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-6 ps-2`}>
+                            <div className={`${global.input_group} col-4 ps-2`}>
                                 <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                 <input type="date" id='input-tanggal' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} required={true} />
                             </div>
                         </div>
                         <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-3 pe-2`}>
+                            <div className={`${global.input_group} col-2 pe-2`}>
                                 <p className={global.title}>Kode Customer <span className={global.important}>*</span></p>
                                 <input type="text" id='input-kode-customer' value={getValueKodeCustomer} required={true} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-5 ps-2`}>
+                            <div className={`${global.input_group} col-4 px-2`}>
                                 <p className={global.title}>Nama Customer <span className={global.important}>*</span></p>
                                 <input type="text" id='input-nama-customer' value={getValueNamaCustomer} required={true} readOnly={true} />
                             </div>
-                        </div>
-                        <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-5 pe-2`}>
+                            <div className={`${global.input_group} col-2 px-2`}>
                                 <p className={global.title}>Kode Pesanan <span className={global.important}>*</span></p>
                                 <input type="text" id='input-kode-pesanan' value={getValueKodePesanan} required={true} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-7 pe-2`}>
+                            <div className={`${global.input_group} col-4 ps-2`}>
                                 <p className={global.title}>Nama Pesanan <span className={global.important}>*</span></p>
                                 <input type="text" id='input-nama-pesanan' value={getValueNamaPesanan} required={true} readOnly={true} />
                             </div>
@@ -284,7 +282,7 @@ export default function Uang_muka_pesanan() {
                         </div>
                     </div>
                 </div>
-                <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                <div className={`col-12`}>
                     <div className={global.card}>
                         <div className={`${global.header}`}>
                             <p className={global.title}>Detail Pesanan</p>
@@ -331,20 +329,21 @@ export default function Uang_muka_pesanan() {
                             <p className={`${global.title} col-3`}>Uang Muka <span className={global.important}>*</span></p>
                             <input type="text" id='input-detail-uang-muka' className={`col-4`} value={getValueUangMuka} onChange={e => setValueUangMuka(e.target.value)} />
                             <div className='col-5 ps-2'>
-                                <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={getDataSelectAkun} value={getValueKodeAkun} placeholder={'Select Akun...'} onChange={e => setValueKodeAkun(e)} styles={CustomSelect} />
+                                <Select id='select-kode-akun' name='select-kode-akun' className={`col-5`} isClearable={true} isSearchable={true} options={getDataSelectAkun} value={getValueKodeAkun} placeholder={'Select Akun...'} onChange={e => setValueKodeAkun(e)} styles={CustomSelect} />
                             </div>
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Sisa <span className={global.important}>*</span></p>
                             <input type="text" id='input-sisa' className={`col-4`} value={SetPriceFormat(getValueSisa)} required={true} readOnly={true} />
                         </div>
-                        <div className='d-flex flex-column gap-3 pt-2'>
+                        <div className='d-flex'>
                             {getValueKodeAkun.value === '1102' &&
-                                <div className='align-items-center d-flex justify-content-between'>
+                                <div className={`${global.input_group}`}>
                                     <p>Upload File Transfer</p>
                                     <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' />
                                 </div>
                             }
+                        </div>
                             <div className='d-flex'>
                                 <div className='col-6 pe-2'>
                                     <button type='button' className={`${global.button} w-100`} onClick={InsertUangMuka}>Simpan</button>
@@ -353,7 +352,6 @@ export default function Uang_muka_pesanan() {
                                     <Link to={'/transaksi/penjualan/daftar-pesanan'} className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</Link>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </form>

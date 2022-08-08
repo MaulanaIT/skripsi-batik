@@ -9,7 +9,7 @@
     border: none;
     display: flex;
     filter: brightness(100%);
-    font-size: 12px;
+    font-size: 14px;
     justify-content: center;
     outline: none;
     padding: 8px 16px;
@@ -33,7 +33,7 @@
 .button,
 .button * {
     color: white;
-    font-size: 12px;
+    font-size: 14px;
     text-decoration: none;
 }
 
@@ -109,7 +109,7 @@
 
 .input_group_row *,
 .input_group * {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: normal;
     margin: 0;
 }
@@ -117,7 +117,7 @@
 .input_group_row>.title>.important,
 .input_group>.title>.important {
     color: red;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: normal;
     margin: 0;
 }
@@ -125,7 +125,7 @@
 .input_group_row>.error,
 .input_group>.error {
     color: red;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: normal;
     margin: 0;
 }
@@ -136,7 +136,7 @@ textarea {
     background-color: rgba(0, 0, 0, 0.4);
     border: none;
     border-radius: 2px;
-    font-size: 12px !important;
+    font-size: 14px !important;
     outline: none;
     padding: 6px 12px;
 }
@@ -156,7 +156,7 @@ textarea:read-only {
     background-color: rgba(0, 0, 0, 0.2);
     border: none;
     border-radius: 2px;
-    font-size: 12px !important;
+    font-size: 14px !important;
     outline: none;
     padding: 6px 12px;
 }
@@ -265,7 +265,7 @@ textarea:read-only {
 }
 
 .tab_card>.item>.name {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .table_action {
@@ -280,7 +280,7 @@ textarea:read-only {
     border: none;
     color: white;
     display: grid;
-    font-size: 12px;
+    font-size: 14px;
     gap: 6px;
     grid-template-columns: auto auto;
     justify-content: center;
@@ -291,7 +291,7 @@ textarea:read-only {
 
 .table_action>button>* {
     color: white;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 /* .table_action>button::before {

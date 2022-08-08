@@ -561,8 +561,8 @@ export class order_pembelian extends Component {
                     <p className={style.pathname}>Transaksi / Pembelian / Order Pembelian</p>
                 </div>
                 <div className={style.content}>
-                    <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
-                        <form id='form-data' className={`${global.card}`}>
+                    <div className={`col-12`}>
+                        <form id='form-data' className={`${global.card} col-12`}>
                             <p className={global.title}>Input Order Pembelian</p>
                             <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Jenis Pembelian</p>
@@ -574,17 +574,15 @@ export class order_pembelian extends Component {
                             {this.state.jenisPembelian !== '' ?
                                 <>
                                     <div className={`d-flex`}>
-                                        <div className={`${global.input_group} col-6 pe-2`}>
+                                        <div className={`${global.input_group} col-2 pe-2`}>
                                             <p className={global.title}>Kode Order <span className={global.important}>*</span></p>
                                             <input type="text" id='valueKodeOrder' maxLength={10} value={valueKodeOrder} required={true} readOnly={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-6 ps-2`}>
+                                        <div className={`${global.input_group} col-2 px-2`}>
                                             <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                             <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} required={true} />
                                         </div>
-                                    </div>
-                                    <div className={`d-flex`}>
-                                        <div className={`${global.input_group} col-3 pe-2`}>
+                                        <div className={`${global.input_group} col-3 px-2`}>
                                             <p className={global.title}>Kode Supplier <span className={global.important}>*</span></p>
                                             <Select escapeClearsValue={false} isClearable={true} isSearchable={true} options={this.state.dataSelectKodeSupplier} placeholder={'Select Kode...'} styles={CustomSelect} value={valueKodeSupplier} onChange={(data) => this.SelectSupplier(data)} isDisabled={dataAlat.length > 0 || dataBahan.length > 0} />
                                         </div>
@@ -593,29 +591,53 @@ export class order_pembelian extends Component {
                                             <Select isClearable={true} isSearchable={true} options={this.state.dataSelectNamaSupplier} placeholder={'Select Nama...'} styles={CustomSelect} value={valueNamaSupplier} onChange={(data) => this.SelectSupplier(data)} isDisabled={dataAlat.length > 0 || dataBahan.length > 0 && false} />
                                         </div>
                                     </div>
+                                    <div className={`d-flex`}>
+                                    </div>
                                     {this.state.jenisPembelian === 'Bahan' ?
                                         <>
                                             <div className={`d-flex`}>
-                                                <div className={`${global.input_group} col-5 pe-2`}>
+                                                <div className={`${global.input_group} col-2 pe-2`}>
                                                     <p className={global.title}>Kode Bahan <span className={global.important}>*</span></p>
                                                     <Select id='select-kode-bahan' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeBahan} placeholder={'Select Kode...'} styles={CustomSelect} value={valueKodeBahan} onChange={(data) => this.SelectBahan(data)} />
                                                 </div>
-                                                <div className={`${global.input_group} col-7 pe-2`}>
+                                                <div className={`${global.input_group} col-4 px-2`}>
                                                     <p className={global.title}>Nama Bahan <span className={global.important}>*</span></p>
                                                     <Select id='select-nama-bahan' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaBahan} placeholder={'Select Nama...'} styles={CustomSelect} value={valueNamaBahan} onChange={(data) => this.SelectBahan(data)} />
+                                                </div>
+                                                <div className={`${global.input_group} col-3 px-2`}>
+                                                    <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
+                                                    <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={this.InputChange} required={true} />
+                                                    </div>
+                                                <div className={`${global.input_group} col-3 ps-2`}>
+                                                    <p className={global.title}>Harga <span className={global.important}>*</span></p>
+                                                    <input type="text" id='valueHarga' className='text-end' value={valueHarga} onInput={InputFormatNumber} onChange={this.InputChange} required={true} />
+                                                </div>
+                                            </div>
+                                            <div className={`d-flex`}>
+                                                <div className={`${global.input_group} col-4 pe-2`}>
+                                                    <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
+                                                    <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(valueTotalHarga)} required={true} readOnly={true} />
                                                 </div>
                                             </div>
                                         </>
                                         :
                                         <>
                                             <div className={`d-flex`}>
-                                                <div className={`${global.input_group} col-5 pe-2`}>
+                                                <div className={`${global.input_group} col-2 pe-2`}>
                                                     <p className={global.title}>Kode Alat <span className={global.important}>*</span></p>
                                                     <Select id='select-kode-alat' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeAlat} placeholder={'Select Kode...'} styles={CustomSelect} value={valueKodeAlat} onChange={(data) => this.SelectAlat(data)} />
                                                 </div>
-                                                <div className={`${global.input_group} col-7 pe-2`}>
+                                                <div className={`${global.input_group} col-4 px-2`}>
                                                     <p className={global.title}>Nama Alat <span className={global.important}>*</span></p>
                                                     <Select id='select-nama-alat' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaAlat} placeholder={'Select Nama...'} styles={CustomSelect} value={valueNamaAlat} onChange={(data) => this.SelectAlat(data)} />
+                                                </div>
+                                                <div className={`${global.input_group} col-3 px-2`}>
+                                                    <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
+                                                    <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={this.InputChange} required={true} />
+                                                </div>
+                                                <div className={`${global.input_group} col-3 ps-2`}>
+                                                    <p className={global.title}>Harga <span className={global.important}>*</span></p>
+                                                    <input type="text" id='valueHarga' className='text-end' value={valueHarga} onInput={InputFormatNumber} onChange={this.InputChange} required={true} />
                                                 </div>
                                             </div>
                                             <div className={`d-flex`}>
@@ -624,29 +646,21 @@ export class order_pembelian extends Component {
                                                     <input type="file" accept='.pdf' id='input-detail-file' />
                                                 </div>
                                             </div>
+                                            <div className={`d-flex`}>
+                                                <div className={`${global.input_group} col-4 pe-2`}>
+                                                    <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
+                                                    <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(valueTotalHarga)} required={true} readOnly={true} />
+                                                </div>
+                                            </div>
                                         </>
                                     }
-                                    <div className={`d-flex`}>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
-                                            <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
-                                            <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} onInput={InputFormatNumber} onChange={this.InputChange} required={true} />
-                                        </div>
-                                        <div className={`${global.input_group} col-4 px-2`}>
-                                            <p className={global.title}>Harga <span className={global.important}>*</span></p>
-                                            <input type="text" id='valueHarga' className='text-end' value={valueHarga} onInput={InputFormatNumber} onChange={this.InputChange} required={true} />
-                                        </div>
-                                        <div className={`${global.input_group} col-4 ps-2`}>
-                                            <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
-                                            <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(valueTotalHarga)} required={true} readOnly={true} />
-                                        </div>
-                                    </div>
                                     <button type='button' className={global.button} onClick={this.AddDetail}><MdAdd /> Tambah</button>
                                 </>
                                 : null}
                         </form>
                     </div>
                     {this.state.jenisPembelian !== '' ?
-                        <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                        <div className={`col-12`}>
                             <form id='form-detail' className={global.card}>
                                 <div className={`${global.header}`}>
                                     <p className={global.title}>Daftar Pembelian</p>

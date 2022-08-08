@@ -217,20 +217,18 @@ export default function Pengeluaran_kas() {
 
         const formData = new FormData();
 
-        if (getValueSelectedAkun?.value === '1102') {
             let file = document.getElementById('input-file-transfer').files[0];
 
             if (file) {
                 let arg = file.name.split('.');
                 let extension = arg[arg.length - 1];
                 formData.append('file_transfer', file);
-                formData.append('nama_file', `File Transfer - ${getValueKodePengeluaranKas} - ${getValueTanggalBayar}.${extension}`);
+                formData.append('nama_file', `File Bukti Bayar - ${getValueKodePengeluaranKas} - ${getValueTanggalBayar}.${extension}`);
             } else {
                 alert('Isi data dengan benar');
                 HideLoading();
                 return;
             }
-        }
 
         formData.append('kode', getValueKodePengeluaranKas)
         formData.append('tanggal', getValueTanggalBayar)
@@ -277,7 +275,7 @@ export default function Pengeluaran_kas() {
                 <p className={style.pathname}>Transaksi / Pembelian / Pengeluaran Kas</p>
             </div>
             <div className={style.content}>
-                <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
+                <div className={`col-12`}>
                     <div className={`${global.card}`}>
                         <p className={global.title}>Input Pengeluaran Kas</p>
                         <div className={`${global.input_group} col-4 pe-2`}>
@@ -285,27 +283,25 @@ export default function Pengeluaran_kas() {
                             <input type="text" id='input-jenis-pembelian' value={getValueJenisPembelian} readOnly={true} />
                         </div>
                         <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-6 pe-2`}>
+                            <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Kode Kas Keluar</p>
                                 <input type="text" id='input-kode-kas-keluar' name='input-kode-kas-keluar' value={getValueKodePengeluaranKas} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-6 ps-2`}>
+                            <div className={`${global.input_group} col-4 ps-2`}>
                                 <p className={global.title}>Tanggal Bayar</p>
                                 <input type="date" id='input-tanggal-bayar' name='input-tanggal-bayar' value={getValueTanggalBayar} onChange={e => setValueTanggalBayar(e.target.value)} />
                             </div>
                         </div>
                         <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-3 pe-2`}>
+                            <div className={`${global.input_group} col-2 pe-2`}>
                                 <p className={global.title}>Kode Order</p>
                                 <input type="text" id='input-kode-order' name='input-kode-order' value={getValueKodeOrder} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-5 ps-2`}>
+                            <div className={`${global.input_group} col-3 px-2`}>
                                 <p className={global.title}>Tanggal Order</p>
                                 <input type="text" id='input-tanggal-order' name='input-tanggal-order' value={getValueTanggalOrder} readOnly={true} />
                             </div>
-                        </div>
-                        <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-3 pe-2`}>
+                            <div className={`${global.input_group} col-2 px-2`}>
                                 <p className={global.title}>Kode Supplier</p>
                                 <input type="text" id='input-kode-supplier' name='input-kode-supplier' value={getValueKodeSupplier} readOnly={true} />
                             </div>
@@ -317,7 +313,7 @@ export default function Pengeluaran_kas() {
                     </div>
                 </div>
                 {getValueJenisPembelian !== '' ?
-                    <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                    <div className={`col-12`}>
                         <div className={global.card}>
                             <div className={`${global.header}`}>
                                 <p className={global.title}>Daftar Pembelian</p>
@@ -380,17 +376,16 @@ export default function Pengeluaran_kas() {
                                     <p className={`${global.title} col-3`}>Total Bayar</p>
                                     <input type="text" id='input-detail-total-harga' name='input-detail-total-harga' className={`col-3`} value={SetPriceFormat(getValueTotalBayar)} readOnly={true} />
                                     <div className='col-6 ps-2'>
-                                        <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Akun...'} styles={CustomSelect} value={getValueSelectedAkun} onChange={e => setValueSelectedAkun(e)} />
+                                        <Select id='select-kode-akun' name='select-kode-akun' className={`col-5`} isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Akun...'} styles={CustomSelect} value={getValueSelectedAkun} onChange={e => setValueSelectedAkun(e)} />
                                     </div>
                                 </div>
                             </div>
-                            <div className='d-flex flex-column gap-2 pt-2'>
-                                {getValueSelectedAkun.value === '1102' &&
-                                    <div className='align-items-center d-flex justify-content-between'>
-                                        <p>Upload File Transfer</p>
+                            <div className='d-flex'>
+                                    <div className={`${global.input_group}`}>
+                                        <p>Upload File Bukti Bayar</p>
                                         <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' />
                                     </div>
-                                }
+                            </div>
                                 <div className='d-flex'>
                                     <div className='col-6 pe-2'>
                                         <button type='button' className={`${global.button} w-100`} onClick={InsertPengeluaranKas}>Simpan</button>
@@ -399,7 +394,6 @@ export default function Pengeluaran_kas() {
                                         <Link to={'/transaksi/pembelian/daftar-terima-barang'} className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</Link>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                     : null}

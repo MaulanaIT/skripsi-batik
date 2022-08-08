@@ -202,37 +202,35 @@ export default function Jual_pesan() {
             <PrintoutPenjualan bayar={getValueTotalBayar} data={getDataPesanan} diskon={getValueDiskon} ongkosKirim={getValueOngkosKirim} jenis={'pesanan'} kembalian={getValueKembalian} tanggal={getValueTanggal} totalJual={getValueTotalJual} uangMuka={getValueUangMuka} />
             <div className={style.header}>
                 <p className={style.title}>Transaksi Penjualan</p>
-                <p className={style.pathname}>Transaksi / Penjualan / Transaksi Penjualan Pesanan</p>
+                <p className={style.pathname}>Transaksi / Penjualan / Penyerahan Pesanan</p>
             </div>
             <div className={style.content}>
-                <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
+                <div className={`col-12`}>
                     <div className={`${global.card}`}>
                         <div className={`${global.header}`}>
-                            <p className={global.title}>Input Penjualan</p>
+                            <p className={global.title}>Detail Pesanan</p>
                         </div>
                         <div className={`${bootstrap['d-flex']}`}>
-                            <div className={`${global.input_group} col-6 pe-2`}>
+                            <div className={`${global.input_group} col-2 pe-2`}>
                                 <p className={global.title}>Kode Jual</p>
                                 <input type="text" id='input-kode-jual' value={getValueKodeJual} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-6 ps-2`}>
+                            <div className={`${global.input_group} col-3 px-2`}>
                                 <p className={global.title}>Tanggal</p>
                                 <input type="date" id='input-tanggal-jual' value={getValueTanggal} readOnly={true} />
                             </div>
-                        </div>
-                        <div className={`${bootstrap['d-flex']}`}>
-                            <div className={`${global.input_group} col-5 pe-2`}>
+                            <div className={`${global.input_group} col-2 px-2`}>
                                 <p className={global.title}>Kode Customer</p>
                                 <input type="text" id='input-kode-customer' value={getValueKodeCustomer} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-7 pe-2`}>
+                            <div className={`${global.input_group} col-5 ps-2`}>
                                 <p className={global.title}>Nama Customer</p>
                                 <input type="text" id='input-nama-customer' value={getValueNamaCustomer} readOnly={true} />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                <div className={`col-12`}>
                     <div className={`${global.card}`}>
                         <div className={`${global.header}`}>
                             <p className={global.title}>Detail Penjualan</p>
@@ -280,7 +278,7 @@ export default function Jual_pesan() {
                             <p className={`${global.title} col-3`}>Sisa</p>
                             <input type="text" id='input-detail-piutang' value={SetPriceFormat(getValueSisa)} className={`col-4`} readOnly={true} />
                             <div className='col-5 ps-2'>
-                                <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Akun...'} value={getValueKodeAkun} styles={CustomSelect} onChange={e => setValueKodeAkun(e)} />
+                                <Select id='select-kode-akun' name='select-kode-akun' className={`col-5`} isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Akun...'} value={getValueKodeAkun} styles={CustomSelect} onChange={e => setValueKodeAkun(e)} />
                             </div>
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
@@ -291,12 +289,14 @@ export default function Jual_pesan() {
                             <p className={`${global.title} col-3`}>Kembalian</p>
                             <input type="text" id='input-detail-kembalian' value={SetPriceFormat(getValueKembalian)} className={`col-4`} readOnly={true} />
                         </div>
-                        {getValueKodeAkun.value === '1102' &&
-                            <div className='align-items-center d-flex justify-content-between'>
-                                <p>Upload File Transfer</p>
-                                <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
-                            </div>
-                        }
+                        <div className='d-flex'>
+                            {getValueKodeAkun.value === '1102' &&
+                                <div className={`${global.input_group}`}>
+                                    <p>Upload File Transfer</p>
+                                    <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
+                                </div>
+                            }
+                        </div>
                         <div className='d-flex flex-column gap-2 pt-2'>
                             <div className='d-flex'>
                                 <div className='col-6 pe-2'>
