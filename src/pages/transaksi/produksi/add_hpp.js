@@ -204,9 +204,11 @@ const Add_hpp = (props, ref) => {
                 });
             }
 
-            setDataDetailAlat(dataDetailAlat);
             setHTMLTableDaftarAlat(htmlTableDaftarAlat, () => {
                 $('#table-data-bop-alat').DataTable();
+
+                setDataDetailAlat(dataDetailAlat);
+                InsertDetailAlat(dataDetailAlat);
 
                 HideLoading();
             });
@@ -229,7 +231,8 @@ const Add_hpp = (props, ref) => {
         formData.append('kode_bahan_baku', getValueBahanBaku?.value);
         formData.append('jumlah', getValueJumlah);
 
-        axios.post(`${baseURL}/api/transaksi/produksi/detail-bahan-baku/update.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/transaksi/produksi/detail-bahan-baku/update.php`, formData, config).then(response => {
+            console.log(response);
             $('#table-data-biaya-bahan-baku').DataTable().destroy();
 
             let dataDetailBahanBaku = getDataDetailBahanBaku;
@@ -266,10 +269,11 @@ const Add_hpp = (props, ref) => {
                 });
             }
 
-            setDataDetailBahanBaku(dataDetailBahanBaku);
-
             setHTMLTableDaftarBahanBaku(htmlTableDaftarBahanBaku, () => {
                 $('#table-data-biaya-bahan-baku').DataTable();
+
+                setDataDetailBahanBaku(dataDetailBahanBaku);
+                InsertDetailBahanBaku(dataDetailBahanBaku);
 
                 HideLoading();
             });
@@ -330,9 +334,11 @@ const Add_hpp = (props, ref) => {
                 });
             }
 
-            setDataDetailPenolong(dataDetailPenolong);
             setHTMLTableDaftarPenolong(htmlTableDaftarPenolong, () => {
                 $('#table-data-bop-penolong').DataTable();
+
+                setDataDetailPenolong(dataDetailPenolong);
+                InsertDetailPenolong(dataDetailPenolong);
 
                 HideLoading();
             });
@@ -389,9 +395,11 @@ const Add_hpp = (props, ref) => {
         }
 
 
-        setDataDetailTenagaKerja(dataDetailTenagaKerja);
         setHTMLTableDaftarTenagaKerja(htmlTableDaftarTenagaKerja, () => {
             $('#table-data-biaya-tenaga-kerja').DataTable();
+
+            setDataDetailTenagaKerja(dataDetailTenagaKerja);
+            InsertDetailTenagaKerja(dataDetailTenagaKerja);
 
             HideLoading();
         });
@@ -790,7 +798,7 @@ const Add_hpp = (props, ref) => {
         });
     }
 
-    const InsertDetailAlat = () => {
+    const InsertDetailAlat = (data) => {
         ShowLoading();
 
         const formData = new FormData();
@@ -806,10 +814,10 @@ const Add_hpp = (props, ref) => {
             formData.append('kode_permintaan', props.kodePermintaan);
         }
         formData.append('tanggal', getValueTanggal);
-        formData.append('data', JSON.stringify(getDataDetailAlat));
+        formData.append('data', JSON.stringify(data));
 
         axios.post(`${baseURL}/api/transaksi/produksi/detail-alat/insert.php`, formData, config).then(response => {
-            console.log(response)
+            SaveDetail();
             HideLoading();
         }).catch(error => {
             console.log(error);
@@ -820,7 +828,7 @@ const Add_hpp = (props, ref) => {
         });
     }
 
-    const InsertDetailBahanBaku = () => {
+    const InsertDetailBahanBaku = (data) => {
         ShowLoading();
 
         const formData = new FormData();
@@ -836,10 +844,11 @@ const Add_hpp = (props, ref) => {
             formData.append('kode_permintaan', props.kodePermintaan);
         }
         formData.append('tanggal', getValueTanggal);
-        formData.append('data', JSON.stringify(getDataDetailBahanBaku));
+        formData.append('data', JSON.stringify(data));
 
         axios.post(`${baseURL}/api/transaksi/produksi/detail-bahan-baku/insert.php`, formData, config).then(response => {
-            console.log(response)
+            console.log(response);
+            SaveDetail();
             HideLoading();
         }).catch(error => {
             console.log(error);
@@ -850,7 +859,7 @@ const Add_hpp = (props, ref) => {
         });
     }
 
-    const InsertDetailPenolong = () => {
+    const InsertDetailPenolong = (data) => {
         ShowLoading();
 
         const formData = new FormData();
@@ -866,9 +875,10 @@ const Add_hpp = (props, ref) => {
             formData.append('kode_permintaan', props.kodePermintaan);
         }
         formData.append('tanggal', getValueTanggal);
-        formData.append('data', JSON.stringify(getDataDetailPenolong));
+        formData.append('data', JSON.stringify(data));
 
         axios.post(`${baseURL}/api/transaksi/produksi/detail-penolong/insert.php`, formData, config).then(response => {
+            SaveDetail();
             HideLoading();
         }).catch(error => {
             console.log(error);
@@ -879,7 +889,7 @@ const Add_hpp = (props, ref) => {
         });
     }
 
-    const InsertDetailTenagaKerja = () => {
+    const InsertDetailTenagaKerja = (data) => {
         ShowLoading();
 
         const formData = new FormData();
@@ -897,9 +907,10 @@ const Add_hpp = (props, ref) => {
         }
 
         formData.append('tanggal', getValueTanggal);
-        formData.append('data', JSON.stringify(getDataDetailTenagaKerja));
+        formData.append('data', JSON.stringify(data));
 
         axios.post(`${baseURL}/api/transaksi/produksi/detail-tenaga-kerja/insert.php`, formData, config).then(() => {
+            SaveDetail();
             HideLoading();
         }).catch(error => {
             console.log(error);
@@ -922,8 +933,6 @@ const Add_hpp = (props, ref) => {
 
         props.setHpp(BahanBaku, TenagaKerja, Overhead);
         props.setDetailData(getDataDetailAlat, getDataDetailBahanBaku, getDataDetailPenolong, getDataDetailTenagaKerja);
-
-        document.getElementById('add_hpp').classList.add('d-none');
     }
 
     const SelectAlat = (e) => {
@@ -1245,7 +1254,10 @@ const Add_hpp = (props, ref) => {
                                 </table>
                             </div>
                             <div className={`${global.input_group} col-12 ms-auto`}>
-                                <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={SaveDetail}><MdAdd /> Simpan</button>
+                                <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={() => {
+                                    SaveDetail();
+                                    document.getElementById('add_hpp').classList.add('d-none');
+                                }}><MdAdd /> Simpan</button>
                             </div>
                         </form>
                     </div>

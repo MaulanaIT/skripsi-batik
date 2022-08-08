@@ -99,7 +99,7 @@ const SetNumberFormat = (price = 0) => {
     let ribuan = reverse.match(/\d{1,3}/g);
     ribuan = ribuan.join(',').split('').reverse().join('');
 
-    if (parseInt(price) < 0) return ribuan;
+    if (parseInt(price) < 0) return -ribuan;
     return ribuan;
 }
 

@@ -214,10 +214,10 @@ export default function Hpp() {
         }
 
         await axios.post(`${baseURL}/api/transaksi/produksi/hpp/insert.php`, formData, config).then(async () => {
-            await addReff.current?.InsertDetailAlat();
-            await addReff.current?.InsertDetailBahanBaku();
-            await addReff.current?.InsertDetailPenolong();
-            await addReff.current?.InsertDetailTenagaKerja();
+            // await addReff.current?.InsertDetailAlat();
+            // await addReff.current?.InsertDetailBahanBaku();
+            // await addReff.current?.InsertDetailPenolong();
+            // await addReff.current?.InsertDetailTenagaKerja();
 
             const formData = new FormData();
 

@@ -11,10 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $data = json_decode($_POST['data']);
 
+    $query = "DELETE FROM hpp_detail_bahan_baku WHERE kode='".$kode."'";
+
+    $result = $conn->query($query);
+
     foreach ($data as $key) {
-        $query = "INSERT INTO hpp_detail_bahan_baku(kode, kode_hpp, kode_produksi, kode_permintaan, kode_bahan_baku, tanggal, harga, jumlah, total_harga) VALUES('" . $kode . "', '" . $kode_hpp . "', '" . $kode_produksi . "', '" . $kode_permintaan . "', '" . $key->kode_bahan . "', '" . $tanggal . "', '" . $key->harga . "', '" . $key->jumlah . "', '" . $key->total_harga . "')
-    ON DUPLICATE KEY UPDATE
-    jumlah='" . $key->jumlah . "', total_harga='" . $key->total_harga . "'";
+        $query = "INSERT INTO hpp_detail_bahan_baku(kode, kode_hpp, kode_produksi, kode_permintaan, kode_bahan_baku, tanggal, harga, jumlah, total_harga) VALUES('" . $kode . "', '" . $kode_hpp . "', '" . $kode_produksi . "', '" . $kode_permintaan . "', '" . $key->kode_bahan . "', '" . $tanggal . "', '" . $key->harga . "', '" . $key->jumlah . "', '" . $key->total_harga . "')";
 
         $result = $conn->query($query);
 
