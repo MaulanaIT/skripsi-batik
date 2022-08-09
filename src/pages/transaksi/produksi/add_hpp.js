@@ -408,10 +408,10 @@ const Add_hpp = (props, ref) => {
     const CloseDetail = () => {
         document.getElementById('add_hpp').classList.add('d-none');
 
-        setDataDetailAlat([]);
-        setDataDetailBahanBaku([]);
-        setDataDetailPenolong([]);
-        setDataDetailTenagaKerja([]);
+        // setDataDetailAlat([]);
+        // setDataDetailBahanBaku([]);
+        // setDataDetailPenolong([]);
+        // setDataDetailTenagaKerja([]);
     }
 
     const GetAlat = () => {
@@ -757,10 +757,10 @@ const Add_hpp = (props, ref) => {
                                 <td>{index + 1}.</td>
                                 <td>{item.kode_tenaga_kerja}</td>
                                 <td>{item.nama_tenaga_kerja}</td>
-                                <td>{item.jumlah}</td>
                                 <td>{item.harga}</td>
+                                <td>{item.jumlah}</td>
                                 <td>{item.total_harga}</td>
-                                =                            </tr>
+                            </tr>
                         );
 
                         dataDetailTenagaKerja.push({
@@ -1007,8 +1007,8 @@ const Add_hpp = (props, ref) => {
                                             <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props.isUpdate ? props.dataSelected.kode_produksi : props.kodeProduksi} required={true} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-8 ps-2`}>
-                                            <p className={global.title}>Kode Permintaan Bahan <span className={global.important}>*</span></p>
-                                            <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' value={props.isUpdate ? props.dataSelected.kode_permintaan : props.kodePermintaan} required={true} readOnly={true} />
+                                            <p className={global.title}>Kode Permintaan <span className={global.important}>*</span></p>
+                                            <input type="text" id='input-kode-permintaan' name='input-kode-permintaan' value={props.isUpdate ? props.dataSelected.kode_permintaan : props.kodePermintaan} required={true} readOnly={true} />
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
@@ -1055,8 +1055,8 @@ const Add_hpp = (props, ref) => {
                                             <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props.isUpdate ? props.dataSelected.kode_produksi : props.kodeProduksi} required={true} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-8 ps-2`}>
-                                            <p className={global.title}>Kode Permintaan Bahan <span className={global.important}>*</span></p>
-                                            <input type="text" id='input-kode-permintaan-bahan' name='input-kode-permintaan-bahan' value={props.isUpdate ? props.dataSelected.kode_permintaan : props.kodePermintaan} required={true} readOnly={true} />
+                                            <p className={global.title}>Kode Permintaan <span className={global.important}>*</span></p>
+                                            <input type="text" id='input-kode-permintaan' name='input-kode-permintaan' value={props.isUpdate ? props.dataSelected.kode_permintaan : props.kodePermintaan} required={true} readOnly={true} />
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
@@ -1224,8 +1224,8 @@ const Add_hpp = (props, ref) => {
                                     <thead className='text-nowrap'>
                                         <tr>
                                             <td>No.</td>
-                                            <td>Kode Tenaga Kerja</td>
-                                            <td>Nama Tenaga Kerja</td>
+                                            <td>Kode Alat</td>
+                                            <td>Nama Alat</td>
                                             <td>Pemakaian</td>
                                             <td>Tarif</td>
                                             <td>Biaya</td>
@@ -1241,10 +1241,10 @@ const Add_hpp = (props, ref) => {
                                     <thead className='text-nowrap'>
                                         <tr>
                                             <td>No.</td>
-                                            <td>Kode Alat</td>
-                                            <td>Nama Alat</td>
-                                            <td>Tarif</td>
-                                            <td>Pemakaian</td>
+                                            <td>Kode Tenaga Kerja</td>
+                                            <td>Nama Tenaga Kerja</td>
+                                            <td>Upah</td>
+                                            <td>Jumlah</td>
                                             <td>Biaya</td>
                                         </tr>
                                     </thead>
