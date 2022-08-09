@@ -79,8 +79,8 @@
     width: 100%;
 }
 
-.card * {
-    color: black;
+.card.boxless {
+    box-shadow: unset;
 }
 
 .card>.header {

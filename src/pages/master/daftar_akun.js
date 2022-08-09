@@ -143,7 +143,7 @@ export class daftar_akun extends Component {
                             <p className={global.title}>Daftar Akun</p>
                             <Link to={'/master/akun'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
                         </div>
-                        <div className={global.card}>
+                        <div className={cx([global.card, global.boxless])}>
                             <form id='form-table' className={`table-responsive`}>
                                 <table id='table-data' className={`table w-100`}>
                                     <thead className="align-middle text-center text-nowrap">
