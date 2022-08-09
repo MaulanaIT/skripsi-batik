@@ -151,7 +151,7 @@ export default function Penerimaan_barang() {
             let extension = arg[arg.length - 1];
             formData.append('file_nota', file);
             
-            formData.append('nama_file', `File Nota Pembelian - ${getValueKodePenerimaan} - ${getValueTanggal}.${extension}`);
+            formData.append('nama_file', `File Nota Tagihan - ${getValueKodePenerimaan} - ${getValueTanggal}.${extension}`);
         } else {
             alert('Isi data dengan benar');
             HideLoading();
@@ -192,31 +192,29 @@ export default function Penerimaan_barang() {
                 <p className={style.pathname}>Transaksi / Pembelian / Penerimaan Barang</p>
             </div>
             <div className={style.content}>
-                <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
+                <div className={`col-12`}>
                     <div className={`${global.card}`}>
                         <p className={global.title}>Input Penerimaan Barang</p>
                         <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-6 pe-2`}>
+                            <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Kode Penerimaan</p>
                                 <input type="text" id='input-kode-terima-barang' value={getValueKodePenerimaan} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-6 ps-2`}>
+                            <div className={`${global.input_group} col-4 ps-2`}>
                                 <p className={global.title}>Tanggal Terima</p>
                                 <input type="date" id='input-tanggal-terima-barang' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
                             </div>
                         </div>
                         <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-3 pe-2`}>
+                            <div className={`${global.input_group} col-2 pe-2`}>
                                 <p className={global.title}>Kode Order</p>
                                 <input type="text" id='input-kode-order' value={getValueKodeOrder} readOnly={true} />
                             </div>
-                            <div className={`${global.input_group} col-5 ps-2`}>
+                            <div className={`${global.input_group} col-3 px-2`}>
                                 <p className={global.title}>Tanggal Order</p>
                                 <input type="text" id='input-tanggal-order' value={getValueTanggalOrder} readOnly={true} />
                             </div>
-                        </div>
-                        <div className={`d-flex`}>
-                            <div className={`${global.input_group} col-3 pe-2`}>
+                            <div className={`${global.input_group} col-2 px-2`}>
                                 <p className={global.title}>Kode Supplier</p>
                                 <input type="text" id='input-kode-supplier' value={getValueKodeSupplier} readOnly={true} />
                             </div>
@@ -225,12 +223,14 @@ export default function Penerimaan_barang() {
                                 <input type="text" id='input-nama-supplier' value={getValueNamaSupplier} readOnly={true} />
                             </div>
                         </div>
+                        <div className={`d-flex`}>
+                        </div>
                     </div>
                 </div>
-                <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                <div className={`col-12`}>
                     <div className={global.card}>
                         <div className={`${global.header}`}>
-                            <p className={global.title}>Daftar Pembelian</p>
+                            <p className={global.title}>Daftar Penerimaan Barang</p>
                         </div>
                         <div className={`${getValueJenisPembelian === 'bahan' && 'd-none'} table-responsive`}>
                             <table id='table-data-alat' className={`table w-100`}>
@@ -267,28 +267,24 @@ export default function Penerimaan_barang() {
                                 </tbody>
                             </table>
                         </div>
-                        <div className={`d-flex flex-column gap-2 pb-2`}>
-                            <div className={`align-items-center ${global.input_group_row}`}>
-                                <p className={`${global.title} col-3`}>Total Barang</p>
-                                <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-3`} value={SetNumberFormat(getValueTotalBarang)} readOnly={true} />
+                        <div className={`d-flex`}>
+                            <div className={`${global.input_group_row}`}>
+                                <p className={`${global.title} col-6`}>Total Barang</p>
+                                <input type="text" id='input-detail-total-pembelian' name='input-detail-total-pembelian' className={`col-5`} value={SetNumberFormat(getValueTotalBarang)} readOnly={true} />
                             </div>
                         </div>
-                        <div className='d-flex flex-column gap-2 pt-2'>
-                            <div className='d-flex'>
-                                <div className='align-items-center d-flex justify-content-between'>
-                                    <p>Upload Nota Pembelian</p>
-                                    <input type="file" accept='.pdf' id='input-file-nota' name='input-file-nota' />
-                                </div>
+                        <div className='d-flex'>
+                            <div className={`${global.input_group}`}>
+                                <p>Upload Copy Nota Tagihan/Faktur</p>
+                                <input type="file" accept='.pdf' id='input-file-nota' name='input-file-nota' />
                             </div>
-                            <div className='d-flex flex-column gap-2 pt-2'>
-                                <div className='d-flex'>
-                                    <div className='col-6 pe-2'>
-                                        <button type='button' className={`${global.button} w-100`} onClick={TerimaBarang}>Simpan</button>
-                                    </div>
-                                    <div className='col-6 ps-2'>
-                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>
-                                    </div>
-                                </div>
+                        </div>
+                        <div className='d-flex'>
+                            <div className='col-6 pe-2'>
+                                <button type='button' className={`${global.button} w-100`} onClick={TerimaBarang}>Simpan</button>
+                            </div>
+                            <div className='col-6 ps-2'>
+                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Batal</button>
                             </div>
                         </div>
                     </div>

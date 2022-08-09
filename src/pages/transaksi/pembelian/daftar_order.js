@@ -13,7 +13,7 @@ import PrintoutOrder from './printout_order';
 
 // Import CSS
 import global from '../../../css/global.module.css';
-import style from '../../../css/transaksi/pembelian/order_pembelian.module.css';
+import style from '../../../css/transaksi/penjualan/daftar_pesanan.module.css';
 
 export class daftar_order extends Component {
 

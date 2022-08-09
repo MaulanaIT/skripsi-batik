@@ -1,14 +1,15 @@
 .content {
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
-    margin-top: 24px;
+    margin-top: 12px;
+    gap: 10px;
 }
 
 .header {
     align-items: baseline;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    gap: 600px;
 }
 
 .header>.pathname {

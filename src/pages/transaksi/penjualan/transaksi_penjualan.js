@@ -15,7 +15,7 @@ import PrintoutPenjualan from './printout_penjualan';
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
-import style from '../../../css/transaksi/penjualan/transaksi_penjualan.module.css';
+import style from '../../../css/transaksi/penerimaan_kas/uang_muka_pesanan.module.css';
 
 const CustomSelect = {
     control: (provided, state) => ({
@@ -1552,12 +1552,12 @@ export class transaksi_penjualan extends Component {
                     <p className={style.pathname}>Transaksi / Penjualan / Transaksi Penjualan</p>
                 </div>
                 <div className={style.content}>
-                    <div className={`col-12 col-md-6 pe-md-2 pb-2 pb-md-0`}>
+                    <div className={`col-12`}>
                         <form id='form-data' className={`${global.card}`}>
                             <div className={`${global.header}`}>
                                 <p className={global.title}>Input Penjualan</p>
                             </div>
-                            <div className={global.input_group}>
+                            <div className={`${global.input_group} col-6 pe-2`}>
                                 <p className={global.title}>Jenis Transaksi</p>
                                 <Select isClearable={true} isSearchable={true} options={[
                                     { value: 'Tunai', label: 'Tunai' },
@@ -1570,58 +1570,54 @@ export class transaksi_penjualan extends Component {
                                     {this.state.jenisPenjualan === 'Tunai' ?
                                         <React.Fragment>
                                             <div className={`${bootstrap['d-flex']}`}>
-                                                <div className={`${global.input_group} col-6 pe-2`}>
+                                                <div className={`${global.input_group} col-2 pe-2`}>
                                                     <p className={global.title}>Kode Jual <span className={global.important}>*</span></p>
                                                     <input type="text" id='valueKodeJual' maxLength={10} value={valueKodeJual} required={true} readOnly={true} />
                                                 </div>
-                                                <div className={`${global.input_group} col-6 ps-2`}>
+                                                <div className={`${global.input_group} col-2 px-2`}>
                                                     <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                                     <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} required={true} />
                                                 </div>
-                                            </div>
-                                            <div className={`${bootstrap['d-flex']}`}>
-                                                <div className={`${global.input_group} col-5 pe-2`}>
+                                                <div className={`${global.input_group} col-3 px-2`}>
                                                     <p className={global.title}>Kode Customer <span className={global.important}>*</span></p>
                                                     <Select id='select-kode-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeCustomer} placeholder={'Select Kode...'} value={valueKodeCustomer} styles={CustomSelect} onChange={(data) => this.SelectCustomer(data)} isDisabled={[dataKonsinyasi.length, dataPesanan.length, dataTunai.length].some(item => item > 0)} />
                                                 </div>
-                                                <div className={`${global.input_group} col-7 pe-2`}>
+                                                <div className={`${global.input_group} col-5 ps-2`}>
                                                     <p className={global.title}>Nama Customer <span className={global.important}>*</span></p>
                                                     <Select id='select-nama-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaCustomer} placeholder={'Select Nama...'} value={valueNamaCustomer} styles={CustomSelect} onChange={(data) => this.SelectCustomer(data)} isDisabled={[dataKonsinyasi.length, dataPesanan.length, dataTunai.length].some(item => item > 0)} />
                                                 </div>
                                             </div>
                                             <div className={`${bootstrap['d-flex']}`}>
-                                                <div className={`${global.input_group} col-5 pe-2`}>
+                                                <div className={`${global.input_group} col-3 pe-2`}>
                                                     <p className={global.title}>Kode Produk <span className={global.important}>*</span></p>
                                                     <Select id='select-kode-produk' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeProduk} placeholder={'Select Kode...'} value={valueKodeProduk} styles={CustomSelect} onChange={this.SelectProduk} />
                                                 </div>
-                                                <div className={`${global.input_group} col-7 pe-2`}>
+                                                <div className={`${global.input_group} col-6 px-2`}>
                                                     <p className={global.title}>Nama Produk <span className={global.important}>*</span></p>
                                                     <Select id='select-nama-produk' name='select-nama-produk' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaProduk} placeholder={'Select Nama...'} value={valueNamaProduk} styles={CustomSelect} onChange={this.SelectProduk} />
                                                 </div>
-                                            </div>
-                                            <div className={`${bootstrap['d-flex']}`}>
-                                                <div className={`${global.input_group} col-4 pe-2`}>
+                                                <div className={`${global.input_group} col-3 ps-2`}>
                                                     <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                                     <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} min={0} onInput={InputFormatNumber} onChange={e => this.setState({
                                                             valueJumlah: +e.target.value > +this.state.valueJumlahMax ? this.state.valueJumlahMax : e.target.value,
                                                         valueTotalHpp: +e.target.value * +valueHpp
                                                     })} required={true} />
                                                 </div>
-                                                <div className={`${global.input_group} col-4 px-2`}>
+                                            </div>
+                                            <div className={`${bootstrap['d-flex']}`}>
+                                                <div className={`${global.input_group} col-3 pe-2`}>
                                                     <p className={global.title}>Harga <span className={global.important}>*</span></p>
                                                     <input type="text" id='valueHarga' className='text-end' value={SetPriceFormat(valueHarga)} required={true} readOnly={true} />
                                                 </div>
-                                                <div className={`${global.input_group} col-4 ps-2`}>
+                                                <div className={`${global.input_group} col-3 px-2`}>
                                                     <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
                                                     <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga))} required={true} readOnly={true} />
                                                 </div>
-                                            </div>
-                                            <div className={`${bootstrap['d-flex']}`}>
-                                                <div className={`${global.input_group} col-4 pe-2`}>
+                                                <div className={`${global.input_group} col-3 px-2`}>
                                                     <p className={global.title}>Harga Pokok Penjualan</p>
                                                     <input type="text" id='valueHarga' className='text-end' value={SetPriceFormat(valueHpp)} readOnly={true} />
                                                 </div>
-                                                <div className={`${global.input_group} col-4 px-2`}>
+                                                <div className={`${global.input_group} col-3 ps-2`}>
                                                     <p className={global.title}>Total HPP</p>
                                                     <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(valueTotalHpp)} readOnly={true} />
                                                 </div>
@@ -1631,39 +1627,39 @@ export class transaksi_penjualan extends Component {
                                         :
                                         this.state.jenisPenjualan === 'Pesanan' ?
                                             <React.Fragment>
-                                                <div className='d-flex'>
-                                                    <div className={`${global.input_group} col-6 pe-2`}>
+                                                <div className={`${bootstrap['d-flex']}`}>
+                                                    <div className={`${global.input_group} col-2 pe-2`}>
                                                         <p className={global.title}>Kode Pesanan <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueKodePesanan' value={valueKodePesanan} required={true} readOnly={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-6 ps-2`}>
+                                                    <div className={`${global.input_group} col-2 px-2`}>
                                                         <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                                         <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} required={true} />
                                                     </div>
+                                                    <div className={`${global.input_group} col-6 px-2`}>
+                                                        <p className={global.title}>Nama Pesanan <span className={global.important}>*</span></p>
+                                                        <input type="text" id='valueNamaPesanan' value={valueNamaPesanan} onChange={this.InputChange} required={true} />
+                                                    </div>
+                                                    <div className={`${global.input_group} col-2 ps-2`}>
+                                                        <p className={global.title}>Jenis Produk <span className={global.important}>*</span></p>
+                                                        <Select id='select-jenis-produk' name='select-jenis-produk' isClearable={true} isSearchable={true} options={[
+                                                            { value: 'Kain', label: 'Kain' },
+                                                            { value: 'Pakaian', label: 'Pakaian' }
+                                                        ]} placeholder={'Select Jenis Produk...'} value={valueJenisProduk} onChange={e => this.setState({ valueJenisProduk: e })} styles={CustomSelect} />
+                                                    </div>
                                                 </div>
-                                                <div className={`${global.input_group}`}>
-                                                    <p className={global.title}>Nama Pesanan <span className={global.important}>*</span></p>
-                                                    <input type="text" id='valueNamaPesanan' value={valueNamaPesanan} onChange={this.InputChange} required={true} />
-                                                </div>
-                                                <div className='d-flex'>
-                                                    <div className={`${global.input_group} col-4 pe-2`}>
+                                                <div className={`${bootstrap['d-flex']}`}>
+                                                    <div className={`${global.input_group} col-3 pe-2`}>
                                                         <p className={global.title}>Kode Customer <span className={global.important}>*</span></p>
                                                         <Select id='select-kode-customer' name='select-kode-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeCustomer} placeholder={'Select Kode...'} value={valueKodeCustomer} onChange={e => this.SelectCustomer(e)} styles={CustomSelect} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-8 ps-2`}>
+                                                    <div className={`${global.input_group} col-6 ps-2`}>
                                                         <p className={global.title}>Nama Customer <span className={global.important}>*</span></p>
                                                         <Select id='select-nama-customer' name='select-nama-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaCustomer} placeholder={'Select Nama Customer...'} value={valueNamaCustomer} onChange={e => this.SelectCustomer(e)} styles={CustomSelect} />
                                                     </div>
                                                 </div>
-                                                <div className={`${global.input_group}`}>
-                                                    <p className={global.title}>Jenis Produk <span className={global.important}>*</span></p>
-                                                    <Select id='select-jenis-produk' name='select-jenis-produk' isClearable={true} isSearchable={true} options={[
-                                                        { value: 'Kain', label: 'Kain' },
-                                                        { value: 'Pakaian', label: 'Pakaian' }
-                                                    ]} placeholder={'Select Jenis Produk...'} value={valueJenisProduk} onChange={e => this.setState({ valueJenisProduk: e })} styles={CustomSelect} />
-                                                </div>
-                                                <div className='d-flex'>
-                                                    <div className={`${global.input_group} col-4 pe-2`}>
+                                                <div className={`${bootstrap['d-flex']}`}>
+                                                    <div className={`${global.input_group} col-3 pe-2`}>
                                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueJumlah' value={valueJumlah} onInput={InputFormatNumber} min={0} onChange={async e => {
                                                             await this.InputChange(e);
@@ -1674,21 +1670,21 @@ export class transaksi_penjualan extends Component {
                                                             });
                                                         }} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-4 px-2`}>
-                                                        <p className={global.title}>HPP <span className={global.important}>*</span></p>
-                                                        <input type="text" id='valueHpp' value={SetPriceFormat(valueHpp)} required={true} readOnly={true} />
-                                                    </div>
-                                                    <div className={`${global.input_group} col-4 ps-2`}>
+                                                    <div className={`${global.input_group} col-3 px-2`}>
                                                         <p className={global.title}>Profit (%) <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueProfit' value={valueProfit} onInput={InputFormatNumber} onChange={async e => {
                                                             await this.InputChange(e);
                                                             this.KalkulasiHargaJual();
                                                         }} required={true} />
                                                     </div>
-                                                </div>
-                                                <div className={`${global.input_group}`}>
-                                                    <p className={global.title}>Harga Jual <span className={global.important}>*</span></p>
-                                                    <input type="text" id='valueHargaJual' value={SetPriceFormat(valueHargaJual)} required={true} readOnly={true} />
+                                                    <div className={`${global.input_group} col-3 px-2`}>
+                                                        <p className={global.title}>HPP <span className={global.important}>*</span></p>
+                                                        <input type="text" id='valueHpp' value={SetPriceFormat(valueHpp)} required={true} readOnly={true} />
+                                                    </div>
+                                                    <div className={`${global.input_group} col-3 ps-2`}>
+                                                        <p className={global.title}>Harga Jual <span className={global.important}>*</span></p>
+                                                        <input type="text" id='valueHargaJual' value={SetPriceFormat(valueHargaJual)} required={true} readOnly={true} />
+                                                    </div>
                                                 </div>
                                                 <div className='d-flex'>
                                                     <div className='col-6 pe-2'>
@@ -1702,58 +1698,56 @@ export class transaksi_penjualan extends Component {
                                             :
                                             <React.Fragment>
                                                 <div className={`${bootstrap['d-flex']}`}>
-                                                    <div className={`${global.input_group} col-6 pe-2`}>
+                                                    <div className={`${global.input_group} col-2 pe-2`}>
                                                         <p className={global.title}>Kode Jual <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueKodeJual' maxLength={10} value={valueKodeJual} required={true} readOnly={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-6 ps-2`}>
+                                                    <div className={`${global.input_group} col-2 px-2`}>
                                                         <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                                         <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} required={true} />
                                                     </div>
-                                                </div>
-                                                <div className={`${bootstrap['d-flex']}`}>
-                                                    <div className={`${global.input_group} col-5 pe-2`}>
-                                                        <p className={global.title}>Kode Consignee <span className={global.important}>*</span></p>
-                                                        <Select id='select-kode-consignee' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeConsignee} placeholder={'Select Kode...'} value={valueKodeConsignee} styles={CustomSelect} onChange={(data) => this.SelectConsignee(data)} />
-                                                    </div>
-                                                    <div className={`${global.input_group} col-7 pe-2`}>
+                                                    <div className={`${global.input_group} col-3 ps-2`}>
                                                         <p className={global.title}>Nama Consignee <span className={global.important}>*</span></p>
                                                         <Select id='select-nama-consignee' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaConsignee} placeholder={'Select Nama...'} value={valueNamaConsignee} styles={CustomSelect} onChange={(data) => this.SelectConsignee(data)} />
                                                     </div>
+                                                    <div className={`${global.input_group} col-5 px-2`}>
+                                                        <p className={global.title}>Kode Consignee <span className={global.important}>*</span></p>
+                                                        <Select id='select-kode-consignee' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeConsignee} placeholder={'Select Kode...'} value={valueKodeConsignee} styles={CustomSelect} onChange={(data) => this.SelectConsignee(data)} />
+                                                    </div>
                                                 </div>
                                                 <div className={`${bootstrap['d-flex']}`}>
-                                                    <div className={`${global.input_group} col-5 pe-2`}>
+                                                </div>
+                                                <div className={`${bootstrap['d-flex']}`}>
+                                                    <div className={`${global.input_group} col-3 pe-2`}>
                                                         <p className={global.title}>Kode Produk <span className={global.important}>*</span></p>
                                                         <Select id='select-kode-produk' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeProduk} placeholder={'Select Kode...'} value={valueKodeProduk} styles={CustomSelect} onChange={this.SelectProduk} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-7 pe-2`}>
+                                                    <div className={`${global.input_group} col-6 px-2`}>
                                                         <p className={global.title}>Nama Produk <span className={global.important}>*</span></p>
                                                         <Select id='select-nama-produk' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaProduk} placeholder={'Select Nama...'} value={valueNamaProduk} styles={CustomSelect} onChange={this.SelectProduk} />
                                                     </div>
-                                                </div>
-                                                <div className={`${bootstrap['d-flex']}`}>
-                                                    <div className={`${global.input_group} col-4 pe-2`}>
+                                                    <div className={`${global.input_group} col-3 ps-2`}>
                                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} min={0} onInput={InputFormatNumber} onChange={e => this.setState({
                                                             valueJumlah: +e.target.value > +this.state.valueJumlahMax ? this.state.valueJumlahMax : e.target.value,
                                                             valueTotalHpp: +e.target.value * +valueHpp
                                                         })} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-4 px-2`}>
+                                                </div>
+                                                <div className={`${bootstrap['d-flex']}`}>
+                                                    <div className={`${global.input_group} col-3 pe-2`}>
                                                         <p className={global.title}>Harga <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueHarga' className='text-end' value={SetPriceFormat(valueHarga)} required={true} readOnly={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-4 ps-2`}>
+                                                    <div className={`${global.input_group} col-3 px-2`}>
                                                         <p className={global.title}>Total Harga <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(parseInt(valueJumlah === '' ? 0 : valueJumlah) * parseInt(valueHarga))} required={true} readOnly={true} />
                                                     </div>
-                                                </div>
-                                                <div className={`${bootstrap['d-flex']}`}>
-                                                    <div className={`${global.input_group} col-4 pe-2`}>
+                                                    <div className={`${global.input_group} col-3 px-2`}>
                                                         <p className={global.title}>Harga Pokok Penjualan</p>
                                                         <input type="text" id='valueHarga' className='text-end' value={SetPriceFormat(valueHpp)} readOnly={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-4 px-2`}>
+                                                    <div className={`${global.input_group} col-3 ps-2`}>
                                                         <p className={global.title}>Total HPP</p>
                                                         <input type="text" id='valueTotalHarga' className='text-end' value={SetPriceFormat(valueTotalHpp)} readOnly={true} />
                                                     </div>
@@ -1767,7 +1761,7 @@ export class transaksi_penjualan extends Component {
                     </div>
                     {this.state.jenisPenjualan !== '' ?
                         this.state.jenisPenjualan === 'Pesanan' ?
-                            <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                            <div className={`col-12`}>
                                 <div className={`${global.tab_card} pb-2`}>
                                     <div className={`${global.item} ${this.state.tabSelected === 0 ? global.active : ''}`} onClick={() => this.SelectTab(0)}>
                                         <p className={`${global.name}`}>Bahan Baku</p>
@@ -2002,7 +1996,7 @@ export class transaksi_penjualan extends Component {
                                 </div>
                             </div>
                             :
-                            <div className={`col-12 col-md-6 ps-md-2 pt-2 pt-md-0`}>
+                            <div className={`col-12`}>
                                 <div className={`${global.card}`}>
                                     <div className={`${global.header}`}>
                                         <p className={global.title}>Daftar Penjualan</p>
@@ -2052,7 +2046,7 @@ export class transaksi_penjualan extends Component {
                                                 <p className={`${global.title} col-3`}>Total Harga</p>
                                                 <input type="text" id='valueTotalHarga' className={`col-4`} value={SetPriceFormat(Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim]))} readOnly={true} />
                                                 <div className='col-5 ps-2'>
-                                                    <Select id='select-kode-akun' name='select-kode-akun' isClearable={true} isSearchable={true} options={dataSelectAkun} placeholder={'Select Akun...'} value={valueKodeAkun} styles={CustomSelect} onChange={e => this.setState({ valueKodeAkun: e })} />
+                                                    <Select id='select-kode-akun' name='select-kode-akun' className={`col-5`} isClearable={true} isSearchable={true} options={dataSelectAkun} placeholder={'Select Akun...'} value={valueKodeAkun} styles={CustomSelect} onChange={e => this.setState({ valueKodeAkun: e })} />
                                                 </div>
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>

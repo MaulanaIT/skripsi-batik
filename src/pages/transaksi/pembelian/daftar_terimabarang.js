@@ -8,7 +8,7 @@ import { baseURL, config, HideLoading, SetNumberFormat, ShowLoading } from '../.
 
 // Import CSS
 import global from '../../../css/global.module.css';
-import style from '../../../css/transaksi/pembelian/penerimaan_barang.module.css';
+import style from '../../../css/transaksi/penjualan/daftar_pesanan.module.css';
 
 export class daftar_terimabarang extends Component {
 
