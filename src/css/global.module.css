@@ -68,14 +68,19 @@
 }
 
 .card {
-    background-color: #623e2d;
-    border: 2px solid #966948;
+    background-color: #ffffff;
+    /* border: 2px solid #966948; */
     border-radius: 4px;
+    box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     gap: 12px;
     padding: 12px;
     width: 100%;
+}
+
+.card * {
+    color: black;
 }
 
 .card>.header {

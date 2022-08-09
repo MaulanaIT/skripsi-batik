@@ -111,6 +111,29 @@ export default function Lap_hpp() {
             setValueHpp(data.hpp);
             setValueHppPerProduk(+data.hpp / +data.jumlah);
 
+            let dataExport = [];
+    
+            dataExport.push([
+                'Laporan HPP',
+                '',
+                '',
+                ''
+            ]);
+    
+            dataExport.push(['Kode Produksi', data.kode_produksi, 'Tanggal Pesan', data.tanggal]);
+            dataExport.push(['Kode Produk', !data.kode_produk || data.kode_produk === '' ? '-' : data.kode_produk, 'Kode Pesanan', !data.kode_pesanan || data.kode_pesanan === '' ? '-' : data.kode_pesanan]);
+            dataExport.push(['Nama Produk', !data.nama_produk || data.nama_produk === '' ? '-' : data.nama_produk, 'Nama Pesanan', !data.nama_pesanan || data.nama_pesanan === '' ? '-' : data.nama_pesanan]);
+            dataExport.push(['Jumlah Produksi', SetNumberFormat(data.jumlah), '', '']);
+            dataExport.push(['', '', '', '']);
+            dataExport.push(['Rincian Harga Pokok Produksi', '', '', '']);
+            dataExport.push(['Biaya Bahan Baku', 'Biaya Tenaga Kerja', 'Biaya Overhead', '']);
+            dataExport.push([SetPriceFormat(data.biaya_bahan_baku), SetPriceFormat(data.biaya_tenaga_kerja), SetPriceFormat(data.biaya_overhead_pabrik), '']);
+            dataExport.push(['Harga Pokok Produksi', SetPriceFormat(data.hpp), '', '']);
+            dataExport.push(['Jumlah Produksi', SetNumberFormat(data.jumlah), '', '']);
+            dataExport.push(['Harga Pokok Produk', SetPriceFormat(+data.hpp / +data.jumlah), '', '']);
+    
+            setDataExport(dataExport);
+
             HideLoading();
         }).catch(error => {
             console.log(error);
@@ -195,7 +218,7 @@ export default function Lap_hpp() {
                             <p className={global.title}></p>
                         </div>
                         <div className={`${global.cursor_pointer} ms-auto pe-5`}>
-                            <CSVLink data={getDataExport} filename={`Laporan Profitabilitas ${getValueTanggalPesan}`}>
+                            <CSVLink data={getDataExport} filename={`Laporan HPP ${getValueTanggalPesan}`}>
                                 <TiExport className='fs-4' />
                             </CSVLink>
                         </div>

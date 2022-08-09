@@ -8,14 +8,14 @@
 }
 
 body {
-  background-image: linear-gradient(130deg, #3b2f46 0%, #ac7147 70%, #c9ae81 100%);
+  /* background-image: linear-gradient(130deg, #3b2f46 0%, #ac7147 70%, #c9ae81 100%); */
   margin: 0;
   position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-body::before {
+/* body::before {
   background: url(./assets/images/batik-background.png) no-repeat;
   background-size: cover;
   background-position: bottom;
@@ -26,7 +26,7 @@ body::before {
   position: absolute;
   top: 0;
   width: 100vw;
-}
+} */
 
 /* Customize website's scrollbar like Mac OS
 Not supports in Firefox and IE */
