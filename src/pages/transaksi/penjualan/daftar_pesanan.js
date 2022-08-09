@@ -94,7 +94,6 @@ export class daftar_pesanan extends Component {
                                     :
                                     <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }} disabled={true}>Penyerahan Pesanan</button>
                                 }
-                                <button type='button' id='button-print' className={global.apply}><FaPrint /> Print</button>
                                 <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeletePesanan(item.kode)} disabled={+item.status === 2 && true}><FaTrash /> Delete</button>
                             </td>
                         </tr>
