@@ -7,7 +7,7 @@ import Select from 'react-select';
 import moment from 'moment';
 import { CSVLink } from 'react-csv';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
+import { baseURL, config, cx, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -164,7 +164,7 @@ export default function Lap_tenaga_kerja() {
                             </CSVLink>
                         </div>
                     </div>
-                    <div className={global.card}>
+                    <div className={cx([global.card, global.boxless])}>
                         <p className={`${style.title} text-center w-100 fw-bold`}>LEKSANA BATIK JAYA</p>
                         <p className={`${style.title} text-center w-100 fw-bold`}>LAPORAN TENAGA KERJA</p>
                         <br></br>

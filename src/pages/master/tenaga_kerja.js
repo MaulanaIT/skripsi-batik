@@ -246,7 +246,7 @@ export default function Tenaga_kerja() {
                     <div className={`${global.header}`}>
                         <p className={global.title}>Daftar Tenaga Kerja</p>
                     </div>
-                    <div className={global.card}>
+                    <div className={cx([global.card, global.boxless])}>
                         <form id='form-table' className={`table-responsive`}>
                             <table id='table-data' className={`table w-100`}>
                                 <thead className="align-middle text-center text-nowrap">

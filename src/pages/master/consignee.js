@@ -187,7 +187,7 @@ export class consignee extends Component {
                         <div className={`${global.header}`}>
                             <p className={global.title}>Daftar Consignee</p>
                         </div>
-                        <form id='form-table' className={global.card}>
+                        <form id='form-table' className={cx([global.card, global.boxless])}>
                             <div className={`table-responsive`}>
                                 <table id='table-data' className={`table w-100`}>
                                     <thead className="align-middle text-center text-nowrap">

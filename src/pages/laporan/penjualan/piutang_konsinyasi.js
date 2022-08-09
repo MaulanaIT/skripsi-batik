@@ -7,7 +7,7 @@ import Select from 'react-select';
 import moment from 'moment';
 import { CSVLink } from 'react-csv';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
-import { baseURL, config, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
+import { baseURL, config, cx, HideLoading, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
 
@@ -143,7 +143,7 @@ export default function Piutang_konsinyasi() {
                             </CSVLink>
                         </div>
                     </div>
-                    <div className={global.card}>
+                    <div className={cx([global.card, global.boxless])}>
                         <div className={`table-responsive`}>
                             <table id='table-data' className={`table w-100`}>
                                 <thead className="align-middle text-center text-nowrap">
