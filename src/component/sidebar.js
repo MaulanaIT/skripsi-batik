@@ -15,6 +15,14 @@ import $ from 'jquery';
 export default function Sidebar(props) {
 
     useEffect(() => {
+        let menu = document.querySelectorAll(`li:not(.${style.dropdown})`);
+
+        menu.forEach(item => {
+            item.addEventListener('click', function() {
+                document.getElementById('sidebar').classList.remove(style.active);
+            });
+        })
+
         ToggleMenu();
     }, [props.jabatan]);
 
