@@ -14,7 +14,7 @@ import { TiExport } from 'react-icons/ti';
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
-import style from '../../../css/laporan/kas/penerimaan_kas.module.css';
+import style from '../../../css/laporan/laporanproduksi.module.css';
 
 export default function Lap_produk() {
 
@@ -85,17 +85,24 @@ export default function Lap_produk() {
     }
 
     return (
-        <div className={`${global.card} col-12`}>
-            <div className='d-flex'>
-                <div className='col-10'>
-                    <p className={global.title}></p>
-                </div>
-                <div className={`${global.cursor_pointer} ms-auto pe-5`}>
-                    <CSVLink data={getDataExport} filename={`Laporan Bahan Jadi per tanggal ${moment().format('YYYY-MM-DD')}`}>
-                        <TiExport className='fs-4' />
-                    </CSVLink>
-                </div>
-            </div>
+        <React.Fragment>
+
+        <div className={style.header}>
+                <p className={style.title}>Laporan Persediaan Barang Jadi</p>
+                <p className={style.pathname}>Laporan / Laporan Produksi / Laporan Persediaan Barang Jadi </p>
+        </div>
+        <div className={style.content}>
+                <div className={`${global.card} col-12`}>
+                    <div className='d-flex'>
+                        <div className='col-10'>
+                            <p className={global.title}></p>
+                        </div>
+                        <div className={`${global.cursor_pointer} ms-auto pe-5`}>
+                            <CSVLink data={getDataExport} filename={`Laporan Bahan Jadi per tanggal ${moment().format('YYYY-MM-DD')}`}>
+                                <TiExport className='fs-4' />
+                            </CSVLink>
+                        </div>
+                    </div>
             <div className={`${global.card} col-12`}>
                 <div className={([global.card, global.boxless])}>
                     <p className={`${style.title} text-center w-100 fw-bold`}>LEKSANA BATIK JAYA</p>
@@ -127,5 +134,7 @@ export default function Lap_produk() {
                 </div>
             </div>
         </div>
+    </div>
+    </React.Fragment>
     )
 }

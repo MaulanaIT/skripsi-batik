@@ -183,7 +183,7 @@ export default function Daftar_produksi() {
     return (
         <React.Fragment>
             <div className={style.header}>
-                <p className={style.title}>Produksi</p>
+                <p className={style.title}>Perencanaan Produksi</p>
                 <p className={style.pathname}>Transaksi / Produksi / Perencanaan Produksi</p>
             </div>
             <div className={`${style.content}`}>

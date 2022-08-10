@@ -9,14 +9,15 @@
 .header {
     align-items: baseline;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    gap: 600px;
 }
 
 .header>.pathname {
     font-size: 12px;
     font-weight: normal;
     margin: 0;
+    margin-left: auto;
 }
 
 .header>.title {
