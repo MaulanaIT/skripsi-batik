@@ -5,7 +5,8 @@ import $ from 'jquery';
 import axios from 'axios';
 import moment from 'moment';
 import Select from 'react-select';
-import { baseURL, config, HideLoading, ShowLoading } from '../../../component/helper';
+import { CSVLink } from 'react-csv';
+import { baseURL, config, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { MdAdd } from 'react-icons/md';
 import { TiExport } from 'react-icons/ti';
@@ -30,6 +31,21 @@ export default function Lap_produk() {
             let data = response.data.data;
 
             let htmlTableDaftarLaporan = [];
+            let dataExport = [];
+
+            dataExport.push([
+                'Laporan Bahan Jadi',
+                '',
+                '',
+                '',
+            ]);
+
+            dataExport.push([
+                'Kode',
+                'Nama',
+                'Jumlah',
+                'Harga Per Produk'
+            ]);
 
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
@@ -38,13 +54,22 @@ export default function Lap_produk() {
                             <td>{index + 1}.</td>
                             <td>{item.kode}</td>
                             <td>{item.nama}</td>
-                            <td>{item.jumlah}</td>
-                            <td>{item.hpp_per_produk}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
+                            <td>{SetPriceFormat(item.hpp_per_produk)}</td>
                         </tr>
                     );
+
+                    dataExport.push([
+                        item.kode,
+                        item.nama,
+                        SetNumberFormat(item.jumlah),
+                        SetPriceFormat(item.hpp_per_produk)
+                    ]);
                 });
             }
+            $(`#table-data-produk-jadi`).DataTable().destroy();
 
+            setDataExport(dataExport);
             setHTMLTableDaftarLaporan(htmlTableDaftarLaporan, () => {
                 $(`#table-data-produk-jadi`).DataTable();
             });
@@ -64,7 +89,9 @@ export default function Lap_produk() {
                     <p className={global.title}></p>
                 </div>
                 <div className={`${global.cursor_pointer} ms-auto pe-5`}>
-                    <TiExport className='fs-4' />
+                    <CSVLink data={getDataExport} filename={`Laporan Bahan Jadi per tanggal ${moment().format('YYYY-MM-DD')}`}>
+                        <TiExport className='fs-4' />
+                    </CSVLink>
                 </div>
             </div>
             <div className={`${global.card} col-12`}>
