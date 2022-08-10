@@ -210,7 +210,7 @@ export class transaksi_penjualan extends Component {
             } else {
                 dataTunai[check].jumlah = +dataTunai[check].jumlah + +valueJumlah;
                 dataTunai[check].total_harga = +dataTunai[check].total_harga + valueJumlah * valueHarga;
-                dataTunai[check].total_hpp = +dataTunai[check].total_hpp + valueTotalHpp;
+                dataTunai[check].total_hpp = +dataTunai[check].total_hpp + valueJumlah * valueHpp;
             }
 
             this.setState({
