@@ -1,5 +1,5 @@
-const baseURL = 'http://leksana-batik.virtusrox.me';
-// const baseURL = 'http://localhost/skripsi-batik';
+//const baseURL = 'http://leksana-batik.virtusrox.me';
+const baseURL = 'http://localhost/skripsi-batik';
 const config = {
     headers: {
         'Access-Control-Allow-Origin': `*`,

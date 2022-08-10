@@ -1294,8 +1294,8 @@ export class transaksi_penjualan extends Component {
             return;
         }
 
-        if (+this.state.valueTotalBahan <= 0 || +this.state.valueTotalPenolong <= 0 || +this.state.valueTotalAlat <= 0 || +this.state.valueTotalBTKL <= 0) {
-            alert('Estimasi total biaya tidak boleh 0');
+        if (+this.state.valueTotalBahan <= 0 || +this.state.valueProfit <= 0 || +this.state.valueTotalPenolong <= 0 || +this.state.valueTotalAlat <= 0 || +this.state.valueTotalBTKL <= 0) {
+            alert('Estimasi total biaya dan Profit tidak boleh 0');
             return;
         }
 
@@ -1759,13 +1759,13 @@ export class transaksi_penjualan extends Component {
                                                         <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                                         <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-3 ps-2`}>
-                                                        <p className={global.title}>Nama Consignee <span className={global.important}>*</span></p>
-                                                        <Select id='select-nama-consignee' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaConsignee} placeholder={'Select Nama...'} value={valueNamaConsignee} styles={CustomSelect} onChange={(data) => this.SelectConsignee(data)} />
-                                                    </div>
-                                                    <div className={`${global.input_group} col-5 px-2`}>
+                                                    <div className={`${global.input_group} col-3 px-2`}>
                                                         <p className={global.title}>Kode Consignee <span className={global.important}>*</span></p>
                                                         <Select id='select-kode-consignee' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeConsignee} placeholder={'Select Kode...'} value={valueKodeConsignee} styles={CustomSelect} onChange={(data) => this.SelectConsignee(data)} />
+                                                    </div>
+                                                    <div className={`${global.input_group} col-5 ps-2`}>
+                                                        <p className={global.title}>Nama Consignee <span className={global.important}>*</span></p>
+                                                        <Select id='select-nama-consignee' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaConsignee} placeholder={'Select Nama...'} value={valueNamaConsignee} styles={CustomSelect} onChange={(data) => this.SelectConsignee(data)} />
                                                     </div>
                                                 </div>
                                                 <div className={`${bootstrap['d-flex']}`}>
