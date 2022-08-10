@@ -59,6 +59,7 @@ import LaporanKasPenerimaanKas from './pages/laporan/kas/penerimaan_kas';
 import LaporanKasPengeluaranKas from './pages/laporan/kas/pengeluaran_kas';
 import LaporanProfitabilitas from './pages/laporan/profitabilitas';
 import LaporanHargaPokokProduksi from './pages/laporan/produksi/lap_hpp';
+import LaporanProduk from './pages/laporan/produksi/lap_produk';
 import LaporanProduksi from './pages/laporan/produksi/lap_produksi';
 import LaporanTenagaKerja from './pages/laporan/produksi/lap_tenaga_kerja';
 import KartuAlat from './pages/laporan/produksi/kartu_alat';
@@ -174,6 +175,7 @@ export default function App() {
                                 <Route path={'/laporan/kas/pengeluaran-kas'} element={<LaporanKasPengeluaranKas />} />
                                 <Route path={'/laporan/produksi/lap-produksi'} element={<LaporanProduksi />} />
                                 <Route path={'/laporan/produksi/lap-hpp'} element={<LaporanHargaPokokProduksi />} />
+                                <Route path={'/laporan/produksi/lap-produk'} element={<LaporanProduk />} />
                                 <Route path={'/laporan/produksi/lap-tenaga-kerja'} element={<LaporanTenagaKerja />} />
                                 <Route path={'/laporan/produksi/kartu-alat'} element={<KartuAlat />} />
                                 <Route path={'/laporan/produksi/kartu-persediaan-bb'} element={<KartuPersediaanBahanBaku />} />
