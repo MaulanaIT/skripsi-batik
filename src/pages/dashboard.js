@@ -235,7 +235,7 @@ export default function Dashboard() {
                             datasets: [{
                                 label: 'Penjualan Tunai',
                                 data: getDataGrafikTunai,
-                                borderColor: 'white',
+                                borderColor: 'black',
                                 borderWidth: 2,
                                 tension: 0.3
                             }]
@@ -255,19 +255,19 @@ export default function Dashboard() {
                                 x: {
                                     display: true,
                                     ticks: {
-                                        color: 'white'
+                                        color: 'black'
                                     },
                                     title: {
-                                        color: '#ffffff'
+                                        color: 'black'
                                     }
                                 },
                                 y: {
                                     display: true,
                                     ticks: {
-                                        color: 'white'
+                                        color: 'black'
                                     },
                                     title: {
-                                        color: '#ffffff'
+                                        color: 'black'
                                     }
                                 }
                             }
@@ -284,7 +284,7 @@ export default function Dashboard() {
                             datasets: [{
                                 label: 'Penjualan Konsinyasi',
                                 data: getDataGrafikKonsinyasi,
-                                borderColor: 'white',
+                                borderColor: 'black',
                                 borderWidth: 2,
                                 tension: 0.3
                             }]
@@ -304,19 +304,19 @@ export default function Dashboard() {
                                 x: {
                                     display: true,
                                     ticks: {
-                                        color: 'white'
+                                        color: 'black'
                                     },
                                     title: {
-                                        color: '#ffffff'
+                                        color: 'black'
                                     }
                                 },
                                 y: {
                                     display: true,
                                     ticks: {
-                                        color: 'white'
+                                        color: 'black'
                                     },
                                     title: {
-                                        color: '#ffffff'
+                                        color: 'black'
                                     }
                                 }
                             }
@@ -333,7 +333,7 @@ export default function Dashboard() {
                             datasets: [{
                                 label: 'Penjualan Pesanan',
                                 data: getDataGrafikPesanan,
-                                borderColor: 'white',
+                                borderColor: 'black',
                                 borderWidth: 2,
                                 tension: 0.3
                             }]
@@ -353,19 +353,19 @@ export default function Dashboard() {
                                 x: {
                                     display: true,
                                     ticks: {
-                                        color: 'white'
+                                        color: 'black'
                                     },
                                     title: {
-                                        color: '#ffffff'
+                                        color: 'black'
                                     }
                                 },
                                 y: {
                                     display: true,
                                     ticks: {
-                                        color: 'white'
+                                        color: 'black'
                                     },
                                     title: {
-                                        color: '#ffffff'
+                                        color: 'black'
                                     }
                                 }
                             }
