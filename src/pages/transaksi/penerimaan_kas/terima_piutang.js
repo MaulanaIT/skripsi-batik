@@ -121,11 +121,6 @@ export default function Terima_piutang() {
     }
 
     const GetKonsinyasi = () => {
-        if (getValueKodeAkun.length <= 0) {
-            alert('Isi data dengan benar');
-            return;
-        }
-
         ShowLoading();
 
         const formData = new FormData();
