@@ -155,7 +155,7 @@ export default function Sidebar(props) {
                                     </div>
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/produksi/permintaanprod'}><span>Input Permintaan Produksi Stok</span></Link></li>
-                                        <li><Link to={'/transaksi/produksi/permintaan-prod-pesanan'}><span>Daftar Permintaan Produksi</span></Link></li>
+                                        <li><Link to={'/transaksi/produksi/permintaan-prod-pesanan'}><span>Daftar Permintaan Produksi Pesanan</span></Link></li>
                                         <li><Link to={'/transaksi/produksi/daftar-produksi'}><span>Daftar Perencanaan Produksi</span></Link></li>
                                         <li><Link to={'/transaksi/produksi/daftar-hpp'}><span>Daftar Proses Produksi</span></Link></li>
                                     </ul>
@@ -207,6 +207,7 @@ export default function Sidebar(props) {
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/laporan/produksi/lap-produksi'}><span>Laporan Produksi</span></Link></li>
                                         <li><Link to={'/laporan/produksi/lap-hpp'}><span>Laporan Harga Pokok Produksi</span></Link></li>
+                                        <li><Link to={'/laporan/produksi/lap-produk'}><span>Laporan Persediaan Barang Jadi</span></Link></li>
                                         <li><Link to={'/laporan/produksi/lap-tenaga-kerja'}><span>Laporan Tenaga Kerja</span></Link></li>
                                         <li><Link to={'/laporan/produksi/kartu-alat'}><span>Kartu Alat</span></Link></li>
                                         <li><Link to={'/laporan/produksi/kartu-persediaan-bb'}><span>Kartu Persediaan Bahan Baku</span></Link></li>
@@ -297,7 +298,7 @@ export default function Sidebar(props) {
                                     </div>
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/produksi/permintaanprod'}><span>Input Permintaan Produksi Stok</span></Link></li>
-                                        <li><Link to={'/transaksi/produksi/permintaan-prod-pesanan'}><span>Daftar Permintaan Produksi</span></Link></li>
+                                        <li><Link to={'/transaksi/produksi/permintaan-prod-pesanan'}><span>Daftar Permintaan Produksi Pesanan</span></Link></li>
                                         <li><Link to={'/transaksi/produksi/daftar-produksi'}><span>Daftar Perencanaan Produksi</span></Link></li>
                                         <li><Link to={'/transaksi/produksi/daftar-hpp'}><span>Daftar Proses Produksi</span></Link></li>
                                     </ul>

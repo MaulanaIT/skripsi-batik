@@ -9,7 +9,7 @@ import { baseURL, config, HideLoading, SetNumberFormat, ShowLoading } from '../.
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
-import style from '../../../css/transaksi/produksi/daftar_produksi.module.css';
+import style from '../../../css/transaksi/produksi/produksi.module.css';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 export default function Permintaan_prod_pesanan() {
