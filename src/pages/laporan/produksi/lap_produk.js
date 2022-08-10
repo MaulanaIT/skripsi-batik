@@ -18,6 +18,8 @@ import style from '../../../css/laporan/kas/penerimaan_kas.module.css';
 
 export default function Lap_produk() {
 
+    const [getDataExport, setDataExport] = useState([]);
+
     const [getHTMLTableDaftarLaporan, setHTMLTableDaftarLaporan] = useStateWithCallbackLazy([]);
 
     useEffect(() => {
