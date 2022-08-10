@@ -997,7 +997,7 @@ const Add_hpp = (props, ref) => {
                             {+getSelectedTab === 0 &&
                                 <React.Fragment>
                                     <div className='d-flex'>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                        <div className={`${global.input_group} col-8 pe-2`}>
                                             <p className={global.title}>Kode Biaya Bahan Baku <span className={global.important}>*</span></p>
                                             <input type="text" id='input-kode-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueKodeBiayaBahanBaku} required={true} readOnly={true} />
                                         </div>
@@ -1045,7 +1045,7 @@ const Add_hpp = (props, ref) => {
                             {+getSelectedTab === 1 &&
                                 <React.Fragment>
                                     <div className='d-flex'>
-                                        <div className={`${global.input_group} col-4 pe-2`}>
+                                        <div className={`${global.input_group} col-8 pe-2`}>
                                             <p className={global.title}>Kode Biaya Bahan Penolong </p>
                                             <input type="text" id='input-kode-biaya-bahan-penolong' name='input-biaya-bahan-penolong' value={getValueKodeBiayaPenolong} readOnly={true} />
                                         </div>
