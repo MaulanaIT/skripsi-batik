@@ -19,18 +19,22 @@ import Select from 'react-select';
 
 const CustomSelect = {
     control: (provided, state) => ({
-        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
         color: 'white',
         cursor: 'pointer',
         display: 'flex',
         fontSize: 12
+    }),
+    dropdownIndicator: (provided, state) => ({
+        ...provided,
+        color: state.isFocused ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.8)',
     }),
     input: (provided, state) => ({
         ...provided,
         color: 'white'
     }),
     menu: (provided, state) => ({
-        backgroundColor: 'rgba(0, 0, 0, 3)',
+        backgroundColor: 'rgba(255, 255, 255, 1)',
         fontSize: 12,
         position: 'absolute',
         width: '100%',
@@ -38,11 +42,12 @@ const CustomSelect = {
     }),
     option: (provided, state) => ({
         ...provided,
-        backgroundColor: state.isFocused ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.4)',
+        backgroundColor: state.isFocused ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
         fontSize: 12
     }),
     placeholder: (provided, state) => ({
         ...provided,
+        color: 'rgba(0, 0, 0, 0.8)',
         whiteSpace: 'nowrap'
     }),
     singleValue: (provided, state) => ({

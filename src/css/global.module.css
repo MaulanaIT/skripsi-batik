@@ -1,6 +1,6 @@
 :root {
-    --button-first-color: #532f00;
-    --button-second-color: #9e5e31;
+    --button-first-color: #0f5132;
+    --button-second-color: #0a58ca;
 }
 
 .button {
@@ -48,7 +48,7 @@
 
 .card_detail {
     background-color: rgba(99, 99, 99, 1);
-    border-radius: 4px;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -70,7 +70,7 @@
 .card {
     background-color: #ffffff;
     /* border: 2px solid #966948; */
-    border-radius: 4px;
+    border-radius: 8px;
     box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;

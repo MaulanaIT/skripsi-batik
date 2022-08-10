@@ -11,18 +11,22 @@ import style from '../../css/master.module.css';
 
 const CustomSelect = {
     control: (provided, state) => ({
-        backgroundColor: 'rgba(0, 0, 0, 0.4)',
-        color: 'white',
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        color: 'black',
         cursor: 'pointer',
         display: 'flex',
         fontSize: 12
     }),
+    dropdownIndicator: (provided, state) => ({
+        ...provided,
+        color: state.isFocused ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.8)',
+    }),
     input: (provided, state) => ({
         ...provided,
-        color: 'white'
+        color: 'black'
     }),
     menu: (provided, state) => ({
-        backgroundColor: 'rgba(0, 0, 0, 3)',
+        backgroundColor: 'rgba(255, 255, 255, 1)',
         fontSize: 12,
         position: 'absolute',
         width: '100%',
@@ -30,16 +34,18 @@ const CustomSelect = {
     }),
     option: (provided, state) => ({
         ...provided,
-        backgroundColor: state.isFocused ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.4)',
+        backgroundColor: state.isFocused ? 'rgba(0, 0, 0, 0.1)' : 'rgba(0, 0, 0, 0.2)',
+        color: state.isSelected ? 'rgba(0, 0, 0, 0.6)' : 'black',
         fontSize: 12
     }),
     placeholder: (provided, state) => ({
         ...provided,
+        color: 'rgba(0, 0, 0, 0.8)',
         whiteSpace: 'nowrap'
     }),
     singleValue: (provided, state) => ({
         ...provided,
-        color: 'white',
+        color: 'black',
         fontSize: 12
     })
 }
