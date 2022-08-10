@@ -1294,6 +1294,11 @@ export class transaksi_penjualan extends Component {
             return;
         }
 
+        if (+this.state.valueTotalBahan <= 0 || +this.state.valueTotalPenolong <= 0 || +this.state.valueTotalAlat <= 0 || +this.state.valueTotalBTKL <= 0) {
+            alert('Estimasi total biaya tidak boleh 0');
+            return;
+        }
+
         ShowLoading();
 
         const formData = new FormData();
