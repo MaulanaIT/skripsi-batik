@@ -151,6 +151,11 @@ export default function Jual_pesan() {
     }
 
     const InsertJual = () => {
+        if (getValueKodeAkun.length <= 0) {
+            alert('Isi data dengan benar');
+            return;
+        }
+        
         ShowLoading();
 
         const formData = new FormData();

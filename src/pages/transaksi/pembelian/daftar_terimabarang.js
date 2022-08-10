@@ -3,8 +3,12 @@ import React, { Component } from 'react'
 // Import Library
 import $ from 'jquery';
 import axios from 'axios';
+import { FaClipboardList } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { baseURL, config, HideLoading, SetNumberFormat, ShowLoading } from '../../../component/helper';
+
+// Import Component
+import DetailTerimaBarang from './detail_terimabarang';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -13,7 +17,8 @@ import style from '../../../css/transaksi/penjualan/daftar_pesanan.module.css';
 export class daftar_terimabarang extends Component {
 
     state = {
-        htmlTableDaftarTerimaBarang: []
+        htmlTableDaftarTerimaBarang: [],
+        selectedKodeTerimaBarang: ''
     }
 
     componentDidMount() {
@@ -53,7 +58,8 @@ export class daftar_terimabarang extends Component {
                                 <div id={`data-total-barang-${item.id}`} className={`data-${item.id}`}>{SetNumberFormat(item.total_barang)}</div>
                             </td>
                             {(jabatan === 'admin, keuangan' || jabatan === 'super admin') &&
-                                <td>
+                                <td className={global.table_action}>
+                                    <button type='button' id='button-detail' className={global.edit} style={{ gridColumn: '2 span' }} onClick={() => this.SelectDetail(item.kode)}><FaClipboardList /> Detail</button>
                                     <div className={global.table_action}>
                                         {item.status === '0' ?
                                             <Link to={'/transaksi/pembelian/pengeluaran-kas'} state={{ kode: item.kode_order }} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}>Bayar</Link>
@@ -82,9 +88,16 @@ export class daftar_terimabarang extends Component {
         });
     }
 
+    SelectDetail = (data) => {
+        this.setState({ selectedKodeTerimaBarang: data }, () => {
+            document.getElementById('detail-terima-barang').classList.remove('d-none');
+        });
+    }
+
     render() {
         return (
             <>
+                <DetailTerimaBarang kode={this.state.selectedKodeTerimaBarang} />
                 <div className={style.header}>
                     <p className={style.title}>Penerimaan Barang</p>
                     <p className={style.pathname}>Transaksi / Pembelian / Penerimaan Barang</p>

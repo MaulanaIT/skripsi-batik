@@ -289,6 +289,16 @@ export class transaksi_penjualan extends Component {
             valueTotalHpp
         } = this.state;
 
+        if (+valueKodeAlat.length <= 0) {
+            alert('Alat belum dipilih');
+            return;
+        }
+
+        if (+valueJumlahAlat === 0) {
+            alert('Jumlah tidak boleh 0');
+            return;
+        }
+
         let dataAlat = this.state.dataAlat.find(item => item.kode === valueKodeAlat.value);
         let dataDetailAlat = this.state.dataDetailAlat;
 
@@ -345,6 +355,17 @@ export class transaksi_penjualan extends Component {
             valueTotalHpp
         } = this.state;
 
+        if (+valueKodeBahan.length <= 0) {
+            alert('Bahan baku belum dipilih');
+            return;
+        }
+
+        if (+valueJumlahBahan === 0) {
+            alert('Jumlah tidak boleh 0');
+            return;
+        }
+
+
         let dataBahan = this.state.dataBahan.find(item => item.kode === valueKodeBahan.value);
         let dataDetailBahan = this.state.dataDetailBahan;
 
@@ -400,6 +421,17 @@ export class transaksi_penjualan extends Component {
             valueUpah
         } = this.state;
 
+        if (+valueKodeBTKL.length <= 0) {
+            alert('Tenaga kerja belum dipilih');
+            return;
+        }
+
+        if (+valueJumlahBTKL === 0) {
+            alert('Jumlah tidak boleh 0');
+            return;
+        }
+
+
         let dataBTKL = this.state.dataBTKL.find(item => item.kode === valueKodeBTKL.value);
         let dataDetailBTKL = this.state.dataDetailBTKL;
 
@@ -451,6 +483,17 @@ export class transaksi_penjualan extends Component {
             valueKodePesanan,
             valueKodePenolong
         } = this.state;
+
+        if (+valueKodePenolong.length <= 0) {
+            alert('Bahan penolong belum dipilih');
+            return;
+        }
+
+        if (+valueJumlahPenolong === 0) {
+            alert('Jumlah tidak boleh 0');
+            return;
+        }
+
 
         let dataPenolong = this.state.dataPenolong.find(item => item.kode === valueKodePenolong.value);
         let dataDetailPenolong = this.state.dataDetailPenolong;

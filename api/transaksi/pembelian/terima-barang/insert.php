@@ -17,6 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     $result = $conn->query($query);
 
+    foreach ($data as $key) {
+        $query = "INSERT INTO detail_terima(kode, kode_item, nama_item, jumlah, harga) VALUES('".$kode."', '".$key->kode_item."', '".$key->nama_item."', '".$key->jumlah."', '".$key->total_harga/$key->jumlah."')";
+
+        $result = $conn->query($query);
+
+        if (!$result) break;
+    }
+
     $response = [];
     
     if ($result) {

@@ -202,7 +202,7 @@ export default function Pengeluaran_kas() {
             setValueNamaSupplier(data.nama_supplier);
             setValueTanggalBayar(moment().format('YYYY-MM-DD'));
             setValueTanggalOrder(data.tanggal);
-            setDataPembelian(data);
+            // setDataPembelian(data);
 
             HideLoading();
         }).catch(error => {
@@ -213,9 +213,13 @@ export default function Pengeluaran_kas() {
     }
 
     const InsertPengeluaranKas = () => {
+        if (getValueSelectedAkun.length <= 0) {
+            alert('Isi data dengan benar');
+            return;
+        }
+
         if (getDataAkun.find(item => item.kode === getValueSelectedAkun.value).saldo < getValueTotalBayar) {
             alert('Saldo Tidak Mencukupi');
-
             return;
         }
 
@@ -251,12 +255,12 @@ export default function Pengeluaran_kas() {
             formDetailData.append('data', JSON.stringify(getDataDetailPembelian));
 
             axios.post(`${baseURL}/api/transaksi/pembelian/detail-pengeluaran-kas/insert.php`, formDetailData, config).then(() => {
-                if (window.confirm("Apakah ingin mencetak nota?")) {
-                    window.print();
+                // if (window.confirm("Apakah ingin mencetak nota?")) {
+                    // window.print();
                     window.location.href = '/#/transaksi/pembelian/daftar-terima-barang';
-                } else {
-                    window.location.href = '/#/transaksi/pembelian/daftar-terima-barang';
-                }
+                // } else {
+                //     window.location.href = '/#/transaksi/pembelian/daftar-terima-barang';
+                // }
             }).catch(error => {
                 console.log(error);
 
@@ -275,7 +279,7 @@ export default function Pengeluaran_kas() {
 
     return (
         <React.Fragment>
-            <PrintoutKasKeluar data={getDataPembelian} dataDetail={getDataDetailPembelian} diskon={getValueDiskon} ongkosKirim={getValueOngkosKirim} total={getValueTotalPembelian} totalJual={getValueTotalBayar} />
+            {/* <PrintoutKasKeluar data={getDataPembelian} dataDetail={getDataDetailPembelian} diskon={getValueDiskon} ongkosKirim={getValueOngkosKirim} total={getValueTotalPembelian} totalJual={getValueTotalBayar} /> */}
             <div className={style.header}>
                 <p className={style.title}>Pengeluaran Kas</p>
                 <p className={style.pathname}>Transaksi / Pembelian / Pengeluaran Kas</p>

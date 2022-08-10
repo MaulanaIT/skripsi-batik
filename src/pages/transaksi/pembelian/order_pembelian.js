@@ -410,13 +410,12 @@ export class order_pembelian extends Component {
 
     InsertOrder = () => {
         const {
+            jenisPembelian,
             valueKodeOrder,
             valueKodeSupplier,
             valueTanggal,
             valueKalkulasiTotalHarga
         } = this.state;
-
-        let jenisPembelian = this.state.jenisPembelian;
 
         ShowLoading();
 
@@ -430,10 +429,24 @@ export class order_pembelian extends Component {
         formData.append('jenis_pembelian', jenisPembelian.toLowerCase());
 
         if (jenisPembelian.toLowerCase() === 'alat') {
+            let file = document.getElementById('input-file-desain').files[0];
+
+            if (file) {
+                let arg = file.name.split('.');
+                let extension = arg[arg.length - 1];
+                formData.append('file_desain', file);
+                formData.append('nama_file', `File Desain - ${valueKodeOrder} - ${valueTanggal}.${extension}`);
+            } else {
+                alert('Isi data dengan benar');
+                HideLoading();
+                return;
+            }
+
             formData.append('data', JSON.stringify(this.state.dataAlat));
 
             if (this.state.dataAlat.length <= 0) {
                 alert('Data alat kosong');
+                HideLoading();
                 return;
             }
         } else if (jenisPembelian.toLowerCase() === 'bahan') {
@@ -441,6 +454,7 @@ export class order_pembelian extends Component {
 
             if (this.state.dataBahan.length <= 0) {
                 alert('Data bahan kosong');
+                HideLoading();
                 return;
             }
         }
@@ -649,7 +663,7 @@ export class order_pembelian extends Component {
                                             <div className={`d-flex`}>
                                                 <div className={`${global.input_group}`}>
                                                     <p>Upload File Desain</p>
-                                                    <input type="file" accept='.pdf' id='input-detail-file' />
+                                                    <input type="file" accept='.pdf' id='input-file-desain' required={true} />
                                                 </div>
                                             </div>
                                             <div className={`d-flex`}>

@@ -11,7 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jenis_pembelian = $_POST['jenis_pembelian'];
     $data = json_decode($_POST['data']);
 
-    $query = "INSERT INTO order_pembelian(kode, jenis_pembelian, tanggal, kode_supplier, total_harga, status) VALUES('" . $kode . "', '" . $jenis_pembelian . "', '" . $tanggal . "', '" . $kode_supplier . "', '" . $total_harga . "', 'Menunggu')";
+    if ($jenis_pembelian == 'bahan') {
+        $query = "INSERT INTO order_pembelian(kode, jenis_pembelian, tanggal, kode_supplier, total_harga, status) VALUES('" . $kode . "', '" . $jenis_pembelian . "', '" . $tanggal . "', '" . $kode_supplier . "', '" . $total_harga . "', 'Menunggu')";
+    } else {
+        $file_desain = $_FILES['file_desain']['tmp_name'];
+        $nama_file = $_POST['nama_file'];
+
+        $query = "INSERT INTO order_pembelian(kode, jenis_pembelian, tanggal, kode_supplier, total_harga, status, file) VALUES('" . $kode . "', '" . $jenis_pembelian . "', '" . $tanggal . "', '" . $kode_supplier . "', '" . $total_harga . "', 'Menunggu', '" . $nama_file . "')";
+    }
+
 
     $result = $conn->query($query);
 
@@ -20,6 +28,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result) {
         $response['status'] = 200;
         $response['data'] = [];
+
+        if ($jenis_pembelian == 'alat') {
+            $upload_directory = $base_url . "File Desain/";
+
+            if (!file_exists($upload_directory) && !is_dir($upload_directory)) {
+                mkdir($upload_directory, 0777, true);
+            }
+
+            $upload_transfer = move_uploaded_file($file_transfer, $upload_directory . $nama_file);
+        }
 
         foreach ($data as $key) {
             $query = "INSERT INTO detail_order_pembelian (kode, kode_item, nama_item, jumlah, harga, total_harga) VALUES('" . $key->kode . "', '" . $key->kode_item . "', '" . $key->nama_item . "', '" . $key->jumlah . "', '" . $key->harga . "', '" . $key->jumlah * $key->harga . "')";
