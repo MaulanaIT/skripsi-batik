@@ -11,7 +11,7 @@ import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 // Import CSS
 import global from '../../../css/global.module.css';
-import style from '../../../css/transaksi/produksi/daftar_produksi.module.css';
+import style from '../../../css/transaksi/produksi/produksi.module.css';
 
 export default function Daftar_hpp() {
 
