@@ -5,9 +5,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tanggal_awal = $_POST['tanggal_awal'];
     $tanggal_akhir = $_POST['tanggal_akhir'];
 
-    $query = "SELECT a.tanggal, a.kode, 'Pembelian Alat' AS keterangan, b.total_harga AS nominal, a.created_at FROM pengeluaran_kas a INNER JOIN order_pembelian b ON a.kode_order = b.kode WHERE b.status = 3 AND b.jenis_pembelian = 'alat' AND a.created_at >= '" . $tanggal_awal . "' AND a.created_at <= '" . $tanggal_akhir . "'
+    $query = "SELECT a.tanggal, a.kode, c.nama AS nama_akun, 'Pembelian Alat' AS keterangan, b.total_harga AS nominal, a.created_at FROM pengeluaran_kas a INNER JOIN order_pembelian b ON a.kode_order = b.kode INNER JOIN master_akun c ON a.kode_akun = c.kode WHERE b.status = 3 AND b.jenis_pembelian = 'alat' AND a.created_at >= '" . $tanggal_awal . "' AND a.created_at <= '" . $tanggal_akhir . "'
     UNION
-    SELECT a.tanggal, a.kode, 'Pembelian Bahan' AS keterangan, b.total_harga AS nominal, a.created_at FROM pengeluaran_kas a INNER JOIN order_pembelian b ON a.kode_order = b.kode WHERE b.status = 3 AND b.jenis_pembelian = 'bahan' AND a.created_at >= '" . $tanggal_awal . "' AND a.created_at <= '" . $tanggal_akhir . "'";
+    SELECT a.tanggal, a.kode, c.nama AS nama_akun, 'Pembelian Bahan' AS keterangan, b.total_harga AS nominal, a.created_at FROM pengeluaran_kas a INNER JOIN order_pembelian b ON a.kode_order = b.kode INNER JOIN master_akun c ON a.kode_akun = c.kode WHERE b.status = 3 AND b.jenis_pembelian = 'bahan' AND a.created_at >= '" . $tanggal_awal . "' AND a.created_at <= '" . $tanggal_akhir . "'";
 
     $result = $conn->query($query);
 

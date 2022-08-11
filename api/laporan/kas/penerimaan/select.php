@@ -5,15 +5,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tanggal_awal = $_POST['tanggal_awal'];
     $tanggal_akhir = $_POST['tanggal_akhir'];
 
-    $query = "SELECT * FROM (SELECT date_format(created_at, '%Y-%m-%d') AS tanggal, kode, 'Penerimaan Piutang' AS keterangan, terima_piutang AS nominal, created_at FROM terima_piutang
+    $query = "SELECT * FROM (SELECT date_format(a.created_at, '%Y-%m-%d') AS tanggal, a.kode, b.nama AS nama_akun, 'Penerimaan Piutang' AS keterangan, a.terima_piutang AS nominal, a.created_at FROM terima_piutang a INNER JOIN master_akun b ON a.kode_akun = b.kode
     UNION
-    SELECT tanggal, kode, 'Refund Barang' AS keterangan, jumlah_terima AS nominal, created_at FROM refund
+    SELECT a.tanggal, a.kode, b.nama AS nama_akun, 'Refund Barang' AS keterangan, a.jumlah_terima AS nominal, a.created_at FROM refund a INNER JOIN master_akun b ON a.kode_akun = b.kode
     UNION
-    SELECT tanggal, kode, 'Penjualan Tunai' AS keterangan, total_harga AS nominal, created_at FROM penjualan_tunai
+    SELECT a.tanggal, a.kode, b.nama AS nama_akun, 'Penjualan Tunai' AS keterangan, a.total_harga AS nominal, a.created_at FROM penjualan_tunai a INNER JOIN master_akun b ON a.kode_akun = b.kode
     UNION
-    SELECT tanggal, kode, 'Uang Muka Pesanan' AS keterangan, uang_muka AS nominal, created_at FROM uang_muka_pesanan
+    SELECT a.tanggal, a.kode, b.nama AS nama_akun, 'Uang Muka Pesanan' AS keterangan, a.uang_muka AS nominal, a.created_at FROM uang_muka_pesanan a INNER JOIN master_akun b ON a.kode_akun = b.kode
     UNION
-    SELECT tanggal, kode, 'Pelunasan Pesanan' AS keterangan, sisa AS nominal, created_at FROM uang_muka_pesanan) a WHERE a.created_at >= '" . $tanggal_awal . "' AND a.created_at <= '" . $tanggal_akhir . "'";
+    SELECT a.tanggal, a.kode, b.nama AS nama_akun, 'Pelunasan Pesanan' AS keterangan, a.sisa AS nominal, a.created_at FROM uang_muka_pesanan a INNER JOIN master_akun b ON a.kode_akun = b.kode) c WHERE c.created_at >= '" . $tanggal_awal . "' AND c.created_at <= '" . $tanggal_akhir . "'";
 
     $result = $conn->query($query);
 

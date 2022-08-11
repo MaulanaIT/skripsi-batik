@@ -436,10 +436,6 @@ export class order_pembelian extends Component {
                 let extension = arg[arg.length - 1];
                 formData.append('file_desain', file);
                 formData.append('nama_file', `File Desain - ${valueKodeOrder} - ${valueTanggal}.${extension}`);
-            } else {
-                alert('Isi data dengan benar');
-                HideLoading();
-                return;
             }
 
             formData.append('data', JSON.stringify(this.state.dataAlat));

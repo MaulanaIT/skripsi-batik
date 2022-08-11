@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama_file = $_POST['nama_file'];
     $kode_akun = $_POST['kode_akun'];
 
-    $query = "INSERT INTO pengeluaran_kas(kode, tanggal, kode_order, kode_supplier, diskon, ongkos_kirim, total_bayar, file) VALUES('" . $kode . "', '" . $tanggal . "', '" . $kode_order . "', '" . $kode_supplier . "', '" . $diskon . "', '" . $ongkos_kirim . "', '" . $total_bayar . "', '" . $nama_file . "')";
+    $query = "INSERT INTO pengeluaran_kas(kode, tanggal, kode_akun, kode_order, kode_supplier, diskon, ongkos_kirim, total_bayar, file) VALUES('" . $kode . "', '" . $tanggal . "''" . $kode_akun . "', '" . $kode_order . "', '" . $kode_supplier . "', '" . $diskon . "', '" . $ongkos_kirim . "', '" . $total_bayar . "', '" . $nama_file . "')";
 
     $result = $conn->query($query);
 

@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sisa = $_POST['sisa'];
     $terima_piutang = $_POST['terima_piutang'];
 
-    $query = "INSERT INTO terima_piutang(kode, kode_jual, kode_consignee, piutang, terima_piutang, sisa) VALUES('" . $kode . "', '" . $kode_jual . "', '" . $kode_consignee . "', '" . $jumlah_piutang . "', '" . $terima_piutang . "', '" . $sisa . "')";
+    $query = "INSERT INTO terima_piutang(kode, kode_akun, kode_jual, kode_consignee, piutang, terima_piutang, sisa) VALUES('" . $kode . "', '" . $kode_akun . "', '" . $kode_jual . "', '" . $kode_consignee . "', '" . $jumlah_piutang . "', '" . $terima_piutang . "', '" . $sisa . "')";
 
     $result = $conn->query($query);
 

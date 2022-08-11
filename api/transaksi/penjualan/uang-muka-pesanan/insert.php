@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $file_transfer = $_FILES['file_transfer']['tmp_name'];
     $nama_file = $_POST['nama_file'];
 
-    $query = "INSERT INTO uang_muka_pesanan(kode, tanggal, kode_customer, total_hpp, total_jual, uang_muka, sisa, file) VALUES('" . $kode . "', '" . $tanggal . "', '" . $kode_customer . "', '" . $total_hpp . "', '" . $total_jual . "', '" . $uang_muka . "', '" . $sisa . "', '" . $nama_file . "')";
+    $query = "INSERT INTO uang_muka_pesanan(kode, tanggal, kode_akun, kode_customer, total_hpp, total_jual, uang_muka, sisa, file) VALUES('" . $kode . "', '" . $tanggal . "', '" . $kode_akun . "', '" . $kode_customer . "', '" . $total_hpp . "', '" . $total_jual . "', '" . $uang_muka . "', '" . $sisa . "', '" . $nama_file . "')";
 
     $result = $conn->query($query);
 

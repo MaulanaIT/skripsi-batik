@@ -65,7 +65,7 @@ export default function Pengeluaran_kas() {
 
     // const [getValueJenis, setValueJenis] = useState([]);
     const [getValueTanggalAwal, setValueTanggalAwal] = useState(moment().format('YYYY-MM-DD'));
-    const [getValueTanggalAkhir, setValueTanggalAkhir] = useState(moment().format('YYYY-MM-DD'));
+    const [getValueTanggalAkhir, setValueTanggalAkhir] = useState(moment().add(1, 'days').format('YYYY-MM-DD'));
 
     useEffect(() => {
         $('#table-data').DataTable();
@@ -90,12 +90,14 @@ export default function Pengeluaran_kas() {
                 'Laporan Pengeluaran Kas',
                 '',
                 '',
+                '',
                 ''
             ]);
 
             dataExport.push([
                 'Tanggal',
                 'Kode',
+                'Akun',
                 'Keterangan',
                 'Nominal'
             ]);
@@ -107,6 +109,7 @@ export default function Pengeluaran_kas() {
                             <td className='text-center'>{index+1}.</td>
                             <td>{item.tanggal}</td>
                             <td>{item.kode}</td>
+                            <td>{item.nama_akun}</td>
                             <td>{item.keterangan}</td>
                             <td>{SetPriceFormat(item.nominal)}</td>
                         </tr>
@@ -115,6 +118,7 @@ export default function Pengeluaran_kas() {
                     dataExport.push([
                         item.tanggal,
                         item.kode,
+                        item.nama_akun,
                         item.keterangan,
                         SetPriceFormat(item.nominal)
                     ]);
@@ -194,6 +198,7 @@ export default function Pengeluaran_kas() {
                                         <th>No.</th>
                                         <th>Tanggal</th>
                                         <th>Kode Kas Keluar</th>
+                                        <th>Nama Akun</th>
                                         <th>Jenis Pembelian</th>
                                         <th>Nominal</th>
                                     </tr>

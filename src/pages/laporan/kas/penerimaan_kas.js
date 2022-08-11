@@ -64,7 +64,7 @@ export default function Penerimaan_kas() {
 
     // const [getValueJenis, setValueJenis] = useState([]);
     const [getValueTanggalAwal, setValueTanggalAwal] = useState(moment().format('YYYY-MM-DD'));
-    const [getValueTanggalAkhir, setValueTanggalAkhir] = useState(moment().format('YYYY-MM-DD'));
+    const [getValueTanggalAkhir, setValueTanggalAkhir] = useState(moment().add(1, 'days').format('YYYY-MM-DD'));
 
     useEffect(() => {
         $('#table-data').DataTable();
@@ -82,11 +82,14 @@ export default function Penerimaan_kas() {
         axios.post(`${baseURL}/api/laporan/kas/penerimaan/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
+            console.log(response);
+
             let htmlTableDaftarLaporan = [];
             let dataExport = [];
 
             dataExport.push([
                 'Laporan Pnerimaan Kas',
+                '',
                 '',
                 '',
                 ''
@@ -95,6 +98,7 @@ export default function Penerimaan_kas() {
             dataExport.push([
                 'Tanggal',
                 'Kode',
+                'Akun',
                 'Keterangan',
                 'Nominal'
             ]);
@@ -106,6 +110,7 @@ export default function Penerimaan_kas() {
                             <td className='text-center'>{index+1}.</td>
                             <td>{item.tanggal}</td>
                             <td>{item.kode}</td>
+                            <td>{item.nama_akun}</td>
                             <td>{item.keterangan}</td>
                             <td>{SetPriceFormat(item.nominal)}</td>
                         </tr>
@@ -114,6 +119,7 @@ export default function Penerimaan_kas() {
                     dataExport.push([
                         item.tanggal,
                         item.kode,
+                        item.nama_akun,
                         item.keterangan,
                         SetPriceFormat(item.nominal)
                     ]);
@@ -193,6 +199,7 @@ export default function Penerimaan_kas() {
                                         <th>No.</th>
                                         <th>Tanggal</th>
                                         <th>Kode Kas Masuk</th>
+                                        <th>Nama Akun</th>
                                         <th>Keterangan</th>
                                         <th>Nominal</th>
                                     </tr>

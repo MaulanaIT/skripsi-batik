@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $total_harga = $_POST['total_harga'];
         $total_bayar = $_POST['total_bayar'];
 
-        $query = "INSERT INTO penjualan_tunai(kode, tanggal, kode_customer, total_jual, total_hpp, diskon, ongkos_kirim, total_harga, total_bayar) VALUES('" . $kode . "', '" . $tanggal . "', '" . $kode_customer . "', '" . $total_jual . "', '" . $total_hpp . "', '" . $diskon . "', '" . $ongkos_kirim . "', '" . $total_harga . "', '" . $total_bayar . "')";
+        $query = "INSERT INTO penjualan_tunai(kode, tanggal, kode_akun, kode_customer, total_jual, total_hpp, diskon, ongkos_kirim, total_harga, total_bayar) VALUES('" . $kode . "', '" . $tanggal . "', '" . $kode_akun . "', '" . $kode_customer . "', '" . $total_jual . "', '" . $total_hpp . "', '" . $diskon . "', '" . $ongkos_kirim . "', '" . $total_harga . "', '" . $total_bayar . "')";
     } else if ($jenis_penjualan == 'konsinyasi') {
         $kode_consignee = $_POST['kode_consignee'];
         $total_hpp = $_POST['total_hpp'];
