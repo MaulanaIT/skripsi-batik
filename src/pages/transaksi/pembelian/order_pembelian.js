@@ -659,7 +659,7 @@ export class order_pembelian extends Component {
                                             <div className={`d-flex`}>
                                                 <div className={`${global.input_group}`}>
                                                     <p>Upload File Desain</p>
-                                                    <input type="file" accept='.pdf' id='input-file-desain' required={true} />
+                                                    <input type="file" accept='.pdf' id='input-file-desain' required={false} />
                                                 </div>
                                             </div>
                                             <div className={`d-flex`}>
