@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Aug 10, 2022 at 02:23 PM
--- Server version: 10.5.13-MariaDB-cll-lve
--- PHP Version: 7.2.34
+-- Host: 127.0.0.1
+-- Generation Time: Aug 11, 2022 at 06:15 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `u158919227_leksana_batik`
+-- Database: `skripsi_batik`
 --
 
 -- --------------------------------------------------------
@@ -223,7 +223,8 @@ INSERT INTO `detail_penjualan` (`id`, `kode`, `kode_item`, `nama_item`, `jumlah`
 (1, 'JT0001', 'PROD0003', 'Kain Batik Tulis Lasem Primissima 1 Warna Alami', 2, '500000.00', '1000000.00', '0.00', '0.00', '2022-08-06 15:19:55', '2022-08-06 15:19:55'),
 (2, 'JK0001', 'PROD0003', 'Kain Batik Tulis Lasem Primissima 1 Warna Alami', 2, '500000.00', '1000000.00', '0.00', '0.00', '2022-08-07 15:07:35', '2022-08-07 15:07:35'),
 (3, 'JT0001', 'PROD0001', 'Kain Batik Mangrove Api-api Sintetis 1 Warna', 3, '90000.00', '270000.00', '75000.00', '225000.00', '2022-08-08 03:29:11', '2022-08-08 03:29:11'),
-(4, 'JT0002', 'PROD0001', 'Kain Batik Mangrove Api-api Sintetis 1 Warna', 2, '90000.00', '180000.00', '75000.00', '150000.00', '2022-08-08 03:30:50', '2022-08-08 03:30:50');
+(4, 'JT0002', 'PROD0001', 'Kain Batik Mangrove Api-api Sintetis 1 Warna', 2, '90000.00', '180000.00', '75000.00', '150000.00', '2022-08-08 03:30:50', '2022-08-08 03:30:50'),
+(5, 'JT0004', 'PROD0003', 'Kain Batik Tulis Lasem Primissima 1 Warna Alami', 4, '500000.00', '2000000.00', '140500.00', '562000.00', '2022-08-11 16:09:59', '2022-08-11 16:09:59');
 
 -- --------------------------------------------------------
 
@@ -701,14 +702,14 @@ CREATE TABLE `master_akun` (
 --
 
 INSERT INTO `master_akun` (`id`, `kode`, `nama`, `saldo`, `jenis`, `created_at`, `updated_at`) VALUES
-(1, '1101', 'Kas di Tangan', '6530000.00', 0, '2022-07-02 03:35:56', '2022-08-09 16:44:02'),
+(1, '1101', 'Kas di Tangan', '8545000.00', 0, '2022-07-02 03:35:56', '2022-08-11 16:09:59'),
 (2, '1102', 'Kas Bank', '150068000.00', 0, '2022-07-02 03:36:09', '2022-08-09 16:51:08'),
 (3, '1103', 'Piutang Konsinyasi', '1345000.00', 0, '2022-07-02 03:36:21', '2022-08-07 22:52:57'),
 (4, '2101', 'Uang Muka Pesanan', '1479517.34', 1, '2022-07-02 03:36:48', '2022-08-07 19:46:01'),
-(5, '4101', 'Penjualan', '13137698.82', 1, '2022-07-02 03:40:10', '2022-08-08 03:30:50'),
-(6, '4201', 'Potongan Penjualan', '1087482.12', 0, '2022-07-02 03:40:22', '2022-08-07 19:46:01'),
-(7, '4202', 'Beban Angkut Penjualan', '749000.00', 0, '2022-07-02 03:40:32', '2022-08-06 16:33:32'),
-(8, '5101', 'HPP', '3729363.39', 0, '2022-07-02 03:40:42', '2022-08-08 03:30:50'),
+(5, '4101', 'Penjualan', '15137698.82', 1, '2022-07-02 03:40:10', '2022-08-11 16:09:59'),
+(6, '4201', 'Potongan Penjualan', '1092482.12', 0, '2022-07-02 03:40:22', '2022-08-11 16:09:59'),
+(7, '4202', 'Beban Angkut Penjualan', '769000.00', 0, '2022-07-02 03:40:32', '2022-08-11 16:09:59'),
+(8, '5101', 'HPP', '4291363.39', 0, '2022-07-02 03:40:42', '2022-08-11 16:09:59'),
 (9, '5201', 'Potongan Pembelian', '50000.00', 1, '2022-07-02 03:40:51', '2022-08-07 14:56:33'),
 (10, '5202', 'Retur Pembelian', '208000.00', 1, '2022-07-02 03:41:06', '2022-08-07 19:02:19'),
 (11, '5203', 'Beban Angkut Pembelian', '49100.00', 0, '2022-07-02 03:41:15', '2022-08-07 15:01:12');
@@ -923,7 +924,7 @@ CREATE TABLE `master_inventory_produk` (
 INSERT INTO `master_inventory_produk` (`id`, `kode`, `nama`, `jenis`, `warna`, `jumlah`, `stok_minimal`, `hpp_per_produk`, `harga_jual`, `created_at`, `updated_at`) VALUES
 (4, 'PROD0001', 'Kain Batik Mangrove Api-api Sintetis 1 Warna', 'Cap', 'Sintetis', 0, 5, '75000.00', '90000.00', '2022-07-29 07:54:42', '2022-08-08 03:30:50'),
 (5, 'PROD0002', 'Batik Bumi Wijayakusuma Kombinasi 2 Warna Sintetis', 'Kombinasi', 'Sintetis', 30, 5, '145000.00', '160000.00', '2022-07-29 08:26:51', '2022-08-07 22:51:38'),
-(6, 'PROD0003', 'Kain Batik Tulis Lasem Primissima 1 Warna Alami', 'Tulis', 'Alami', 11, 5, '140500.00', '500000.00', '2022-07-30 20:19:20', '2022-08-08 03:21:11'),
+(6, 'PROD0003', 'Kain Batik Tulis Lasem Primissima 1 Warna Alami', 'Tulis', 'Alami', 7, 5, '140500.00', '500000.00', '2022-07-30 20:19:20', '2022-08-11 16:09:59'),
 (7, 'PROD0004', 'Kemeja Sekar Wijayakusuma Size S', 'Cap', 'Sintetis', 30, 5, '0.00', '160000.00', '2022-07-30 20:22:50', '2022-07-30 20:22:50'),
 (8, 'PROD0005', 'Kemeja Sekar Wijayakusuma Size M', 'Cap', 'Sintetis', 15, 5, '0.00', '160000.00', '2022-07-30 20:23:38', '2022-08-06 11:04:44'),
 (9, 'PROD0006', 'Kemeja Sekar Wijayakusuma Size L', 'Cap', 'Sintetis', 15, 5, '0.00', '160000.00', '2022-07-30 20:24:05', '2022-08-06 11:02:41'),
@@ -1078,6 +1079,7 @@ CREATE TABLE `pengeluaran_kas` (
   `id` int(11) NOT NULL,
   `kode` varchar(10) NOT NULL,
   `tanggal` date NOT NULL,
+  `kode_akun` varchar(10) NOT NULL,
   `kode_order` varchar(10) NOT NULL,
   `kode_supplier` varchar(10) NOT NULL,
   `diskon` decimal(10,2) NOT NULL,
@@ -1092,11 +1094,11 @@ CREATE TABLE `pengeluaran_kas` (
 -- Dumping data for table `pengeluaran_kas`
 --
 
-INSERT INTO `pengeluaran_kas` (`id`, `kode`, `tanggal`, `kode_order`, `kode_supplier`, `diskon`, `ongkos_kirim`, `total_bayar`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'KK0001', '2022-08-08', 'O0001', 'SUP0003', '0.00', '0.00', '1680000.00', 'File Transfer - KK0001 - 2022-08-08.pdf', '2022-08-08 05:02:24', '2022-08-08 05:02:24'),
-(2, 'KK0002', '2022-08-09', 'O0002', 'SUP0002', '0.00', '0.00', '1220000.00', 'File Bukti Bayar - KK0002 - 2022-08-09.pdf', '2022-08-09 05:09:28', '2022-08-09 05:09:28'),
-(3, 'KK0002', '2022-08-09', 'O0002', 'SUP0002', '0.00', '0.00', '140000.00', 'File Bukti Bayar - KK0002 - 2022-08-09.pdf', '2022-08-09 16:44:02', '2022-08-09 16:44:02'),
-(4, 'KK0002', '2022-08-09', 'O0003', 'SUP0004', '0.00', '0.00', '1500000.00', 'File Bukti Bayar - KK0002 - 2022-08-09.pdf', '2022-08-09 16:51:08', '2022-08-09 16:51:08');
+INSERT INTO `pengeluaran_kas` (`id`, `kode`, `tanggal`, `kode_akun`, `kode_order`, `kode_supplier`, `diskon`, `ongkos_kirim`, `total_bayar`, `file`, `created_at`, `updated_at`) VALUES
+(1, 'KK0001', '2022-08-08', '', 'O0001', 'SUP0003', '0.00', '0.00', '1680000.00', 'File Transfer - KK0001 - 2022-08-08.pdf', '2022-08-08 05:02:24', '2022-08-08 05:02:24'),
+(2, 'KK0002', '2022-08-09', '', 'O0002', 'SUP0002', '0.00', '0.00', '1220000.00', 'File Bukti Bayar - KK0002 - 2022-08-09.pdf', '2022-08-09 05:09:28', '2022-08-09 05:09:28'),
+(3, 'KK0002', '2022-08-09', '', 'O0002', 'SUP0002', '0.00', '0.00', '140000.00', 'File Bukti Bayar - KK0002 - 2022-08-09.pdf', '2022-08-09 16:44:02', '2022-08-09 16:44:02'),
+(4, 'KK0002', '2022-08-09', '', 'O0003', 'SUP0004', '0.00', '0.00', '1500000.00', 'File Bukti Bayar - KK0002 - 2022-08-09.pdf', '2022-08-09 16:51:08', '2022-08-09 16:51:08');
 
 -- --------------------------------------------------------
 
@@ -1152,6 +1154,7 @@ CREATE TABLE `penjualan_tunai` (
   `id` int(11) NOT NULL,
   `kode` varchar(10) NOT NULL,
   `tanggal` date NOT NULL,
+  `kode_akun` varchar(10) NOT NULL,
   `kode_customer` varchar(10) NOT NULL,
   `total_jual` decimal(10,2) NOT NULL,
   `total_hpp` decimal(10,2) NOT NULL,
@@ -1168,10 +1171,11 @@ CREATE TABLE `penjualan_tunai` (
 -- Dumping data for table `penjualan_tunai`
 --
 
-INSERT INTO `penjualan_tunai` (`id`, `kode`, `tanggal`, `kode_customer`, `total_jual`, `total_hpp`, `diskon`, `ongkos_kirim`, `total_harga`, `total_bayar`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'JT0001', '2022-08-08', 'CUS0007', '270000.00', '225000.00', '0.00', '0.00', '270000.00', '270000.00', '', '2022-08-08 03:29:11', '2022-08-08 03:29:11'),
-(2, 'JT0002', '2022-08-08', 'CUS0003', '180000.00', '150000.00', '0.00', '0.00', '180000.00', '180000.00', '', '2022-08-08 03:30:50', '2022-08-08 03:30:50'),
-(3, 'JT0003', '2022-08-10', 'undefined', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '2022-08-10 13:11:19', '2022-08-10 13:11:19');
+INSERT INTO `penjualan_tunai` (`id`, `kode`, `tanggal`, `kode_akun`, `kode_customer`, `total_jual`, `total_hpp`, `diskon`, `ongkos_kirim`, `total_harga`, `total_bayar`, `file`, `created_at`, `updated_at`) VALUES
+(1, 'JT0001', '2022-08-08', '', 'CUS0007', '270000.00', '225000.00', '0.00', '0.00', '270000.00', '270000.00', '', '2022-08-08 03:29:11', '2022-08-08 03:29:11'),
+(2, 'JT0002', '2022-08-08', '', 'CUS0003', '180000.00', '150000.00', '0.00', '0.00', '180000.00', '180000.00', '', '2022-08-08 03:30:50', '2022-08-08 03:30:50'),
+(3, 'JT0003', '2022-08-10', '', 'undefined', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '', '2022-08-10 13:11:19', '2022-08-10 13:11:19'),
+(4, 'JT0004', '2022-08-11', '1101', 'CUS0004', '2000000.00', '562000.00', '5000.00', '20000.00', '2015000.00', '2020000.00', '', '2022-08-11 16:09:59', '2022-08-11 16:09:59');
 
 -- --------------------------------------------------------
 
@@ -1307,6 +1311,7 @@ INSERT INTO `produksi_stok` (`id`, `kode`, `kode_permintaan`, `kode_produk`, `ta
 CREATE TABLE `refund` (
   `id` int(11) NOT NULL,
   `kode` varchar(10) NOT NULL,
+  `kode_akun` varchar(10) NOT NULL,
   `kode_retur` varchar(10) NOT NULL,
   `tanggal` date NOT NULL,
   `jumlah_terima` decimal(10,2) NOT NULL,
@@ -1376,6 +1381,7 @@ INSERT INTO `terima_barang` (`id`, `kode`, `kode_order`, `jenis_pembelian`, `tan
 CREATE TABLE `terima_piutang` (
   `id` int(11) NOT NULL,
   `kode` varchar(10) NOT NULL,
+  `kode_akun` varchar(10) NOT NULL,
   `kode_jual` varchar(10) NOT NULL,
   `kode_consignee` varchar(10) NOT NULL,
   `piutang` decimal(10,2) NOT NULL,
@@ -1415,6 +1421,7 @@ CREATE TABLE `uang_muka_pesanan` (
   `id` int(11) NOT NULL,
   `kode` varchar(10) NOT NULL,
   `tanggal` date NOT NULL,
+  `kode_akun` varchar(10) NOT NULL,
   `kode_customer` varchar(10) NOT NULL,
   `total_hpp` decimal(10,2) NOT NULL,
   `total_jual` decimal(10,2) NOT NULL,
@@ -1694,7 +1701,7 @@ ALTER TABLE `detail_pengeluaran_kas`
 -- AUTO_INCREMENT for table `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `detail_retur`
@@ -1838,7 +1845,7 @@ ALTER TABLE `penjualan_pesanan`
 -- AUTO_INCREMENT for table `penjualan_tunai`
 --
 ALTER TABLE `penjualan_tunai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `permintaan_pesanan`
