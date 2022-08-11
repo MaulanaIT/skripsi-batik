@@ -61,7 +61,7 @@ export default function Permintaan_prod_pesanan() {
     return (
         <React.Fragment>
             <div className={style.header}>
-                <p className={style.title}>Produksi</p>
+                <p className={style.title}>Daftar Permintaan Produksi Pesanan</p>
                 <p className={style.pathname}>Transaksi / Produksi / Daftar Permintaan Produksi Pesanan</p>
             </div>
             <div className={`${style.content}`}>

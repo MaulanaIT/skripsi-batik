@@ -256,7 +256,7 @@ export default function Permintaanprod() {
     return (
         <React.Fragment>
             <div className={style.header}>
-                <p className={style.title}>Produksi</p>
+                <p className={style.title}>Permintaan Produksi Stok</p>
                 <p className={style.pathname}>Transaksi / Produksi / Permintaan Produksi</p>
             </div>
             {localStorage.getItem('leksana_jabatan').toLowerCase() !== 'owner' &&
