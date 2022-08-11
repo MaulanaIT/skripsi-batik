@@ -8,7 +8,7 @@ import Logo from '../../../assets/images/logo.jpg';
 // Import CSS
 import style from '../../../css/printout.module.css';
 
-export default function Printout_uang_muka({ customer, kode, tanggal, uangMuka, totalHarga }) {
+export default function Printout_uang_muka({ customer, kode, tanggal, uangMuka, totalHarga, namapesanan, jumlah }) {
     return (
         <div className={cx([style.container, 'print'])}>
             <div className={style.box}>
@@ -27,7 +27,7 @@ export default function Printout_uang_muka({ customer, kode, tanggal, uangMuka, 
                 <p className={style.title}>KUITANSI UANG MUKA PESANAN
                 </p>
                 <div className={style.date}>
-                    <table className='table w-50'>
+                    <table className='table w-80'>
                         <tbody>
                             <tr>
                                 <td>Tanggal</td>
@@ -40,6 +40,16 @@ export default function Printout_uang_muka({ customer, kode, tanggal, uangMuka, 
                                 <td>{customer}</td>
                             </tr>
                             <tr>
+                                <td> Atas Pesanan</td>
+                                <td>:</td>
+                                <td>{namapesanan}</td>
+                            </tr>
+                            <tr>
+                                <td>Jumlah Pesanan</td>
+                                <td>:</td>
+                                <td>{jumlah} pcs</td>
+                            </tr>
+                            <tr>
                                 <td>Sebesar</td>
                                 <td>:</td>
                                 <td>{SetPriceFormat(uangMuka)}</td>
@@ -48,11 +58,6 @@ export default function Printout_uang_muka({ customer, kode, tanggal, uangMuka, 
                                 <td>Nilai Pesanan</td>
                                 <td>:</td>
                                 <td>{SetPriceFormat(totalHarga)}</td>
-                            </tr>
-                            <tr>
-                                <td>Pembayaran</td>
-                                <td>:</td>
-                                <td>Uang Muka Pesanan</td>
                             </tr>
                         </tbody>
                     </table>

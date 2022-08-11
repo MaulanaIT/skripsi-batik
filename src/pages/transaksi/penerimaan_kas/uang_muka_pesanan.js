@@ -231,6 +231,8 @@ export default function Uang_muka_pesanan() {
                 tanggal={getValueTanggal}
                 uangMuka={getValueUangMuka}
                 totalHarga={getValueKalkulasiTotalHarga}
+                namapesanan={getValueNamaPesanan}
+                jumlah={getValueJumlah}
             />
             <div className={style.header}>
                 <p className={style.title}>Uang Muka Pesanan</p>
