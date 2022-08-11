@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tanggal_awal = $_POST['tanggal_awal'];
     $tanggal_akhir = $_POST['tanggal_akhir'];
 
-    $query = "SELECT a.kode AS kode_retur, a.tanggal AS tanggal, d.jenis_pembelian, a.kode_supplier, c.nama AS nama_supplier, a.total_harga FROM retur_pembelian a INNER JOIN pengeluaran_kas b ON a.kode_kas_keluar = b.kode INNER JOIN master_supplier c ON a.kode_supplier = c.kode INNER JOIN order_pembelian d ON b.kode_order = d.kode WHERE d.jenis_pembelian LIKE '%".$jenis_pembelian."' AND b.created_at >= '".$tanggal_awal."' AND b.created_at <= '".$tanggal_akhir."'";
+    $query = "SELECT a.kode AS kode_retur, a.tanggal AS tanggal, d.jenis_pembelian, a.kode_supplier, c.nama AS nama_supplier, a.total_harga, e.kode_item AS kode_item, e.nama_item AS nama_item FROM retur_pembelian a INNER JOIN pengeluaran_kas b ON a.kode_kas_keluar = b.kode INNER JOIN master_supplier c ON a.kode_supplier = c.kode INNER JOIN order_pembelian d ON b.kode_order = d.kode INNER JOIN detail_retur e ON a.kode = e.kode WHERE d.jenis_pembelian LIKE '%".$jenis_pembelian."' AND b.created_at >= '".$tanggal_awal."' AND b.created_at <= '".$tanggal_akhir."'";
 
     $result = $conn->query($query);
 

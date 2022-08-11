@@ -175,6 +175,11 @@ export default function Pengembalian_dana() {
     }
 
     const Insert = () => {
+        if (getValueSelectedAkun.length <= 0) {
+            alert('Isi data dengan benar');
+            return;
+        }
+
         ShowLoading();
 
         const formData = new FormData();
@@ -198,7 +203,7 @@ export default function Pengembalian_dana() {
         formData.append('kode_retur', getValueKodeRetur);
         formData.append('tanggal', getValueTanggal);
         formData.append('jumlah_terima', getValueJumlahUangDiterima);
-        formData.append('kode_akun', getValueSelectedAkun.value);
+        formData.append('kode_akun', getValueSelectedAkun?.value);
 
         axios.post(`${baseURL}/api/transaksi/pembelian/refund/insert.php`, formData, config).then(() => {
             if (window.confirm("Apakah ingin mencetak nota?")) {
@@ -262,7 +267,7 @@ export default function Pengembalian_dana() {
                         </div>
                     </div>
                     <div className='d-flex flex-column gap-5 pt-2'>
-                        {getValueSelectedAkun.value === '1102' &&
+                        {getValueSelectedAkun?.value === '1102' &&
                             <div>
                                 <p>Upload File Transfer</p>
                                 <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' />

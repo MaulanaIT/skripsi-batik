@@ -71,6 +71,12 @@ export default function Retur_pembelian() {
     }, []);
 
     const GetLaporan = () => {
+        if (getValueJenis.length <= 0) {
+            alert('Isi data dengan benar');
+            return;
+        }        
+
+
         ShowLoading();
 
         const formData = new FormData();
