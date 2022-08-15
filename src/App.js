@@ -51,6 +51,7 @@ import DaftarHargaPokokProduksi from './pages/transaksi/produksi/daftar_hpp';
 import Produksi from './pages/transaksi/produksi/produksi';
 import HargaPokokProduksi from './pages/transaksi/produksi/hpp';
 import AddHPP from './pages/transaksi/produksi/add_hpp';
+import DetailPesanan from './pages/transaksi/produksi/detail_pesanan';
 import LaporanPembelianTransaksiPembelian from './pages/laporan/pembelian/transaksi_pembelian';
 import LaporanPembelianReturPembelian from './pages/laporan/pembelian/retur_pembelian';
 import LaporanPenjualanTransaksiPenjualan from './pages/laporan/penjualan/transaksi_penjualan';
@@ -167,6 +168,7 @@ export default function App() {
                                 <Route path={'/transaksi/produksi/daftar-hpp'} element={<DaftarHargaPokokProduksi />} />
                                 <Route path={'/transaksi/produksi/hpp'} element={<HargaPokokProduksi />} />
                                 <Route path={'/transaksi/produksi/add-hpp'} element={<AddHPP />} />
+                                <Route path={'/transaksi/produksi/detail-pesanan'} element={<DetailPesanan />} />
                                 <Route path={'/laporan/pembelian/transaksi-pembelian'} element={<LaporanPembelianTransaksiPembelian />} />
                                 <Route path={'/laporan/pembelian/retur-pembelian'} element={<LaporanPembelianReturPembelian />} />
                                 <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<LaporanPenjualanTransaksiPenjualan />} />
