@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     UNION
     SELECT a.tanggal, a.kode, b.nama AS nama_akun, 'Uang Muka Pesanan' AS keterangan, a.uang_muka AS nominal, a.created_at FROM uang_muka_pesanan a INNER JOIN master_akun b ON a.kode_akun = b.kode
     UNION
-    SELECT a.tanggal, a.kode, b.nama AS nama_akun, 'Pelunasan Pesanan' AS keterangan, a.sisa AS nominal, a.created_at FROM uang_muka_pesanan a INNER JOIN master_akun b ON a.kode_akun = b.kode) c WHERE c.created_at >= '" . $tanggal_awal . "' AND c.created_at <= '" . $tanggal_akhir . "'";
+    SELECT date_format(c.updated_at, '%Y-%m-%d') AS tanggal, a.kode, b.nama AS nama_akun, 'Pelunasan Pesanan' AS keterangan, a.sisa AS nominal, a.created_at FROM uang_muka_pesanan a INNER JOIN penjualan_pesanan c ON a.kode = c.kode_pesanan INNER JOIN master_akun b ON c.kode_akun = b.kode) d WHERE d.tanggal >= '" . $tanggal_awal . "' AND d.tanggal <= '" . $tanggal_akhir . "'";
 
     $result = $conn->query($query);
 

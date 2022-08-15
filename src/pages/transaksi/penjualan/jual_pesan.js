@@ -63,6 +63,7 @@ export default function Jual_pesan() {
     const [getDataPesanan, setDataPesanan] = useState([]);
     const [getDataSelectAkun, setDataSelectAkun] = useState([]);
 
+    const [getValueAlamat, setValueAlamat] = useState('');
     const [getValueKodeAkun, setValueKodeAkun] = useState([]);
     const [getValueKodeJual, setValueKodeJual] = useState('');
     const [getValueTanggal, setValueTanggal] = useState('');
@@ -131,6 +132,9 @@ export default function Jual_pesan() {
             ShowLoading();
             let data = response.data.data.find(item => item.kode_pesanan === location.state.data.kode);
 
+            console.log(data);
+
+            setValueAlamat(data.alamat);
             setValueKodeJual(data.kode);
             setValueTotalJual(data.total_jual);
             setValueTotalHpp(data.total_hpp);
@@ -209,7 +213,22 @@ export default function Jual_pesan() {
 
     return (
         <React.Fragment>
-            <PrintoutPenjualan bayar={getValueTotalBayar} data={getDataPesanan} diskon={getValueDiskon} ongkosKirim={getValueOngkosKirim} jenis={'pesanan'} kembalian={getValueKembalian} tanggal={getValueTanggal} totalJual={getValueTotalJual} uangMuka={getValueUangMuka} />
+            <PrintoutPenjualan 
+            alamat={getValueAlamat} 
+            bayar={getValueTotalBayar} 
+            data={getDataPesanan} 
+            diskon={getValueDiskon} 
+            kode={getValueKodeJual} 
+            kode_customer={getValueKodeCustomer} 
+            nama_customer={getValueNamaCustomer} 
+            kode_consignee={null} 
+            nama_consignee={null} 
+            ongkosKirim={getValueOngkosKirim} 
+            jenis={'pesanan'} 
+            kembalian={getValueKembalian} 
+            tanggal={getValueTanggal} 
+            totalJual={getValueTotalJual} 
+            uangMuka={getValueUangMuka} />
             <div className={style.header}>
                 <p className={style.title}>Transaksi Penjualan</p>
                 <p className={style.pathname}>Transaksi / Penjualan / Penyerahan Pesanan</p>

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama_file = $_POST['nama_file'];
 
     if ($jenis_penjualan == 'pesanan') {
-        $query = "UPDATE penjualan_pesanan SET total_bayar=(total_bayar + " . $sisa . "), sisa=(sisa-" . $sisa . ") WHERE kode='" . $kode . "'";
+        $query = "UPDATE penjualan_pesanan SET kode_akun='".$kode_akun."', total_bayar=(total_bayar + " . $sisa . "), sisa=(sisa-" . $sisa . ") WHERE kode='" . $kode . "'";
     }
 
     $result = $conn->query($query);
