@@ -8,7 +8,7 @@ import Logo from '../../../assets/images/logo.jpg';
 // Import CSS
 import style from '../../../css/printout.module.css';
 
-export default function Printout_penjualan({ bayar, data, diskon, jenis, ongkosKirim, kembalian, tanggal, totalJual, uangMuka = 0 }) {
+export default function Printout_penjualan({ alamat, bayar, data, diskon, kode, kode_customer, nama_customer, kode_consignee, nama_consignee, jenis, ongkosKirim, kembalian, tanggal, totalJual, uangMuka = 0 }) {
     return (
         <div className={cx([style.container, 'print'])} style={{ maxWidth: 600 }}>
             <div className={style.box}>
@@ -22,8 +22,13 @@ export default function Printout_penjualan({ bayar, data, diskon, jenis, ongkosK
                             <p className={style.detail}>Telp. 0838-xxxx-xxxx</p>
                         </div>
                     </div>
+                    <p className={style.code}>{kode}</p>
                 </div>
                 <div style={{ borderBottom: '1px dashed black', borderTop: '1px dashed black', height: 8, marginBottom: 24, marginTop: 24, width: '100%' }}></div>
+                <p>
+                    Yth. {jenis === 'konsinyasi' ? `${kode_consignee} - ${nama_consignee}` : `${kode_customer} - ${nama_customer}`} <br />
+                    {alamat}
+                </p>
                 <table className={cx([style.table, 'table', 'table-bordered', 'w-100'])}>
                     <thead>
                         <tr className='text-center'>

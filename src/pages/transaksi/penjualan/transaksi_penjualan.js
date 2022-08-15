@@ -65,6 +65,8 @@ export class transaksi_penjualan extends Component {
         dataAlat: [],
         dataBahan: [],
         dataBTKL: [],
+        dataCustomer: [],
+        dataConsignee: [],
         dataPenolong: [],
         dataDetailAlat: [],
         dataDetailBahan: [],
@@ -102,6 +104,7 @@ export class transaksi_penjualan extends Component {
         htmlTableDaftarDetailBTKL: [],
         htmlTableDaftarDetailPenolong: [],
 
+        valueAlamat: '',
         valueDeskripsiPesanan: '',
         valueDepartemen: '',
         valueDiskon: 0,
@@ -1424,10 +1427,11 @@ export class transaksi_penjualan extends Component {
         if (data) {
             let valueKode = this.state.dataSelectKodeConsignee.find(item => item.value === data?.value);
             let valueNama = this.state.dataSelectNamaConsignee.find(item => item.value === data?.value);
+            let alamat = this.state.dataConsignee.find(item => item.kode = valueKode.value).alamat;
 
-            this.setState({ valueKodeConsignee: valueKode, valueNamaConsignee: valueNama });
+            this.setState({ valueAlamat: alamat, valueKodeConsignee: valueKode, valueNamaConsignee: valueNama });
         } else {
-            this.setState({ valueKodeConsignee: '', valueNamaConsignee: '' });
+            this.setState({ valueAlamat: '', valueKodeConsignee: '', valueNamaConsignee: '' });
         }
     }
 
@@ -1435,10 +1439,11 @@ export class transaksi_penjualan extends Component {
         if (data) {
             let valueKode = this.state.dataSelectKodeCustomer.find(item => item.value === data?.value);
             let valueNama = this.state.dataSelectNamaCustomer.find(item => item.value === data?.value);
+            let alamat = this.state.dataCustomer.find(item => item.kode = valueKode.value).alamat;
 
-            this.setState({ valueKodeCustomer: valueKode, valueNamaCustomer: valueNama });
+            this.setState({ valueAlamat: alamat, valueKodeCustomer: valueKode, valueNamaCustomer: valueNama });
         } else {
-            this.setState({ valueKodeCustomer: '', valueNamaCustomer: '' });
+            this.setState({ valueAlamat: '', valueKodeCustomer: '', valueNamaCustomer: '' });
         }
     }
 
@@ -1548,6 +1553,7 @@ export class transaksi_penjualan extends Component {
             dataPesanan,
             dataSelectAkun,
             dataTunai,
+            valueAlamat,
             valueDeskripsiPesanan,
             valueDepartemen,
             valueDiskon,
@@ -1598,7 +1604,20 @@ export class transaksi_penjualan extends Component {
 
         return (
             <React.Fragment>
-                <PrintoutPenjualan bayar={valueTotalBayar} data={valueJenisPenjualan?.value?.toLowerCase() === 'tunai' ? this.state.dataTunai : valueJenisPenjualan?.value?.toLowerCase() === 'konsinyasi' && this.state.dataKonsinyasi} diskon={valueDiskon} ongkosKirim={valueOngkosKirim} jenis={valueJenisPenjualan?.value?.toLowerCase()} kembalian={Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim])} tanggal={valueTanggal} totalJual={valueTotalJual} />
+                <PrintoutPenjualan 
+                alamat={valueAlamat} 
+                bayar={valueTotalBayar} 
+                data={valueJenisPenjualan?.value?.toLowerCase() === 'tunai' ? this.state.dataTunai : valueJenisPenjualan?.value?.toLowerCase() === 'konsinyasi' && this.state.dataKonsinyasi} 
+                diskon={valueDiskon} 
+                kode={valueKodeJual} 
+                kode_customer={valueKodeCustomer?.value} 
+                nama_customer={valueNamaCustomer?.value} 
+                kode_consignee={valueKodeConsignee?.value} 
+                nama_consignee={valueNamaConsignee?.value} 
+                ongkosKirim={valueOngkosKirim} 
+                jenis={valueJenisPenjualan?.value?.toLowerCase()} 
+                kembalian={Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim])} 
+                tanggal={valueTanggal} totalJual={valueTotalJual} />
 
                 <div className={style.header}>
                     <p className={style.title}>Transaksi Penjualan</p>

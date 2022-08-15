@@ -176,6 +176,7 @@ export default function Transaksi_penjualan() {
     }
 
     const PrintNota = (item) => {
+        console.log(item)
         setDataPenjualan(item, () => {
             const formData = new FormData();
 
@@ -198,7 +199,21 @@ export default function Transaksi_penjualan() {
 
     return (
         <React.Fragment>
-            <PrintoutPenjualan bayar={getDataPenjualan?.total_harga ?? 0} data={getDataDetailPenjualan} diskon={getDataPenjualan?.diskon ?? 0} ongkosKirim={getDataPenjualan?.ongkos_kirim ?? 0} jenis={getDataPenjualan?.jenis_jual?.toLowerCase()} kembalian={(+getDataPenjualan?.total_harga - +getDataPenjualan?.total_bayar) ?? 0} tanggal={getDataPenjualan?.tanggal} totalJual={getDataPenjualan?.total_jual ?? 0} />
+            <PrintoutPenjualan 
+            alamat={getDataPenjualan?.alamat}
+            bayar={getDataPenjualan?.total_harga ?? 0} 
+            data={getDataDetailPenjualan} 
+            diskon={getDataPenjualan?.diskon ?? 0} 
+            kode={getDataPenjualan?.kode} 
+            kode_customer={getDataPenjualan?.kode_customer} 
+            nama_customer={getDataPenjualan?.nama_customer} 
+            kode_consignee={getDataPenjualan?.value} 
+            nama_consignee={getDataPenjualan?.value} 
+            ongkosKirim={getDataPenjualan?.ongkos_kirim ?? 0} 
+            jenis={getDataPenjualan?.jenis_jual?.toLowerCase()} 
+            kembalian={(+getDataPenjualan?.total_harga - +getDataPenjualan?.total_bayar) ?? 0} 
+            tanggal={getDataPenjualan?.tanggal} 
+            totalJual={getDataPenjualan?.total_jual ?? 0} />
 
             <div className={style.header}>
                 <p className={style.title}>Laporan Transaksi Penjualan</p>

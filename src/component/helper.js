@@ -112,10 +112,10 @@ const SetPriceFormat = (harga = 0) => {
     ribuan = ribuan.join(',').split('').reverse().join('');
 
     if (harga < 0) {
-        if (price.length > 1) return `-Rp. ${ribuan}.${price[1]}`;
+        if (price.length > 1) return `-Rp. ${ribuan}.${price[1].substring(0, 2)}`;
         else return `-Rp. ${ribuan}`;
     } else {
-        if (price.length > 1) return `Rp. ${ribuan}.${price[1]}`;
+        if (price.length > 1) return `Rp. ${ribuan}.${price[1].substring(0, 2)}`;
         else return 'Rp. ' + ribuan;
     }
 }
