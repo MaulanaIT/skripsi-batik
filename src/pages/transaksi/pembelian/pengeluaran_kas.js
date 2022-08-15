@@ -249,7 +249,8 @@ export default function Pengeluaran_kas() {
         formData.append('total_bayar', getValueTotalBayar)
         formData.append('kode_akun', getValueSelectedAkun.value);
 
-        axios.post(`${baseURL}/api/transaksi/pembelian/pengeluaran-kas/insert.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/transaksi/pembelian/pengeluaran-kas/insert.php`, formData, config).then(response => {
+            console.log(response);
             const formDetailData = new FormData();
 
             formDetailData.append('data', JSON.stringify(getDataDetailPembelian));

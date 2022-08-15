@@ -9,7 +9,10 @@ import { CSVLink } from 'react-csv';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { baseURL, config, cx, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
-import { AiFillPrinter } from 'react-icons/ai';
+import { FaPrint } from 'react-icons/fa';
+
+// Import Component
+import PrintoutPenjualan from '../../transaksi/penjualan/printout_penjualan';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -60,30 +63,33 @@ export default function Transaksi_penjualan() {
 
     const [getDataExport, setDataExport] = useState([]);
 
+    const [getDataPenjualan, setDataPenjualan] = useStateWithCallbackLazy([]);
+    const [getDataDetailPenjualan, setDataDetailPenjualan] = useStateWithCallbackLazy([]);
+
     const [getHTMLTableDaftarLaporan, setHTMLTableDaftarLaporan] = useStateWithCallbackLazy([]);
 
     const [getValueJenis, setValueJenis] = useState([]);
     const [getValueTanggalAwal, setValueTanggalAwal] = useState(moment().format('YYYY-MM-DD'));
-    const [getValueTanggalAkhir, setValueTanggalAkhir] = useState(moment().format('YYYY-MM-DD'));
+    const [getValueTanggalAkhir, setValueTanggalAkhir] = useState(moment().add(1, 'days').format('YYYY-MM-DD'));
 
     useEffect(() => {
         $('#table-data').DataTable();
     }, []);
 
     const GetLaporan = () => {
-        ShowLoading();
-
         if (getValueJenis.length <= 0) {
             alert('Pilih jenis penjualan');
             return;
         }
+
+        ShowLoading();
 
         const formData = new FormData();
 
         formData.append('jenis_penjualan', getValueJenis.value.toLowerCase());
         formData.append('tanggal_awal', getValueTanggalAwal);
         formData.append('tanggal_akhir', getValueTanggalAkhir);
-        
+
         axios.post(`${baseURL}/api/laporan/penjualan/transaksi/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
@@ -115,12 +121,12 @@ export default function Transaksi_penjualan() {
                 'Harga',
                 'Total Harga'
             ]);
-            
+
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
                     htmlTableDaftarLaporan.push(
                         <tr key={index} className={'align-middle'}>
-                            <td className='text-center'>{index+1}.</td>
+                            <td className='text-center'>{index + 1}.</td>
                             <td>{item.kode}</td>
                             <td>{item.jenis_jual}</td>
                             <td>{item.tanggal}</td>
@@ -131,7 +137,9 @@ export default function Transaksi_penjualan() {
                             <td>{SetNumberFormat(item.jumlah)}</td>
                             <td>{SetPriceFormat(item.harga)}</td>
                             <td>{SetPriceFormat(item.total_harga)}</td>
-                            {/* <td></td> */}
+                            <td className={global.table_action} style={{ display: 'table-cell' }}>
+                                <button type='button' id='button-print' className={global.apply} onClick={() => PrintNota(item)}><FaPrint /> Print</button>
+                            </td>
                         </tr>
                     );
 
@@ -167,8 +175,31 @@ export default function Transaksi_penjualan() {
         });
     }
 
+    const PrintNota = (item) => {
+        setDataPenjualan(item, () => {
+            const formData = new FormData();
+
+            formData.append('kode', item.kode);
+
+            axios.post(`${baseURL}/api/laporan/penjualan/transaksi/select-detail.php`, formData, config).then(response => {
+                let data = response.data.data;
+                setDataDetailPenjualan(data, () => {
+                    window.print();
+                    setDataPenjualan([]);
+                    setDataDetailPenjualan([]);
+                });
+            }).catch(error => {
+                console.log(error);
+                setDataPenjualan([]);
+                setDataDetailPenjualan([]);
+            });
+        });
+    }
+
     return (
         <React.Fragment>
+            <PrintoutPenjualan bayar={getDataPenjualan?.total_harga ?? 0} data={getDataDetailPenjualan} diskon={getDataPenjualan?.diskon ?? 0} ongkosKirim={getDataPenjualan?.ongkos_kirim ?? 0} jenis={getDataPenjualan?.jenis_jual?.toLowerCase()} kembalian={(+getDataPenjualan?.total_harga - +getDataPenjualan?.total_bayar) ?? 0} tanggal={getDataPenjualan?.tanggal} totalJual={getDataPenjualan?.total_jual ?? 0} />
+
             <div className={style.header}>
                 <p className={style.title}>Laporan Transaksi Penjualan</p>
                 <p className={style.pathname}>Laporan / Laporan Penjualan / Transaksi Penjualan </p>
@@ -233,7 +264,7 @@ export default function Transaksi_penjualan() {
                                         <th>Jumlah</th>
                                         <th>Harga</th>
                                         <th>Total Jual</th>
-                                        {/* <th>Nota</th> */}
+                                        <th>Nota</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -31,7 +31,7 @@ export default function Printout_refund({ data }) {
                         Nama Supplier : {data.nama_supplier} <br />
                         Alamat Supplier : {data.alamat_supplier}
                     </p>
-                    <p>Tanggal : {data.tanggal}</p>
+                    <p>Tanggal : {data.tanggal} <br /> Kode Order: {data.kode_order}</p>
                 </div>
                 <p>Telah diterima Pengembalian Dana atas transaksi Retur Pembelian senilai {SetPriceFormat(data.total_harga)}</p>
                 <div className={style.signature}>

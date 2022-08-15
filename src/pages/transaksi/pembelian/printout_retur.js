@@ -27,7 +27,7 @@ export default function Printout_retur({ data, dataDetail }) {
                 <p className={style.title}>NOTA RETUR PEMBELIAN</p>
                 <div className={style.date}>
                     <p>Kepada Yth. {data.nama_supplier} <br />{data.alamat_supplier}</p>
-                    <p>Tanggal : {data.tanggal}</p>
+                    <p>Tanggal : {data.tanggal} <br /> Kode Order: {data.kode_order} </p>
                 </div>
                 <p>Dikarenakan Barang yang kami terima dalam jangka waktu kesepakatan mengalami cacat/kerusakan. Kami bermaksud mengembalikan Barang tersebut.</p>
                 <table className={cx([style.table, 'table', 'table-bordered', 'w-100'])}>
