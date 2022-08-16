@@ -1611,9 +1611,9 @@ export class transaksi_penjualan extends Component {
                 diskon={valueDiskon} 
                 kode={valueKodeJual} 
                 kode_customer={valueKodeCustomer?.value} 
-                nama_customer={valueNamaCustomer?.value} 
+                nama_customer={valueNamaCustomer?.label} 
                 kode_consignee={valueKodeConsignee?.value} 
-                nama_consignee={valueNamaConsignee?.value} 
+                nama_consignee={valueNamaConsignee?.label} 
                 ongkosKirim={valueOngkosKirim} 
                 jenis={valueJenisPenjualan?.value?.toLowerCase()} 
                 kembalian={Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim])} 
