@@ -120,7 +120,7 @@ export default function Detail_order(props) {
                                         <input type="text" id={`edit-total-kapasitas-${item.id}`} className={`edit-${item.id} d-none`} maxLength={50} defaultValue={item.total_kapasitas} required={true} />
                                     </div>
                                 </td>
-                                {+props.status <= 2 &&
+                                {(+props.status === 0 && +props.status === 2) &&
                                     <td>
                                         <div className={global.table_action}>
                                             <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
@@ -151,7 +151,7 @@ export default function Detail_order(props) {
                                     </div>
                                 </td>
                                 <td>{item.total_harga}</td>
-                                {+props.status <= 2 &&
+                                {(+props.status === 0 && +props.status === 2) &&
                                     <td>
                                         <div className={global.table_action}>
                                             <button type='button' id='button-apply' className={cx([global.apply, `d-none edit-${item.id}`])} onClick={() => ApplyItem(item.id)}><FaCheck /> Apply</button>
