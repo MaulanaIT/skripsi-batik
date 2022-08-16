@@ -59,7 +59,6 @@ const CustomSelect = {
 export default function Pengeluaran_kas() {
     const [getDataAkun, setDataAkun] = useState([]);
     const [getDataDetailPembelian, setDataDetailPembelian] = useState([]);
-    const [getDataPembelian, setDataPembelian] = useState([]);
     const [getDataSelectAkun, setDataSelectAkun] = useState([]);
     const [getHTMLDetailOrder, setHTMLDetailOrder] = useState([]);
     const [getValueDiskon, setValueDiskon] = useState(0);
@@ -84,8 +83,8 @@ export default function Pengeluaran_kas() {
     }, []);
 
     useEffect(() => {
-        if (getValueKodeOrder) GetDetailOrder();
-    }, [getValueKodeOrder]);
+        if (getValueKodeOrder !== '' && getValueKodePengeluaranKas !== '') GetDetailOrder();
+    }, [getValueKodeOrder, getValueKodePengeluaranKas]);
 
     useEffect(() => {
         setValueTotalBayar(Calculate([getValueTotalPembelian, -getValueDiskon, getValueOngkosKirim]));
@@ -250,7 +249,6 @@ export default function Pengeluaran_kas() {
         formData.append('kode_akun', getValueSelectedAkun.value);
 
         axios.post(`${baseURL}/api/transaksi/pembelian/pengeluaran-kas/insert.php`, formData, config).then(response => {
-            console.log(response);
             const formDetailData = new FormData();
 
             formDetailData.append('data', JSON.stringify(getDataDetailPembelian));
