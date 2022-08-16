@@ -207,8 +207,8 @@ export default function Transaksi_penjualan() {
             kode={getDataPenjualan?.kode} 
             kode_customer={getDataPenjualan?.kode_customer} 
             nama_customer={getDataPenjualan?.nama_customer} 
-            kode_consignee={getDataPenjualan?.value} 
-            nama_consignee={getDataPenjualan?.value} 
+            kode_consignee={getDataPenjualan?.kode_consignee} 
+            nama_consignee={getDataPenjualan?.nama_consignee} 
             ongkosKirim={getDataPenjualan?.ongkos_kirim ?? 0} 
             jenis={getDataPenjualan?.jenis_jual?.toLowerCase()} 
             kembalian={(+getDataPenjualan?.total_harga - +getDataPenjualan?.total_bayar) ?? 0} 
