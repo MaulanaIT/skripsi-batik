@@ -21,12 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $resultMaster = $conn->query($query);
 
-        $query = "SELECT DATE_FORMAT(a.tanggal, '%Y-%m-%d') AS tanggal, '' AS keterangan, SUM(a.unit_masuk) AS unit_masuk, SUM(a.kapasitas_masuk) AS kapasitas_masuk, SUM(a.unit_keluar) AS unit_keluar, SUM(a.kapasitas_keluar) AS kapasitas_keluar, SUM(unit_masuk - unit_keluar) AS unit_saldo, SUM(kapasitas_masuk - kapasitas_keluar) AS kapasitas_saldo FROM 
-        (SELECT b.tanggal, a.jumlah AS unit_masuk, a.total_kapasitas AS kapasitas_masuk, 0 AS unit_keluar, 0 AS kapasitas_keluar, 0 AS unit_saldo, 0 AS kapasitas_saldo FROM detail_order_pembelian a INNER JOIN order_pembelian b ON a.kode = b.kode WHERE a.kode_item = '".$kode_item."'
+        $query = "SELECT DATE_FORMAT(a.tanggal, '%Y-%m-%d') AS tanggal, a.keterangan, SUM(a.unit_masuk) AS unit_masuk, SUM(a.kapasitas_masuk) AS kapasitas_masuk, SUM(a.unit_keluar) AS unit_keluar, SUM(a.kapasitas_keluar) AS kapasitas_keluar, SUM(unit_masuk - unit_keluar) AS unit_saldo, SUM(kapasitas_masuk - kapasitas_keluar) AS kapasitas_saldo FROM 
+        (SELECT b.tanggal, 'Order Pembelian Alat' AS keterangan, a.jumlah AS unit_masuk, a.total_kapasitas AS kapasitas_masuk, 0 AS unit_keluar, 0 AS kapasitas_keluar, 0 AS unit_saldo, 0 AS kapasitas_saldo FROM detail_order_pembelian a INNER JOIN order_pembelian b ON a.kode = b.kode WHERE a.kode_item = '".$kode_item."'
         UNION ALL
-        SELECT updated_at AS tanggal, 0 AS unit_masuk, 0 AS kapasitas_masuk, jumlah AS unit_keluar, total_kapasitas AS kapasitas_keluar, 0 AS unit_saldo, 0 AS kapasitas_saldo from detail_retur WHERE kode_item = '".$kode_item."'
+        SELECT updated_at AS tanggal, 'Retur Pembelian Alat' AS keterangan, 0 AS unit_masuk, 0 AS kapasitas_masuk, jumlah AS unit_keluar, total_kapasitas AS kapasitas_keluar, 0 AS unit_saldo, 0 AS kapasitas_saldo from detail_retur WHERE kode_item = '".$kode_item."'
         UNION ALL
-        SELECT updated_at AS tanggal, 0 AS unit_masuk, 0 AS kapasitas_masuk, jumlah AS unit_keluar, jumlah AS kapasitas_keluar, 0 AS unit_saldo, 0 AS kapasitas_saldo from hpp_detail_alat WHERE kode_alat = '".$kode_item."') a GROUP BY tanggal";
+        SELECT updated_at AS tanggal, 'Produksi Pembelian Alat' AS keterangan, 0 AS unit_masuk, 0 AS kapasitas_masuk, jumlah AS unit_keluar, jumlah AS kapasitas_keluar, 0 AS unit_saldo, 0 AS kapasitas_saldo from hpp_detail_alat WHERE kode_alat = '".$kode_item."') a GROUP BY tanggal";
     // }
 
     $result = $conn->query($query);
