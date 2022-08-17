@@ -234,6 +234,7 @@ export default function Tenaga_kerja() {
                             { value: 'Designer', label: 'Designer' },
                             { value: 'Cap/Canting', label: 'Cap/Canting' },
                             { value: 'Pewarnaan', label: 'Pewarnaan' },
+                            { value: 'Jahit', label: 'Jahit'},
                             { value: 'Packing', label: 'Packing' }
                         ]} placeholder={'Pilih Departemen...'} value={getValueDepartemen} styles={CustomSelect} onChange={e => setValueDepartemen(e)} required={true} />
                     </div>

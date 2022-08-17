@@ -249,6 +249,7 @@ export class user extends Component {
                                 { value: 'Designer', label: 'Designer' },
                                 { value: 'Cap/Canting', label: 'Cap/Canting' },
                                 { value: 'Pewarnaan', label: 'Pewarnaan' },
+                                { value: 'Jahit', label: 'Jahit' },
                                 { value: 'Packing', label: 'Packing' }
                             ]} placeholder={'Select Jabatan...'} styles={CustomSelect} value={valueJabatan} onChange={(data) => this.SelectJabatan(data)} />
                         </div>
