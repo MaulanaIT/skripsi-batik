@@ -76,7 +76,7 @@ export default function Hpp() {
 
     const [getValueJumlah, setValueJumlah] = useState(0);
     const [getValueKodeHPP, setValueKodeHPP] = useState('');
-    const [getValueKodeProduksi, setValueKodeProduksi] = useState(null);
+    const [getValueKodeProduksi, setValueKodeProduksi] = useStateWithCallbackLazy([]);
     const [getValueKodeCustomer, setValueKodeCustomer] = useState('');
     const [getValueNamaCustomer, setValueNamaCustomer] = useState('');
     const [getValueKodePesanan, setValueKodePesanan] = useState('');
@@ -258,6 +258,10 @@ export default function Hpp() {
         let kode = e?.value;
         let dataSelected = [];
 
+        $(`#table-data-bahan-baku`).DataTable().destroy();
+        $(`#table-data-tenaga-kerja`).DataTable().destroy();
+        $(`#table-data-overhead`).DataTable().destroy();
+
         if (kode?.includes('PS')) {
             dataSelected = getDataStok.find(item => item.kode === kode);
 
@@ -280,7 +284,11 @@ export default function Hpp() {
             setValueKodePermintaan(dataSelected.kode_permintaan);
         }
 
-        setValueKodeProduksi(e);
+        setValueKodeProduksi(e, () => {
+            $(`#table-data-bahan-baku`).DataTable();
+            $(`#table-data-tenaga-kerja`).DataTable();
+            $(`#table-data-overhead`).DataTable();
+        });
     }
 
     const SelectAddHPP = () => {
@@ -291,6 +299,10 @@ export default function Hpp() {
         let htmlTableDaftarDetailBahanBaku = [];
         let htmlTableDaftarDetailOverhead = [];
         let htmlTableDaftarDetailTenagaKerja = [];
+
+        $(`#table-data-bahan-baku`).DataTable().destroy();
+        $(`#table-data-tenaga-kerja`).DataTable().destroy();
+        $(`#table-data-overhead`).DataTable().destroy();
 
         if (BahanBaku && BahanBaku.length > 0) {
             BahanBaku.forEach((item, index) => {
