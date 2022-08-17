@@ -11,9 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $query = "SELECT pengeluaran_kas.*, master_supplier.nama AS nama_supplier FROM pengeluaran_kas 
-                INNER JOIN detail_pengeluaran_kas ON pengeluaran_kas.kode = detail_pengeluaran_kas.kode 
                 INNER JOIN master_supplier ON pengeluaran_kas.kode_supplier = master_supplier.kode
-                WHERE (detail_pengeluaran_kas.kode_item LIKE ".$kode.") 
+                WHERE pengeluaran_kas.kode IN 
+                (SELECT kode FROM detail_pengeluaran_kas 
+                WHERE detail_pengeluaran_kas.kode_item 
+                LIKE ".$kode.") 
                 AND pengeluaran_kas.kode NOT IN 
                 (SELECT kode_kas_keluar FROM retur_pembelian)";
 
@@ -42,4 +44,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $conn->close();
-?>
