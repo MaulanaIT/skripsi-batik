@@ -564,35 +564,7 @@ export default function Sidebar(props) {
                         </li>
                     </React.Fragment>
                 }
-                {props.jabatan.toLowerCase() === 'designer' &&
-                    <React.Fragment>
-                        <li>
-                            <Link to={'/dashboard'}>
-                                <MdDashboard />
-                                <span>Dashboard</span>
-                            </Link>
-                        </li>
-                        <li className={style.dropdown}>
-                            <div>
-                                <MdStackedBarChart />
-                                <span>Transaksi</span>
-                                <MdExpandMore className={style.toggle} />
-                            </div>
-                            <ul className={style.dropdown_menu}>
-                                <li className={style.dropdown}>
-                                    <div>
-                                        <span>Produksi</span>
-                                        <MdExpandMore className={style.toggle} />
-                                    </div>
-                                    <ul className={style.dropdown_menu}>
-                                        <li><Link to={'/transaksi/produksi/daftar-hpp'}><span>Daftar Proses Produksi</span></Link></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </React.Fragment>
-                }
-                {(props.jabatan.toLowerCase() === 'cap/canting' || props.jabatan.toLowerCase() === 'pewarnaan' || props.jabatan.toLowerCase() === 'packing') &&
+                {['cap/canting', 'pewarnaan', 'packing', 'designer', 'jahit'].some(item => item = props.jabatan.toLowerCase()) &&
                     <React.Fragment>
                         <li>
                             <Link to={'/dashboard'}>

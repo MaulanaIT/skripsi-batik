@@ -7,6 +7,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { FaBars, FaBell, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import { baseURL, config, cx, GenerateCode, HideLoading, ShowLoading } from './helper';
 
+// Import Component
+import DetailPesanan from '../pages/transaksi/produksi/detail_pesanan';
+
 // Import Assets
 import Logo from '../assets/images/logo.jpg';
 
@@ -22,6 +25,7 @@ export default function Header(props) {
     const [getDataNotification, setDataNotification] = useState([]);
 
     const [getValueKodePesanan, setValueKodePesanan] = useState([]);
+    const [getDataKodePesanan, setDataKodePesanan] = useState([]);
 
     const location = useLocation();
 
@@ -98,6 +102,12 @@ export default function Header(props) {
         })
     }
 
+    const OpenDetailPesanan = (kode) => {
+        setActiveNotification(false);
+        setDataKodePesanan(kode);
+        document.getElementById('detail-pesanan').classList.remove('d-none');
+    }
+
     const ToggleAccount = (event) => {
         event.currentTarget.querySelector(`ul.${style.dropdown_menu}`).classList.toggle(style.active);
     }
@@ -107,51 +117,55 @@ export default function Header(props) {
     }
 
     return (
-        <nav className={style.container}>
-            <div className={style.logo}>
-                <FaBars className={style.toggle} onClick={ToggleSidebar} />
-                <img src={Logo} alt="" />
-                <p className={style.title}>LEKSANA BATIK JAYA</p>
-            </div>
-            <div className={style.menu}>
-                <div className={style.notification}>
-                    <div className={style.toggle} onClick={() => setActiveNotification((prevState) => !prevState)} notifikasi={getDataNotification.length}>
-                        <FaBell />
-                    </div>
-                    <div className={cx([style.dropdown_menu, getActiveNotification && style.active])}>
-                        {getDataNotification && getDataNotification.length > 0 ?
-                            getDataNotification.map((item, index) =>
-                                item.kode.includes('PESAN') ?
-                                    <div key={index} className={cx([style.item, style.pesanan])}>
-                                        <p className={style.description}>Transaksi pesanan produk telah masuk dengan nomor kode <span className={style.green}>{item.kode}</span></p>
-                                        <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => InsertPermintaanPesanan(item)}>Terima</button>
-                                    </div>
-                                    :
-                                    item.kode.includes('PPS') ?
-                                        <div key={index} className={style.item}>
-                                            <p className={style.description}>Permintaan Stok dengan kode <span className={style.green}>{item.kode}</span> untuk produk dengan kode <span className={style.green}>{item.nama}</span> telah di setujui oleh Owner.</p>
+        <React.Fragment>
+            <DetailPesanan kode={getDataKodePesanan} />
+            <nav className={style.container}>
+                <div className={style.logo}>
+                    <FaBars className={style.toggle} onClick={ToggleSidebar} />
+                    <img src={Logo} alt="" />
+                    <p className={style.title}>LEKSANA BATIK JAYA</p>
+                </div>
+                <div className={style.menu}>
+                    <div className={style.notification}>
+                        <div className={style.toggle} onClick={() => setActiveNotification((prevState) => !prevState)} notifikasi={getDataNotification.length}>
+                            <FaBell />
+                        </div>
+                        <div className={cx([style.dropdown_menu, getActiveNotification && style.active])}>
+                            {getDataNotification && getDataNotification.length > 0 ?
+                                getDataNotification.map((item, index) =>
+                                    item.kode.includes('PESAN') ?
+                                        <div key={index} className={cx([style.item, style.pesanan])}>
+                                            <p className={style.description}>Transaksi pesanan produk telah masuk dengan nomor kode <span className={style.green}>{item.kode}</span></p>
+                                            <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => InsertPermintaanPesanan(item)}>Terima</button>
+                                            <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={() => OpenDetailPesanan(item.kode)}>Lihat</button>
                                         </div>
                                         :
-                                        <div key={index} className={style.item}>
-                                            <p className={style.description}>Stok barang <span className={style.green}>{item.kode} - {item.nama}</span> menipis.</p>
-                                        </div>
-                            )
-                            :
-                            <div className={cx([style.item, style.empty])}>
-                                <p className={style.description}>Tidak ada notifikasi</p>
-                            </div>
-                        }
+                                        item.kode.includes('PPS') ?
+                                            <div key={index} className={style.item}>
+                                                <p className={style.description}>Permintaan Stok dengan kode <span className={style.green}>{item.kode}</span> untuk produk dengan kode <span className={style.green}>{item.nama}</span> telah di setujui oleh Owner.</p>
+                                            </div>
+                                            :
+                                            <div key={index} className={style.item}>
+                                                <p className={style.description}>Stok barang <span className={style.green}>{item.kode} - {item.nama}</span> menipis.</p>
+                                            </div>
+                                )
+                                :
+                                <div className={cx([style.item, style.empty])}>
+                                    <p className={style.description}>Tidak ada notifikasi</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div className={style.account} onClick={ToggleAccount}>
+                        <p className={style.title}>{props.jabatan.toUpperCase()}</p>
+                        <MdAccountCircle className={style.icon} />
+                        <ul className={style.dropdown_menu}>
+                            <li><div><FaCog /> SETTING</div></li>
+                            <li><Link to={'/login'} onClick={Logout}><FaSignOutAlt /> LOGOUT</Link></li>
+                        </ul>
                     </div>
                 </div>
-                <div className={style.account} onClick={ToggleAccount}>
-                    <p className={style.title}>{props.jabatan.toUpperCase()}</p>
-                    <MdAccountCircle className={style.icon} />
-                    <ul className={style.dropdown_menu}>
-                        <li><div><FaCog /> SETTING</div></li>
-                        <li><Link to={'/login'} onClick={Logout}><FaSignOutAlt /> LOGOUT</Link></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+            </nav>
+        </React.Fragment>
     )
 }
