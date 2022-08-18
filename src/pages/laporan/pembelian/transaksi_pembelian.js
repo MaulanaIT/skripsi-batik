@@ -10,6 +10,10 @@ import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { baseURL, config, cx, HideLoading, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { TiExport } from 'react-icons/ti';
 import { AiFillPrinter } from 'react-icons/ai';
+import { FaFile } from 'react-icons/fa';
+
+// Import Component
+import PrintoutOrder from '../../transaksi/pembelian/printout_order';
 
 // Import CSS
 import global from '../../../css/global.module.css';
@@ -61,6 +65,9 @@ export default function Transaksi_pembelian() {
 
     const [getDataExport, setDataExport] = useState([]);
 
+    const [getDataOrder, setDataOrder] = useStateWithCallbackLazy([]);
+    const [getDataDetailOrder, setDataDetailOrder] = useStateWithCallbackLazy([]);
+
     const [getHTMLTableDaftarLaporan, setHTMLTableDaftarLaporan] = useStateWithCallbackLazy([]);
 
     const [getValueJenis, setValueJenis] = useState([]);
@@ -82,6 +89,8 @@ export default function Transaksi_pembelian() {
 
         axios.post(`${baseURL}/api/laporan/pembelian/transaksi/select.php`, formData, config).then(response => {
             let data = response.data.data;
+
+            console.log(data);
 
             let htmlTableDaftarLaporan = [];
             let dataExport = [];
@@ -130,7 +139,9 @@ export default function Transaksi_pembelian() {
                             <td>{SetNumberFormat(item.jumlah)}</td>
                             <td>{SetPriceFormat(item.harga)}</td>
                             <td>{SetPriceFormat(item.total_harga)}</td>
-                            {/* <td></td> */}
+                            <td className={global.table_action} style={{ display: 'table-cell' }}>
+                                <button type='button' id='button-print' className={global.apply} onClick={() => OpenFile(item.file)}><FaFile /> Open</button>
+                            </td>
                         </tr>
                     );
 
@@ -165,6 +176,10 @@ export default function Transaksi_pembelian() {
 
             HideLoading();
         });
+    }
+
+    const OpenFile = (url) => {
+        window.open(`${baseURL}/upload/File Transfer/${url}`, '_blank', 'noreferrer');
     }
 
     return (
@@ -233,7 +248,7 @@ export default function Transaksi_pembelian() {
                                         <th>Jumlah</th>
                                         <th>Harga</th>
                                         <th>Total Pembelian</th>
-                                        {/* <th>Nota</th> */}
+                                        <th>File</th>
                                     </tr>
                                 </thead>
                                 <tbody>
