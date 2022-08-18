@@ -191,7 +191,7 @@ export default function Kartu_persediaan_bb() {
                         <td>{SetPriceFormat(master.harga_keluar)}</td>
                         <td>{SetPriceFormat(master.jumlah_keluar)}</td>
                         <td>{SetNumberFormat(master.unit_saldo)}</td>
-                        <td>{SetPriceFormat(master.harga_saldo ?? 0)}</td>
+                        <td>{SetPriceFormat(isNaN(master.harga_saldo) ? 0 : master.harga_saldo)}</td>
                         <td>{SetPriceFormat(Math.ceil(master.jumlah_saldo))}</td>
                     </tr>
                 );
@@ -206,14 +206,14 @@ export default function Kartu_persediaan_bb() {
                     SetPriceFormat(master.harga_keluar),
                     SetPriceFormat(master.jumlah_keluar),
                     SetNumberFormat(master.unit_saldo),
-                    SetPriceFormat(master.harga_saldo),
+                    SetPriceFormat(isNaN(master.harga_saldo) ? 0 : master.harga_saldo),
                     SetPriceFormat(master.jumlah_saldo)
                 ]);
             }
 
             let currentUnitSaldo = master.unit_saldo;
             let currentJumlahSaldo = master.jumlah_saldo;
-            let currentHargaSaldo = master.harga_saldo;
+            let currentHargaSaldo = isNaN(master.harga_saldo) ? 0 : master.harga_saldo;
 
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
@@ -232,7 +232,7 @@ export default function Kartu_persediaan_bb() {
                             <td>{SetPriceFormat(item.harga_keluar)}</td>
                             <td>{SetPriceFormat(item.jumlah_keluar)}</td>
                             <td>{SetNumberFormat(currentUnitSaldo)}</td>
-                            <td>{SetPriceFormat(currentHargaSaldo)}</td>
+                            <td>{SetPriceFormat(isNaN(currentHargaSaldo) ? 0 : currentHargaSaldo)}</td>
                             <td>{SetPriceFormat(currentJumlahSaldo)}</td>
                         </tr>
                     );
@@ -247,7 +247,7 @@ export default function Kartu_persediaan_bb() {
                         SetPriceFormat(item.harga_keluar),
                         SetPriceFormat(item.jumlah_keluar),
                         SetNumberFormat(item.currentUnitSaldo),
-                        SetPriceFormat(item.currentHargaSaldo),
+                        SetPriceFormat(isNaN(item.currentHargaSaldo) ? 0 : item.currentHargaSaldo),
                         SetPriceFormat(item.currentJumlahSaldo)
                     ]);
                 });
