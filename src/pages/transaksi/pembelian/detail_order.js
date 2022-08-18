@@ -259,7 +259,7 @@ export default function Detail_order(props) {
                                     {props.status === 2 ?
                                         <Link to={'/transaksi/pembelian/penerimaan-barang'} className={`${global.button}`} state={{ kode: props.kode }} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Terima Barang</Link>
                                         :
-                                        <button type='button' className={`${global.button} w-100`} onClick={() => UpdateStatus(3)} disabled={true} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Terima Barang</button>
+                                        <button type='button' className={`${global.button} w-100`}disabled={true} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }}>Terima Barang</button>
                                     }
                                 </div>
                             </React.Fragment>

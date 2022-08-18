@@ -22,9 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $resultMaster = $conn->query($query);
 
         $query = "SELECT DATE_FORMAT(a.tanggal, '%Y-%m-%d') AS tanggal, a.keterangan, a.unit_masuk AS unit_masuk, a.harga_masuk AS harga_masuk, unit_masuk * harga_masuk AS jumlah_masuk, a.unit_keluar AS unit_keluar, a.harga_keluar AS harga_keluar, unit_keluar * harga_keluar AS jumlah_keluar, unit_masuk - unit_keluar AS unit_saldo, CAST((unit_masuk * harga_masuk-unit_keluar * harga_keluar)/(unit_masuk - unit_keluar) AS DECIMAL(10,2)) AS harga_saldo, unit_masuk * harga_masuk-unit_keluar * harga_keluar AS jumlah_saldo FROM 
-        (SELECT b.tanggal, 'Order Pembelian Bahan Baku' AS keterangan, a.jumlah AS unit_masuk, a.harga AS harga_masuk, 0 AS unit_keluar, 0 AS harga_keluar, 0 AS unit_saldo, 0 AS harga_saldo FROM detail_order_pembelian a INNER JOIN order_pembelian b ON a.kode = b.kode WHERE a.kode_item = '".$kode_item."'
+        (SELECT b.tanggal, 'Order Pembelian Bahan Baku' AS keterangan, a.jumlah AS unit_masuk, a.harga AS harga_masuk, 0 AS unit_keluar, 0 AS harga_keluar, 0 AS unit_saldo, 0 AS harga_saldo FROM detail_order_pembelian a INNER JOIN order_pembelian b ON a.kode = b.kode WHERE a.kode_item = '".$kode_item."' AND b.status = 3
         UNION ALL
-        SELECT updated_at AS tanggal, 'Retur Pembelian Bahan Baku' AS keterangan, 0 AS unit_masuk, 0 AS harga_masuk, jumlah AS unit_keluar, harga AS harga_keluar, 0 AS unit_saldo, 0 AS harga_saldo from detail_retur WHERE kode_item = '".$kode_item."'
+        SELECT a.updated_at AS tanggal, 'Retur Pembelian Bahan Baku' AS keterangan, 0 AS unit_masuk, 0 AS harga_masuk, a.jumlah AS unit_keluar, a.harga AS harga_keluar, 0 AS unit_saldo, 0 AS harga_saldo from detail_retur a INNER JOIN retur_pembelian b ON a.kode = b.kode WHERE a.kode_item = '".$kode_item."' AND b.status = 3
         UNION ALL
         SELECT updated_at AS tanggal, 'Produksi Bahan Baku' AS keterangan, 0 AS unit_masuk, 0 AS harga_masuk, jumlah AS unit_keluar, harga AS harga_keluar, 0 AS unit_saldo, 0 AS harga_saldo from hpp_detail_bahan_baku WHERE kode_bahan_baku = '".$kode_item."') a";
     // }

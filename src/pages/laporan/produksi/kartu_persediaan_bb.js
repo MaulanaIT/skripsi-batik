@@ -175,7 +175,7 @@ export default function Kartu_persediaan_bb() {
                 data.forEach(item => {
                     master.unit_saldo = +master.unit_saldo + +item.unit_keluar - +item.unit_masuk;
                     master.jumlah_saldo = +master.jumlah_saldo + +item.jumlah_keluar - +item.jumlah_masuk;
-                    master.harga_saldo = Math.ceil(+master.jumlah_saldo / +master.unit_saldo);
+                    master.harga_saldo = +master.unit_saldo === 0 ? 0 : Math.ceil(+master.jumlah_saldo / +master.unit_saldo);
                 });
             }
 
@@ -191,7 +191,7 @@ export default function Kartu_persediaan_bb() {
                         <td>{SetPriceFormat(master.harga_keluar)}</td>
                         <td>{SetPriceFormat(master.jumlah_keluar)}</td>
                         <td>{SetNumberFormat(master.unit_saldo)}</td>
-                        <td>{SetPriceFormat(isNaN(master.harga_saldo) ? 0 : master.harga_saldo)}</td>
+                        <td>{SetPriceFormat(master.harga_saldo)}</td>
                         <td>{SetPriceFormat(Math.ceil(master.jumlah_saldo))}</td>
                     </tr>
                 );
@@ -206,7 +206,7 @@ export default function Kartu_persediaan_bb() {
                     SetPriceFormat(master.harga_keluar),
                     SetPriceFormat(master.jumlah_keluar),
                     SetNumberFormat(master.unit_saldo),
-                    SetPriceFormat(isNaN(master.harga_saldo) ? 0 : master.harga_saldo),
+                    SetPriceFormat(master.harga_saldo),
                     SetPriceFormat(master.jumlah_saldo)
                 ]);
             }
@@ -219,7 +219,7 @@ export default function Kartu_persediaan_bb() {
                 data.forEach((item, index) => {
                     currentUnitSaldo = +currentUnitSaldo + +item.unit_masuk - +item.unit_keluar;
                     currentJumlahSaldo = +currentJumlahSaldo + +item.jumlah_masuk - +item.jumlah_keluar;
-                    currentHargaSaldo = Math.ceil(+currentJumlahSaldo / +currentUnitSaldo);
+                    currentHargaSaldo = +currentUnitSaldo === 0 ? 0 : Math.ceil(+currentJumlahSaldo / +currentUnitSaldo);
 
                     htmlTableDaftarBahanBaku.push(
                         <tr key={index}>
@@ -232,7 +232,7 @@ export default function Kartu_persediaan_bb() {
                             <td>{SetPriceFormat(item.harga_keluar)}</td>
                             <td>{SetPriceFormat(item.jumlah_keluar)}</td>
                             <td>{SetNumberFormat(currentUnitSaldo)}</td>
-                            <td>{SetPriceFormat(isNaN(currentHargaSaldo) ? 0 : currentHargaSaldo)}</td>
+                            <td>{SetPriceFormat(currentHargaSaldo)}</td>
                             <td>{SetPriceFormat(currentJumlahSaldo)}</td>
                         </tr>
                     );
@@ -247,7 +247,7 @@ export default function Kartu_persediaan_bb() {
                         SetPriceFormat(item.harga_keluar),
                         SetPriceFormat(item.jumlah_keluar),
                         SetNumberFormat(item.currentUnitSaldo),
-                        SetPriceFormat(isNaN(item.currentHargaSaldo) ? 0 : item.currentHargaSaldo),
+                        SetPriceFormat(item.currentHargaSaldo),
                         SetPriceFormat(item.currentJumlahSaldo)
                     ]);
                 });
