@@ -87,6 +87,7 @@ const Add_hpp = (props, ref) => {
     const [getValueDepartemen, setValueDepartemen] = useState('');
     const [getValueHarga, setValueHarga] = useState(0);
     const [getValueJumlah, setValueJumlah] = useState(0);
+    const [getValueMaxJumlah, setValueMaxJumlah] = useState(0);
     const [getValueKodeBiayaAlat, setValueKodeBiayaAlat] = useState('');
     const [getValueKodeBiayaBahanBaku, setValueKodeBiayaBahanBaku] = useState('');
     const [getValueKodeBiayaPenolong, setValueKodeBiayaPenolong] = useState('');
@@ -130,18 +131,21 @@ const Add_hpp = (props, ref) => {
     useEffect(() => {
         let dataSelected = getDataAlat?.find(item => item.kode === getValueKodeAlat?.value);
 
+        setValueMaxJumlah(dataSelected?.jumlah ?? 0);
         setValueHarga(dataSelected?.bop ?? 0);
     }, [getValueKodeAlat, getValueNamaAlat]);
 
     useEffect(() => {
         let dataSelected = getDataBahanBaku?.find(item => item.kode === getValueBahanBaku?.value);
 
+        setValueMaxJumlah(dataSelected?.jumlah ?? 0);
         setValueHarga(dataSelected?.harga ?? 0);
     }, [getValueBahanBaku]);
 
     useEffect(() => {
         let dataSelected = getDataPenolong?.find(item => item.kode === getValuePenolong?.value);
 
+        setValueMaxJumlah(dataSelected?.jumlah ?? 0);
         setValueHarga(dataSelected?.harga ?? 0);
     }, [getValuePenolong]);
 
@@ -154,6 +158,10 @@ const Add_hpp = (props, ref) => {
     useEffect(() => {
         if (props?.isUpdate) SaveDetail();
     }, [getDataDetailAlat, getDataDetailBahanBaku, getDataDetailPenolong, getDataDetailTenagaKerja]);
+
+    useEffect(() => {
+        if (+getValueJumlah > +getValueMaxJumlah) setValueJumlah(getValueMaxJumlah);
+    }, [getValueJumlah]);
 
     useImperativeHandle(ref, () => ({
         InsertDetailAlat, InsertDetailBahanBaku, InsertDetailPenolong, InsertDetailTenagaKerja

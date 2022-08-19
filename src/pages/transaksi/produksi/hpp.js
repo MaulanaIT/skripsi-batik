@@ -398,7 +398,8 @@ export default function Hpp() {
                     </div>
                     <div className='d-flex flex-wrap'>
                         <div className='col-12 col-md-4 pe-2'>
-                            {(getIsUpdateData || getValueKodeProduksi) &&
+                            {console.log(getValueKodeProduksi)}
+                            {(getIsUpdateData || getValueKodeProduksi?.value) &&
                                 <button type='button' className={global.button} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={SelectAddHPP}>Tambah Perhitungan HPP</button>
                             }
                         </div>

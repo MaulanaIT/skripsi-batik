@@ -46,7 +46,7 @@ export class daftar_retur extends Component {
             console.log(error);
         });
     }
-    
+
     GetDetail = () => {
         const formData = new FormData();
 
@@ -54,8 +54,8 @@ export class daftar_retur extends Component {
 
         axios.post(`${baseURL}/api/transaksi/pembelian/detail-retur/select.php`, formData, config).then(response => {
             let data = response.data.data;
-            
-            this.setState({dataDetailSelectedItem: data}, () => {
+
+            this.setState({ dataDetailSelectedItem: data }, () => {
                 window.print();
             });
         }).catch(error => {
@@ -152,7 +152,9 @@ export class daftar_retur extends Component {
                     <div className={`${global.card} col-12`}>
                         <div className={`${global.header}`}>
                             <p className={global.title}>Daftar Retur Pembelian</p>
-                            <Link to={'/transaksi/pembelian/retur-pembelian'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
+                            {(localStorage.getItem('leksana_jabatan').toLowerCase() === 'gudang, pembelian' || localStorage.getItem('leksana_jabatan').toLowerCase() === 'super admin') &&
+                                <Link to={'/transaksi/pembelian/retur-pembelian'} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><MdAdd /> Tambah</Link>
+                            }
                         </div>
                         <div className={`table-responsive`}>
                             <table id='table-data' className={`table w-100`}>
