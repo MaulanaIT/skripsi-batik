@@ -221,15 +221,15 @@ export default function Tenaga_kerja() {
                 <form id='form-data' className={global.card}>
                     <p className={global.title}>Tambah Tenaga Kerja</p>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-3`}>Kode Tenaga Kerja <span className={global.important}>*</span></p>
-                        <input type="text" className={global.input1} id='input-kode-tenaga-kerja' value={getValueKodeTenagaKerja} maxLength={10} readOnly={true} required={true} />
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Tenaga Kerja <span className={global.important}>*</span></p>
+                        <input type="text" className="col-12 col-md-8 col-lg-6" id='input-kode-tenaga-kerja' value={getValueKodeTenagaKerja} maxLength={10} readOnly={true} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-3`}>Nama Tenaga Kerja <span className={global.important}>*</span></p>
-                        <input type="text" className={global.input2} id='input-nama-tenaga-kerja' value={getValueNamaTenagaKerja} maxLength={50} onChange={e => setValueNamaTenagaKerja(e.target.value)} required={true} />
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Tenaga Kerja <span className={global.important}>*</span></p>
+                        <input type="text" className="col-12 col-md-8 col-lg-6" id='input-nama-tenaga-kerja' value={getValueNamaTenagaKerja} maxLength={50} onChange={e => setValueNamaTenagaKerja(e.target.value)} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-3`}>Departemen <span className={global.important}>*</span></p>
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Departemen <span className={global.important}>*</span></p>
                         <Select id='select-departemen-tenaga-kerja' name='select-departemen-tenaga-kerja' isClearable={true} isSearchable={true} options={[
                             { value: 'Designer', label: 'Designer' },
                             { value: 'Cap/Canting', label: 'Cap/Canting' },
@@ -239,12 +239,12 @@ export default function Tenaga_kerja() {
                         ]} placeholder={'Pilih Departemen...'} value={getValueDepartemen} styles={CustomSelect} onChange={e => setValueDepartemen(e)} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-3`}>No. Telp <span className={global.important}>*</span></p>
-                        <input type="text" className={global.input3} id='input-telepon-tenaga-kerja' value={getValueTelepon} maxLength={13} onInput={InputFormatNumber} onChange={e => setValueTelepon(e.target.value)} required={true} />
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>No. Telp <span className={global.important}>*</span></p>
+                        <input type="text" className="col-12 col-md-8 col-lg-6" id='input-telepon-tenaga-kerja' value={getValueTelepon} maxLength={13} onInput={InputFormatNumber} onChange={e => setValueTelepon(e.target.value)} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
-                        <p className={`${global.title} col-3`}>Upah <span className={global.important}>*</span></p>
-                        <input type="text" className={global.input3} id='input-upah-tenaga-kerja' value={getValueUpah} onInput={InputFormatNumber} onChange={e => setValueUpah(e.target.value)} required={true} />
+                        <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Upah <span className={global.important}>*</span></p>
+                        <input type="text" className="col-12 col-md-8 col-lg-6" id='input-upah-tenaga-kerja' value={getValueUpah} onInput={InputFormatNumber} onChange={e => setValueUpah(e.target.value)} required={true} />
                     </div>
                     <button type='button' className={global.button} onClick={InsertTenagaKerja}><MdAdd /> Simpan</button>
                 </form>

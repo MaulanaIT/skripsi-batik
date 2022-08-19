@@ -25,3 +25,14 @@
     font-weight: 500;
     margin: 0;
 }
+
+@media screen and (max-width: 791px) {
+    .header {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .header>.pathname {
+        margin-left: unset;
+    }
+}

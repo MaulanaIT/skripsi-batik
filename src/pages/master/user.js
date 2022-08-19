@@ -234,11 +234,11 @@ export class user extends Component {
                         <p className={global.title}>Tambah User</p>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Username <span className={global.important}>*</span></p>
-                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-username' name='input-username' required={true} />
+                            <input type="text" className="col-12 col-md-8 col-lg-6" id='input-username' name='input-username' required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Password <span className={global.important}>*</span></p>
-                            <input type="password" className="col12 col-md-8 col-lg-6" id='input-password' name='input-password' required={true} />
+                            <input type="password" className="col-12 col-md-8 col-lg-6" id='input-password' name='input-password' required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jabatan <span className={global.important}>*</span></p>

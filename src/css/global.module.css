@@ -109,6 +109,7 @@
 .input_group_row {
     align-items: center;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
 }
 

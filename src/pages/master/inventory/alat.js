@@ -67,31 +67,31 @@ export class alat extends Component {
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Alat <span className={global.important}>*</span></p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-alat' name='input-kode-alat' value={GenerateCode('ALAT', this.state.dataAlat)} maxLength={13} readOnly={true} required={true} />
+                            <input type="text" className="col-12 col-lg-2 col-md-3" id='input-kode-alat' name='input-kode-alat' value={GenerateCode('ALAT', this.state.dataAlat)} maxLength={13} readOnly={true} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Alat <span className={global.important}>*</span></p>
-                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-alat' name='input-nama-alat' maxLength={50} required={true} />
+                            <input type="text" className="col-12 col-md-8 col-lg-6" id='input-nama-alat' name='input-nama-alat' maxLength={50} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jumlah Unit <span className={global.important}>*</span></p>
-                            <input type="text" className="col col-lg-1 col-md-2" id='input-jumlah-alat' name='input-jumlah-alat' onInput={InputFormatNumber} required={true} />
+                            <input type="text" className="col-12 col-lg-1 col-md-2" id='input-jumlah-alat' name='input-jumlah-alat' onInput={InputFormatNumber} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Harga Perolehan <span className={global.important}>*</span></p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-harga-alat' name='input-harga-alat' onInput={InputFormatNumber} onChange={() => {
+                            <input type="text" className="col-12 col-lg-2 col-md-3" id='input-harga-alat' name='input-harga-alat' onInput={InputFormatNumber} onChange={() => {
                                 document.getElementById('input-tarif-bop').value = +GetValue('input-harga-alat') / +GetValue('input-kapasitas-alat')
                             }} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Total Kapasitas <span className={global.important}>*</span></p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-kapasitas-alat' name='input-kapasitas-alat' onInput={InputFormatNumber} onChange={() => {
+                            <input type="text" className="col-12 col-lg-2 col-md-3" id='input-kapasitas-alat' name='input-kapasitas-alat' onInput={InputFormatNumber} onChange={() => {
                                 document.getElementById('input-tarif-bop').value = +GetValue('input-harga-alat') / +GetValue('input-kapasitas-alat')
                             }} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Tarif BOP<span className={global.important}>*</span></p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-tarif-bop' name='input-tarif-bop' readOnly={true} required={true} />
+                            <input type="text" className="col-12 col-lg-2 col-md-3" id='input-tarif-bop' name='input-tarif-bop' readOnly={true} required={true} />
                         </div>
                         <button type='button' className={global.button} onClick={this.InsertAlat}><MdAdd /> Simpan</button>
                     </form>

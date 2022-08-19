@@ -203,11 +203,11 @@
 }
 
 @media screen and (max-width: 495px) {
-    .container {
-        justify-content: flex-end;
+    .container>.logo>img {
+        display: none;
     }
-
-    .container>.logo {
+    
+    .container>.logo>.title {
         display: none;
     }
 }

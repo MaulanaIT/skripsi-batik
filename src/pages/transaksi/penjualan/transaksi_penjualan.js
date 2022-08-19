@@ -15,7 +15,7 @@ import PrintoutPenjualan from './printout_penjualan';
 // Import CSS
 import bootstrap from '../../../css/bootstrap.module.css';
 import global from '../../../css/global.module.css';
-import style from '../../../css/transaksi/penerimaan_kas/uang_muka_pesanan.module.css';
+import style from '../../../css/transaksi/penjualan/transaksi_penjualan.module.css';
 
 const CustomSelect = {
     control: (provided, state) => ({
@@ -1604,20 +1604,20 @@ export class transaksi_penjualan extends Component {
 
         return (
             <React.Fragment>
-                <PrintoutPenjualan 
-                alamat={valueAlamat} 
-                bayar={valueTotalBayar} 
-                data={valueJenisPenjualan?.value?.toLowerCase() === 'tunai' ? this.state.dataTunai : valueJenisPenjualan?.value?.toLowerCase() === 'konsinyasi' && this.state.dataKonsinyasi} 
-                diskon={valueDiskon} 
-                kode={valueKodeJual} 
-                kode_customer={valueKodeCustomer?.value} 
-                nama_customer={valueNamaCustomer?.label} 
-                kode_consignee={valueKodeConsignee?.value} 
-                nama_consignee={valueNamaConsignee?.label} 
-                ongkosKirim={valueOngkosKirim} 
-                jenis={valueJenisPenjualan?.value?.toLowerCase()} 
-                kembalian={Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim])} 
-                tanggal={valueTanggal} totalJual={valueTotalJual} />
+                <PrintoutPenjualan
+                    alamat={valueAlamat}
+                    bayar={valueTotalBayar}
+                    data={valueJenisPenjualan?.value?.toLowerCase() === 'tunai' ? this.state.dataTunai : valueJenisPenjualan?.value?.toLowerCase() === 'konsinyasi' && this.state.dataKonsinyasi}
+                    diskon={valueDiskon}
+                    kode={valueKodeJual}
+                    kode_customer={valueKodeCustomer?.value}
+                    nama_customer={valueNamaCustomer?.label}
+                    kode_consignee={valueKodeConsignee?.value}
+                    nama_consignee={valueNamaConsignee?.label}
+                    ongkosKirim={valueOngkosKirim}
+                    jenis={valueJenisPenjualan?.value?.toLowerCase()}
+                    kembalian={Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim])}
+                    tanggal={valueTanggal} totalJual={valueTotalJual} />
 
                 <div className={style.header}>
                     <p className={style.title}>Transaksi Penjualan</p>
@@ -1629,7 +1629,7 @@ export class transaksi_penjualan extends Component {
                             <div className={`${global.header}`}>
                                 <p className={global.title}>Input Penjualan</p>
                             </div>
-                            <div className={`${global.input_group} col-6 pe-2`}>
+                            <div className={`${global.input_group} col-12 col-lg-6`}>
                                 <p className={global.title}>Jenis Transaksi</p>
                                 <Select isClearable={true} isSearchable={true} options={[
                                     { value: 'Tunai', label: 'Tunai' },
@@ -1641,42 +1641,42 @@ export class transaksi_penjualan extends Component {
                                 <React.Fragment>
                                     {this.state.jenisPenjualan === 'Tunai' ?
                                         <React.Fragment>
-                                            <div className={`${bootstrap['d-flex']}`}>
-                                                <div className={`${global.input_group} col-2 pe-2`}>
+                                            <div className={`${bootstrap['d-flex']} flex-wrap`}>
+                                                <div className={`${global.input_group} col-6 col-lg-2 pe-2`}>
                                                     <p className={global.title}>Kode Jual <span className={global.important}>*</span></p>
                                                     <input type="text" id='valueKodeJual' maxLength={10} value={valueKodeJual} required={true} readOnly={true} />
                                                 </div>
-                                                <div className={`${global.input_group} col-2 px-2`}>
+                                                <div className={`${global.input_group} col-6 col-lg-2 px-lg-2`}>
                                                     <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                                     <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} required={true} />
                                                 </div>
-                                                <div className={`${global.input_group} col-3 px-2`}>
+                                                <div className={`${global.input_group} col-4 col-lg-3 px-lg-2`}>
                                                     <p className={global.title}>Kode Customer <span className={global.important}>*</span></p>
                                                     <Select id='select-kode-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeCustomer} placeholder={'Select Kode...'} value={valueKodeCustomer} styles={CustomSelect} onChange={(data) => this.SelectCustomer(data)} isDisabled={[dataKonsinyasi.length, dataPesanan.length, dataTunai.length].some(item => item > 0)} />
                                                 </div>
-                                                <div className={`${global.input_group} col-5 ps-2`}>
+                                                <div className={`${global.input_group} col-8 col-lg-5 ps-2`}>
                                                     <p className={global.title}>Nama Customer <span className={global.important}>*</span></p>
                                                     <Select id='select-nama-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaCustomer} placeholder={'Select Nama...'} value={valueNamaCustomer} styles={CustomSelect} onChange={(data) => this.SelectCustomer(data)} isDisabled={[dataKonsinyasi.length, dataPesanan.length, dataTunai.length].some(item => item > 0)} />
                                                 </div>
                                             </div>
-                                            <div className={`${bootstrap['d-flex']}`}>
-                                                <div className={`${global.input_group} col-3 pe-2`}>
+                                            <div className={`${bootstrap['d-flex']} flex-wrap`}>
+                                                <div className={`${global.input_group} col-4 col-lg-3 pe-2`}>
                                                     <p className={global.title}>Kode Produk <span className={global.important}>*</span></p>
                                                     <Select id='select-kode-produk' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeProduk} placeholder={'Select Kode...'} value={valueKodeProduk} styles={CustomSelect} onChange={this.SelectProduk} />
                                                 </div>
-                                                <div className={`${global.input_group} col-6 px-2`}>
+                                                <div className={`${global.input_group} col-5 col-lg-6 px-lg-2`}>
                                                     <p className={global.title}>Nama Produk <span className={global.important}>*</span></p>
                                                     <Select id='select-nama-produk' name='select-nama-produk' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaProduk} placeholder={'Select Nama...'} value={valueNamaProduk} styles={CustomSelect} onChange={this.SelectProduk} />
                                                 </div>
                                                 <div className={`${global.input_group} col-3 ps-2`}>
                                                     <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                                     <input type="text" id='valueJumlah' className='text-end' value={valueJumlah} min={0} onInput={InputFormatNumber} onChange={e => this.setState({
-                                                            valueJumlah: +e.target.value > +this.state.valueJumlahMax ? this.state.valueJumlahMax : e.target.value,
+                                                        valueJumlah: +e.target.value > +this.state.valueJumlahMax ? this.state.valueJumlahMax : e.target.value,
                                                         valueTotalHpp: +e.target.value * +valueHpp
                                                     })} required={true} />
                                                 </div>
                                             </div>
-                                            <div className={`${bootstrap['d-flex']}`}>
+                                            <div className={`${bootstrap['d-flex']} flex-wrap`}>
                                                 <div className={`${global.input_group} col-3 pe-2`}>
                                                     <p className={global.title}>Harga <span className={global.important}>*</span></p>
                                                     <input type="text" id='valueHarga' className='text-end' value={SetPriceFormat(valueHarga)} required={true} readOnly={true} />
@@ -1699,7 +1699,7 @@ export class transaksi_penjualan extends Component {
                                         :
                                         this.state.jenisPenjualan === 'Pesanan' ?
                                             <React.Fragment>
-                                                <div className={`${bootstrap['d-flex']}`}>
+                                                <div className={`${bootstrap['d-flex']} flex-wrap`}>
                                                     <div className={`${global.input_group} col-2 pe-2`}>
                                                         <p className={global.title}>Kode Pesanan <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueKodePesanan' value={valueKodePesanan} required={true} readOnly={true} />
@@ -1720,7 +1720,7 @@ export class transaksi_penjualan extends Component {
                                                         ]} placeholder={'Select Jenis Produk...'} value={valueJenisProduk} onChange={e => this.setState({ valueJenisProduk: e })} styles={CustomSelect} />
                                                     </div>
                                                 </div>
-                                                <div className={`${bootstrap['d-flex']}`}>
+                                                <div className={`${bootstrap['d-flex']} flex-wrap`}>
                                                     <div className={`${global.input_group} col-3 pe-2`}>
                                                         <p className={global.title}>Kode Customer <span className={global.important}>*</span></p>
                                                         <Select id='select-kode-customer' name='select-kode-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeCustomer} placeholder={'Select Kode...'} value={valueKodeCustomer} onChange={e => this.SelectCustomer(e)} styles={CustomSelect} />
@@ -1758,7 +1758,7 @@ export class transaksi_penjualan extends Component {
                                                         <input type="text" id='valueHargaJual' value={SetPriceFormat(valueHargaJual)} required={true} readOnly={true} />
                                                     </div>
                                                 </div>
-                                                <div className='d-flex'>
+                                                <div className='d-flex flex-wrap'>
                                                     <div className='col-6 pe-2'>
                                                         <button type='button' className={`${global.button} w-100`} onClick={this.InsertPesanan}>Simpan</button>
                                                     </div>
@@ -1769,7 +1769,7 @@ export class transaksi_penjualan extends Component {
                                             </React.Fragment>
                                             :
                                             <React.Fragment>
-                                                <div className={`${bootstrap['d-flex']}`}>
+                                                <div className={`${bootstrap['d-flex']} flex-wrap`}>
                                                     <div className={`${global.input_group} col-2 pe-2`}>
                                                         <p className={global.title}>Kode Jual <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueKodeJual' maxLength={10} value={valueKodeJual} required={true} readOnly={true} />
@@ -1787,9 +1787,9 @@ export class transaksi_penjualan extends Component {
                                                         <Select id='select-nama-consignee' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaConsignee} placeholder={'Select Nama...'} value={valueNamaConsignee} styles={CustomSelect} onChange={(data) => this.SelectConsignee(data)} />
                                                     </div>
                                                 </div>
-                                                <div className={`${bootstrap['d-flex']}`}>
+                                                <div className={`${bootstrap['d-flex']} flex-wrap`}>
                                                 </div>
-                                                <div className={`${bootstrap['d-flex']}`}>
+                                                <div className={`${bootstrap['d-flex']} flex-wrap`}>
                                                     <div className={`${global.input_group} col-3 pe-2`}>
                                                         <p className={global.title}>Kode Produk <span className={global.important}>*</span></p>
                                                         <Select id='select-kode-produk' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeProduk} placeholder={'Select Kode...'} value={valueKodeProduk} styles={CustomSelect} onChange={this.SelectProduk} />
@@ -1806,7 +1806,7 @@ export class transaksi_penjualan extends Component {
                                                         })} required={true} />
                                                     </div>
                                                 </div>
-                                                <div className={`${bootstrap['d-flex']}`}>
+                                                <div className={`${bootstrap['d-flex']} flex-wrap`}>
                                                     <div className={`${global.input_group} col-3 pe-2`}>
                                                         <p className={global.title}>Harga <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueHarga' className='text-end' value={SetPriceFormat(valueHarga)} required={true} readOnly={true} />
@@ -1851,8 +1851,8 @@ export class transaksi_penjualan extends Component {
                                         <p className={`${global.name}`}>Catatan Pesanan</p>
                                     </div>
                                 </div>
-                                <div className={`${global.card} ${this.state.tabSelected === 0 ? '' : 'd-none'}`}>
-                                    <div className='d-flex'>
+                                <div className={`${global.card} w-100 ${this.state.tabSelected === 0 ? '' : 'd-none'}`}>
+                                    <div className='d-flex flex-wrap'>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Kode Bahan</p>
                                             <Select id='select-kode-bahan-bahan-baku' name='select-kode-bahan-bahan-baku' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeBahan} value={valueKodeBahan} placeholder={'Select Kode...'} onChange={e => this.SelectBahan(e)} styles={CustomSelect} />
@@ -1862,7 +1862,7 @@ export class transaksi_penjualan extends Component {
                                             <Select id='select-nama-bahan-bahan-baku' name='select-nama-bahan-bahan-baku' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaBahan} value={valueNamaBahan} placeholder={'Select Nama Bahan...'} onChange={e => this.SelectBahan(e)} styles={CustomSelect} />
                                         </div>
                                     </div>
-                                    <div className={`d-flex`}>
+                                    <div className={`d-flex flex-wrap`}>
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Harga</p>
                                             <input type="text" id='valueHargaBahan' value={SetPriceFormat(valueHargaBahan)} readOnly={true} />
@@ -2068,128 +2068,126 @@ export class transaksi_penjualan extends Component {
                                 </div>
                             </div>
                             :
-                            <div className={`col-12`}>
-                                <div className={`${global.card}`}>
-                                    <div className={`${global.header}`}>
-                                        <p className={global.title}>Daftar Penjualan</p>
-                                    </div>
-                                    {this.state.jenisPenjualan === 'Tunai' ?
-                                        <>
-                                            <div className={`table-responsive`}>
-                                                <table id='table-data' className={`table w-100`}>
-                                                    <thead>
-                                                        <tr>
-                                                            <td>No.</td>
-                                                            <td>Kode</td>
-                                                            <td>Kode Produk</td>
-                                                            <td>Nama Produk</td>
-                                                            <td>Jumlah Jual</td>
-                                                            <td>Harga Jual</td>
-                                                            <td>Total Harga</td>
-                                                            <td>Harga Pokok Penjualan</td>
-                                                            <td>Total HPP</td>
-                                                            <td>Aksi</td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {this.state.htmlTableDaftarTunai}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div className={`d-flex flex-column gap-2 pb-2`}>
-                                                <div className={`align-items-center ${global.input_group_row}`}>
-                                                    <p className={`${global.title} col-3`}>Total Jual</p>
-                                                    <input type="text" id='valueTotalJual' className={'col-4'} value={SetPriceFormat(valueTotalJual)} readOnly={true} />
-                                                </div>
-                                                <div className={`align-items-center ${global.input_group_row}`}>
-                                                    <p className={`${global.title} col-3`}>Total Harga Pokok Penjualan</p>
-                                                    <input type="text" id='valueTotalJual' className={'col-4'} value={SetPriceFormat(valueKalkulasiTotalHpp)} readOnly={true} />
-                                                </div>
-                                                <div className={`align-items-center ${global.input_group_row}`}>
-                                                    <p className={`${global.title} col-3`}>Diskon</p>
-                                                    <input type="text" id='valueDiskon' className={'col-4'} value={valueDiskon} onInput={InputFormatNumber} onChange={this.InputChange} onBlur={(e) => parseInt(e.target.value) > parseInt(valueTotalJual) && this.setState({ valueDiskon: valueTotalJual })} />
-                                                </div>
+                            <div className={`${global.card}`}>
+                                <div className={`${global.header}`}>
+                                    <p className={global.title}>Daftar Penjualan</p>
+                                </div>
+                                {this.state.jenisPenjualan === 'Tunai' ?
+                                    <>
+                                        <div className={`table-responsive`}>
+                                            <table id='table-data' className={`table w-100`}>
+                                                <thead>
+                                                    <tr>
+                                                        <td>No.</td>
+                                                        <td>Kode</td>
+                                                        <td>Kode Produk</td>
+                                                        <td>Nama Produk</td>
+                                                        <td>Jumlah Jual</td>
+                                                        <td>Harga Jual</td>
+                                                        <td>Total Harga</td>
+                                                        <td>Harga Pokok Penjualan</td>
+                                                        <td>Total HPP</td>
+                                                        <td>Aksi</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {this.state.htmlTableDaftarTunai}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div className={`d-flex flex-column gap-2 pb-2`}>
+                                            <div className={`align-items-center ${global.input_group_row}`}>
+                                                <p className={`${global.title} col-3`}>Total Jual</p>
+                                                <input type="text" id='valueTotalJual' className={'col-4'} value={SetPriceFormat(valueTotalJual)} readOnly={true} />
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Ongkos Kirim</p>
-                                                <input type="text" id='valueOngkosKirim' className={`col-4`} value={valueOngkosKirim} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                                <p className={`${global.title} col-3`}>Total Harga Pokok Penjualan</p>
+                                                <input type="text" id='valueTotalJual' className={'col-4'} value={SetPriceFormat(valueKalkulasiTotalHpp)} readOnly={true} />
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Total Harga</p>
-                                                <input type="text" id='valueTotalHarga' className={`col-4`} value={SetPriceFormat(Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim]))} readOnly={true} />
-                                                <div className='col-5 ps-2'>
-                                                    <Select id='select-kode-akun' name='select-kode-akun' className={`col-5`} isClearable={true} isSearchable={true} options={dataSelectAkun} placeholder={'Select Akun...'} value={valueKodeAkun} styles={CustomSelect} onChange={e => this.setState({ valueKodeAkun: e })} />
-                                                </div>
+                                                <p className={`${global.title} col-3`}>Diskon</p>
+                                                <input type="text" id='valueDiskon' className={'col-4'} value={valueDiskon} onInput={InputFormatNumber} onChange={this.InputChange} onBlur={(e) => parseInt(e.target.value) > parseInt(valueTotalJual) && this.setState({ valueDiskon: valueTotalJual })} />
                                             </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Bayar</p>
-                                                <input type="text" id='valueTotalBayar' className={`col-4`} value={valueTotalBayar} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                        </div>
+                                        <div className={`align-items-center ${global.input_group_row}`}>
+                                            <p className={`${global.title} col-3`}>Ongkos Kirim</p>
+                                            <input type="text" id='valueOngkosKirim' className={`col-4`} value={valueOngkosKirim} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                        </div>
+                                        <div className={`align-items-center ${global.input_group_row}`}>
+                                            <p className={`${global.title} col-3`}>Total Harga</p>
+                                            <input type="text" id='valueTotalHarga' className={`col-4`} value={SetPriceFormat(Calculate([valueTotalJual, -valueDiskon, valueOngkosKirim]))} readOnly={true} />
+                                            <div className='col-5 ps-2'>
+                                                <Select id='select-kode-akun' name='select-kode-akun' className={`col-5`} isClearable={true} isSearchable={true} options={dataSelectAkun} placeholder={'Select Akun...'} value={valueKodeAkun} styles={CustomSelect} onChange={e => this.setState({ valueKodeAkun: e })} />
                                             </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Kembalian</p>
-                                                <input type="text" id='valueTotalKembalian' className={`col-4`} value={SetPriceFormat(Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim]))} readOnly={true} />
-                                            </div>
-                                            <div className='d-flex'>
-                                                {valueKodeAkun?.value === '1102' &&
-                                                    <div className='{`${global.input_group}`}'>
-                                                        <p>Upload File Transfer</p>
-                                                        <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
-                                                    </div>
-                                                }
-                                            </div>
-                                        </>
-                                        :
-                                        this.state.jenisPenjualan === 'Konsinyasi' &&
-                                        <React.Fragment>
-                                            <div className={`table-responsive`}>
-                                                <table id='table-data' className={`table w-100`}>
-                                                    <thead>
-                                                        <tr>
-                                                            <td>No.</td>
-                                                            <td>Kode</td>
-                                                            <td>Kode Produk</td>
-                                                            <td>Nama Produk</td>
-                                                            <td>Jumlah Jual</td>
-                                                            <td>Harga Jual</td>
-                                                            <td>Total Harga</td>
-                                                            <td>Harga Pokok Penjualan</td>
-                                                            <td>Total HPP</td>
-                                                            <td>Aksi</td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {this.state.htmlTableDaftarKonsinyasi}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div className={`d-flex flex-column gap-2 pb-2`}>
-                                                <div className={`align-items-center ${global.input_group_row}`}>
-                                                    <p className={`${global.title} col-3`}>Total Jual</p>
-                                                    <input type="text" id='valueTotalJual' className={'col-6'} value={SetPriceFormat(valueTotalJual)} readOnly={true} />
-                                                </div>
-                                                <div className={`align-items-center ${global.input_group_row}`}>
-                                                    <p className={`${global.title} col-3`}>Total Harga Pokok Penjualan</p>
-                                                    <input type="text" id='valueTotalJual' className={'col-6'} value={SetPriceFormat(valueKalkulasiTotalHpp)} readOnly={true} />
-                                                </div>
-                                                <div className={`align-items-center ${global.input_group_row}`}>
-                                                    <p className={`${global.title} col-3`}>Diskon</p>
-                                                    <input type="text" id='valueDiskon' className={'col-6'} value={valueDiskon} onInput={InputFormatNumber} onChange={this.InputChange} />
-                                                </div>
-                                            </div>
-                                            <div className={`align-items-center ${global.input_group_row}`}>
-                                                <p className={`${global.title} col-3`}>Piutang</p>
-                                                <input type="text" id='valuePiutang' className={'col-6'} value={SetPriceFormat(Calculate([valueTotalJual, -valueDiskon]))} readOnly={true} />
-                                            </div>
-                                        </React.Fragment>
-                                    }
-                                    <div className='d-flex flex-column gap-2 pt-2'>
+                                        </div>
+                                        <div className={`align-items-center ${global.input_group_row}`}>
+                                            <p className={`${global.title} col-3`}>Bayar</p>
+                                            <input type="text" id='valueTotalBayar' className={`col-4`} value={valueTotalBayar} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                        </div>
+                                        <div className={`align-items-center ${global.input_group_row}`}>
+                                            <p className={`${global.title} col-3`}>Kembalian</p>
+                                            <input type="text" id='valueTotalKembalian' className={`col-4`} value={SetPriceFormat(Calculate([valueTotalBayar, -valueTotalJual, valueDiskon, -valueOngkosKirim]))} readOnly={true} />
+                                        </div>
                                         <div className='d-flex'>
-                                            <div className='col-6 pe-2'>
-                                                <button type='button' className={`${global.button} w-100`} onClick={this.InsertJual}>Simpan</button>
+                                            {valueKodeAkun?.value === '1102' &&
+                                                <div className='{`${global.input_group}`}'>
+                                                    <p>Upload File Transfer</p>
+                                                    <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
+                                                </div>
+                                            }
+                                        </div>
+                                    </>
+                                    :
+                                    this.state.jenisPenjualan === 'Konsinyasi' &&
+                                    <React.Fragment>
+                                        <div className={`table-responsive`}>
+                                            <table id='table-data' className={`table w-100`}>
+                                                <thead>
+                                                    <tr>
+                                                        <td>No.</td>
+                                                        <td>Kode</td>
+                                                        <td>Kode Produk</td>
+                                                        <td>Nama Produk</td>
+                                                        <td>Jumlah Jual</td>
+                                                        <td>Harga Jual</td>
+                                                        <td>Total Harga</td>
+                                                        <td>Harga Pokok Penjualan</td>
+                                                        <td>Total HPP</td>
+                                                        <td>Aksi</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {this.state.htmlTableDaftarKonsinyasi}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div className={`d-flex flex-column gap-2 pb-2`}>
+                                            <div className={`align-items-center ${global.input_group_row}`}>
+                                                <p className={`${global.title} col-3`}>Total Jual</p>
+                                                <input type="text" id='valueTotalJual' className={'col-6'} value={SetPriceFormat(valueTotalJual)} readOnly={true} />
                                             </div>
-                                            <div className='col-6 ps-2'>
-                                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }} onClick={() => this.SelectPenjualan(null)}>Batal</button>
+                                            <div className={`align-items-center ${global.input_group_row}`}>
+                                                <p className={`${global.title} col-3`}>Total Harga Pokok Penjualan</p>
+                                                <input type="text" id='valueTotalJual' className={'col-6'} value={SetPriceFormat(valueKalkulasiTotalHpp)} readOnly={true} />
                                             </div>
+                                            <div className={`align-items-center ${global.input_group_row}`}>
+                                                <p className={`${global.title} col-3`}>Diskon</p>
+                                                <input type="text" id='valueDiskon' className={'col-6'} value={valueDiskon} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                            </div>
+                                        </div>
+                                        <div className={`align-items-center ${global.input_group_row}`}>
+                                            <p className={`${global.title} col-3`}>Piutang</p>
+                                            <input type="text" id='valuePiutang' className={'col-6'} value={SetPriceFormat(Calculate([valueTotalJual, -valueDiskon]))} readOnly={true} />
+                                        </div>
+                                    </React.Fragment>
+                                }
+                                <div className='d-flex flex-column gap-2 pt-2'>
+                                    <div className='d-flex'>
+                                        <div className='col-6 pe-2'>
+                                            <button type='button' className={`${global.button} w-100`} onClick={this.InsertJual}>Simpan</button>
+                                        </div>
+                                        <div className='col-6 ps-2'>
+                                            <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }} onClick={() => this.SelectPenjualan(null)}>Batal</button>
                                         </div>
                                     </div>
                                 </div>

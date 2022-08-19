@@ -115,15 +115,15 @@ export class akun extends Component {
                         <p className={global.title}>Tambah Akun</p>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Akun <span className={global.important}>*</span></p>
-                            <input type="text" className="col col-lg-2 col-md-3" id='input-kode-akun' name='input-kode-akun' maxLength={10}  required={true} />
+                            <input type="text" className="col-12 col-lg-2 col-md-3" id='input-kode-akun' name='input-kode-akun' maxLength={10}  required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Akun <span className={global.important}>*</span></p>
-                            <input type="text" className="col12 col-md-8 col-lg-6" id='input-nama-akun' name='input-nama-akun' maxLength={50} required={true} />
+                            <input type="text" className="col-12 col-md-8 col-lg-6" id='input-nama-akun' name='input-nama-akun' maxLength={50} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Saldo <span className={global.important}>*</span></p>
-                            <input type="text" className="col col-lg-3 col-md-6" id='input-saldo-akun' name='input-saldo-akun' onInput={InputFormatNumber} defaultValue={0} required={true} />
+                            <input type="text" className="col-12 col-lg-3 col-md-6" id='input-saldo-akun' name='input-saldo-akun' onInput={InputFormatNumber} defaultValue={0} required={true} />
                         </div>
                         <div className={`${global.input_group_row}`}>
                             <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jenis Akun <span className={global.important}>*</span></p>

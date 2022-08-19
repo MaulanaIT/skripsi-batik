@@ -135,7 +135,7 @@ export default function Produk() {
                     <p className={global.title}>Tambah Produk</p>
                     <div className={`${global.input_group_row}`}>
                         <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Kode Produk <span className={global.important}>*</span></p>
-                        <input type="text" className="col col-lg-2 col-md-3" value={getValueKodeProduk} maxLength={10} readOnly={true} required={true} />
+                        <input type="text" className="col-12 col-lg-2 col-md-3" value={getValueKodeProduk} maxLength={10} readOnly={true} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
                         <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Nama Produk <span className={global.important}>*</span></p>
@@ -158,19 +158,19 @@ export default function Produk() {
                     </div>
                     <div className={`${global.input_group_row}`}>
                         <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Jumlah <span className={global.important}>*</span></p>
-                        <input type="text" className="col col-lg-2 col-md-3" value={getValueJumlahProduk} onInput={InputFormatNumber} onChange={e => setValueJumlahProduk(e.target.value)} required={true} />
+                        <input type="text" className="col-12 col-lg-2 col-md-3" value={getValueJumlahProduk} onInput={InputFormatNumber} onChange={e => setValueJumlahProduk(e.target.value)} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
                         <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Stok Minimal <span className={global.important}>*</span></p>
-                        <input type="text" className="col col-lg-2 col-md-3" value={getValueStokMinimalProduk} onInput={InputFormatNumber} onChange={e => setValueStokMinimalProduk(e.target.value)} required={true} />
+                        <input type="text" className="col-12 col-lg-2 col-md-3" value={getValueStokMinimalProduk} onInput={InputFormatNumber} onChange={e => setValueStokMinimalProduk(e.target.value)} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
                         <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>HPP <span className={global.important}>*</span></p>
-                        <input type="text" className="col col-lg-2 col-md-3" value={getValueHppProduk} onInput={InputFormatNumber} onChange={e => setValueHppProduk(e.target.value)} required={true} />
+                        <input type="text" className="col-12 col-lg-2 col-md-3" value={getValueHppProduk} onInput={InputFormatNumber} onChange={e => setValueHppProduk(e.target.value)} required={true} />
                     </div>
                     <div className={`${global.input_group_row}`}>
                         <p className={`${global.title} col-12 col-lg-2 col-md-3 pb-2 pb-md-0`}>Harga Jual <span className={global.important}>*</span></p>
-                        <input type="text" className="col col-lg-2 col-md-3" value={getValueHargaJualProduk} onInput={InputFormatNumber} onChange={e => setValueHargaJualProduk(e.target.value)} required={true} />
+                        <input type="text" className="col-12 col-lg-2 col-md-3" value={getValueHargaJualProduk} onInput={InputFormatNumber} onChange={e => setValueHargaJualProduk(e.target.value)} required={true} />
                     </div>
                     <button type='button' className={global.button} onClick={   InsertProduk}><MdAdd /> Simpan</button>
                 </form>
