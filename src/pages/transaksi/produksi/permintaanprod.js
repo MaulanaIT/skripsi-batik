@@ -229,7 +229,7 @@ export default function Permintaanprod() {
             setValueJumlah(0);
 
             $(`#table-data`).DataTable().destroy();
-
+            HideLoading();
             GetPermintaanProduksi();
         }).catch(error => {
             console.log(error);
