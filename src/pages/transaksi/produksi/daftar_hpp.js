@@ -79,8 +79,12 @@ export default function Daftar_hpp() {
                                 </div>
                             </td>
                             <td className={cx([global.table_action, 'text-nowrap'])}>
-                                <button type='button' id={`button-apply-${item.kode}`} className={cx([global.apply, `d-none edit-${item.kode}`])} onClick={() => ApplyHPP(item.kode)}><FaCheck /> Apply</button>
-                                <button type='button' id={`button-edit-${item.kode}`} className={cx([global.edit, `data-${item.kode}`])} onClick={() => EditHPP(item.kode)}><FaPen /> Edit</button>
+                                {!item.kode_pesanan &&
+                                    <React.Fragment>
+                                        <button type='button' id={`button-apply-${item.kode}`} className={cx([global.apply, `d-none edit-${item.kode}`])} onClick={() => ApplyHPP(item.kode)}><FaCheck /> Apply</button>
+                                        <button type='button' id={`button-edit-${item.kode}`} className={cx([global.edit, `data-${item.kode}`])} onClick={() => EditHPP(item.kode)}><FaPen /> Edit</button>
+                                    </React.Fragment>
+                                }
                                 {localStorage.getItem('leksana_jabatan').toLowerCase() !== 'owner' &&
                                     <Link to={'/transaksi/produksi/hpp'} state={{ data: item }} className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }}><FaPlus /> Tambah Biaya</Link>
                                 }
