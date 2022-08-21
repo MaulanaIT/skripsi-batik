@@ -420,11 +420,11 @@ export default function Hpp() {
                                         <p className={global.title}>Kode HPP <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-hpp' name='input-kode-hpp' value={getIsUpdateData ? getDataSelected.kode : getValueKodeHPP} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2 ps-lg-0`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2`}>
                                         <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={getIsUpdateData ? getDataSelected.kode_produksi : getValueKodeProduksi?.value} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 pe-2 pe-lg-0 mt-2 mt-lg-0`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 pe-2 mt-2 mt-lg-0`}>
                                         <p className={global.title}>Kode Produk <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-produk' name='input-kode-produk' value={getIsUpdateData ? getDataSelected.kode_produk : getValueKodeProduk} required={true} readOnly={true} />
                                     </div>
@@ -438,7 +438,7 @@ export default function Hpp() {
                                         <p className={global.title}>Tanggal Mulai <span className={global.important}>*</span></p>
                                         <input type="date" id='input-tanggal-mulai' name='input-tanggal-mulai' value={getIsUpdateData ? getDataSelected.tanggal_mulai : getValueTanggalMulai} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2 ps-lg-0`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2`}>
                                         <p className={global.title}>Tanggal Selesai <span className={global.important}>*</span></p>
                                         <input type="date" id='input-tanggal-selesai' name='input-tanggal-selesai' value={getIsUpdateData ? getDataSelected.tanggal_selesai : getValueTanggalSelesai} required={true} readOnly={true} />
                                     </div>
@@ -456,11 +456,11 @@ export default function Hpp() {
                                         <p className={global.title}>Kode HPP <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-hpp' name='input-kode-hpp' value={getIsUpdateData ? getDataSelected.kode : getValueKodeHPP} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2 ps-lg-0`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2`}>
                                         <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={getIsUpdateData ? getDataSelected.kode_produksi : getValueKodeProduksi?.value} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 pe-2 pe-lg-0 mt-2 mt-lg-0`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 pe-2 mt-2 mt-lg-0`}>
                                         <p className={global.title}>Kode Pesanan <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' value={getIsUpdateData ? getDataSelected.kode_pesanan : getValueKodePesanan} required={true} readOnly={true} />
                                     </div>
@@ -474,15 +474,15 @@ export default function Hpp() {
                                         <p className={global.title}>Kode Customer <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-customer' name='input-kode-customer' value={getIsUpdateData ? getDataSelected.kode_customer : getValueKodeCustomer} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2 ps-lg-0`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2`}>
                                         <p className={global.title}>Nama Customer <span className={global.important}>*</span></p>
                                         <input type="text" id='input-nama-customer' name='input-nama-customer' value={getIsUpdateData ? getDataSelected.nama_customer : getValueNamaCustomer} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 pe-2 pe-lg-0`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 pe-2`}>
                                         <p className={global.title}>Tanggal Pesan <span className={global.important}>*</span></p>
                                         <input type="date" id='input-tanggal-pesan' name='input-tanggal-pesan' value={getIsUpdateData ? getDataSelected.tanggal_mulai : getValueTanggalMulai} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2 ps-lg-0`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2`}>
                                         <p className={global.title}>Tanggal Selesai <span className={global.important}>*</span></p>
                                         <input type="date" id='input-tanggal-selesai' name='input-tanggal-selesai' value={getIsUpdateData ? getDataSelected.tanggal_selesai : getValueTanggalSelesai} required={true} readOnly={true} />
                                     </div>
