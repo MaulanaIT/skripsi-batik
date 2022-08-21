@@ -985,7 +985,7 @@ const Add_hpp = (props, ref) => {
                 <div className={style.content}>
                     <div className={global.card_detail}>
                         <p className={global.title}>Tambah Perhitungan Harga Pokok Produksi</p>
-                        <div className={`col-12 col-md-7 ps-md-2 pt-2 pt-md-0`}>
+                        <div className={`col-12 ps-md-2 pt-2 pt-md-0`}>
                             <div className={`${global.tab_card} pb-2`}>
                                 <div className={`${global.item} ${+getSelectedTab === 0 ? global.active : ''}`} onClick={() => setSelectedTab(0)}>
                                     <p className={`${global.name}`}>Bahan Baku</p>
@@ -1005,11 +1005,11 @@ const Add_hpp = (props, ref) => {
                             {+getSelectedTab === 0 &&
                                 <React.Fragment>
                                     <div className='d-flex flex-wrap'>
-                                        <div className={`${global.input_group} col-12 col-lg-8 pe-lg-2`}>
+                                        <div className={`${global.input_group} col-12 col-lg-6 pe-lg-2`}>
                                             <p className={global.title}>Kode Biaya Bahan Baku <span className={global.important}>*</span></p>
                                             <input type="text" id='input-kode-biaya-bahan-baku' name='input-biaya-bahan-baku' value={getValueKodeBiayaBahanBaku} required={true} readOnly={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-12 col-lg-8 pe-lg-2 mt-2 mt-lg-0`}>
+                                        <div className={`${global.input_group} col-12 col-lg-6 ps-lg-2 mt-2 mt-lg-0`}>
                                             <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                             <input type="date" id='input-tanggal-bbb' name='input-tanggal-bbb' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} required={true} />
                                         </div>
@@ -1039,11 +1039,11 @@ const Add_hpp = (props, ref) => {
                                             <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                             <input type="text" id='input-jumlah-bahan-baku' name='input-jumlah-bahan-baku' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} required={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-12 col-lg-8 pe-lg-2 mt-2 mt-lg-0`}>
+                                        <div className={`${global.input_group} col-12 col-lg-4 pe-lg-2 mt-2 mt-lg-0`}>
                                             <p className={global.title}>Biaya <span className={global.important}>*</span></p>
                                             <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={SetPriceFormat(getValueTotalHarga)} required={true} readOnly={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-12 col-lg-3 ps-lg-2 mt-2 mt-lg-0`}>
+                                        <div className={`${global.input_group} col-12 col-lg-4 ps-lg-2 mt-2 mt-lg-0`}>
                                             <p className={global.title}>Aksi</p>
                                             <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={AddDetailBahanBaku}><MdAdd /> Tambah</button>
                                         </div>
@@ -1053,12 +1053,12 @@ const Add_hpp = (props, ref) => {
                             {+getSelectedTab === 1 &&
                                 <React.Fragment>
                                     <div className='d-flex flex-wrap'>
-                                        <div className={`${global.input_group} col-12 col-lg-8 pe-lg-2`}>
-                                            <p className={global.title}>Kode Biaya Bahan Penolong </p>
+                                        <div className={`${global.input_group} col-12 col-lg-6 pe-lg-2`}>
+                                            <p className={global.title}>Kode Biaya Bahan Penolong <span className={global.important}>*</span></p>
                                             <input type="text" id='input-kode-biaya-bahan-penolong' name='input-biaya-bahan-penolong' value={getValueKodeBiayaPenolong} readOnly={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-12 col-lg-4 ps-lg-2 mt-2 mt-lg-0`}>
-                                            <p className={global.title}>Tanggal </p>
+                                        <div className={`${global.input_group} col-12 col-lg-6 ps-lg-2 mt-2 mt-lg-0`}>
+                                            <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                             <input type="date" id='input-tanggal-bop-penolong' name='input-tanggal-bop-penolong' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} />
                                         </div>
                                     </div>
@@ -1087,11 +1087,11 @@ const Add_hpp = (props, ref) => {
                                             <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                             <input type="text" id='input-jumlah-bahan-penolong' name='input-jumlah-bahan-penolong' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} required={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-12 col-lg-8 pe-lg-2 mt-2 mt-lg-0`}>
+                                        <div className={`${global.input_group} col-12 col-lg-4 pe-lg-2 mt-2 mt-lg-0`}>
                                             <p className={global.title}>Biaya <span className={global.important}>*</span></p>
                                             <input type="text" id='input-biaya-bahan-penolong' name='input-biaya-bahan-penolong' value={SetPriceFormat(getValueTotalHarga)} required={true} readOnly={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-12 col-lg-3 ps-lg-2 mt-2 mt-lg-0`}>
+                                        <div className={`${global.input_group} col-12 col-lg-4 ps-lg-2 mt-2 mt-lg-0`}>
                                             <p className={global.title}>Aksi</p>
                                             <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={AddDetailPenolong}><MdAdd /> Tambah</button>
                                         </div>
@@ -1105,7 +1105,7 @@ const Add_hpp = (props, ref) => {
                                             <p className={global.title}>Kode BOP Alat <span className={global.important}>*</span></p>
                                             <input type="text" id='input-kode-bop-alat' name='input-kode-bop-alat' value={getValueKodeBiayaAlat} required={true} readOnly={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-12 col-lg-8 pe-lg-2 mt-2 mt-lg-0`}>
+                                        <div className={`${global.input_group} col-12 col-lg-4 pe-lg-2 mt-2 mt-lg-0`}>
                                             <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
                                             <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props.isUpdate ? props.dataSelected.kode_produksi : props.kodeProduksi} required={true} readOnly={true} />
                                         </div>
@@ -1139,7 +1139,7 @@ const Add_hpp = (props, ref) => {
                                             <p className={global.title}>Biaya <span className={global.important}>*</span></p>
                                             <input type="text" id='input-biaya-bop-alat' name='input-biaya-bop-alat' value={SetPriceFormat(getValueTotalHarga)} required={true} readOnly={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-12 col-lg-3 ps-lg-2 mt-2 mt-lg-0`}>
+                                        <div className={`${global.input_group} col-12 col-lg-4 ps-lg-2 mt-2 mt-lg-0`}>
                                             <p className={global.title}>Aksi</p>
                                             <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={AddDetailAlat}><MdAdd /> Tambah</button>
                                         </div>
@@ -1149,15 +1149,15 @@ const Add_hpp = (props, ref) => {
                             {+getSelectedTab === 3 &&
                                 <React.Fragment>
                                     <div className='d-flex flex-wrap'>
-                                        <div className={`${global.input_group} col-12 col-lg-4 pe-lg-2`}>
+                                        <div className={`${global.input_group} col-12 col-lg-6 pe-lg-2`}>
                                             <p className={global.title}>Kode Biaya Tenaga Kerja <span className={global.important}>*</span></p>
                                             <input type="text" id='input-kode-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={getValueKodeBiayaTenagaKerja} required={true} readOnly={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-12 col-lg-8 pe-lg-2 mt-2 mt-lg-0`}>
+                                        <div className={`${global.input_group} col-12 col-lg-3 pe-lg-2 mt-2 mt-lg-0`}>
                                             <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
                                             <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={props.isUpdate ? props.dataSelected.kode_produksi : props.kodeProduksi} required={true} readOnly={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-12 col-lg-4 ps-lg-2 mt-2 mt-lg-0`}>
+                                        <div className={`${global.input_group} col-12 col-lg-3 ps-lg-2 mt-2 mt-lg-0`}>
                                             <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                             <input type="date" id='input-tanggal-btk' name='input-tanggal-btk' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} required={true} />
                                         </div>
@@ -1187,11 +1187,11 @@ const Add_hpp = (props, ref) => {
                                             <p className={global.title}>Jumlah Pengerjaan <span className={global.important}>*</span></p>
                                             <input type="text" id='input-jumlah-pengerjaan' name='input-jumlah-pengerjaan' value={getValueJumlah} onInput={InputFormatNumber} onChange={e => setValueJumlah(e.target.value)} required={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-12 col-lg-8 pe-lg-2 mt-2 mt-lg-0`}>
+                                        <div className={`${global.input_group} col-12 col-lg-4 pe-lg-2 mt-2 mt-lg-0`}>
                                             <p className={global.title}>Biaya <span className={global.important}>*</span></p>
                                             <input type="text" id='input-biaya-tenaga-kerja' name='input-biaya-tenaga-kerja' value={SetPriceFormat(getValueTotalHarga)} required={true} readOnly={true} />
                                         </div>
-                                        <div className={`${global.input_group} col-12 col-lg-3 ps-lg-2 mt-2 mt-lg-0`}>
+                                        <div className={`${global.input_group} col-12 col-lg-4 ps-lg-2 mt-2 mt-lg-0`}>
                                             <p className={global.title}>Aksi</p>
                                             <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={AddDetailTenagaKerja}><MdAdd /> Tambah</button>
                                         </div>
