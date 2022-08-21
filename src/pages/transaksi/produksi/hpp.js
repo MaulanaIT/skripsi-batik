@@ -386,7 +386,7 @@ export default function Hpp() {
                     <div className={`${global.header}`}>
                         <p className={global.title}>Perhitungan Harga Pokok Produksi</p>
                     </div>
-                    <div className={`${bootstrap['d-flex']}`}>
+                    <div className={`d-flex flex-wrap`}>
                         <div className={`${global.input_group} col-5 pe-2`}>
                             <p className={global.title}>Kode Produksi</p>
                             {getIsUpdateData ?
@@ -415,34 +415,34 @@ export default function Hpp() {
                         </div>
                         {(getValueKodeProduksi?.value?.includes('PS') || getDataSelected?.kode_produksi?.includes('PS')) &&
                             <React.Fragment>
-                                <div className={`${bootstrap['d-flex']}`}>
-                                    <div className={`${global.input_group} col-3 pe-2`}>
+                                <div className={`d-flex flex-wrap`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 pe-2`}>
                                         <p className={global.title}>Kode HPP <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-hpp' name='input-kode-hpp' value={getIsUpdateData ? getDataSelected.kode : getValueKodeHPP} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-3 ps-4`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2 ps-lg-0`}>
                                         <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={getIsUpdateData ? getDataSelected.kode_produksi : getValueKodeProduksi?.value} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-3 ps-4`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 pe-2 pe-lg-0 mt-2 mt-lg-0`}>
                                         <p className={global.title}>Kode Produk <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-produk' name='input-kode-produk' value={getIsUpdateData ? getDataSelected.kode_produk : getValueKodeProduk} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-3 ps-4`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 ps-2 mt-2 mt-lg-0`}>
                                         <p className={global.title}>Nama Produk <span className={global.important}>*</span></p>
                                         <input type="text" id='input-nama-produk' name='input-nama-produk' value={getIsUpdateData ? getDataSelected.nama_produk : getValueNamaProduk} required={true} readOnly={true} />
                                     </div>
                                 </div>
-                                <div className={`${bootstrap['d-flex']}`}>
-                                    <div className={`${global.input_group} col-3 pe-2`}>
+                                <div className={`d-flex flex-wrap`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 pe-2`}>
                                         <p className={global.title}>Tanggal Mulai <span className={global.important}>*</span></p>
                                         <input type="date" id='input-tanggal-mulai' name='input-tanggal-mulai' value={getIsUpdateData ? getDataSelected.tanggal_mulai : getValueTanggalMulai} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-3 ps-4`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2 ps-lg-0`}>
                                         <p className={global.title}>Tanggal Selesai <span className={global.important}>*</span></p>
                                         <input type="date" id='input-tanggal-selesai' name='input-tanggal-selesai' value={getIsUpdateData ? getDataSelected.tanggal_selesai : getValueTanggalSelesai} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-3 ps-4`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 ps-lg-2 mt-2 mt-lg-0`}>
                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                         <input type="text" id='input-jumlah' name='input-jumlah' value={SetNumberFormat(getIsUpdateData ? getDataSelected.jumlah : getValueJumlah)} required={true} readOnly={true} />
                                     </div>
@@ -451,44 +451,44 @@ export default function Hpp() {
                         }
                         {(getValueKodeProduksi?.value?.includes('PP') || getDataSelected?.kode_produksi?.includes('PP')) &&
                             <React.Fragment>
-                                <div className={`${bootstrap['d-flex']}`}>
-                                    <div className={`${global.input_group} col-3 pe-2`}>
+                                <div className={`d-flex flex-wrap`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 pe-2`}>
                                         <p className={global.title}>Kode HPP <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-hpp' name='input-kode-hpp' value={getIsUpdateData ? getDataSelected.kode : getValueKodeHPP} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-3 ps-4`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2 ps-lg-0`}>
                                         <p className={global.title}>Kode Produksi <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-produksi' name='input-kode-produksi' value={getIsUpdateData ? getDataSelected.kode_produksi : getValueKodeProduksi?.value} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-3 ps-4`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 pe-2 pe-lg-0 mt-2 mt-lg-0`}>
                                         <p className={global.title}>Kode Pesanan <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-pesanan' name='input-kode-pesanan' value={getIsUpdateData ? getDataSelected.kode_pesanan : getValueKodePesanan} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-3 ps-4`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 ps-2 mt-2 mt-lg-0`}>
                                         <p className={global.title}>Nama Pesanan <span className={global.important}>*</span></p>
                                         <input type="text" id='input-nama-pesanan' name='input-nama-pesanan' value={getIsUpdateData ? getDataSelected.nama_pesanan : getValueNamaPesanan} required={true} readOnly={true} />
                                     </div>
                                 </div>
-                                <div className={`${bootstrap['d-flex']}`}>
-                                    <div className={`${global.input_group} col-3 pe-2`}>
+                                <div className={`d-flex flex-wrap`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 pe-2`}>
                                         <p className={global.title}>Kode Customer <span className={global.important}>*</span></p>
                                         <input type="text" id='input-kode-customer' name='input-kode-customer' value={getIsUpdateData ? getDataSelected.kode_customer : getValueKodeCustomer} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-3 ps-4`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2 ps-lg-0`}>
                                         <p className={global.title}>Nama Customer <span className={global.important}>*</span></p>
                                         <input type="text" id='input-nama-customer' name='input-nama-customer' value={getIsUpdateData ? getDataSelected.nama_customer : getValueNamaCustomer} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-3 ps-4`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 pe-2 pe-lg-0`}>
                                         <p className={global.title}>Tanggal Pesan <span className={global.important}>*</span></p>
                                         <input type="date" id='input-tanggal-pesan' name='input-tanggal-pesan' value={getIsUpdateData ? getDataSelected.tanggal_mulai : getValueTanggalMulai} required={true} readOnly={true} />
                                     </div>
-                                    <div className={`${global.input_group} col-3 ps-4`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 px-lg-2 ps-2 ps-lg-0`}>
                                         <p className={global.title}>Tanggal Selesai <span className={global.important}>*</span></p>
                                         <input type="date" id='input-tanggal-selesai' name='input-tanggal-selesai' value={getIsUpdateData ? getDataSelected.tanggal_selesai : getValueTanggalSelesai} required={true} readOnly={true} />
                                     </div>
                                 </div>
-                                <div className={`${bootstrap['d-flex']}`}>
-                                    <div className={`${global.input_group} col-3 pe-2`}>
+                                <div className={`d-flex flex-wrap`}>
+                                    <div className={`${global.input_group} col-6 col-lg-3 pe-2 mt-2 mt-lg-0`}>
                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                         <input type="text" id='input-jumlah' name='input-jumlah' value={SetNumberFormat(getValueJumlah)} required={true} readOnly={true} />
                                     </div>
@@ -554,12 +554,12 @@ export default function Hpp() {
                                 </table>
                             </div>
                         </div>
-                        <div className={`${bootstrap['d-flex']}`}>
-                            <div className={`${global.input_group} col-3 pe-2`}>
+                        <div className={`d-flex flex-wrap`}>
+                            <div className={`${global.input_group} col-6 col-lg-3 pe-2`}>
                                 <p className={`${global.title} fw-bold`} style={{ fontSize: 18 }}>Biaya Produksi</p>
                             </div>
                         </div>
-                        <div className={`${bootstrap['d-flex']}`}>
+                        <div className={`d-flex flex-wrap`}>
                             <div className={`${global.input_group} col-4 pe-2`}>
                                 <p className={global.title}>Biaya Bahan Baku <span className={global.important}>*</span></p>
                                 <input type="text" id='input-biaya-bahan-baku' name='input-biaya-bahan-baku' value={SetPriceFormat(getValueBiayaBahanBaku)} required={true} readOnly={true} />
@@ -573,7 +573,7 @@ export default function Hpp() {
                                 <input type="text" id='input-biaya-overhead' name='input-biaya-overhead' value={SetPriceFormat(getValueBiayaOverheadPabrik)} required={true} readOnly={true} />
                             </div>
                         </div>
-                        <div className={`${bootstrap['d-flex']}`}>
+                        <div className={`d-flex flex-wrap`}>
                             <div className={`${global.input_group} col-4`}>
                                 <p className={`${global.title} fw-bold`} style={{ fontSize: 18 }}>Harga Pokok Produksi <span className={global.important}>*</span></p>
                                 <input type="text" id='input-harga-pokok-produksi' name='input-harga-pokok-produksi' value={SetPriceFormat(getValueHPP)} required={true} readOnly={true} />
