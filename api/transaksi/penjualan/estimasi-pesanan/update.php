@@ -9,6 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query = "UPDATE estimasi_pesanan SET hpp='".$hpp."' WHERE kode='".$kode_pesanan."'";
     
     $result = $conn->query($query);
+    
+    $query = "UPDATE penjualan_pesanan SET total_hpp='".$hpp."' WHERE kode='".$kode_pesanan."'";
+    
+    $result = $conn->query($query);
 
     $response = [];
     

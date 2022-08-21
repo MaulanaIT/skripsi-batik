@@ -51,6 +51,9 @@
     border-radius: 8px;
     display: flex;
     flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
     gap: 12px;
     padding: 12px;
 }
@@ -235,7 +238,6 @@ textarea:read-only {
 
 .popup_detail {
     background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
     height: 100vh;
     justify-content: center;
     left: 0px;
@@ -250,6 +252,7 @@ textarea:read-only {
 .tab_card {
     align-items: stretch;
     display: flex;
+    flex-wrap: wrap;
     gap: 6px;
 }
 
