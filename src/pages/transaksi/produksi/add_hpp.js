@@ -160,7 +160,7 @@ const Add_hpp = (props, ref) => {
     }, [getDataDetailAlat, getDataDetailBahanBaku, getDataDetailPenolong, getDataDetailTenagaKerja]);
 
     useEffect(() => {
-        if (+getValueJumlah > +getValueMaxJumlah) setValueJumlah(getValueMaxJumlah);
+        if (+getValueJumlah > +getValueMaxJumlah && +getSelectedTab < 3) setValueJumlah(getValueMaxJumlah);
     }, [getValueJumlah]);
 
     useImperativeHandle(ref, () => ({
