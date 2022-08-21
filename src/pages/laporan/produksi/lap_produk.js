@@ -88,8 +88,8 @@ export default function Lap_produk() {
         <React.Fragment>
 
         <div className={style.header}>
-                <p className={style.title}>Laporan Persediaan Barang Jadi</p>
-                <p className={style.pathname}>Laporan / Laporan Produksi / Laporan Persediaan Barang Jadi </p>
+                <p className={style.title}>Daftar Persediaan Barang Jadi</p>
+                <p className={style.pathname}>Laporan / Laporan Produksi / Daftar Persediaan Barang Jadi </p>
         </div>
         <div className={style.content}>
                 <div className={`${global.card} col-12`}>
@@ -106,7 +106,7 @@ export default function Lap_produk() {
             <div className={`${global.card} col-12`}>
                 <div className={([global.card, global.boxless])}>
                     <p className={`${style.title} text-center w-100 fw-bold`}>LEKSANA BATIK JAYA</p>
-                    <p className={`${style.title} text-center w-100 fw-bold`}>LAPORAN PERSEDIAAN BARANG JADI</p>
+                    <p className={`${style.title} text-center w-100 fw-bold`}>DAFTAR PERSEDIAAN BARANG JADI</p>
                     <br></br>
                     <div className={`${bootstrap[`d-flex`]}`}>
                         <div className={`${global.input_group_row} col-6 ps-2`}>

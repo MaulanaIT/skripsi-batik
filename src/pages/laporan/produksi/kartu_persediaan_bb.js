@@ -302,8 +302,8 @@ export default function Kartu_persediaan_bb() {
                         </div>
                         :
                         getValueJenis && getValueJenis.value === 'Bahan Baku' ? */}
-                    <div className={`${global.input_group_row} col-4`}>
-                        <p className={`${global.title} col-6`}>Nama Bahan Baku</p>
+                    <div className={`${global.input_group_row} col-8`}>
+                        <p className={`${global.title} col-col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Nama Bahan Baku</p>
                         <Select isClearable={true} isSearchable={true} options={getDataSelectBahanBaku} placeholder={'Pilih Bahan Baku...'} styles={CustomSelect} value={getValueKodeBahanBaku} onChange={e => setValueKodeBahanBaku(e)} className='col-7' />
                     </div>
                     {/* :

@@ -200,9 +200,9 @@ export default function Lap_hpp() {
                     </div>
 
                     <div className={`d-flex`}>
-                        <div className={`${global.input_group_row} col-4`}>
-                            <p className={`${global.title} col-6`}>Kode Produksi</p>
-                            <Select className="col col-lg-8 col-md-3" isClearable={true} isSearchable={true} options={getDataSelectProduksi} placeholder={'Select Kode Produksi...'} styles={CustomSelect} isDisabled={(!getValueJenis || getValueJenis.length === 0) && true} value={getValueKode} onChange={e => setValueKode(e)} />
+                        <div className={`${global.input_group_row} col-8`}>
+                            <p className={`${global.title} col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Kode Produksi</p>
+                            <Select className="col col-lg-4 col-md-3" isClearable={true} isSearchable={true} options={getDataSelectProduksi} placeholder={'Select Kode Produksi...'} styles={CustomSelect} isDisabled={(!getValueJenis || getValueJenis.length === 0) && true} value={getValueKode} onChange={e => setValueKode(e)} />
                         </div>
                     </div>
 

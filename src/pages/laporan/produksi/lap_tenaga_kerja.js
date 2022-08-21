@@ -129,17 +129,13 @@ export default function Lap_tenaga_kerja() {
             <div className={style.content}>
                 <div className={global.card}>
                     <div className={`d-flex`}>
-                        <div className={`${global.input_group_row}`}>
-                            <p className={`${global.title} col-3`}>Tanggal</p>
-                            <div>
-                                <input type="date" className={global.input1} id='input-tanggal-awal' name='input-tanggal-awal' value={getValueTanggalAwal} onChange={e => setValueTanggalAwal(e.target.value)} />
-                            </div>
-                            <div>
-                                <p className={`${global.title} col-auto px-3`}>sampai</p>
-                            </div>
-                            <div>
-                                <input type="date" className={global.input1} id='input-tanggal-akhir' name='input-tanggal-akhir' value={getValueTanggalAkhir} onChange={e => setValueTanggalAkhir(e.target.value)} />
-                            </div>
+                        <div className={`${global.input_group_row} col-6`}>
+                            <p className={`${global.title} col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Tanggal Awal</p>
+                            <input type="date" id='input-tanggal-awal' name='input-tanggal-awal' value={getValueTanggalAwal} onChange={e => setValueTanggalAwal(e.target.value)} />
+                        </div>
+                        <div className={`${global.input_group_row} col-6`}>
+                            <p className={`${global.title} col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Tanggal Akhir</p>
+                            <input type="date" id='input-tanggal-akhir' name='input-tanggal-akhir' value={getValueTanggalAkhir} onChange={e => setValueTanggalAkhir(e.target.value)} />
                         </div>
                     </div>
                     <div className='d-flex flex-column gap-2 pt-2'>

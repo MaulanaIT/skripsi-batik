@@ -281,8 +281,8 @@ export default function Kartu_alat() {
                         </div>
                         :
                         getValueJenis && getValueJenis.value === 'Alat' ? */}
-                    <div className={`${global.input_group_row} col-4`}>
-                        <p className={`${global.title} col-6`}>Nama Alat</p>
+                    <div className={`${global.input_group_row} col-8`}>
+                        <p className={`${global.title} col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Nama Alat</p>
                         <Select isClearable={true} isSearchable={true} options={getDataSelectAlat} placeholder={'Pilih Alat...'} styles={CustomSelect} value={getValueKodeAlat} onChange={e => setValueKodeAlat(e)} className='col-7' />
                     </div>
                     {/* :
