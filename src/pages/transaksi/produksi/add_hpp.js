@@ -566,6 +566,8 @@ const Add_hpp = (props, ref) => {
     const GetDetailAlat = () => {
         ShowLoading();
 
+        $('#table-data-bop-alat').DataTable().destroy();
+
         axios.get(`${baseURL}/api/transaksi/produksi/detail-alat/select.php`, config).then(response => {
             let data = response.data.data;
 
@@ -628,6 +630,8 @@ const Add_hpp = (props, ref) => {
     const GetDetailBahanBaku = () => {
         ShowLoading();
 
+        $('#table-data-biaya-bahan-baku').DataTable().destroy();
+
         axios.get(`${baseURL}/api/transaksi/produksi/detail-bahan-baku/select.php`, config).then(response => {
             let data = response.data.data;
 
@@ -689,6 +693,8 @@ const Add_hpp = (props, ref) => {
 
     const GetDetailPenolong = () => {
         ShowLoading();
+        
+        $('#table-data-bop-bahan-penolong').DataTable().destroy();
 
         axios.get(`${baseURL}/api/transaksi/produksi/detail-penolong/select.php`, config).then(response => {
             let data = response.data.data;
@@ -751,6 +757,8 @@ const Add_hpp = (props, ref) => {
 
     const GetDetailTenagaKerja = () => {
         ShowLoading();
+        
+        $('#table-data-biaya-tenaga-kerja').DataTable().destroy();
 
         axios.get(`${baseURL}/api/transaksi/produksi/detail-tenaga-kerja/select.php`, config).then(response => {
             let data = response.data.data;
