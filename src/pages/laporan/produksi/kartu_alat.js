@@ -148,7 +148,7 @@ export default function Kartu_alat() {
                 '',
                 '',
                 '',
-                '',
+                // '',
                 '',
                 '',
                 ''
@@ -159,7 +159,7 @@ export default function Kartu_alat() {
                 'Nama',
                 'Unit Masuk',
                 'Kapasitas Masuk',
-                'Unit Keluar',
+                // 'Unit Keluar',
                 'Kapasitas Keluar',
                 'Unit Saldo',
                 'Kapasitas Saldo'
@@ -179,7 +179,7 @@ export default function Kartu_alat() {
                         <td>Master {master.nama}</td>
                         <td>{SetNumberFormat(master.unit_masuk)}</td>
                         <td>{SetNumberFormat(master.kapasitas_masuk)}</td>
-                        <td>{SetNumberFormat(master.unit_keluar)}</td>
+                        {/* <td>{SetNumberFormat(master.unit_keluar)}</td> */}
                         <td>{SetNumberFormat(master.kapasitas_keluar)}</td>
                         <td>{SetNumberFormat(master.unit_saldo)}</td>
                         <td>{SetNumberFormat(master.kapasitas_saldo)}</td>
@@ -191,7 +191,7 @@ export default function Kartu_alat() {
                     master.nama,
                     SetNumberFormat(master.unit_masuk),
                     SetNumberFormat(master.kapasitas_masuk),
-                    SetNumberFormat(master.unit_keluar),
+                    // SetNumberFormat(master.unit_keluar),
                     SetNumberFormat(master.kapasitas_keluar),
                     SetNumberFormat(master.unit_saldo),
                     SetNumberFormat(master.kapasitas_saldo)

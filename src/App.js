@@ -84,12 +84,16 @@ export default function App() {
     const location = useLocation();
 
     useEffect(() => {
-        localStorage.getItem('leksana_token') && login();
+        if (localStorage.getItem('leksana_token')) {
+            login();
+        } else {
+            window.location.href = '/#/login';
+        }
     }, []);
 
     const login = () => {
         ShowLoading();
-        
+
         const formData = new FormData();
 
         formData.append('username', localStorage.getItem('leksana_username'));
@@ -97,12 +101,12 @@ export default function App() {
 
         axios.post(`${baseURL}/api/login.php`, formData, config).then(response => {
             let login = response.data.data;
-            
+
             setJabatan(login.data.jabatan);
 
             HideLoading();
         }).catch(error => {
-            if (location.pathname !== '/' && location.pathname !== '/login') window.location.href = '/#/login';
+            if (location.pathname !== '/' && location.pathname !== '/#/login') window.location.href = '/#/login';
             console.log(error);
 
             localStorage.clear();

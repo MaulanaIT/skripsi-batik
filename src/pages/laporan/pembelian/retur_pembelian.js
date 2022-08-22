@@ -97,6 +97,10 @@ export default function Retur_pembelian() {
                 '',
                 '',
                 '',
+                '',
+                '',
+                // '',
+                // '',
                 ''
             ]);
 
@@ -108,8 +112,8 @@ export default function Retur_pembelian() {
                 'Nama Supplier',
                 'Kode Item',
                 'Nama Item',
-                'Jumlah',
-                'Harga',
+                // 'Jumlah',
+                // 'Harga',
                 'Total Harga'
             ]);
             

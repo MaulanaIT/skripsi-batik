@@ -131,7 +131,7 @@ const Add_hpp = (props, ref) => {
     useEffect(() => {
         let dataSelected = getDataAlat?.find(item => item.kode === getValueKodeAlat?.value);
 
-        setValueMaxJumlah(dataSelected?.jumlah ?? 0);
+        setValueMaxJumlah(dataSelected?.total_kapasitas ?? 0);
         setValueHarga(dataSelected?.bop ?? 0);
     }, [getValueKodeAlat, getValueNamaAlat]);
 
@@ -913,6 +913,8 @@ const Add_hpp = (props, ref) => {
     const InsertDetailTenagaKerja = (data) => {
         ShowLoading();
 
+        console.log(data);
+
         const formData = new FormData();
 
         formData.append('kode', getValueKodeBiayaTenagaKerja);
@@ -930,7 +932,8 @@ const Add_hpp = (props, ref) => {
         formData.append('tanggal', getValueTanggal);
         formData.append('data', JSON.stringify(data));
 
-        axios.post(`${baseURL}/api/transaksi/produksi/detail-tenaga-kerja/insert.php`, formData, config).then(() => {
+        axios.post(`${baseURL}/api/transaksi/produksi/detail-tenaga-kerja/insert.php`, formData, config).then(response => {
+            console.log(response);
             SaveDetail();
             HideLoading();
         }).catch(error => {
