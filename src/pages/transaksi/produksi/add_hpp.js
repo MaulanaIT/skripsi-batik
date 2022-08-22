@@ -382,7 +382,7 @@ const Add_hpp = (props, ref) => {
                 tanggal: getValueTanggal,
                 kode_tenaga_kerja: getValueKodeTenagaKerja.value,
                 nama_tenaga_kerja: getValueNamaTenagaKerja.label,
-                departemen: getValueDepartemen,
+                departemen: getValueDepartemen === '' ? localStorage.getItem('leksana_jabatan') : getValueDepartemen,
                 jumlah: getValueJumlah,
                 harga: getValueHarga,
                 total_harga: getValueTotalHarga
