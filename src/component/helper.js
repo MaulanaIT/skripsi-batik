@@ -4,7 +4,7 @@ const config = {
     headers: {
         'Access-Control-Allow-Origin': `*`,
         'Authorization': `$2a$16$V8nX0lYVYeAdzmwd2qaV.egge8PmIYEzrI6uksbt.HmTpWElFOou.`,
-        'Content-Type': 'application/x-www-form-urlencoded, multipart/form-data'
+        'Content-Type': 'multipart/form-data'
     }
 };
 

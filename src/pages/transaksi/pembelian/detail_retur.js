@@ -114,8 +114,7 @@ export default function Detail_retur(props) {
         formData.append('data', JSON.stringify(getDataDetailRetur));
 
         axios.post(`${baseURL}/api/transaksi/pembelian/retur/update-status.php`, formData, config).then(response => {
-            console.log(response);
-            // window.location.reload();
+            window.location.reload();
         }).catch(error => {
             console.log(error)
 
