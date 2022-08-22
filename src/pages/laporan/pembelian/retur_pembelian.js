@@ -125,8 +125,8 @@ export default function Retur_pembelian() {
                             <td>{item.nama_supplier}</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td>{SetNumberFormat(item.jumlah)}</td>
-                            <td>{SetPriceFormat(item.harga)}</td>
+                            {/* <td>{SetNumberFormat(item.jumlah)}</td>
+                            <td>{SetPriceFormat(item.harga)}</td> */}
                             <td>{SetPriceFormat(item.total_harga)}</td>
                         </tr>
                     );
@@ -139,8 +139,8 @@ export default function Retur_pembelian() {
                         item.nama_supplier,
                         item.kode_item,
                         item.nama_item,
-                        SetNumberFormat(item.jumlah),
-                        SetPriceFormat(item.harga),
+                        // SetNumberFormat(item.jumlah),
+                        // SetPriceFormat(item.harga),
                         SetPriceFormat(item.total_harga)
                     ]);
                 });
@@ -225,8 +225,8 @@ export default function Retur_pembelian() {
                                         <th>Nama Supplier</th>
                                         <th>Kode Barang</th>
                                         <th>Nama Barang</th>
-                                        <th>Jumlah</th>
-                                        <th>Harga</th>
+                                        {/* <th>Jumlah</th>
+                                        <th>Harga</th> */}
                                         <th>Total Retur</th>
                                     </tr>
                                 </thead>
