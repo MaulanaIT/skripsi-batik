@@ -7,11 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query = '';
 
     if ($jenis_penjualan == 'tunai') {
-        $query = "SELECT * FROM penjualan_tunai";
+        $query = "SELECT * FROM penjualan_tunai ORDER BY kode";
     } else if ($jenis_penjualan == 'konsinyasi') {
-        $query = "SELECT penjualan_konsinyasi.*, master_consignee.nama AS nama_consignee FROM penjualan_konsinyasi INNER JOIN master_consignee ON penjualan_konsinyasi.kode_consignee = master_consignee.kode";
+        $query = "SELECT penjualan_konsinyasi.*, master_consignee.nama AS nama_consignee FROM penjualan_konsinyasi INNER JOIN master_consignee ON penjualan_konsinyasi.kode_consignee = master_consignee.kode ORDER BY penjualan_konsinyasi.kode";
     } else if ($jenis_penjualan == 'pesanan') {
-        $query = "SELECT a.*, c.alamat, b.jumlah, b.nama FROM penjualan_pesanan a INNER JOIN estimasi_pesanan b ON a.kode_pesanan = b.kode INNER JOIN master_customer c ON a.kode_customer = c.kode";
+        $query = "SELECT a.*, c.alamat, b.jumlah, b.nama FROM penjualan_pesanan a INNER JOIN estimasi_pesanan b ON a.kode_pesanan = b.kode INNER JOIN master_customer c ON a.kode_customer = c.kode ORDER BY a.kode";
     }
 
     $result = $conn->query($query);

@@ -2,7 +2,7 @@
 
 require_once 'header.php';
 
-// $base_url = 'http://leksana-batik.virtusrox.me/upload/';
+// $base_url = '/home/u158919227/domains/virtusrox.me/public_html/leksana-batik/upload/';
 $base_url = '/xampp/htdocs/skripsi-batik/upload/';
 
 // $username = "u158919227_leksana_root";
