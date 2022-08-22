@@ -159,7 +159,7 @@ export default function Kartu_alat() {
                 'Nama',
                 'Unit Masuk',
                 'Kapasitas Masuk',
-                // 'Unit Keluar',
+                'Unit Keluar',
                 'Kapasitas Keluar',
                 'Unit Saldo',
                 'Kapasitas Saldo'
@@ -167,7 +167,7 @@ export default function Kartu_alat() {
 
             if (data && data.length > 0) {
                 data.forEach(item => {
-                    master.unit_saldo = +master.unit_saldo + +item.unit_keluar - +item.unit_masuk
+                    master.unit_saldo = +master.unit_saldo + 0 - +item.unit_masuk
                     master.kapasitas_saldo = +master.kapasitas_saldo + +item.kapasitas_keluar - +item.kapasitas_masuk
                 });
             }
@@ -179,7 +179,7 @@ export default function Kartu_alat() {
                         <td>Master {master.nama}</td>
                         <td>{SetNumberFormat(master.unit_masuk)}</td>
                         <td>{SetNumberFormat(master.kapasitas_masuk)}</td>
-                        {/* <td>{SetNumberFormat(master.unit_keluar)}</td> */}
+                        <td>{0}</td>
                         <td>{SetNumberFormat(master.kapasitas_keluar)}</td>
                         <td>{SetNumberFormat(master.unit_saldo)}</td>
                         <td>{SetNumberFormat(master.kapasitas_saldo)}</td>
@@ -191,7 +191,7 @@ export default function Kartu_alat() {
                     master.nama,
                     SetNumberFormat(master.unit_masuk),
                     SetNumberFormat(master.kapasitas_masuk),
-                    // SetNumberFormat(master.unit_keluar),
+                    0,
                     SetNumberFormat(master.kapasitas_keluar),
                     SetNumberFormat(master.unit_saldo),
                     SetNumberFormat(master.kapasitas_saldo)
@@ -203,7 +203,7 @@ export default function Kartu_alat() {
 
             if (data && data.length > 0) {
                 data.forEach((item, index) => {
-                    currentUnitSaldo = +currentUnitSaldo + +item.unit_masuk - +item.unit_keluar; 
+                    currentUnitSaldo = +currentUnitSaldo + +item.unit_masuk - 0; 
                     currentKapasitasSaldo = +currentKapasitasSaldo + +item.kapasitas_masuk - +item.kapasitas_keluar; 
 
                     htmlTableDaftarAlat.push(
@@ -212,7 +212,7 @@ export default function Kartu_alat() {
                             <td>{item.keterangan}</td>
                             <td>{SetNumberFormat(item.unit_masuk)}</td>
                             <td>{SetNumberFormat(item.kapasitas_masuk)}</td>
-                            <td>{SetNumberFormat(item.unit_keluar)}</td>
+                            <td>{0}</td>
                             <td>{SetNumberFormat(item.kapasitas_keluar)}</td>
                             <td>{SetNumberFormat(currentUnitSaldo)}</td>
                             <td>{SetNumberFormat(currentKapasitasSaldo)}</td>
@@ -224,7 +224,7 @@ export default function Kartu_alat() {
                         item.nama,
                         SetNumberFormat(item.unit_masuk),
                         SetNumberFormat(item.kapasitas_masuk),
-                        SetNumberFormat(item.unit_keluar),
+                        0,
                         SetNumberFormat(item.kapasitas_keluar),
                         SetNumberFormat(currentUnitSaldo),
                         SetNumberFormat(currentKapasitasSaldo)
