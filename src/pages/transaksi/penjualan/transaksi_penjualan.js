@@ -1708,9 +1708,13 @@ export class transaksi_penjualan extends Component {
                                                         <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                                         <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-6 px-2`}>
+                                                    <div className={`${global.input_group} col-4 px-2`}>
                                                         <p className={global.title}>Nama Pesanan <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueNamaPesanan' value={valueNamaPesanan} onChange={this.InputChange} required={true} />
+                                                    </div>
+                                                    <div className={`${global.input_group} col-2 ps-2`}>
+                                                        <p className={global.title}>Standar Pesanan <span className={global.important}>*</span></p>
+                                                        <Select id='select-standar-pesanan' isClearable={true} isSearchable={true} placeholder={'Select Standar...'} styles={CustomSelect} />
                                                     </div>
                                                     <div className={`${global.input_group} col-2 ps-2`}>
                                                         <p className={global.title}>Jenis Produk <span className={global.important}>*</span></p>
@@ -1725,13 +1729,11 @@ export class transaksi_penjualan extends Component {
                                                         <p className={global.title}>Kode Customer <span className={global.important}>*</span></p>
                                                         <Select id='select-kode-customer' name='select-kode-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeCustomer} placeholder={'Select Kode...'} value={valueKodeCustomer} onChange={e => this.SelectCustomer(e)} styles={CustomSelect} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-6 ps-2`}>
+                                                    <div className={`${global.input_group} col-6 px-2`}>
                                                         <p className={global.title}>Nama Customer <span className={global.important}>*</span></p>
                                                         <Select id='select-nama-customer' name='select-nama-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaCustomer} placeholder={'Select Nama Customer...'} value={valueNamaCustomer} onChange={e => this.SelectCustomer(e)} styles={CustomSelect} />
                                                     </div>
-                                                </div>
-                                                <div className={`${bootstrap['d-flex']}`}>
-                                                    <div className={`${global.input_group} col-3 pe-2`}>
+                                                    <div className={`${global.input_group} col-3 ps-2`}>
                                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueJumlah' value={valueJumlah} onInput={InputFormatNumber} min={0} onChange={async e => {
                                                             await this.InputChange(e);
@@ -1742,7 +1744,9 @@ export class transaksi_penjualan extends Component {
                                                             });
                                                         }} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-3 px-2`}>
+                                                </div>
+                                                <div className={`${bootstrap['d-flex']}`}>
+                                                    <div className={`${global.input_group} col-3 pe-2`}>
                                                         <p className={global.title}>Profit (%) <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueProfit' value={valueProfit} onInput={InputFormatNumber} onChange={async e => {
                                                             await this.InputChange(e);
@@ -1752,6 +1756,10 @@ export class transaksi_penjualan extends Component {
                                                     <div className={`${global.input_group} col-3 px-2`}>
                                                         <p className={global.title}>HPP <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueHpp' value={SetPriceFormat(valueHpp)} required={true} readOnly={true} />
+                                                    </div>
+                                                    <div className={`${global.input_group} col-3 px-2`}>
+                                                        <p className={global.title}>Pengurangan Harga <span className={global.important}>*</span></p>
+                                                        <input type="text" id='valuePenguranganHarga' required={true} />
                                                     </div>
                                                     <div className={`${global.input_group} col-3 ps-2`}>
                                                         <p className={global.title}>Harga Jual <span className={global.important}>*</span></p>

@@ -134,6 +134,7 @@ export default function Sidebar(props) {
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/penjualan/transaksi-penjualan'}><span>Transaksi Penjualan</span></Link></li>
                                         <li><Link to={'/transaksi/penjualan/daftar-pesanan'}><span>Data Pesanan</span></Link></li>
+                                        <li><Link to={'/transaksi/penjualan/daftar-konsinyasi'}><span>Data Konsinyasi</span></Link></li>
                                     </ul>
                                 </li>
                                 <li className={style.dropdown}>
@@ -195,6 +196,7 @@ export default function Sidebar(props) {
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/laporan/penjualan/transaksi-penjualan'}><span>Transaksi Penjualan</span></Link></li>
                                         <li><Link to={'/laporan/penjualan/piutang-konsinyasi'}><span>Piutang Konsinyasi</span></Link></li>
+                                        <li><Link to={'/laporan/penjualan/produk-konsinyasi'}><span>Produk Konsinyasi</span></Link></li>
                                     </ul>
                                 </li>
                                 <li className={style.dropdown}>
