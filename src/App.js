@@ -15,6 +15,8 @@ import Login from './pages/login';
 
 // Import Page - Format: MenuSubmenu
 import TransaksiPenjualanKalkulatorEstimasi from './pages/transaksi/penjualan/kalkulator_estimasi';
+import TransaksiPenjualanDaftarStandar from './pages/transaksi/penjualan/daftar_standar';
+import TransaksiPenjualanStandarPesanan from './pages/transaksi/penjualan/standar_pesanan';
 import TransaksiPenjualanDaftarPesanan from './pages/transaksi/penjualan/daftar_pesanan';
 import TransaksiPenjualanDaftarKonsinyasi from './pages/transaksi/penjualan/daftar_konsinyasi';
 import TransaksiPenjualanTransaksiPenjualan from './pages/transaksi/penjualan/transaksi_penjualan';
@@ -45,6 +47,7 @@ import TransaksiPenerimaanKasPengembalianDana from './pages/transaksi/penerimaan
 import TransaksiPenerimaanKasUangMukaPesanan from './pages/transaksi/penerimaan_kas/uang_muka_pesanan';
 import TransaksiPenerimaanKasDaftarUangMuka from './pages/transaksi/penerimaan_kas/daftar_uangmuka';
 import TransaksiPenerimaanKasTerimaPiutang from './pages/transaksi/penerimaan_kas/terima_piutang';
+import TransaksiPenerimaanKasTerimaKonsinyasi from './pages/transaksi/penerimaan_kas/terima_konsinyasi';
 import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
 import TransaksiPermintaanProduksiPesanan from './pages/transaksi/produksi/permintaan_prod_pesanan';
 import DaftarProduksi from './pages/transaksi/produksi/daftar_produksi';
@@ -153,6 +156,8 @@ export default function App() {
                                 <Route path={'/master/inventory/produk'} element={<MasterProduk />} />
                                 <Route path={'/master/tenaga-kerja'} element={<MasterTenagaKerja />} />
                                 <Route path={'/transaksi/penjualan/transaksi-penjualan'} element={<TransaksiPenjualanTransaksiPenjualan />} />
+                                <Route path={'/transaksi/penjualan/daftar-standar'} element={<TransaksiPenjualanDaftarStandar />} />
+                                <Route path={'/transaksi/penjualan/standar-pesanan'} element={<TransaksiPenjualanStandarPesanan />} />
                                 <Route path={'/transaksi/penjualan/daftar-pesanan'} element={<TransaksiPenjualanDaftarPesanan />} />
                                 <Route path={'/transaksi/penjualan/daftar-konsinyasi'} element={<TransaksiPenjualanDaftarKonsinyasi />} />
                                 <Route path={'/transaksi/penjualan/jual-pesan'} element={<TransaksiPenjualanJualPesan />} />
@@ -168,6 +173,7 @@ export default function App() {
                                 <Route path={'/transaksi/penerimaan-kas/uang-muka-pesanan'} element={<TransaksiPenerimaanKasUangMukaPesanan />} />
                                 <Route path={'/transaksi/penerimaan-kas/daftar-uangmuka'} element={<TransaksiPenerimaanKasDaftarUangMuka />} />
                                 <Route path={'/transaksi/penerimaan-kas/terima-piutang'} element={<TransaksiPenerimaanKasTerimaPiutang />} />
+                                <Route path={'/transaksi/penerimaan-kas/terima-konsinyasi'} element={<TransaksiPenerimaanKasTerimaKonsinyasi />} />
                                 <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
                                 <Route path={'/transaksi/produksi/permintaan-prod-pesanan'} element={<TransaksiPermintaanProduksiPesanan />} />
                                 <Route path={'/transaksi/produksi/daftar-produksi'} element={<DaftarProduksi />} />
