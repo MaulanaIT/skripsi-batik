@@ -104,10 +104,13 @@ export class transaksi_penjualan extends Component {
         htmlTableDaftarDetailBTKL: [],
         htmlTableDaftarDetailPenolong: [],
 
+        limitDiskon: 500000,
+
         valueAlamat: '',
         valueDeskripsiPesanan: '',
         valueDepartemen: '',
         valueDiskon: 0,
+        valuePercentageDiskon: 0,
         valueHarga: 0,
         valueHargaAlat: 0,
         valueHargaBahan: 0,
@@ -142,6 +145,7 @@ export class transaksi_penjualan extends Component {
         valueNamaPenolong: [],
         valueNamaProduk: [],
         valueOngkosKirim: 0,
+        valuePengurangan: 0,
         valueProfit: 0,
         valueSisa: 0,
         valueTanggal: moment().format('YYYY-MM-DD'),
@@ -1332,10 +1336,11 @@ export class transaksi_penjualan extends Component {
         const {
             valueHpp,
             valueJumlah,
+            valuePengurangan,
             valueProfit
         } = this.state;
         this.setState({
-            valueHargaJual: +valueHpp * (100 + +valueProfit) / 100
+            valueHargaJual: +valueJumlah * (+valueHpp - +valuePengurangan) * (100 + +valueProfit) / 100
         });
     }
 
@@ -1378,7 +1383,13 @@ export class transaksi_penjualan extends Component {
             });
         }
 
-        this.setState({ valueTotalJual: totalHarga });
+        this.setState({ valueTotalJual: totalHarga }, () => {
+            if (totalHarga > this.state.limitDiskon) {
+                this.setState({valuePercentageDiskon: 10, valueDiskon: +totalHarga * 0.1});
+            } else {
+                this.setState({valuePercentageDiskon: 5, valueDiskon: +totalHarga * 0.05});
+            }
+        });
     }
 
     SelectAlat = (data) => {
@@ -1557,6 +1568,7 @@ export class transaksi_penjualan extends Component {
             valueDeskripsiPesanan,
             valueDepartemen,
             valueDiskon,
+            valuePercentageDiskon,
             valueHarga,
             valueHargaAlat,
             valueHargaBahan,
@@ -1590,6 +1602,7 @@ export class transaksi_penjualan extends Component {
             valueNamaPenolong,
             valueNamaProduk,
             valueOngkosKirim,
+            valuePengurangan,
             valueProfit,
             valueTanggal,
             valueTotalAlat,
@@ -1700,19 +1713,19 @@ export class transaksi_penjualan extends Component {
                                         this.state.jenisPenjualan === 'Pesanan' ?
                                             <React.Fragment>
                                                 <div className={`${bootstrap['d-flex']} flex-wrap`}>
-                                                    <div className={`${global.input_group} col-2 pe-2`}>
+                                                    <div className={`${global.input_group} col-6 col-sm-2 pe-2`}>
                                                         <p className={global.title}>Kode Pesanan <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueKodePesanan' value={valueKodePesanan} required={true} readOnly={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-2 px-2`}>
+                                                    <div className={`${global.input_group} col-6 col-sm-2 ps-2 px-sm-2`}>
                                                         <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                                         <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-6 px-2`}>
+                                                    <div className={`${global.input_group} col-6 mt-2 mt-sm-0 pe-2 px-sm-2`}>
                                                         <p className={global.title}>Nama Pesanan <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueNamaPesanan' value={valueNamaPesanan} onChange={this.InputChange} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-2 ps-2`}>
+                                                    <div className={`${global.input_group} col-6 col-sm-2 mt-2 mt-sm-0 ps-2`}>
                                                         <p className={global.title}>Jenis Produk <span className={global.important}>*</span></p>
                                                         <Select id='select-jenis-produk' name='select-jenis-produk' isClearable={true} isSearchable={true} options={[
                                                             { value: 'Kain', label: 'Kain' },
@@ -1721,7 +1734,7 @@ export class transaksi_penjualan extends Component {
                                                     </div>
                                                 </div>
                                                 <div className={`${bootstrap['d-flex']} flex-wrap`}>
-                                                    <div className={`${global.input_group} col-3 pe-2`}>
+                                                    <div className={`${global.input_group} col-6 pe-2`}>
                                                         <p className={global.title}>Kode Customer <span className={global.important}>*</span></p>
                                                         <Select id='select-kode-customer' name='select-kode-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeCustomer} placeholder={'Select Kode...'} value={valueKodeCustomer} onChange={e => this.SelectCustomer(e)} styles={CustomSelect} />
                                                     </div>
@@ -1730,8 +1743,8 @@ export class transaksi_penjualan extends Component {
                                                         <Select id='select-nama-customer' name='select-nama-customer' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaCustomer} placeholder={'Select Nama Customer...'} value={valueNamaCustomer} onChange={e => this.SelectCustomer(e)} styles={CustomSelect} />
                                                     </div>
                                                 </div>
-                                                <div className={`${bootstrap['d-flex']}`}>
-                                                    <div className={`${global.input_group} col-3 pe-2`}>
+                                                <div className={`${bootstrap['d-flex']} flex-wrap`}>
+                                                    <div className={`${global.input_group} col-6 col-sm-2 pe-2`}>
                                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueJumlah' value={valueJumlah} onInput={InputFormatNumber} min={0} onChange={async e => {
                                                             await this.InputChange(e);
@@ -1742,18 +1755,26 @@ export class transaksi_penjualan extends Component {
                                                             });
                                                         }} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-3 px-2`}>
+                                                    <div className={`${global.input_group} col-6 col-sm-2 ps-2 px-sm-2`}>
                                                         <p className={global.title}>Profit (%) <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueProfit' value={valueProfit} onInput={InputFormatNumber} onChange={async e => {
                                                             await this.InputChange(e);
                                                             this.KalkulasiHargaJual();
                                                         }} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-3 px-2`}>
+                                                    <div className={`${global.input_group} col-6 col-sm-2 mt-2 mt-sm-0 pe-2 px-sm-2`}>
                                                         <p className={global.title}>HPP <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueHpp' value={SetPriceFormat(valueHpp)} required={true} readOnly={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-3 ps-2`}>
+                                                    <div className={`${global.input_group} col-6 col-sm-2 mt-2 mt-sm-0 ps-2 px-sm-2`}>
+                                                        <p className={global.title}>Pengurangan Harga <span className={global.important}>*</span></p>
+                                                        <input type="text" id='valuePengurangan' value={valuePengurangan} onInput={InputFormatNumber} onChange={async (event) => {
+                                                            await this.InputChange(event);
+                                                            await this.KalkulasiHargaJual();
+                                                        
+                                                        }} required={true} />
+                                                    </div>
+                                                    <div className={`${global.input_group} col-12 col-sm-2 mt-2 mt-sm-0 ps-sm-2`}>
                                                         <p className={global.title}>Harga Jual <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueHargaJual' value={SetPriceFormat(valueHargaJual)} required={true} readOnly={true} />
                                                     </div>
@@ -2106,7 +2127,7 @@ export class transaksi_penjualan extends Component {
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Diskon</p>
-                                                <input type="text" id='valueDiskon' className={'col-4'} value={valueDiskon} onInput={InputFormatNumber} onChange={this.InputChange} onBlur={(e) => parseInt(e.target.value) > parseInt(valueTotalJual) && this.setState({ valueDiskon: valueTotalJual })} />
+                                                <input type="text" id='valueDiskon' className={'col-4'} value={`${valuePercentageDiskon}%`} readOnly={true} />
                                             </div>
                                         </div>
                                         <div className={`align-items-center ${global.input_group_row}`}>
@@ -2172,7 +2193,7 @@ export class transaksi_penjualan extends Component {
                                             </div>
                                             <div className={`align-items-center ${global.input_group_row}`}>
                                                 <p className={`${global.title} col-3`}>Diskon</p>
-                                                <input type="text" id='valueDiskon' className={'col-6'} value={valueDiskon} onInput={InputFormatNumber} onChange={this.InputChange} />
+                                                <input type="text" id='valueDiskon' className={'col-6'} value={`${valuePercentageDiskon}%`} readOnly={true} />
                                             </div>
                                         </div>
                                         <div className={`align-items-center ${global.input_group_row}`}>
