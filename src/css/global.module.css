@@ -91,6 +91,26 @@
     justify-content: space-between;
 }
 
+.card>.header>a {
+    align-items: center;
+    border: none;
+    color: white;
+    display: grid;
+    font-size: 14px;
+    gap: 6px;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    outline: none;
+    position: relative;
+    padding: 6px 12px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.card>.header>a:hover {
+    color: white;
+}
+
 .card>.header>.title {
     font-size: 16px;
     font-weight: 500;
@@ -284,7 +304,6 @@ textarea:read-only {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
-    padding: 12px;
 }
 
 .table_action>button {
@@ -299,6 +318,8 @@ textarea:read-only {
     outline: none;
     position: relative;
     padding: 6px 12px;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
 .table_action>button>* {

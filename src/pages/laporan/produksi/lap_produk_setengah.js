@@ -61,7 +61,7 @@ export default function Lap_produk_setengah() {
     const [getDataFilterLaporan, setDataFilterLaporan] = useState([]);
     const [getDataNamaProduk, setDataNamaProduk] = useStateWithCallbackLazy([]);
 
-    const [getHTMLTableDaftarLaporan, setHTMLTableDaftarLaporan] = useState([]);
+    const [getHTMLTableDaftarLaporan, setHTMLTableDaftarLaporan] = useStateWithCallbackLazy([]);
 
     const [getValueFilterLaporan, setValueFilterLaporan] = useState([]);
     const [getValueNama, setValueNama] = useState([]);
@@ -113,7 +113,7 @@ export default function Lap_produk_setengah() {
                                     <td>{item.tanggal}</td>
                                     <td>{item.kode_produk}</td>
                                     <td>{item.nama_produk}</td>
-                                    <td>{item.jumlah}</td>
+                                    <td>{SetNumberFormat(item.jumlah)}</td>
                                     <td>{item.departemen}</td>
                                     <td>{
                                         item.departemen === 'Designer' ? 'Cap/Canting' :
@@ -128,7 +128,9 @@ export default function Lap_produk_setengah() {
                 });
             }
 
-            setHTMLTableDaftarLaporan(htmlTableDaftarLaporan);
+            setHTMLTableDaftarLaporan(htmlTableDaftarLaporan, () => {
+                $(`#table-data`).DataTable();
+            });
         }).catch(error => {
             console.log(error);
         });

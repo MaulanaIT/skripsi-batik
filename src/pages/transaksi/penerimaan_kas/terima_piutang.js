@@ -163,8 +163,10 @@ export default function Terima_piutang() {
                             <td>{SetPriceFormat(item.piutang)}</td>
                             <td>{SetPriceFormat(item.terima_piutang)}</td>
                             <td>{SetPriceFormat(item.sisa)}</td>
-                            <td className={cx([global.table_action, 'text-nowrap'])}>
-                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => SelectKonsinyasi(item)}>Terima Piutang</button>
+                            <td>
+                                <div className={cx([global.table_action, 'text-nowrap'])}>
+                                    <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }} onClick={() => SelectKonsinyasi(item)}>Terima Piutang</button>
+                                </div>
                             </td>
                         </tr>
                     );
@@ -383,12 +385,12 @@ export default function Terima_piutang() {
                             </div>
                         </div>
                         <div className='d-flex'>
-                                {getValueKodeAkun.value === '1102' &&
-                                    <div className={`${global.input_group}`}>
-                                        <p>Upload File Transfer</p>
-                                        <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
-                                    </div>
-                                }
+                            {getValueKodeAkun.value === '1102' &&
+                                <div className={`${global.input_group}`}>
+                                    <p>Upload File Transfer</p>
+                                    <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
+                                </div>
+                            }
                         </div>
                         <div className='d-flex'>
                             <div className='col-6 pe-2'>
