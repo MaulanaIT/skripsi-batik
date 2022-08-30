@@ -15,7 +15,10 @@ import Login from './pages/login';
 
 // Import Page - Format: MenuSubmenu
 import TransaksiPenjualanKalkulatorEstimasi from './pages/transaksi/penjualan/kalkulator_estimasi';
+import TransaksiPenjualanDaftarStandar from './pages/transaksi/penjualan/daftar_standar';
+import TransaksiPenjualanStandarPesanan from './pages/transaksi/penjualan/standar_pesanan';
 import TransaksiPenjualanDaftarPesanan from './pages/transaksi/penjualan/daftar_pesanan';
+import TransaksiPenjualanDaftarKonsinyasi from './pages/transaksi/penjualan/daftar_konsinyasi';
 import TransaksiPenjualanTransaksiPenjualan from './pages/transaksi/penjualan/transaksi_penjualan';
 import TransaksiPenjualanJualPesan from './pages/transaksi/penjualan/jual_pesan';
 import MasterUser from './pages/master/user';
@@ -44,6 +47,7 @@ import TransaksiPenerimaanKasPengembalianDana from './pages/transaksi/penerimaan
 import TransaksiPenerimaanKasUangMukaPesanan from './pages/transaksi/penerimaan_kas/uang_muka_pesanan';
 import TransaksiPenerimaanKasDaftarUangMuka from './pages/transaksi/penerimaan_kas/daftar_uangmuka';
 import TransaksiPenerimaanKasTerimaPiutang from './pages/transaksi/penerimaan_kas/terima_piutang';
+import TransaksiPenerimaanKasTerimaKonsinyasi from './pages/transaksi/penerimaan_kas/terima_konsinyasi';
 import TransaksiPermintaanProduksi from './pages/transaksi/produksi/permintaanprod';
 import TransaksiPermintaanProduksiPesanan from './pages/transaksi/produksi/permintaan_prod_pesanan';
 import DaftarProduksi from './pages/transaksi/produksi/daftar_produksi';
@@ -56,6 +60,7 @@ import LaporanPembelianTransaksiPembelian from './pages/laporan/pembelian/transa
 import LaporanPembelianReturPembelian from './pages/laporan/pembelian/retur_pembelian';
 import LaporanPenjualanTransaksiPenjualan from './pages/laporan/penjualan/transaksi_penjualan';
 import LaporanPenjualanPiutangKonsinyasi from './pages/laporan/penjualan/piutang_konsinyasi';
+import LaporanPenjualanProdukKonsinyasi from './pages/laporan/penjualan/produk_konsinyasi';
 import LaporanKasPenerimaanKas from './pages/laporan/kas/penerimaan_kas';
 import LaporanKasPengeluaranKas from './pages/laporan/kas/pengeluaran_kas';
 import LaporanProfitabilitas from './pages/laporan/profitabilitas';
@@ -152,7 +157,10 @@ export default function App() {
                                 <Route path={'/master/inventory/produk'} element={<MasterProduk />} />
                                 <Route path={'/master/tenaga-kerja'} element={<MasterTenagaKerja />} />
                                 <Route path={'/transaksi/penjualan/transaksi-penjualan'} element={<TransaksiPenjualanTransaksiPenjualan />} />
+                                <Route path={'/transaksi/penjualan/daftar-standar'} element={<TransaksiPenjualanDaftarStandar />} />
+                                <Route path={'/transaksi/penjualan/standar-pesanan'} element={<TransaksiPenjualanStandarPesanan />} />
                                 <Route path={'/transaksi/penjualan/daftar-pesanan'} element={<TransaksiPenjualanDaftarPesanan />} />
+                                <Route path={'/transaksi/penjualan/daftar-konsinyasi'} element={<TransaksiPenjualanDaftarKonsinyasi />} />
                                 <Route path={'/transaksi/penjualan/jual-pesan'} element={<TransaksiPenjualanJualPesan />} />
                                 <Route path={'/transaksi/penjualan/daftar-pesanan/kalkulator-estimasi'} element={<TransaksiPenjualanKalkulatorEstimasi />} />
                                 <Route path={'/transaksi/pembelian/order-pembelian'} element={<TransaksiPembelianOrderPembelian />} />
@@ -166,6 +174,7 @@ export default function App() {
                                 <Route path={'/transaksi/penerimaan-kas/uang-muka-pesanan'} element={<TransaksiPenerimaanKasUangMukaPesanan />} />
                                 <Route path={'/transaksi/penerimaan-kas/daftar-uangmuka'} element={<TransaksiPenerimaanKasDaftarUangMuka />} />
                                 <Route path={'/transaksi/penerimaan-kas/terima-piutang'} element={<TransaksiPenerimaanKasTerimaPiutang />} />
+                                <Route path={'/transaksi/penerimaan-kas/terima-konsinyasi'} element={<TransaksiPenerimaanKasTerimaKonsinyasi />} />
                                 <Route path={'/transaksi/produksi/permintaanprod'} element={<TransaksiPermintaanProduksi />} />
                                 <Route path={'/transaksi/produksi/permintaan-prod-pesanan'} element={<TransaksiPermintaanProduksiPesanan />} />
                                 <Route path={'/transaksi/produksi/daftar-produksi'} element={<DaftarProduksi />} />
@@ -178,6 +187,7 @@ export default function App() {
                                 <Route path={'/laporan/pembelian/retur-pembelian'} element={<LaporanPembelianReturPembelian />} />
                                 <Route path={'/laporan/penjualan/transaksi-penjualan'} element={<LaporanPenjualanTransaksiPenjualan />} />
                                 <Route path={'/laporan/penjualan/piutang-konsinyasi'} element={<LaporanPenjualanPiutangKonsinyasi />} />
+                                <Route path={'/laporan/penjualan/produk-konsinyasi'} element={<LaporanPenjualanProdukKonsinyasi />} />
                                 <Route path={'/laporan/kas/penerimaan-kas'} element={<LaporanKasPenerimaanKas />} />
                                 <Route path={'/laporan/kas/pengeluaran-kas'} element={<LaporanKasPengeluaranKas />} />
                                 <Route path={'/laporan/produksi/lap-produksi'} element={<LaporanProduksi />} />

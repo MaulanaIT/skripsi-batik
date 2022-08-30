@@ -133,7 +133,9 @@ export default function Sidebar(props) {
                                     </div>
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/penjualan/transaksi-penjualan'}><span>Transaksi Penjualan</span></Link></li>
+                                        <li><Link to={'/transaksi/penjualan/daftar-standar'}><span>Standar Pesanan</span></Link></li>
                                         <li><Link to={'/transaksi/penjualan/daftar-pesanan'}><span>Data Pesanan</span></Link></li>
+                                        <li><Link to={'/transaksi/penjualan/daftar-konsinyasi'}><span>Data Konsinyasi</span></Link></li>
                                     </ul>
                                 </li>
                                 <li className={style.dropdown}>
@@ -147,7 +149,7 @@ export default function Sidebar(props) {
                                         <li><Link to={'/transaksi/pembelian/daftar-terima-barang'}><span>Penerimaan Barang</span></Link></li>
                                     </ul>
                                 </li>
-                                <li className={style.dropdown}>
+                                {/* <li className={style.dropdown}> 
                                     <div>
                                         <span>Penerimaan Kas</span>
                                         <MdExpandMore className={style.toggle} />
@@ -155,7 +157,7 @@ export default function Sidebar(props) {
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/transaksi/penerimaan-kas/terima-piutang'}><span>Terima Piutang</span></Link></li>
                                     </ul>
-                                </li>
+                                </li> */}
                                 <li className={style.dropdown}>
                                     <div>
                                         <span>Produksi</span>
@@ -195,6 +197,7 @@ export default function Sidebar(props) {
                                     <ul className={style.dropdown_menu}>
                                         <li><Link to={'/laporan/penjualan/transaksi-penjualan'}><span>Transaksi Penjualan</span></Link></li>
                                         <li><Link to={'/laporan/penjualan/piutang-konsinyasi'}><span>Piutang Konsinyasi</span></Link></li>
+                                        <li><Link to={'/laporan/penjualan/produk-konsinyasi'}><span>Produk Konsinyasi</span></Link></li>
                                     </ul>
                                 </li>
                                 <li className={style.dropdown}>

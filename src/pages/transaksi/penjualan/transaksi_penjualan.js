@@ -1721,7 +1721,7 @@ export class transaksi_penjualan extends Component {
                                                         <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                                         <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-6 mt-2 mt-sm-0 pe-2 px-sm-2`}>
+                                                    <div className={`${global.input_group} col-6 px-2`}>
                                                         <p className={global.title}>Nama Pesanan <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueNamaPesanan' value={valueNamaPesanan} onChange={this.InputChange} required={true} />
                                                     </div>
@@ -1755,7 +1755,9 @@ export class transaksi_penjualan extends Component {
                                                             });
                                                         }} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-6 col-sm-2 ps-2 px-sm-2`}>
+                                                </div>
+                                                <div className={`${bootstrap['d-flex']}`}>
+                                                    <div className={`${global.input_group} col-6 col-sm-2 ps-2 pe-sm-2`}>
                                                         <p className={global.title}>Profit (%) <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueProfit' value={valueProfit} onInput={InputFormatNumber} onChange={async e => {
                                                             await this.InputChange(e);
@@ -1873,7 +1875,7 @@ export class transaksi_penjualan extends Component {
                                     </div>
                                 </div>
                                 <div className={`${global.card} w-100 ${this.state.tabSelected === 0 ? '' : 'd-none'}`}>
-                                    <div className='d-flex flex-wrap'>
+                                    {/* <div className='d-flex flex-wrap'> 
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Kode Bahan</p>
                                             <Select id='select-kode-bahan-bahan-baku' name='select-kode-bahan-bahan-baku' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeBahan} value={valueKodeBahan} placeholder={'Select Kode...'} onChange={e => this.SelectBahan(e)} styles={CustomSelect} />
@@ -1890,13 +1892,13 @@ export class transaksi_penjualan extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Jumlah</p>
-                                            <input type="text" id='valueJumlahBahan' value={valueJumlahBahan} onChange={this.InputChange} />
+                                            <input type="text" id='valueJumlahBahan' value={valueJumlahBahan} onChange={this.InputChange} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                             <p className={global.title}>Aksi</p>
                                             <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={this.AddDetailBahan}><MdAdd /> Tambah</button>
                                         </div>
-                                    </div>
+                                    </div>*/}
                                     <div className={`table-responsive`}>
                                         <table id='table-data-bahan-baku' className={`table w-100`}>
                                             <thead className='text-nowrap'>
@@ -1924,7 +1926,7 @@ export class transaksi_penjualan extends Component {
                                     </div>
                                 </div>
                                 <div className={`${global.card} ${this.state.tabSelected === 1 ? '' : 'd-none'}`}>
-                                    <div className='d-flex'>
+                                    {/* <div className='d-flex'> 
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Kode Bahan</p>
                                             <Select id='select-kode-bahan-bop-penolong' name='select-kode-bahan-bop-penolong' isClearable={true} isSearchable={true} options={this.state.dataSelectKodePenolong} placeholder={'Select Kode...'} value={valueKodePenolong} onChange={e => this.SelectPenolong(e)} styles={CustomSelect} />
@@ -1941,13 +1943,13 @@ export class transaksi_penjualan extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Jumlah</p>
-                                            <input type="text" id='valueJumlahPenolong' value={valueJumlahPenolong} onChange={this.InputChange} />
+                                            <input type="text" id='valueJumlahPenolong' value={valueJumlahPenolong} onChange={this.InputChange} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                             <p className={global.title}>Aksi</p>
                                             <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={this.AddDetailPenolong}><MdAdd /> Tambah</button>
                                         </div>
-                                    </div>
+                                    </div>*/}
                                     <div className={`table-responsive`}>
                                         <table id='table-data-bop-penolong' className={`table w-100`}>
                                             <thead className='text-nowrap'>
@@ -1975,7 +1977,7 @@ export class transaksi_penjualan extends Component {
                                     </div>
                                 </div>
                                 <div className={`${global.card} ${this.state.tabSelected === 2 ? '' : 'd-none'}`}>
-                                    <div className='d-flex'>
+                                    {/* <div className='d-flex'> 
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Kode Alat</p>
                                             <Select id='select-kode-bahan-bop-alat' name='select-kode-bahan-bop-alat' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeAlat} value={valueKodeAlat} placeholder={'Select Kode...'} onChange={e => this.SelectAlat(e)} styles={CustomSelect} />
@@ -1992,13 +1994,13 @@ export class transaksi_penjualan extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Jumlah</p>
-                                            <input type="text" id='valueJumlahAlat' value={valueJumlahAlat} onChange={this.InputChange} />
+                                            <input type="text" id='valueJumlahAlat' value={valueJumlahAlat} onChange={this.InputChange} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                             <p className={global.title}>Aksi</p>
                                             <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={this.AddDetailAlat}><MdAdd /> Tambah</button>
                                         </div>
-                                    </div>
+                                    </div>*/}
                                     <div className={`table-responsive`}>
                                         <table id='table-data-bop-alat' className={`table w-100`}>
                                             <thead className='text-nowrap'>
@@ -2026,7 +2028,7 @@ export class transaksi_penjualan extends Component {
                                     </div>
                                 </div>
                                 <div className={`${global.card} ${this.state.tabSelected === 3 ? '' : 'd-none'}`}>
-                                    <div className='d-flex'>
+                                    {/* <div className='d-flex'> 
                                         <div className={`${global.input_group} col-4 pe-2`}>
                                             <p className={global.title}>Kode TKL</p>
                                             <Select id='select-kode-btkl' name='select-kode-btkl' isClearable={true} isSearchable={true} options={this.state.dataSelectKodeBTKL} placeholder={'Select Kode...'} value={valueKodeBTKL} onChange={e => this.SelectBTKL(e)} styles={CustomSelect} />
@@ -2047,13 +2049,13 @@ export class transaksi_penjualan extends Component {
                                         </div>
                                         <div className={`${global.input_group} col-4 px-2`}>
                                             <p className={global.title}>Jumlah</p>
-                                            <input type="text" id='valueJumlahBTKL' value={valueJumlahBTKL} onChange={this.InputChange} />
+                                            <input type="text" id='valueJumlahBTKL' value={valueJumlahBTKL} onChange={this.InputChange} readOnly={true} />
                                         </div>
                                         <div className={`${global.input_group} col-3 ms-auto ps-2`}>
                                             <p className={global.title}>Aksi</p>
                                             <button type='button' className={`${global.button}`} style={{ "--button-first-color": '#026b00', "--button-second-color": '#64a562' }} onClick={this.AddDetailBTKL}><MdAdd /> Tambah</button>
                                         </div>
-                                    </div>
+                                    </div>*/}
                                     <div className={`table-responsive`}>
                                         <table id='table-data-btkl' className={`table w-100`}>
                                             <thead className='text-nowrap'>
