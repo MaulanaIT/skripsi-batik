@@ -109,8 +109,6 @@ const Add_hpp = (props, ref) => {
         GetDetailBahanBaku();
         GetDetailPenolong();
         GetDetailTenagaKerja();
-
-        setValueDepartemen(localStorage.getItem('leksana_jabatan'));
     }, []);
 
     useEffect(() => {
@@ -382,7 +380,7 @@ const Add_hpp = (props, ref) => {
                 tanggal: getValueTanggal,
                 kode_tenaga_kerja: getValueKodeTenagaKerja.value,
                 nama_tenaga_kerja: getValueNamaTenagaKerja.label,
-                departemen: getValueDepartemen === '' ? localStorage.getItem('leksana_jabatan') : getValueDepartemen,
+                departemen: getValueDepartemen.label,
                 jumlah: getValueJumlah,
                 harga: getValueHarga,
                 total_harga: getValueTotalHarga
@@ -979,13 +977,16 @@ const Add_hpp = (props, ref) => {
 
         let valueKode = getDataSelectKodeTenagaKerja.find(item => item.value === data);
         let valueNama = getDataSelectNamaTenagaKerja.find(item => item.value === data);
+        let departemen = getDataTenagaKerja.find(item => item.kode === valueKode?.value)?.departemen;
 
         if (data) {
             setValueKodeTenagaKerja(valueKode);
             setValueNamaTenagaKerja(valueNama);
+            setValueDepartemen(departemen);
         } else {
             setValueKodeTenagaKerja(null);
             setValueNamaTenagaKerja(null);
+            setValueDepartemen('');
         }
     }
 

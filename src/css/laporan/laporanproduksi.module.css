@@ -10,7 +10,7 @@
     align-items: baseline;
     display: flex;
     flex-direction: row;
-    gap: 580px;
+    justify-content: space-between;
 }
 
 .header>.pathname {
@@ -18,10 +18,24 @@
     font-weight: normal;
     margin: 0;
     margin-left: auto;
+    white-space: nowrap;
 }
 
 .header>.title {
     font-size: 20px;
     font-weight: 500;
     margin: 0;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 767px) {
+    .header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: unset;
+    }
+    
+    .header>.pathname {
+        margin-left: unset;
+    }
 }
