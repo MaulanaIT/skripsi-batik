@@ -211,8 +211,8 @@ export default function Terima_piutang() {
         axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
-            let dataLunas = [...data.filter(item => +item.jumlah_terjual > 0)];
-            let dataBelumLunas = [...data.filter(item => +item.jumlah_terjual === 0)];
+            let dataLunas = [...data.filter(item => +item.sisa === 0)];
+            let dataBelumLunas = [...data.filter(item => +item.sisa > 0)];
 
             let htmlTableDaftarBelumLunas = [];
             let htmlTableDaftarLunas = [];
