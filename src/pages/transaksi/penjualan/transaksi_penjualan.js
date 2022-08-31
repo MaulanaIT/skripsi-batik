@@ -838,7 +838,7 @@ export class transaksi_penjualan extends Component {
             valueProfit
         } = this.state;
         this.setState({
-            valueHargaJual: (+valueJumlah * +valueHpp * (100 + +valueProfit) / 100) - +valuePengurangan
+            valueHargaJual: ( +valueHpp * (100 + +valueProfit) / 100) - +valuePengurangan
         });
     }
 
