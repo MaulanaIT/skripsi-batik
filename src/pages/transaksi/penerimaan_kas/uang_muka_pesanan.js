@@ -88,6 +88,8 @@ export default function Uang_muka_pesanan() {
         GetAkun();
         GetJual();
 
+        let hpp = parseFloat(+props.hpp / +props.jumlah).toFixed(2);
+
         setValueJumlah(+props.jumlah);
         setValueKodeCustomer(props.kode_customer);
         setValueNamaCustomer(props.nama_customer);
@@ -96,9 +98,10 @@ export default function Uang_muka_pesanan() {
         setValueTotalHpp(props.hpp);
         setValueTotalHarga(props.harga_jual);
         setValueTotalJual(props.harga_jual);
-        setValueHpp(parseFloat(+props.hpp / +props.jumlah).toFixed(2));
+        setValueHpp(+hpp);
         setValueHarga(parseFloat(+props.harga_jual / +props.jumlah).toFixed(2));
         setValueTanggal(moment().format('YYYY-MM-DD'));
+        setValueDiskon(+props.harga_jual * 0.1);
     }, []);
 
     useEffect(() => {
@@ -106,8 +109,12 @@ export default function Uang_muka_pesanan() {
     }, [getValueTotalJual, getValueDiskon, getValueOngkosKirim]);
 
     useEffect(() => {
+        setValueUangMuka(+getValueKalkulasiTotalHarga * 0.5);
+    }, [getValueKalkulasiTotalHarga]);
+
+    useEffect(() => {
         setValueSisa(+getValueKalkulasiTotalHarga - +getValueUangMuka);
-    }, [getValueUangMuka, getValueKalkulasiTotalHarga]);
+    }, [getValueUangMuka]);
 
     const GetAkun = () => {
         ShowLoading();
@@ -324,7 +331,7 @@ export default function Uang_muka_pesanan() {
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Diskon</p>
-                            <input type="text" id='input-detail-diskon' className={'col-4'} value={getValueDiskon} onChange={e => setValueDiskon(e.target.value)} />
+                            <input type="text" id='input-detail-diskon' className={'col-4'} value={getValueDiskon} onChange={e => setValueDiskon(e.target.value)} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Ongkos Kirim <span className={global.important}>*</span></p>
@@ -336,7 +343,7 @@ export default function Uang_muka_pesanan() {
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Uang Muka <span className={global.important}>*</span></p>
-                            <input type="text" id='input-detail-uang-muka' className={`col-4`} value={getValueUangMuka} onChange={e => setValueUangMuka(e.target.value)} />
+                            <input type="text" id='input-detail-uang-muka' className={`col-4`} value={getValueUangMuka} onChange={e => setValueUangMuka(e.target.value)} readOnly={true} />
                             <div className='col-5 ps-2'>
                                 <Select id='select-kode-akun' name='select-kode-akun' className={`col-5`} isClearable={true} isSearchable={true} options={getDataSelectAkun} value={getValueKodeAkun} placeholder={'Select Akun...'} onChange={e => setValueKodeAkun(e)} styles={CustomSelect} />
                             </div>
