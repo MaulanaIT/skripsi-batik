@@ -148,6 +148,115 @@ export class transaksi_penjualan extends Component {
         await this.GetStandarPesanan();
     }
 
+    AddDetail = () => {
+        const {
+            valueHarga,
+            valueJumlah,
+            valueKodeJual,
+            valueKodeProduk,
+            valueNamaProduk,
+            valueHpp,
+            valueTotalHpp
+        } = this.state;
+
+        if (+valueJumlah < 0) {
+            alert('Jumlah tidak boleh minus');
+            return;
+        }
+
+        if (this.state.jenisPenjualan.toLowerCase() === 'tunai') {
+            if (!CheckInputValidity('form-data') || this.state.valueKodeCustomer.length <= 0 || valueKodeProduk.length <= 0) {
+                alert('Isi data dengan benar');
+                return;
+            }
+
+            let dataTunai = this.state.dataTunai;
+
+            let check = dataTunai.findIndex(item => item.kode_item === valueKodeProduk.value && item.harga === valueHarga);
+
+            if (check < 0) {
+                dataTunai.push({
+                    kode: valueKodeJual,
+                    kode_item: valueKodeProduk.value,
+                    nama_item: valueNamaProduk.label,
+                    jumlah: valueJumlah,
+                    harga: valueHarga,
+                    total_harga: valueJumlah * valueHarga,
+                    hpp: valueHpp,
+                    total_hpp: valueTotalHpp
+                });
+            } else {
+                dataTunai[check].jumlah = +dataTunai[check].jumlah + +valueJumlah;
+                dataTunai[check].total_harga = +dataTunai[check].total_harga + valueJumlah * valueHarga;
+                dataTunai[check].total_hpp = +dataTunai[check].total_hpp + valueJumlah * valueHpp;
+            }
+
+            this.setState({
+                dataTunai: dataTunai,
+                valueKodeProduk: [],
+                valueNamaProduk: [],
+                valueHarga: 0,
+                valueJumlah: 0,
+                valueTotalJual: 0,
+                valueHpp: 0,
+                valueTotalHpp: 0
+            }, () => {
+                this.GetDetailTunai();
+            });
+        } else if (this.state.jenisPenjualan.toLowerCase() === 'konsinyasi') {
+            if (!CheckInputValidity('form-data') || this.state.valueKodeConsignee.length <= 0 || valueKodeProduk.length <= 0) {
+                alert('Isi data dengan benar');
+                return;
+            }
+            let dataKonsinyasi = this.state.dataKonsinyasi;
+
+            let check = dataKonsinyasi.findIndex(item => item.kode_item === valueKodeProduk.value && item.harga === valueHarga);
+
+            if (check < 0) {
+                dataKonsinyasi.push({
+                    kode: valueKodeJual,
+                    kode_item: valueKodeProduk.value,
+                    nama_item: valueNamaProduk.label,
+                    jumlah: valueJumlah,
+                    harga: valueHarga,
+                    total_harga: valueJumlah * valueHarga,
+                    hpp: valueHpp,
+                    total_hpp: valueTotalHpp
+                });
+            } else {
+                dataKonsinyasi[check].jumlah = +dataKonsinyasi[check].jumlah + +valueJumlah;
+                dataKonsinyasi[check].total_harga = +dataKonsinyasi[check].total_harga + valueJumlah * valueHarga;
+                dataKonsinyasi[check].total_hpp = +dataKonsinyasi[check].total_hpp + valueTotalHpp;
+            }
+
+            this.setState({
+                dataKonsinyasi: dataKonsinyasi,
+                valueKodeProduk: [],
+                valueNamaProduk: [],
+                valueHarga: 0,
+                valueJumlah: 0,
+                valueTotalJual: 0,
+                valueHpp: 0,
+                valueTotalHpp: 0
+            }, () => {
+                this.GetDetailKonsinyasi();
+            });
+        } else if (this.state.jenisPenjualan.toLowerCase() === 'pesanan') {
+            let dataPesanan = this.state.dataPesanan;
+
+            dataPesanan.push({
+                kode: valueKodeJual,
+                jumlah: valueJumlah,
+                harga: valueHarga,
+                total_harga: valueJumlah * valueHarga
+            });
+
+            this.setState({ dataPesanan: dataPesanan }, () => {
+                this.GetDetailPesanan();
+            });
+        }
+    }
+
     DeleteKonsinyasi = (id) => {
         let dataKonsinyasi = this.state.dataKonsinyasi;
 
@@ -318,13 +427,13 @@ export class transaksi_penjualan extends Component {
                             <td>{item.kode}</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td>{item.jumlah}</td>
-                            <td>{item.harga}</td>
-                            <td>{item.total_harga}</td>
+                            <td>{SetNumberFormat(+item.jumlah * +this.state.valueJumlah)}</td>
+                            <td>{SetPriceFormat(+item.harga * +this.state.valueJumlah)}</td>
+                            <td>{SetPriceFormat(+item.total_harga * +this.state.valueJumlah)}</td>
                         </tr>
                     );
 
-                    valueTotalAlat += +item.total_harga;
+                    valueTotalAlat += +item.total_harga * +this.state.valueJumlah;
                 })
             }
 
@@ -336,13 +445,13 @@ export class transaksi_penjualan extends Component {
                             <td>{item.kode}</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td>{item.jumlah}</td>
-                            <td>{item.harga}</td>
-                            <td>{item.total_harga}</td>
+                            <td>{SetNumberFormat(+item.jumlah * +this.state.valueJumlah)}</td>
+                            <td>{SetPriceFormat(+item.harga * +this.state.valueJumlah)}</td>
+                            <td>{SetPriceFormat(+item.total_harga * +this.state.valueJumlah)}</td>
                         </tr>
                     );
 
-                    valueTotalBahan += +item.total_harga;
+                    valueTotalBahan += +item.total_harga * +this.state.valueJumlah;
                 })
             }
 
@@ -354,13 +463,13 @@ export class transaksi_penjualan extends Component {
                             <td>{item.kode}</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td>{item.jumlah}</td>
-                            <td>{item.harga}</td>
-                            <td>{item.total_harga}</td>
+                            <td>{SetNumberFormat(+item.jumlah * +this.state.valueJumlah)}</td>
+                            <td>{SetPriceFormat(+item.harga * +this.state.valueJumlah)}</td>
+                            <td>{SetPriceFormat(+item.total_harga * +this.state.valueJumlah)}</td>
                         </tr>
                     );
 
-                    valueTotalPenolong += +item.total_harga;
+                    valueTotalPenolong += +item.total_harga * +this.state.valueJumlah;
                 })
             }
 
@@ -373,13 +482,13 @@ export class transaksi_penjualan extends Component {
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
                             <td>{item.departemen}</td>
-                            <td>{item.jumlah}</td>
-                            <td>{item.harga}</td>
-                            <td>{item.total_harga}</td>
+                            <td>{SetNumberFormat(+item.jumlah * +this.state.valueJumlah)}</td>
+                            <td>{SetPriceFormat(+item.harga * +this.state.valueJumlah)}</td>
+                            <td>{SetPriceFormat(+item.total_harga * +this.state.valueJumlah)}</td>
                         </tr>
                     );
 
-                    valueTotalBTKL += +item.total_harga;
+                    valueTotalBTKL += +item.total_harga * +this.state.valueJumlah;
                 })
             }
 
@@ -826,6 +935,9 @@ export class transaksi_penjualan extends Component {
 
         $('#table-data').DataTable().destroy();
         $('#table-data-bahan-baku').DataTable().destroy();
+        $('#table-data-bop-penolong').DataTable().destroy();
+        $('#table-data-bop-alat').DataTable().destroy();
+        $('#table-data-btkl').DataTable().destroy();
 
         this.setState({
             jenisPenjualan: data ? data.value : '',
@@ -833,6 +945,10 @@ export class transaksi_penjualan extends Component {
             dataTunai: [],
             dataKonsinyasi: [],
             dataPesanan: [],
+            dataDetailAlat: [],
+            dataDetailBahan: [],
+            dataDetailPenolong: [],
+            dataDetailBTKL: [],
 
             valueDiskon: 0,
             valueHarga: 0,
@@ -1055,6 +1171,8 @@ export class transaksi_penjualan extends Component {
                                                             this.setState({
                                                                 valueJumlah: e.target.value,
                                                                 valueTotalHpp: +e.target.value * +valueHpp
+                                                            }, () => {
+                                                                this.GetDetailStandarPesanan(this.state.valueNamaStandarPesanan.value);
                                                             });
                                                         }} required={true} />
                                                     </div>

@@ -5,7 +5,8 @@ import $ from 'jquery';
 import axios from 'axios';
 import moment from 'moment';
 import Select from 'react-select';
-import { baseURL, config, cx, GenerateCode, HideLoading, InputFormatNumber, SetPriceFormat, ShowLoading } from '../../../component/helper';
+import { FaCheck, FaPen } from 'react-icons/fa';
+import { baseURL, config, cx, GenerateCode, HideLoading, InputFormatNumber, SetNumberFormat, SetPriceFormat, ShowLoading } from '../../../component/helper';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
 // Import Component
@@ -61,10 +62,12 @@ export default function Terima_piutang() {
 
     const [getDataBelumLunas, setDataBelumLunas] = useState([]);
     const [getDataLunas, setDataLunas] = useState([]);
+    const [getDataDetail, setDataDetail] = useState([]);
     const [getDataSelectAkun, setDataSelectAkun] = useState([]);
 
     const [getHTMLTableDaftarBelumLunas, setHTMLTableDaftarBelumLunas] = useStateWithCallbackLazy([]);
     const [getHTMLTableDaftarLunas, setHTMLTableDaftarLunas] = useStateWithCallbackLazy([]);
+    const [getHTMLTableDaftarDetail, setHTMLTableDaftarDetail] = useStateWithCallbackLazy([]);
 
     const [getValueKodeAkun, setValueKodeAkun] = useState([]);
     const [getValueKodeConsignee, setValueKodeConsignee] = useState('');
@@ -85,6 +88,8 @@ export default function Terima_piutang() {
         GetAkun();
         GetKonsinyasi();
         GetTerimaPiutang();
+
+        $(`#table-detail-data`).DataTable();
     }, []);
 
     useEffect(() => {
@@ -130,6 +135,57 @@ export default function Terima_piutang() {
         });
     }
 
+    const GetDetail = (kode) => {
+        ShowLoading();
+
+        $(`#table-detail-data`).DataTable().destroy();
+
+        const formData = new FormData();
+
+        formData.append('kode', kode)
+
+        axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/select-detail.php`, formData, config).then(response => {
+            let data = response.data.data;
+
+            let htmlTableDaftarDetail = [];
+            let terimaPiutang = 0;
+
+            if (data && data.length > 0) {
+                data.forEach((item, index) => {
+                    htmlTableDaftarDetail.push(
+                        <tr key={index} className='align-middle'>
+                            <td>{index + 1}.</td>
+                            <td>{item.kode_item}</td>
+                            <td>{item.nama_item}</td>
+                            <td>{item.jumlah}</td>
+                            <td>
+                                <input type="text" defaultValue={item.jumlah_terjual} onBlur={e => UpdateTerjual(item.id, e.target.value, item.kode)} required={true} />
+                            </td>
+                            <td>{SetNumberFormat(item.jumlah_sisa)}</td>
+                            <td>{SetPriceFormat(item.harga)}</td>
+                            <td>{SetPriceFormat(item.total_harga)}</td>
+                        </tr>
+                    );
+
+                    terimaPiutang += +item.jumlah_terjual * +item.harga;
+                });
+            }
+
+            setDataDetail(data);
+            setValueTerimaPiutang(terimaPiutang);
+            setHTMLTableDaftarDetail(htmlTableDaftarDetail, () => {
+                $(`#table-detail-data`).DataTable();
+
+                HideLoading();
+            });
+        }).catch(error => {
+            $(`#table-detail-data`).DataTable();
+            console.log(error);
+
+            HideLoading();
+        });
+    }
+
     const GetKonsinyasi = () => {
         ShowLoading();
 
@@ -155,8 +211,8 @@ export default function Terima_piutang() {
         axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
-            let dataLunas = [...data.filter(item => +item.sisa === 0)];
-            let dataBelumLunas = [...data.filter(item => +item.sisa > 0)];
+            let dataLunas = [...data.filter(item => +item.jumlah_terjual > 0)];
+            let dataBelumLunas = [...data.filter(item => +item.jumlah_terjual === 0)];
 
             let htmlTableDaftarBelumLunas = [];
             let htmlTableDaftarLunas = [];
@@ -171,8 +227,6 @@ export default function Terima_piutang() {
                             <td>{item.kode_consignee}</td>
                             <td>{item.nama_consignee}</td>
                             <td>{item.jumlah}</td>
-                            <td>{item.jumlah_terjual}</td>
-                            <td>{item.jumlah_sisa}</td>
                             <td>{SetPriceFormat(item.piutang)}</td>
                             <td>{SetPriceFormat(item.terima_piutang)}</td>
                             <td>{SetPriceFormat(item.sisa)}</td>
@@ -195,13 +249,8 @@ export default function Terima_piutang() {
                             <td>{item.tanggal}</td>
                             <td>{item.kode_consignee}</td>
                             <td>{item.nama_consignee}</td>
-                            <td>{item.jumlah}</td>
-                            <td>{item.jumlah_terjual}</td>
-                            <td>{item.jumlah_sisa}</td>
+                            <td>{SetNumberFormat(item.jumlah)}</td>
                             <td>{SetPriceFormat(item.jumlah_piutang)}</td>
-                            {/* <td className={cx([global.table_action, 'text-nowrap'])}>
-                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Print</button>
-                            </td> */}
                         </tr>
                     );
                 });
@@ -259,10 +308,9 @@ export default function Terima_piutang() {
         formData.append('kode_jual', getValueKodeJual);
         formData.append('kode_consignee', getValueKodeConsignee);
         formData.append('jumlah_piutang', getValueJumlahPiutang);
-        formData.append('jumlah_terjual', getValueJumlahTerjual);
-        formData.append('jumlah_sisa', getValueJumlahSisa);
         formData.append('sisa', +getValueSisaPiutang - +getValueTerimaPiutang);
         formData.append('terima_piutang', getValueTerimaPiutang);
+        formData.append('data', JSON.stringify(getDataDetail));
 
         axios.post(`${baseURL}/api/transaksi/penerimaan-kas/terima-piutang/insert.php`, formData, config).then(() => {
             if (window.confirm("Apakah ingin mencetak nota?")) {
@@ -293,6 +341,26 @@ export default function Terima_piutang() {
         setValueJumlahJual(data.jumlah);
         setValueJumlahTerjual(data.jumlah_terjual);
         setValueJumlahSisa(data.jumlah_sisa);
+
+        GetDetail(data.kode);
+    }
+
+    const UpdateTerjual = (id, jumlah, kode) => {
+        ShowLoading();
+
+        const formData = new FormData();
+
+        formData.append('id', id);
+        formData.append('jumlah_terjual', jumlah);
+
+        axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/update-detail-konsinyasi.php`, formData, config).then(() => {
+            GetDetail(kode);
+            HideLoading();
+        }).catch(error => {
+            console.log(error);
+
+            HideLoading();
+        });
     }
 
     return (
@@ -329,8 +397,6 @@ export default function Terima_piutang() {
                                         <td>Kode Consignee</td>
                                         <td>Nama Consignee</td>
                                         <td>Jumlah Jual</td>
-                                        <td>Jumlah Terjual</td>
-                                        <td>Jumlah Sisa</td>
                                         <td>Jumlah Piutang</td>
                                         <td>Terima Piutang</td>
                                         <td>Sisa Piutang</td>
@@ -352,8 +418,6 @@ export default function Terima_piutang() {
                                         <td>Kode Consignee</td>
                                         <td>Nama Consignee</td>
                                         <td>Jumlah Jual</td>
-                                        <td>Jumlah Terjual</td>
-                                        <td>Jumlah Sisa</td>
                                         <td>Jumlah Piutang</td>
                                     </tr>
                                 </thead>
@@ -408,25 +472,7 @@ export default function Terima_piutang() {
                                 </div>
                                 <div className={`${global.input_group} col-6 ps-2`}>
                                     <p className={global.title}>Terima Piutang <span className={global.important}>*</span></p>
-                                    <input type="text" id='input-terima-piutang' name='input-terima-piutang' value={getValueTerimaPiutang} onInput={InputFormatNumber} onChange={e => setValueTerimaPiutang(+e.target.value > +getValueSisaPiutang ? +getValueSisaPiutang : +e.target.value)} required={true} />
-                                </div>
-                            </div>
-                            <div className='d-flex'>
-                                <div className={`${global.input_group} col-4 pe-2`}>
-                                    <p className={global.title}>Jumlah Jual</p>
-                                    <input type="text" value={getValueJumlahJual} readOnly={true} />
-                                </div>
-                                <div className={`${global.input_group} col-4 px-2`}>
-                                    <p className={global.title}>Jumlah Terjual <span className={global.important}>*</span></p>
-                                    <input type="text" value={getValueJumlahTerjual} onInput={InputFormatNumber} onChange={e => setValueJumlahTerjual(
-                                        +e.target.value > +getValueJumlahJual ?
-                                            +getValueJumlahJual :
-                                            +e.target.value
-                                    )} required={true} />
-                                </div>
-                                <div className={`${global.input_group} col-4 ps-2`}>
-                                    <p className={global.title}>Jumlah Sisa</p>
-                                    <input type="text" value={getValueJumlahSisa} readOnly={true} />
+                                    <input type="text" id='input-terima-piutang' name='input-terima-piutang' value={getValueTerimaPiutang} onInput={InputFormatNumber} onChange={e => setValueTerimaPiutang(+e.target.value > +getValueSisaPiutang ? +getValueSisaPiutang : +e.target.value)} required={true} readOnly={true} />
                                 </div>
                             </div>
                             <div className='d-flex'>
@@ -436,6 +482,25 @@ export default function Terima_piutang() {
                                         <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
                                     </div>
                                 }
+                            </div>
+                            <div className={`table-responsive w-100`}>
+                                <table id='table-detail-data' className={`table w-100`}>
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Kode Item</th>
+                                            <th>Nama Item</th>
+                                            <th>Jumlah</th>
+                                            <th>Jumlah Terjual</th>
+                                            <th>Jumlah Sisa</th>
+                                            <th>Harga</th>
+                                            <th>Total Harga</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {getHTMLTableDaftarDetail}
+                                    </tbody>
+                                </table>
                             </div>
                             <div className='d-flex'>
                                 <div className='col-6 pe-2'>
