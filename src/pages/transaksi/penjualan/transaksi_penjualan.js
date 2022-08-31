@@ -427,7 +427,7 @@ export class transaksi_penjualan extends Component {
                             <td>{item.kode}</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td>{SetNumberFormat(+item.jumlah * +this.state.valueJumlah)}</td>
+                            <td>{+item.jumlah * +this.state.valueJumlah}</td>
                             <td>{SetPriceFormat(+item.harga * +this.state.valueJumlah)}</td>
                             <td>{SetPriceFormat(+item.total_harga * +this.state.valueJumlah)}</td>
                         </tr>
@@ -445,7 +445,7 @@ export class transaksi_penjualan extends Component {
                             <td>{item.kode}</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td>{SetNumberFormat(+item.jumlah * +this.state.valueJumlah)}</td>
+                            <td>{+item.jumlah * +this.state.valueJumlah}</td>
                             <td>{SetPriceFormat(+item.harga * +this.state.valueJumlah)}</td>
                             <td>{SetPriceFormat(+item.total_harga * +this.state.valueJumlah)}</td>
                         </tr>
@@ -463,7 +463,7 @@ export class transaksi_penjualan extends Component {
                             <td>{item.kode}</td>
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
-                            <td>{SetNumberFormat(+item.jumlah * +this.state.valueJumlah)}</td>
+                            <td>{+item.jumlah * +this.state.valueJumlah}</td>
                             <td>{SetPriceFormat(+item.harga * +this.state.valueJumlah)}</td>
                             <td>{SetPriceFormat(+item.total_harga * +this.state.valueJumlah)}</td>
                         </tr>
@@ -482,7 +482,7 @@ export class transaksi_penjualan extends Component {
                             <td>{item.kode_item}</td>
                             <td>{item.nama_item}</td>
                             <td>{item.departemen}</td>
-                            <td>{SetNumberFormat(+item.jumlah * +this.state.valueJumlah)}</td>
+                            <td>{+item.jumlah * +this.state.valueJumlah}</td>
                             <td>{SetPriceFormat(+item.harga * +this.state.valueJumlah)}</td>
                             <td>{SetPriceFormat(+item.total_harga * +this.state.valueJumlah)}</td>
                         </tr>
