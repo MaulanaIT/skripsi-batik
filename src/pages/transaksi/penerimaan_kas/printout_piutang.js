@@ -50,7 +50,7 @@ export default function Printout_piutang({ consignee, kode, sisa, tanggal, terim
                                 <td>Konsinyasi Penjualan Batik</td>
                             </tr>
                             <tr>
-                                <td>Sisa</td>
+                                <td>Tidak Terjual</td>
                                 <td>:</td>
                                 <td>{SetPriceFormat(+sisa - +terimaPiutang)}</td>
                             </tr>
