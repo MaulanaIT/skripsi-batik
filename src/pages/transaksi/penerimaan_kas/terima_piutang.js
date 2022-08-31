@@ -250,7 +250,7 @@ export default function Terima_piutang() {
                             <td>{item.kode_consignee}</td>
                             <td>{item.nama_consignee}</td>
                             <td>{SetNumberFormat(item.jumlah)}</td>
-                            <td>{SetPriceFormat(item.jumlah_piutang)}</td>
+                            <td>{SetPriceFormat(item.piutang)}</td>
                         </tr>
                     );
                 });
