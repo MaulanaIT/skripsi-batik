@@ -31,6 +31,8 @@ export default function Detail_order(props) {
     const GetDetail = () => {
         ShowLoading();
 
+        $(`#table-detail-konsinyasi`).DataTable().destroy();
+
         let htmlTableKonsinaysi = [];
 
         if (props.data && props.data.length > 0) {

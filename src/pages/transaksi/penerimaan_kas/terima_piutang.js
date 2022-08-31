@@ -72,6 +72,9 @@ export default function Terima_piutang() {
     const [getValueKodeTerimaPiutang, setValueKodeTerimaPiutang] = useState('');
     const [getValueNamaConsignee, setValueNamaConsignee] = useState('');
     const [getValueJumlahPiutang, setValueJumlahPiutang] = useState(0);
+    const [getValueJumlahJual, setValueJumlahJual] = useState(0);
+    const [getValueJumlahTerjual, setValueJumlahTerjual] = useState(0);
+    const [getValueJumlahSisa, setValueJumlahSisa] = useState(0);
     const [getValueSisaPiutang, setValueSisaPiutang] = useState(0);
     const [getValueTerimaPiutang, setValueTerimaPiutang] = useState(0);
     const [getValueTanggal, setValueTanggal] = useState('');
@@ -84,12 +87,19 @@ export default function Terima_piutang() {
         GetTerimaPiutang();
     }, []);
 
+    useEffect(() => {
+        setValueJumlahSisa(+getValueJumlahJual - getValueJumlahTerjual);
+    }, [getValueJumlahJual, getValueJumlahTerjual]);
+
     const Clear = () => {
         setValueKodeAkun([]);
         setValueKodeConsignee('');
         setValueNamaConsignee('');
         setValueKodeJual('');
         setValueJumlahPiutang(0);
+        setValueJumlahJual(0);
+        setValueJumlahTerjual(0);
+        setValueJumlahSisa(0);
         setValueSisaPiutang(0);
         setValueTerimaPiutang(0);
     }
@@ -160,6 +170,9 @@ export default function Terima_piutang() {
                             <td>{item.tanggal}</td>
                             <td>{item.kode_consignee}</td>
                             <td>{item.nama_consignee}</td>
+                            <td>{item.jumlah}</td>
+                            <td>{item.jumlah_terjual}</td>
+                            <td>{item.jumlah_sisa}</td>
                             <td>{SetPriceFormat(item.piutang)}</td>
                             <td>{SetPriceFormat(item.terima_piutang)}</td>
                             <td>{SetPriceFormat(item.sisa)}</td>
@@ -182,6 +195,9 @@ export default function Terima_piutang() {
                             <td>{item.tanggal}</td>
                             <td>{item.kode_consignee}</td>
                             <td>{item.nama_consignee}</td>
+                            <td>{item.jumlah}</td>
+                            <td>{item.jumlah_terjual}</td>
+                            <td>{item.jumlah_sisa}</td>
                             <td>{SetPriceFormat(item.jumlah_piutang)}</td>
                             {/* <td className={cx([global.table_action, 'text-nowrap'])}>
                                 <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#0F008E', "--button-second-color": '#656EA0' }}>Print</button>
@@ -243,6 +259,8 @@ export default function Terima_piutang() {
         formData.append('kode_jual', getValueKodeJual);
         formData.append('kode_consignee', getValueKodeConsignee);
         formData.append('jumlah_piutang', getValueJumlahPiutang);
+        formData.append('jumlah_terjual', getValueJumlahTerjual);
+        formData.append('jumlah_sisa', getValueJumlahSisa);
         formData.append('sisa', +getValueSisaPiutang - +getValueTerimaPiutang);
         formData.append('terima_piutang', getValueTerimaPiutang);
 
@@ -272,6 +290,9 @@ export default function Terima_piutang() {
         setValueNamaConsignee(data.nama_consignee);
         setValueSisaPiutang(data.sisa);
         setValueJumlahPiutang(data.piutang);
+        setValueJumlahJual(data.jumlah);
+        setValueJumlahTerjual(data.jumlah_terjual);
+        setValueJumlahSisa(data.jumlah_sisa);
     }
 
     return (
@@ -307,6 +328,9 @@ export default function Terima_piutang() {
                                         <td>Tanggal</td>
                                         <td>Kode Consignee</td>
                                         <td>Nama Consignee</td>
+                                        <td>Jumlah Jual</td>
+                                        <td>Jumlah Terjual</td>
+                                        <td>Jumlah Sisa</td>
                                         <td>Jumlah Piutang</td>
                                         <td>Terima Piutang</td>
                                         <td>Sisa Piutang</td>
@@ -327,8 +351,10 @@ export default function Terima_piutang() {
                                         <td>Tanggal</td>
                                         <td>Kode Consignee</td>
                                         <td>Nama Consignee</td>
+                                        <td>Jumlah Jual</td>
+                                        <td>Jumlah Terjual</td>
+                                        <td>Jumlah Sisa</td>
                                         <td>Jumlah Piutang</td>
-                                        {/* <td>Aksi</td> */}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -338,71 +364,90 @@ export default function Terima_piutang() {
                         </div>
                     </div>
                 </div>
-                <div className={`col-12`}>
-                    <form id='form-data' className={`${global.card}`}>
-                        <div className={`${global.header}`}>
-                            <p className={global.title}>Terima Piutang</p>
-                        </div>
-                        <div className='d-flex'>
-                            <div className={`${global.input_group} col-4 pe-2`}>
-                                <p className={global.title}>Kode Terima Piutang <span className={global.important}>*</span></p>
-                                <input type="text" id='input-kode-terima-piutang' name='input-kode-terima-piutang' value={getValueKodeTerimaPiutang} required={true} readOnly={true} />
+                {+getSelectedTab === 0 &&
+                    <div className={`col-12`}>
+                        <form id='form-data' className={`${global.card}`}>
+                            <div className={`${global.header}`}>
+                                <p className={global.title}>Terima Piutang</p>
                             </div>
-                            <div className={`${global.input_group} col-4 px-2`}>
-                                <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
-                                <input type="date" id='input-tanggal' name='input-tanggal' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} required={true} />
-                            </div>
-                            <div className={`${global.input_group} col-4 ps-2`}>
-                                <p className={global.title}>Kode Jual <span className={global.important}>*</span></p>
-                                <input type="text" id='input-kode-jual' name='input-kode-jual' value={getValueKodeJual} required={true} readOnly={true} />
-                            </div>
-                        </div>
-                        <div className={`${bootstrap['d-flex']}`}>
-                            <div className={`${global.input_group} col-4 pe-2`}>
-                                <p className={global.title}>Kode Consignee <span className={global.important}>*</span></p>
-                                <input type="text" id='input-kode-consignee' name='input-kode-consignee' value={getValueKodeConsignee} required={true} readOnly={true} />
-                            </div>
-                            <div className={`${global.input_group} col-4 px-2`}>
-                                <p className={global.title}>Nama Consignee <span className={global.important}>*</span></p>
-                                <input type="text" id='input-nama-consignee' name='input-nama-consignee' value={getValueNamaConsignee} required={true} readOnly={true} />
-                            </div>
-                            <div className={`${global.input_group} col-4 ps-2`}>
-                                <p className={global.title}>Sisa Piutang <span className={global.important}>*</span></p>
-                                <input type="text" id='input-sisa-piutang' name='input-sisa-piutang' value={SetPriceFormat(getValueSisaPiutang)} required={true} readOnly={true} />
-                            </div>
-                        </div>
-                        <div>
-                            <p className={global.title}>Pelunasan</p>
-                        </div>
-                        <div className='d-flex'>
-                            <div className={`${global.input_group} col-6 pe-2`}>
-                                <p className={global.title}>Pilih Akun <span className={global.important}>*</span></p>
-                                <Select id='select-jenis-akun' name='select-jenis-akun' isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Jenis Akun...'} value={getValueKodeAkun} styles={CustomSelect} onChange={e => setValueKodeAkun(e)} />
-                            </div>
-                            <div className={`${global.input_group} col-6 ps-2`}>
-                                <p className={global.title}>Terima Piutang <span className={global.important}>*</span></p>
-                                <input type="text" id='input-terima-piutang' name='input-terima-piutang' value={getValueTerimaPiutang} onInput={InputFormatNumber} onChange={e => setValueTerimaPiutang(e.target.value)} required={true} />
-                            </div>
-                        </div>
-                        <div className='d-flex'>
-                            {getValueKodeAkun.value === '1102' &&
-                                <div className={`${global.input_group}`}>
-                                    <p>Upload File Transfer</p>
-                                    <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
+                            <div className='d-flex'>
+                                <div className={`${global.input_group} col-4 pe-2`}>
+                                    <p className={global.title}>Kode Terima Piutang <span className={global.important}>*</span></p>
+                                    <input type="text" id='input-kode-terima-piutang' name='input-kode-terima-piutang' value={getValueKodeTerimaPiutang} required={true} readOnly={true} />
                                 </div>
-                            }
-                        </div>
-                        <div className='d-flex'>
-                            <div className='col-6 pe-2'>
-                                <button type='button' className={`${global.button} w-100`} onClick={InsertTerimaPiutang}>Simpan</button>
+                                <div className={`${global.input_group} col-4 px-2`}>
+                                    <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
+                                    <input type="date" id='input-tanggal' name='input-tanggal' value={getValueTanggal} onChange={e => setValueTanggal(e.target.value)} required={true} />
+                                </div>
+                                <div className={`${global.input_group} col-4 ps-2`}>
+                                    <p className={global.title}>Kode Jual <span className={global.important}>*</span></p>
+                                    <input type="text" id='input-kode-jual' name='input-kode-jual' value={getValueKodeJual} required={true} readOnly={true} />
+                                </div>
                             </div>
-                            <div className='col-6 ps-2'>
-                                <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }} onClick={Clear}>Batal</button>
+                            <div className={`${bootstrap['d-flex']}`}>
+                                <div className={`${global.input_group} col-4 pe-2`}>
+                                    <p className={global.title}>Kode Consignee <span className={global.important}>*</span></p>
+                                    <input type="text" id='input-kode-consignee' name='input-kode-consignee' value={getValueKodeConsignee} required={true} readOnly={true} />
+                                </div>
+                                <div className={`${global.input_group} col-4 px-2`}>
+                                    <p className={global.title}>Nama Consignee <span className={global.important}>*</span></p>
+                                    <input type="text" id='input-nama-consignee' name='input-nama-consignee' value={getValueNamaConsignee} required={true} readOnly={true} />
+                                </div>
+                                <div className={`${global.input_group} col-4 ps-2`}>
+                                    <p className={global.title}>Sisa Piutang <span className={global.important}>*</span></p>
+                                    <input type="text" id='input-sisa-piutang' name='input-sisa-piutang' value={SetPriceFormat(getValueSisaPiutang)} required={true} readOnly={true} />
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-
+                            <div>
+                                <p className={global.title}>Pelunasan</p>
+                            </div>
+                            <div className='d-flex'>
+                                <div className={`${global.input_group} col-6 pe-2`}>
+                                    <p className={global.title}>Pilih Akun <span className={global.important}>*</span></p>
+                                    <Select id='select-jenis-akun' name='select-jenis-akun' isClearable={true} isSearchable={true} options={getDataSelectAkun} placeholder={'Select Jenis Akun...'} value={getValueKodeAkun} styles={CustomSelect} onChange={e => setValueKodeAkun(e)} />
+                                </div>
+                                <div className={`${global.input_group} col-6 ps-2`}>
+                                    <p className={global.title}>Terima Piutang <span className={global.important}>*</span></p>
+                                    <input type="text" id='input-terima-piutang' name='input-terima-piutang' value={getValueTerimaPiutang} onInput={InputFormatNumber} onChange={e => setValueTerimaPiutang(+e.target.value > +getValueSisaPiutang ? +getValueSisaPiutang : +e.target.value)} required={true} />
+                                </div>
+                            </div>
+                            <div className='d-flex'>
+                                <div className={`${global.input_group} col-4 pe-2`}>
+                                    <p className={global.title}>Jumlah Jual</p>
+                                    <input type="text" value={getValueJumlahJual} readOnly={true} />
+                                </div>
+                                <div className={`${global.input_group} col-4 px-2`}>
+                                    <p className={global.title}>Jumlah Terjual <span className={global.important}>*</span></p>
+                                    <input type="text" value={getValueJumlahTerjual} onInput={InputFormatNumber} onChange={e => setValueJumlahTerjual(
+                                        +e.target.value > +getValueJumlahJual ?
+                                            +getValueJumlahJual :
+                                            +e.target.value
+                                    )} required={true} />
+                                </div>
+                                <div className={`${global.input_group} col-4 ps-2`}>
+                                    <p className={global.title}>Jumlah Sisa</p>
+                                    <input type="text" value={getValueJumlahSisa} readOnly={true} />
+                                </div>
+                            </div>
+                            <div className='d-flex'>
+                                {getValueKodeAkun.value === '1102' &&
+                                    <div className={`${global.input_group}`}>
+                                        <p>Upload File Transfer</p>
+                                        <input type="file" accept='.pdf' id='input-file-transfer' name='input-file-transfer' required={true} />
+                                    </div>
+                                }
+                            </div>
+                            <div className='d-flex'>
+                                <div className='col-6 pe-2'>
+                                    <button type='button' className={`${global.button} w-100`} onClick={InsertTerimaPiutang}>Simpan</button>
+                                </div>
+                                <div className='col-6 ps-2'>
+                                    <button type='button' className={`${global.button} w-100`} style={{ "--button-first-color": '#8e0000', "--button-second-color": '#a06565' }} onClick={Clear}>Batal</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                }
             </div>
         </React.Fragment>
     )

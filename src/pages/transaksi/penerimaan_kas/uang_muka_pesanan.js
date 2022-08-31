@@ -191,6 +191,7 @@ export default function Uang_muka_pesanan() {
             formData.append('kode_pesanan', getValueKodePesanan);
             formData.append('tanggal', getValueTanggal);
             formData.append('kode_customer', getValueKodeCustomer);
+            formData.append('jumlah', getValueJumlah);
             formData.append('total_jual', getValueTotalJual);
             formData.append('diskon', getValueDiskon);
             formData.append('ongkos_kirim', getValueOngkosKirim);

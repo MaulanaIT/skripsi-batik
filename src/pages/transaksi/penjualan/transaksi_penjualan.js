@@ -62,16 +62,8 @@ export class transaksi_penjualan extends Component {
 
     state = {
         dataAkun: [],
-        dataAlat: [],
-        dataBahan: [],
-        dataBTKL: [],
         dataCustomer: [],
         dataConsignee: [],
-        dataPenolong: [],
-        dataDetailAlat: [],
-        dataDetailBahan: [],
-        dataDetailBTKL: [],
-        dataDetailPenolong: [],
         dataJual: [],
         dataKonsinyasi: [],
         dataPesanan: [],
@@ -79,71 +71,54 @@ export class transaksi_penjualan extends Component {
         dataSupplier: [],
         dataTunai: [],
 
+        dataDetailAlat: [],
+        dataDetailBahan: [],
+        dataDetailBTKL: [],
+        dataDetailPenolong: [],
+
         kode: '',
 
         dataSelectAkun: [],
-        dataSelectKodeAlat: [],
-        dataSelectNamaAlat: [],
-        dataSelectKodeBahan: [],
-        dataSelectNamaBahan: [],
-        dataSelectKodeBTKL: [],
-        dataSelectNamaBTKL: [],
-        dataSelectKodePenolong: [],
-        dataSelectNamaPenolong: [],
         dataSelectKodeProduk: [],
         dataSelectNamaProduk: [],
         dataSelectKodeConsignee: [],
         dataSelectNamaConsignee: [],
         dataSelectKodeCustomer: [],
         dataSelectNamaCustomer: [],
+        dataSelectNamaStandarPesanan: [],
 
-        htmlTableDaftarTunai: [],
-        htmlTableDaftarKonsinyasi: [],
         htmlTableDaftarDetailAlat: [],
         htmlTableDaftarDetailBahan: [],
         htmlTableDaftarDetailBTKL: [],
         htmlTableDaftarDetailPenolong: [],
+        htmlTableDaftarTunai: [],
+        htmlTableDaftarKonsinyasi: [],
 
         limitDiskon: 500000,
 
         valueAlamat: '',
         valueDeskripsiPesanan: '',
-        valueDepartemen: '',
         valueDiskon: 0,
         valuePercentageDiskon: 0,
         valueHarga: 0,
-        valueHargaAlat: 0,
-        valueHargaBahan: 0,
-        valueHargaPenolong: 0,
         valueHargaJual: 0,
         valueHpp: 0,
         valueJumlah: 0,
-        valueJumlahMax: 0,
-        valueJumlahAlat: 0,
-        valueJumlahBahan: 0,
-        valueJumlahBTKL: 0,
-        valueJumlahPenolong: 0,
         valueJenisProduk: [],
         valueJenisPenjualan: [],
         valueKalkulasiTotalHpp: 0,
         valueKodeAkun: [],
-        valueKodeAlat: [],
-        valueKodeBTKL: [],
-        valueKodeBahan: [],
-        valueKodePenolong: [],
         valueKodeProduk: [],
         valueKodeJual: '',
         valueKodeConsignee: [],
         valueKodeCustomer: [],
         valueKodeKasMasuk: '',
         valueKodePesanan: '',
-        valueNamaAlat: [],
-        valueNamaBahan: [],
-        valueNamaBTKL: [],
         valueNamaConsignee: [],
         valueNamaCustomer: [],
         valueNamaPenolong: [],
         valueNamaProduk: [],
+        valueNamaStandarPesanan: [],
         valueOngkosKirim: 0,
         valuePengurangan: 0,
         valueProfit: 0,
@@ -158,7 +133,6 @@ export class transaksi_penjualan extends Component {
         valueTotalJual: 0,
         valueTotalPenolong: 0,
         valueUangMuka: 0,
-        valueUpah: 0,
 
         tabSelected: 0,
 
@@ -167,381 +141,11 @@ export class transaksi_penjualan extends Component {
 
     async componentDidMount() {
         await this.GetAkun();
-        await this.GetAlat();
-        await this.GetBahan();
-        await this.GetPenolong();
         await this.GetCustomer();
         await this.GetConsignee();
         await this.GetPesanan();
         await this.GetProduk();
-        await this.GetTenagaKerja();
-    }
-
-    AddDetail = () => {
-        const {
-            valueHarga,
-            valueJumlah,
-            valueKodeJual,
-            valueKodeProduk,
-            valueNamaProduk,
-            valueHpp,
-            valueTotalHpp
-        } = this.state;
-
-        if (+valueJumlah < 0) {
-            alert('Jumlah tidak boleh minus');
-            return;
-        }
-
-        if (this.state.jenisPenjualan.toLowerCase() === 'tunai') {
-            if (!CheckInputValidity('form-data') || this.state.valueKodeCustomer.length <= 0 || valueKodeProduk.length <= 0) {
-                alert('Isi data dengan benar');
-                return;
-            }
-
-            let dataTunai = this.state.dataTunai;
-
-            let check = dataTunai.findIndex(item => item.kode_item === valueKodeProduk.value && item.harga === valueHarga);
-
-            if (check < 0) {
-                dataTunai.push({
-                    kode: valueKodeJual,
-                    kode_item: valueKodeProduk.value,
-                    nama_item: valueNamaProduk.label,
-                    jumlah: valueJumlah,
-                    harga: valueHarga,
-                    total_harga: valueJumlah * valueHarga,
-                    hpp: valueHpp,
-                    total_hpp: valueTotalHpp
-                });
-            } else {
-                dataTunai[check].jumlah = +dataTunai[check].jumlah + +valueJumlah;
-                dataTunai[check].total_harga = +dataTunai[check].total_harga + valueJumlah * valueHarga;
-                dataTunai[check].total_hpp = +dataTunai[check].total_hpp + valueJumlah * valueHpp;
-            }
-
-            this.setState({
-                dataTunai: dataTunai,
-                valueKodeProduk: [],
-                valueNamaProduk: [],
-                valueHarga: 0,
-                valueJumlah: 0,
-                valueTotalJual: 0,
-                valueHpp: 0,
-                valueTotalHpp: 0
-            }, () => {
-                this.GetDetailTunai();
-            });
-        } else if (this.state.jenisPenjualan.toLowerCase() === 'konsinyasi') {
-            if (!CheckInputValidity('form-data') || this.state.valueKodeConsignee.length <= 0 || valueKodeProduk.length <= 0) {
-                alert('Isi data dengan benar');
-                return;
-            }
-            let dataKonsinyasi = this.state.dataKonsinyasi;
-
-            let check = dataKonsinyasi.findIndex(item => item.kode_item === valueKodeProduk.value && item.harga === valueHarga);
-
-            if (check < 0) {
-                dataKonsinyasi.push({
-                    kode: valueKodeJual,
-                    kode_item: valueKodeProduk.value,
-                    nama_item: valueNamaProduk.label,
-                    jumlah: valueJumlah,
-                    harga: valueHarga,
-                    total_harga: valueJumlah * valueHarga,
-                    hpp: valueHpp,
-                    total_hpp: valueTotalHpp
-                });
-            } else {
-                dataKonsinyasi[check].jumlah = +dataKonsinyasi[check].jumlah + +valueJumlah;
-                dataKonsinyasi[check].total_harga = +dataKonsinyasi[check].total_harga + valueJumlah * valueHarga;
-                dataKonsinyasi[check].total_hpp = +dataKonsinyasi[check].total_hpp + valueTotalHpp;
-            }
-
-            this.setState({
-                dataKonsinyasi: dataKonsinyasi,
-                valueKodeProduk: [],
-                valueNamaProduk: [],
-                valueHarga: 0,
-                valueJumlah: 0,
-                valueTotalJual: 0,
-                valueHpp: 0,
-                valueTotalHpp: 0
-            }, () => {
-                this.GetDetailKonsinyasi();
-            });
-        } else if (this.state.jenisPenjualan.toLowerCase() === 'pesanan') {
-            let dataPesanan = this.state.dataPesanan;
-
-            dataPesanan.push({
-                kode: valueKodeJual,
-                jumlah: valueJumlah,
-                harga: valueHarga,
-                total_harga: valueJumlah * valueHarga
-            });
-
-            this.setState({ dataPesanan: dataPesanan }, () => {
-                this.GetDetailPesanan();
-            });
-        }
-    }
-
-    AddDetailAlat = () => {
-        const {
-            valueHargaAlat,
-            valueJumlahAlat,
-            valueKodePesanan,
-            valueKodeAlat,
-            valueHpp,
-            valueTotalHpp
-        } = this.state;
-
-        if (+valueKodeAlat.length <= 0) {
-            alert('Alat belum dipilih');
-            return;
-        }
-
-        if (+valueJumlahAlat === 0) {
-            alert('Jumlah tidak boleh 0');
-            return;
-        }
-
-        let dataAlat = this.state.dataAlat.find(item => item.kode === valueKodeAlat.value);
-        let dataDetailAlat = this.state.dataDetailAlat;
-
-        let check = dataDetailAlat.findIndex(item => item.kode_alat === valueKodeAlat.value);
-
-        if (check < 0) {
-            dataDetailAlat.push({
-                kode: valueKodePesanan,
-                kode_alat: dataAlat.kode,
-                nama_alat: dataAlat.nama,
-                jumlah: +valueJumlahAlat,
-                harga: +valueHargaAlat,
-                total_harga: +valueHargaAlat * +valueJumlahAlat,
-                hpp: valueHpp,
-                total_hpp: valueTotalHpp
-            });
-        } else {
-            dataDetailAlat[check].jumlah = +dataDetailAlat[check].jumlah + +valueJumlahAlat;
-            dataDetailAlat[check].total_harga = +dataDetailAlat[check].total_harga + +valueHargaAlat * +valueJumlahAlat;
-
-            if (dataDetailAlat[check].jumlah > +dataAlat.jumlah) {
-                dataDetailAlat[check].jumlah = +dataAlat.jumlah;
-                dataDetailAlat[check].total_harga = +dataAlat.harga * +dataAlat.jumlah;
-            }
-        }
-
-        let valueTotalAlat = 0;
-
-        dataDetailAlat.forEach(item => {
-            valueTotalAlat += +item.total_harga;
-        });
-
-        this.setState({
-            dataDetailAlat: dataDetailAlat,
-            valueKodeAlat: [],
-            valueNamaAlat: [],
-            valueHargaAlat: 0,
-            valueJumlahAlat: 0,
-            valueTotalAlat: valueTotalAlat,
-            valueHpp: 0,
-            valueTotalHpp: 0
-        }, () => {
-            this.GetDetailAlat();
-        });
-    }
-
-    AddDetailBahan = () => {
-        const {
-            valueHargaBahan,
-            valueJumlahBahan,
-            valueKodePesanan,
-            valueKodeBahan,
-            valueHpp,
-            valueTotalHpp
-        } = this.state;
-
-        if (+valueKodeBahan.length <= 0) {
-            alert('Bahan baku belum dipilih');
-            return;
-        }
-
-        if (+valueJumlahBahan === 0) {
-            alert('Jumlah tidak boleh 0');
-            return;
-        }
-
-
-        let dataBahan = this.state.dataBahan.find(item => item.kode === valueKodeBahan.value);
-        let dataDetailBahan = this.state.dataDetailBahan;
-
-        let check = dataDetailBahan.findIndex(item => item.kode_bahan === valueKodeBahan.value);
-
-        if (check < 0) {
-            dataDetailBahan.push({
-                kode: valueKodePesanan,
-                kode_bahan: dataBahan.kode,
-                nama_bahan: dataBahan.nama,
-                jumlah: +valueJumlahBahan,
-                harga: +valueHargaBahan,
-                total_harga: +valueHargaBahan * +valueJumlahBahan,
-                hpp: valueHpp,
-                total_hpp: valueTotalHpp
-            });
-        } else {
-            dataDetailBahan[check].jumlah = +dataDetailBahan[check].jumlah + +valueJumlahBahan;
-            dataDetailBahan[check].total_harga = +dataDetailBahan[check].total_harga + +valueHargaBahan * +valueJumlahBahan;
-
-            if (dataDetailBahan[check].jumlah > +dataBahan.jumlah) {
-                dataDetailBahan[check].jumlah = +dataBahan.jumlah;
-                dataDetailBahan[check].total_harga = +dataBahan.harga * +dataBahan.jumlah;
-            }
-        }
-
-        let valueTotalBahan = 0;
-
-        dataDetailBahan.forEach(item => {
-            valueTotalBahan += +item.total_harga;
-        });
-
-        this.setState({
-            dataDetailBahan: dataDetailBahan,
-            valueKodeBahan: [],
-            valueNamaBahan: [],
-            valueHargaBahan: 0,
-            valueJumlahBahan: 0,
-            valueTotalBahan: valueTotalBahan,
-            valueHpp: 0,
-            valueTotalHpp: 0
-        }, () => {
-            this.GetDetailBahan();
-        });
-    }
-
-    AddDetailBTKL = () => {
-        const {
-            valueDepartemen,
-            valueJumlahBTKL,
-            valueKodePesanan,
-            valueKodeBTKL,
-            valueUpah
-        } = this.state;
-
-        if (+valueKodeBTKL.length <= 0) {
-            alert('Tenaga kerja belum dipilih');
-            return;
-        }
-
-        if (+valueJumlahBTKL === 0) {
-            alert('Jumlah tidak boleh 0');
-            return;
-        }
-
-
-        let dataBTKL = this.state.dataBTKL.find(item => item.kode === valueKodeBTKL.value);
-        let dataDetailBTKL = this.state.dataDetailBTKL;
-
-        let check = dataDetailBTKL.findIndex(item => item.kode_tenaga_kerja === valueKodeBTKL.value);
-
-        if (check < 0) {
-            dataDetailBTKL.push({
-                kode: valueKodePesanan,
-                kode_tenaga_kerja: dataBTKL.kode,
-                nama_tenaga_kerja: dataBTKL.nama,
-                departemen: valueDepartemen,
-                jumlah: +valueJumlahBTKL,
-                harga: +valueUpah,
-                total_harga: +valueUpah * +valueJumlahBTKL
-            });
-        } else {
-            dataDetailBTKL[check].jumlah = +dataDetailBTKL[check].jumlah + +valueJumlahBTKL;
-            dataDetailBTKL[check].total_harga = +dataDetailBTKL[check].total_harga + +valueUpah * +valueJumlahBTKL;
-
-            if (dataDetailBTKL[check].jumlah > +dataBTKL.jumlah) {
-                dataDetailBTKL[check].jumlah = +dataBTKL.jumlah;
-                dataDetailBTKL[check].total_harga = +dataBTKL.harga * +dataBTKL.jumlah;
-            }
-        }
-
-        let valueTotalBTKL = 0;
-
-        dataDetailBTKL.forEach(item => {
-            valueTotalBTKL += +item.total_harga;
-        });
-
-        this.setState({
-            dataDetailBTKL: dataDetailBTKL,
-            valueKodeBTKL: [],
-            valueNamaBTKL: [],
-            valueDepartemen: '',
-            valueUpah: 0,
-            valueJumlahBTKL: 0,
-            valueTotalBTKL: valueTotalBTKL
-        }, () => {
-            this.GetDetailBTKL();
-        });
-    }
-
-    AddDetailPenolong = () => {
-        const {
-            valueHargaPenolong,
-            valueJumlahPenolong,
-            valueKodePesanan,
-            valueKodePenolong
-        } = this.state;
-
-        if (+valueKodePenolong.length <= 0) {
-            alert('Bahan penolong belum dipilih');
-            return;
-        }
-
-        if (+valueJumlahPenolong === 0) {
-            alert('Jumlah tidak boleh 0');
-            return;
-        }
-
-
-        let dataPenolong = this.state.dataPenolong.find(item => item.kode === valueKodePenolong.value);
-        let dataDetailPenolong = this.state.dataDetailPenolong;
-
-        let check = dataDetailPenolong.findIndex(item => item.kode_penolong === valueKodePenolong.value);
-
-        if (check < 0) {
-            dataDetailPenolong.push({
-                kode: valueKodePesanan,
-                kode_penolong: dataPenolong.kode,
-                nama_penolong: dataPenolong.nama,
-                jumlah: +valueJumlahPenolong,
-                harga: +valueHargaPenolong,
-                total_harga: +valueHargaPenolong * +valueJumlahPenolong
-            });
-        } else {
-            dataDetailPenolong[check].jumlah = +dataDetailPenolong[check].jumlah + +valueJumlahPenolong;
-            dataDetailPenolong[check].total_harga = +dataDetailPenolong[check].total_harga + +valueHargaPenolong * +valueJumlahPenolong;
-
-            if (dataDetailPenolong[check].jumlah > +dataPenolong.jumlah) {
-                dataDetailPenolong[check].jumlah = +dataPenolong.jumlah;
-                dataDetailPenolong[check].total_harga = +dataPenolong.harga * +dataPenolong.jumlah;
-            }
-        }
-
-        let valueTotalPenolong = 0;
-
-        dataDetailPenolong.forEach(item => {
-            valueTotalPenolong += +item.total_harga;
-        });
-
-        this.setState({
-            dataDetailPenolong: dataDetailPenolong,
-            valueKodePenolong: [],
-            valueNamaPenolong: [],
-            valueHargaPenolong: 0,
-            valueJumlahPenolong: 0,
-            valueTotalPenolong: valueTotalPenolong
-        }, () => {
-            this.GetDetailPenolong();
-        });
+        await this.GetStandarPesanan();
     }
 
     DeleteKonsinyasi = (id) => {
@@ -551,82 +155,6 @@ export class transaksi_penjualan extends Component {
 
         this.setState({ dataKonsinyasi: dataKonsinyasi }, () => {
             this.GetDetailKonsinyasi();
-        });
-    }
-
-    DeleteDetailAlat = (id) => {
-        let dataDetailAlat = this.state.dataDetailAlat;
-
-        dataDetailAlat.splice(id, 1);
-
-        let valueTotalAlat = 0;
-
-        dataDetailAlat.forEach(item => {
-            valueTotalAlat += +item.total_harga;
-        });
-
-        this.setState({
-            dataDetailAlat: dataDetailAlat,
-            valueTotalAlat: valueTotalAlat
-        }, () => {
-            this.GetDetailAlat();
-        });
-    }
-
-    DeleteDetailBahan = (id) => {
-        let dataDetailBahan = this.state.dataDetailBahan;
-
-        dataDetailBahan.splice(id, 1);
-
-        let valueTotalBahan = 0;
-
-        dataDetailBahan.forEach(item => {
-            valueTotalBahan += +item.total_harga;
-        });
-
-        this.setState({
-            dataDetailBahan: dataDetailBahan,
-            valueTotalBahan: valueTotalBahan
-        }, () => {
-            this.GetDetailBahan();
-        });
-    }
-
-    DeleteDetailBTKL = (id) => {
-        let dataDetailBTKL = this.state.dataDetailBTKL;
-
-        dataDetailBTKL.splice(id, 1);
-
-        let valueTotalBTKL = 0;
-
-        dataDetailBTKL.forEach(item => {
-            valueTotalBTKL += +item.total_harga;
-        });
-
-        this.setState({
-            dataDetailBTKL: dataDetailBTKL,
-            valueTotalBTKL: valueTotalBTKL
-        }, () => {
-            this.GetDetailBTKL();
-        });
-    }
-
-    DeleteDetailPenolong = (id) => {
-        let dataDetailPenolong = this.state.dataDetailPenolong;
-
-        dataDetailPenolong.splice(id, 1);
-
-        let valueTotalPenolong = 0;
-
-        dataDetailPenolong.forEach(item => {
-            valueTotalPenolong += +item.total_harga;
-        });
-
-        this.setState({
-            dataDetailPenolong: dataDetailPenolong,
-            valueTotalPenolong: valueTotalPenolong
-        }, () => {
-            this.GetDetailPenolong();
         });
     }
 
@@ -663,252 +191,6 @@ export class transaksi_penjualan extends Component {
             console.log(error);
 
             HideLoading();
-        });
-    }
-
-    GetAlat = async () => {
-        axios.get(`${baseURL}/api/master/inventory/alat/select.php`, config).then(response => {
-            let dataAlat = response.data.data;
-
-            let dataSelectKodeAlat = [];
-            let dataSelectNamaAlat = [];
-
-            if (dataAlat.length > 0) {
-                dataAlat.forEach(item => {
-                    dataSelectKodeAlat.push({
-                        value: item.kode,
-                        label: item.kode
-                    });
-
-                    dataSelectNamaAlat.push({
-                        value: item.kode,
-                        label: item.nama
-                    });
-                });
-            }
-
-            this.setState({ dataAlat: dataAlat, dataSelectKodeAlat: dataSelectKodeAlat, dataSelectNamaAlat: dataSelectNamaAlat });
-        }).catch(error => {
-            console.log(error);
-        });
-    }
-
-    GetBahan = async () => {
-        axios.get(`${baseURL}/api/master/inventory/bahan-baku/select.php`, config).then(response => {
-            let dataBahan = response.data.data;
-
-            let dataSelectKodeBahan = [];
-            let dataSelectNamaBahan = [];
-
-            if (dataBahan.length > 0) {
-                dataBahan.forEach(item => {
-                    dataSelectKodeBahan.push({
-                        value: item.kode,
-                        label: item.kode
-                    });
-
-                    dataSelectNamaBahan.push({
-                        value: item.kode,
-                        label: item.nama
-                    });
-                });
-            }
-
-            this.setState({ dataBahan: dataBahan, dataSelectKodeBahan: dataSelectKodeBahan, dataSelectNamaBahan: dataSelectNamaBahan });
-        }).catch(error => {
-            console.log(error);
-        });
-    }
-
-    GetDetailAlat = () => {
-        const {
-            dataDetailAlat
-        } = this.state;
-
-        ShowLoading();
-
-        let htmlTableDaftarDetailAlat = [];
-
-        if (dataDetailAlat.length > 0) {
-            dataDetailAlat.forEach((item, index) => {
-                htmlTableDaftarDetailAlat.push(
-                    <tr key={index} className={'align-middle'}>
-                        <td>{index + 1}.</td>
-                        <td>{item.kode}</td>
-                        <td>{item.kode_alat}</td>
-                        <td>{item.nama_alat}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
-                        <td>
-                            <div className={global.table_action}>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailAlat(index)}><FaTrash />Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                );
-            });
-        }
-
-        $('#table-data-bop-alat').DataTable().destroy();
-
-        this.setState({ htmlTableDaftarDetailAlat: htmlTableDaftarDetailAlat }, () => {
-            $('#table-data-bop-alat').DataTable();
-
-            this.KalkulasiHpp();
-
-            HideLoading();
-        });
-    }
-
-    GetDetailBahan = () => {
-        const {
-            dataDetailBahan
-        } = this.state;
-
-        ShowLoading();
-
-        let htmlTableDaftarDetailBahan = [];
-
-        if (dataDetailBahan.length > 0) {
-            dataDetailBahan.forEach((item, index) => {
-                htmlTableDaftarDetailBahan.push(
-                    <tr key={index} className={'align-middle'}>
-                        <td>{index + 1}.</td>
-                        <td>{item.kode}</td>
-                        <td>{item.kode_bahan}</td>
-                        <td>{item.nama_bahan}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
-                        <td>
-                            <div className={global.table_action}>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailBahan(index)}><FaTrash />Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                );
-            });
-        }
-
-        $('#table-data-bahan-baku').DataTable().destroy();
-
-        this.setState({ htmlTableDaftarDetailBahan: htmlTableDaftarDetailBahan }, () => {
-            $('#table-data-bahan-baku').DataTable();
-
-            this.KalkulasiHpp();
-
-            HideLoading();
-        });
-    }
-
-    GetDetailBTKL = () => {
-        const {
-            dataDetailBTKL
-        } = this.state;
-
-        ShowLoading();
-
-        let htmlTableDaftarDetailBTKL = [];
-
-        if (dataDetailBTKL.length > 0) {
-            dataDetailBTKL.forEach((item, index) => {
-                htmlTableDaftarDetailBTKL.push(
-                    <tr key={index} className={'align-middle'}>
-                        <td>{index + 1}.</td>
-                        <td>{item.kode}</td>
-                        <td>{item.kode_tenaga_kerja}</td>
-                        <td>{item.nama_tenaga_kerja}</td>
-                        <td>{item.departemen}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
-                        <td>
-                            <div className={global.table_action}>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailBTKL(index)}><FaTrash />Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                );
-            });
-        }
-
-        $('#table-data-btkl').DataTable().destroy();
-
-        this.setState({ htmlTableDaftarDetailBTKL: htmlTableDaftarDetailBTKL }, () => {
-            $('#table-data-btkl').DataTable()
-
-            this.KalkulasiHpp();
-
-            HideLoading();
-        });
-    }
-
-    GetDetailPenolong = () => {
-        const {
-            dataDetailPenolong
-        } = this.state;
-
-        ShowLoading();
-
-        let htmlTableDaftarDetailPenolong = [];
-
-        if (dataDetailPenolong.length > 0) {
-            dataDetailPenolong.forEach((item, index) => {
-                htmlTableDaftarDetailPenolong.push(
-                    <tr key={index} className={'align-middle'}>
-                        <td>{index + 1}.</td>
-                        <td>{item.kode}</td>
-                        <td>{item.kode_penolong}</td>
-                        <td>{item.nama_penolong}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
-                        <td>
-                            <div className={global.table_action}>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeleteDetailPenolong(index)}><FaTrash />Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                );
-            });
-        }
-
-        $('#table-data-bop-penolong').DataTable().destroy();
-
-        this.setState({ htmlTableDaftarDetailPenolong: htmlTableDaftarDetailPenolong }, () => {
-            $('#table-data-bop-penolong').DataTable();
-
-            this.KalkulasiHpp();
-
-            HideLoading();
-        });
-    }
-
-    GetPenolong = async () => {
-        axios.get(`${baseURL}/api/master/inventory/bahan-penolong/select.php`, config).then(response => {
-            let dataPenolong = response.data.data;
-
-            let dataSelectKodePenolong = [];
-            let dataSelectNamaPenolong = [];
-
-            if (dataPenolong.length > 0) {
-                dataPenolong.forEach(item => {
-                    dataSelectKodePenolong.push({
-                        value: item.kode,
-                        label: item.kode
-                    });
-
-                    dataSelectNamaPenolong.push({
-                        value: item.kode,
-                        label: item.nama
-                    });
-                });
-            }
-
-            this.setState({ dataPenolong: dataPenolong, dataSelectKodePenolong: dataSelectKodePenolong, dataSelectNamaPenolong: dataSelectNamaPenolong });
-        }).catch(error => {
-            console.log(error);
         });
     }
 
@@ -1007,36 +289,127 @@ export class transaksi_penjualan extends Component {
         });
     }
 
-    GetDetailPesanan = () => {
+    GetDetailStandarPesanan = async (kode) => {
         ShowLoading();
 
-        let htmlTableDaftarPesanan = [];
+        axios.get(`${baseURL}/api/transaksi/penjualan/standar-pesanan/select-detail.php`, config).then(response => {
+            let data = response.data.data.filter(item => item.kode === kode);
 
-        if (this.state.dataPesanan.length > 0) {
-            this.state.dataPesanan.forEach((item, index) => {
-                htmlTableDaftarPesanan.push(
-                    <tr key={index}>
-                        <td>{index + 1}.</td>
-                        <td>{item.kode}</td>
-                        <td>{item.jumlah}</td>
-                        <td>{item.harga}</td>
-                        <td>{item.total_harga}</td>
-                        <td>
-                            <div className={global.table_action}>
-                                <button type='button' id='button-delete' className={global.delete} onClick={() => this.DeletePesanan(item.id)}><FaTrash />Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                );
+            let dataDetailAlat = data.filter(item => item.jenis_item === 'Alat');
+            let dataDetailBahan = data.filter(item => item.jenis_item === 'Bahan Baku');
+            let dataDetailPenolong = data.filter(item => item.jenis_item === 'Bahan Penolong');
+            let dataDetailBTKL = data.filter(item => item.jenis_item === 'Tenaga Kerja');
+
+            let htmlTableDaftarDetailAlat = [];
+            let htmlTableDaftarDetailBahan = [];
+            let htmlTableDaftarDetailBTKL = [];
+            let htmlTableDaftarDetailPenolong = [];
+
+            let valueTotalAlat = 0;
+            let valueTotalBahan = 0;
+            let valueTotalBTKL = 0;
+            let valueTotalPenolong = 0;
+
+            if (dataDetailAlat && dataDetailAlat.length > 0) {
+                dataDetailAlat.forEach((item, index) => {
+                    htmlTableDaftarDetailAlat.push(
+                        <tr key={index} className={'align-middle'}>
+                            <td>{index + 1}.</td>
+                            <td>{item.kode}</td>
+                            <td>{item.kode_item}</td>
+                            <td>{item.nama_item}</td>
+                            <td>{item.jumlah}</td>
+                            <td>{item.harga}</td>
+                            <td>{item.total_harga}</td>
+                        </tr>
+                    );
+
+                    valueTotalAlat += +item.total_harga;
+                })
+            }
+
+            if (dataDetailBahan && dataDetailBahan.length > 0) {
+                dataDetailBahan.forEach((item, index) => {
+                    htmlTableDaftarDetailBahan.push(
+                        <tr key={index} className={'align-middle'}>
+                            <td>{index + 1}.</td>
+                            <td>{item.kode}</td>
+                            <td>{item.kode_item}</td>
+                            <td>{item.nama_item}</td>
+                            <td>{item.jumlah}</td>
+                            <td>{item.harga}</td>
+                            <td>{item.total_harga}</td>
+                        </tr>
+                    );
+
+                    valueTotalBahan += +item.total_harga;
+                })
+            }
+
+            if (dataDetailPenolong && dataDetailPenolong.length > 0) {
+                dataDetailPenolong.forEach((item, index) => {
+                    htmlTableDaftarDetailPenolong.push(
+                        <tr key={index} className={'align-middle'}>
+                            <td>{index + 1}.</td>
+                            <td>{item.kode}</td>
+                            <td>{item.kode_item}</td>
+                            <td>{item.nama_item}</td>
+                            <td>{item.jumlah}</td>
+                            <td>{item.harga}</td>
+                            <td>{item.total_harga}</td>
+                        </tr>
+                    );
+
+                    valueTotalPenolong += +item.total_harga;
+                })
+            }
+
+            if (dataDetailBTKL && dataDetailBTKL.length > 0) {
+                dataDetailBTKL.forEach((item, index) => {
+                    htmlTableDaftarDetailBTKL.push(
+                        <tr key={index} className={'align-middle'}>
+                            <td>{index + 1}.</td>
+                            <td>{item.kode}</td>
+                            <td>{item.kode_item}</td>
+                            <td>{item.nama_item}</td>
+                            <td>{item.departemen}</td>
+                            <td>{item.jumlah}</td>
+                            <td>{item.harga}</td>
+                            <td>{item.total_harga}</td>
+                        </tr>
+                    );
+
+                    valueTotalBTKL += +item.total_harga;
+                })
+            }
+
+            $('#table-data-bahan-baku').DataTable().destroy();
+            $('#table-data-bop-penolong').DataTable().destroy();
+            $('#table-data-bop-alat').DataTable().destroy();
+            $('#table-data-btkl').DataTable().destroy();
+
+            this.setState({
+                htmlTableDaftarDetailAlat: htmlTableDaftarDetailAlat,
+                htmlTableDaftarDetailBahan: htmlTableDaftarDetailBahan,
+                htmlTableDaftarDetailBTKL: htmlTableDaftarDetailBTKL,
+                htmlTableDaftarDetailPenolong: htmlTableDaftarDetailPenolong,
+                valueTotalAlat: valueTotalAlat,
+                valueTotalBahan: valueTotalBahan,
+                valueTotalBTKL: valueTotalBTKL,
+                valueTotalPenolong: valueTotalPenolong,
+                valueHpp: +valueTotalAlat + +valueTotalBahan + +valueTotalBTKL + +valueTotalPenolong
+            }, () => {
+                $('#table-data-bahan-baku').DataTable();
+                $('#table-data-bop-penolong').DataTable();
+                $('#table-data-bop-alat').DataTable();
+                $('#table-data-btkl').DataTable();
+
+                this.KalkulasiHargaJual();
+
+                HideLoading();
             });
-        }
-
-        $('#table-data').DataTable().destroy();
-
-        this.setState({ htmlTableDaftarPesanan: htmlTableDaftarPesanan }, () => {
-            $('#table-data').DataTable();
-
-            this.KalkulasiTotalHarga();
+        }).catch(error => {
+            console.log(error);
 
             HideLoading();
         });
@@ -1111,30 +484,30 @@ export class transaksi_penjualan extends Component {
         });
     }
 
-    GetTenagaKerja = async () => {
-        axios.get(`${baseURL}/api/master/tenaga-kerja/select.php`, config).then(response => {
-            let dataTenagaKerja = response.data.data;
+    GetStandarPesanan = async () => {
+        ShowLoading();
 
-            let dataSelectKodeBTKL = [];
-            let dataSelectNamaBTKL = [];
+        axios.get(`${baseURL}/api/transaksi/penjualan/standar-pesanan/select.php`, config).then(response => {
+            let data = response.data.data;
 
-            if (dataTenagaKerja.length > 0) {
-                dataTenagaKerja.forEach(item => {
-                    dataSelectKodeBTKL.push({
-                        value: item.kode,
-                        label: item.kode
-                    });
+            let dataSelectNamaStandarPesanan = [];
 
-                    dataSelectNamaBTKL.push({
+            if (data && data.length > 0) {
+                for (const item of data) {
+                    dataSelectNamaStandarPesanan.push({
                         value: item.kode,
                         label: item.nama
                     });
-                });
+                }
             }
 
-            this.setState({ dataBTKL: dataTenagaKerja, dataSelectKodeBTKL: dataSelectKodeBTKL, dataSelectNamaBTKL: dataSelectNamaBTKL });
+            this.setState({ dataSelectNamaStandarPesanan: dataSelectNamaStandarPesanan }, () => {
+                HideLoading()
+            });
         }).catch(error => {
             console.log(error);
+
+            HideLoading();
         });
     }
 
@@ -1202,6 +575,7 @@ export class transaksi_penjualan extends Component {
             dataTunai,
             jenisPenjualan,
             valueDiskon,
+            valueJumlah,
             valueKodeAkun,
             valueKodeConsignee,
             valueKodeCustomer,
@@ -1261,8 +635,23 @@ export class transaksi_penjualan extends Component {
                 }
             }
 
+            let jumlah = 0;
+
+            for (const item of dataTunai) {
+                jumlah += +item.jumlah;
+            }
+
+            formData.append('jumlah', jumlah);
             formData.append('data', JSON.stringify(dataTunai));
         } else if (jenisPenjualan.toLowerCase() === 'konsinyasi') {
+
+            let jumlah = 0;
+
+            for (const item of dataKonsinyasi) {
+                jumlah += +item.jumlah;
+            }
+
+            formData.append('jumlah', jumlah);
             formData.append('data', JSON.stringify(dataKonsinyasi));
         }
 
@@ -1385,53 +774,11 @@ export class transaksi_penjualan extends Component {
 
         this.setState({ valueTotalJual: totalHarga }, () => {
             if (totalHarga > this.state.limitDiskon) {
-                this.setState({valuePercentageDiskon: 10, valueDiskon: +totalHarga * 0.1});
+                this.setState({ valuePercentageDiskon: 10, valueDiskon: +totalHarga * 0.1 });
             } else {
-                this.setState({valuePercentageDiskon: 5, valueDiskon: +totalHarga * 0.05});
+                this.setState({ valuePercentageDiskon: 5, valueDiskon: +totalHarga * 0.05 });
             }
         });
-    }
-
-    SelectAlat = (data) => {
-        if (data) {
-            let valueKode = this.state.dataSelectKodeAlat.find(item => item.value === data?.value);
-            let valueNama = this.state.dataSelectNamaAlat.find(item => item.value === data?.value);
-
-            let dataAlat = this.state.dataAlat.find(item => item.kode === valueKode.value);
-
-            this.setState({
-                valueKodeAlat: valueKode,
-                valueNamaAlat: valueNama,
-                valueHargaAlat: dataAlat.bop
-            });
-        } else {
-            this.setState({
-                valueKodeAlat: '',
-                valueNamaAlat: '',
-                valueHargaAlat: 0
-            });
-        }
-    }
-
-    SelectBahan = (data) => {
-        if (data) {
-            let valueKode = this.state.dataSelectKodeBahan.find(item => item.value === data?.value);
-            let valueNama = this.state.dataSelectNamaBahan.find(item => item.value === data?.value);
-
-            let dataBahan = this.state.dataBahan.find(item => item.kode === valueKode.value);
-
-            this.setState({
-                valueKodeBahan: valueKode,
-                valueNamaBahan: valueNama,
-                valueHargaBahan: dataBahan.harga
-            });
-        } else {
-            this.setState({
-                valueKodeBahan: '',
-                valueNamaBahan: '',
-                valueHargaBahan: 0
-            });
-        }
     }
 
     SelectConsignee = (data) => {
@@ -1455,27 +802,6 @@ export class transaksi_penjualan extends Component {
             this.setState({ valueAlamat: alamat, valueKodeCustomer: valueKode, valueNamaCustomer: valueNama });
         } else {
             this.setState({ valueAlamat: '', valueKodeCustomer: '', valueNamaCustomer: '' });
-        }
-    }
-
-    SelectPenolong = (data) => {
-        if (data) {
-            let valueKode = this.state.dataSelectKodePenolong.find(item => item.value === data?.value);
-            let valueNama = this.state.dataSelectNamaPenolong.find(item => item.value === data?.value);
-
-            let dataPenolong = this.state.dataPenolong.find(item => item.kode === valueKode.value);
-
-            this.setState({
-                valueKodePenolong: valueKode,
-                valueNamaPenolong: valueNama,
-                valueHargaPenolong: dataPenolong.harga
-            });
-        } else {
-            this.setState({
-                valueKodePenolong: '',
-                valueNamaPenolong: '',
-                valueHargaPenolong: 0
-            });
         }
     }
 
@@ -1536,25 +862,18 @@ export class transaksi_penjualan extends Component {
         });
     }
 
-    SelectBTKL = (data) => {
-        if (data) {
-            let valueKode = this.state.dataSelectKodeBTKL.find(item => item.value === data?.value);
-            let valueNama = this.state.dataSelectNamaBTKL.find(item => item.value === data?.value);
-            let departemen = this.state.dataBTKL.find(item => item.kode === data?.value).departemen;
-            let upah = this.state.dataBTKL.find(item => item.kode === data?.value).upah;
-
-            this.setState({ valueDepartemen: departemen, valueUpah: upah, valueKodeBTKL: valueKode, valueNamaBTKL: valueNama });
-        } else {
-            this.setState({ valueDepartemen: '', valueUpah: 0, valueKodeBTKL: '', valueNamaBTKL: '' });
-        }
+    SelectStandarPesanan = (e) => {
+        this.setState({ valueNamaStandarPesanan: e }, () => {
+            this.GetDetailStandarPesanan(e.value);
+        })
     }
 
     SelectTab = (index) => {
         this.setState({ tabSelected: index }, () => {
-            if (index === 0) this.GetDetailBahan();
-            if (index === 1) this.GetDetailPenolong();
-            if (index === 2) this.GetDetailAlat();
-            if (index === 3) this.GetDetailBTKL();
+            // if (index === 0) this.GetDetailBahan();
+            // if (index === 1) this.GetDetailPenolong();
+            // if (index === 2) this.GetDetailAlat();
+            // if (index === 3) this.GetDetailBTKL();
         });
     }
 
@@ -1566,41 +885,26 @@ export class transaksi_penjualan extends Component {
             dataTunai,
             valueAlamat,
             valueDeskripsiPesanan,
-            valueDepartemen,
             valueDiskon,
             valuePercentageDiskon,
             valueHarga,
-            valueHargaAlat,
-            valueHargaBahan,
-            valueHargaPenolong,
             valueHargaJual,
             valueHpp,
             valueJumlah,
-            valueJumlahAlat,
-            valueJumlahBahan,
-            valueJumlahPenolong,
-            valueJumlahBTKL,
             valueJenisProduk,
             valueJenisPenjualan,
             valueKalkulasiTotalHpp,
             valueKodeAkun,
-            valueKodeAlat,
-            valueKodeBahan,
-            valueKodeBTKL,
             valueKodeConsignee,
             valueKodeCustomer,
             valueKodeJual,
             valueKodePesanan,
-            valueKodePenolong,
             valueKodeProduk,
-            valueNamaAlat,
-            valueNamaBahan,
-            valueNamaBTKL,
             valueNamaConsignee,
             valueNamaCustomer,
             valueNamaPesanan,
-            valueNamaPenolong,
             valueNamaProduk,
+            valueNamaStandarPesanan,
             valueOngkosKirim,
             valuePengurangan,
             valueProfit,
@@ -1612,7 +916,6 @@ export class transaksi_penjualan extends Component {
             valueTotalBTKL,
             valueTotalHpp,
             valueTotalJual,
-            valueUpah
         } = this.state;
 
         return (
@@ -1713,11 +1016,11 @@ export class transaksi_penjualan extends Component {
                                         this.state.jenisPenjualan === 'Pesanan' ?
                                             <React.Fragment>
                                                 <div className={`${bootstrap['d-flex']} flex-wrap`}>
-                                                    <div className={`${global.input_group} col-6 col-sm-2 pe-2`}>
+                                                    <div className={`${global.input_group} col-6 col-lg-2 pe-2`}>
                                                         <p className={global.title}>Kode Pesanan <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueKodePesanan' value={valueKodePesanan} required={true} readOnly={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-6 col-sm-2 ps-2 px-sm-2`}>
+                                                    <div className={`${global.input_group} col-6 col-lg-2 ps-2 px-lg-2`}>
                                                         <p className={global.title}>Tanggal <span className={global.important}>*</span></p>
                                                         <input type="date" id='valueTanggal' value={valueTanggal} onChange={this.InputChange} required={true} />
                                                     </div>
@@ -1725,7 +1028,7 @@ export class transaksi_penjualan extends Component {
                                                         <p className={global.title}>Nama Pesanan <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueNamaPesanan' value={valueNamaPesanan} onChange={this.InputChange} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-6 col-sm-2 mt-2 mt-sm-0 ps-2`}>
+                                                    <div className={`${global.input_group} col-6 col-lg-2 mt-2 mt-lg-0 ps-2`}>
                                                         <p className={global.title}>Jenis Produk <span className={global.important}>*</span></p>
                                                         <Select id='select-jenis-produk' name='select-jenis-produk' isClearable={true} isSearchable={true} options={[
                                                             { value: 'Kain', label: 'Kain' },
@@ -1744,7 +1047,7 @@ export class transaksi_penjualan extends Component {
                                                     </div>
                                                 </div>
                                                 <div className={`${bootstrap['d-flex']} flex-wrap`}>
-                                                    <div className={`${global.input_group} col-6 col-sm-2 pe-2`}>
+                                                    <div className={`${global.input_group} col-6 col-lg-2 pe-2`}>
                                                         <p className={global.title}>Jumlah <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueJumlah' value={valueJumlah} onInput={InputFormatNumber} min={0} onChange={async e => {
                                                             await this.InputChange(e);
@@ -1755,30 +1058,34 @@ export class transaksi_penjualan extends Component {
                                                             });
                                                         }} required={true} />
                                                     </div>
-                                                </div>
-                                                <div className={`${bootstrap['d-flex']}`}>
-                                                    <div className={`${global.input_group} col-6 col-sm-2 ps-2 pe-sm-2`}>
+                                                    <div className={`${global.input_group} col-6 col-lg-2 ps-2`}>
                                                         <p className={global.title}>Profit (%) <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueProfit' value={valueProfit} onInput={InputFormatNumber} onChange={async e => {
                                                             await this.InputChange(e);
                                                             this.KalkulasiHargaJual();
                                                         }} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-6 col-sm-2 mt-2 mt-sm-0 pe-2 px-sm-2`}>
+                                                    <div className={`${global.input_group} col-6 col-lg-2 mt-2 mt-lg-0 pe-2 px-lg-2`}>
                                                         <p className={global.title}>HPP <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueHpp' value={SetPriceFormat(valueHpp)} required={true} readOnly={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-6 col-sm-2 mt-2 mt-sm-0 ps-2 px-sm-2`}>
+                                                    <div className={`${global.input_group} col-6 col-lg-2 mt-2 mt-lg-0 ps-2 px-lg-2`}>
                                                         <p className={global.title}>Pengurangan Harga <span className={global.important}>*</span></p>
                                                         <input type="text" id='valuePengurangan' value={valuePengurangan} onInput={InputFormatNumber} onChange={async (event) => {
                                                             await this.InputChange(event);
                                                             await this.KalkulasiHargaJual();
-                                                        
+
                                                         }} required={true} />
                                                     </div>
-                                                    <div className={`${global.input_group} col-12 col-sm-2 mt-2 mt-sm-0 ps-sm-2`}>
+                                                    <div className={`${global.input_group} col-12 col-lg-2 mt-2 mt-lg-0 ps-lg-2`}>
                                                         <p className={global.title}>Harga Jual <span className={global.important}>*</span></p>
                                                         <input type="text" id='valueHargaJual' value={SetPriceFormat(valueHargaJual)} required={true} readOnly={true} />
+                                                    </div>
+                                                </div>
+                                                <div className={`${bootstrap['d-flex']} flex-wrap`}>
+                                                    <div className={`${global.input_group} col-6 pe-2`}>
+                                                        <p className={global.title}>Nama Standar Pesanan <span className={global.important}>*</span></p>
+                                                        <Select id='select-nama-standar' name='select-nama-standar' isClearable={true} isSearchable={true} options={this.state.dataSelectNamaStandarPesanan} placeholder={'Select Nama...'} value={valueNamaStandarPesanan} onChange={e => this.SelectStandarPesanan(e)} styles={CustomSelect} />
                                                     </div>
                                                 </div>
                                                 <div className='d-flex flex-wrap'>
@@ -1910,7 +1217,6 @@ export class transaksi_penjualan extends Component {
                                                     <td>Jumlah</td>
                                                     <td>Harga</td>
                                                     <td>Biaya</td>
-                                                    <td>Aksi</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -1961,7 +1267,6 @@ export class transaksi_penjualan extends Component {
                                                     <td>Jumlah</td>
                                                     <td>Harga</td>
                                                     <td>Biaya</td>
-                                                    <td>Aksi</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -2012,7 +1317,6 @@ export class transaksi_penjualan extends Component {
                                                     <td>Jumlah</td>
                                                     <td>Tarif BOP</td>
                                                     <td>Biaya</td>
-                                                    <td>Aksi</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -2068,7 +1372,6 @@ export class transaksi_penjualan extends Component {
                                                     <td>Jumlah</td>
                                                     <td>Upah</td>
                                                     <td>Biaya</td>
-                                                    <td>Aksi</td>
                                                 </tr>
                                             </thead>
                                             <tbody>

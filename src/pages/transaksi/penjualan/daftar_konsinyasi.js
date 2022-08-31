@@ -57,8 +57,6 @@ export default function Daftar_konsinyasi() {
         axios.post(`${baseURL}/api/transaksi/penjualan/penjualan/select.php`, formData, config).then(response => {
             let data = response.data.data;
 
-            console.log(data);
-
             let htmlTableDaftarKonsinyasi = [];
 
             if (data && data.length > 0) {
@@ -73,7 +71,7 @@ export default function Daftar_konsinyasi() {
                             <td>{SetPriceFormat(item.total_jual)}</td>
                             <td>{SetPriceFormat(item.diskon)}</td>
                             <td>{SetPriceFormat(item.piutang)}</td>
-                            <td>{+item.status === 0 ? 'Menunggu' : 'Selesai'}</td>
+                            <td>{+item.sisa === 0 ? 'Selesai' : 'Menunggu'}</td>
                             <td>
                                 <div className={global.table_action}>
                                     <button type='button' id='button-detail' className={global.edit} onClick={() => getDetailKonsinyasi(item.kode)}><FaClipboardList /> Detail</button>
