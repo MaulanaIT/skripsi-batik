@@ -32,7 +32,7 @@ export default function Detail_standar(props) {
         ShowLoading();
 
         axios.get(`${baseURL}/api/transaksi/penjualan/standar-pesanan/select-detail.php`, config).then(response => {
-            let data = response.data.data;
+            let data = response.data.data.filter(item => item.kode === props.kode);
 
             let htmlTableDaftar = [];
 
