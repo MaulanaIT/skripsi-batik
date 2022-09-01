@@ -331,11 +331,11 @@ export default function Uang_muka_pesanan() {
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Diskon</p>
-                            <input type="text" id='input-detail-diskon' className={'col-4'} value={getValueDiskon} onChange={e => setValueDiskon(e.target.value)} readOnly={true} />
+                            <input type="text" id='input-detail-diskon' className={'col-4'} value={SetPriceFormat(getValueDiskon)} onChange={e => setValueDiskon(e.target.value)} readOnly={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Ongkos Kirim <span className={global.important}>*</span></p>
-                            <input type="text" id='input-detail-ongkos-kirim' className={`col-4`} value={getValueOngkosKirim} onChange={e => setValueOngkosKirim(e.target.value)} required={true} />
+                            <input type="text" id='input-detail-ongkos-kirim' className={`col-4`} value={SetPriceFormat(getValueOngkosKirim)} onChange={e => setValueOngkosKirim(e.target.value)} required={true} />
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Total Harga <span className={global.important}>*</span></p>
@@ -343,7 +343,7 @@ export default function Uang_muka_pesanan() {
                         </div>
                         <div className={`align-items-center ${global.input_group_row}`}>
                             <p className={`${global.title} col-3`}>Uang Muka <span className={global.important}>*</span></p>
-                            <input type="text" id='input-detail-uang-muka' className={`col-4`} value={getValueUangMuka} onChange={e => setValueUangMuka(e.target.value)} readOnly={true} />
+                            <input type="text" id='input-detail-uang-muka' className={`col-4`} value={SetPriceFormat(getValueUangMuka)} onChange={e => setValueUangMuka(e.target.value)} readOnly={true} />
                             <div className='col-5 ps-2'>
                                 <Select id='select-kode-akun' name='select-kode-akun' className={`col-5`} isClearable={true} isSearchable={true} options={getDataSelectAkun} value={getValueKodeAkun} placeholder={'Select Akun...'} onChange={e => setValueKodeAkun(e)} styles={CustomSelect} />
                             </div>

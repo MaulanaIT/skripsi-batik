@@ -181,7 +181,7 @@ export default function Lap_produk_setengah() {
             <div className={style.content}>
                 <div className={global.card}>
                     <div className={`${global.input_group_row} col-12`}>
-                        <p className={`${global.title} col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Produksi Berdasarkan</p>
+                        <p className={`${global.title} col-12 col-lg-3 col-md-3 pb-2 pb-md-0`}>Laporan Berdasarkan</p>
                         <Select className="col col-lg-4 col-md-3" isClearable={true} isSearchable={true} options={getDataFilterLaporan} placeholder={'Select Laporan...'} value={getValueFilterLaporan} styles={CustomSelect} onChange={(value) => setValueFilterLaporan(value)} />
                     </div>
 
